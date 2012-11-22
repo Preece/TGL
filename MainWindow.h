@@ -7,7 +7,7 @@
 #include "Model/Sprite.h"
 #include "Model/ObjectInstance.h"
 #include "Model/ObjectPrototype.h"
-#include "Model/resourcemanager.h"
+#include "Model/ResourceManager.h"
 
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelProperties.h"

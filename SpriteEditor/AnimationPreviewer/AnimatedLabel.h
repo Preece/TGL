@@ -22,6 +22,8 @@ private:
     QTimer frameTimer;
     int currentFrame;
 
+    QImage spritesheetImage;
+
     bool playing;
 
 public:

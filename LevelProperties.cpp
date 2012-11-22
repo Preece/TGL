@@ -1,5 +1,5 @@
-#include "levelproperties.h"
-#include "ui_levelproperties.h"
+#include "LevelProperties.h"
+#include "ui_LevelProperties.h"
 
 LevelProperties::LevelProperties(QWidget *parent) :
     QDialog(parent),

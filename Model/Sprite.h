@@ -6,7 +6,7 @@
 #include <QList>
 #include <QStringList>
 
-#include "savable.h"
+#include "Savable.h"
 
 #include "Animation.h"
 #include "Frame.h"

@@ -4,7 +4,7 @@
 #include <QList>
 
 #include "Frame.h"
-#include "savable.h"
+#include "Savable.h"
 
 class Animation : public Savable
 {
