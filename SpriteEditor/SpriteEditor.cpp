@@ -360,7 +360,8 @@ void SpriteEditor::on_previewButton_clicked()
 
     if(IsAnimationSelected() && IsSpritesheetLoaded())
     {
-        animationPreviewer->Load(&imageItem->pixmap(), GetSelectedAnimation());
+        QPixmap temporaryPixmap = imageItem->pixmap();
+        animationPreviewer->Load(&temporaryPixmap, GetSelectedAnimation());
         animationPreviewer->exec();
     }
 }

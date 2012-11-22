@@ -5,7 +5,7 @@
 #include <QPoint>
 #include <QList>
 
-#include "savable.h"
+#include "Savable.h"
 
 class Frame : public Savable
 {
