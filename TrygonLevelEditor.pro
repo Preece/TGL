@@ -71,3 +71,25 @@ FORMS    += \
 
 RESOURCES += \
     Icons.qrc
+
+OTHER_FILES += \
+    Icons/zoomout.png \
+    Icons/zoomin.png \
+    Icons/zoom.png \
+    Icons/selector.png \
+    Icons/save.png \
+    Icons/renderspot.png \
+    Icons/previousframe.png \
+    Icons/play.png \
+    Icons/pencil.png \
+    Icons/pause.png \
+    Icons/open.png \
+    Icons/nextframe.png \
+    Icons/new.png \
+    Icons/MissingFile.png \
+    Icons/hotspot.png \
+    Icons/frameselect.png \
+    Icons/eyedropper.png \
+    Icons/eraser.png \
+    Icons/bucket.png \
+    Icons/autoframeselect.png
