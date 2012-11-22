@@ -4,7 +4,7 @@
 #include <QString>
 #include <QImage>
 
-#include "savable.h"
+#include "Savable.h"
 
 class ObjectPrototype : public Savable
 {

@@ -18,7 +18,8 @@ AnimatedLabel::AnimatedLabel(QWidget *parent) :
 void AnimatedLabel::LoadAnimation(Animation *newAnimation, QPixmap *spritesheet)
 {
     currentAnimation = newAnimation;
-    currentImage = &spritesheet->toImage();
+    spritesheetImage = spritesheet->toImage();
+    currentImage = &spritesheetImage;
     playing = true;
 
     SetupFramePixmaps();

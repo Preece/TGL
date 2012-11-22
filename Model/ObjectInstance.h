@@ -3,7 +3,7 @@
 
 #include "ObjectPrototype.h"
 
-#include "savable.h"
+#include "Savable.h"
 
 class ObjectInstance : public Savable
 {

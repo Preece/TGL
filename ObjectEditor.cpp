@@ -1,5 +1,5 @@
-#include "objecteditor.h"
-#include "ui_objecteditor.h"
+#include "ObjectEditor.h"
+#include "ui_ObjectEditor.h"
 
 ObjectEditor::ObjectEditor(QWidget *parent) :
     QDialog(parent),
