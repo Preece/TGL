@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Icons/bucket.png</file>
+        <file>Icons/eraser.png</file>
+        <file>Icons/eyedropper.png</file>
+        <file>Icons/frameselect.png</file>
+        <file>Icons/hotspot.png</file>
+        <file>Icons/MissingFile.png</file>
+        <file>Icons/pencil.png</file>
+        <file>Icons/zoomin.png</file>
+        <file>Icons/zoomout.png</file>
+        <file>Icons/new.png</file>
+        <file>Icons/open.png</file>
+        <file>Icons/save.png</file>
+        <file>Icons/selector.png</file>
+        <file>Icons/autoframeselect.png</file>
+        <file>Icons/renderspot.png</file>
+        <file>Icons/nextframe.png</file>
+        <file>Icons/pause.png</file>
+        <file>Icons/play.png</file>
+        <file>Icons/previousframe.png</file>
+    </qresource>
+</RCC>
