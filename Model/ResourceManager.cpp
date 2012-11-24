@@ -6,7 +6,13 @@ ResourceManager::ResourceManager()
 
 int ResourceManager::AddSprite(Sprite *newSprite)
 {
-    return 0;
+    if(newSprite != NULL)
+    {
+        spriteList.append(newSprite);
+        return newSprite->GetID();
+    }
+
+    return NULL;
 }
 
 bool ResourceManager::DeleteSprite(int ID)

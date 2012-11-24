@@ -7,15 +7,6 @@ AnimationListItem::AnimationListItem()
 
 AnimationListItem::~AnimationListItem()
 {
-    DestroyAnimation();
-}
-
-void AnimationListItem::CreateNewAnimation()
-{
-    if(animationItem != 0)
-            DestroyAnimation();
-
-    animationItem = new Animation;
 }
 
 void AnimationListItem::SetAnimation(Animation *existingAnimation)
@@ -30,12 +21,4 @@ void AnimationListItem::SetAnimation(Animation *existingAnimation)
 Animation *AnimationListItem::GetAnimation()
 {
     return animationItem;
-}
-
-void AnimationListItem::DestroyAnimation()
-{
-    animationItem->DestroyAllFrames();
-
-    delete animationItem;
-    animationItem = 0;
 }

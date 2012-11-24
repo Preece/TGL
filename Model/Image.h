@@ -22,7 +22,7 @@ public:
 
     void SetImage(QImage *newImage) { image = newImage; }
     void SetImageFromFile(QString filename);
-    QImage *GetImage() { return image; }
+    QImage *GetImage();
 };
 
 #endif // IMAGE_H

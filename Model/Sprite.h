@@ -29,8 +29,12 @@ public:
     int GetImageID() { return imageID; }
     void SetImageID(int newImageID);
 
+    int GetAnimationCount() { return animations.count(); }
+
+    Animation *GetAnimationByIndex(int index);
     Animation *GetAnimation(int animationID);
     void AddAnimation(Animation *newAnimation);
+    void DeleteAnimation(int ID);
 
     QStringList GetAnimationNames();
 

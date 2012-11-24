@@ -5,8 +5,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+#include "../SpriteEditor/SpriteEditor.h"
 #include "ImageViewer.h"
 #include "ImageSelectorItem.h"
+#include "SpriteSelectorItem.h"
 
 #include "../Model/ResourceManager.h"
 #include "../Model/Image.h"
@@ -35,6 +37,10 @@ public:
     ImageSelectorItem *GetSelectedImageItem();
     Image *GetSelectedImage();
 
+    bool IsSpriteSelected();
+    SpriteSelectorItem *GetSelectedSpriteItem();
+    Sprite *GetSelectedSprite();
+
 private slots:
     void on_addImageButton_clicked();
 
@@ -42,9 +48,17 @@ private slots:
 
     void on_deleteImageButton_clicked();
 
+    void on_editSpriteButton_clicked();
+
+    void on_addSpriteButton_clicked();
+
+signals:
+    void NewSpriteButtonClicked();
+
 private:
     Ui::ResourceTab *ui;
     ImageViewer *imageViewer;
+    SpriteEditor *spriteWindow;
 
     ResourceManager *resourceManager;
 };

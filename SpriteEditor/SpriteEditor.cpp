@@ -42,6 +42,11 @@ SpriteEditor::~SpriteEditor()
 void SpriteEditor::ClearAll()
 {
     //clear all input from the sprite edit window
+    ui->spriteNameInput->setText("");
+    ui->animationList->clear();
+    ui->frameList->clear();
+
+    imageItem->hide();
 }
 
 
@@ -196,7 +201,11 @@ void SpriteEditor::StoreNewRenderSpot(QPoint newSpot)
 /////////////////////////////////IMAGE FUNCTIONS//////////////////////////////////////////////
 void SpriteEditor::UpdateDisplayImage()
 {
+    //if the sprite has an image
+
+
     imageItem->setPixmap(QPixmap::fromImage(*(resourceManager->GetImage(currentSprite->GetImageID())->GetImage())));
+    imageItem->show();
 
     //notify the scene about the spritesheet
     imageScene.SetSpritesheet(imageItem->pixmap().toImage());
@@ -243,7 +252,6 @@ void SpriteEditor::ChangeTool(int newTool)
 
 void SpriteEditor::NewSprite(Sprite *newSprite)
 {
-    //clear the form
     ClearAll();
 
     //assign the working sprite pointer to the new sprite pointer provided
@@ -252,17 +260,31 @@ void SpriteEditor::NewSprite(Sprite *newSprite)
 
 void SpriteEditor::EditSprite(Sprite *editSprite)
 {
-    //clear the form
-    ClearAll();
-
     //assign the working sprite pointer to the pointer to be edited
+    currentSprite = editSprite;
 
     //put the sprites name in the name input
-    //put the filename into the filename input
+    ui->spriteNameInput->setText(currentSprite->GetName());
+
     //load the image and put it into the graphics view
+    UpdateDisplayImage();
+
     //loop through all the animations and fill the animation list
-    //select the first animation if there are any
-    //loop through it's frames and put them into the frame viewer
+    AnimationListItem *tempItem;
+
+    ui->animationList->clear();
+
+    for(int i = 0; i < currentSprite->GetAnimationCount(); i++)
+    {
+        tempItem = new AnimationListItem;
+        tempItem->SetAnimation(currentSprite->GetAnimationByIndex(i));
+
+        ui->animationList->addItem(tempItem);
+        ui->animationList->setCurrentItem(tempItem);
+    }
+
+    //repopulate the frame list
+    RepopulateFrameList();
 }
 
 void SpriteEditor::on_buttonBox_accepted()
@@ -270,9 +292,14 @@ void SpriteEditor::on_buttonBox_accepted()
     //check that the name is filled out
     if(ui->spriteNameInput->text() == "")
     {
-
+        currentSprite->SetName("New Sprite");
     }
-    //check that the filename is filled out
+    else
+        currentSprite->SetName(ui->spriteNameInput->text());
+
+    //clear the reference to the working sprite
+    currentSprite = NULL;
+
 }
 
 void SpriteEditor::on_addAnimationButton_clicked()
@@ -302,6 +329,8 @@ void SpriteEditor::on_addAnimationButton_clicked()
         ui->animationList->addItem(tempAnimationListItem);
         //select the new item
         ui->animationList->setCurrentItem(tempAnimationListItem);
+
+        currentSprite->AddAnimation(temporaryAnimation);
     }
     //otherwise, throw out the values and clear the form
     else
@@ -322,7 +351,8 @@ void SpriteEditor::on_deleteAnimationButton_clicked()
         if(warning.question(this, "Confirm", "Are you sure you want to delete this animation?", warning.Ok, warning.No)
                 == warning.Ok)
         {
-            //remove the item from the list
+            //remove the item from the list and sprite
+            currentSprite->DeleteAnimation(GetSelectedAnimation()->GetID());
             delete ui->animationList->currentItem();
         }
     }
@@ -381,7 +411,7 @@ void SpriteEditor::on_addFrameButton_clicked()
         GetSelectedAnimation()->AddFrame(newFrame);
 
         //check if a selection box has been drawn
-        if(!imageScene.GetSelectionRect().isNull())
+        if(!imageScene.GetSelectionRect().isNull() && !IsFrameSelected())
             //if so, automatically associate that selection box
             newFrame->SetFrameRect(imageScene.GetSelectionRect());
 
@@ -517,10 +547,10 @@ void SpriteEditor::on_zoomoutTool_clicked()
 
 void SpriteEditor::on_spriteNameInput_textChanged(const QString &arg1)
 {
-    if(arg1 == "")
-        currentSprite->SetName("Unnamed Sprite");
-    else
-        currentSprite->SetName(arg1);
+    if(currentSprite == NULL)
+        return;
+
+    currentSprite->SetName(arg1);
 }
 
 

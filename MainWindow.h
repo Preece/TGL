@@ -28,14 +28,12 @@ public:
 private slots:
 
     void on_actionProperties_triggered();
-    void on_actionAdd_Sprite_triggered();
     void on_actionAdd_Object_triggered();
 
 private:
     Ui::MainWindow *ui;
 
     //Dialogs
-    SpriteEditor *spriteWindow;
     LevelProperties *levelPropertiesWindow;
     ObjectEditor *objectEditorWindow;
 

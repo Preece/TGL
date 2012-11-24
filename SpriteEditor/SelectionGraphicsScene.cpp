@@ -15,7 +15,8 @@ SelectionGraphicsScene::SelectionGraphicsScene(QObject *parent) :
     renderSpot->setOffset(-7, -7);
     renderSpot->setZValue(100);
     renderSpot->setParentItem(selectionBox);
-    renderSpot->show();
+    renderSpot->setPos(0, 0);
+    renderSpot->hide();
 
     this->addItem(selectionBox);
     //this->addItem(renderSpot);
@@ -87,6 +88,9 @@ void SelectionGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEven
     {
         if(!selectionBox->rect().isNull())
         {
+            //show the render spot
+            renderSpot->show();
+
             //position the render spot item at the mouse
             QPoint pressSpot = mouseEvent->buttonDownScenePos(Qt::LeftButton).toPoint();
 
@@ -131,6 +135,9 @@ void SelectionGraphicsScene::UpdateSelectionRect(QRect newRect)
 {
     //set the rectangle of the selection box to the specified rect
     selectionBox->setRect(newRect);
+
+    if(newRect.isNull())
+        renderSpot->hide();
 }
 
 void SelectionGraphicsScene::UpdateRenderSpot(QPoint newSpot)

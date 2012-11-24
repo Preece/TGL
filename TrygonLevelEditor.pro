@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     SpriteEditor/SpritesheetSelector.cpp \
     SpriteEditor/SelectionGraphicsScene.cpp \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.cpp \
-    SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp
+    SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
+    ResourceTab/SpriteSelectorItem.cpp
   
 
 HEADERS  += \
@@ -55,7 +56,8 @@ HEADERS  += \
     SpriteEditor/SpritesheetSelector.h \
     SpriteEditor/SelectionGraphicsScene.h \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.h \
-    SpriteEditor/AnimationPreviewer/AnimatedLabel.h
+    SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
+    ResourceTab/SpriteSelectorItem.h
    
 
 FORMS    += \

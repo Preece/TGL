@@ -39,3 +39,14 @@ void Image::SetImageFromFile(QString filename)
     if(image->isNull())
         QMessageBox::warning(NULL, "Warning", "The Image Failed To Load.");
 }
+
+QImage *Image::GetImage()
+{
+    if(image == NULL)
+    {
+        QMessageBox::warning(NULL, "Warning", "You tried to get an image, but it was NULL!");
+        return NULL;
+    }
+
+    return image;
+}

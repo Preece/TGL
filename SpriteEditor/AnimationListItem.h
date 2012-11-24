@@ -18,8 +18,6 @@ public:
     void SetAnimation(Animation *existingAnimation);
 
     Animation *GetAnimation();
-
-    void DestroyAnimation();
 };
 
 #endif // ANIMATIONLISTITEM_H
