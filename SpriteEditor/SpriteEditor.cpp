@@ -198,6 +198,9 @@ void SpriteEditor::UpdateDisplayImage()
 {
     imageItem->setPixmap(QPixmap::fromImage(*(resourceManager->GetImage(currentSprite->GetImageID())->GetImage())));
 
+    //notify the scene about the spritesheet
+    imageScene.SetSpritesheet(imageItem->pixmap().toImage());
+
     //resize the scene
     imageScene.setSceneRect(imageItem->boundingRect());
 }
@@ -377,8 +380,14 @@ void SpriteEditor::on_addFrameButton_clicked()
         //add the frame object to the selected animation
         GetSelectedAnimation()->AddFrame(newFrame);
 
+        //check if a selection box has been drawn
+        if(!imageScene.GetSelectionRect().isNull())
+            //if so, automatically associate that selection box
+            newFrame->SetFrameRect(imageScene.GetSelectionRect());
+
         //repopulate the frame list
         RepopulateFrameList();
+
     }
 
 }

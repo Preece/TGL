@@ -20,3 +20,9 @@ void Savable::RegisterID(int registeredID)
     while(registeredID >= newID)
         newID++;
 }
+
+bool Savable::WriteString(QFile &file, QString string)
+{
+    //write out an int that holds the number of letters in the string
+    return false;
+}

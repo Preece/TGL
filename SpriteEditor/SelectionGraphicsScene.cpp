@@ -14,12 +14,13 @@ SelectionGraphicsScene::SelectionGraphicsScene(QObject *parent) :
     renderSpot = new QGraphicsPixmapItem(QPixmap(":/Icons/Icons/renderspot.png"));
     renderSpot->setOffset(-7, -7);
     renderSpot->setZValue(100);
+    renderSpot->setParentItem(selectionBox);
     renderSpot->show();
 
     this->addItem(selectionBox);
-    this->addItem(renderSpot);
+    //this->addItem(renderSpot);
 
-    currentTool = 0;
+    currentTool = 1;
 }
 
 SelectionGraphicsScene::~SelectionGraphicsScene()
@@ -54,6 +55,7 @@ void SelectionGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent
 
 void SelectionGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
+    //frame select
     if(mouseEvent->buttons() == Qt::LeftButton && currentTool == 0)
     {
         //nullify the dimensions of the selection
@@ -73,6 +75,14 @@ void SelectionGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEven
             origin.setY(this->height() - 2);
 
     }
+    //frame select
+    else if(mouseEvent->buttons() == Qt::LeftButton && currentTool == 1)
+    {
+        QPoint pressSpot = mouseEvent->buttonDownScenePos(Qt::LeftButton).toPoint();
+
+        AutoSelectFrame(pressSpot.x(), pressSpot.y());
+    }
+    //render spot
     else if(mouseEvent->buttons() == Qt::LeftButton && currentTool == 3)
     {
         if(!selectionBox->rect().isNull())
@@ -90,11 +100,15 @@ void SelectionGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEven
             if(pressSpot.y() > selectionBox->rect().bottom())
                 pressSpot.setY(selectionBox->rect().bottom());
 
+            //transform to item coordinates
+            pressSpot.setX(pressSpot.x() - selectionBox->x());
+            pressSpot.setY(pressSpot.y() - selectionBox->y());
+
             renderSpot->setPos(pressSpot.x(), pressSpot.y());
             renderSpot->show();
 
             //emit a signal that the renderspot has been moved
-            emit RenderSpotUpdated(renderSpot->scenePos().toPoint());
+            emit RenderSpotUpdated(pressSpot);
         }
     }
 }
@@ -127,21 +141,105 @@ void SelectionGraphicsScene::UpdateRenderSpot(QPoint newSpot)
 
 void SelectionGraphicsScene::AutoSelectFrame(int x, int y)
 {
-    //if a spritesheet is loaded
-        //get the spritesheet
+    //check that the value is in bounds of the image
+    if(x < 0 || y < 0 || x >= spritesheet.width() || y >= spritesheet.height())
+        return;
 
+    //if a spritesheet is loaded
+    if(!spritesheet.isNull())
+    {
         //get the color of the top left pixel
+        QRgb colorKey = spritesheet.pixel(0, 0);
 
         //if the pixel at the specified coordinates is the key color, return
+        if(colorKey == spritesheet.pixel(x, y))
+            return;
 
         //if not
-            //loop while the selection box is smaller than the image
+        else
+        {
+            int expanding;
+            QRect newSelection(x - 1, y - 1, 2, 2);
+
+            //loop while the selection box is smaller than the image and the box is expanding
+            while((newSelection.width() * newSelection.height()) < (spritesheet.rect().width() * spritesheet.rect().height()) && expanding)
+            {
+                expanding = 0;
+
                 //check if the right border is all the key color
-                    //if not, push that border by 1 pixel
+                for(int i = 0; i < newSelection.height(); i++)
+                {
+                    //if the pixel along the right border does not equal the color key
+                    if(spritesheet.pixel(newSelection.right(), newSelection.top() + i) != colorKey)
+                    {
+                        //push the right border over by one
+                        newSelection.setRight(newSelection.right() + 1);
+
+                        //the selection is still expanding
+                        expanding++;
+
+                        //and break out of the loop
+                        break;
+                    }
+                }
+
                 //check if the bottom border is all the key color
-                    //if not, push the border by 1 pixel
+                for(int i = 0; i < newSelection.width(); i++)
+                {
+                    //if the pixel along the bottom border does not equal the color key
+                    if(spritesheet.pixel(newSelection.left() + i, newSelection.bottom()) != colorKey)
+                    {
+                        //push the bottom border down by one
+                        newSelection.setBottom(newSelection.bottom() + 1);
+
+                        //the selection is still expanding
+                        expanding++;
+
+                        //and break out of the loop
+                        break;
+                    }
+                }
+
                 //check the left
-                    //push the border
+                for(int i = 0; i < newSelection.height(); i++)
+                {
+                    //if the pixel along the right border does not equal the color key
+                    if(spritesheet.pixel(newSelection.left(), newSelection.top() + i) != colorKey)
+                    {
+                        //push the right border over by one
+                        newSelection.setLeft(newSelection.left() - 1);
+
+                        //the selection is still expanding
+                        expanding++;
+
+                        //and break out of the loop
+                        break;
+                    }
+                }
+
+
                 //check the top
-    //push the border
+                for(int i = 0; i < newSelection.width(); i++)
+                {
+                    //if the pixel along the top border does not equal the color key
+                    if(spritesheet.pixel(newSelection.left() + i, newSelection.top()) != colorKey)
+                    {
+                        //push the top border up by one
+                        newSelection.setTop(newSelection.top() - 1);
+
+                        //the selection is still expanding
+                        expanding++;
+
+                        //and break out of the loop
+                        break;
+                    }
+                }
+            }
+
+            selectionBox->setRect(newSelection);
+
+            //signal that a new rect is ready
+            emit SelectionUpdated(selectionBox->rect().toRect());
+        }
+    }
 }

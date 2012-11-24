@@ -15,6 +15,8 @@ private:
     QGraphicsPixmapItem *renderSpot;
     QPoint origin;
 
+    QImage spritesheet;
+
     int currentTool;
 
 public:
@@ -34,9 +36,8 @@ public:
     void HideRenderSpot() { renderSpot->hide(); }
     void ShowRenderSpot() { renderSpot->show(); }
 
-    QImage GetSpritesheet();
-
     void SetTool(int newTool) { currentTool = newTool; }
+    void SetSpritesheet(QImage newSheet) { spritesheet = newSheet; }
 
     void AutoSelectFrame(int x, int y);
     
