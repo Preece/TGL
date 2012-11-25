@@ -179,6 +179,10 @@ void SelectionGraphicsScene::AutoSelectFrame(int x, int y)
                     //if the pixel along the right border does not equal the color key
                     if(spritesheet.pixel(newSelection.right(), newSelection.top() + i) != colorKey)
                     {
+                        //if the edge is pushing against the right border
+                        if(newSelection.right() == spritesheet.rect().right())
+                            break;
+
                         //push the right border over by one
                         newSelection.setRight(newSelection.right() + 1);
 
@@ -196,6 +200,10 @@ void SelectionGraphicsScene::AutoSelectFrame(int x, int y)
                     //if the pixel along the bottom border does not equal the color key
                     if(spritesheet.pixel(newSelection.left() + i, newSelection.bottom()) != colorKey)
                     {
+                        //if the edge is pushing against the bottom border
+                        if(newSelection.bottom() == spritesheet.rect().bottom())
+                            break;
+
                         //push the bottom border down by one
                         newSelection.setBottom(newSelection.bottom() + 1);
 
@@ -213,6 +221,10 @@ void SelectionGraphicsScene::AutoSelectFrame(int x, int y)
                     //if the pixel along the right border does not equal the color key
                     if(spritesheet.pixel(newSelection.left(), newSelection.top() + i) != colorKey)
                     {
+                        //if the edge is pushing against the left border
+                        if(newSelection.left() == 0)
+                            break;
+
                         //push the right border over by one
                         newSelection.setLeft(newSelection.left() - 1);
 
@@ -231,6 +243,10 @@ void SelectionGraphicsScene::AutoSelectFrame(int x, int y)
                     //if the pixel along the top border does not equal the color key
                     if(spritesheet.pixel(newSelection.left() + i, newSelection.top()) != colorKey)
                     {
+                        //if the edge is pushing against the top border
+                        if(newSelection.top() == 0)
+                            break;
+
                         //push the top border up by one
                         newSelection.setTop(newSelection.top() - 1);
 
