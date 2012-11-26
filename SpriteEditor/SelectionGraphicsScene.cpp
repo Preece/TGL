@@ -76,12 +76,14 @@ void SelectionGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEven
             origin.setY(this->height() - 2);
 
     }
-    //frame select
+    //auto frame select
     else if(mouseEvent->buttons() == Qt::LeftButton && currentTool == 1)
     {
         QPoint pressSpot = mouseEvent->buttonDownScenePos(Qt::LeftButton).toPoint();
 
         AutoSelectFrame(pressSpot.x(), pressSpot.y());
+        UpdateRenderSpot(QPoint(0, 0));
+        renderSpot->show();
     }
     //render spot
     else if(mouseEvent->buttons() == Qt::LeftButton && currentTool == 3)
@@ -105,10 +107,10 @@ void SelectionGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEven
                 pressSpot.setY(selectionBox->rect().bottom());
 
             //transform to item coordinates
-            pressSpot.setX(pressSpot.x() - selectionBox->x());
-            pressSpot.setY(pressSpot.y() - selectionBox->y());
+            pressSpot.setX(pressSpot.x() - selectionBox->rect().x());
+            pressSpot.setY(pressSpot.y() - selectionBox->rect().y());
 
-            renderSpot->setPos(pressSpot.x(), pressSpot.y());
+            UpdateRenderSpot(pressSpot);
             renderSpot->show();
 
             //emit a signal that the renderspot has been moved
@@ -121,13 +123,12 @@ void SelectionGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEv
 {
     //if a regular frame drag is released
     if(mouseEvent->button() == Qt::LeftButton && currentTool == 0)
+    {
         //signal that a new rect is ready
         emit SelectionUpdated(selectionBox->rect().toRect());
 
-    //if the auto frame select is used
-    if(mouseEvent->button() == Qt::LeftArrow && currentTool == 1)
-    {
-        AutoSelectFrame(mouseEvent->scenePos().x(), mouseEvent->scenePos().y());
+        UpdateRenderSpot(QPoint(0, 0));
+        renderSpot->show();
     }
 }
 
@@ -138,11 +139,14 @@ void SelectionGraphicsScene::UpdateSelectionRect(QRect newRect)
 
     if(newRect.isNull())
         renderSpot->hide();
+    else
+        renderSpot->show();
 }
 
 void SelectionGraphicsScene::UpdateRenderSpot(QPoint newSpot)
 {
-    renderSpot->setPos(newSpot.x(), newSpot.y());
+    //this translates from relative to absolute coordinates
+    renderSpot->setPos(newSpot.x() + selectionBox->rect().x(), newSpot.y() + selectionBox->rect().y());
     renderSpot->show();
 }
 

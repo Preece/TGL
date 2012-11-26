@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //zero out these pointers
     levelPropertiesWindow = 0;
-    objectEditorWindow = 0;
 
     //create a resource manager
     resources = new ResourceManager;
@@ -38,14 +37,4 @@ void MainWindow::on_actionProperties_triggered()
     }
 
     levelPropertiesWindow->show();
-}
-
-void MainWindow::on_actionAdd_Object_triggered()
-{
-    if(!objectEditorWindow)
-    {
-        objectEditorWindow = new ObjectEditor;
-    }
-
-    objectEditorWindow->show();
 }

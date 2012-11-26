@@ -9,8 +9,10 @@ ResourceTab::ResourceTab(QWidget *parent) :
 
     imageViewer = NULL;
     spriteWindow = NULL;
+    objectEditorWindow = NULL;
 
     connect(ui->addSpriteButton, SIGNAL(clicked()), this, SIGNAL(NewSpriteButtonClicked()));
+    connect(ui->addObjectButton, SIGNAL(clicked()), this, SIGNAL(NewObjectButtonClicked()));
 }
 
 ResourceTab::~ResourceTab()
@@ -239,4 +241,12 @@ void ResourceTab::on_addSpriteButton_clicked()
     {
         delete temporarySprite;
     }
+}
+
+void ResourceTab::on_addObjectButton_clicked()
+{
+    if(!objectEditorWindow)
+        objectEditorWindow = new ObjectEditor;
+
+    objectEditorWindow->exec();
 }

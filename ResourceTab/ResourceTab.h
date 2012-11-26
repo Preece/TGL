@@ -6,6 +6,7 @@
 #include <QMessageBox>
 
 #include "../SpriteEditor/SpriteEditor.h"
+#include "../ObjectEditor.h"
 #include "ImageViewer.h"
 #include "ImageSelectorItem.h"
 #include "SpriteSelectorItem.h"
@@ -52,13 +53,18 @@ private slots:
 
     void on_addSpriteButton_clicked();
 
+    void on_addObjectButton_clicked();
+
 signals:
     void NewSpriteButtonClicked();
+    void NewObjectButtonClicked();
 
 private:
     Ui::ResourceTab *ui;
+
     ImageViewer *imageViewer;
     SpriteEditor *spriteWindow;
+    ObjectEditor *objectEditorWindow;
 
     ResourceManager *resourceManager;
 };

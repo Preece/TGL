@@ -28,14 +28,12 @@ public:
 private slots:
 
     void on_actionProperties_triggered();
-    void on_actionAdd_Object_triggered();
 
 private:
     Ui::MainWindow *ui;
 
     //Dialogs
     LevelProperties *levelPropertiesWindow;
-    ObjectEditor *objectEditorWindow;
 
     ResourceManager *resources;
 };

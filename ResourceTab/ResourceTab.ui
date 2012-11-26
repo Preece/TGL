@@ -35,7 +35,7 @@
    <enum>QTabWidget::Triangular</enum>
   </property>
   <property name="currentIndex">
-   <number>2</number>
+   <number>1</number>
   </property>
   <widget class="QWidget" name="tilesTab">
    <attribute name="title">
@@ -58,8 +58,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>249</width>
-         <height>327</height>
+         <width>79</width>
+         <height>26</height>
         </rect>
        </property>
        <widget class="QGraphicsView" name="tileSelector">
@@ -265,6 +265,22 @@
     <hint type="destinationlabel">
      <x>133</x>
      <y>315</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spriteSelector</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>editSpriteButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>145</x>
+     <y>174</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>343</y>
     </hint>
    </hints>
   </connection>
