@@ -55,13 +55,7 @@ bool SpriteEditor::IsAnimationSelected()
 {
     //check if there is anything selected
     if(ui->animationList->currentRow() == -1)
-    {
-        //if not, warn the user and abort the function
-        QMessageBox warning;
-        warning.warning(this, "Warning", "Please select an Animation first.");
-
         return false;
-    }
 
     return true;
 }
@@ -201,8 +195,19 @@ void SpriteEditor::StoreNewRenderSpot(QPoint newSpot)
 /////////////////////////////////IMAGE FUNCTIONS//////////////////////////////////////////////
 void SpriteEditor::UpdateDisplayImage()
 {
-    //if the sprite has an image
+    //hide the image item until is has been proven to exist
+    imageItem->hide();
 
+    //get the image from the resource manager
+    Image *tempImage = resourceManager->GetImage(currentSprite->GetImageID());
+
+    //abort if the image doesn't exist
+    if(tempImage == NULL)
+        return;
+
+    //abort of the image has no associated QImage loaded
+    if(tempImage->GetImage()->isNull())
+        return;
 
     imageItem->setPixmap(QPixmap::fromImage(*(resourceManager->GetImage(currentSprite->GetImageID())->GetImage())));
     imageItem->show();
@@ -249,7 +254,6 @@ void SpriteEditor::ChangeTool(int newTool)
     ui->imageView->setCursor(newCursor);
 }
 
-
 void SpriteEditor::NewSprite(Sprite *newSprite)
 {
     ClearAll();
@@ -280,11 +284,9 @@ void SpriteEditor::EditSprite(Sprite *editSprite)
         tempItem->SetAnimation(currentSprite->GetAnimationByIndex(i));
 
         ui->animationList->addItem(tempItem);
-        ui->animationList->setCurrentItem(tempItem);
     }
 
-    //repopulate the frame list
-    RepopulateFrameList();
+
 }
 
 void SpriteEditor::on_buttonBox_accepted()

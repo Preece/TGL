@@ -89,7 +89,6 @@ Image *ResourceManager::GetImageByIndex(int index)
 {
     if(index >= imageList.count() || index < 0)
     {
-        QMessageBox::warning(NULL, "Warning", "Tried to Get an Image by index. Failed.");
         return NULL;
     }
 
@@ -104,7 +103,6 @@ Image *ResourceManager::GetImage(int ID)
             return imageList[i];
     }
 
-    QMessageBox::warning(NULL, "Warning", "You attempted to access an Image by ID. It was not found.");
     return NULL;
 }
 
