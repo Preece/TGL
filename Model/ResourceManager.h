@@ -36,6 +36,8 @@ public slots:
     int AddObjectPrototype(ObjectPrototype *newObjectPrototype);
     bool DeleteObjectPrototype(int ID);
     ObjectPrototype *GetObjectPrototype(int ID);
+    ObjectPrototype *GetObjectPrototypeByIndex(int index);
+    int GetObjectPrototypeCount() { return objectPrototypeList.count(); }
 
     int AddObjectInstance(ObjectInstance *newObjectInstance);
     bool DeleteObjectInstance(int ID);

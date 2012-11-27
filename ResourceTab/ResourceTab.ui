@@ -58,8 +58,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>79</width>
-         <height>26</height>
+         <width>249</width>
+         <height>327</height>
         </rect>
        </property>
        <widget class="QGraphicsView" name="tileSelector">
@@ -83,14 +83,7 @@
    </attribute>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QTreeView" name="objectSelector">
-      <property name="frameShape">
-       <enum>QFrame::WinPanel</enum>
-      </property>
-      <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOn</enum>
-      </property>
-     </widget>
+     <widget class="QListWidget" name="objectSelector"/>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -272,6 +265,22 @@
    <sender>spriteSelector</sender>
    <signal>itemDoubleClicked(QListWidgetItem*)</signal>
    <receiver>editSpriteButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>145</x>
+     <y>174</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>343</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>objectSelector</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>editObjectButton</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">

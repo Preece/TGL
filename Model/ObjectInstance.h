@@ -8,7 +8,7 @@
 class ObjectInstance : public Savable
 {
 private:
-	ObjectPrototype *prototype;
+    int prototypeID;
 	int ID;
 
 	int x, y;
@@ -17,9 +17,9 @@ public:
     bool SaveToFile(QFile &file);
     bool LoadFromFile(QFile &file);
 
-    bool AttachPrototype(ObjectPrototype *newPrototype);
+    bool AttachPrototype(int newProtoID);
 	bool UnattachPrototype();
-    ObjectPrototype *GetPrototype();
+    int GetPrototypeID();
 
 	bool SetPosition(int newX, int newY);
 	int GetX();

@@ -2,6 +2,12 @@
 #define OBJECTEDITOR_H
 
 #include <QDialog>
+#include <QMap>
+#include <QVariant>
+
+#include "Model/ObjectPrototype.h"
+#include "Model/ResourceManager.h"
+#include "ResourceTab/SpriteSelectorItem.h"
 
 namespace Ui {
 class ObjectEditor;
@@ -14,9 +20,33 @@ class ObjectEditor : public QDialog
 public:
     explicit ObjectEditor(QWidget *parent = 0);
     ~ObjectEditor();
+
+    void NewObject(ObjectPrototype *newObject);
+    void EditObject(ObjectPrototype *newObject);
+
+    void RepopulateSpriteList();
+
+    void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
     
+private slots:
+    void on_objectNameInput_textChanged(const QString &arg1);
+
+    void on_objectTypeSelector_currentIndexChanged(int index);
+
+    void on_objectBehaviorSelector_currentIndexChanged(int index);
+
+    void on_spriteList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_ObjectEditor_accepted();
+
 private:
     Ui::ObjectEditor *ui;
+
+    ObjectPrototype *currentObject;
+
+    ResourceManager *resourceManager;
+
+
 };
 
 #endif // OBJECTEDITOR_H

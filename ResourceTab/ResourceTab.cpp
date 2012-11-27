@@ -29,9 +29,20 @@ void ResourceTab::RepopulateTileSelector()
 void ResourceTab::RepopulateObjectSelector()
 {
     //clear the object selector
+    ui->objectSelector->clear();
+
+    ObjectSelectorItem *tempObject;
 
     //loop through all the objects
+    for(int i = 0; i < resourceManager->GetObjectPrototypeCount(); i++)
+    {
         //add the object to the proper category
+        tempObject = new ObjectSelectorItem;
+        tempObject->SetObject(resourceManager->GetObjectPrototypeByIndex(i));
+
+        tempObject->setText(tempObject->GetObject()->GetObjectName());
+        ui->objectSelector->addItem(tempObject);
+    }
 }
 
 void ResourceTab::RepopulateSpriteSelector()
@@ -183,6 +194,41 @@ Sprite *ResourceTab::GetSelectedSprite()
     return NULL;
 }
 
+bool ResourceTab::IsObjectSelected()
+{
+    if(ui->objectSelector->currentRow() == -1)
+        return false;
+
+    return true;
+}
+
+ObjectSelectorItem *ResourceTab::GetSelectedObjectItem()
+{
+    if(IsObjectSelected())
+    {
+        //retrieve the list item
+        ObjectSelectorItem *tempItem = dynamic_cast<ObjectSelectorItem*>(ui->objectSelector->currentItem());
+
+        //warn if the cast failed
+        if(tempItem == 0)
+            QMessageBox::warning(this, "Warning", "The dynamic cast has failed!");
+
+        return tempItem;
+    }
+
+    return NULL;
+}
+
+ObjectPrototype *ResourceTab::GetSelectedObject()
+{
+    if(IsObjectSelected())
+    {
+        return GetSelectedObjectItem()->GetObject();
+    }
+
+    return NULL;
+}
+
 void ResourceTab::on_deleteImageButton_clicked()
 {
     //make sure an image is selected
@@ -246,7 +292,40 @@ void ResourceTab::on_addSpriteButton_clicked()
 void ResourceTab::on_addObjectButton_clicked()
 {
     if(!objectEditorWindow)
+    {
         objectEditorWindow = new ObjectEditor;
+        objectEditorWindow->RegisterResourceManager(resourceManager);
+    }
 
-    objectEditorWindow->exec();
+    ObjectPrototype *tempObject = new ObjectPrototype;
+    objectEditorWindow->NewObject(tempObject);
+
+    if(objectEditorWindow->exec() == QDialog::Accepted)
+    {
+        resourceManager->AddObjectPrototype(tempObject);
+        RepopulateObjectSelector();
+    }
+    else
+    {
+        delete tempObject;
+    }
+}
+
+void ResourceTab::on_editObjectButton_clicked()
+{
+    if(IsObjectSelected())
+    {
+        //create the sprite editing window if it does not already exist
+        if(!objectEditorWindow)
+        {
+            objectEditorWindow = new ObjectEditor;
+            objectEditorWindow->RegisterResourceManager(resourceManager);
+        }
+
+        objectEditorWindow->EditObject(GetSelectedObject());
+
+        objectEditorWindow->exec();
+
+        RepopulateObjectSelector();
+    }
 }

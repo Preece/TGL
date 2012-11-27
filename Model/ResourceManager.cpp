@@ -35,7 +35,13 @@ Sprite *ResourceManager::GetSpriteByIndex(int index)
 
 int ResourceManager::AddObjectPrototype(ObjectPrototype *newObjectPrototype)
 {
-    return 0;
+    if(newObjectPrototype != NULL)
+    {
+        objectPrototypeList.append(newObjectPrototype);
+        return newObjectPrototype->GetID();
+    }
+
+    return NULL;
 }
 
 bool ResourceManager::DeleteObjectPrototype(int ID)
@@ -46,6 +52,14 @@ bool ResourceManager::DeleteObjectPrototype(int ID)
 ObjectPrototype *ResourceManager::GetObjectPrototype(int ID)
 {
     return NULL;
+}
+
+ObjectPrototype *ResourceManager::GetObjectPrototypeByIndex(int index)
+{
+    if(index < 0 || index >= objectPrototypeList.count())
+        return NULL;
+
+    return objectPrototypeList[index];
 }
 
 int ResourceManager::AddObjectInstance(ObjectInstance *newObjectInstance)

@@ -10,6 +10,7 @@
 #include "ImageViewer.h"
 #include "ImageSelectorItem.h"
 #include "SpriteSelectorItem.h"
+#include "ObjectSelectorItem.h"
 
 #include "../Model/ResourceManager.h"
 #include "../Model/Image.h"
@@ -42,6 +43,10 @@ public:
     SpriteSelectorItem *GetSelectedSpriteItem();
     Sprite *GetSelectedSprite();
 
+    bool IsObjectSelected();
+    ObjectSelectorItem *GetSelectedObjectItem();
+    ObjectPrototype *GetSelectedObject();
+
 private slots:
     void on_addImageButton_clicked();
 
@@ -54,6 +59,8 @@ private slots:
     void on_addSpriteButton_clicked();
 
     void on_addObjectButton_clicked();
+
+    void on_editObjectButton_clicked();
 
 signals:
     void NewSpriteButtonClicked();
