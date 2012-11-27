@@ -169,7 +169,7 @@ void SelectionGraphicsScene::AutoSelectFrame(int x, int y)
         //if not
         else
         {
-            int expanding;
+            int expanding = 1;
             QRect newSelection(x - 1, y - 1, 2, 2);
 
             //loop while the selection box is smaller than the image and the box is expanding
