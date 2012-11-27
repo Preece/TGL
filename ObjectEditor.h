@@ -33,8 +33,6 @@ private slots:
 
     void on_objectTypeSelector_currentIndexChanged(int index);
 
-    void on_objectBehaviorSelector_currentIndexChanged(int index);
-
     void on_spriteList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
     void on_ObjectEditor_accepted();

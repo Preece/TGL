@@ -13,6 +13,16 @@ ResourceTab::ResourceTab(QWidget *parent) :
 
     connect(ui->addSpriteButton, SIGNAL(clicked()), this, SIGNAL(NewSpriteButtonClicked()));
     connect(ui->addObjectButton, SIGNAL(clicked()), this, SIGNAL(NewObjectButtonClicked()));
+
+    //set up the tree view
+    NPCTree = new QTreeWidgetItem(ui->objectSelector);
+    NPCTree->setText(0, "NPCs");
+    EnemyTree = new QTreeWidgetItem(ui->objectSelector);
+    EnemyTree->setText(0, "Enemies");
+    ItemTree = new QTreeWidgetItem(ui->objectSelector);
+    ItemTree->setText(0, "Items");
+    DoodadTree = new QTreeWidgetItem(ui->objectSelector);
+    DoodadTree->setText(0, "Doodads");
 }
 
 ResourceTab::~ResourceTab()
@@ -29,7 +39,10 @@ void ResourceTab::RepopulateTileSelector()
 void ResourceTab::RepopulateObjectSelector()
 {
     //clear the object selector
-    ui->objectSelector->clear();
+    qDeleteAll(NPCTree->takeChildren());
+    qDeleteAll(EnemyTree->takeChildren());
+    qDeleteAll(ItemTree->takeChildren());
+    qDeleteAll(DoodadTree->takeChildren());
 
     ObjectSelectorItem *tempObject;
 
@@ -40,8 +53,18 @@ void ResourceTab::RepopulateObjectSelector()
         tempObject = new ObjectSelectorItem;
         tempObject->SetObject(resourceManager->GetObjectPrototypeByIndex(i));
 
-        tempObject->setText(tempObject->GetObject()->GetObjectName());
-        ui->objectSelector->addItem(tempObject);
+        tempObject->setText(0, tempObject->GetObject()->GetObjectName());
+
+        if(tempObject->GetObject()->GetType() == 0)
+            NPCTree->addChild(tempObject);
+        else if(tempObject->GetObject()->GetType() == 1)
+            EnemyTree->addChild(tempObject);
+        else if(tempObject->GetObject()->GetType() == 2)
+            ItemTree->addChild(tempObject);
+        else if(tempObject->GetObject()->GetType() == 3)
+            DoodadTree->addChild(tempObject);
+        else
+            delete tempObject;
     }
 }
 
@@ -196,7 +219,7 @@ Sprite *ResourceTab::GetSelectedSprite()
 
 bool ResourceTab::IsObjectSelected()
 {
-    if(ui->objectSelector->currentRow() == -1)
+    if(ui->objectSelector->currentItem() == NULL)
         return false;
 
     return true;

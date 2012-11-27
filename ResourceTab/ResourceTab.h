@@ -4,6 +4,7 @@
 #include <QTabWidget>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTreeWidgetItem>
 
 #include "../SpriteEditor/SpriteEditor.h"
 #include "../ObjectEditor.h"
@@ -74,6 +75,11 @@ private:
     ObjectEditor *objectEditorWindow;
 
     ResourceManager *resourceManager;
+
+    QTreeWidgetItem *NPCTree;
+    QTreeWidgetItem *EnemyTree;
+    QTreeWidgetItem *ItemTree;
+    QTreeWidgetItem *DoodadTree;
 };
 
 #endif // RESOURCETAB_H

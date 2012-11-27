@@ -1,11 +1,11 @@
 #ifndef OBJECTSELECTORITEM_H
 #define OBJECTSELECTORITEM_H
 
-#include <QListWidgetItem>
+#include <QTreeWidgetItem>
 
 #include "Model/ObjectPrototype.h"
 
-class ObjectSelectorItem : public QListWidgetItem
+class ObjectSelectorItem : public QTreeWidgetItem
 {
 private:
     ObjectPrototype *object;

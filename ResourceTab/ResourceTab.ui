@@ -58,8 +58,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>249</width>
-         <height>327</height>
+         <width>79</width>
+         <height>26</height>
         </rect>
        </property>
        <widget class="QGraphicsView" name="tileSelector">
@@ -83,7 +83,16 @@
    </attribute>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QListWidget" name="objectSelector"/>
+     <widget class="QTreeWidget" name="objectSelector">
+      <attribute name="headerVisible">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string notr="true">1</string>
+       </property>
+      </column>
+     </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -265,22 +274,6 @@
    <sender>spriteSelector</sender>
    <signal>itemDoubleClicked(QListWidgetItem*)</signal>
    <receiver>editSpriteButton</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>145</x>
-     <y>174</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>145</x>
-     <y>343</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>objectSelector</sender>
-   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
-   <receiver>editObjectButton</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -21,7 +21,6 @@ void ObjectEditor::NewObject(ObjectPrototype *newObject)
 
     ui->objectNameInput->setText("");
     ui->objectTypeSelector->setCurrentIndex(0);
-    ui->objectBehaviorSelector->setCurrentIndex(0);
 
     RepopulateSpriteList();
 }
@@ -33,8 +32,6 @@ void ObjectEditor::EditObject(ObjectPrototype *newObject)
 
     ui->objectNameInput->setText(newObject->GetObjectName());
     ui->objectTypeSelector->setCurrentIndex(newObject->GetType());
-    ui->objectBehaviorSelector->setCurrentIndex(newObject->GetBehavior());
-
 
     currentObject = newObject;
 
@@ -51,12 +48,6 @@ void ObjectEditor::on_objectTypeSelector_currentIndexChanged(int index)
 {
     if(currentObject)
         currentObject->SetType(index);
-}
-
-void ObjectEditor::on_objectBehaviorSelector_currentIndexChanged(int index)
-{
-    if(currentObject)
-        currentObject->SetBehavior(index);
 }
 
 void ObjectEditor::on_spriteList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
