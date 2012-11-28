@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMap>
 #include <QVariant>
+#include <QTreeWidgetItem>
 
 #include "Model/ObjectPrototype.h"
 #include "Model/ResourceManager.h"
@@ -25,6 +26,7 @@ public:
     void EditObject(ObjectPrototype *newObject);
 
     void RepopulateSpriteList();
+    void RepopulateCustomValueList();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
     
@@ -36,6 +38,12 @@ private slots:
     void on_spriteList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
     void on_ObjectEditor_accepted();
+
+    void on_addCustomButton_clicked();
+
+    void on_removeCustomButton_clicked();
+
+    void on_customValues_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
 private:
     Ui::ObjectEditor *ui;

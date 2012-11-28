@@ -19,5 +19,7 @@
         <file>Icons/pause.png</file>
         <file>Icons/play.png</file>
         <file>Icons/previousframe.png</file>
+        <file>Icons/addvalue.png</file>
+        <file>Icons/removevalue.png</file>
     </qresource>
 </RCC>

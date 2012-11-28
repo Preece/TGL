@@ -219,7 +219,11 @@ Sprite *ResourceTab::GetSelectedSprite()
 
 bool ResourceTab::IsObjectSelected()
 {
-    if(ui->objectSelector->currentItem() == NULL)
+    QTreeWidgetItem *item = ui->objectSelector->currentItem();
+    if(item == NULL)
+        return false;
+
+    if(item == NPCTree || item == EnemyTree || item == ItemTree || item == DoodadTree)
         return false;
 
     return true;

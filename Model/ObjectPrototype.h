@@ -39,7 +39,8 @@ public:
     bool UnattachSprite() { spriteID = 0; }
 
     void AddCustomValue(QString newName, QVariant newValue) { customValues.insert(newName, newValue); }
-    QMap<QString, QVariant>::const_iterator GetCustomValueIterator() { return customValues.constBegin(); }
+    QMap<QString, QVariant> GetCustomValues() { return customValues; }
+    void ClearCustomValues() { customValues.clear(); }
 
 
 };

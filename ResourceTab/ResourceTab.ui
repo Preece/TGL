@@ -58,8 +58,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>79</width>
-         <height>26</height>
+         <width>249</width>
+         <height>327</height>
         </rect>
        </property>
        <widget class="QGraphicsView" name="tileSelector">
@@ -274,6 +274,22 @@
    <sender>spriteSelector</sender>
    <signal>itemDoubleClicked(QListWidgetItem*)</signal>
    <receiver>editSpriteButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>145</x>
+     <y>174</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>343</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>objectSelector</sender>
+   <signal>itemDoubleClicked(QTreeWidgetItem*,int)</signal>
+   <receiver>editObjectButton</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
