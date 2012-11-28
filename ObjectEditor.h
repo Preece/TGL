@@ -45,6 +45,8 @@ private slots:
 
     void on_customValues_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
+    void on_buttonBox_accepted();
+
 private:
     Ui::ObjectEditor *ui;
 

@@ -106,29 +106,7 @@ void ObjectEditor::RepopulateCustomValueList()
 
 void ObjectEditor::on_ObjectEditor_accepted()
 {
-    if(ui->objectNameInput->text() == "")
-        currentObject->SetObjectName("New Object");
 
-    //clear the objects custom value list
-    currentObject->ClearCustomValues();
-
-    QTreeWidgetItem *tempItem;
-    QVariant tempValue;
-
-    //loop through for every entry in the custom values tree
-    for(int i = 0; i < ui->customValues->topLevelItemCount(); i++)
-    {
-        tempItem = ui->customValues->takeTopLevelItem(i);
-
-        tempValue = tempItem->text(1);
-
-        //add the key/value pair
-        currentObject->AddCustomValue(tempItem->text(0), tempValue);
-
-        delete tempItem;
-    }
-
-    currentObject = NULL;
 }
 
 void ObjectEditor::on_addCustomButton_clicked()
@@ -149,4 +127,29 @@ void ObjectEditor::on_removeCustomButton_clicked()
 void ObjectEditor::on_customValues_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     ui->customValues->editItem(item, column);
+}
+
+void ObjectEditor::on_buttonBox_accepted()
+{
+    if(ui->objectNameInput->text() == "")
+        currentObject->SetObjectName("New Object");
+
+    //clear the objects custom value list
+    currentObject->ClearCustomValues();
+
+    QTreeWidgetItem *tempItem;
+    QVariant tempValue;
+
+    //loop through for every entry in the custom values tree
+    for(int i = 0; i < ui->customValues->topLevelItemCount(); i++)
+    {
+        tempItem = ui->customValues->topLevelItem(i);
+
+        tempValue = tempItem->text(1);
+
+        //add the key/value pair
+        currentObject->AddCustomValue(tempItem->text(0), tempValue);
+    }
+
+    currentObject = NULL;
 }
