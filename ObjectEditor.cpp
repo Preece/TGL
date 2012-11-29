@@ -24,6 +24,7 @@ void ObjectEditor::NewObject(ObjectPrototype *newObject)
     ui->customValues->clear();
 
     RepopulateSpriteList();
+    UpdateSymbol();
 }
 
 void ObjectEditor::EditObject(ObjectPrototype *newObject)
@@ -38,6 +39,7 @@ void ObjectEditor::EditObject(ObjectPrototype *newObject)
 
     RepopulateSpriteList();
     RepopulateCustomValueList();
+    UpdateSymbol();
 }
 
 void ObjectEditor::on_objectNameInput_textChanged(const QString &arg1)
@@ -63,6 +65,8 @@ void ObjectEditor::on_spriteList_currentItemChanged(QListWidgetItem *current, QL
 
     //set the spriteID
     currentObject->AttachSprite(tempItem->GetSprite()->GetID());
+
+    UpdateSymbol();
 }
 
 void ObjectEditor::RepopulateSpriteList()
@@ -102,6 +106,12 @@ void ObjectEditor::RepopulateCustomValueList()
         tempItem->setText(0, str);
         tempItem->setText(1, iter.value(str).toString());
     }
+}
+
+void ObjectEditor::UpdateSymbol()
+{
+    if(currentObject)
+        ui->symbolPreview->setPixmap(resourceManager->GetSpriteSymbol(currentObject->GetSpriteID()));
 }
 
 void ObjectEditor::on_ObjectEditor_accepted()

@@ -20,6 +20,8 @@ private:
     int imageID;
     QList<Animation*> animations;
 public:
+    Sprite();
+
     bool SaveToFile(QFile &file);
     bool LoadFromFile(QFile &file);
 

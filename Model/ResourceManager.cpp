@@ -22,6 +22,12 @@ bool ResourceManager::DeleteSprite(int ID)
 
 Sprite *ResourceManager::GetSprite(int ID)
 {
+    for(int i = 0; i < spriteList.count(); i++)
+    {
+        if(spriteList[i]->GetID() == ID)
+            return spriteList[i];
+    }
+
     return NULL;
 }
 
@@ -107,6 +113,43 @@ Image *ResourceManager::GetImageByIndex(int index)
     }
 
     return imageList[index];
+}
+
+QPixmap ResourceManager::GetSpriteSymbol(int spriteID)
+{
+    //get the sprite based on its ID
+    Sprite *tempSprite = GetSprite(spriteID);
+
+    //if its a valid sprite
+    if(tempSprite)
+    {
+        Image *tempImage = GetImage(tempSprite->GetImageID());
+
+        //if the image is valid
+        if(tempImage)
+        {
+            //get the image
+            QImage *tempQImage = tempImage->GetImage();
+
+            //if the image is valid
+            if(tempQImage)
+            {
+                //if the sprite has an animation and frame
+                if(tempSprite->GetAnimationCount() > 0)
+                    if(tempSprite->GetAnimationByIndex(0)->GetFrameCount() > 0)
+                    {
+                        //get the frame rect and make a pixmap from it
+                        QRect frameRect = tempSprite->GetAnimationByIndex(0)->GetFrameAtIndex(0)->GetFrameRect();
+                        QPixmap tempPixmap = QPixmap::fromImage(tempQImage->copy(frameRect));
+                        return tempPixmap;
+                    }
+            }
+
+        }
+    }
+
+    //return the missing file symbol
+    return QPixmap(":/Icons/Icons/MissingFile.png");
 }
 
 Image *ResourceManager::GetImage(int ID)

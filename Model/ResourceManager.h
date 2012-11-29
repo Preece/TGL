@@ -49,6 +49,8 @@ public slots:
     Image *GetImageByIndex(int index);
     int GetImageCount() { return imageList.count(); }
 
+    QPixmap GetSpriteSymbol(int spriteID);
+
     void DestroyAllResources();
 
 signals:

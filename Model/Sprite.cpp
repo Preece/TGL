@@ -5,6 +5,11 @@ bool Sprite::LoadFromFile(QFile &file)
     return false;
 }
 
+Sprite::Sprite()
+{
+    imageID = 0;
+}
+
 bool Sprite::SaveToFile(QFile &file)
 {
     return false;

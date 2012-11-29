@@ -27,6 +27,7 @@ public:
 
     void RepopulateSpriteList();
     void RepopulateCustomValueList();
+    void UpdateSymbol();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
     

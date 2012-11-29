@@ -1,6 +1,6 @@
 #include "Savable.h"
 
-int Savable::newID = 0;
+int Savable::newID = 1;
 
 Savable::Savable()
 {
