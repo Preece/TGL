@@ -20,73 +20,184 @@
    <string>Trygon Level Editor</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <widget class="QScrollArea" name="scrollArea_2">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::WinPanel</enum>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>444</width>
-         <height>442</height>
-        </rect>
-       </property>
-       <widget class="QGraphicsView" name="graphicsView">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>256</width>
-          <height>192</height>
-         </rect>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QToolButton" name="pencilTool">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="Icons.qrc">
+            <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="eyedropperTool">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="Icons.qrc">
+            <normaloff>:/Icons/Icons/eyedropper.png</normaloff>:/Icons/Icons/eyedropper.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="brushTool">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="Icons.qrc">
+            <normaloff>:/Icons/Icons/brush.png</normaloff>:/Icons/Icons/brush.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="bucketTool">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="Icons.qrc">
+            <normaloff>:/Icons/Icons/bucket.png</normaloff>:/Icons/Icons/bucket.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="eraserButton">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="Icons.qrc">
+            <normaloff>:/Icons/Icons/eraser.png</normaloff>:/Icons/Icons/eraser.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="gridToggle">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="Icons.qrc">
+            <normaloff>:/Icons/Icons/grid.png</normaloff>:/Icons/Icons/grid.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="levelView">
+        <property name="frameShape">
+         <enum>QFrame::WinPanel</enum>
         </property>
        </widget>
-      </widget>
-     </widget>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="ResourceTab" name="resourceTab">
-      <property name="minimumSize">
-       <size>
-        <width>271</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>271</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="tabPosition">
-       <enum>QTabWidget::North</enum>
-      </property>
-      <property name="tabShape">
-       <enum>QTabWidget::Triangular</enum>
-      </property>
-      <property name="currentIndex">
-       <number>-1</number>
-      </property>
-      <property name="elideMode">
-       <enum>Qt::ElideNone</enum>
-      </property>
-      <property name="usesScrollButtons">
-       <bool>true</bool>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="ResourceTab" name="resourceTab">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>271</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>271</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="tabPosition">
+         <enum>QTabWidget::North</enum>
+        </property>
+        <property name="tabShape">
+         <enum>QTabWidget::Triangular</enum>
+        </property>
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+        <property name="elideMode">
+         <enum>Qt::ElideNone</enum>
+        </property>
+        <property name="usesScrollButtons">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -143,6 +254,10 @@
    <addaction name="actionNew"/>
    <addaction name="actionSave"/>
    <addaction name="actionOpen"/>
+   <addaction name="separator"/>
+   <addaction name="separator"/>
+   <addaction name="actionUndo"/>
+   <addaction name="actionRedo"/>
    <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -202,6 +317,37 @@
     <string>Add Object</string>
    </property>
   </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset>
+     <normalon>:/Icons/Icons/undo.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="toolTip">
+    <string>Undo your previous action</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/Icons/redo.png</normaloff>:/Icons/Icons/redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+   <property name="toolTip">
+    <string>Redo the last undone action</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -216,4 +362,7 @@
   <include location="Icons.qrc"/>
  </resources>
  <connections/>
+ <buttongroups>
+  <buttongroup name="toolGroup"/>
+ </buttongroups>
 </ui>

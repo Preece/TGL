@@ -21,5 +21,9 @@
         <file>Icons/previousframe.png</file>
         <file>Icons/addvalue.png</file>
         <file>Icons/removevalue.png</file>
+        <file>Icons/redo.png</file>
+        <file>Icons/undo.png</file>
+        <file>Icons/brush.png</file>
+        <file>Icons/grid.png</file>
     </qresource>
 </RCC>

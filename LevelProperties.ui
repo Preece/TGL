@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>337</width>
-    <height>226</height>
+    <height>236</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -31,31 +31,6 @@
      </item>
      <item>
       <widget class="QLineEdit" name="mapNameInput"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>Tileset:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="tilesetInput"/>
-     </item>
-     <item>
-      <widget class="QToolButton" name="tilesetFindfileButton">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="icon">
-        <iconset resource="Icons.qrc">
-         <normaloff>:/Icons/Icons/open.png</normaloff>:/Icons/Icons/open.png</iconset>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -213,9 +188,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="Icons.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
