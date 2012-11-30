@@ -25,5 +25,9 @@
         <file>Icons/undo.png</file>
         <file>Icons/brush.png</file>
         <file>Icons/grid.png</file>
+        <file>Icons/size1.png</file>
+        <file>Icons/size2.png</file>
+        <file>Icons/size3.png</file>
+        <file>Icons/size4.png</file>
     </qresource>
 </RCC>

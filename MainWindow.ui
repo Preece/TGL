@@ -114,6 +114,23 @@
          </widget>
         </item>
         <item>
+         <widget class="QToolButton" name="pointerTool">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="Icons.qrc">
+            <normaloff>:/Icons/Icons/selector.png</normaloff>:/Icons/Icons/selector.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
          <widget class="Line" name="line">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -159,45 +176,41 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="ResourceTab" name="resourceTab">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>271</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>271</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="tabPosition">
-         <enum>QTabWidget::North</enum>
-        </property>
-        <property name="tabShape">
-         <enum>QTabWidget::Triangular</enum>
-        </property>
-        <property name="currentIndex">
-         <number>-1</number>
-        </property>
-        <property name="elideMode">
-         <enum>Qt::ElideNone</enum>
-        </property>
-        <property name="usesScrollButtons">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="ResourceTab" name="resourceTab">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>271</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>271</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Triangular</enum>
+      </property>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="usesScrollButtons">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

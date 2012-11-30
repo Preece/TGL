@@ -33,7 +33,10 @@ SOURCES += main.cpp\
     SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
     ResourceTab/SpriteSelectorItem.cpp \
     Model/ObjectPrototype.cpp \
-    ResourceTab/ObjectSelectorItem.cpp
+    ResourceTab/ObjectSelectorItem.cpp \
+    LevelEditor/TileItem.cpp \
+    LevelEditor/ObjectItem.cpp \
+    LevelEditor/LayerManager.cpp
   
 
 HEADERS  += \
@@ -60,7 +63,10 @@ HEADERS  += \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.h \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
     ResourceTab/SpriteSelectorItem.h \
-    ResourceTab/ObjectSelectorItem.h
+    ResourceTab/ObjectSelectorItem.h \
+    LevelEditor/TileItem.h \
+    LevelEditor/ObjectItem.h \
+    LevelEditor/LayerManager.h
    
 
 FORMS    += \
