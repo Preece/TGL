@@ -25,6 +25,7 @@ ResourceTab::ResourceTab(QWidget *parent) :
     DoodadTree->setText(0, "Doodads");
 
     tileSelector = new QGraphicsScene;
+    ui->tileSelector->setScene(tileSelector);
 }
 
 ResourceTab::~ResourceTab()
@@ -36,10 +37,39 @@ ResourceTab::~ResourceTab()
 void ResourceTab::RepopulateTileSelector()
 {
     //clear out all the items in the tile selector
-    //loop for the width of the spritesheet divided by the width of a tile
-        //loop for the height of the spritesheet divided by the height of a tile
-            //copy the correct fragment of the image into a new TileItem
-            //add the tile item to the tile selector at (i * tilewidth) + i
+    tileSelector->clear();
+
+    if(!spritesheet->isNull())
+    {
+        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+        if(tileW && tileH)
+        {
+            int imageW = spritesheet->width() / tileW;
+            int imageH = spritesheet->height() / tileH;
+
+            TileItem *tempItem;
+
+            //loop for the width of the spritesheet divided by the width of a tile
+            for(int i = 0; i < imageH; i++)
+            {
+                //loop for the height of the spritesheet divided by the height of a tile
+                for(int j = 0; j < imageW; j++)
+                {
+                    //copy the correct fragment of the image into a new TileItem
+                    tempItem = new TileItem;
+                    tempItem->SetTilePixmap(*spritesheet, j, i, tileW, tileH);
+
+                    //add the tile item to the tile selector at (i * tilewidth) + i
+                    tileSelector->addItem(tempItem);
+
+                    tempItem->setPos((j * tileW) + j, (i * tileH) + i);
+                    tempItem->setFlag(QGraphicsItem::ItemIsSelectable);
+                }
+            }
+        }
+    }
 }
 
 void ResourceTab::RepopulateObjectSelector()
