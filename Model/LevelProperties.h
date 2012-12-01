@@ -1,6 +1,8 @@
 #ifndef LEVELPROPERTIES_H
 #define LEVELPROPERTIES_H
 
+#include <QString>
+
 class LevelProperties
 {
 private:

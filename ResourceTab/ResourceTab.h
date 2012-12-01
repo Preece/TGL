@@ -7,7 +7,9 @@
 #include <QTreeWidgetItem>
 
 #include "../SpriteEditor/SpriteEditor.h"
+#include "../SpriteEditor/SpritesheetSelector.h"
 #include "../ObjectEditor.h"
+#include "../LevelEditor/TileItem.h"
 #include "ImageViewer.h"
 #include "ImageSelectorItem.h"
 #include "SpriteSelectorItem.h"
@@ -48,6 +50,9 @@ public:
     ObjectSelectorItem *GetSelectedObjectItem();
     ObjectPrototype *GetSelectedObject();
 
+    bool IsTileSelected();
+    TileItem *GetSelectedTileItem();
+
 private slots:
     void on_addImageButton_clicked();
 
@@ -82,6 +87,8 @@ private:
     QTreeWidgetItem *EnemyTree;
     QTreeWidgetItem *ItemTree;
     QTreeWidgetItem *DoodadTree;
+
+    QImage *spritesheet;
 };
 
 #endif // RESOURCETAB_H

@@ -19,7 +19,6 @@ SOURCES += main.cpp\
     SpriteEditor/AnimationListItem.cpp \
     ObjectEditor.cpp \
     MainWindow.cpp \
-    LevelProperties.cpp \
     SpriteEditor/SpriteEditor.cpp \
     SpriteEditor/AnimationEditor.cpp \
     SpriteEditor/FrameListItem.cpp \
@@ -47,7 +46,8 @@ SOURCES += main.cpp\
     LevelEditor/LevelLayer.cpp \
     Model/Tile.cpp \
     LevelEditor/Brushes/TileBrush.cpp \
-    Model/LevelProperties.cpp
+    Model/LevelProperties.cpp \
+    LevelPropertiesDialog.cpp
   
 
 HEADERS  += \
@@ -59,7 +59,6 @@ HEADERS  += \
     Model/Savable.h \
     Model/ResourceManager.h \
     SpriteEditor/AnimationListItem.h \
-    LevelProperties.h \
     MainWindow.h \
     ObjectEditor.h \
     SpriteEditor/SpriteEditor.h \
@@ -88,7 +87,8 @@ HEADERS  += \
     LevelEditor/LevelLayer.h \
     Model/Tile.h \
     LevelEditor/Brushes/TileBrush.h \
-    Model/LevelProperties.h
+    Model/LevelProperties.h \
+    LevelPropertiesDialog.h
    
 
 FORMS    += \
@@ -96,11 +96,11 @@ FORMS    += \
     ResourceTab/ImageViewer.ui \
     SpriteEditor/SpriteEditor.ui \
     SpriteEditor/AnimationEditor.ui \
-    LevelProperties.ui \
     MainWindow.ui \
     ObjectEditor.ui \
     SpriteEditor/SpritesheetSelector.ui \
-    SpriteEditor/AnimationPreviewer/AnimationPreviewer.ui
+    SpriteEditor/AnimationPreviewer/AnimationPreviewer.ui \
+    LevelPropertiesDialog.ui
 
 RESOURCES += \
     Icons.qrc

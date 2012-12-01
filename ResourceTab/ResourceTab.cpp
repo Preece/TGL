@@ -360,4 +360,19 @@ void ResourceTab::on_editObjectButton_clicked()
 void ResourceTab::on_selectTilesetButton_clicked()
 {
     //bring up an image selection window
+    SpritesheetSelector spritesheetWindow;
+
+    if(spritesheetWindow.exec())
+    {
+        if(spritesheetWindow.IsImageSelected())
+        {
+            spritesheet = spritesheetWindow.GetSelectedImage()->GetImage();
+
+            //clear out all the items in the tile selector
+            //loop for the width of the spritesheet divided by the width of a tile
+                //loop for the height of the spritesheet divided by the height of a tile
+                    //copy the correct fragment of the image into a new TileItem
+                    //add the tile item to the tile selector at (i * tilewidth) + i
+        }
+    }
 }

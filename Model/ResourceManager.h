@@ -9,7 +9,7 @@
 #include "ObjectInstance.h"
 #include "ObjectPrototype.h"
 #include "Image.h"
-#include "LevelProperties.h"
+#include "Model/LevelProperties.h"
 
 class ResourceManager : public QObject
 {
@@ -29,7 +29,7 @@ public:
 
 public slots:
 
-    LevelProperties *GetLevelproperties() { return &levelProperties; }
+    LevelProperties *GetLevelProperties() { return &levelProperties; }
 
     int AddSprite(Sprite *newSprite);
     bool DeleteSprite(int ID);

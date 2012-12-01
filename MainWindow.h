@@ -10,7 +10,7 @@
 #include "Model/ResourceManager.h"
 
 #include "SpriteEditor/SpriteEditor.h"
-#include "LevelProperties.h"
+#include "LevelPropertiesDialog.h"
 #include "ObjectEditor.h"
 
 namespace Ui {
@@ -33,7 +33,7 @@ private:
     Ui::MainWindow *ui;
 
     //Dialogs
-    LevelProperties *levelPropertiesWindow;
+    LevelPropertiesDialog *levelPropertiesWindow;
 
     ResourceManager *resources;
 };

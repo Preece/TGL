@@ -3,6 +3,8 @@
 
 #include <QGraphicsItemGroup>
 
+#include <Model/ObjectPrototype.h>
+
 class LevelLayer : public QGraphicsItemGroup
 {
 public:

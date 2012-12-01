@@ -1,6 +1,10 @@
 #ifndef TILEBRUSH_H
 #define TILEBRUSH_H
 
+#include <QPoint>
+
+#include "LevelEditor/LevelLayer.h"
+
 class TileBrush
 {
 private:

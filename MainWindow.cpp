@@ -33,8 +33,9 @@ void MainWindow::on_actionProperties_triggered()
 {
     if(!levelPropertiesWindow)
     {
-        levelPropertiesWindow = new LevelProperties;
+        levelPropertiesWindow = new LevelPropertiesDialog;
     }
 
+    levelPropertiesWindow->LoadValues();
     levelPropertiesWindow->show();
 }
