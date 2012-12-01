@@ -36,7 +36,14 @@ SOURCES += main.cpp\
     ResourceTab/ObjectSelectorItem.cpp \
     LevelEditor/TileItem.cpp \
     LevelEditor/ObjectItem.cpp \
-    LevelEditor/LayerManager.cpp
+    LevelEditor/LayerManager.cpp \
+    Commands/ModifyTilesCommand.cpp \
+    Commands/AddObjectInstanceCommand.cpp \
+    Commands/DeleteObjectInstanceCommand.cpp \
+    Commands/AddObjectCommand.cpp \
+    Commands/DeleteObjectCommand.cpp \
+    Commands/AddSpriteCommand.cpp \
+    Commands/DeletesSriteCommand.cpp
   
 
 HEADERS  += \
@@ -66,7 +73,14 @@ HEADERS  += \
     ResourceTab/ObjectSelectorItem.h \
     LevelEditor/TileItem.h \
     LevelEditor/ObjectItem.h \
-    LevelEditor/LayerManager.h
+    LevelEditor/LayerManager.h \
+    Commands/ModifyTilesCommand.h \
+    Commands/AddObjectInstanceCommand.h \
+    Commands/DeleteObjectInstanceCommand.h \
+    Commands/AddObjectCommand.h \
+    Commands/DeleteObjectCommand.h \
+    Commands/AddSpriteCommand.h \
+    Commands/DeleteSpriteCommand.h
    
 
 FORMS    += \
