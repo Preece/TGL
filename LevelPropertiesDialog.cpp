@@ -15,18 +15,10 @@ LevelPropertiesDialog::~LevelPropertiesDialog()
     delete ui;
 }
 
-void LevelPropertiesDialog::on_mapNameInput_textChanged(const QString &arg1)
-{
-    if(resourceManager)
-    {
-        resourceManager->GetLevelProperties()->SetLevelName(arg1);
-    }
-}
-
 void LevelPropertiesDialog::LoadValues()
 {
     //put all the level properties values into the inputs
-    ui->mapNameInput->setText(resourceManager->GetLevelProperties()->GetLevelname());
+    ui->mapNameInput->setText(resourceManager->GetLevelProperties()->GetLevelName());
 
     ui->tileSizeX->setValue(resourceManager->GetLevelProperties()->GetTileWidth());
     ui->tileSizeY->setValue(resourceManager->GetLevelProperties()->GetTileHeight());
@@ -34,34 +26,14 @@ void LevelPropertiesDialog::LoadValues()
     ui->mapSizeY->setValue(resourceManager->GetLevelProperties()->GetMapHeight());
 }
 
-void LevelPropertiesDialog::on_tileSizeX_valueChanged(int arg1)
+void LevelPropertiesDialog::on_buttonBox_accepted()
 {
     if(resourceManager)
     {
-        resourceManager->GetLevelProperties()->SetTileWidth(arg1);
-    }
-}
-
-void LevelPropertiesDialog::on_tileSizeY_valueChanged(int arg1)
-{
-    if(resourceManager)
-    {
-        resourceManager->GetLevelProperties()->SetTileHeight(arg1);
-    }
-}
-
-void LevelPropertiesDialog::on_mapSizeX_valueChanged(int arg1)
-{
-    if(resourceManager)
-    {
-        resourceManager->GetLevelProperties()->SetMapWidth(arg1);
-    }
-}
-
-void LevelPropertiesDialog::on_mapSizeY_valueChanged(int arg1)
-{
-    if(resourceManager)
-    {
-        resourceManager->GetLevelProperties()->SetMapHeight(arg1);
+        resourceManager->GetLevelProperties()->SetLevelName(ui->mapNameInput->text());
+        resourceManager->GetLevelProperties()->SetTileWidth(ui->tileSizeX->value());
+        resourceManager->GetLevelProperties()->SetTileHeight(ui->tileSizeY->value());
+        resourceManager->GetLevelProperties()->SetMapWidth(ui->mapSizeX->value());
+        resourceManager->GetLevelProperties()->SetMapHeight(ui->mapSizeY->value());
     }
 }

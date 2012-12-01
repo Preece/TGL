@@ -23,13 +23,8 @@ public:
     void LoadValues();
     
 private slots:
-    void on_tileSizeX_valueChanged(int arg1);
 
-    void on_tileSizeY_valueChanged(int arg1);
-
-    void on_mapSizeX_valueChanged(int arg1);
-
-    void on_mapSizeY_valueChanged(int arg1);
+    void on_buttonBox_accepted();
 
 private:
     Ui::LevelPropertiesDialog *ui;

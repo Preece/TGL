@@ -6,4 +6,6 @@ LevelProperties::LevelProperties()
     tileHeight = 0;
     mapWidth  = 0;
     mapHeight = 0;
+
+    levelName = "";
 }

@@ -20,7 +20,7 @@ public:
     int GetTileHeight() { return tileHeight; }
 
     void SetLevelName(QString newName) { levelName = newName; }
-    QString GetLevelname() { return levelName; }
+    QString GetLevelName() { return levelName; }
 
     void SetMapSize(int newW, int newH) { mapWidth = newW; mapHeight = newH; }
     void SetMapWidth(int newW) { mapWidth = newW; }
