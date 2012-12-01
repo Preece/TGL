@@ -23,17 +23,23 @@ ResourceTab::ResourceTab(QWidget *parent) :
     ItemTree->setText(0, "Items");
     DoodadTree = new QTreeWidgetItem(ui->objectSelector);
     DoodadTree->setText(0, "Doodads");
+
+    tileSelector = new QGraphicsScene;
 }
 
 ResourceTab::~ResourceTab()
 {
     delete ui;
+    delete tileSelector;
 }
 
 void ResourceTab::RepopulateTileSelector()
 {
-    //clear the tile selection panel
-    //load the new tilesets into the selector
+    //clear out all the items in the tile selector
+    //loop for the width of the spritesheet divided by the width of a tile
+        //loop for the height of the spritesheet divided by the height of a tile
+            //copy the correct fragment of the image into a new TileItem
+            //add the tile item to the tile selector at (i * tilewidth) + i
 }
 
 void ResourceTab::RepopulateObjectSelector()
@@ -362,17 +368,16 @@ void ResourceTab::on_selectTilesetButton_clicked()
     //bring up an image selection window
     SpritesheetSelector spritesheetWindow;
 
-    if(spritesheetWindow.exec())
+    spritesheetWindow.RegisterResourceManager(resourceManager);
+    spritesheetWindow.RepopulateImageList();
+
+    //if the user completes the dialog
+    if(spritesheetWindow.exec() == QDialog::Accepted)
     {
         if(spritesheetWindow.IsImageSelected())
         {
             spritesheet = spritesheetWindow.GetSelectedImage()->GetImage();
-
-            //clear out all the items in the tile selector
-            //loop for the width of the spritesheet divided by the width of a tile
-                //loop for the height of the spritesheet divided by the height of a tile
-                    //copy the correct fragment of the image into a new TileItem
-                    //add the tile item to the tile selector at (i * tilewidth) + i
+            RepopulateTileSelector();
         }
     }
 }

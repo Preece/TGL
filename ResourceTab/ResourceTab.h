@@ -89,6 +89,7 @@ private:
     QTreeWidgetItem *DoodadTree;
 
     QImage *spritesheet;
+    QGraphicsScene *tileSelector;
 };
 
 #endif // RESOURCETAB_H
