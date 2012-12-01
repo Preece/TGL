@@ -43,7 +43,11 @@ SOURCES += main.cpp\
     Commands/AddObjectCommand.cpp \
     Commands/DeleteObjectCommand.cpp \
     Commands/AddSpriteCommand.cpp \
-    Commands/DeletesSriteCommand.cpp
+    Commands/DeletesSriteCommand.cpp \
+    LevelEditor/LevelLayer.cpp \
+    Model/Tile.cpp \
+    LevelEditor/Brushes/TileBrush.cpp \
+    Model/LevelProperties.cpp
   
 
 HEADERS  += \
@@ -80,7 +84,11 @@ HEADERS  += \
     Commands/AddObjectCommand.h \
     Commands/DeleteObjectCommand.h \
     Commands/AddSpriteCommand.h \
-    Commands/DeleteSpriteCommand.h
+    Commands/DeleteSpriteCommand.h \
+    LevelEditor/LevelLayer.h \
+    Model/Tile.h \
+    LevelEditor/Brushes/TileBrush.h \
+    Model/LevelProperties.h
    
 
 FORMS    += \

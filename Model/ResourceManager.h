@@ -9,6 +9,7 @@
 #include "ObjectInstance.h"
 #include "ObjectPrototype.h"
 #include "Image.h"
+#include "LevelProperties.h"
 
 class ResourceManager : public QObject
 {
@@ -22,11 +23,14 @@ private:
     QList<ObjectInstance*> objectInstanceList;
     QList<Image*> imageList;
 
-
+    LevelProperties levelProperties;
 public:
     ResourceManager();
 
 public slots:
+
+    LevelProperties *GetLevelproperties() { return &levelProperties; }
+
     int AddSprite(Sprite *newSprite);
     bool DeleteSprite(int ID);
     Sprite *GetSprite(int ID);

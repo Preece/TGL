@@ -356,3 +356,8 @@ void ResourceTab::on_editObjectButton_clicked()
         RepopulateObjectSelector();
     }
 }
+
+void ResourceTab::on_selectTilesetButton_clicked()
+{
+    //bring up an image selection window
+}
