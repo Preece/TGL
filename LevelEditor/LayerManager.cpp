@@ -9,11 +9,14 @@ LayerManager::LayerManager()
     addItem(scaffold);
     scaffold->setPos(0, 0);
     scaffold->show();
+
+    addItem(&grid);
+    grid.setPos(0, 0);
+    grid.hide();
 }
 
 LayerManager::~LayerManager()
 {
-    delete scaffold;
 }
 
 void LayerManager::ModifyTile(QPoint pos)
@@ -31,8 +34,8 @@ void LayerManager::ModifyTile(QPoint pos)
         int tileY = pos.y() / tileH;
 
         //get rid of the tile at that position, if there is one.
-        if(itemAt(pos.x(), pos.y()))
-            delete itemAt(pos.x(), pos.y());
+        //if(itemAt(pos.x(), pos.y()))
+            //delete itemAt(pos.x(), pos.y());
 
         //create a new TileItem
         TileItem *tempTile = new TileItem;
@@ -50,7 +53,37 @@ void LayerManager::ModifyTile(QPoint pos)
     }
 }
 
+void LayerManager::ToggleGrid(bool show)
+{
+    if(show = false)
+    {
+        grid.hide();
+        return;
+    }
+
+    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    {
+        //loop for the height of the map
+        for(int i = 0; i < resourceManager->GetLevelProperties()->GetMapHeight(); i++)
+        {
+            //loop for the width of the map
+            for(int j = 0; j < resourceManager->GetLevelProperties()->GetMapWidth(); j++)
+            {
+
+            }
+        }
+    }
+}
+
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    ModifyTile(event->pos().toPoint());
+    ModifyTile(event->scenePos().toPoint());
+}
+
+void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        ModifyTile(event->scenePos().toPoint());
+    }
 }

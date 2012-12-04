@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     layers = new LayerManager;
     ui->levelView->setScene(layers);
+    layers->setSceneRect(0, 0, 100, 100);
     layers->RegisterResourceManager(resources);
 
     //when the selection changes in tileSelector, notify the layer manager

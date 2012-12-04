@@ -15,6 +15,8 @@ private:
     ResourceManager *resourceManager;
     TileItem *currentTile;
 
+    QGraphicsItemGroup grid;
+
 public:
     LayerManager();
     ~LayerManager();
@@ -28,8 +30,11 @@ public:
 public slots:
     void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
 
+    void ToggleGrid(bool show = true);
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // LAYERMANAGER_H
