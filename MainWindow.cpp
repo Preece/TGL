@@ -19,6 +19,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //connect the add sprite button in the resource tab to the add sprite action
     connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
+
+    tileSelector = new QGraphicsScene;
+    ui->resourceTab->RegisterTileSelector(tileSelector);
+
+    layers = new LayerManager;
+    ui->levelView->setScene(layers);
+    layers->RegisterResourceManager(resources);
+
+    //when the selection changes in tileSelector, notify the layer manager
+    connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
 }
 
 MainWindow::~MainWindow()
@@ -27,6 +37,17 @@ MainWindow::~MainWindow()
 
     resources->DestroyAllResources();
     delete resources;
+
+    //call a cleanup function?
+    delete layers;
+}
+
+bool MainWindow::IsTileSelected()
+{
+    if(tileSelector->selectedItems().count() > 0)
+        return true;
+
+    return false;
 }
 
 void MainWindow::on_actionProperties_triggered()
@@ -39,4 +60,19 @@ void MainWindow::on_actionProperties_triggered()
 
     levelPropertiesWindow->LoadValues();
     levelPropertiesWindow->show();
+}
+
+void MainWindow::UpdateSelectedTile()
+{
+    layers->SetSelectedTile(GetSelectedTileItem());
+}
+
+TileItem *MainWindow::GetSelectedTileItem()
+{
+    if(IsTileSelected())
+    {
+        return dynamic_cast<TileItem*>(tileSelector->selectedItems()[0]);
+    }
+
+    return NULL;
 }

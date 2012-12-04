@@ -10,6 +10,7 @@
 #include "../SpriteEditor/SpritesheetSelector.h"
 #include "../ObjectEditor.h"
 #include "../LevelEditor/TileItem.h"
+#include "../Model/Tile.h"
 #include "ImageViewer.h"
 #include "ImageSelectorItem.h"
 #include "SpriteSelectorItem.h"
@@ -31,8 +32,8 @@ public:
     ~ResourceTab();
 
     void RegisterResourceManager(ResourceManager *newResourceManager) { resourceManager = newResourceManager; }
-    
-    void RepopulateTileSelector();
+    void RegisterTileSelector(QGraphicsScene *tiles);
+
     void RepopulateObjectSelector();
     void RepopulateSpriteSelector();
     void RepopulateImageSelector();
@@ -50,24 +51,17 @@ public:
     ObjectSelectorItem *GetSelectedObjectItem();
     ObjectPrototype *GetSelectedObject();
 
-    bool IsTileSelected();
-    TileItem *GetSelectedTileItem();
+    void RepopulateTileSelector();
 
 private slots:
+
     void on_addImageButton_clicked();
-
     void on_viewImageButton_clicked();
-
     void on_deleteImageButton_clicked();
-
     void on_editSpriteButton_clicked();
-
     void on_addSpriteButton_clicked();
-
     void on_addObjectButton_clicked();
-
     void on_editObjectButton_clicked();
-
     void on_selectTilesetButton_clicked();
 
 signals:
@@ -83,6 +77,7 @@ private:
 
     ResourceManager *resourceManager;
 
+    //will eventually be a list of QTWI's
     QTreeWidgetItem *NPCTree;
     QTreeWidgetItem *EnemyTree;
     QTreeWidgetItem *ItemTree;

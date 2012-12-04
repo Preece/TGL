@@ -10,6 +10,8 @@ private:
     QString levelName;
     int mapWidth, mapHeight;
 
+    int tilesetID;
+
 public:
     LevelProperties();
 
@@ -27,6 +29,11 @@ public:
     void SetMapHeight(int newH) { mapHeight = newH; }
     int GetMapWidth() { return mapWidth; }
     int GetMapHeight() { return mapHeight; }
+
+    void SetTilesetID(int newID) { tilesetID = newID; }
+    int GetTilesetID() { return tilesetID; }
+
+    bool IsPropertiesSet();
 };
 
 #endif // LEVELPROPERTIES_H

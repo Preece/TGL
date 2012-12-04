@@ -3,15 +3,18 @@
 
 #include <QGraphicsItemGroup>
 
-#include <Model/ObjectPrototype.h>
+#include "../Model/ObjectPrototype.h"
+#include "../Model/ResourceManager.h"
+#include "TileItem.h"
 
 class LevelLayer : public QGraphicsItemGroup
 {
+private:
+
 public:
     LevelLayer();
 
-    void AddObjectItem(QPoint pos, ObjectPrototype *proto);
-    void ModifyTile(int tileX, int tileY, int originX, int originY);
+
 };
 
 #endif // LEVELLAYER_H

@@ -3,11 +3,13 @@
 
 #include <QMainWindow>
 #include <QStringList>
+#include <QGraphicsScene>
 
 #include "Model/Sprite.h"
 #include "Model/ObjectInstance.h"
 #include "Model/ObjectPrototype.h"
 #include "Model/ResourceManager.h"
+#include "LevelEditor/LayerManager.h"
 
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"
@@ -24,10 +26,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    bool IsTileSelected();
+    TileItem *GetSelectedTileItem();
     
 private slots:
 
     void on_actionProperties_triggered();
+
+    void UpdateSelectedTile();
 
 private:
     Ui::MainWindow *ui;
@@ -36,6 +43,9 @@ private:
     LevelPropertiesDialog *levelPropertiesWindow;
 
     ResourceManager *resources;
+
+    LayerManager *layers;
+    QGraphicsScene *tileSelector;
 };
 
 #endif // MAINWINDOW_H

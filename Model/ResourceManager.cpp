@@ -152,6 +152,14 @@ QPixmap ResourceManager::GetSpriteSymbol(int spriteID)
     return QPixmap(":/Icons/Icons/MissingFile.png");
 }
 
+QImage *ResourceManager::GetTileset()
+{
+    if(levelProperties.GetTilesetID() == 0)
+        return NULL;
+
+    return GetImage(levelProperties.GetTilesetID())->GetImage();
+}
+
 Image *ResourceManager::GetImage(int ID)
 {
     for(int i = 0; i < imageList.count(); i++)

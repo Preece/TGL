@@ -10,6 +10,7 @@ ResourceTab::ResourceTab(QWidget *parent) :
     imageViewer = NULL;
     spriteWindow = NULL;
     objectEditorWindow = NULL;
+    tileSelector = NULL;
 
     connect(ui->addSpriteButton, SIGNAL(clicked()), this, SIGNAL(NewSpriteButtonClicked()));
     connect(ui->addObjectButton, SIGNAL(clicked()), this, SIGNAL(NewObjectButtonClicked()));
@@ -23,21 +24,26 @@ ResourceTab::ResourceTab(QWidget *parent) :
     ItemTree->setText(0, "Items");
     DoodadTree = new QTreeWidgetItem(ui->objectSelector);
     DoodadTree->setText(0, "Doodads");
-
-    tileSelector = new QGraphicsScene;
-    ui->tileSelector->setScene(tileSelector);
 }
 
 ResourceTab::~ResourceTab()
 {
     delete ui;
-    delete tileSelector;
+}
+
+void ResourceTab::RegisterTileSelector(QGraphicsScene *tiles)
+{
+    tileSelector = tiles;
+    ui->tileSelector->setScene(tiles);
 }
 
 void ResourceTab::RepopulateTileSelector()
 {
     //clear out all the items in the tile selector
-    tileSelector->clear();
+    if(tileSelector)
+        tileSelector->clear();
+    else
+        return;
 
     if(!spritesheet->isNull())
     {
@@ -50,6 +56,7 @@ void ResourceTab::RepopulateTileSelector()
             int imageH = spritesheet->height() / tileH;
 
             TileItem *tempItem;
+            Tile *tempTile;
 
             //loop for the width of the spritesheet divided by the width of a tile
             for(int i = 0; i < imageH; i++)
@@ -60,6 +67,11 @@ void ResourceTab::RepopulateTileSelector()
                     //copy the correct fragment of the image into a new TileItem
                     tempItem = new TileItem;
                     tempItem->SetTilePixmap(*spritesheet, j, i, tileW, tileH);
+
+                    //create and add the actual tile
+                    tempTile = new Tile;
+                    tempItem->SetTile(tempTile);
+                    tempTile->SetOrigin(j, i);
 
                     //add the tile item to the tile selector at (i * tilewidth) + i
                     tileSelector->addItem(tempItem);
@@ -404,9 +416,16 @@ void ResourceTab::on_selectTilesetButton_clicked()
     //if the user completes the dialog
     if(spritesheetWindow.exec() == QDialog::Accepted)
     {
+        //and if an image was selected
         if(spritesheetWindow.IsImageSelected())
         {
+            //set the spritesheet as that image
             spritesheet = spritesheetWindow.GetSelectedImage()->GetImage();
+
+            //store its ID as the image to be used as the tileset
+            resourceManager->GetLevelProperties()->SetTilesetID(spritesheetWindow.GetSelectedImage()->GetID());
+
+            //and repopulate the tile selector
             RepopulateTileSelector();
         }
     }
