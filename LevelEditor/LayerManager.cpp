@@ -42,12 +42,14 @@ void LayerManager::ModifyTile(QPoint pos)
            tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
             return;
 
-        //get rid of the tile at that position, if there is one.
-        if(itemAt(pos.x(), pos.y()))
-            delete itemAt(pos.x(), pos.y());
+        TileItem *tempTile;
+
+        //if there is already a tile there, change its stuff
 
         //create a new TileItem
-        TileItem *tempTile = new TileItem;
+        tempTile = new TileItem;
+
+
         tempTile->SetTile(currentTile->GetTile());
 
         //set the tile items pixmap and may Jaysus forgive me for this abomination
@@ -91,7 +93,7 @@ void LayerManager::ToggleGrid(bool show)
         //loop for the height of the map, draw horizontal lines
         for(int i = 1; i < mapH; i++)
         {
-            tempLine = new QGraphicsLineItem(0, (i * tileH) + i, (mapW * tileW) + mapW, (i * tileH) + i);
+            tempLine = new QGraphicsLineItem(0, (i * tileH), (mapW * tileW), (i * tileH));
             tempLine->setPen(pen);
             grid->addToGroup(tempLine);
         }
@@ -99,7 +101,7 @@ void LayerManager::ToggleGrid(bool show)
         //loop for the width of the map, draw vertical lines
         for(int j = 1; j < mapW; j++)
         {
-            tempLine = new QGraphicsLineItem((j * tileW) + j, 0, (j * tileW) + j, (mapH * tileH) + mapH);
+            tempLine = new QGraphicsLineItem((j * tileW), 0, (j * tileW), (mapH * tileH));
             tempLine->setPen(pen);
             grid->addToGroup(tempLine);
         }
