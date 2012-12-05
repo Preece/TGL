@@ -4,15 +4,18 @@ LayerManager::LayerManager()
 {
     resourceManager = NULL;
     currentTile = NULL;
+
+    grid = new QGraphicsItemGroup;
     scaffold = new LevelLayer;
 
     addItem(scaffold);
     scaffold->setPos(0, 0);
     scaffold->show();
 
-    addItem(&grid);
-    grid.setPos(0, 0);
-    grid.hide();
+
+    addItem(grid);
+    grid->setPos(0, 0);
+    grid->hide();
 }
 
 LayerManager::~LayerManager()
@@ -33,9 +36,15 @@ void LayerManager::ModifyTile(QPoint pos)
         int tileX = pos.x() / tileW;
         int tileY = pos.y() / tileH;
 
+        //if the position is beyond the bounds of the scene, ignore it
+        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
+        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
+           tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
+            return;
+
         //get rid of the tile at that position, if there is one.
-        //if(itemAt(pos.x(), pos.y()))
-            //delete itemAt(pos.x(), pos.y());
+        if(itemAt(pos.x(), pos.y()))
+            delete itemAt(pos.x(), pos.y());
 
         //create a new TileItem
         TileItem *tempTile = new TileItem;
@@ -55,23 +64,50 @@ void LayerManager::ModifyTile(QPoint pos)
 
 void LayerManager::ToggleGrid(bool show)
 {
-    if(show = false)
+    if(show == false)
     {
-        grid.hide();
+        grid->hide();
         return;
+    }
+
+    if(grid)
+    {
+        delete grid;
+        grid = new QGraphicsItemGroup;
     }
 
     if(resourceManager->GetLevelProperties()->IsPropertiesSet())
     {
-        //loop for the height of the map
-        for(int i = 0; i < resourceManager->GetLevelProperties()->GetMapHeight(); i++)
-        {
-            //loop for the width of the map
-            for(int j = 0; j < resourceManager->GetLevelProperties()->GetMapWidth(); j++)
-            {
+        QPen pen(Qt::DashLine);
+        pen.setColor(QColor(Qt::gray));
 
-            }
+        QGraphicsLineItem *tempLine;
+
+        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+        int tileH = resourceManager->GetLevelProperties()->GetMapHeight();
+        int mapH = resourceManager->GetLevelProperties()->GetMapHeight();
+        int mapW = resourceManager->GetLevelProperties()->GetMapWidth();
+
+        //loop for the height of the map, draw horizontal lines
+        for(int i = 1; i < mapH; i++)
+        {
+            tempLine = new QGraphicsLineItem(0, i * tileH, mapW * tileW, i * tileH);
+            tempLine->setPen(pen);
+            grid->addToGroup(tempLine);
         }
+
+        //loop for the width of the map, draw vertical lines
+        for(int j = 1; j < mapW; j++)
+        {
+            tempLine = new QGraphicsLineItem(j * tileW, 0, j * tileW, mapW * tileW);
+            tempLine->setPen(pen);
+            grid->addToGroup(tempLine);
+        }
+
+        addItem(grid);
+
+        grid->setZValue(99);
+        grid->show();
     }
 }
 
@@ -82,8 +118,5 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(event->button() == Qt::LeftButton)
-    {
-        ModifyTile(event->scenePos().toPoint());
-    }
+    ModifyTile(event->scenePos().toPoint());
 }

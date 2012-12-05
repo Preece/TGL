@@ -10,6 +10,8 @@
 class LevelLayer : public QGraphicsItemGroup
 {
 private:
+    int verticalParallax, horizontalParallax;
+    QString name;
 
 public:
     LevelLayer();

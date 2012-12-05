@@ -36,6 +36,8 @@ private slots:
 
     void UpdateSelectedTile();
 
+    void on_gridToggle_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
 

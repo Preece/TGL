@@ -15,7 +15,7 @@ private:
     ResourceManager *resourceManager;
     TileItem *currentTile;
 
-    QGraphicsItemGroup grid;
+    QGraphicsItemGroup *grid;
 
 public:
     LayerManager();

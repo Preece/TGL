@@ -77,3 +77,8 @@ TileItem *MainWindow::GetSelectedTileItem()
 
     return NULL;
 }
+
+void MainWindow::on_gridToggle_toggled(bool checked)
+{
+    layers->ToggleGrid(checked);
+}
