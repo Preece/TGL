@@ -84,14 +84,14 @@ void LayerManager::ToggleGrid(bool show)
         QGraphicsLineItem *tempLine;
 
         int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetMapHeight();
+        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
         int mapH = resourceManager->GetLevelProperties()->GetMapHeight();
         int mapW = resourceManager->GetLevelProperties()->GetMapWidth();
 
         //loop for the height of the map, draw horizontal lines
         for(int i = 1; i < mapH; i++)
         {
-            tempLine = new QGraphicsLineItem(0, i * tileH, mapW * tileW, i * tileH);
+            tempLine = new QGraphicsLineItem(0, (i * tileH) + i, (mapW * tileW) + mapW, (i * tileH) + i);
             tempLine->setPen(pen);
             grid->addToGroup(tempLine);
         }
@@ -99,7 +99,7 @@ void LayerManager::ToggleGrid(bool show)
         //loop for the width of the map, draw vertical lines
         for(int j = 1; j < mapW; j++)
         {
-            tempLine = new QGraphicsLineItem(j * tileW, 0, j * tileW, mapW * tileW);
+            tempLine = new QGraphicsLineItem((j * tileW) + j, 0, (j * tileW) + j, (mapH * tileH) + mapH);
             tempLine->setPen(pen);
             grid->addToGroup(tempLine);
         }
