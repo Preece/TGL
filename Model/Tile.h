@@ -1,7 +1,9 @@
 #ifndef TILE_H
 #define TILE_H
 
-class Tile
+#include "Savable.h"
+
+class Tile : public Savable
 {
 private:
     int originX, originY;

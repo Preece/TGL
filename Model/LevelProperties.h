@@ -1,18 +1,17 @@
 #ifndef LEVELPROPERTIES_H
 #define LEVELPROPERTIES_H
 
+#include "Savable.h"
+
 #include <QString>
 
-class LevelProperties
+class LevelProperties : public Savable
 {
-private:
-    int tileWidth, tileHeight;
-    QString levelName;
-    int mapWidth, mapHeight;
-
-    int tilesetID;
-
 public:
+    bool SaveToFile(QFile &file);
+    bool LoadFromFile(QFile &file);
+    QString GetType() { return "LVLP"; }
+
     LevelProperties();
 
     void SetTileSize(int newW, int newH) { tileWidth = newW; tileHeight = newH; }
@@ -34,6 +33,13 @@ public:
     int GetTilesetID() { return tilesetID; }
 
     bool IsPropertiesSet();
+
+private:
+    int tileWidth, tileHeight;
+    QString levelName;
+    int mapWidth, mapHeight;
+
+    int tilesetID;
 };
 
 #endif // LEVELPROPERTIES_H

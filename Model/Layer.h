@@ -5,10 +5,15 @@
 
 class Layer : public Savable
 {
+public:
+    bool SaveToFile(QFile &file);
+    bool LoadFromFile(QFile &file);
+    QString GetType() { return "LAYR"; }
+
+    Layer();
+
 private:
 
-public:
-    Layer();
 };
 
 #endif // LAYER_H

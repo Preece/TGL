@@ -7,15 +7,10 @@
 
 class ObjectInstance : public Savable
 {
-private:
-    int prototypeID;
-	int ID;
-
-	int x, y;
-
 public:
     bool SaveToFile(QFile &file);
     bool LoadFromFile(QFile &file);
+    QString GetType() { return "OBIN"; }
 
     bool AttachPrototype(int newProtoID);
 	bool UnattachPrototype();
@@ -24,6 +19,12 @@ public:
 	bool SetPosition(int newX, int newY);
 	int GetX();
 	int GetY();
+
+private:
+    int prototypeID;
+    int ID;
+
+    int x, y;
 };
 
 #endif

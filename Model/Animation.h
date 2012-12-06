@@ -8,16 +8,10 @@
 
 class Animation : public Savable
 {
+public:
     bool SaveToFile(QFile &file);
     bool LoadFromFile(QFile &file);
-
-private:
-    QString animationName;
-    QList<Frame*> frameList;
-    bool loop;
-    int nextAnimationID;
-
-public:
+    QString GetType() { return "ANMT"; }
 
     Animation();
 
@@ -36,6 +30,12 @@ public:
     void SetLoop(bool newLoop) { loop = newLoop; }
 
     void DestroyAllFrames();
+
+private:
+    QString animationName;
+    QList<Frame*> frameList;
+    bool loop;
+    int nextAnimationID;
 };
 
 #endif // ANIMATION_H

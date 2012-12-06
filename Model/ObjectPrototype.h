@@ -10,26 +10,18 @@
 
 class ObjectPrototype : public Savable
 {
-private:
-	int spriteID;
-
-    QString name;
-    int type;
-    int behavior;
-
-    QMap<QString, QVariant> customValues;
-
 public:
-    ObjectPrototype();
-
     bool SaveToFile(QFile &file);
     bool LoadFromFile(QFile &file);
+    QString GetType() { return "OBPT"; }
+
+    ObjectPrototype();
 
     QString GetObjectName() { return name; }
     void SetObjectName(QString newName) { name = newName; }
 
-    int GetType() { return type; }
-    void SetType(int newType) { type = newType; }
+    int GetObjectType() { return objectType; }
+    void SetObjectType(int newType) { objectType = newType; }
 
     int GetBehavior() { return behavior; }
     void SetBehavior(int newBehavior) { behavior = newBehavior; }
@@ -42,7 +34,14 @@ public:
     QMap<QString, QVariant> GetCustomValues() { return customValues; }
     void ClearCustomValues() { customValues.clear(); }
 
+private:
+    int spriteID;
 
+    QString name;
+    int objectType;
+    int behavior;
+
+    QMap<QString, QVariant> customValues;
 };
 
 #endif

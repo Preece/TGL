@@ -61,6 +61,8 @@ void LayerManager::ModifyTile(QPoint pos)
 
         //set its position
         tempTile->setPos(tileX * tileW, tileY * tileH);
+
+        //modify the model to represent this new tile
     }
 }
 

@@ -3,7 +3,7 @@
 ObjectPrototype::ObjectPrototype()
 {
     spriteID = 0;
-    type = 0;
+    objectType = 0;
     behavior = 0;
 }
 

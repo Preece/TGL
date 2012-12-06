@@ -8,6 +8,23 @@ Savable::Savable()
     ID = GenerateID();
 }
 
+void Savable::AddChild(Savable *newChild)
+{
+    children.append(newChild);
+}
+
+void Savable::RemoveChild(int ID)
+{
+    for(int i = 0; i < children.count(); i++)
+    {
+        if(ID == children[i]->GetID())
+        {
+            delete children[i];
+            children.removeAt(i);
+        }
+    }
+}
+
 int Savable::GenerateID()
 {
     return newID++;

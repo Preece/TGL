@@ -9,21 +9,13 @@
 
 class Frame : public Savable
 {
-private:
-    QRect frameRect;
-    int delay;
-
-    QPoint renderSpot;
-    QPoint boundingBoxXY;
-
-    QList<QPoint> hotspots;
-
 public:
-    Frame();
-    ~Frame();
-
     bool SaveToFile(QFile &file);
     bool LoadFromFile(QFile &file);
+    QString GetType() { return "FRME"; }
+
+    Frame();
+    ~Frame();
 
     void SetFrameRect(QRect newFrameRect) { frameRect = newFrameRect; }
     QRect GetFrameRect() { return frameRect; }
@@ -40,6 +32,15 @@ public:
     void AddHotspot(QPoint newHotspot) { hotspots.push_back(newHotspot); }
     QPoint GetHotspot(int index) { return hotspots[index]; }
     void RemoveHotspot(int index) { hotspots.removeAt(index); }
+
+private:
+    QRect frameRect;
+    int delay;
+
+    QPoint renderSpot;
+    QPoint boundingBoxXY;
+
+    QList<QPoint> hotspots;
 
 };
 

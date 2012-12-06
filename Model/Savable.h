@@ -5,13 +5,15 @@
 #include <QRect>
 #include <QPoint>
 #include <QImage>
+#include <QList>
 
 class Savable
 {
 protected:
-    int ID;
-
     static int newID;
+
+    int ID;
+    QList<Savable*> children;
 
     int GenerateID();
 
@@ -42,8 +44,12 @@ public:
 
     int GetID() { return ID; }
 
+    virtual QString GetType() = 0;
     virtual bool SaveToFile(QFile &file) = 0;
     virtual bool LoadFromFile(QFile &file) = 0;
+
+    void AddChild(Savable *newChild);
+    void RemoveChild(int ID);
 
 
 };

@@ -14,16 +14,12 @@
 
 class Sprite : public Savable
 {
-private:
-    QString name;
-
-    int imageID;
-    QList<Animation*> animations;
 public:
-    Sprite();
-
     bool SaveToFile(QFile &file);
     bool LoadFromFile(QFile &file);
+    QString GetType() { return "SPRT"; }
+
+    Sprite();
 
     QString GetName() { return name; }
     void SetName(QString newName) { name = newName; }
@@ -42,6 +38,11 @@ public:
 
     void DestroyAllAnimations();
 
+private:
+    QString name;
+
+    int imageID;
+    QList<Animation*> animations;
 };
 
 #endif

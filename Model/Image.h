@@ -10,19 +10,20 @@
 
 class Image : public Savable
 {
-private:
-    QImage *image;
-
 public:
-    Image();
-    ~Image();
-
     bool SaveToFile(QFile &file);
     bool LoadFromFile(QFile &file);
+    QString GetType() { return "IMAG"; }
+
+    Image();
+    ~Image();
 
     void SetImage(QImage *newImage) { image = newImage; }
     void SetImageFromFile(QString filename);
     QImage *GetImage();
+
+private:
+    QImage *image;
 };
 
 #endif // IMAGE_H
