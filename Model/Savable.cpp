@@ -13,6 +13,32 @@ void Savable::AddChild(Savable *newChild)
     children.append(newChild);
 }
 
+Savable *Savable::GetChild(int ID)
+{
+    for(int i = 0; i < children.count(); i++)
+    {
+        if(ID == children[i]->GetID())
+        {
+            return children[i];
+        }
+    }
+
+    return NULL;
+}
+
+Savable *Savable::GetChildByIndex(int i)
+{
+    if(i < 0 || i >= children.count())
+        return NULL;
+
+    return children[i];
+}
+
+int Savable::GetChildCount()
+{
+    return children.count();
+}
+
 void Savable::RemoveChild(int ID)
 {
     for(int i = 0; i < children.count(); i++)

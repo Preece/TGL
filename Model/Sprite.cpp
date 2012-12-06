@@ -29,21 +29,12 @@ void Sprite::DestroyAllAnimations()
 
 void Sprite::AddAnimation(Animation *newAnimation)
 {
-    children.push_back(newAnimation);
+    AddChild(newAnimation);
 }
 
 void Sprite::DeleteAnimation(int ID)
 {
-    //loop through and destroy all animations
-    for(int i = 0; i < children.count(); i++)
-    {
-        if(children[i]->GetID() == ID)
-        {
-            static_cast<Animation*>(children[i])->DestroyAllFrames();
-            delete children[i];
-            children.removeAt(i);
-        }
-    }
+    RemoveChild(ID);
 }
 
 void Sprite::SetImageID(int newImageID)
@@ -53,8 +44,5 @@ void Sprite::SetImageID(int newImageID)
 
 Animation *Sprite::GetAnimationByIndex(int index)
 {
-    if(index >= 0 && index < children.count())
-        return static_cast<Animation*>(children[index]);
-
-    return NULL;
+    return static_cast<Animation*>(GetChildByIndex(index));
 }

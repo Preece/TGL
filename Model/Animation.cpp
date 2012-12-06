@@ -39,34 +39,20 @@ void Animation::SetName(QString newName)
 
 int Animation::GetFrameCount()
 {
-    return children.count();
+    return GetChildCount();
 }
 
 Frame *Animation::GetFrameAtIndex(int i)
 {
-    if(i >= children.count() || i < 0)
-        return NULL;
-
-    return static_cast<Frame*>(children[i]);
+    return static_cast<Frame*>(GetChildByIndex(i));
 }
 
 void Animation::AddFrame(Frame *newFrame)
 {
-    //put the new frame at the rear of the frame list
-    children.push_back(newFrame);
+    AddChild(newFrame);
 }
 
 void Animation::DeleteFrame(int ID)
 {
-    //loop through the frames
-    for(int i = 0; i < GetFrameCount(); i++)
-    {
-        //check their ID's against the paramater
-        if(children[i]->GetID() == ID)
-        {
-            //if it matches, delete it
-            delete children[i];
-            children.removeAt(i);
-        }
-    }
+    RemoveChild(ID);
 }

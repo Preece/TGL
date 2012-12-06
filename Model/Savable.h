@@ -49,6 +49,9 @@ public:
     virtual bool LoadFromFile(QFile &file) = 0;
 
     void AddChild(Savable *newChild);
+    Savable *GetChild(int ID);
+    Savable *GetChildByIndex(int i);
+    int GetChildCount();
     void RemoveChild(int ID);
 
 
