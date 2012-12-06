@@ -103,13 +103,13 @@ void ResourceTab::RepopulateObjectSelector()
 
         tempObject->setText(0, tempObject->GetObject()->GetObjectName());
 
-        if(tempObject->GetObject()->GetType() == 0)
+        if(tempObject->GetObject()->GetObjectType() == 0)
             NPCTree->addChild(tempObject);
-        else if(tempObject->GetObject()->GetType() == 1)
+        else if(tempObject->GetObject()->GetObjectType() == 1)
             EnemyTree->addChild(tempObject);
-        else if(tempObject->GetObject()->GetType() == 2)
+        else if(tempObject->GetObject()->GetObjectType() == 2)
             ItemTree->addChild(tempObject);
-        else if(tempObject->GetObject()->GetType() == 3)
+        else if(tempObject->GetObject()->GetObjectType() == 3)
             DoodadTree->addChild(tempObject);
         else
             delete tempObject;

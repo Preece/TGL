@@ -11,7 +11,6 @@ public:
     QString GetType() { return "LAYR"; }
 
     Layer();
-
 private:
 
 };

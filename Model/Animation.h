@@ -33,7 +33,6 @@ public:
 
 private:
     QString animationName;
-    QList<Frame*> frameList;
     bool loop;
     int nextAnimationID;
 };

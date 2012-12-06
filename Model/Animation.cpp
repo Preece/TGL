@@ -3,12 +3,12 @@
 void Animation::DestroyAllFrames()
 {
     //loop through and destroy all frames
-    for(int i = 0; i < frameList.count(); i++)
+    for(int i = 0; i < children.count(); i++)
     {
-        delete frameList[i];
+        delete children[i];
     }
 
-    frameList.clear();
+    children.clear();
 }
 
 bool Animation::SaveToFile(QFile &file)
@@ -39,21 +39,21 @@ void Animation::SetName(QString newName)
 
 int Animation::GetFrameCount()
 {
-    return frameList.count();
+    return children.count();
 }
 
 Frame *Animation::GetFrameAtIndex(int i)
 {
-    if(i >= frameList.count() || i < 0)
+    if(i >= children.count() || i < 0)
         return NULL;
 
-    return frameList[i];
+    return static_cast<Frame*>(children[i]);
 }
 
 void Animation::AddFrame(Frame *newFrame)
 {
     //put the new frame at the rear of the frame list
-    frameList.push_back(newFrame);
+    children.push_back(newFrame);
 }
 
 void Animation::DeleteFrame(int ID)
@@ -62,11 +62,11 @@ void Animation::DeleteFrame(int ID)
     for(int i = 0; i < GetFrameCount(); i++)
     {
         //check their ID's against the paramater
-        if(frameList[i]->GetID() == ID)
+        if(children[i]->GetID() == ID)
         {
             //if it matches, delete it
-            delete frameList[i];
-            frameList.removeAt(i);
+            delete children[i];
+            children.removeAt(i);
         }
     }
 }

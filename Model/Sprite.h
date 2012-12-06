@@ -27,7 +27,7 @@ public:
     int GetImageID() { return imageID; }
     void SetImageID(int newImageID);
 
-    int GetAnimationCount() { return animations.count(); }
+    int GetAnimationCount() { return children.count(); }
 
     Animation *GetAnimationByIndex(int index);
     Animation *GetAnimation(int animationID);
@@ -40,9 +40,7 @@ public:
 
 private:
     QString name;
-
     int imageID;
-    QList<Animation*> animations;
 };
 
 #endif

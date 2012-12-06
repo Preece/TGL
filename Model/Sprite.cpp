@@ -18,30 +18,30 @@ bool Sprite::SaveToFile(QFile &file)
 void Sprite::DestroyAllAnimations()
 {
     //loop through and destroy all animations
-    for(int i = 0; i < animations.count(); i++)
+    for(int i = 0; i < children.count(); i++)
     {
-        animations[i]->DestroyAllFrames();
-        delete animations[i];
+        static_cast<Animation*>(children[i])->DestroyAllFrames();
+        delete children[i];
     }
 
-    animations.clear();
+    children.clear();
 }
 
 void Sprite::AddAnimation(Animation *newAnimation)
 {
-    animations.push_back(newAnimation);
+    children.push_back(newAnimation);
 }
 
 void Sprite::DeleteAnimation(int ID)
 {
     //loop through and destroy all animations
-    for(int i = 0; i < animations.count(); i++)
+    for(int i = 0; i < children.count(); i++)
     {
-        if(animations[i]->GetID() == ID)
+        if(children[i]->GetID() == ID)
         {
-            animations[i]->DestroyAllFrames();
-            delete animations[i];
-            animations.removeAt(i);
+            static_cast<Animation*>(children[i])->DestroyAllFrames();
+            delete children[i];
+            children.removeAt(i);
         }
     }
 }
@@ -53,8 +53,8 @@ void Sprite::SetImageID(int newImageID)
 
 Animation *Sprite::GetAnimationByIndex(int index)
 {
-    if(index >= 0 && index < animations.count())
-        return animations[index];
+    if(index >= 0 && index < children.count())
+        return static_cast<Animation*>(children[index]);
 
     return NULL;
 }

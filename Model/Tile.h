@@ -5,13 +5,11 @@
 
 class Tile : public Savable
 {
-private:
-    int originX, originY;
-    int collision;
-
-    int x, y;
-
 public:
+    bool SaveToFile(QFile &file);
+    bool LoadFromFile(QFile &file);
+    QString GetType() { return "TILE"; }
+
     Tile();
 
     void SetPos(int newX, int newY) { x = newX; y = newY; }
@@ -29,6 +27,11 @@ public:
     int GetXOrigin() { return originX; }
     int GetYOrigin() { return originY; }
 
+private:
+    int originX, originY;
+    int collision;
+
+    int x, y;
 };
 
 #endif // TILE_H
