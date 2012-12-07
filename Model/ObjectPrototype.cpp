@@ -7,12 +7,12 @@ ObjectPrototype::ObjectPrototype()
     behavior = 0;
 }
 
-bool ObjectPrototype::SaveToFile(QFile &file)
+bool ObjectPrototype::SaveToFile(Exporter *exporter)
 {
     return false;
 }
 
-bool ObjectPrototype::LoadFromFile(QFile &file)
+bool ObjectPrototype::LoadFromFile(Exporter *exporter)
 {
     return false;
 }

@@ -4,12 +4,12 @@ Tile::Tile()
 {
 }
 
-bool Tile::SaveToFile(QFile &file)
+bool Tile::SaveToFile(Exporter *exporter)
 {
     return false;
 }
 
-bool Tile::LoadFromFile(QFile &file)
+bool Tile::LoadFromFile(Exporter *exporter)
 {
     return false;
 }

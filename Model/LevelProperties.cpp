@@ -19,12 +19,12 @@ bool LevelProperties::IsPropertiesSet()
     return false;
 }
 
-bool LevelProperties::SaveToFile(QFile &file)
+bool LevelProperties::SaveToFile(Exporter *exporter)
 {
     return false;
 }
 
-bool LevelProperties::LoadFromFile(QFile &file)
+bool LevelProperties::LoadFromFile(Exporter *exporter)
 {
     return false;
 }

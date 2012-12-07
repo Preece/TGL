@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-bool Sprite::LoadFromFile(QFile &file)
+bool Sprite::LoadFromFile(Exporter *exporter)
 {
     return false;
 }
@@ -10,7 +10,7 @@ Sprite::Sprite()
     imageID = 0;
 }
 
-bool Sprite::SaveToFile(QFile &file)
+bool Sprite::SaveToFile(Exporter *exporter)
 {
     return false;
 }

@@ -11,12 +11,12 @@ void Animation::DestroyAllFrames()
     children.clear();
 }
 
-bool Animation::SaveToFile(QFile &file)
+bool Animation::SaveToFile(Exporter *exporter)
 {
     return false;
 }
 
-bool Animation::LoadFromFile(QFile &file)
+bool Animation::LoadFromFile(Exporter *exporter)
 {
     return false;
 }

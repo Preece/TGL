@@ -1,6 +1,8 @@
 #ifndef SAVABLE_H
 #define SAVABLE_H
 
+#include "Exporter.h"
+
 #include <QFile>
 #include <QRect>
 #include <QPoint>
@@ -28,8 +30,8 @@ public:
     int GetID() { return ID; }
 
     virtual QString GetType() = 0;
-    virtual bool SaveToFile(QFile &file) = 0;
-    virtual bool LoadFromFile(QFile &file) = 0;
+    virtual bool SaveToFile(Exporter *exporter) = 0;
+    virtual bool LoadFromFile(Exporter *exporter) = 0;
 
     void AddChild(Savable *newChild);
     Savable *GetChild(int ID);

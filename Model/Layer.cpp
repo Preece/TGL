@@ -4,12 +4,12 @@ Layer::Layer()
 {
 }
 
-bool Layer::SaveToFile(QFile &file)
+bool Layer::SaveToFile(Exporter *exporter)
 {
     return false;
 }
 
-bool Layer::LoadFromFile(QFile &file)
+bool Layer::LoadFromFile(Exporter *exporter)
 {
     return false;
 }

@@ -1,12 +1,12 @@
 #include "Frame.h"
 
-bool Frame::SaveToFile(QFile &file)
+bool Frame::SaveToFile(Exporter *exporter)
 {
     return false;
 }
 
 
-bool Frame::LoadFromFile(QFile &file)
+bool Frame::LoadFromFile(Exporter *exporter)
 {
     return false;
 }

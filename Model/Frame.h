@@ -10,8 +10,8 @@
 class Frame : public Savable
 {
 public:
-    bool SaveToFile(QFile &file);
-    bool LoadFromFile(QFile &file);
+    bool SaveToFile(Exporter *exporter);
+    bool LoadFromFile(Exporter *exporter);
     QString GetType() { return "FRME"; }
 
     Frame();
