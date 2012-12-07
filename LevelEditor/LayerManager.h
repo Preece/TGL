@@ -32,6 +32,8 @@ public:
 
     void ToggleLayerVisibility(int layerIndex, bool show);
 
+    void SetTool(int newTool) { selectedTool = newTool; }
+
 public slots:
     void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
 
@@ -49,6 +51,8 @@ private:
     TileItem *currentTile;
 
     QGraphicsItemGroup *grid;
+
+    int selectedTool;
 };
 
 #endif // LAYERMANAGER_H

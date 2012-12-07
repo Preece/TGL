@@ -46,6 +46,8 @@ private slots:
 
     void on_layerSelector_itemClicked(QListWidgetItem *item);
 
+    void UpdateToolSelection();
+
 private:
     Ui::MainWindow *ui;
 

@@ -5,6 +5,7 @@ LayerManager::LayerManager()
     resourceManager = NULL;
     currentTile = NULL;
     currentSelection = NULL;
+    selectedTool = 0;
 
     grid = new QGraphicsItemGroup;
 
@@ -135,12 +136,16 @@ void LayerManager::ToggleGrid(bool show)
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    ModifyTile(event->scenePos().toPoint());
+    //pencil
+    if(selectedTool == 0)
+        ModifyTile(event->scenePos().toPoint());
 }
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    ModifyTile(event->scenePos().toPoint());
+    //pencil
+    if(selectedTool == 0)
+        ModifyTile(event->scenePos().toPoint());
 }
 
 void LayerManager::SetLayerSelection(int newSelection)

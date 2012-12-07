@@ -30,6 +30,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //when the selection changes in tileSelector, notify the layer manager
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
+
+    ui->toolGroup->setId(ui->pencilTool, 0);
+    ui->toolGroup->setId(ui->eyedropperTool, 1);
+    ui->toolGroup->setId(ui->brushTool, 2);
+    ui->toolGroup->setId(ui->bucketTool, 3);
+    ui->toolGroup->setId(ui->eraserButton, 4);
+    ui->toolGroup->setId(ui->pointerTool, 5);
+
+    connect(ui->pencilTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
+    connect(ui->eyedropperTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
+    connect(ui->brushTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
+    connect(ui->bucketTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
+    connect(ui->eraserButton, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
+    connect(ui->pointerTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
 }
 
 MainWindow::~MainWindow()
@@ -120,4 +134,9 @@ void MainWindow::on_layerSelector_itemClicked(QListWidgetItem *item)
         layers->ToggleLayerVisibility(ui->layerSelector->row(item), true);
     else
         layers->ToggleLayerVisibility(ui->layerSelector->row(item), false);
+}
+
+void MainWindow::UpdateToolSelection()
+{
+    layers->SetTool(ui->toolGroup->checkedId());
 }
