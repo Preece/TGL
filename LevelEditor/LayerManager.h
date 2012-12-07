@@ -19,6 +19,7 @@ public:
     void AddObjectItem(QPoint pos, ObjectPrototype *proto);
     void ModifyTile(int tileX, int tileY, TileItem *newTile);
     void ModifyTile(QPoint pos);
+    void FloodFill(QPoint pos);
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
