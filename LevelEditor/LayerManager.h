@@ -30,6 +30,8 @@ public:
     void SetLayerSelection(int newSelection);
     QString GetLayerName(int index);
 
+    void ToggleLayerVisibility(int layerIndex, bool show);
+
 public slots:
     void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
 

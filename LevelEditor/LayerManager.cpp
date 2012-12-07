@@ -161,3 +161,14 @@ QString LayerManager::GetLayerName(int index)
 
     return layers[index]->GetName();
 }
+
+void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
+{
+    if(layerIndex < 0 || layerIndex >= layers.count())
+        return;
+
+    if(show)
+        layers[layerIndex]->show();
+    else
+        layers[layerIndex]->hide();
+}

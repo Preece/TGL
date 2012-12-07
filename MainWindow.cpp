@@ -88,6 +88,10 @@ void MainWindow::RepopulateLayerSelector()
     {
         tempItem = new QListWidgetItem;
         tempItem->setText(layers->GetLayerName(i));
+
+        tempItem->setFlags(tempItem->flags() | Qt::ItemIsUserCheckable);
+        tempItem->setCheckState(Qt::Checked);
+
         ui->layerSelector->addItem(tempItem);
     }
 }
@@ -108,4 +112,12 @@ void MainWindow::on_addLayerButton_clicked()
 void MainWindow::on_layerSelector_currentRowChanged(int currentRow)
 {
     layers->SetLayerSelection(currentRow);
+}
+
+void MainWindow::on_layerSelector_itemClicked(QListWidgetItem *item)
+{
+    if(item->checkState() == Qt::Checked)
+        layers->ToggleLayerVisibility(ui->layerSelector->row(item), true);
+    else
+        layers->ToggleLayerVisibility(ui->layerSelector->row(item), false);
 }

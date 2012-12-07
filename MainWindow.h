@@ -44,6 +44,8 @@ private slots:
 
     void on_layerSelector_currentRowChanged(int currentRow);
 
+    void on_layerSelector_itemClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
 
