@@ -3,20 +3,15 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QList>
+#include <QVariant>
+#include <QAbstractListModel>
+#include <QItemSelectionModel>
 
 #include "LevelLayer.h"
 
 class LayerManager : public QGraphicsScene
 {
-private:
-    //this should be a list of LevelLayer's
-    LevelLayer *scaffold;
-
-    ResourceManager *resourceManager;
-    TileItem *currentTile;
-
-    QGraphicsItemGroup *grid;
-
 public:
     LayerManager();
     ~LayerManager();
@@ -27,6 +22,14 @@ public:
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
+    void AddLayer(QString name);
+
+    bool IsLayerSelected();
+    LevelLayer *GetSelectedLayer();
+    int GetLayerCount() { return layers.count(); }
+    void SetLayerSelection(int newSelection);
+    QString GetLayerName(int index);
+
 public slots:
     void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
 
@@ -35,6 +38,15 @@ public slots:
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+
+private:
+    QList<LevelLayer*> layers;
+    LevelLayer *currentSelection;
+
+    ResourceManager *resourceManager;
+    TileItem *currentTile;
+
+    QGraphicsItemGroup *grid;
 };
 
 #endif // LAYERMANAGER_H

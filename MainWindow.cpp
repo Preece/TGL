@@ -60,7 +60,7 @@ void MainWindow::on_actionProperties_triggered()
     }
 
     levelPropertiesWindow->LoadValues();
-    levelPropertiesWindow->show();
+    levelPropertiesWindow->exec();
 }
 
 void MainWindow::UpdateSelectedTile()
@@ -78,7 +78,34 @@ TileItem *MainWindow::GetSelectedTileItem()
     return NULL;
 }
 
+void MainWindow::RepopulateLayerSelector()
+{
+    ui->layerSelector->clear();
+
+    QListWidgetItem *tempItem;
+
+    for(int i = 0; i < layers->GetLayerCount(); i++)
+    {
+        tempItem = new QListWidgetItem;
+        tempItem->setText(layers->GetLayerName(i));
+        ui->layerSelector->addItem(tempItem);
+    }
+}
+
 void MainWindow::on_gridToggle_toggled(bool checked)
 {
     layers->ToggleGrid(checked);
+}
+
+void MainWindow::on_addLayerButton_clicked()
+{
+    layers->AddLayer("Test");
+
+
+    RepopulateLayerSelector();
+}
+
+void MainWindow::on_layerSelector_currentRowChanged(int currentRow)
+{
+    layers->SetLayerSelection(currentRow);
 }

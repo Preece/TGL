@@ -178,7 +178,7 @@
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
         <property name="viewportUpdateMode">
-         <enum>QGraphicsView::FullViewportUpdate</enum>
+         <enum>QGraphicsView::SmartViewportUpdate</enum>
         </property>
        </widget>
       </item>
@@ -303,6 +303,8 @@
     </property>
     <addaction name="actionAdd_Sprite"/>
     <addaction name="actionAdd_Object"/>
+    <addaction name="separator"/>
+    <addaction name="actionEdit_Brushes"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -416,6 +418,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="actionEdit_Brushes">
+   <property name="text">
+    <string>Edit Brushes</string>
    </property>
   </action>
  </widget>

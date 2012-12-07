@@ -4,14 +4,9 @@ LayerManager::LayerManager()
 {
     resourceManager = NULL;
     currentTile = NULL;
+    currentSelection = NULL;
 
     grid = new QGraphicsItemGroup;
-    scaffold = new LevelLayer;
-
-    addItem(scaffold);
-    scaffold->setPos(0, 0);
-    scaffold->show();
-
 
     addItem(grid);
     grid->setPos(0, 0);
@@ -24,7 +19,7 @@ LayerManager::~LayerManager()
 
 void LayerManager::ModifyTile(QPoint pos)
 {
-    if(!resourceManager || !currentTile)
+    if(!resourceManager || !currentTile || !currentSelection)
         return;
 
     if(resourceManager->GetLevelProperties()->IsPropertiesSet())
@@ -57,13 +52,36 @@ void LayerManager::ModifyTile(QPoint pos)
                                 resourceManager->GetLevelProperties()->GetTileWidth(), resourceManager->GetLevelProperties()->GetTileHeight());
 
         //add it to the scene
-        scaffold->addToGroup(tempTile);
+        currentSelection->addToGroup(tempTile);
 
         //set its position
         tempTile->setPos(tileX * tileW, tileY * tileH);
-
-        //modify the model to represent this new tile
     }
+}
+
+void LayerManager::AddLayer(QString name)
+{
+    LevelLayer *tempLayer = new LevelLayer;
+    tempLayer->SetName(name);
+
+    layers.append(tempLayer);
+    addItem(tempLayer);
+
+    tempLayer->show();
+    tempLayer->setPos(0,0);
+}
+
+bool LayerManager::IsLayerSelected()
+{
+    if(currentSelection == NULL)
+        return false;
+
+    return true;
+}
+
+LevelLayer *LayerManager::GetSelectedLayer()
+{
+    return currentSelection;
 }
 
 void LayerManager::ToggleGrid(bool show)
@@ -123,4 +141,23 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     ModifyTile(event->scenePos().toPoint());
+}
+
+void LayerManager::SetLayerSelection(int newSelection)
+{
+    if(newSelection < 0 || newSelection > layers.count())
+    {
+        currentSelection = NULL;
+        return;
+    }
+
+    currentSelection = layers[newSelection];
+}
+
+QString LayerManager::GetLayerName(int index)
+{
+    if(index < 0 || index >= layers.count())
+        return QString("Invalid index");
+
+    return layers[index]->GetName();
 }

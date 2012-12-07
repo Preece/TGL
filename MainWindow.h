@@ -29,6 +29,8 @@ public:
 
     bool IsTileSelected();
     TileItem *GetSelectedTileItem();
+
+    void RepopulateLayerSelector();
     
 private slots:
 
@@ -37,6 +39,10 @@ private slots:
     void UpdateSelectedTile();
 
     void on_gridToggle_toggled(bool checked);
+
+    void on_addLayerButton_clicked();
+
+    void on_layerSelector_currentRowChanged(int currentRow);
 
 private:
     Ui::MainWindow *ui;

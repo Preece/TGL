@@ -14,6 +14,10 @@ private:
     QString name;
 
 public:
+
+    QString GetName() { return name; }
+    void SetName(QString newName) { name = newName; }
+
     LevelLayer();
 
 
