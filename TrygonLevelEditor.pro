@@ -48,7 +48,8 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/TileBrush.cpp \
     Model/LevelProperties.cpp \
     LevelPropertiesDialog.cpp \
-    Model/Layer.cpp
+    Model/Layer.cpp \
+    Model/Exporter.cpp
   
 
 HEADERS  += \
@@ -90,7 +91,8 @@ HEADERS  += \
     LevelEditor/Brushes/TileBrush.h \
     Model/LevelProperties.h \
     LevelPropertiesDialog.h \
-    Model/Layer.h
+    Model/Layer.h \
+    Model/Exporter.h
    
 
 FORMS    += \

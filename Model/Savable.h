@@ -22,23 +22,6 @@ protected:
     //objects should register their ID's.
     void RegisterID(int registeredID);
 
-    //these functions help write out different types of data
-    bool WriteString(QFile &file, QString string);
-    bool WriteInt(QFile &file, int number);
-    bool WriteBool(QFile &file, bool boolean);
-    bool WriteRect(QFile &file, QRect rect);
-    bool WritePoint(QFile &file, QPoint point);
-    bool WriteImage(QFile &file, QImage image);
-
-    //these functions help read in different types of data
-    bool ReadString(QFile &file, QString &string);
-    bool ReadInt(QFile &file, int &number);
-    bool ReadBool(QFile &file, bool &boolean);
-    bool ReadRect(QFile &file, QRect &rect);
-    bool ReadPoint(QFile &file, QPoint &point);
-    bool ReadImage(QFile &file, QImage &image);
-
-
 public:
     Savable();
 
