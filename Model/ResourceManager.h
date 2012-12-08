@@ -9,6 +9,7 @@
 #include "ObjectInstance.h"
 #include "ObjectPrototype.h"
 #include "Image.h"
+#include "Tile.h"
 #include "Model/LevelProperties.h"
 
 class ResourceManager : public QObject
@@ -22,6 +23,7 @@ private:
     QList<ObjectPrototype*> objectPrototypeList;
     QList<ObjectInstance*> objectInstanceList;
     QList<Image*> imageList;
+    QList<Tile*> tileList;
 
     LevelProperties levelProperties;
 public:
@@ -55,6 +57,12 @@ public slots:
 
     QPixmap GetSpriteSymbol(int spriteID);
     QImage *GetTileset();
+
+    void AddTile(Tile *newTile);
+    void ClearTiles();
+    int GetTileCount() { return tileList.count(); }
+    Tile *GetTile(int ID);
+    Tile *GetTile(int x, int y);
 
     void DestroyAllResources();
 

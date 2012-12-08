@@ -8,7 +8,10 @@
 #include <QAbstractListModel>
 #include <QItemSelectionModel>
 
-#include "LevelLayer.h"
+#include "../Model/Layer.h"
+#include "../Model/ObjectPrototype.h"
+#include "../Model/ResourceManager.h"
+#include "TileItem.h"
 
 class LayerManager : public QGraphicsScene
 {
@@ -21,12 +24,14 @@ public:
     void ModifyTile(QPoint pos);
     void FloodFill(QPoint pos);
 
+    void RepopulateLayer(Layer *dirtyLayer);
+
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
     void AddLayer(QString name);
 
     bool IsLayerSelected();
-    LevelLayer *GetSelectedLayer();
+    Layer *GetSelectedLayer();
     int GetLayerCount() { return layers.count(); }
     void SetLayerSelection(int newSelection);
     QString GetLayerName(int index);
@@ -45,8 +50,8 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    QList<LevelLayer*> layers;
-    LevelLayer *currentSelection;
+    QList<Layer*> layers;
+    Layer *currentSelection;
 
     ResourceManager *resourceManager;
     TileItem *currentTile;

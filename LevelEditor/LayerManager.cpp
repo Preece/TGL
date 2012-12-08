@@ -38,31 +38,16 @@ void LayerManager::ModifyTile(QPoint pos)
            tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
             return;
 
-        TileItem *tempTile;
+        //modify the correct tiles tileID to the one of the selection
+        currentSelection->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
 
-        //if there is already a tile there, change its stuff
-
-        //create a new TileItem
-        tempTile = new TileItem;
-
-
-        tempTile->SetTile(currentTile->GetTile());
-
-        //set the tile items pixmap and may Jaysus forgive me for this abomination
-        tempTile->SetTilePixmap(*resourceManager->GetTileset(), currentTile->GetTile()->GetXOrigin(), currentTile->GetTile()->GetYOrigin(),
-                                resourceManager->GetLevelProperties()->GetTileWidth(), resourceManager->GetLevelProperties()->GetTileHeight());
-
-        //add it to the scene
-        currentSelection->addToGroup(tempTile);
-
-        //set its position
-        tempTile->setPos(tileX * tileW, tileY * tileH);
+        RepopulateLayer(currentSelection);
     }
 }
 
 void LayerManager::AddLayer(QString name)
 {
-    LevelLayer *tempLayer = new LevelLayer;
+    Layer *tempLayer = new Layer;
     tempLayer->SetName(name);
 
     layers.append(tempLayer);
@@ -80,7 +65,7 @@ bool LayerManager::IsLayerSelected()
     return true;
 }
 
-LevelLayer *LayerManager::GetSelectedLayer()
+Layer *LayerManager::GetSelectedLayer()
 {
     return currentSelection;
 }
@@ -176,4 +161,42 @@ void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
         layers[layerIndex]->show();
     else
         layers[layerIndex]->hide();
+}
+
+void LayerManager::RepopulateLayer(Layer *dirtyLayer)
+{
+    if(!dirtyLayer || !resourceManager)
+        return;
+
+    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    {
+        //clear out all the current tile items
+
+        //loop for every tile in the layer
+            //create a new tile item
+            //set its tile based on the index
+            //set its pixmap
+            //add it at the correct position
+
+
+        TileItem *tempTile;
+
+        //if there is already a tile there, change its stuff
+
+        //create a new TileItem
+        tempTile = new TileItem;
+
+
+        tempTile->SetTile(currentTile->GetTile());
+
+        //set the tile items pixmap and may Jaysus forgive me for this abomination
+        tempTile->SetTilePixmap(*resourceManager->GetTileset(), currentTile->GetTile()->GetXOrigin(), currentTile->GetTile()->GetYOrigin(),
+                                resourceManager->GetLevelProperties()->GetTileWidth(), resourceManager->GetLevelProperties()->GetTileHeight());
+
+        //add it to the scene
+        currentSelection->addToGroup(tempTile);
+
+        //set its position
+        tempTile->setPos(tileX * tileW, tileY * tileH);
+    }
 }

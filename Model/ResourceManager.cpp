@@ -160,6 +160,45 @@ QImage *ResourceManager::GetTileset()
     return GetImage(levelProperties.GetTilesetID())->GetImage();
 }
 
+void ResourceManager::AddTile(Tile *newTile)
+{
+    if(newTile)
+        tileList.append(newTile);
+}
+
+void ResourceManager::ClearTiles()
+{
+    for(int i = 0; i < GetTileCount(); i++)
+    {
+        if(tileList[i])
+            delete tileList[i];
+    }
+
+    tileList.clear();
+}
+
+Tile *ResourceManager::GetTile(int ID)
+{
+    for(int i = 0; i < GetTileCount(); i++)
+    {
+        if(tileList[i]->GetID() == ID)
+            return tileList[i];
+    }
+
+    return NULL;
+}
+
+Tile *ResourceManager::GetTile(int x, int y)
+{
+    for(int i = 0; i < GetTileCount(); i++)
+    {
+        if(tileList[i]->GetXOrigin() == x && tileList[i]->GetYOrigin() == y)
+            return tileList[i];
+    }
+
+    return NULL;
+}
+
 Image *ResourceManager::GetImage(int ID)
 {
     for(int i = 0; i < imageList.count(); i++)

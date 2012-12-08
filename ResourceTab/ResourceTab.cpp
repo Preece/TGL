@@ -69,9 +69,8 @@ void ResourceTab::RepopulateTileSelector()
                     tempItem->SetTilePixmap(*spritesheet, j, i, tileW, tileH);
 
                     //create and add the actual tile
-                    tempTile = new Tile;
+                    tempTile = resourceManager->GetTile(j, i);
                     tempItem->SetTile(tempTile);
-                    tempTile->SetOrigin(j, i);
 
                     //add the tile item to the tile selector at (i * tilewidth) + i
                     tileSelector->addItem(tempItem);
@@ -417,13 +416,34 @@ void ResourceTab::on_selectTilesetButton_clicked()
     if(spritesheetWindow.exec() == QDialog::Accepted)
     {
         //and if an image was selected
-        if(spritesheetWindow.IsImageSelected())
+        if(spritesheetWindow.IsImageSelected() && resourceManager->GetLevelProperties()->IsPropertiesSet())
         {
             //set the spritesheet as that image
             spritesheet = spritesheetWindow.GetSelectedImage()->GetImage();
 
             //store its ID as the image to be used as the tileset
             resourceManager->GetLevelProperties()->SetTilesetID(spritesheetWindow.GetSelectedImage()->GetID());
+
+            //create and store the Tiles
+            Tile *tempTile;
+            int sheetW = spritesheet->width() / resourceManager->GetLevelProperties()->GetTileWidth();
+            int sheetH = spritesheet->height() / resourceManager->GetLevelProperties()->GetTileHeight();
+
+            //if there are already tiles, get rid of em
+            if(resourceManager->GetTileCount() != 0)
+                resourceManager->ClearTiles();
+
+            for(int i = 0; i < sheetH; i++)
+            {
+                for(int j = 0; j < sheetW; j++)
+                {
+                    tempTile = new Tile;
+                    tempTile->SetOrigin(j, i);
+                    tempTile->SetTilesheetID(spritesheetWindow.GetSelectedImage()->GetID());
+
+                    resourceManager->AddTile(tempTile);
+                }
+            }
 
             //and repopulate the tile selector
             RepopulateTileSelector();

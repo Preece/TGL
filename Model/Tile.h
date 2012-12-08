@@ -12,12 +12,6 @@ public:
 
     Tile();
 
-    void SetPos(int newX, int newY) { x = newX; y = newY; }
-    void SetX(int newX) { x = newX; }
-    void SetY(int newY) { y = newY; }
-    int GetX() { return x; }
-    int GetY() { return y; }
-
     void SetCollision(int newType) { collision = newType; }
     int GetCollision();
 
@@ -27,11 +21,14 @@ public:
     int GetXOrigin() { return originX; }
     int GetYOrigin() { return originY; }
 
+    int GetTilesheetID() { return tilesheetID; }
+    void SetTilesheetID(int newID) { tilesheetID = newID; }
+
 private:
     int originX, originY;
     int collision;
 
-    int x, y;
+    int tilesheetID;
 };
 
 #endif // TILE_H

@@ -12,6 +12,7 @@ public:
     Exporter();
 
     //these functions help write out different types of data
+    virtual bool WriteType(int ID, char type[4]) = 0;
     virtual bool WriteString(QString string) = 0;
     virtual bool WriteInt(int number) = 0;
     virtual bool WriteBool(bool boolean) = 0;
@@ -20,7 +21,8 @@ public:
     virtual bool WriteImage(QImage image) = 0;
 
     //these functions help read in different types of data
-    virtual bool ReadString( QString &string) = 0;
+    virtual bool ReadType(int &ID, char type[4]) = 0;
+    virtual bool ReadString(QString &string) = 0;
     virtual bool ReadInt(int &number) = 0;
     virtual bool ReadBool(bool &boolean) = 0;
     virtual bool ReadRect(QRect &rect) = 0;

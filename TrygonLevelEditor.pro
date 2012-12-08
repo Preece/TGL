@@ -43,13 +43,13 @@ SOURCES += main.cpp\
     Commands/DeleteObjectCommand.cpp \
     Commands/AddSpriteCommand.cpp \
     Commands/DeletesSriteCommand.cpp \
-    LevelEditor/LevelLayer.cpp \
     Model/Tile.cpp \
     LevelEditor/Brushes/TileBrush.cpp \
     Model/LevelProperties.cpp \
     LevelPropertiesDialog.cpp \
     Model/Layer.cpp \
-    Model/Exporter.cpp
+    Model/Exporter.cpp \
+    Model/TileInstance.cpp
   
 
 HEADERS  += \
@@ -86,13 +86,13 @@ HEADERS  += \
     Commands/DeleteObjectCommand.h \
     Commands/AddSpriteCommand.h \
     Commands/DeleteSpriteCommand.h \
-    LevelEditor/LevelLayer.h \
     Model/Tile.h \
     LevelEditor/Brushes/TileBrush.h \
     Model/LevelProperties.h \
     LevelPropertiesDialog.h \
     Model/Layer.h \
-    Model/Exporter.h
+    Model/Exporter.h \
+    Model/TileInstance.h
    
 
 FORMS    += \
