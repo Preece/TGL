@@ -6,7 +6,7 @@
 #include "Savable.h"
 #include "TileInstance.h"
 
-class Layer : public Savable, public QGraphicsItemGroup
+class Layer : public Savable
 {
 public:
     bool SaveToFile(Exporter *exporter);

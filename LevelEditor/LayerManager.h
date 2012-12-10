@@ -11,6 +11,7 @@
 #include "../Model/Layer.h"
 #include "../Model/ObjectPrototype.h"
 #include "../Model/ResourceManager.h"
+#include "LayerGroup.h"
 #include "TileItem.h"
 
 class LayerManager : public QGraphicsScene
@@ -19,19 +20,16 @@ public:
     LayerManager();
     ~LayerManager();
 
-    void AddObjectItem(QPoint pos, ObjectPrototype *proto);
-    void ModifyTile(int tileX, int tileY, TileItem *newTile);
-    void ModifyTile(QPoint pos);
-    void FloodFill(QPoint pos);
-
-    void RepopulateLayer(Layer *dirtyLayer);
-
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
-
+    void RepopulateLayer(LayerGroup *dirtyLayer);
     void AddLayer(QString name);
 
+    void ModifyTile(QPoint pos);
+    void FloodFill(QPoint pos);
+    void AddObjectItem(QPoint pos, ObjectPrototype *proto);
+
     bool IsLayerSelected();
-    Layer *GetSelectedLayer();
+    LayerGroup *GetSelectedLayer();
     int GetLayerCount() { return layers.count(); }
     void SetLayerSelection(int newSelection);
     QString GetLayerName(int index);
@@ -50,8 +48,8 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    QList<Layer*> layers;
-    Layer *currentSelection;
+    QList<LayerGroup*> layers;
+    LayerGroup *currentLayer;
 
     ResourceManager *resourceManager;
     TileItem *currentTile;

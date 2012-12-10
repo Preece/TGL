@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>369</height>
+    <width>296</width>
+    <height>388</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -32,13 +32,13 @@
    <string>TabWidget</string>
   </property>
   <property name="tabPosition">
-   <enum>QTabWidget::North</enum>
+   <enum>QTabWidget::West</enum>
   </property>
   <property name="tabShape">
    <enum>QTabWidget::Triangular</enum>
   </property>
   <property name="currentIndex">
-   <number>4</number>
+   <number>0</number>
   </property>
   <widget class="QWidget" name="tilesTab">
    <attribute name="title">
@@ -295,6 +295,11 @@
   <widget class="QWidget" name="audioTab">
    <attribute name="title">
     <string>Audio</string>
+   </attribute>
+  </widget>
+  <widget class="QWidget" name="triggerTab">
+   <attribute name="title">
+    <string>Triggers</string>
    </attribute>
   </widget>
   <widget class="QWidget" name="linksTab">

@@ -199,6 +199,44 @@ Tile *ResourceManager::GetTile(int x, int y)
     return NULL;
 }
 
+void ResourceManager::AddLayer(Layer *newLayer)
+{
+    if(newLayer)
+        layerList.append(newLayer);
+}
+
+void ResourceManager::DeleteLayer(int ID)
+{
+    for(int i = 0; i < layerList.count(); i++)
+    {
+        if(layerList[i]->GetID() == ID)
+        {
+            delete layerList[i];
+            layerList.removeAt(i);
+            return;
+        }
+    }
+}
+
+Layer *ResourceManager::GetLayer(int ID)
+{
+    for(int i = 0; i < layerList.count(); i++)
+    {
+        if(layerList[i]->GetID() == ID)
+        {
+            return layerList[i];
+        }
+    }
+}
+
+Layer *ResourceManager::GetLayerByIndex(int index)
+{
+    if(index < 0 || index > layerList.count())
+        return NULL;
+
+    return layerList[index];
+}
+
 Image *ResourceManager::GetImage(int ID)
 {
     for(int i = 0; i < imageList.count(); i++)

@@ -3,25 +3,24 @@
 
 #include <QGraphicsPixmapItem>
 #include <Model/Tile.h>
+#include "../Model/TileInstance.h"
 
 class TileItem : public QGraphicsPixmapItem
 {
-private:
-    int originX, originY;
-
-    Tile *tile;
-
 public:
     TileItem();
 
     void SetTile(Tile *newTile) { tile = newTile; }
     Tile *GetTile() { return tile; }
 
-    void SetTilePixmap(QImage spritesheet, int tileX, int tileY, int w, int h);
+    void SetTilePixmap(QImage spritesheet, int w, int h);
     QPixmap GetTilePixmap();
 
-    int GetOriginX() { return originX; }
-    int GetOriginY() { return originY; }
+    int GetOriginX() { if(tile) return tile->GetXOrigin(); }
+    int GetOriginY() { if(tile) return tile->GetYOrigin(); }
+
+private:
+    Tile *tile;
 };
 
 #endif // TILEITEM_H

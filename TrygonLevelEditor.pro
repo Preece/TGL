@@ -49,7 +49,9 @@ SOURCES += main.cpp\
     LevelPropertiesDialog.cpp \
     Model/Layer.cpp \
     Model/Exporter.cpp \
-    Model/TileInstance.cpp
+    Model/TileInstance.cpp \
+    LevelEditor/LayerGroup.cpp \
+    LevelEditor/TileInstanceItem.cpp
   
 
 HEADERS  += \
@@ -92,7 +94,9 @@ HEADERS  += \
     LevelPropertiesDialog.h \
     Model/Layer.h \
     Model/Exporter.h \
-    Model/TileInstance.h
+    Model/TileInstance.h \
+    LevelEditor/LayerGroup.h \
+    LevelEditor/TileInstanceItem.h
    
 
 FORMS    += \

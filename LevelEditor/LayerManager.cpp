@@ -4,7 +4,7 @@ LayerManager::LayerManager()
 {
     resourceManager = NULL;
     currentTile = NULL;
-    currentSelection = NULL;
+    currentLayer = NULL;
     selectedTool = 0;
 
     grid = new QGraphicsItemGroup;
@@ -20,7 +20,7 @@ LayerManager::~LayerManager()
 
 void LayerManager::ModifyTile(QPoint pos)
 {
-    if(!resourceManager || !currentTile || !currentSelection)
+    if(!resourceManager || !currentTile || !currentLayer)
         return;
 
     if(resourceManager->GetLevelProperties()->IsPropertiesSet())
@@ -39,9 +39,16 @@ void LayerManager::ModifyTile(QPoint pos)
             return;
 
         //modify the correct tiles tileID to the one of the selection
-        currentSelection->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
+        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
 
-        RepopulateLayer(currentSelection);
+        if(currentModelLayer)
+        {
+            currentModelLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
+        }
+
+        RepopulateLayer(currentLayer);
+
+
     }
 }
 
@@ -49,25 +56,29 @@ void LayerManager::AddLayer(QString name)
 {
     Layer *tempLayer = new Layer;
     tempLayer->SetName(name);
+    resourceManager->AddLayer(tempLayer);
 
-    layers.append(tempLayer);
-    addItem(tempLayer);
+    LayerGroup *tempLayerGroup = new LayerGroup;
+    tempLayerGroup->SetLayerID(tempLayer->GetID());
 
-    tempLayer->show();
-    tempLayer->setPos(0,0);
+    layers.append(tempLayerGroup);
+    addItem(tempLayerGroup);
+
+    tempLayerGroup->show();
+    tempLayerGroup->setPos(0,0);
 }
 
 bool LayerManager::IsLayerSelected()
 {
-    if(currentSelection == NULL)
+    if(currentLayer == NULL)
         return false;
 
     return true;
 }
 
-Layer *LayerManager::GetSelectedLayer()
+LayerGroup *LayerManager::GetSelectedLayer()
 {
-    return currentSelection;
+    return currentLayer;
 }
 
 void LayerManager::ToggleGrid(bool show)
@@ -137,11 +148,11 @@ void LayerManager::SetLayerSelection(int newSelection)
 {
     if(newSelection < 0 || newSelection > layers.count())
     {
-        currentSelection = NULL;
+        currentLayer = NULL;
         return;
     }
 
-    currentSelection = layers[newSelection];
+    currentLayer = layers[newSelection];
 }
 
 QString LayerManager::GetLayerName(int index)
@@ -149,7 +160,7 @@ QString LayerManager::GetLayerName(int index)
     if(index < 0 || index >= layers.count())
         return QString("Invalid index");
 
-    return layers[index]->GetName();
+    return resourceManager->GetLayerByIndex(index)->GetName();
 }
 
 void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
@@ -163,40 +174,42 @@ void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
         layers[layerIndex]->hide();
 }
 
-void LayerManager::RepopulateLayer(Layer *dirtyLayer)
+void LayerManager::RepopulateLayer(LayerGroup *dirtyLayer)
 {
-    if(!dirtyLayer || !resourceManager)
+    if(!dirtyLayer)
         return;
 
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    dirtyLayer->DeleteAllTileInstanceItems();
+
+    TileInstanceItem *tempTileItem;
+
+    Layer *dirtyModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
+    int tileCount = 0;
+
+    if(dirtyModelLayer)
+        tileCount = dirtyModelLayer->GetTileCount();
+
+    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+    int tileX = 0;
+    int tileY = 0;
+
+    for(int i = 0; i < tileCount; i++)
     {
-        //clear out all the current tile items
+        //create a new TileInstanceItem
+        tempTileItem = new TileInstanceItem;
+        tempTileItem->SetTileInstance(dirtyModelLayer->GetTileAtIndex(i));
 
-        //loop for every tile in the layer
-            //create a new tile item
-            //set its tile based on the index
-            //set its pixmap
-            //add it at the correct position
+        //set the tile items pixmap
+        tempTileItem->SetTilePixmap(currentTile->GetTilePixmap());
 
-
-        TileItem *tempTile;
-
-        //if there is already a tile there, change its stuff
-
-        //create a new TileItem
-        tempTile = new TileItem;
-
-
-        tempTile->SetTile(currentTile->GetTile());
-
-        //set the tile items pixmap and may Jaysus forgive me for this abomination
-        tempTile->SetTilePixmap(*resourceManager->GetTileset(), currentTile->GetTile()->GetXOrigin(), currentTile->GetTile()->GetYOrigin(),
-                                resourceManager->GetLevelProperties()->GetTileWidth(), resourceManager->GetLevelProperties()->GetTileHeight());
+        tileX = dirtyModelLayer->GetTileAtIndex(i)->GetX();
+        tileY = dirtyModelLayer->GetTileAtIndex(i)->GetY();
 
         //add it to the scene
-        currentSelection->addToGroup(tempTile);
+        dirtyLayer->AddTileInstanceItem(tempTileItem);
 
         //set its position
-        tempTile->setPos(tileX * tileW, tileY * tileH);
+        tempTileItem->setPos(tileX * tileW, tileY * tileH);
     }
 }

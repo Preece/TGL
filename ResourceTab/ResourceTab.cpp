@@ -66,11 +66,12 @@ void ResourceTab::RepopulateTileSelector()
                 {
                     //copy the correct fragment of the image into a new TileItem
                     tempItem = new TileItem;
-                    tempItem->SetTilePixmap(*spritesheet, j, i, tileW, tileH);
 
                     //create and add the actual tile
                     tempTile = resourceManager->GetTile(j, i);
                     tempItem->SetTile(tempTile);
+
+                    tempItem->SetTilePixmap(*spritesheet, tileW, tileH);
 
                     //add the tile item to the tile selector at (i * tilewidth) + i
                     tileSelector->addItem(tempItem);

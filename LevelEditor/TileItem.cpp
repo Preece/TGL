@@ -2,12 +2,23 @@
 
 TileItem::TileItem()
 {
+    tile = NULL;
 }
 
-void TileItem::SetTilePixmap(QImage spritesheet, int tileX, int tileY, int w, int h)
+void TileItem::SetTilePixmap(QImage spritesheet, int w, int h)
 {
+    //if the tile is not set, abort
+    if(!tile)
+        return;
+
+    //create an image from the tileset, representing this single tile
     QImage tempImage;
-    tempImage = spritesheet.copy((tileX * w), (tileY * h), w, h);
+    tempImage = spritesheet.copy((tile->GetXOrigin() * w), (tile->GetYOrigin() * h), w, h);
 
     setPixmap(QPixmap::fromImage(tempImage));
+}
+
+QPixmap TileItem::GetTilePixmap()
+{
+    return pixmap();
 }

@@ -10,6 +10,7 @@
 #include "ObjectPrototype.h"
 #include "Image.h"
 #include "Tile.h"
+#include "Layer.h"
 #include "Model/LevelProperties.h"
 
 class ResourceManager : public QObject
@@ -17,15 +18,6 @@ class ResourceManager : public QObject
     Q_OBJECT
 
     //ResourceManager(QObject *parent = 0);
-
-private:
-    QList<Sprite*> spriteList;
-    QList<ObjectPrototype*> objectPrototypeList;
-    QList<ObjectInstance*> objectInstanceList;
-    QList<Image*> imageList;
-    QList<Tile*> tileList;
-
-    LevelProperties levelProperties;
 public:
     ResourceManager();
 
@@ -64,6 +56,12 @@ public slots:
     Tile *GetTile(int ID);
     Tile *GetTile(int x, int y);
 
+    void AddLayer(Layer *newLayer);
+    void DeleteLayer(int ID);
+    Layer *GetLayer(int ID);
+    Layer *GetLayerByIndex(int index);
+    int GetLayerCount() { return layerList.count(); }
+
     void DestroyAllResources();
 
 signals:
@@ -73,6 +71,15 @@ signals:
 
     //void ObjectInstanceAdded(QImage symbol, int ID);
 
+private:
+    QList<Sprite*> spriteList;
+    QList<ObjectPrototype*> objectPrototypeList;
+    QList<ObjectInstance*> objectInstanceList;
+    QList<Image*> imageList;
+    QList<Tile*> tileList;
+    QList<Layer*> layerList;
+
+    LevelProperties levelProperties;
 };
 
 #endif // RESOURCEMANAGER_H
