@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolGroup->setId(ui->eraserButton, 4);
     ui->toolGroup->setId(ui->pointerTool, 5);
 
-    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), layers, SLOT(SetTool(int)));
+    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection(int)));
 }
 
 MainWindow::~MainWindow()
@@ -131,7 +131,7 @@ void MainWindow::on_layerSelector_itemClicked(QListWidgetItem *item)
         layers->ToggleLayerVisibility(ui->layerSelector->row(item), false);
 }
 
-void MainWindow::UpdateToolSelection()
+void MainWindow::UpdateToolSelection(int newTool)
 {
-    layers->SetTool(ui->toolGroup->checkedId());
+    layers->SetTool(newTool);
 }

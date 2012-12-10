@@ -106,7 +106,7 @@ void LayerManager::FloodFill(int tileX, int tileY, int newTileID, int oldTileID)
             if(currentModelLayer->GetTileType(tileX, tileY) == oldTileID)
             {
                 //replace this tile with the new type
-                currentModelLayer->ModifyTile(tileX, tileY, newTileID);
+                ModifyTile(tileX, tileY, false);
 
                 //call this function on the surrounding tiles
                 FloodFill(tileX - 1, tileY, newTileID, oldTileID);
