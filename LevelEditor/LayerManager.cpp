@@ -47,8 +47,74 @@ void LayerManager::ModifyTile(QPoint pos)
         }
 
         RepopulateLayer(currentLayer);
+    }
+}
 
+void LayerManager::ModifyTile(int tileX, int tileY, bool repopulate)
+{
+    if(!resourceManager || !currentTile || !currentLayer)
+        return;
 
+    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    {
+        //if the position is beyond the bounds of the scene, ignore it
+        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
+        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
+           tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
+            return;
+
+        //modify the correct tiles tileID to the one of the selection
+        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
+
+        if(currentModelLayer)
+        {
+            currentModelLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
+        }
+
+        //repopulate the layer unless the function user says otherwise
+        if(repopulate)
+            RepopulateLayer(currentLayer);
+    }
+}
+
+void LayerManager::FloodFill(int tileX, int tileY, int newTileID, int oldTileID)
+{
+    //this is a recursive function. It calls itself in tiles to the north, east, south and west.
+    //it will return if the tile is different from the one being replaced, or off the edge of the grid
+
+    if(!resourceManager || !currentTile || !currentLayer)
+        return;
+
+    if(newTileID == oldTileID)
+        return;
+
+    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    {
+        //if the position is beyond the bounds of the scene, ignore it
+        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
+        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
+           tileY >= resourceManager->GetLevelProperties()->GetMapHeight() ||
+           tileX < 0 || tileY < 0)
+            return;
+
+        //modify the correct tiles tileID to the one of the selection
+        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
+
+        if(currentModelLayer)
+        {
+            //if the current tile is of the type to be replaced
+            if(currentModelLayer->GetTileType(tileX, tileY) == oldTileID)
+            {
+                //replace this tile with the new type
+                currentModelLayer->ModifyTile(tileX, tileY, newTileID);
+
+                //call this function on the surrounding tiles
+                FloodFill(tileX - 1, tileY, newTileID, oldTileID);
+                FloodFill(tileX + 1, tileY, newTileID, oldTileID);
+                FloodFill(tileX, tileY - 1, newTileID, oldTileID);
+                FloodFill(tileX, tileY + 1, newTileID, oldTileID);
+            }
+        }
     }
 }
 
@@ -135,6 +201,24 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //pencil
     if(selectedTool == 0)
         ModifyTile(event->scenePos().toPoint());
+
+    //bucket
+    if(selectedTool == 3)
+    {
+        //translate the position to tile coordinates
+        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+        int tileX = event->scenePos().toPoint().x() / tileW;
+        int tileY = event->scenePos().toPoint().y() / tileH;
+
+        Layer *tempLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
+        int oldTileID = tempLayer->GetTileType(tileX, tileY);
+
+        FloodFill(tileX, tileY, currentTile->GetTile()->GetID(), oldTileID);
+
+        RepopulateLayer(currentLayer);
+    }
 }
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)

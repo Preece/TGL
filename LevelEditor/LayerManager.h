@@ -25,7 +25,8 @@ public:
     void AddLayer(QString name);
 
     void ModifyTile(QPoint pos);
-    void FloodFill(QPoint pos);
+    void ModifyTile(int tileX, int tileY, bool repopulate = true);
+    void FloodFill(int tileX, int tileY, int newTileID, int oldTileID);
     void AddObjectItem(QPoint pos, ObjectPrototype *proto);
 
     bool IsLayerSelected();
@@ -36,12 +37,12 @@ public:
 
     void ToggleLayerVisibility(int layerIndex, bool show);
 
-    void SetTool(int newTool) { selectedTool = newTool; }
-
 public slots:
     void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
 
     void ToggleGrid(bool show = true);
+
+    void SetTool(int newTool) { selectedTool = newTool; }
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

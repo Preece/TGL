@@ -38,12 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolGroup->setId(ui->eraserButton, 4);
     ui->toolGroup->setId(ui->pointerTool, 5);
 
-    connect(ui->pencilTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
-    connect(ui->eyedropperTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
-    connect(ui->brushTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
-    connect(ui->bucketTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
-    connect(ui->eraserButton, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
-    connect(ui->pointerTool, SIGNAL(clicked()), this, SLOT(UpdateToolSelection()));
+    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), layers, SLOT(SetTool(int)));
 }
 
 MainWindow::~MainWindow()
