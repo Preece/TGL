@@ -56,7 +56,7 @@ int Layer::GetTileType(int x, int y)
         if(tempTile->GetX() == x && tempTile->GetY() == y)
         {
             //return its type
-            return tempTile->GetID();
+            return tempTile->GetTileID();
         }
     }
 
