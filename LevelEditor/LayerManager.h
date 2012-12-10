@@ -27,6 +27,7 @@ public:
     void ModifyTile(QPoint pos);
     void ModifyTile(int tileX, int tileY, bool repopulate = true);
     void FloodFill(int tileX, int tileY, int newTileID, int oldTileID);
+    void EraseTile(QPoint pos);
     void AddObjectItem(QPoint pos, ObjectPrototype *proto);
 
     bool IsLayerSelected();

@@ -27,20 +27,31 @@ void Layer::ModifyTile(int x, int y, int ID)
         //and if one in said position exists
         if(tempTile->GetX() == x && tempTile->GetY() == y)
         {
-            //modify its ID
-            tempTile->SetTileID(ID);
+            if(ID != 0)
+            {
+                //modify its ID
+                tempTile->SetTileID(ID);
+            }
+            else if(ID == 0)
+            {
+                //remove it
+                RemoveChild(tempTile->GetID());
+            }
             return;
         }
     }
 
     //if the loop finishes, no matching tile was found
     //so we add a new one
-    tempTile = new TileInstance;
-    tempTile->SetX(x);
-    tempTile->SetY(y);
-    tempTile->SetTileID(ID);
+    if(ID != 0)
+    {
+        tempTile = new TileInstance;
+        tempTile->SetX(x);
+        tempTile->SetY(y);
+        tempTile->SetTileID(ID);
 
-    AddChild(tempTile);
+        AddChild(tempTile);
+    }
 }
 
 int Layer::GetTileType(int x, int y)
