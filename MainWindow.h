@@ -48,6 +48,8 @@ private slots:
 
     void UpdateToolSelection(int newTool);
 
+    void on_pencilTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 

@@ -135,3 +135,8 @@ void MainWindow::UpdateToolSelection(int newTool)
 {
     layers->SetTool(newTool);
 }
+
+void MainWindow::on_pencilTool_clicked()
+{
+    layers->SetTool(0);
+}

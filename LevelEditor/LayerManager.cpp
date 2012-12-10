@@ -282,10 +282,17 @@ void LayerManager::RepopulateLayer(LayerGroup *dirtyLayer)
     {
         //create a new TileInstanceItem
         tempTileItem = new TileInstanceItem;
-        tempTileItem->SetTileInstance(dirtyModelLayer->GetTileAtIndex(i));
+        TileInstance *tempTile = dirtyModelLayer->GetTileAtIndex(i);
+        tempTileItem->SetTileInstance(tempTile);
+
+        Tile *tempSelectionTile = resourceManager->GetTile(tempTile->GetTileID());
 
         //set the tile items pixmap
-        tempTileItem->SetTilePixmap(currentTile->GetTilePixmap());
+        QImage tempImage = *resourceManager->GetTileset();
+        tempImage = tempImage.copy(tempSelectionTile->GetXOrigin() * tileW,
+                                   tempSelectionTile->GetYOrigin() * tileH, tileW, tileH);
+
+        tempTileItem->SetTilePixmap(QPixmap::fromImage(tempImage));
 
         tileX = dirtyModelLayer->GetTileAtIndex(i)->GetX();
         tileY = dirtyModelLayer->GetTileAtIndex(i)->GetY();
