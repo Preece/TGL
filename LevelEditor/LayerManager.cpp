@@ -264,38 +264,51 @@ void LayerManager::ToggleGrid(bool show)
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    //pencil
-    if(selectedTool == 0)
-        ModifyTile(event->scenePos().toPoint());
-
-    //eyedropper
-    if(selectedTool == 1)
+    if(event->button() == Qt::LeftButton)
     {
-        EyedropTile(event->scenePos().toPoint());
+        //pencil
+        if(selectedTool == 0)
+            ModifyTile(event->scenePos().toPoint());
+
+        //eyedropper
+        if(selectedTool == 1)
+        {
+            EyedropTile(event->scenePos().toPoint());
+
+            //switch back to the pencil tool
+        }
+
+        //bucket
+        if(selectedTool == 3)
+        {
+            //translate the position to tile coordinates
+            int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+            int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+            int tileX = event->scenePos().toPoint().x() / tileW;
+            int tileY = event->scenePos().toPoint().y() / tileH;
+
+            Layer *tempLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
+            int oldTileID = tempLayer->GetTileType(tileX, tileY);
+
+            FloodFill(tileX, tileY, currentTile->GetTile()->GetID(), oldTileID);
+
+            RepopulateLayer(currentLayer);
+        }
+
+        //eraser
+        if(selectedTool == 4)
+        {
+            EraseTile(event->scenePos().toPoint());
+        }
     }
-
-    //bucket
-    if(selectedTool == 3)
+    else if(event->button() == Qt::RightButton)
     {
-        //translate the position to tile coordinates
-        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-
-        int tileX = event->scenePos().toPoint().x() / tileW;
-        int tileY = event->scenePos().toPoint().y() / tileH;
-
-        Layer *tempLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
-        int oldTileID = tempLayer->GetTileType(tileX, tileY);
-
-        FloodFill(tileX, tileY, currentTile->GetTile()->GetID(), oldTileID);
-
-        RepopulateLayer(currentLayer);
-    }
-
-    //eraser
-    if(selectedTool == 4)
-    {
-        EraseTile(event->scenePos().toPoint());
+        //pencil, eraser, bucket
+        if(selectedTool == 0 || selectedTool == 3 || selectedTool == 4)
+        {
+            EyedropTile(event->scenePos().toPoint());
+        }
     }
 }
 
