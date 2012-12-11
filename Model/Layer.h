@@ -23,6 +23,7 @@ public:
 
     int GetTileCount() { return GetChildCount(); }
     TileInstance *GetTileAtIndex(int index);
+    TileInstance *GetTileAtPosition(int x, int y);
 
 private:
     int verticalParallax, horizontalParallax;

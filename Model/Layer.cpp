@@ -18,32 +18,24 @@ void Layer::ModifyTile(int x, int y, int ID)
 {
     //replace with a binary search, not a linear one
     //look through all the tiles
-    TileInstance *tempTile;
+    TileInstance *tempTile = GetTileAtPosition(x, y);
 
-    for(int i = 0; i < GetChildCount(); i++)
+    if(tempTile)
     {
-         tempTile = static_cast<TileInstance*>(GetChildByIndex(i));
-
-        //and if one in said position exists
-        if(tempTile->GetX() == x && tempTile->GetY() == y)
+        if(ID != 0)
         {
-            if(ID != 0)
-            {
-                //modify its ID
-                tempTile->SetTileID(ID);
-            }
-            else if(ID == 0)
-            {
-                //remove it
-                RemoveChild(tempTile->GetID());
-            }
-            return;
+            //modify its ID
+            tempTile->SetTileID(ID);
+        }
+        else if(ID == 0)
+        {
+            //remove it
+            RemoveChild(tempTile->GetID());
         }
     }
-
     //if the loop finishes, no matching tile was found
     //so we add a new one
-    if(ID != 0)
+    else if(ID != 0)
     {
         tempTile = new TileInstance;
         tempTile->SetX(x);
@@ -81,4 +73,21 @@ TileInstance *Layer::GetTileAtIndex(int index)
         return NULL;
 
     return static_cast<TileInstance*>(GetChildByIndex(index));
+}
+
+TileInstance *Layer::GetTileAtPosition(int x, int y)
+{
+    TileInstance *tempTile;
+
+    //binary search plz
+    for(int i = 0; i < GetChildCount(); i++)
+    {
+         tempTile = static_cast<TileInstance*>(GetChildByIndex(i));
+
+        //and if one in said position exists
+        if(tempTile->GetX() == x && tempTile->GetY() == y)
+        {
+            return tempTile;
+        }
+    }
 }
