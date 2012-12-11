@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolGroup->setId(ui->pointerTool, 5);
 
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection(int)));
+
+    connect(layers, SIGNAL(SelectNewTile(int)), this, SLOT(SelectNewTile(int)));
 }
 
 MainWindow::~MainWindow()
@@ -139,4 +141,27 @@ void MainWindow::UpdateToolSelection(int newTool)
 void MainWindow::on_pencilTool_clicked()
 {
     layers->SetTool(0);
+}
+
+void MainWindow::SelectNewTile(int ID)
+{
+    int tileW = resources->GetLevelProperties()->GetTileWidth();
+    int tileH = resources->GetLevelProperties()->GetTileHeight();
+
+    Tile *tempTile = resources->GetTile(ID);
+
+    if(!tempTile)
+        return;
+
+    //find the x and y position of the tile
+    int tileX = (tileW * tempTile->GetXOrigin()) + tileW - 1;
+    int tileY = (tileH * tempTile->GetYOrigin()) + tileH - 1;
+
+    //find that tile based on position
+    QGraphicsItem *tempTileItem = tileSelector->itemAt(tileX, tileY);
+
+    //select that tile
+    if(tempTileItem)
+        tempTileItem->setSelected(true);
+
 }

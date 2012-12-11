@@ -50,6 +50,8 @@ private slots:
 
     void on_pencilTool_clicked();
 
+    void SelectNewTile(int ID);
+
 private:
     Ui::MainWindow *ui;
 

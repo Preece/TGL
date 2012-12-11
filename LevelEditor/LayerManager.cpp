@@ -150,6 +150,40 @@ void LayerManager::EraseTile(QPoint pos)
     }
 }
 
+void LayerManager::EyedropTile(QPoint pos)
+{
+    if(!resourceManager || !currentLayer)
+        return;
+
+    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    {
+        //unselect the current tile
+        if(currentTile)
+            currentTile->setSelected(false);
+
+        //translate the position to tile coordinates
+        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+        int tileX = pos.x() / tileW;
+        int tileY = pos.y() / tileH;
+
+        //if the position is beyond the bounds of the scene, ignore it
+        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
+        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
+           tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
+            return;
+
+        //modify the correct tiles tileID to the one of the selection
+        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
+
+        if(currentModelLayer)
+        {
+            emit SelectNewTile(currentModelLayer->GetTileType(tileX, tileY));
+        }
+    }
+}
+
 void LayerManager::AddLayer(QString name)
 {
     Layer *tempLayer = new Layer;
@@ -233,6 +267,12 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //pencil
     if(selectedTool == 0)
         ModifyTile(event->scenePos().toPoint());
+
+    //eyedropper
+    if(selectedTool == 1)
+    {
+        EyedropTile(event->scenePos().toPoint());
+    }
 
     //bucket
     if(selectedTool == 3)

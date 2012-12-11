@@ -16,6 +16,8 @@
 
 class LayerManager : public QGraphicsScene
 {
+    Q_OBJECT
+
 public:
     LayerManager();
     ~LayerManager();
@@ -28,6 +30,8 @@ public:
     void ModifyTile(int tileX, int tileY, bool repopulate = true);
     void FloodFill(int tileX, int tileY, int newTileID, int oldTileID);
     void EraseTile(QPoint pos);
+    void EyedropTile(QPoint pos);
+
     void AddObjectItem(QPoint pos, ObjectPrototype *proto);
 
     bool IsLayerSelected();
@@ -44,6 +48,9 @@ public slots:
     void ToggleGrid(bool show = true);
 
     void SetTool(int newTool) { selectedTool = newTool; }
+
+signals:
+    void SelectNewTile(int ID);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
