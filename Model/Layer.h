@@ -25,9 +25,14 @@ public:
     TileInstance *GetTileAtIndex(int index);
     TileInstance *GetTileAtPosition(int x, int y);
 
+    void SetLayerSize(int w, int h);
+
 private:
     int verticalParallax, horizontalParallax;
     QString name;
+
+    QList<QList<TileInstance*> > tiles; //2 dimensional array of pointers
+    int width, height;
 };
 
 #endif // LAYER_H

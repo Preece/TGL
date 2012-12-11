@@ -46,7 +46,8 @@ void LayerManager::ModifyTile(QPoint pos)
             currentModelLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
         }
 
-        RepopulateLayer(currentLayer);
+        //RepopulateLayer(currentLayer);
+        AddTileItem(tileX, tileY, currentTile->GetTile()->GetID());
     }
 }
 
@@ -184,10 +185,16 @@ void LayerManager::EyedropTile(QPoint pos)
     }
 }
 
+void LayerManager::AddTileItem(int x, int y, int ID)
+{
+
+}
+
 void LayerManager::AddLayer(QString name)
 {
     Layer *tempLayer = new Layer;
     tempLayer->SetName(name);
+    tempLayer->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(), resourceManager->GetLevelProperties()->GetMapHeight());
     resourceManager->AddLayer(tempLayer);
 
     LayerGroup *tempLayerGroup = new LayerGroup;

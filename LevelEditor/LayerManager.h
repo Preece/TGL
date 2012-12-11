@@ -31,6 +31,7 @@ public:
     void FloodFill(int tileX, int tileY, int newTileID, int oldTileID);
     void EraseTile(QPoint pos);
     void EyedropTile(QPoint pos);
+    void AddTileItem(int x, int y, int ID);
 
     void AddObjectItem(QPoint pos, ObjectPrototype *proto);
 
