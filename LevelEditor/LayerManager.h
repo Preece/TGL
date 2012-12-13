@@ -13,6 +13,7 @@
 #include "../Model/ResourceManager.h"
 #include "LayerGroup.h"
 #include "TileItem.h"
+#include "Brushes/TileBrush.h"
 
 class LayerManager : public QGraphicsScene
 {
@@ -26,12 +27,7 @@ public:
     void RepopulateLayer(LayerGroup *dirtyLayer);
     void AddLayer(QString name);
 
-    void ModifyTile(QPoint pos, int ID);
-    void ModifyTile(int tileX, int tileY, int ID, bool repopulate = true);
-    void FloodFill(int tileX, int tileY, int newTileID, int oldTileID);
-    void EraseTile(QPoint pos);
     void EyedropTile(QPoint pos);
-    void AddTileItem(int x, int y, int ID);
 
     void AddObjectItem(QPoint pos, ObjectPrototype *proto);
 
@@ -43,12 +39,14 @@ public:
 
     void ToggleLayerVisibility(int layerIndex, bool show);
 
+    int GetSelectedTileID();
+
 public slots:
     void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
 
     void ToggleGrid(bool show = true);
 
-    void SetTool(int newTool) { selectedTool = newTool; }
+    void SetBrush(TileBrush *newBrush) { currentBrush = newBrush; }
 
 signals:
     void SelectNewTile(int ID);
@@ -66,7 +64,7 @@ private:
 
     QGraphicsItemGroup *grid;
 
-    int selectedTool;
+    TileBrush *currentBrush;
 };
 
 #endif // LAYERMANAGER_H

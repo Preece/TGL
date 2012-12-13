@@ -46,6 +46,14 @@ void LayerGroup::SetLayerSize(int w, int h)
     }
 }
 
+void LayerGroup::ToggleVisibility(bool visible)
+{
+    if(visible)
+        show();
+    else
+        hide();
+}
+
 void LayerGroup::ModifyTile(int x, int y, int newType)
 {
     //bounds check
@@ -95,4 +103,18 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
             //delete the tile and remove it from the layer model
         }
     }
+}
+
+int LayerGroup::GetTileType(int x, int y)
+{
+    //bounds check
+    if(x >= width || y >= height || x < 0 || y < 0)
+        return 0;
+
+    int pos = (x * width) + y;
+
+    if(items[pos] == NULL)
+        return 0;
+    else
+        return items[pos]->GetTileInstance()->GetTileID();
 }

@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     layers->setSceneRect(0, 0, 100, 100);
     layers->RegisterResourceManager(resources);
 
+    currentBrush = &pencil;
+
     //when the selection changes in tileSelector, notify the layer manager
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
 
@@ -38,7 +40,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolGroup->setId(ui->eraserButton, 4);
     ui->toolGroup->setId(ui->pointerTool, 5);
 
-    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection(int)));
+    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
+    UpdateToolSelection();
 
     connect(layers, SIGNAL(SelectNewTile(int)), this, SLOT(SelectNewTile(int)));
 }
@@ -77,6 +80,7 @@ void MainWindow::on_actionProperties_triggered()
 void MainWindow::UpdateSelectedTile()
 {
     layers->SetSelectedTile(GetSelectedTileItem());
+    pencil.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
 }
 
 TileItem *MainWindow::GetSelectedTileItem()
@@ -133,14 +137,15 @@ void MainWindow::on_layerSelector_itemClicked(QListWidgetItem *item)
         layers->ToggleLayerVisibility(ui->layerSelector->row(item), false);
 }
 
-void MainWindow::UpdateToolSelection(int newTool)
+void MainWindow::UpdateToolSelection()
 {
-    layers->SetTool(newTool);
+    layers->SetBrush(currentBrush);
 }
 
 void MainWindow::on_pencilTool_clicked()
 {
-    layers->SetTool(0);
+    currentBrush = &pencil;
+    UpdateToolSelection();
 }
 
 void MainWindow::SelectNewTile(int ID)
@@ -148,8 +153,10 @@ void MainWindow::SelectNewTile(int ID)
     int tileW = resources->GetLevelProperties()->GetTileWidth();
     int tileH = resources->GetLevelProperties()->GetTileHeight();
 
+    //get a tile based on the given ID
     Tile *tempTile = resources->GetTile(ID);
 
+    //if the tile doesn't exist, bail
     if(!tempTile)
         return;
 

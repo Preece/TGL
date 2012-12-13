@@ -3,6 +3,8 @@
 
 #include <QPoint>
 
+#include "../LayerGroup.h"
+
 class TileBrush
 {
 private:
@@ -10,9 +12,7 @@ private:
 public:
     TileBrush();
 
-    //in the mouse event handler, this is called. The brush subclasses
-    //reimplement helper functions inside of it to define the custom
-    //functionality of that brush.
+    virtual void Paint(int x, int y, LayerGroup *layer) = 0;
 };
 
 #endif // TILEBRUSH_H

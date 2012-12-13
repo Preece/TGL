@@ -11,6 +11,9 @@
 #include "Model/ResourceManager.h"
 #include "LevelEditor/LayerManager.h"
 
+#include "LevelEditor/Brushes/TileBrush.h"
+#include "LevelEditor/Brushes/PencilBrush.h"
+
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"
 #include "ObjectEditor.h"
@@ -46,7 +49,7 @@ private slots:
 
     void on_layerSelector_itemClicked(QListWidgetItem *item);
 
-    void UpdateToolSelection(int newTool);
+    void UpdateToolSelection();
 
     void on_pencilTool_clicked();
 
@@ -62,6 +65,9 @@ private:
 
     LayerManager *layers;
     QGraphicsScene *tileSelector;
+
+    PencilBrush pencil;
+    TileBrush *currentBrush;
 };
 
 #endif // MAINWINDOW_H

@@ -5,10 +5,9 @@ LayerManager::LayerManager()
     resourceManager = NULL;
     currentTile = NULL;
     currentLayer = NULL;
-    selectedTool = 0;
+    currentBrush = NULL;
 
     grid = new QGraphicsItemGroup;
-
     addItem(grid);
     grid->setPos(0, 0);
     grid->hide();
@@ -17,79 +16,6 @@ LayerManager::LayerManager()
 LayerManager::~LayerManager()
 {
 }
-void LayerManager::FloodFill(int tileX, int tileY, int newTileID, int oldTileID)
-{
-   /* //this is a recursive function. It calls itself in tiles to the north, east, south and west.
-    //it will return if the tile is different from the one being replaced, or off the edge of the grid
-
-    if(!resourceManager || !currentTile || !currentLayer)
-        return;
-
-    if(newTileID == oldTileID)
-        return;
-
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
-    {
-        //if the position is beyond the bounds of the scene, ignore it
-        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
-           tileY >= resourceManager->GetLevelProperties()->GetMapHeight() ||
-           tileX < 0 || tileY < 0)
-            return;
-
-        //modify the correct tiles tileID to the one of the selection
-        Layer *currentModelLayer = currentLayer->GetLayer();
-
-        if(currentModelLayer)
-        {
-            //if the current tile is of the type to be replaced
-            if(currentModelLayer->GetTileType(tileX, tileY) == oldTileID)
-            {
-                //replace this tile with the new type
-                ModifyTile(tileX, tileY, false);
-
-                //call this function on the surrounding tiles
-                FloodFill(tileX - 1, tileY, newTileID, oldTileID);
-                FloodFill(tileX + 1, tileY, newTileID, oldTileID);
-                FloodFill(tileX, tileY - 1, newTileID, oldTileID);
-                FloodFill(tileX, tileY + 1, newTileID, oldTileID);
-            }
-        }
-    }*/
-}
-
-void LayerManager::EraseTile(QPoint pos)
-{
-   /* if(!resourceManager || !currentTile || !currentLayer)
-        return;
-
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
-    {
-        //translate the position to tile coordinates
-        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-
-        int tileX = pos.x() / tileW;
-        int tileY = pos.y() / tileH;
-
-        //if the position is beyond the bounds of the scene, ignore it
-        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
-           tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
-            return;
-
-        //modify the correct tiles tileID to the one of the selection
-        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
-
-        if(currentModelLayer)
-        {
-            currentModelLayer->ModifyTile(tileX, tileY, 0);
-        }
-
-        RepopulateLayer(currentLayer);
-    }*/
-}
-
 void LayerManager::EyedropTile(QPoint pos)
 {
     /*if(!resourceManager || !currentLayer)
@@ -212,66 +138,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-        //pencil
-        if(selectedTool == 0)
-        {
-            //translate the position to tile coordinates
-            int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-            int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
 
-            int tileX = event->scenePos().toPoint().x() / tileW;
-            int tileY = event->scenePos().toPoint().y() / tileH;
-
-            currentLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
-        }
-
-        //eyedropper
-        if(selectedTool == 1)
-        {
-            EyedropTile(event->scenePos().toPoint());
-
-            //switch back to the pencil tool
-        }
-
-        //bucket
-        if(selectedTool == 3)
-        {
-            /*//translate the position to tile coordinates
-            int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-            int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-
-            int tileX = event->scenePos().toPoint().x() / tileW;
-            int tileY = event->scenePos().toPoint().y() / tileH;
-
-            Layer *tempLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
-            int oldTileID = tempLayer->GetTileType(tileX, tileY);
-
-            FloodFill(tileX, tileY, currentTile->GetTile()->GetID(), oldTileID);
-
-            RepopulateLayer(currentLayer);*/
-        }
-
-        //eraser
-        if(selectedTool == 4)
-        {
-            EraseTile(event->scenePos().toPoint());
-        }
-    }
-    else if(event->button() == Qt::RightButton)
-    {
-        //pencil, eraser, bucket
-        if(selectedTool == 0 || selectedTool == 3 || selectedTool == 4)
-        {
-            EyedropTile(event->scenePos().toPoint());
-        }
-    }
-}
-
-void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    //pencil
-    if(selectedTool == 0)
-    {
         //translate the position to tile coordinates
         int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
         int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
@@ -279,12 +146,25 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         int tileX = event->scenePos().toPoint().x() / tileW;
         int tileY = event->scenePos().toPoint().y() / tileH;
 
-        currentLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
+        //currentLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
+        currentBrush->Paint(tileX, tileY, currentLayer);
     }
+    else if(event->button() == Qt::RightButton)
+    {
+        EyedropTile(event->scenePos().toPoint());
+    }
+}
 
-    //eraser
-    if(selectedTool == 4)
-        EraseTile(event->scenePos().toPoint());
+void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    //translate the position to tile coordinates
+    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+    int tileX = event->scenePos().toPoint().x() / tileW;
+    int tileY = event->scenePos().toPoint().y() / tileH;
+
+    currentBrush->Paint(tileX, tileY, currentLayer);
 }
 
 void LayerManager::SetLayerSelection(int newSelection)
@@ -311,9 +191,12 @@ void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
     if(layerIndex < 0 || layerIndex >= layers.count())
         return;
 
-    if(show)
-        layers[layerIndex]->show();
-    else
-        layers[layerIndex]->hide();
+    layers[layerIndex]->ToggleVisibility(show);
+}
+
+int LayerManager::GetSelectedTileID()
+{
+    if(currentTile)
+        return currentTile->GetTileID();
 }
 

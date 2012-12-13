@@ -18,6 +18,7 @@ public:
 
     int GetOriginX() { if(tile) return tile->GetXOrigin(); }
     int GetOriginY() { if(tile) return tile->GetYOrigin(); }
+    int GetTileID() { if(tile) return tile->GetID(); }
 
 private:
     Tile *tile;
