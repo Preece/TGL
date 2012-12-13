@@ -23,6 +23,9 @@ public:
 
     void ToggleVisibility(bool visible);
 
+    int GetLayerWidth() { return width; }
+    int GetLayerHeight() { return height; }
+
 private:
     QList<TileInstanceItem*> items;
     int width, height;

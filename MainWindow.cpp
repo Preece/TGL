@@ -81,6 +81,7 @@ void MainWindow::UpdateSelectedTile()
 {
     layers->SetSelectedTile(GetSelectedTileItem());
     pencil.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
+    bucket.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
 }
 
 TileItem *MainWindow::GetSelectedTileItem()
@@ -171,4 +172,10 @@ void MainWindow::SelectNewTile(int ID)
     if(tempTileItem)
         tempTileItem->setSelected(true);
 
+}
+
+void MainWindow::on_bucketTool_clicked()
+{
+    currentBrush = &bucket;
+    UpdateToolSelection();
 }

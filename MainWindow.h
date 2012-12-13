@@ -13,6 +13,7 @@
 
 #include "LevelEditor/Brushes/TileBrush.h"
 #include "LevelEditor/Brushes/PencilBrush.h"
+#include "LevelEditor/Brushes/FillBrush.h"
 
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"
@@ -55,6 +56,8 @@ private slots:
 
     void SelectNewTile(int ID);
 
+    void on_bucketTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -67,6 +70,7 @@ private:
     QGraphicsScene *tileSelector;
 
     PencilBrush pencil;
+    FillBrush bucket;
     TileBrush *currentBrush;
 };
 

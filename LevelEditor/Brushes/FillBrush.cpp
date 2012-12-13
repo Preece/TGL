@@ -2,45 +2,40 @@
 
 FillBrush::FillBrush()
 {
+    selectedTileID = 0;
 }
 
-/*void LayerManager::FloodFill(int tileX, int tileY, int newTileID, int oldTileID)
+void FillBrush::Paint(int x, int y, LayerGroup *layer)
+{
+    int old = layer->GetTileType(x, y);
+
+    Fill(x, y, selectedTileID, old, layer);
+}
+
+void FillBrush::Fill(int tileX, int tileY, int newTile, int oldTile, LayerGroup *newLayer)
 {
     //this is a recursive function. It calls itself in tiles to the north, east, south and west.
     //it will return if the tile is different from the one being replaced, or off the edge of the grid
 
-    if(!resourceManager || !currentTile || !currentLayer)
+    if(!newLayer || newTile == 0 || newTile == oldTile)
         return;
 
-    if(newTileID == oldTileID)
-        return;
+    //if the position is beyond the bounds of the scene, ignore it
+    if(tileX >= newLayer->GetLayerWidth() ||
+       tileY >= newLayer->GetLayerHeight() ||
+       tileX < 0 || tileY < 0)
+           return;
 
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    //if the current tile is of the type to be replaced
+    if(newLayer->GetTileType(tileX, tileY) == oldTile)
     {
-        //if the position is beyond the bounds of the scene, ignore it
-        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
-           tileY >= resourceManager->GetLevelProperties()->GetMapHeight() ||
-           tileX < 0 || tileY < 0)
-            return;
+        //replace this tile with the new type
+        newLayer->ModifyTile(tileX, tileY, newTile);
 
-        //modify the correct tiles tileID to the one of the selection
-        Layer *currentModelLayer = currentLayer->GetLayer();
-
-        if(currentModelLayer)
-        {
-            //if the current tile is of the type to be replaced
-            if(currentModelLayer->GetTileType(tileX, tileY) == oldTileID)
-            {
-                //replace this tile with the new type
-                ModifyTile(tileX, tileY, false);
-
-                //call this function on the surrounding tiles
-                FloodFill(tileX - 1, tileY, newTileID, oldTileID);
-                FloodFill(tileX + 1, tileY, newTileID, oldTileID);
-                FloodFill(tileX, tileY - 1, newTileID, oldTileID);
-                FloodFill(tileX, tileY + 1, newTileID, oldTileID);
-            }
-        }
+        //call this function on the surrounding tiles
+        Fill(tileX - 1, tileY, newTile, oldTile, newLayer);
+        Fill(tileX + 1, tileY, newTile, oldTile, newLayer);
+        Fill(tileX, tileY - 1, newTile, oldTile, newLayer);
+        Fill(tileX, tileY + 1, newTile, oldTile, newLayer);
     }
-}*/
+}
