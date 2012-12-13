@@ -51,7 +51,11 @@ SOURCES += main.cpp\
     Model/Exporter.cpp \
     Model/TileInstance.cpp \
     LevelEditor/LayerGroup.cpp \
-    LevelEditor/TileInstanceItem.cpp
+    LevelEditor/TileInstanceItem.cpp \
+    LevelEditor/Brushes/PencilBrush.cpp \
+    LevelEditor/Brushes/FillBrush.cpp \
+    LevelEditor/Brushes/SmartBrush.cpp \
+    LevelEditor/Brushes/EraserBrush.cpp
   
 
 HEADERS  += \
@@ -96,7 +100,11 @@ HEADERS  += \
     Model/Exporter.h \
     Model/TileInstance.h \
     LevelEditor/LayerGroup.h \
-    LevelEditor/TileInstanceItem.h
+    LevelEditor/TileInstanceItem.h \
+    LevelEditor/Brushes/PencilBrush.h \
+    LevelEditor/Brushes/FillBrush.h \
+    LevelEditor/Brushes/SmartBrush.h \
+    LevelEditor/Brushes/EraserBrush.h
    
 
 FORMS    += \
