@@ -160,6 +160,26 @@ QImage *ResourceManager::GetTileset()
     return GetImage(levelProperties.GetTilesetID())->GetImage();
 }
 
+QPixmap ResourceManager::GetTilePixmap(int ID)
+{
+    QImage *tempTileset = GetTileset();
+    QImage tempImage = *tempTileset;
+
+    if(tempImage.isNull())
+        return QPixmap();
+
+    Tile *tempTile = GetTile(ID);
+
+    if(tempTile == NULL)
+        return QPixmap();
+
+    tempImage = tempImage.copy(levelProperties.GetTileWidth() * tempTile->GetXOrigin(),
+                                levelProperties.GetTileHeight() * tempTile->GetYOrigin(),
+                                levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
+
+    return QPixmap::fromImage(tempImage);
+}
+
 void ResourceManager::AddTile(Tile *newTile)
 {
     if(newTile)

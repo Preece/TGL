@@ -49,6 +49,7 @@ public slots:
 
     QPixmap GetSpriteSymbol(int spriteID);
     QImage *GetTileset();
+    QPixmap GetTilePixmap(int ID);
 
     void AddTile(Tile *newTile);
     void ClearTiles();

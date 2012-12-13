@@ -3,8 +3,6 @@
 
 #include <QPoint>
 
-#include "LevelEditor/LevelLayer.h"
-
 class TileBrush
 {
 private:
@@ -15,7 +13,6 @@ public:
     //in the mouse event handler, this is called. The brush subclasses
     //reimplement helper functions inside of it to define the custom
     //functionality of that brush.
-    void MouseEvent(QPoint pos, LevelLayer * layer, bool mouseDown);
 };
 
 #endif // TILEBRUSH_H

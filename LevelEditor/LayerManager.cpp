@@ -17,70 +17,9 @@ LayerManager::LayerManager()
 LayerManager::~LayerManager()
 {
 }
-
-void LayerManager::ModifyTile(QPoint pos)
-{
-    if(!resourceManager || !currentTile || !currentLayer)
-        return;
-
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
-    {
-        //translate the position to tile coordinates
-        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-
-        int tileX = pos.x() / tileW;
-        int tileY = pos.y() / tileH;
-
-        //if the position is beyond the bounds of the scene, ignore it
-        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
-           tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
-            return;
-
-        //modify the correct tiles tileID to the one of the selection
-        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
-
-        if(currentModelLayer)
-        {
-            currentModelLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
-        }
-
-        //RepopulateLayer(currentLayer);
-        AddTileItem(tileX, tileY, currentTile->GetTile()->GetID());
-    }
-}
-
-void LayerManager::ModifyTile(int tileX, int tileY, bool repopulate)
-{
-    if(!resourceManager || !currentTile || !currentLayer)
-        return;
-
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
-    {
-        //if the position is beyond the bounds of the scene, ignore it
-        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
-           tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
-            return;
-
-        //modify the correct tiles tileID to the one of the selection
-        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
-
-        if(currentModelLayer)
-        {
-            currentModelLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
-        }
-
-        //repopulate the layer unless the function user says otherwise
-        if(repopulate)
-            RepopulateLayer(currentLayer);
-    }
-}
-
 void LayerManager::FloodFill(int tileX, int tileY, int newTileID, int oldTileID)
 {
-    //this is a recursive function. It calls itself in tiles to the north, east, south and west.
+   /* //this is a recursive function. It calls itself in tiles to the north, east, south and west.
     //it will return if the tile is different from the one being replaced, or off the edge of the grid
 
     if(!resourceManager || !currentTile || !currentLayer)
@@ -99,7 +38,7 @@ void LayerManager::FloodFill(int tileX, int tileY, int newTileID, int oldTileID)
             return;
 
         //modify the correct tiles tileID to the one of the selection
-        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
+        Layer *currentModelLayer = currentLayer->GetLayer();
 
         if(currentModelLayer)
         {
@@ -116,12 +55,12 @@ void LayerManager::FloodFill(int tileX, int tileY, int newTileID, int oldTileID)
                 FloodFill(tileX, tileY + 1, newTileID, oldTileID);
             }
         }
-    }
+    }*/
 }
 
 void LayerManager::EraseTile(QPoint pos)
 {
-    if(!resourceManager || !currentTile || !currentLayer)
+   /* if(!resourceManager || !currentTile || !currentLayer)
         return;
 
     if(resourceManager->GetLevelProperties()->IsPropertiesSet())
@@ -148,12 +87,12 @@ void LayerManager::EraseTile(QPoint pos)
         }
 
         RepopulateLayer(currentLayer);
-    }
+    }*/
 }
 
 void LayerManager::EyedropTile(QPoint pos)
 {
-    if(!resourceManager || !currentLayer)
+    /*if(!resourceManager || !currentLayer)
         return;
 
     if(resourceManager->GetLevelProperties()->IsPropertiesSet())
@@ -182,24 +121,24 @@ void LayerManager::EyedropTile(QPoint pos)
         {
             emit SelectNewTile(currentModelLayer->GetTileType(tileX, tileY));
         }
-    }
-}
-
-void LayerManager::AddTileItem(int x, int y, int ID)
-{
-
+    }*/
 }
 
 void LayerManager::AddLayer(QString name)
 {
+    //create and add a layer to the resource manager
     Layer *tempLayer = new Layer;
     tempLayer->SetName(name);
-    tempLayer->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(), resourceManager->GetLevelProperties()->GetMapHeight());
     resourceManager->AddLayer(tempLayer);
 
+    //create a layer group, and assign the new layer
     LayerGroup *tempLayerGroup = new LayerGroup;
-    tempLayerGroup->SetLayerID(tempLayer->GetID());
+    tempLayerGroup->SetLayer(tempLayer);
+    tempLayerGroup->RegisterResourceManager(resourceManager);
+    tempLayerGroup->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(),
+                                 resourceManager->GetLevelProperties()->GetMapHeight());
 
+    //put the layer group into the list
     layers.append(tempLayerGroup);
     addItem(tempLayerGroup);
 
@@ -275,7 +214,16 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         //pencil
         if(selectedTool == 0)
-            ModifyTile(event->scenePos().toPoint());
+        {
+            //translate the position to tile coordinates
+            int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+            int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+            int tileX = event->scenePos().toPoint().x() / tileW;
+            int tileY = event->scenePos().toPoint().y() / tileH;
+
+            currentLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
+        }
 
         //eyedropper
         if(selectedTool == 1)
@@ -288,7 +236,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
         //bucket
         if(selectedTool == 3)
         {
-            //translate the position to tile coordinates
+            /*//translate the position to tile coordinates
             int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
             int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
 
@@ -300,7 +248,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
             FloodFill(tileX, tileY, currentTile->GetTile()->GetID(), oldTileID);
 
-            RepopulateLayer(currentLayer);
+            RepopulateLayer(currentLayer);*/
         }
 
         //eraser
@@ -323,7 +271,16 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     //pencil
     if(selectedTool == 0)
-        ModifyTile(event->scenePos().toPoint());
+    {
+        //translate the position to tile coordinates
+        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+        int tileX = event->scenePos().toPoint().x() / tileW;
+        int tileY = event->scenePos().toPoint().y() / tileH;
+
+        currentLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
+    }
 
     //eraser
     if(selectedTool == 4)
@@ -360,49 +317,3 @@ void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
         layers[layerIndex]->hide();
 }
 
-void LayerManager::RepopulateLayer(LayerGroup *dirtyLayer)
-{
-    if(!dirtyLayer)
-        return;
-
-    dirtyLayer->DeleteAllTileInstanceItems();
-
-    TileInstanceItem *tempTileItem;
-
-    Layer *dirtyModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
-    int tileCount = 0;
-
-    if(dirtyModelLayer)
-        tileCount = dirtyModelLayer->GetTileCount();
-
-    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-    int tileX = 0;
-    int tileY = 0;
-
-    for(int i = 0; i < tileCount; i++)
-    {
-        //create a new TileInstanceItem
-        tempTileItem = new TileInstanceItem;
-        TileInstance *tempTile = dirtyModelLayer->GetTileAtIndex(i);
-        tempTileItem->SetTileInstance(tempTile);
-
-        Tile *tempSelectionTile = resourceManager->GetTile(tempTile->GetTileID());
-
-        //set the tile items pixmap
-        QImage tempImage = *resourceManager->GetTileset();
-        tempImage = tempImage.copy(tempSelectionTile->GetXOrigin() * tileW,
-                                   tempSelectionTile->GetYOrigin() * tileH, tileW, tileH);
-
-        tempTileItem->SetTilePixmap(QPixmap::fromImage(tempImage));
-
-        tileX = dirtyModelLayer->GetTileAtIndex(i)->GetX();
-        tileY = dirtyModelLayer->GetTileAtIndex(i)->GetY();
-
-        //add it to the scene
-        dirtyLayer->AddTileInstanceItem(tempTileItem);
-
-        //set its position
-        tempTileItem->setPos(tileX * tileW, tileY * tileH);
-    }
-}

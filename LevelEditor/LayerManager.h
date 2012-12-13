@@ -26,8 +26,8 @@ public:
     void RepopulateLayer(LayerGroup *dirtyLayer);
     void AddLayer(QString name);
 
-    void ModifyTile(QPoint pos);
-    void ModifyTile(int tileX, int tileY, bool repopulate = true);
+    void ModifyTile(QPoint pos, int ID);
+    void ModifyTile(int tileX, int tileY, int ID, bool repopulate = true);
     void FloodFill(int tileX, int tileY, int newTileID, int oldTileID);
     void EraseTile(QPoint pos);
     void EyedropTile(QPoint pos);

@@ -9,24 +9,23 @@
 
 class LayerGroup : public QGraphicsItemGroup
 {
-private:
-    QList<TileInstanceItem*> items;
-
-    int layerID;
-
-    ResourceManager *resourceManager;
-
 public:
     LayerGroup();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
-    void AddTileInstanceItem(TileInstanceItem* newItem);
-    void DeleteAllTileInstanceItems();
+    void SetLayer(Layer *newLayer) { layer = newLayer; }
+    Layer *GetLayer() { return layer; }
 
-    void SetLayerID(int newID) { layerID = newID; }
-    int GetLayerID() { return layerID; }
+    void ModifyTile(int x, int y, int newType);
+    void SetLayerSize(int w, int h);
 
+private:
+    QList<TileInstanceItem*> items;
+    int width, height;
+
+    Layer *layer;
+    ResourceManager *resourceManager;
 };
 
 #endif // LAYERGROUP_H
