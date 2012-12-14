@@ -10,6 +10,7 @@
 #include "Model/ObjectPrototype.h"
 #include "Model/ResourceManager.h"
 #include "LevelEditor/LayerManager.h"
+#include "LevelEditor/LayerProperties.h"
 
 #include "LevelEditor/Brushes/TileBrush.h"
 #include "LevelEditor/Brushes/PencilBrush.h"
@@ -61,11 +62,14 @@ private slots:
 
     void on_eraserButton_clicked();
 
+    void on_editLayerButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     //Dialogs
     LevelPropertiesDialog *levelPropertiesWindow;
+    LayerProperties *layerPropertiesWindow;
 
     ResourceManager *resources;
 

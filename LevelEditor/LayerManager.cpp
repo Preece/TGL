@@ -41,16 +41,11 @@ void LayerManager::EyedropTile(QPoint pos)
     }
 }
 
-void LayerManager::AddLayer(QString name)
+void LayerManager::AddLayer(Layer *newLayer)
 {
-    //create and add a layer to the resource manager
-    Layer *tempLayer = new Layer;
-    tempLayer->SetName(name);
-    resourceManager->AddLayer(tempLayer);
-
     //create a layer group, and assign the new layer
     LayerGroup *tempLayerGroup = new LayerGroup;
-    tempLayerGroup->SetLayer(tempLayer);
+    tempLayerGroup->SetLayer(newLayer);
     tempLayerGroup->RegisterResourceManager(resourceManager);
     tempLayerGroup->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(),
                                  resourceManager->GetLevelProperties()->GetMapHeight());

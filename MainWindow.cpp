@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //zero out these pointers
     levelPropertiesWindow = NULL;
+    layerPropertiesWindow = NULL;
 
     //create a resource manager
     resources = new ResourceManager;
@@ -116,8 +117,24 @@ void MainWindow::on_gridToggle_toggled(bool checked)
 
 void MainWindow::on_addLayerButton_clicked()
 {
-    layers->AddLayer("Test");
+    if(layerPropertiesWindow == NULL)
+    {
+        layerPropertiesWindow = new LayerProperties;
+    }
 
+    Layer *newLayer = new Layer;
+
+    layerPropertiesWindow->NewLayer(newLayer);
+
+    if(layerPropertiesWindow->exec() == QDialog::Accepted)
+    {
+        resources->AddLayer(newLayer);
+        layers->AddLayer(newLayer);
+    }
+    else
+    {
+        delete newLayer;
+    }
 
     RepopulateLayerSelector();
 }
@@ -186,4 +203,9 @@ void MainWindow::on_eraserButton_clicked()
 {
     currentBrush = &eraser;
     UpdateToolSelection();
+}
+
+void MainWindow::on_editLayerButton_clicked()
+{
+
 }

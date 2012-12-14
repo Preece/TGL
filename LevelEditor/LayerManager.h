@@ -25,7 +25,7 @@ public:
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
     void RepopulateLayer(LayerGroup *dirtyLayer);
-    void AddLayer(QString name);
+    void AddLayer(Layer *newLayer);
 
     void EyedropTile(QPoint pos);
 
