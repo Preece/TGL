@@ -110,6 +110,31 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
     }
 }
 
+void LayerGroup::PreviewModifyTile(int x, int y, int newType)
+{
+    TileInstanceItem *tempTile = new TileInstanceItem;
+
+    //update its Pixmap
+    tempTile->SetTilePixmap(resourceManager->GetTilePixmap(newType));
+
+    //set the position
+    tempTile->setPos(x * resourceManager->GetLevelProperties()->GetTileWidth(),
+                     y * resourceManager->GetLevelProperties()->GetTileHeight());
+
+    previewItems.append(tempTile);
+    addToGroup(tempTile);
+}
+
+void LayerGroup::ClearPreview()
+{
+    for(int i = 0; i < previewItems.count(); i++)
+    {
+        delete previewItems[i];
+    }
+
+    previewItems.clear();
+}
+
 int LayerGroup::GetTileType(int x, int y)
 {
     //bounds check

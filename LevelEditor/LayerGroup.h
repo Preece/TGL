@@ -18,6 +18,9 @@ public:
     Layer *GetLayer() { return layer; }
 
     void ModifyTile(int x, int y, int newType);
+    void PreviewModifyTile(int x, int y, int newType);
+    void ClearPreview();
+
     int GetTileType(int x, int y);
     void SetLayerSize(int w, int h);
 
@@ -29,6 +32,8 @@ public:
 private:
     QList<TileInstanceItem*> items;
     int width, height;
+
+    QList<TileInstanceItem*> previewItems;
 
     Layer *layer;
     ResourceManager *resourceManager;

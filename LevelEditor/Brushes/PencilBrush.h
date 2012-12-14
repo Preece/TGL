@@ -9,7 +9,7 @@ class PencilBrush : public TileBrush
 public:
     PencilBrush();
 
-    void Paint(int x, int y, LayerGroup *layer);
+    void Paint(int x, int y, LayerGroup *layer, bool preview = false);
 
     void SetSelectedTileID(int newID) { selectedTileID = newID; }
 private:

@@ -8,7 +8,7 @@ class FillBrush : public TileBrush
 public:
     FillBrush();
 
-    void Paint(int x, int y, LayerGroup *layer);
+    void Paint(int x, int y, LayerGroup *layer, bool preview = false);
     void Fill(int tileX, int tileY, int newTile, int oldTile, LayerGroup *newLayer);
 
     void SetSelectedTileID(int newID) { selectedTileID = newID; }

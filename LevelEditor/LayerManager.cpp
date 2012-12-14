@@ -137,7 +137,6 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
         int tileX = event->scenePos().toPoint().x() / tileW;
         int tileY = event->scenePos().toPoint().y() / tileH;
 
-        //currentLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
         currentBrush->Paint(tileX, tileY, currentLayer);
 
         lastPaintSpot.setX(tileX);
@@ -158,10 +157,20 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
-    currentBrush->Line(lastPaintSpot.x(), lastPaintSpot.y(), tileX, tileY, currentLayer);
+    if(event->buttons() == Qt::LeftButton)
+    {
+        //draw a line from the last spot to the new one
+        currentBrush->Line(lastPaintSpot.x(), lastPaintSpot.y(), tileX, tileY, currentLayer);
 
-    lastPaintSpot.setX(tileX);
-    lastPaintSpot.setY(tileY);
+        //this spot is not the last spot
+        lastPaintSpot.setX(tileX);
+        lastPaintSpot.setY(tileY);
+    }
+    //if the left mouse button was not down
+    else
+    {
+        currentBrush->Paint(tileX, tileY, currentLayer, true);
+    }
 }
 
 void LayerManager::SetLayerSelection(int newSelection)

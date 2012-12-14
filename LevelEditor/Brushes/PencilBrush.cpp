@@ -2,15 +2,19 @@
 
 PencilBrush::PencilBrush()
 {
-    size = 1;
+    size = 3;
     overwrite = true;
     selectedTileID = 0;
 }
 
-void PencilBrush::Paint(int x, int y, LayerGroup *layer)
+void PencilBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 {
     if(selectedTileID == 0)
         return;
+
+    //erase the previous preview, if we are in preview mode. Get ready for the next
+    if(preview)
+        layer->ClearPreview();
 
     if(overwrite || layer->GetTileType(x, y) == 0)
     {
@@ -23,7 +27,12 @@ void PencilBrush::Paint(int x, int y, LayerGroup *layer)
             for(signed int j = -radius; j <= radius; j++)
             {
                 if((i*i) + (j*j) < radius * radius)
-                    layer->ModifyTile(j + x, i + y, selectedTileID);
+                {
+                    if(preview)
+                        layer->PreviewModifyTile(j + x, i + y, selectedTileID);
+                    else
+                        layer->ModifyTile(j + x, i + y, selectedTileID);
+                }
             }
         }
     }

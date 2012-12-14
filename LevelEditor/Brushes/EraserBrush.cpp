@@ -5,7 +5,7 @@ EraserBrush::EraserBrush()
     size = 1;
 }
 
-void EraserBrush::Paint(int x, int y, LayerGroup *layer)
+void EraserBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 {
     //if there is not a tile at this position
     if(layer->GetTileType(x, y) == 0)

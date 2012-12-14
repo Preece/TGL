@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //zero out these pointers
-    levelPropertiesWindow = 0;
+    levelPropertiesWindow = NULL;
 
     //create a resource manager
     resources = new ResourceManager;
@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layers->RegisterResourceManager(resources);
 
     currentBrush = &pencil;
+    ui->levelView->setMouseTracking(true);
 
     //when the selection changes in tileSelector, notify the layer manager
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));

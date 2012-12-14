@@ -4,7 +4,7 @@ TileBrush::TileBrush()
 {
 }
 
-void TileBrush::Paint(int x, int y, LayerGroup *layer)
+void TileBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 {
     //do nothing
 }

@@ -5,8 +5,12 @@ FillBrush::FillBrush()
     selectedTileID = 0;
 }
 
-void FillBrush::Paint(int x, int y, LayerGroup *layer)
+void FillBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 {
+    //the fill brush has no preview mode
+    if(preview)
+        return;
+
     int old = layer->GetTileType(x, y);
 
     Fill(x, y, selectedTileID, old, layer);
