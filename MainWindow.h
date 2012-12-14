@@ -37,6 +37,7 @@ public:
     TileItem *GetSelectedTileItem();
 
     void RepopulateLayerSelector();
+    bool IsLayerSelected();
     
 private slots:
 
@@ -63,6 +64,8 @@ private slots:
     void on_eraserButton_clicked();
 
     void on_editLayerButton_clicked();
+
+    void on_deleteLayerButton_clicked();
 
 private:
     Ui::MainWindow *ui;

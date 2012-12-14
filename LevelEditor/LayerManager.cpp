@@ -58,6 +58,20 @@ void LayerManager::AddLayer(Layer *newLayer)
     tempLayerGroup->setPos(0,0);
 }
 
+void LayerManager::RemoveLayer(Layer *dirtyLayer)
+{
+    for(int i = 0; i < layers.count(); i++)
+    {
+        if(layers[i]->GetLayer() == dirtyLayer)
+        {
+            resourceManager->DeleteLayer(layers[i]->GetLayer()->GetID());
+            layers[i]->DestroyAllItems();
+            delete layers[i];
+            layers.removeAt(i);
+        }
+    }
+}
+
 bool LayerManager::IsLayerSelected()
 {
     if(currentLayer == NULL)

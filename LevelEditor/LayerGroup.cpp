@@ -54,6 +54,23 @@ void LayerGroup::ToggleVisibility(bool visible)
         hide();
 }
 
+void LayerGroup::DestroyAllItems()
+{
+    for(int i = 0; i < items.count(); i++)
+    {
+        delete items[i];
+    }
+
+    items.clear();
+
+    for(int i = 0; i < previewItems.count(); i++)
+    {
+        delete previewItems[i];
+    }
+
+    previewItems.clear();
+}
+
 void LayerGroup::ModifyTile(int x, int y, int newType)
 {
     //bounds check

@@ -110,6 +110,14 @@ void MainWindow::RepopulateLayerSelector()
     }
 }
 
+bool MainWindow::IsLayerSelected()
+{
+    if(ui->layerSelector->currentRow() != -1)
+        return true;
+
+    return false;
+}
+
 void MainWindow::on_gridToggle_toggled(bool checked)
 {
     layers->ToggleGrid(checked);
@@ -207,5 +215,39 @@ void MainWindow::on_eraserButton_clicked()
 
 void MainWindow::on_editLayerButton_clicked()
 {
+    if(layerPropertiesWindow == NULL)
+    {
+        layerPropertiesWindow = new LayerProperties;
+    }
 
+    if(IsLayerSelected())
+    {
+        Layer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
+
+        if(tempLayer)
+        {
+            layerPropertiesWindow->EditLayer(tempLayer);
+
+            layerPropertiesWindow->exec();
+        }
+
+        RepopulateLayerSelector();
+    }
+}
+
+void MainWindow::on_deleteLayerButton_clicked()
+{
+    if(IsLayerSelected())
+    {
+        Layer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
+
+        if(tempLayer)
+        {
+            //remove the layer from the layer manager (which will take it out of the RM)
+            layers->RemoveLayer(tempLayer);
+
+            //repopulate the layer selector
+            RepopulateLayerSelector();
+        }
+    }
 }

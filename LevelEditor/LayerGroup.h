@@ -29,6 +29,8 @@ public:
     int GetLayerWidth() { return width; }
     int GetLayerHeight() { return height; }
 
+    void DestroyAllItems();
+
 private:
     QList<TileInstanceItem*> items;
     int width, height;
