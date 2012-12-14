@@ -17,6 +17,7 @@ public:
 
     int GetX() { if(tile) return tile->GetX(); }
     int GetY() { if(tile) return tile->GetY(); }
+    int GetTileID() { if(tile) return tile->GetTileID(); }
 
 private:
     TileInstance *tile;

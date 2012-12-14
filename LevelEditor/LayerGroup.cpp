@@ -121,5 +121,5 @@ int LayerGroup::GetTileType(int x, int y)
     if(items[pos] == NULL)
         return 0;
     else
-        return items[pos]->GetTileInstance()->GetTileID();
+        return items[pos]->GetTileID();
 }

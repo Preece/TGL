@@ -33,13 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //when the selection changes in tileSelector, notify the layer manager
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
 
-    ui->toolGroup->setId(ui->pencilTool, 0);
-    ui->toolGroup->setId(ui->eyedropperTool, 1);
-    ui->toolGroup->setId(ui->brushTool, 2);
-    ui->toolGroup->setId(ui->bucketTool, 3);
-    ui->toolGroup->setId(ui->eraserButton, 4);
-    ui->toolGroup->setId(ui->pointerTool, 5);
-
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     UpdateToolSelection();
 
@@ -167,6 +160,9 @@ void MainWindow::SelectNewTile(int ID)
 
     //find that tile based on position
     QGraphicsItem *tempTileItem = tileSelector->itemAt(tileX, tileY);
+
+    if(tileSelector->selectedItems().count() > 0);
+        tileSelector->selectedItems()[0]->setSelected(false);
 
     //select that tile
     if(tempTileItem)

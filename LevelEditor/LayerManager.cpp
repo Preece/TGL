@@ -16,17 +16,14 @@ LayerManager::LayerManager()
 LayerManager::~LayerManager()
 {
 }
+
 void LayerManager::EyedropTile(QPoint pos)
 {
-    /*if(!resourceManager || !currentLayer)
+    if(!resourceManager || !currentLayer)
         return;
 
     if(resourceManager->GetLevelProperties()->IsPropertiesSet())
     {
-        //unselect the current tile
-        if(currentTile)
-            currentTile->setSelected(false);
-
         //translate the position to tile coordinates
         int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
         int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
@@ -40,14 +37,8 @@ void LayerManager::EyedropTile(QPoint pos)
            tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
             return;
 
-        //modify the correct tiles tileID to the one of the selection
-        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
-
-        if(currentModelLayer)
-        {
-            emit SelectNewTile(currentModelLayer->GetTileType(tileX, tileY));
-        }
-    }*/
+        emit SelectNewTile(currentLayer->GetTileType(tileX, tileY));
+    }
 }
 
 void LayerManager::AddLayer(QString name)
