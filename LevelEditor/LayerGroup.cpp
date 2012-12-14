@@ -78,7 +78,7 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
 
         //set the position
         tempTile->setPos(x * resourceManager->GetLevelProperties()->GetTileWidth(),
-                           y * resourceManager->GetLevelProperties()->GetTileHeight());
+                         y * resourceManager->GetLevelProperties()->GetTileHeight());
 
         items[pos] = tempTile;
         addToGroup(tempTile);
@@ -118,8 +118,11 @@ int LayerGroup::GetTileType(int x, int y)
 
     int pos = (x * width) + y;
 
-    if(items[pos] == NULL)
+    TileInstanceItem *tempItem = items[pos];
+    int tileID = tempItem->GetTileID();
+
+    if(tempItem == NULL)
         return 0;
     else
-        return items[pos]->GetTileID();
+        return tileID;
 }

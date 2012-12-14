@@ -72,9 +72,12 @@ void MainWindow::on_actionProperties_triggered()
 
 void MainWindow::UpdateSelectedTile()
 {
-    layers->SetSelectedTile(GetSelectedTileItem());
-    pencil.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
-    bucket.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
+    if(tileSelector->selectedItems().count() > 0)
+    {
+        layers->SetSelectedTile(GetSelectedTileItem());
+        pencil.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
+        bucket.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
+    }
 }
 
 TileItem *MainWindow::GetSelectedTileItem()
@@ -158,13 +161,12 @@ void MainWindow::SelectNewTile(int ID)
     int tileX = (tileW * tempTile->GetXOrigin()) + tileW - 1;
     int tileY = (tileH * tempTile->GetYOrigin()) + tileH - 1;
 
+    tileSelector->clearSelection();
+
     //find that tile based on position
     QGraphicsItem *tempTileItem = tileSelector->itemAt(tileX, tileY);
 
-    if(tileSelector->selectedItems().count() > 0);
-        tileSelector->selectedItems()[0]->setSelected(false);
-
-    //select that tile
+    //select the new tile
     if(tempTileItem)
         tempTileItem->setSelected(true);
 
