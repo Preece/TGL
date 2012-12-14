@@ -16,17 +16,17 @@ void PencilBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
     if(preview)
         layer->ClearPreview();
 
-    if(overwrite || layer->GetTileType(x, y) == 0)
-    {
-        int radius = size;
+    int radius = size;
 
-        //y dimension
-        for(signed int i = -radius; i <= radius; i++)
+    //y dimension
+    for(signed int i = -radius; i <= radius; i++)
+    {
+        //x dimension
+        for(signed int j = -radius; j <= radius; j++)
         {
-            //x dimension
-            for(signed int j = -radius; j <= radius; j++)
+            if((i*i) + (j*j) < (radius * radius))
             {
-                if((i*i) + (j*j) < (radius * radius) - radius)
+                if(overwrite || layer->GetTileType(j + x, i + y) == 0)
                 {
                     if(preview)
                         layer->PreviewModifyTile(j + x, i + y, selectedTileID);

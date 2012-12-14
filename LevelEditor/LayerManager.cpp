@@ -184,7 +184,7 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         lastPaintSpot.setY(tileY);
     }
     //if the left mouse button was not down
-    else
+    else if(currentLayer)
     {
         currentBrush->Paint(tileX, tileY, currentLayer, true);
     }
