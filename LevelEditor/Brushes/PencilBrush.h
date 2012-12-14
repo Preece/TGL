@@ -12,6 +12,8 @@ public:
     void Paint(int x, int y, LayerGroup *layer, bool preview = false);
 
     void SetSelectedTileID(int newID) { selectedTileID = newID; }
+    void SetSize(int newSize) { size = newSize; }
+    void SetOverwrite(bool over) { overwrite = over; }
 private:
 
     int size;

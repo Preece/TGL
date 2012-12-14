@@ -29,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     layers->setSceneRect(0, 0, 100, 100);
     layers->RegisterResourceManager(resources);
 
-    currentBrush = &pencil;
     ui->levelView->setMouseTracking(true);
 
     //when the selection changes in tileSelector, notify the layer manager
@@ -39,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent) :
     UpdateToolSelection();
 
     connect(layers, SIGNAL(SelectNewTile(int)), this, SLOT(SelectNewTile(int)));
+
+    //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
+    //connect(scroll, SIGNAL(valueChanged(int)), )
 }
 
 MainWindow::~MainWindow()
@@ -77,8 +79,7 @@ void MainWindow::UpdateSelectedTile()
     if(tileSelector->selectedItems().count() > 0)
     {
         layers->SetSelectedTile(GetSelectedTileItem());
-        pencil.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
-        bucket.SetSelectedTileID(GetSelectedTileItem()->GetTileID());
+        ui->brushProperties->SetSelectedTileID(GetSelectedTileItem()->GetTileID());
     }
 }
 
@@ -162,16 +163,16 @@ void MainWindow::on_layerSelector_itemClicked(QListWidgetItem *item)
 
 void MainWindow::UpdateToolSelection()
 {
-    layers->SetBrush(currentBrush);
+    layers->SetBrush(ui->brushProperties->GetCurrentBrush());
 }
 
 void MainWindow::on_pencilTool_clicked()
 {
-    currentBrush = &pencil;
+    ui->brushProperties->SetCurrentBrush(0);
     UpdateToolSelection();
 
     //change the cursor
-    ui->levelView->setCursor(QCursor(QPixmap(":\Icons\Icons\pencil.png")));
+    //ui->levelView->setCursor(QCursor(QPixmap(":\Icons\Icons\pencil.png")));
 }
 
 void MainWindow::SelectNewTile(int ID)
@@ -203,13 +204,13 @@ void MainWindow::SelectNewTile(int ID)
 
 void MainWindow::on_bucketTool_clicked()
 {
-    currentBrush = &bucket;
+    ui->brushProperties->SetCurrentBrush(3);
     UpdateToolSelection();
 }
 
 void MainWindow::on_eraserButton_clicked()
 {
-    currentBrush = &eraser;
+    ui->brushProperties->SetCurrentBrush(4);
     UpdateToolSelection();
 }
 

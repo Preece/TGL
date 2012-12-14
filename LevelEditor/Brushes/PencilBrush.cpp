@@ -26,7 +26,7 @@ void PencilBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
             //x dimension
             for(signed int j = -radius; j <= radius; j++)
             {
-                if((i*i) + (j*j) < radius * radius)
+                if((i*i) + (j*j) < (radius * radius) - radius)
                 {
                     if(preview)
                         layer->PreviewModifyTile(j + x, i + y, selectedTileID);

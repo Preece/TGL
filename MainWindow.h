@@ -78,11 +78,6 @@ private:
 
     LayerManager *layers;
     QGraphicsScene *tileSelector;
-
-    PencilBrush pencil;
-    FillBrush bucket;
-    EraserBrush eraser;
-    TileBrush *currentBrush;
 };
 
 #endif // MAINWINDOW_H

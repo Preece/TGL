@@ -56,7 +56,8 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/FillBrush.cpp \
     LevelEditor/Brushes/SmartBrush.cpp \
     LevelEditor/Brushes/EraserBrush.cpp \
-    LevelEditor/LayerProperties.cpp
+    LevelEditor/LayerProperties.cpp \
+    LevelEditor/Brushes/BrushPropertiesWidget.cpp
   
 
 HEADERS  += \
@@ -106,7 +107,8 @@ HEADERS  += \
     LevelEditor/Brushes/FillBrush.h \
     LevelEditor/Brushes/SmartBrush.h \
     LevelEditor/Brushes/EraserBrush.h \
-    LevelEditor/LayerProperties.h
+    LevelEditor/LayerProperties.h \
+    LevelEditor/Brushes/BrushPropertiesWidget.h
    
 
 FORMS    += \
@@ -119,7 +121,8 @@ FORMS    += \
     SpriteEditor/SpritesheetSelector.ui \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.ui \
     LevelPropertiesDialog.ui \
-    LevelEditor/LayerProperties.ui
+    LevelEditor/LayerProperties.ui \
+    LevelEditor/Brushes/BrushPropertiesWidget.ui
 
 RESOURCES += \
     Icons.qrc

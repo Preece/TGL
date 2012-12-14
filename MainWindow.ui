@@ -196,7 +196,7 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>320</width>
+          <width>250</width>
           <height>0</height>
          </size>
         </property>
@@ -224,9 +224,37 @@
        </widget>
       </item>
       <item>
+       <widget class="BrushPropertiesWidget" name="brushProperties">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>320</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QListWidget" name="layerSelector">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -451,6 +479,12 @@
    <class>ResourceTab</class>
    <extends>QTabWidget</extends>
    <header>ResourceTab/ResourceTab.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BrushPropertiesWidget</class>
+   <extends>QFrame</extends>
+   <header>LevelEditor/Brushes/BrushPropertiesWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
