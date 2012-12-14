@@ -65,6 +65,7 @@ private:
     QGraphicsItemGroup *grid;
 
     TileBrush *currentBrush;
+    QPoint lastPaintSpot;
 };
 
 #endif // LAYERMANAGER_H

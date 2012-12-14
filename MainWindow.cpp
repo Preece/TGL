@@ -179,3 +179,9 @@ void MainWindow::on_bucketTool_clicked()
     currentBrush = &bucket;
     UpdateToolSelection();
 }
+
+void MainWindow::on_eraserButton_clicked()
+{
+    currentBrush = &eraser;
+    UpdateToolSelection();
+}

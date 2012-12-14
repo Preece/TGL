@@ -148,6 +148,9 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
         //currentLayer->ModifyTile(tileX, tileY, currentTile->GetTile()->GetID());
         currentBrush->Paint(tileX, tileY, currentLayer);
+
+        lastPaintSpot.setX(tileX);
+        lastPaintSpot.setY(tileY);
     }
     else if(event->button() == Qt::RightButton)
     {
@@ -164,7 +167,10 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
-    currentBrush->Paint(tileX, tileY, currentLayer);
+    currentBrush->Line(lastPaintSpot.x(), lastPaintSpot.y(), tileX, tileY, currentLayer);
+
+    lastPaintSpot.setX(tileX);
+    lastPaintSpot.setY(tileY);
 }
 
 void LayerManager::SetLayerSelection(int newSelection)

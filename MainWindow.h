@@ -14,6 +14,7 @@
 #include "LevelEditor/Brushes/TileBrush.h"
 #include "LevelEditor/Brushes/PencilBrush.h"
 #include "LevelEditor/Brushes/FillBrush.h"
+#include "LevelEditor/Brushes/EraserBrush.h"
 
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"
@@ -58,6 +59,8 @@ private slots:
 
     void on_bucketTool_clicked();
 
+    void on_eraserButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -71,6 +74,7 @@ private:
 
     PencilBrush pencil;
     FillBrush bucket;
+    EraserBrush eraser;
     TileBrush *currentBrush;
 };
 

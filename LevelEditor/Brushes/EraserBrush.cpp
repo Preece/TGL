@@ -2,36 +2,26 @@
 
 EraserBrush::EraserBrush()
 {
+    size = 1;
 }
 
-/*void LayerManager::EraseTile(QPoint pos)
+void EraserBrush::Paint(int x, int y, LayerGroup *layer)
 {
-    if(!resourceManager || !currentTile || !currentLayer)
+    //if there is not a tile at this position
+    if(layer->GetTileType(x, y) == 0)
         return;
 
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    int radius = size;
+
+    //y dimension
+    for(signed int i = -radius; i <= radius; i++)
     {
-        //translate the position to tile coordinates
-        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-
-        int tileX = pos.x() / tileW;
-        int tileY = pos.y() / tileH;
-
-        //if the position is beyond the bounds of the scene, ignore it
-        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
-           tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
-            return;
-
-        //modify the correct tiles tileID to the one of the selection
-        Layer *currentModelLayer = resourceManager->GetLayer(currentLayer->GetLayerID());
-
-        if(currentModelLayer)
+        //x dimension
+        for(signed int j = -radius; j <= radius; j++)
         {
-            currentModelLayer->ModifyTile(tileX, tileY, 0);
+            if((i*i) + (j*j) < radius * radius)
+                layer->ModifyTile(x, y, 0);
         }
-
-        RepopulateLayer(currentLayer);
     }
-}*/
+
+}

@@ -101,6 +101,11 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
         else
         {
             //delete the tile and remove it from the layer model
+            int oldID = items[pos]->GetTileInstance()->GetID();
+            layer->RemoveChild(oldID);
+
+            delete items[pos];
+            items[pos] = NULL;
         }
     }
 }
