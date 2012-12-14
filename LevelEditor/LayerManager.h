@@ -46,7 +46,7 @@ public slots:
 
     void ToggleGrid(bool show = true);
 
-    void SetBrush(TileBrush *newBrush) { currentBrush = newBrush; }
+    void SetBrush(TileBrush *newBrush);
 
 signals:
     void SelectNewTile(int ID);

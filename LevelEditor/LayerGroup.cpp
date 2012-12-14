@@ -144,10 +144,9 @@ int LayerGroup::GetTileType(int x, int y)
     int pos = (x * width) + y;
 
     TileInstanceItem *tempItem = items[pos];
-    int tileID = tempItem->GetTileID();
 
     if(tempItem == NULL)
         return 0;
     else
-        return tileID;
+        return tempItem->GetTileID();
 }

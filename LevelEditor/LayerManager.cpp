@@ -125,6 +125,14 @@ void LayerManager::ToggleGrid(bool show)
     }
 }
 
+void LayerManager::SetBrush(TileBrush *newBrush)
+{
+    if(currentLayer)
+        currentLayer->ClearPreview();
+
+    currentBrush = newBrush;
+}
+
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)

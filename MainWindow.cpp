@@ -144,6 +144,9 @@ void MainWindow::on_pencilTool_clicked()
 {
     currentBrush = &pencil;
     UpdateToolSelection();
+
+    //change the cursor
+    ui->levelView->setCursor(QCursor(QPixmap(":\Icons\Icons\pencil.png")));
 }
 
 void MainWindow::SelectNewTile(int ID)

@@ -7,6 +7,9 @@ EraserBrush::EraserBrush()
 
 void EraserBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 {
+    if(preview)
+        return;
+
     //if there is not a tile at this position
     if(layer->GetTileType(x, y) == 0)
         return;
