@@ -108,6 +108,8 @@ void MainWindow::RepopulateLayerSelector()
         tempItem->setCheckState(Qt::Checked);
 
         ui->layerSelector->addItem(tempItem);
+        ui->layerSelector->setItemSelected(tempItem, true);
+        layers->SetLayerSelection(i);
     }
 }
 
