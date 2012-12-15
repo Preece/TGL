@@ -209,6 +209,19 @@ QString LayerManager::GetLayerName(int index)
     return resourceManager->GetLayerByIndex(index)->GetName();
 }
 
+void LayerManager::UpdateLayerOpacity(Layer *opaqueLayer)
+{
+    for(int i = 0; i < layers.count(); i++)
+    {
+        if(layers[i]->GetLayer() == opaqueLayer)
+        {
+            qreal opacity = opaqueLayer->GetOpacity();
+            opacity = opacity / 100;
+            layers[i]->setOpacity(opacity);
+        }
+    }
+}
+
 void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
 {
     if(layerIndex < 0 || layerIndex >= layers.count())

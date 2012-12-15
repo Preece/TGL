@@ -38,6 +38,8 @@ public:
     void SetLayerSelection(int newSelection);
     QString GetLayerName(int index);
 
+    void UpdateLayerOpacity(Layer *opaqueLayer);
+
     void ToggleLayerVisibility(int layerIndex, bool show);
 
     int GetSelectedTileID();

@@ -57,7 +57,8 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/SmartBrush.cpp \
     LevelEditor/Brushes/EraserBrush.cpp \
     LevelEditor/LayerProperties.cpp \
-    LevelEditor/Brushes/BrushPropertiesWidget.cpp
+    LevelEditor/Brushes/BrushPropertiesWidget.cpp \
+    LevelEditor/Brushes/ScatterBrush.cpp
   
 
 HEADERS  += \
@@ -108,7 +109,8 @@ HEADERS  += \
     LevelEditor/Brushes/SmartBrush.h \
     LevelEditor/Brushes/EraserBrush.h \
     LevelEditor/LayerProperties.h \
-    LevelEditor/Brushes/BrushPropertiesWidget.h
+    LevelEditor/Brushes/BrushPropertiesWidget.h \
+    LevelEditor/Brushes/ScatterBrush.h
    
 
 FORMS    += \
@@ -147,4 +149,35 @@ OTHER_FILES += \
     Icons/eyedropper.png \
     Icons/eraser.png \
     Icons/bucket.png \
-    Icons/autoframeselect.png
+    Icons/autoframeselect.png \
+    Icons/zoomout.png \
+    Icons/zoomin.png \
+    Icons/undo.png \
+    Icons/size4.png \
+    Icons/size3.png \
+    Icons/size2.png \
+    Icons/size1.png \
+    Icons/selector.png \
+    Icons/selectionbox.png \
+    Icons/scatter.png \
+    Icons/save.png \
+    Icons/renderspot.png \
+    Icons/removevalue.png \
+    Icons/redo.png \
+    Icons/previousframe.png \
+    Icons/play.png \
+    Icons/pencil.png \
+    Icons/pause.png \
+    Icons/open.png \
+    Icons/nextframe.png \
+    Icons/new.png \
+    Icons/MissingFile.png \
+    Icons/hotspot.png \
+    Icons/grid.png \
+    Icons/frameselect.png \
+    Icons/eyedropper.png \
+    Icons/eraser.png \
+    Icons/bucket.png \
+    Icons/brush.png \
+    Icons/autoframeselect.png \
+    Icons/addvalue.png

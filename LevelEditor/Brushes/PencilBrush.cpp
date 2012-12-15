@@ -2,8 +2,6 @@
 
 PencilBrush::PencilBrush()
 {
-    size = 1;
-    overwrite = true;
     selectedTileID = 0;
 }
 

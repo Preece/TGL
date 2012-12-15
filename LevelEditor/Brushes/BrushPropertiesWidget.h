@@ -27,9 +27,10 @@ public:
     TileBrush *GetCurrentBrush() { return currentBrush; }
     
 private slots:
-    void on_pencilSizeInput_valueChanged(int arg1);
 
     void on_overwriteCheckbox_toggled(bool checked);
+
+    void on_brushSizeInput_valueChanged(int arg1);
 
 private:
     Ui::BrushPropertiesWidget *ui;

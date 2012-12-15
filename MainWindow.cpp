@@ -139,6 +139,8 @@ void MainWindow::on_addLayerButton_clicked()
     {
         resources->AddLayer(newLayer);
         layers->AddLayer(newLayer);
+
+        layers->UpdateLayerOpacity(newLayer);
     }
     else
     {
@@ -228,8 +230,9 @@ void MainWindow::on_editLayerButton_clicked()
         if(tempLayer)
         {
             layerPropertiesWindow->EditLayer(tempLayer);
-
             layerPropertiesWindow->exec();
+
+            layers->UpdateLayerOpacity(tempLayer);
         }
 
         RepopulateLayerSelector();

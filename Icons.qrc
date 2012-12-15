@@ -30,5 +30,6 @@
         <file>Icons/size3.png</file>
         <file>Icons/size4.png</file>
         <file>Icons/scatter.png</file>
+        <file>Icons/selectionbox.png</file>
     </qresource>
 </RCC>

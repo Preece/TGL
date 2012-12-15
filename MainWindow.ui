@@ -204,6 +204,9 @@
         <property name="viewportUpdateMode">
          <enum>QGraphicsView::SmartViewportUpdate</enum>
         </property>
+        <property name="rubberBandSelectionMode">
+         <enum>Qt::IntersectsItemShape</enum>
+        </property>
        </widget>
       </item>
      </layout>
@@ -515,7 +518,24 @@
  <resources>
   <include location="Icons.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>layerSelector</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>editLayerButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>581</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>552</x>
+     <y>495</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <buttongroups>
   <buttongroup name="toolGroup"/>
  </buttongroups>

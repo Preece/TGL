@@ -15,6 +15,13 @@ public:
 
     virtual void Paint(int x, int y, LayerGroup *layer, bool preview = false);
     void Line(int x1, int y1, int x2, int y2, LayerGroup *layer);
+
+    void SetSize(int newSize) { size = newSize; }
+    void SetOverwrite(bool over) { overwrite = over; }
+
+protected:
+    int size;
+    bool overwrite;
 };
 
 #endif // TILEBRUSH_H

@@ -19,12 +19,6 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
 {
 }
 
-void BrushPropertiesWidget::on_pencilSizeInput_valueChanged(int arg1)
-{
-    //update the pencil size
-    pencil.SetSize(arg1);
-}
-
 void BrushPropertiesWidget::SetSelectedTileID(int newID)
 {
     pencil.SetSelectedTileID(newID);
@@ -33,4 +27,9 @@ void BrushPropertiesWidget::SetSelectedTileID(int newID)
 void BrushPropertiesWidget::on_overwriteCheckbox_toggled(bool checked)
 {
     pencil.SetOverwrite(checked);
+}
+
+void BrushPropertiesWidget::on_brushSizeInput_valueChanged(int arg1)
+{
+    pencil.SetSize(arg1);
 }
