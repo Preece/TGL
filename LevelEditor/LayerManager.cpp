@@ -144,6 +144,9 @@ void LayerManager::SetBrush(TileBrush *newBrush)
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!currentLayer)
+        return;
+
     if(event->button() == Qt::LeftButton)
     {
 
@@ -167,6 +170,9 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(!currentLayer)
+        return;
+
     //translate the position to tile coordinates
     int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
     int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
