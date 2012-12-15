@@ -29,5 +29,6 @@
         <file>Icons/size2.png</file>
         <file>Icons/size3.png</file>
         <file>Icons/size4.png</file>
+        <file>Icons/scatter.png</file>
     </qresource>
 </RCC>
