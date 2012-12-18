@@ -124,13 +124,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="brushTool">
+         <widget class="QToolButton" name="scatterTool">
           <property name="text">
            <string>...</string>
           </property>
           <property name="icon">
            <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/brush.png</normaloff>:/Icons/Icons/brush.png</iconset>
+            <normaloff>:/Icons/Icons/scatter.png</normaloff>:/Icons/Icons/scatter.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -141,13 +141,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="scatterTool">
+         <widget class="QToolButton" name="brushTool">
           <property name="text">
            <string>...</string>
           </property>
           <property name="icon">
            <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/scatter.png</normaloff>:/Icons/Icons/scatter.png</iconset>
+            <normaloff>:/Icons/Icons/brush.png</normaloff>:/Icons/Icons/brush.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -197,6 +197,12 @@
        <widget class="QGraphicsView" name="levelView">
         <property name="frameShape">
          <enum>QFrame::WinPanel</enum>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOn</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOn</enum>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

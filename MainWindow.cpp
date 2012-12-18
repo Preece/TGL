@@ -257,3 +257,15 @@ void MainWindow::on_deleteLayerButton_clicked()
         }
     }
 }
+
+void MainWindow::on_scatterTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(6);
+    UpdateToolSelection();
+}
+
+void MainWindow::on_brushTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(7);
+    UpdateToolSelection();
+}

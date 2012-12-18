@@ -67,6 +67,10 @@ private slots:
 
     void on_deleteLayerButton_clicked();
 
+    void on_scatterTool_clicked();
+
+    void on_brushTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 
