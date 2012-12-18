@@ -208,13 +208,13 @@ void MainWindow::SelectNewTile(int ID)
 
 void MainWindow::on_bucketTool_clicked()
 {
-    ui->brushProperties->SetCurrentBrush(3);
+    ui->brushProperties->SetCurrentBrush(2);
     UpdateToolSelection();
 }
 
 void MainWindow::on_eraserButton_clicked()
 {
-    ui->brushProperties->SetCurrentBrush(4);
+    ui->brushProperties->SetCurrentBrush(3);
     UpdateToolSelection();
 }
 

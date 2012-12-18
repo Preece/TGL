@@ -11,7 +11,6 @@ public:
     void Paint(int x, int y, LayerGroup *layer, bool preview = false);
 
 private:
-    int size;
 };
 
 #endif // ERASERBRUSH_H
