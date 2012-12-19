@@ -172,7 +172,7 @@
   <customwidget>
    <class>AnimatedLabel</class>
    <extends>QLabel</extends>
-   <header>AnimatedLabel.h</header>
+   <header>SpriteEditor/AnimationPreviewer/AnimatedLabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>
