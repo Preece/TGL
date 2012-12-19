@@ -26,8 +26,24 @@ void BrushPropertiesWindow::RegisterTileSelector(QGraphicsScene *selector)
 
 void BrushPropertiesWindow::NewScatterBrush(ScatterBrush *newBrush)
 {
+    //clear out the tile list
     tileList.clear();
+
+    currentScatterBrush = NULL;
+
+    //empty the name input
+    ui->brushNameInput->setText("");
+
     currentScatterBrush = newBrush;
+}
+
+void BrushPropertiesWindow::EditScatterBrush(ScatterBrush *editBrush)
+{
+    currentScatterBrush = editBrush;
+
+    ui->brushNameInput->setText(currentScatterBrush->GetName());
+
+    RepopulateTileList();
 }
 
 void BrushPropertiesWindow::on_addTile_clicked()
@@ -103,7 +119,7 @@ void BrushPropertiesWindow::RepopulateTileList()
     }
 }
 
-void BrushPropertiesWindow::on_lineEdit_textChanged(const QString &arg1)
+void BrushPropertiesWindow::on_brushNameInput_textChanged(const QString &arg1)
 {
     if(currentScatterBrush)
     {

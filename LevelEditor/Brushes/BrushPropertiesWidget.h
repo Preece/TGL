@@ -45,6 +45,8 @@ private slots:
 
     void on_scatterBrushCombo_currentIndexChanged(int index);
 
+    void on_editScatterBrush_clicked();
+
 signals:
     void BrushChanged();
 

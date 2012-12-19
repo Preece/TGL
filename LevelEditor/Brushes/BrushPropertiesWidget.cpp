@@ -135,3 +135,15 @@ void BrushPropertiesWidget::on_scatterBrushCombo_currentIndexChanged(int index)
         emit BrushChanged();
     }
 }
+
+void BrushPropertiesWidget::on_editScatterBrush_clicked()
+{
+    if(ui->scatterBrushCombo->currentIndex() != -1)
+    {
+        propertiesWindow.EditScatterBrush(scatter[scatterBrushIndex]);
+
+        propertiesWindow.exec();
+
+        RepopulateBrushLists();
+    }
+}

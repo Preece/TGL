@@ -37,7 +37,7 @@ public:
 private slots:
     void on_addTile_clicked();
 
-    void on_lineEdit_textChanged(const QString &arg1);
+    void on_brushNameInput_textChanged(const QString &arg1);
 
 private:
     Ui::BrushPropertiesWindow *ui;
