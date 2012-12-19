@@ -7,7 +7,12 @@ PencilBrush::PencilBrush()
 
 void PencilBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 {
+    //if no tile is selected, bail
     if(selectedTileID == 0)
+        return;
+
+    //if the tile to be painted the same as whats there, bail
+    if(layer->GetTileType(x, y) == selectedTileID)
         return;
 
     //erase the previous preview, if we are in preview mode. Get ready for the next

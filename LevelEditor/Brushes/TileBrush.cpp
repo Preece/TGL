@@ -15,7 +15,7 @@ void TileBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 void TileBrush::Line(int x1, int y1, int x2, int y2, LayerGroup *layer)
 {
     if(x1 == x2 && y1 == y2)
-        return;
+        Paint(x1, y1, layer);
 
     // Bresenham's line algorithm
     const bool steep = (qAbs(y2 - y1) > qAbs(x2 - x1));

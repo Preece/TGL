@@ -184,12 +184,16 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->buttons() == Qt::LeftButton)
     {
-        //draw a line from the last spot to the new one
-        currentBrush->Line(lastPaintSpot.x(), lastPaintSpot.y(), tileX, tileY, currentLayer);
+        //paint if the position is different from before
+        //causes a bug where movement in the doand and right position trails
+        //if(tileX != lastPaintSpot.x() || tileY != lastPaintSpot.y())
+        {
+            currentBrush->Line(lastPaintSpot.x(), lastPaintSpot.y(), tileX, tileY, currentLayer);
 
-        //this spot is not the last spot
-        lastPaintSpot.setX(tileX);
-        lastPaintSpot.setY(tileY);
+            //this spot is not the last spot
+            lastPaintSpot.setX(tileX);
+            lastPaintSpot.setY(tileY);
+        }
     }
     //if the left mouse button was not down
     else if(currentLayer)
