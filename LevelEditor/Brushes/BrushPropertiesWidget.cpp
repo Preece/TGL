@@ -79,6 +79,8 @@ void BrushPropertiesWidget::RepopulateBrushLists()
     for(int i = 0; i < scatter.count(); i++)
     {
         ui->scatterBrushCombo->addItem(scatter[i]->GetName());
+        ui->scatterBrushCombo->setCurrentIndex(i);
+        scatterBrushIndex = i;
     }
 }
 
@@ -143,6 +145,18 @@ void BrushPropertiesWidget::on_editScatterBrush_clicked()
         propertiesWindow.EditScatterBrush(scatter[scatterBrushIndex]);
 
         propertiesWindow.exec();
+
+        RepopulateBrushLists();
+    }
+}
+
+void BrushPropertiesWidget::on_deleteScatterBrush_clicked()
+{
+    //if a brush is selected
+    if(ui->scatterBrushCombo->currentIndex() != -1)
+    {
+        delete scatter[scatterBrushIndex];
+        scatter.removeAt(scatterBrushIndex);
 
         RepopulateBrushLists();
     }

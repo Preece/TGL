@@ -47,6 +47,8 @@ private slots:
 
     void on_editScatterBrush_clicked();
 
+    void on_deleteScatterBrush_clicked();
+
 signals:
     void BrushChanged();
 
