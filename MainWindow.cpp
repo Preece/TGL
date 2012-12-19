@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //when the selection changes in tileSelector, notify the layer manager
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
+    connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
 
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     UpdateToolSelection();

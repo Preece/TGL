@@ -71,7 +71,13 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
 void BrushPropertiesWidget::RepopulateBrushLists()
 {
     //clear out the scatter brush list
+    ui->scatterBrushCombo->clear();
+
     //loop over the brush list and add them all
+    for(int i = 0; i < scatter.count(); i++)
+    {
+        ui->scatterBrushCombo->addItem(scatter[i]->GetName());
+    }
 }
 
 void BrushPropertiesWidget::SetSelectedTileID(int newID)
@@ -111,5 +117,19 @@ void BrushPropertiesWidget::on_addScatterBrush_clicked()
     {
         //get rid of our new brush
         delete tempBrush;
+    }
+}
+
+void BrushPropertiesWidget::on_scatterBrushCombo_currentIndexChanged(int index)
+{
+    if(index == -1)
+        return;
+
+    scatterBrushIndex = index;
+
+    if(scatterBrushIndex < scatter.count())
+    {
+        currentBrush = scatter[scatterBrushIndex];
+        emit BrushChanged();
     }
 }

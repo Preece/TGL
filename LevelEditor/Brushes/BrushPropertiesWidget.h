@@ -43,6 +43,11 @@ private slots:
 
     void on_addScatterBrush_clicked();
 
+    void on_scatterBrushCombo_currentIndexChanged(int index);
+
+signals:
+    void BrushChanged();
+
 private:
     Ui::BrushPropertiesWidget *ui;
     BrushPropertiesWindow propertiesWindow;
