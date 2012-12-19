@@ -126,3 +126,12 @@ void BrushPropertiesWindow::on_brushNameInput_textChanged(const QString &arg1)
         currentScatterBrush->SetName(arg1);
     }
 }
+
+void BrushPropertiesWindow::on_buttonBox_accepted()
+{
+    if(currentScatterBrush)
+        if(currentScatterBrush->GetName() == "")
+        {
+            currentScatterBrush->SetName("New Scatter Brush");
+        }
+}

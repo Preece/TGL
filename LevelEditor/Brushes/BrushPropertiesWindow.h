@@ -39,6 +39,8 @@ private slots:
 
     void on_brushNameInput_textChanged(const QString &arg1);
 
+    void on_buttonBox_accepted();
+
 private:
     Ui::BrushPropertiesWindow *ui;
 
