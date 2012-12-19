@@ -222,7 +222,7 @@ Tile *ResourceManager::GetTile(int x, int y)
 void ResourceManager::AddLayer(Layer *newLayer)
 {
     if(newLayer)
-        layerList.append(newLayer);
+        layerList.insert(0, newLayer);
 }
 
 void ResourceManager::DeleteLayer(int ID)

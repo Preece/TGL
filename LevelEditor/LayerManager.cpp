@@ -51,7 +51,7 @@ void LayerManager::AddLayer(Layer *newLayer)
                                  resourceManager->GetLevelProperties()->GetMapHeight());
 
     //put the layer group into the list
-    layers.append(tempLayerGroup);
+    layers.insert(0, tempLayerGroup);
     addItem(tempLayerGroup);
 
     tempLayerGroup->show();
