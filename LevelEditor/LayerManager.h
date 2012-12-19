@@ -69,6 +69,7 @@ private:
 
     TileBrush *currentBrush;
     QPoint lastPaintSpot;
+    QPoint lastPreviewSpot;
 };
 
 #endif // LAYERMANAGER_H

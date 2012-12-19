@@ -144,11 +144,13 @@ void LayerManager::SetBrush(TileBrush *newBrush)
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(!currentLayer)
+    if(!currentLayer || !currentBrush)
         return;
 
     if(event->button() == Qt::LeftButton)
     {
+        //they have started painting, so nix the preview
+        currentLayer->ClearPreview();
 
         //translate the position to tile coordinates
         int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
@@ -170,7 +172,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(!currentLayer)
+    if(!currentLayer || !currentBrush)
         return;
 
     //translate the position to tile coordinates
@@ -192,7 +194,12 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     //if the left mouse button was not down
     else if(currentLayer)
     {
-        currentBrush->Paint(tileX, tileY, currentLayer, true);
+        //paint a preview, if the position is different from before
+        if(tileX != lastPreviewSpot.x() || tileY != lastPreviewSpot.y())
+            currentBrush->Paint(tileX, tileY, currentLayer, true);
+
+        lastPreviewSpot.setX(tileX);
+        lastPreviewSpot.setY(tileY);
     }
 }
 

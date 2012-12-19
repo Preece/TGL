@@ -51,6 +51,8 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
         {
             currentBrush = scatter[scatterBrushIndex];
         }
+        else
+            currentBrush = NULL;
 
         ui->scatterBrushGroup->show();
 
