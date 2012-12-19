@@ -2,6 +2,7 @@
 #define BRUSHPROPERTIESWIDGET_H
 
 #include <QFrame>
+#include <QTime>
 
 #include "BrushPropertiesWindow.h"
 
@@ -30,6 +31,9 @@ public:
     TileBrush *GetCurrentBrush() { return currentBrush; }
 
     void RepopulateBrushLists();
+
+    void RegisterTileSelector(QGraphicsScene *selector) { propertiesWindow.RegisterTileSelector(selector); }
+    void RegisterResourceManager(ResourceManager *newRM) { propertiesWindow.RegisterResourceManager(newRM); }
     
 private slots:
 
@@ -41,7 +45,7 @@ private slots:
 
 private:
     Ui::BrushPropertiesWidget *ui;
-    BrushPropertiesWindow *propertiesWindow;
+    BrushPropertiesWindow propertiesWindow;
 
     TileBrush *currentBrush;
     PencilBrush pencil;
@@ -49,6 +53,7 @@ private:
     FillBrush bucket;
 
     QList<ScatterBrush*> scatter;
+    int scatterBrushIndex;
 };
 
 #endif // BRUSHPROPERTIESWIDGET_H

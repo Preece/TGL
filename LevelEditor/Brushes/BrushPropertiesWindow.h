@@ -7,6 +7,7 @@
 #include "../../Model/ResourceManager.h"
 
 #include "ScatterBrush.h"
+#include "../TileItem.h"
 
 namespace Ui {
 class BrushPropertiesWindow;
@@ -25,13 +26,26 @@ public:
 
     void NewScatterBrush(ScatterBrush *newBrush);
     void EditScatterBrush(ScatterBrush *editBrush);
+
+    bool IsTileSelected();
+    int GetSelectedTileID();
+    TileItem *GetSelectedTile();
+    TileItem *GetTileFromID(int ID);
+
+    void RepopulateTileList();
     
+private slots:
+    void on_addTile_clicked();
+
+    void on_lineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::BrushPropertiesWindow *ui;
 
     ResourceManager *resourceManager;
 
     QGraphicsScene tileList;
+    QGraphicsScene *tileSelector;
 
     ScatterBrush *currentScatterBrush;
 };

@@ -8,18 +8,18 @@ BrushPropertiesWidget::BrushPropertiesWidget(QWidget *parent) :
     ui->setupUi(this);
 
     currentBrush = &pencil;
-    propertiesWindow = NULL;
+    scatterBrushIndex = 0;
 
     ui->scatterBrushGroup->hide();
     ui->smartBrushGroup->hide();
+
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
 }
 
 BrushPropertiesWidget::~BrushPropertiesWidget()
 {
     delete ui;
-
-    if(propertiesWindow)
-        delete propertiesWindow;
 }
 
 void BrushPropertiesWidget::SetCurrentBrush(int type)
@@ -46,7 +46,14 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
 
     //scatter
     case 6:
+
+        if(scatterBrushIndex < scatter.count())
+        {
+            currentBrush = scatter[scatterBrushIndex];
+        }
+
         ui->scatterBrushGroup->show();
+
         break;
 
     //smart
@@ -86,22 +93,18 @@ void BrushPropertiesWidget::on_brushSizeInput_valueChanged(int arg1)
 
 void BrushPropertiesWidget::on_addScatterBrush_clicked()
 {
-    //create the properties window if it has not already been done
-    if(propertiesWindow == NULL)
-    {
-        propertiesWindow = new BrushPropertiesWindow;
-        propertiesWindow->RegisterTileSelector();
-    }
-
     //create a new brush and pass it to the properties window
     ScatterBrush *tempBrush = new ScatterBrush;
-    propertiesWindow->NewScatterBrush(tempBrush);
+    propertiesWindow.NewScatterBrush(tempBrush);
 
     //execute the window, and check if it was accepted
-    if(propertiesWindow->exec() == QDialog::Accepted)
+    if(propertiesWindow.exec() == QDialog::Accepted)
     {
         //add the new brush to the list
+        scatter.append(tempBrush);
+
         //and repopulate the lists
+        RepopulateBrushLists();
     }
     //if it wasnts accepted
     else

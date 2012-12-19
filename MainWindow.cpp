@@ -31,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->levelView->setMouseTracking(true);
 
+    ui->brushProperties->RegisterTileSelector(tileSelector);
+    ui->brushProperties->RegisterResourceManager(resources);
+
     //when the selection changes in tileSelector, notify the layer manager
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
 

@@ -1,8 +1,9 @@
 #include "TileBrush.h"
 
+int TileBrush::size = 1;
+
 TileBrush::TileBrush()
 {
-    size = 1;
     overwrite = true;
 }
 

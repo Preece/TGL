@@ -20,7 +20,7 @@ public:
     void SetOverwrite(bool over) { overwrite = over; }
 
 protected:
-    int size;
+    static int size;
     bool overwrite;
 };
 
