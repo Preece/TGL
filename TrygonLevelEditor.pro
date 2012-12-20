@@ -59,7 +59,8 @@ SOURCES += main.cpp\
     LevelEditor/LayerProperties.cpp \
     LevelEditor/Brushes/BrushPropertiesWidget.cpp \
     LevelEditor/Brushes/ScatterBrush.cpp \
-    LevelEditor/Brushes/BrushPropertiesWindow.cpp
+    LevelEditor/Brushes/BrushPropertiesWindow.cpp \
+    LevelEditor/Brushes/ComplexBrush.cpp
   
 
 HEADERS  += \
@@ -112,7 +113,8 @@ HEADERS  += \
     LevelEditor/LayerProperties.h \
     LevelEditor/Brushes/BrushPropertiesWidget.h \
     LevelEditor/Brushes/ScatterBrush.h \
-    LevelEditor/Brushes/BrushPropertiesWindow.h
+    LevelEditor/Brushes/BrushPropertiesWindow.h \
+    LevelEditor/Brushes/ComplexBrush.h
    
 
 FORMS    += \
