@@ -50,7 +50,7 @@ void BrushPropertiesWindow::on_addTile_clicked()
 {
     if(currentScatterBrush)
     {
-        currentScatterBrush->AddTile(GetSelectedTileID());
+        currentScatterBrush->AddTile(0, GetSelectedTileID());
         RepopulateTileList();
     }
 }
@@ -107,10 +107,10 @@ void BrushPropertiesWindow::RepopulateTileList()
     if(currentScatterBrush)
     {
         //loop through all of the current scatter brushes tiles
-        for(int i = 0; i < currentScatterBrush->GetTileCount(); i++)
+        for(int i = 0; i < currentScatterBrush->GetTileCount(0); i++)
         {
             //create a visible item for each one, and set its position
-            TileItem *tempItem = GetTileFromID(currentScatterBrush->GetTile(i));
+            TileItem *tempItem = GetTileFromID(currentScatterBrush->GetTile(0, i));
             tempItem->setPos((i * resourceManager->GetLevelProperties()->GetTileWidth()) + i, 0);
 
             //add the new tile to the tile list

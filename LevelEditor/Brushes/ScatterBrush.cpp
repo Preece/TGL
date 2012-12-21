@@ -19,9 +19,9 @@ void ScatterBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
                 if(overwrite || layer->GetTileType(j + x, i + y) == 0)
                 {
                     if(preview)
-                        layer->PreviewModifyTile(j + x, i + y, GetRandomTile());
+                        layer->PreviewModifyTile(j + x, i + y, GetRandomTile(0));
                     else
-                        layer->ModifyTile(j + x, i + y, GetRandomTile());
+                        layer->ModifyTile(j + x, i + y, GetRandomTile(0));
                 }
             }
         }
@@ -30,14 +30,5 @@ void ScatterBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 
 ScatterBrush::ScatterBrush()
 {
-}
-
-int ScatterBrush::GetRandomTile()
-{
-    if(tiles.count() == 0)
-        return 0;
-
-    int rand = qrand() % (tiles.count());
-
-    return tiles[rand];
+    AddList();
 }
