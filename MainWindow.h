@@ -71,6 +71,8 @@ private slots:
 
     void on_brushTool_clicked();
 
+    void on_scatterFillTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 

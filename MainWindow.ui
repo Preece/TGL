@@ -44,7 +44,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -61,7 +61,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -78,7 +78,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -95,7 +95,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -112,7 +112,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -136,7 +136,20 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="scatterFillTool">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -153,7 +166,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -357,7 +370,7 @@
      <x>0</x>
      <y>0</y>
      <width>743</width>
-     <height>21</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

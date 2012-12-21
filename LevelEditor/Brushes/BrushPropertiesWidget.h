@@ -49,6 +49,12 @@ private slots:
 
     void on_deleteScatterBrush_clicked();
 
+    void on_smartBrushCombo_currentIndexChanged(int index);
+
+    void on_addSmartBrush_clicked();
+
+    void on_editSmartBrushes_clicked();
+
 signals:
     void BrushChanged();
 
@@ -63,6 +69,9 @@ private:
 
     QList<ScatterBrush*> scatter;
     int scatterBrushIndex;
+
+    QList<SmartBrush*> smart;
+    int smartBrushIndex;
 };
 
 #endif // BRUSHPROPERTIESWIDGET_H

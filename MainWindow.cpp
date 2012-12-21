@@ -273,3 +273,9 @@ void MainWindow::on_brushTool_clicked()
     ui->brushProperties->SetCurrentBrush(7);
     UpdateToolSelection();
 }
+
+void MainWindow::on_scatterFillTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(8);
+    UpdateToolSelection();
+}

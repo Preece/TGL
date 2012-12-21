@@ -7,6 +7,8 @@
 #include "../../Model/ResourceManager.h"
 
 #include "ScatterBrush.h"
+#include "SmartBrush.h"
+
 #include "../TileItem.h"
 
 namespace Ui {
@@ -24,8 +26,13 @@ public:
     void RegisterTileSelector(QGraphicsScene *selector);
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
-    void NewScatterBrush(ScatterBrush *newBrush);
-    void EditScatterBrush(ScatterBrush *editBrush);
+    void NewBrush(ComplexBrush *newBrush);
+    void EditBrush(ComplexBrush *editBrush);
+
+    void SetListIndex(int newIndex) { currentListIndex = newIndex; }
+
+    void ShowScatterControls();
+    void ShowSmartControls();
 
     bool IsTileSelected();
     int GetSelectedTileID();
@@ -41,6 +48,8 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    void SmartButtonPushed();
+
 private:
     Ui::BrushPropertiesWindow *ui;
 
@@ -49,7 +58,8 @@ private:
     QGraphicsScene tileList;
     QGraphicsScene *tileSelector;
 
-    ScatterBrush *currentScatterBrush;
+    ComplexBrush *currentBrush;
+    int currentListIndex;
 };
 
 #endif // BRUSHPROPERTIESWINDOW_H

@@ -1,11 +1,14 @@
 #ifndef SMARTBRUSH_H
 #define SMARTBRUSH_H
 
-#include "TileBrush.h"
+#include "ComplexBrush.h"
 
-class SmartBrush : public TileBrush
+class SmartBrush : public ComplexBrush
 {
 public:
+
+    void Paint(int x, int y, LayerGroup *layer, bool preview);
+
     SmartBrush();
 };
 

@@ -8,9 +8,24 @@ BrushPropertiesWindow::BrushPropertiesWindow(QWidget *parent) :
     ui->setupUi(this);
 
     resourceManager = NULL;
-    currentScatterBrush = NULL;
+    currentBrush = NULL;
     tileSelector = NULL;
+
+    currentListIndex = 0;
+
     ui->tileList->setScene(&tileList);
+
+    ui->smartBrushButtons->setId(ui->topLeft, 0);
+    ui->smartBrushButtons->setId(ui->topMiddle, 1);
+    ui->smartBrushButtons->setId(ui->topRight, 2);
+    ui->smartBrushButtons->setId(ui->middleLeft, 3);
+    ui->smartBrushButtons->setId(ui->middle, 4);
+    ui->smartBrushButtons->setId(ui->middleRight, 5);
+    ui->smartBrushButtons->setId(ui->bottomLeft, 6);
+    ui->smartBrushButtons->setId(ui->bottomMiddle, 7);
+    ui->smartBrushButtons->setId(ui->bottomRight, 8);
+
+    connect(ui->smartBrushButtons, SIGNAL(buttonClicked(int)), this, SLOT(SmartButtonPushed()));
 }
 
 BrushPropertiesWindow::~BrushPropertiesWindow()
@@ -24,33 +39,45 @@ void BrushPropertiesWindow::RegisterTileSelector(QGraphicsScene *selector)
     tileSelector = selector;
 }
 
-void BrushPropertiesWindow::NewScatterBrush(ScatterBrush *newBrush)
+void BrushPropertiesWindow::NewBrush(ComplexBrush *newBrush)
 {
     //clear out the tile list
     tileList.clear();
 
-    currentScatterBrush = NULL;
+    currentBrush = NULL;
 
     //empty the name input
     ui->brushNameInput->setText("");
 
-    currentScatterBrush = newBrush;
+    currentBrush = newBrush;
 }
 
-void BrushPropertiesWindow::EditScatterBrush(ScatterBrush *editBrush)
+void BrushPropertiesWindow::EditBrush(ComplexBrush *editBrush)
 {
-    currentScatterBrush = editBrush;
+    currentBrush = editBrush;
 
-    ui->brushNameInput->setText(currentScatterBrush->GetName());
+    ui->brushNameInput->setText(currentBrush->GetName());
 
     RepopulateTileList();
 }
 
+void BrushPropertiesWindow::ShowScatterControls()
+{
+    ui->smartBrushGroup->hide();
+    SetListIndex(0);
+}
+
+void BrushPropertiesWindow::ShowSmartControls()
+{
+    ui->smartBrushGroup->show();
+    SetListIndex(4);
+}
+
 void BrushPropertiesWindow::on_addTile_clicked()
 {
-    if(currentScatterBrush)
+    if(currentBrush)
     {
-        currentScatterBrush->AddTile(0, GetSelectedTileID());
+        currentBrush->AddTile(currentListIndex, GetSelectedTileID());
         RepopulateTileList();
     }
 }
@@ -104,13 +131,13 @@ void BrushPropertiesWindow::RepopulateTileList()
     tileList.clear();
 
     //make sure there is a brush
-    if(currentScatterBrush)
+    if(currentBrush)
     {
         //loop through all of the current scatter brushes tiles
-        for(int i = 0; i < currentScatterBrush->GetTileCount(0); i++)
+        for(int i = 0; i < currentBrush->GetTileCount(currentListIndex); i++)
         {
             //create a visible item for each one, and set its position
-            TileItem *tempItem = GetTileFromID(currentScatterBrush->GetTile(0, i));
+            TileItem *tempItem = GetTileFromID(currentBrush->GetTile(currentListIndex, i));
             tempItem->setPos((i * resourceManager->GetLevelProperties()->GetTileWidth()) + i, 0);
 
             //add the new tile to the tile list
@@ -121,17 +148,25 @@ void BrushPropertiesWindow::RepopulateTileList()
 
 void BrushPropertiesWindow::on_brushNameInput_textChanged(const QString &arg1)
 {
-    if(currentScatterBrush)
+    if(currentBrush)
     {
-        currentScatterBrush->SetName(arg1);
+        currentBrush->SetName(arg1);
     }
 }
 
 void BrushPropertiesWindow::on_buttonBox_accepted()
 {
-    if(currentScatterBrush)
-        if(currentScatterBrush->GetName() == "")
+    if(currentBrush)
+        if(currentBrush->GetName() == "")
         {
-            currentScatterBrush->SetName("New Scatter Brush");
+            currentBrush->SetName("New Brush");
         }
+}
+
+void BrushPropertiesWindow::SmartButtonPushed()
+{
+    //the button IDs correspond to the list index
+    currentListIndex = ui->smartBrushButtons->checkedId();
+
+    RepopulateTileList();
 }
