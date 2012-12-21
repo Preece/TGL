@@ -10,10 +10,10 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
     int radius = size;
 
     //y dimension
-    for(signed int i = -radius; i <= radius; i++)
+    for(signed int i = -radius + 1; i < radius; i++)
     {
         //x dimension
-        for(signed int j = -radius; j <= radius; j++)
+        for(signed int j = -radius + 1; j < radius; j++)
         {
             if(overwrite || layer->GetTileType(j + x, i + y) == 0)
             {
