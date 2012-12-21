@@ -24,6 +24,8 @@ public:
     int GetTileCount(int listIndex);
     void RemoveTile(int listIndex, int tileIndex);
 
+    bool ListContainsTile(int listIndex, int type);
+
 private:
     QList<TileList> lists;
 
