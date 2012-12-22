@@ -9,6 +9,8 @@ public:
 
     void Paint(int x, int y, LayerGroup *layer, bool preview);
 
+    void ContextPaintTile(int x, int y, LayerGroup *layer, bool preview);
+
     SmartBrush();
 };
 

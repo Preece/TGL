@@ -35,10 +35,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
         {
             if(overwrite || layer->GetTileType(x - radius, y + i) == 0)
             {
-                if(preview)
-                    layer->PreviewModifyTile(x - radius, y + i, GetRandomTile(3));
-                else
-                    layer->ModifyTile(x - radius, y + i, GetRandomTile(3));
+                ContextPaintTile(x - radius, y + i, layer, preview);
             }
         }
 
@@ -47,10 +44,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
         {
             if(overwrite || layer->GetTileType(x + radius, y + i) == 0)
             {
-                if(preview)
-                    layer->PreviewModifyTile(x + radius, y + i, GetRandomTile(5));
-                else
-                    layer->ModifyTile(x + radius, y + i, GetRandomTile(5));
+                ContextPaintTile(x + radius, y + i, layer, preview);
             }
         }
 
@@ -59,10 +53,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
         {
             if(overwrite || layer->GetTileType(x + i, y - radius) == 0)
             {
-                if(preview)
-                    layer->PreviewModifyTile(x + i, y - radius, GetRandomTile(1));
-                else
-                    layer->ModifyTile(x + i, y - radius, GetRandomTile(1));
+                ContextPaintTile(x + 1, y - radius, layer, preview);
             }
         }
 
@@ -71,10 +62,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
         {
             if(overwrite || layer->GetTileType(x + i, y + radius) == 0)
             {
-                if(preview)
-                    layer->PreviewModifyTile(x + i, y + radius, GetRandomTile(7));
-                else
-                    layer->ModifyTile(x + i, y + radius, GetRandomTile(7));
+                ContextPaintTile(x + i, y + radius, layer, preview);
             }
         }
     }
@@ -84,10 +72,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
     {
         if(overwrite || layer->GetTileType(x - radius, y - radius) == 0)
         {
-            if(preview)
-                layer->PreviewModifyTile(x - radius, y - radius, GetRandomTile(0));
-            else
-                layer->ModifyTile(x - radius, y - radius, GetRandomTile(0));
+            ContextPaintTile(x - radius, y - radius, layer, preview);
         }
     }
 
@@ -96,10 +81,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
     {
         if(overwrite || layer->GetTileType(x + radius, y - radius) == 0)
         {
-            if(preview)
-                layer->PreviewModifyTile(x + radius, y - radius, GetRandomTile(2));
-            else
-                layer->ModifyTile(x + radius, y - radius, GetRandomTile(2));
+            ContextPaintTile(x + radius, y - radius, layer, preview);
         }
     }
 
@@ -108,10 +90,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
     {
         if(overwrite || layer->GetTileType(x - radius, y + radius) == 0)
         {
-            if(preview)
-                layer->PreviewModifyTile(x - radius, y + radius, GetRandomTile(6));
-            else
-                layer->ModifyTile(x - radius, y + radius, GetRandomTile(6));
+             ContextPaintTile(x - radius, y + radius, layer, preview);
         }
     }
 
@@ -120,15 +99,211 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
     {
         if(overwrite || layer->GetTileType(x + radius, y + radius) == 0)
         {
-            if(preview)
-                layer->PreviewModifyTile(x + radius, y + radius, GetRandomTile(8));
-            else
-                layer->ModifyTile(x + radius, y + radius, GetRandomTile(8));
+            ContextPaintTile(x + radius, y + radius, layer, preview);
         }
     }
 }
 
+void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
+{
+    //check for middle tiles that pinch this tile. That means paint a middle tile
+    if(ListContainsTile(4, layer->GetTileType(x - 1, y)) && ListContainsTile(4, layer->GetTileType(x + 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(4));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(4));
+    }
+
+    if(ListContainsTile(4, layer->GetTileType(x, y - 1)) && ListContainsTile(4, layer->GetTileType(x, y + 1)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(4));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(4));
+    }
+
+    if(ListContainsTile(4, layer->GetTileType(x - 1, y - 1)) && ListContainsTile(4, layer->GetTileType(x + 1, y + 1)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(4));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(4));
+    }
+
+    if(ListContainsTile(4, layer->GetTileType(x - 1, y + 1)) && ListContainsTile(4, layer->GetTileType(x + 1, y - 1)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(4));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(4));
+    }
+
+    //check for side tiles
+
+    //left side
+    if(ListContainsTile(4, layer->GetTileType(x + 1, y)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x - 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(3));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(3));
+
+        return;
+    }
+
+    //right side
+    if(ListContainsTile(4, layer->GetTileType(x - 1, y)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x + 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(5));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(5));
+
+        return;
+    }
+
+    //top side
+    if(ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x + 1, y)) &&
+       !ListContainsTile(4, layer->GetTileType(x - 1, y)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y - 1)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(1));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(1));
+
+        return;
+    }
+
+    //bottom side
+    if(ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x + 1, y)) &&
+       !ListContainsTile(4, layer->GetTileType(x - 1, y)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y + 1)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(7));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(7));
+
+        return;
+    }
+
+    //top left
+    if(ListContainsTile(4, layer->GetTileType(x + 1, y + 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x + 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(0));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(0));
+
+        return;
+    }
+
+    //top right
+    if(ListContainsTile(4, layer->GetTileType(x - 1, y + 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x - 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(2));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(2));
+
+        return;
+    }
+
+    //bottom left
+    if(ListContainsTile(4, layer->GetTileType(x + 1, y - 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x + 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(6));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(6));
+
+        return;
+    }
+
+    //bottom right
+    if(ListContainsTile(4, layer->GetTileType(x - 1, y - 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
+       !ListContainsTile(4, layer->GetTileType(x - 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(8));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(8));
+
+        return;
+    }
+
+    //top left corner
+    if(ListContainsTile(4, layer->GetTileType(x + 1, y + 1)) &&
+       ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
+       ListContainsTile(4, layer->GetTileType(x + 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(9));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(9));
+
+        return;
+    }
+
+    //top right
+    if(ListContainsTile(4, layer->GetTileType(x - 1, y + 1)) &&
+       ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
+       ListContainsTile(4, layer->GetTileType(x - 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(10));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(10));
+
+        return;
+    }
+
+    //bottom left
+    if(ListContainsTile(4, layer->GetTileType(x + 1, y - 1)) &&
+       ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
+       ListContainsTile(4, layer->GetTileType(x + 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(11));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(11));
+
+        return;
+    }
+
+    //bottom right
+    if(ListContainsTile(4, layer->GetTileType(x - 1, y - 1)) &&
+       ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
+       ListContainsTile(4, layer->GetTileType(x - 1, y)))
+    {
+        if(preview)
+            layer->PreviewModifyTile(x, y, GetRandomTile(12));
+        else
+            layer->ModifyTile(x, y, GetRandomTile(12));
+
+        return;
+    }
+}
+
+
 SmartBrush::SmartBrush()
 {
-    AddList(9);
+    AddList(13);
 }

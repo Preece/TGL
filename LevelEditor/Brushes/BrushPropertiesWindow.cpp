@@ -24,6 +24,10 @@ BrushPropertiesWindow::BrushPropertiesWindow(QWidget *parent) :
     ui->smartBrushButtons->setId(ui->bottomLeft, 6);
     ui->smartBrushButtons->setId(ui->bottomMiddle, 7);
     ui->smartBrushButtons->setId(ui->bottomRight, 8);
+    ui->smartBrushButtons->setId(ui->topLeftCorner, 9);
+    ui->smartBrushButtons->setId(ui->topRightCorner, 10);
+    ui->smartBrushButtons->setId(ui->bottomLeftCorner, 11);
+    ui->smartBrushButtons->setId(ui->bottomRightCorner, 12);
 
     connect(ui->smartBrushButtons, SIGNAL(buttonClicked(int)), this, SLOT(SmartButtonPushed()));
 }
