@@ -182,6 +182,8 @@ void SpriteEditor::StoreNewFrameRect(QRect newRect)
         //update the frame items icon
         SetFrameIcon(GetSelectedFrameItem());
     }
+
+    RepopulateFrameList();
 }
 
 void SpriteEditor::StoreNewRenderSpot(QPoint newSpot)
