@@ -53,7 +53,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
         {
             if(overwrite || layer->GetTileType(x + i, y - radius) == 0)
             {
-                ContextPaintTile(x + 1, y - radius, layer, preview);
+                ContextPaintTile(x + i, y - radius, layer, preview);
             }
         }
 
@@ -106,37 +106,60 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 
 void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
 {
-    //check for middle tiles that pinch this tile. That means paint a middle tile
-    if(ListContainsTile(4, layer->GetTileType(x - 1, y)) && ListContainsTile(4, layer->GetTileType(x + 1, y)))
+    if(!ListContainsTile(4, layer->GetTileType(x, y)))
     {
-        if(preview)
-            layer->PreviewModifyTile(x, y, GetRandomTile(4));
-        else
-            layer->ModifyTile(x, y, GetRandomTile(4));
-    }
+        //check for middle tiles that pinch this tile. That means paint a middle tile
+        if(ListContainsTile(4, layer->GetTileType(x - 1, y)) && ListContainsTile(4, layer->GetTileType(x + 1, y)))
+        {
+            if(preview)
+                layer->PreviewModifyTile(x, y, GetRandomTile(4));
+            else
+                layer->ModifyTile(x, y, GetRandomTile(4));
 
-    if(ListContainsTile(4, layer->GetTileType(x, y - 1)) && ListContainsTile(4, layer->GetTileType(x, y + 1)))
-    {
-        if(preview)
-            layer->PreviewModifyTile(x, y, GetRandomTile(4));
-        else
-            layer->ModifyTile(x, y, GetRandomTile(4));
-    }
+            //call this function on that new tile
+            ContextPaintTile(x - 1, y, layer, preview);
 
-    if(ListContainsTile(4, layer->GetTileType(x - 1, y - 1)) && ListContainsTile(4, layer->GetTileType(x + 1, y + 1)))
-    {
-        if(preview)
-            layer->PreviewModifyTile(x, y, GetRandomTile(4));
-        else
-            layer->ModifyTile(x, y, GetRandomTile(4));
-    }
+            return;
+        }
 
-    if(ListContainsTile(4, layer->GetTileType(x - 1, y + 1)) && ListContainsTile(4, layer->GetTileType(x + 1, y - 1)))
-    {
-        if(preview)
-            layer->PreviewModifyTile(x, y, GetRandomTile(4));
-        else
-            layer->ModifyTile(x, y, GetRandomTile(4));
+        if(ListContainsTile(4, layer->GetTileType(x, y - 1)) && ListContainsTile(4, layer->GetTileType(x, y + 1)))
+        {
+            if(preview)
+                layer->PreviewModifyTile(x, y, GetRandomTile(4));
+            else
+                layer->ModifyTile(x, y, GetRandomTile(4));
+
+            //call this function on that new tile
+            ContextPaintTile(x - 1, y, layer, preview);
+
+            return;
+        }
+
+        if(ListContainsTile(4, layer->GetTileType(x - 1, y - 1)) && ListContainsTile(4, layer->GetTileType(x + 1, y + 1)))
+        {
+            if(preview)
+                layer->PreviewModifyTile(x, y, GetRandomTile(4));
+            else
+                layer->ModifyTile(x, y, GetRandomTile(4));
+
+            //call this function on that new tile
+            ContextPaintTile(x - 1, y, layer, preview);
+
+            return;
+        }
+
+        if(ListContainsTile(4, layer->GetTileType(x - 1, y + 1)) && ListContainsTile(4, layer->GetTileType(x + 1, y - 1)))
+        {
+            if(preview)
+                layer->PreviewModifyTile(x, y, GetRandomTile(4));
+            else
+                layer->ModifyTile(x, y, GetRandomTile(4));
+
+            //call this function on that new tile
+            ContextPaintTile(x - 1, y, layer, preview);
+
+            return;
+        }
     }
 
     //check for side tiles
