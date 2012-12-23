@@ -17,6 +17,16 @@ int ResourceManager::AddSprite(Sprite *newSprite)
 
 bool ResourceManager::DeleteSprite(int ID)
 {
+    for(int i = 0; i < spriteList.count(); i++)
+    {
+        if(spriteList[i]->GetID() == ID)
+        {
+            delete spriteList[i];
+            spriteList.removeAt(i);
+
+            return true;
+        }
+    }
     return false;
 }
 
@@ -52,6 +62,16 @@ int ResourceManager::AddObjectPrototype(ObjectPrototype *newObjectPrototype)
 
 bool ResourceManager::DeleteObjectPrototype(int ID)
 {
+    for(int i = 0; i < objectPrototypeList.count(); i++)
+    {
+        if(objectPrototypeList[i]->GetID() == ID)
+        {
+            delete objectPrototypeList[i];
+            objectPrototypeList.removeAt(i);
+
+            return true;
+        }
+    }
     return false;
 }
 

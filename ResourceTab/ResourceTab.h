@@ -64,6 +64,8 @@ private slots:
     void on_editObjectButton_clicked();
     void on_selectTilesetButton_clicked();
 
+    void on_deleteObjectButton_clicked();
+
 signals:
     void NewSpriteButtonClicked();
     void NewObjectButtonClicked();

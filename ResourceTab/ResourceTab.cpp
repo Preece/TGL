@@ -451,3 +451,12 @@ void ResourceTab::on_selectTilesetButton_clicked()
         }
     }
 }
+
+void ResourceTab::on_deleteObjectButton_clicked()
+{
+    if(IsObjectSelected())
+    {
+        resourceManager->DeleteObjectPrototype(GetSelectedObject()->GetID());
+        RepopulateObjectSelector();
+    }
+}
