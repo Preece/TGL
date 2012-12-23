@@ -460,3 +460,12 @@ void ResourceTab::on_deleteObjectButton_clicked()
         RepopulateObjectSelector();
     }
 }
+
+void ResourceTab::on_deleteSpriteButton_clicked()
+{
+    if(IsSpriteSelected())
+    {
+        resourceManager->DeleteSprite(GetSelectedSprite()->GetID());
+        RepopulateSpriteSelector();
+    }
+}

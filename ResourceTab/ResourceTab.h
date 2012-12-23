@@ -66,6 +66,8 @@ private slots:
 
     void on_deleteObjectButton_clicked();
 
+    void on_deleteSpriteButton_clicked();
+
 signals:
     void NewSpriteButtonClicked();
     void NewObjectButtonClicked();
