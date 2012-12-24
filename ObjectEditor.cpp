@@ -114,11 +114,6 @@ void ObjectEditor::UpdateSymbol()
         ui->symbolPreview->setPixmap(resourceManager->GetSpriteSymbol(currentObject->GetSpriteID()));
 }
 
-void ObjectEditor::on_ObjectEditor_accepted()
-{
-
-}
-
 void ObjectEditor::on_addCustomButton_clicked()
 {
     QTreeWidgetItem *newItem = new QTreeWidgetItem(ui->customValues);

@@ -41,6 +41,14 @@ void LayerManager::EyedropTile(QPoint pos)
     }
 }
 
+void LayerManager::AddObjectItem(ObjectInstanceItem *object)
+{
+    if(currentLayer && object)
+    {
+        currentLayer->AddObjectItem(object);
+    }
+}
+
 void LayerManager::AddLayer(Layer *newLayer)
 {
     //create a layer group, and assign the new layer

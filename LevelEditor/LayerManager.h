@@ -30,7 +30,7 @@ public:
 
     void EyedropTile(QPoint pos);
 
-    void AddObjectItem(QPoint pos, ObjectPrototype *proto);
+    void AddObjectItem(ObjectInstanceItem *object);
 
     bool IsLayerSelected();
     LayerGroup *GetSelectedLayer();

@@ -90,6 +90,9 @@ ObjectPrototype *ResourceManager::GetObjectPrototypeByIndex(int index)
 
 int ResourceManager::AddObjectInstance(ObjectInstance *newObjectInstance)
 {
+    if(newObjectInstance)
+        objectInstanceList.append(newObjectInstance);
+
     return 0;
 }
 

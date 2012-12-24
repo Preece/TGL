@@ -282,3 +282,22 @@ void MainWindow::on_scatterFillTool_clicked()
     ui->brushProperties->SetCurrentBrush(8);
     UpdateToolSelection();
 }
+
+void MainWindow::on_addObject_clicked()
+{
+    if(ui->resourceTab->IsObjectSelected())
+    {
+        ObjectInstanceItem *tempObjItem = new ObjectInstanceItem;
+        ObjectInstance *tempObj = new ObjectInstance;
+
+        tempObj->SetPosition(0, 0);
+        tempObj->AttachPrototype(ui->resourceTab->GetSelectedObject()->GetID());
+        tempObjItem->SetObject(tempObj);
+
+        tempObjItem->setPixmap(resources->GetSpriteSymbol(ui->resourceTab->GetSelectedObject()->GetSpriteID()));
+        tempObjItem->setPos(0, 0);
+
+        resources->AddObjectInstance(tempObj);
+        layers->AddObjectItem(tempObjItem);
+    }
+}

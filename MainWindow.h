@@ -73,6 +73,8 @@ private slots:
 
     void on_scatterFillTool_clicked();
 
+    void on_addObject_clicked();
+
 private:
     Ui::MainWindow *ui;
 

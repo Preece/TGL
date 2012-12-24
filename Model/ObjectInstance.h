@@ -8,11 +8,14 @@
 class ObjectInstance : public Savable
 {
 public:
+
+    ObjectInstance();
+
     bool SaveToFile(Exporter *exporter);
     bool LoadFromFile(Exporter *exporter);
     QString GetType() { return "OBIN"; }
 
-    bool AttachPrototype(int newProtoID);
+    bool AttachPrototype(int newProtoID) { prototypeID = newProtoID; }
 	bool UnattachPrototype();
     int GetPrototypeID();
 
@@ -22,7 +25,6 @@ public:
 
 private:
     int prototypeID;
-    int ID;
 
     int x, y;
 };

@@ -4,6 +4,8 @@
 #include <QGraphicsItemGroup>
 
 #include "TileInstanceItem.h"
+#include "ObjectInstanceItem.h"
+
 #include "../Model/Layer.h"
 #include "../Model/ResourceManager.h"
 
@@ -24,6 +26,10 @@ public:
     int GetTileType(int x, int y);
     void SetLayerSize(int w, int h);
 
+    void AddObjectItem(ObjectInstanceItem *newObj);
+    ObjectInstance *GetObject(int ID);
+    void DeleteObject(int ID);
+
     void ToggleVisibility(bool visible);
 
     int GetLayerWidth() { return width; }
@@ -39,6 +45,8 @@ private:
 
     Layer *layer;
     ResourceManager *resourceManager;
+
+    QList<ObjectInstanceItem*> objects;
 };
 
 #endif // LAYERGROUP_H

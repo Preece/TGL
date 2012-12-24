@@ -38,8 +38,6 @@ private slots:
 
     void on_spriteList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    void on_ObjectEditor_accepted();
-
     void on_addCustomButton_clicked();
 
     void on_removeCustomButton_clicked();
