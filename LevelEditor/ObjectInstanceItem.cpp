@@ -2,6 +2,7 @@
 
 ObjectInstanceItem::ObjectInstanceItem()
 {
+    this->setAcceptedMouseButtons(Qt::LeftButton);
 }
 
 void ObjectInstanceItem::MoveItem(int x, int y)
