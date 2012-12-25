@@ -15,7 +15,7 @@ public:
 
     void MoveItem(int x, int y);
 
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+    //QVariant itemChange(GraphicsItemChange change, const QVariant &value);
     
 signals:
     

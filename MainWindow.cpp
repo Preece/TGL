@@ -295,15 +295,15 @@ void MainWindow::on_addObject_clicked()
         tempObjItem->SetObject(tempObj);
 
         resources->AddObjectInstance(tempObj);
-        layers->AddObjectItem(tempObjItem);
 
         tempObjItem->setPixmap(resources->GetSpriteSymbol(ui->resourceTab->GetSelectedObject()->GetSpriteID()));
-        tempObjItem->setPos(100, 100);
+        //tempObjItem->setPos(100, 100);
 
         tempObjItem->setFlags(tempObjItem->flags() | QGraphicsItem::ItemIsSelectable
                               | QGraphicsItem::ItemIsMovable
                               | QGraphicsItem::ItemSendsGeometryChanges);
 
         tempObjItem->show();
+        layers->AddObjectItem(tempObjItem);
     }
 }
