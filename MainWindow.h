@@ -38,6 +38,8 @@ public:
 
     void RepopulateLayerSelector();
     bool IsLayerSelected();
+
+    void RepopulateObjects();
     
 private slots:
 

@@ -12,7 +12,7 @@ int ResourceManager::AddSprite(Sprite *newSprite)
         return newSprite->GetID();
     }
 
-    return NULL;
+    return 0;
 }
 
 bool ResourceManager::DeleteSprite(int ID)
@@ -57,7 +57,7 @@ int ResourceManager::AddObjectPrototype(ObjectPrototype *newObjectPrototype)
         return newObjectPrototype->GetID();
     }
 
-    return NULL;
+    return 0;
 }
 
 bool ResourceManager::DeleteObjectPrototype(int ID)
@@ -270,6 +270,8 @@ Layer *ResourceManager::GetLayer(int ID)
             return layerList[i];
         }
     }
+
+    return NULL;
 }
 
 Layer *ResourceManager::GetLayerByIndex(int index)

@@ -28,7 +28,7 @@ public:
 
     void AttachSprite(int newSpriteID) { spriteID = newSpriteID; }
     int GetSpriteID() { return spriteID; }
-    bool UnattachSprite() { spriteID = 0; }
+    void UnattachSprite() { spriteID = 0; }
 
     void AddCustomValue(QString newName, QVariant newValue) { customValues.insert(newName, newValue); }
     QMap<QString, QVariant> GetCustomValues() { return customValues; }

@@ -65,7 +65,7 @@ void SpritesheetSelector::ClearImageList()
     ui->imageList->clear();
 }
 
-void SpritesheetSelector::on_imageList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+void SpritesheetSelector::on_imageList_currentItemChanged(QListWidgetItem *current)
 {
     if(IsImageSelected())
     {

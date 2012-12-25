@@ -89,7 +89,7 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
     int pos = (x * width) + y;
 
     //if there is not a tile at this position
-    if(items[pos] == NULL && newType != NULL)
+    if(items[pos] == NULL && newType != 0)
     {
         TileInstanceItem *tempTile = new TileInstanceItem;
 
@@ -113,7 +113,7 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
     else
     {
         //and the new type is not 0
-        if(newType != NULL)
+        if(newType != 0)
         {
             //modify the Tile ID it references
             items[pos]->GetTileInstance()->SetTileID(newType);

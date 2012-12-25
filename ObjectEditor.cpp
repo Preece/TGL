@@ -54,7 +54,7 @@ void ObjectEditor::on_objectTypeSelector_currentIndexChanged(int index)
         currentObject->SetObjectType(index);
 }
 
-void ObjectEditor::on_spriteList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+void ObjectEditor::on_spriteList_currentItemChanged(QListWidgetItem *current)
 {
     //abort of there is no item selected
     if(ui->spriteList->currentRow() == -1)

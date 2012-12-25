@@ -32,3 +32,7 @@ ScatterBrush::ScatterBrush()
 {
     AddList();
 }
+
+ScatterBrush::~ScatterBrush()
+{
+}

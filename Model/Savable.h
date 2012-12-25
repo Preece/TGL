@@ -26,6 +26,7 @@ protected:
 
 public:
     Savable();
+    virtual ~Savable();
 
     int GetID() { return ID; }
 

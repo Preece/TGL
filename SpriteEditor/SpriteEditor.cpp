@@ -449,12 +449,12 @@ void SpriteEditor::on_deleteFrameButton_clicked()
     }
 }
 
-void SpriteEditor::on_animationList_currentRowChanged(int currentRow)
+void SpriteEditor::on_animationList_currentRowChanged()
 {
     RepopulateFrameList();
 }
 
-void SpriteEditor::on_frameList_currentRowChanged(int currentRow)
+void SpriteEditor::on_frameList_currentRowChanged()
 {
     //if a frame is selected
     if(IsFrameSelected())
@@ -498,7 +498,7 @@ void SpriteEditor::on_selectSpritesheetButton_clicked()
 
 }
 
-void SpriteEditor::on_frameDelayInput_valueChanged(int arg1)
+void SpriteEditor::on_frameDelayInput_valueChanged()
 {
     //if a frame is selected when the value changes in the delay input
     if(IsFrameSelected())

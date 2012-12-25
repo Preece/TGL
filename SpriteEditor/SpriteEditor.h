@@ -66,10 +66,10 @@ private slots:
     void on_editAnimationButton_clicked();
     void on_addFrameButton_clicked();
     void on_deleteFrameButton_clicked();
-    void on_animationList_currentRowChanged(int currentRow);
-    void on_frameList_currentRowChanged(int currentRow);
+    void on_animationList_currentRowChanged();
+    void on_frameList_currentRowChanged();
     void on_selectSpritesheetButton_clicked();
-    void on_frameDelayInput_valueChanged(int arg1);
+    void on_frameDelayInput_valueChanged();
     void on_zoominTool_clicked();
     void on_zoomoutTool_clicked();
     void on_spriteNameInput_textChanged(const QString &arg1);

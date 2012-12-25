@@ -9,6 +9,7 @@ public:
     void Paint(int x, int y, LayerGroup *layer, bool preview);
 
     ScatterBrush();
+    virtual ~ScatterBrush();
 
 private:
 

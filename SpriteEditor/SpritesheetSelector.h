@@ -28,7 +28,7 @@ public:
     
 private slots:
 
-    void on_imageList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void on_imageList_currentItemChanged(QListWidgetItem *current);
 
 private:
     Ui::SpritesheetSelector *ui;

@@ -8,6 +8,10 @@ Savable::Savable()
     ID = GenerateID();
 }
 
+Savable::~Savable()
+{
+}
+
 void Savable::AddChild(Savable *newChild)
 {
     children.append(newChild);

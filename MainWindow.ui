@@ -268,7 +268,7 @@
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
         <property name="viewportUpdateMode">
-         <enum>QGraphicsView::FullViewportUpdate</enum>
+         <enum>QGraphicsView::SmartViewportUpdate</enum>
         </property>
         <property name="rubberBandSelectionMode">
          <enum>Qt::IntersectsItemShape</enum>

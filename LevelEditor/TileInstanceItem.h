@@ -15,9 +15,9 @@ public:
 
     void SetTilePixmap(QPixmap tilePixmap);
 
-    int GetX() { if(tile) return tile->GetX(); }
-    int GetY() { if(tile) return tile->GetY(); }
-    int GetTileID() { if(tile) return tile->GetTileID(); }
+    int GetX() { if(tile) return tile->GetX(); return 0; }
+    int GetY() { if(tile) return tile->GetY(); return 0; }
+    int GetTileID() { if(tile) return tile->GetTileID(); return 0; }
 
 private:
     TileInstance *tile;

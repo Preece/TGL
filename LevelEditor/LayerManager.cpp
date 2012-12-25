@@ -259,5 +259,7 @@ int LayerManager::GetSelectedTileID()
 {
     if(currentTile)
         return currentTile->GetTileID();
+
+    return 0;
 }
 
