@@ -14,6 +14,8 @@ public:
     ObjectInstance *GetObject() { return object; }
 
     void MoveItem(int x, int y);
+
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
     
 signals:
     
