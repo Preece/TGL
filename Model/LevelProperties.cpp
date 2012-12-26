@@ -19,12 +19,12 @@ bool LevelProperties::IsPropertiesSet()
     return false;
 }
 
-bool LevelProperties::SaveToFile(Exporter *exporter)
+bool LevelProperties::Export(Exporter *exporter)
 {
     return false;
 }
 
-bool LevelProperties::LoadFromFile(Exporter *exporter)
+bool LevelProperties::Import(Exporter *exporter)
 {
     return false;
 }

@@ -11,12 +11,12 @@ ObjectInstance::ObjectInstance()
 {
 }
 
-bool ObjectInstance::SaveToFile(Exporter *exporter)
+bool ObjectInstance::Export(Exporter *exporter)
 {
     return false;
 }
 
-bool ObjectInstance::LoadFromFile(Exporter *exporter)
+bool ObjectInstance::Import(Exporter *exporter)
 {
     return false;
 }

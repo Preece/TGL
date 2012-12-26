@@ -11,12 +11,12 @@ Image::~Image()
         delete image;
 }
 
-bool Image::SaveToFile(Exporter *exporter)
+bool Image::Export(Exporter *exporter)
 {
     return false;
 }
 
-bool Image::LoadFromFile(Exporter *exporter)
+bool Image::Import(Exporter *exporter)
 {
     return false;
 }

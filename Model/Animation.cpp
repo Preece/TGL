@@ -11,14 +11,22 @@ void Animation::DestroyAllFrames()
     children.clear();
 }
 
-bool Animation::SaveToFile(Exporter *exporter)
+bool Animation::Export(Exporter *exporter)
 {
-    return false;
+    exporter->WriteString(animationName);
+    exporter->WriteBool(loop);
+    exporter->WriteInt(nextAnimationID);
+
+    return true;
 }
 
-bool Animation::LoadFromFile(Exporter *exporter)
+bool Animation::Import(Exporter *exporter)
 {
-    return false;
+    exporter->ReadString(animationName);
+    exporter->ReadBool(loop);
+    exporter->ReadInt(nextAnimationID);
+
+    return true;
 }
 
 Animation::Animation()

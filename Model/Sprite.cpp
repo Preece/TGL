@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-bool Sprite::LoadFromFile(Exporter *exporter)
+bool Sprite::Import(Exporter *exporter)
 {
     return false;
 }
@@ -10,7 +10,7 @@ Sprite::Sprite()
     imageID = 0;
 }
 
-bool Sprite::SaveToFile(Exporter *exporter)
+bool Sprite::Export(Exporter *exporter)
 {
     return false;
 }

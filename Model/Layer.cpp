@@ -4,12 +4,12 @@ Layer::Layer()
 {
 }
 
-bool Layer::SaveToFile(Exporter *exporter)
+bool Layer::Export(Exporter *exporter)
 {
     return false;
 }
 
-bool Layer::LoadFromFile(Exporter *exporter)
+bool Layer::Import(Exporter *exporter)
 {
     return false;
 }

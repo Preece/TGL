@@ -1,14 +1,32 @@
 #include "Frame.h"
 
-bool Frame::SaveToFile(Exporter *exporter)
+bool Frame::Export(Exporter *exporter)
 {
-    return false;
+    exporter->WriteRect(frameRect);
+    exporter->WriteInt(delay);
+    exporter->WritePoint(renderSpot);
+    exporter->WritePoint(boundingBoxXY);
+
+    exporter->WriteInt(hotspots.count());
+    for(int i = 0; i < hotspots.count(); i++)
+        exporter->WritePoint(hotspots[i]);
+
+    return true;
 }
 
-
-bool Frame::LoadFromFile(Exporter *exporter)
+bool Frame::Import(Exporter *exporter)
 {
-    return false;
+    exporter->ReadRect(frameRect);
+    exporter->ReadInt(delay);
+    exporter->ReadPoint(renderSpot);
+    exporter->ReadPoint(boundingBoxXY);
+
+    int hotspotCount;
+    exporter->ReadInt(hotspotCount);
+    for(int i = 0; i < hotspotCount; i++)
+        exporter->ReadPoint(hotspots[i]);
+
+    return true;
 }
 
 Frame::Frame()

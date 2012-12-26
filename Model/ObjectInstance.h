@@ -11,8 +11,8 @@ public:
 
     ObjectInstance();
 
-    bool SaveToFile(Exporter *exporter);
-    bool LoadFromFile(Exporter *exporter);
+    bool Export(Exporter *exporter);
+    bool Import(Exporter *exporter);
     QString GetType() { return "OBIN"; }
 
     void SetPrototypeID(int newProtoID) { prototypeID = newProtoID; }

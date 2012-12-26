@@ -6,8 +6,8 @@
 class TileInstance : public Savable
 {
 public:
-    bool SaveToFile(Exporter *exporter);
-    bool LoadFromFile(Exporter *exporter);
+    bool Export(Exporter *exporter);
+    bool Import(Exporter *exporter);
     QString GetType() { return "TLIN"; }
 
     TileInstance() { x = 0; y = 0; tileID = 0; }

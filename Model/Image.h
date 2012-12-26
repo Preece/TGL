@@ -11,8 +11,8 @@
 class Image : public Savable
 {
 public:
-    bool SaveToFile(Exporter *exporter);
-    bool LoadFromFile(Exporter *exporter);
+    bool Export(Exporter *exporter);
+    bool Import(Exporter *exporter);
     QString GetType() { return "IMAG"; }
 
     Image();

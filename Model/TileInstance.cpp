@@ -1,11 +1,11 @@
 #include "TileInstance.h"
 
-bool TileInstance::SaveToFile(Exporter *exporter)
+bool TileInstance::Export(Exporter *exporter)
 {
     return false;
 }
 
-bool TileInstance::LoadFromFile(Exporter *exporter)
+bool TileInstance::Import(Exporter *exporter)
 {
     return false;
 }

@@ -4,12 +4,12 @@ Tile::Tile()
 {
 }
 
-bool Tile::SaveToFile(Exporter *exporter)
+bool Tile::Export(Exporter *exporter)
 {
     return false;
 }
 
-bool Tile::LoadFromFile(Exporter *exporter)
+bool Tile::Import(Exporter *exporter)
 {
     return false;
 }

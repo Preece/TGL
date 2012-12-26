@@ -7,12 +7,12 @@ ObjectPrototype::ObjectPrototype()
     behavior = 0;
 }
 
-bool ObjectPrototype::SaveToFile(Exporter *exporter)
+bool ObjectPrototype::Export(Exporter *exporter)
 {
     return false;
 }
 
-bool ObjectPrototype::LoadFromFile(Exporter *exporter)
+bool ObjectPrototype::Import(Exporter *exporter)
 {
     return false;
 }

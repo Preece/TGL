@@ -12,6 +12,18 @@ Savable::~Savable()
 {
 }
 
+void Savable::Save(Exporter *exporter)
+{
+    exporter->WriteType(ID, GetType());
+
+    Export(exporter);
+
+    for(int i = 0 ; i < GetChildCount(); i++)
+    {
+        GetChildByIndex(i)->Save(exporter);
+    }
+}
+
 void Savable::AddChild(Savable *newChild)
 {
     children.append(newChild);
