@@ -152,6 +152,7 @@ void LayerManager::SetBrush(TileBrush *newBrush)
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    event->accept();
     QGraphicsScene::mousePressEvent(event);
 
     if(!currentLayer || !currentBrush)
@@ -182,6 +183,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    event->accept();
     QGraphicsScene::mouseMoveEvent(event);
 
     if(!currentLayer || !currentBrush)

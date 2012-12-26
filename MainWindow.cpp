@@ -291,17 +291,13 @@ void MainWindow::on_addObject_clicked()
         ObjectInstance *tempObj = new ObjectInstance;
 
         tempObj->SetPosition(0, 0);
-        tempObj->AttachPrototype(ui->resourceTab->GetSelectedObject()->GetID());
-        tempObjItem->SetObject(tempObj);
+        tempObj->SetPrototypeID(ui->resourceTab->GetSelectedObject()->GetID());
+        tempObjItem->SetObjectInstance(tempObj);
 
         resources->AddObjectInstance(tempObj);
 
         tempObjItem->setPixmap(resources->GetSpriteSymbol(ui->resourceTab->GetSelectedObject()->GetSpriteID()));
         //tempObjItem->setPos(100, 100);
-
-        tempObjItem->setFlags(tempObjItem->flags() | QGraphicsItem::ItemIsSelectable
-                              | QGraphicsItem::ItemIsMovable
-                              | QGraphicsItem::ItemSendsGeometryChanges);
 
         tempObjItem->show();
         layers->AddObjectItem(tempObjItem);

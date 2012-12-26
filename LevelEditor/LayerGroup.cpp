@@ -51,7 +51,7 @@ void LayerGroup::AddObjectItem(ObjectInstanceItem *newObj)
     if(newObj)
     {
         objects.append(newObj);
-        addToGroup(newObj);
+        newObj->setParentItem(this);
     }
 }
 
@@ -107,7 +107,7 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
                          y * resourceManager->GetLevelProperties()->GetTileHeight());
 
         items[pos] = tempTile;
-        addToGroup(tempTile);
+        tempTile->setParentItem(this);
     }
     //if a tile already exists at this position
     else
@@ -148,7 +148,7 @@ void LayerGroup::PreviewModifyTile(int x, int y, int newType)
                      y * resourceManager->GetLevelProperties()->GetTileHeight());
 
     previewItems.append(tempTile);
-    addToGroup(tempTile);
+    tempTile->setParentItem(this);
 }
 
 void LayerGroup::ClearPreview()

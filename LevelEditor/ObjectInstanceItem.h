@@ -10,7 +10,7 @@ class ObjectInstanceItem : public QGraphicsPixmapItem
 public:
     ObjectInstanceItem();
 
-    void SetObject(ObjectInstance *newObj) { object = newObj; }
+    void SetObjectInstance(ObjectInstance *newObj) { object = newObj; }
     ObjectInstance *GetObject() { return object; }
 
     void MoveItem(int x, int y);

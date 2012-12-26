@@ -9,7 +9,7 @@
 #include "../Model/Layer.h"
 #include "../Model/ResourceManager.h"
 
-class LayerGroup : public QGraphicsItemGroup
+class LayerGroup : public QGraphicsRectItem
 {
 public:
     LayerGroup();

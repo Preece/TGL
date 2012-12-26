@@ -15,7 +15,7 @@ public:
     bool LoadFromFile(Exporter *exporter);
     QString GetType() { return "OBIN"; }
 
-    void AttachPrototype(int newProtoID) { prototypeID = newProtoID; }
+    void SetPrototypeID(int newProtoID) { prototypeID = newProtoID; }
     void UnattachPrototype();
     int GetPrototypeID();
 

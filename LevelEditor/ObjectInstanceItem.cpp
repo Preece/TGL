@@ -3,6 +3,9 @@
 ObjectInstanceItem::ObjectInstanceItem()
 {
     this->setAcceptedMouseButtons(Qt::LeftButton);
+    this->setFlag(ItemIsSelectable, true);
+    this->setFlag(ItemIsMovable, true);
+    this->setFlag(ItemSendsGeometryChanges, true);
 }
 
 void ObjectInstanceItem::MoveItem(int x, int y)
