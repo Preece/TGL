@@ -17,7 +17,7 @@ void ObjectInstanceItem::MoveItem(int x, int y)
         object->SetPosition(x, y);
 }
 
-/*QVariant ObjectInstanceItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant ObjectInstanceItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if(change == ItemPositionChange)
     {
@@ -28,4 +28,6 @@ void ObjectInstanceItem::MoveItem(int x, int y)
             object->SetPosition(position.x(), position.y());
         }
     }
-}*/
+
+    return QGraphicsPixmapItem::itemChange(change, value);
+}
