@@ -14,7 +14,7 @@ Savable::~Savable()
 
 void Savable::Save(Exporter *exporter)
 {
-    exporter->WriteType(ID, GetType());
+    //exporter->WriteType(ID, GetType());
 
     Export(exporter);
 

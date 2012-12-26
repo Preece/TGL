@@ -6,6 +6,7 @@ ObjectInstanceItem::ObjectInstanceItem()
     this->setFlag(ItemIsSelectable, true);
     this->setFlag(ItemIsMovable, true);
     this->setFlag(ItemSendsGeometryChanges, true);
+    this->setZValue(4);
 }
 
 void ObjectInstanceItem::MoveItem(int x, int y)

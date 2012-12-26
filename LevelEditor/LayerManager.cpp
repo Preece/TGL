@@ -158,7 +158,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(!currentLayer || !currentBrush)
         return;
 
-    if(event->button() == Qt::LeftButton)
+    if(event->button() == Qt::LeftButton && !IsObjectSelected())
     {
         //they have started painting, so nix the preview
         currentLayer->ClearPreview();
@@ -196,7 +196,7 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
-    if(event->buttons() == Qt::LeftButton)
+    if(event->buttons() == Qt::LeftButton && !IsObjectSelected())
     {
         //paint if the position is different from before
         //causes a bug where movement in the doand and right position trails
@@ -267,5 +267,13 @@ int LayerManager::GetSelectedTileID()
         return currentTile->GetTileID();
 
     return 0;
+}
+
+bool LayerManager::IsObjectSelected()
+{
+    if(this->selectedItems().count() > 0)
+        return true;
+
+    return false;
 }
 

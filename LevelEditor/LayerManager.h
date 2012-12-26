@@ -44,6 +44,8 @@ public:
 
     int GetSelectedTileID();
 
+    bool IsObjectSelected();
+
 public slots:
     void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
 
