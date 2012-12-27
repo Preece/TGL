@@ -49,6 +49,7 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
     case 6:
         if(scatterBrushIndex < scatter.count())
         {
+            scatter[scatterBrushIndex]->SetFill(false);
             currentBrush = scatter[scatterBrushIndex];
         }
         else
@@ -61,15 +62,17 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
 
     //scatter fill
     case 8:
-    /*    if(scatterBrushIndex < scatter.count())
+        if(scatterBrushIndex < scatter.count())
         {
+            scatter[scatterBrushIndex]->SetFill(true);
             currentBrush = scatter[scatterBrushIndex];
+
         }
         else
             currentBrush = NULL;
 
         ui->scatterBrushGroup->show();
-        break;*/
+        break;
 
     //smart
     case 7:

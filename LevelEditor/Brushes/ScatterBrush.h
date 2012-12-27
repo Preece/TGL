@@ -11,7 +11,11 @@ public:
     ScatterBrush();
     virtual ~ScatterBrush();
 
+    void SetFill(bool toFill) { fill = toFill; }
+    void Fill(int tileX, int tileY, int newTile, int oldTile, LayerGroup *newLayer);
 private:
+
+    static bool fill;
 
 };
 
