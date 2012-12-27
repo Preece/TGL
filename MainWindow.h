@@ -81,6 +81,10 @@ private slots:
 
     void on_eyedropperTool_clicked();
 
+    void on_zoomInTool_clicked();
+
+    void on_zoomOutTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -92,6 +96,8 @@ private:
 
     LayerManager *layers;
     QGraphicsScene *tileSelector;
+
+    double zoomLevel;
 };
 
 #endif // MAINWINDOW_H

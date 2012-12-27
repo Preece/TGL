@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
     ui->levelView->setCursor(tempCur);
 
+    zoomLevel = 1;
     //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
     //connect(scroll, SIGNAL(valueChanged(int)), )
 }
@@ -341,4 +342,39 @@ void MainWindow::on_eyedropperTool_clicked()
     //change the cursor
     QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
     ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_zoomInTool_clicked()
+{
+    //check that the zoom level is not too big
+    if(zoomLevel <= 1)
+    {
+        //reset the scale
+        ui->levelView->scale(1/zoomLevel, 1/zoomLevel);
+
+        //increase the zoom level
+        zoomLevel += 0.1;
+
+        //ui->zoomLevelLabel->setText(QString::number(zoomLevel * 100) + "% Zoom");
+
+        //set the new scale
+        ui->levelView->scale(zoomLevel, zoomLevel);
+    }
+}
+
+void MainWindow::on_zoomOutTool_clicked()
+{
+    //check that the zoom level is not too small
+    if(zoomLevel > 0.2)
+    {
+        //reset the scale
+        ui->levelView->scale(1/zoomLevel, 1/zoomLevel);
+
+        zoomLevel -= 0.1;
+
+        //ui->zoomLevelLabel->setText(QString::number(zoomLevel * 100) + "% Zoom");
+
+        //set the new scale
+        ui->levelView->scale(zoomLevel, zoomLevel);
+    }
 }
