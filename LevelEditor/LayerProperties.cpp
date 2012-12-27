@@ -44,7 +44,11 @@ void LayerProperties::on_buttonBox_accepted()
 {
     if(currentLayer)
     {
-        currentLayer->SetName(ui->layerNameInput->text());
+        if(ui->layerNameInput->text() == "")
+            currentLayer->SetName("New Layer");
+        else
+            currentLayer->SetName(ui->layerNameInput->text());
+
         currentLayer->SetOpacity(ui->opacitySlider->value());
         currentLayer->SetHorizontalParallax(ui->horizontalPValue->value());
         currentLayer->SetVerticalParallax(ui->verticalPValue->value());
