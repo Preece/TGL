@@ -77,6 +77,10 @@ private slots:
 
     void on_addObject_clicked();
 
+    void on_pointerTool_clicked();
+
+    void on_eyedropperTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 

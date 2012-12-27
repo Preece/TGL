@@ -43,6 +43,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(layers, SIGNAL(SelectNewTile(int)), this, SLOT(SelectNewTile(int)));
 
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+
     //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
     //connect(scroll, SIGNAL(valueChanged(int)), )
 }
@@ -183,7 +187,8 @@ void MainWindow::on_pencilTool_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    //ui->levelView->setCursor(QCursor(QPixmap(":\Icons\Icons\pencil.png")));
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::SelectNewTile(int ID)
@@ -217,12 +222,20 @@ void MainWindow::on_bucketTool_clicked()
 {
     ui->brushProperties->SetCurrentBrush(2);
     UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_eraserButton_clicked()
 {
     ui->brushProperties->SetCurrentBrush(3);
     UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/eraser.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_editLayerButton_clicked()
@@ -269,18 +282,30 @@ void MainWindow::on_scatterTool_clicked()
 {
     ui->brushProperties->SetCurrentBrush(6);
     UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_brushTool_clicked()
 {
     ui->brushProperties->SetCurrentBrush(7);
     UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/brush.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_scatterFillTool_clicked()
 {
     ui->brushProperties->SetCurrentBrush(8);
     UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_addObject_clicked()
@@ -302,4 +327,18 @@ void MainWindow::on_addObject_clicked()
         tempObjItem->show();
         layers->AddObjectItem(tempObjItem);
     }
+}
+
+void MainWindow::on_pointerTool_clicked()
+{
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/selector.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_eyedropperTool_clicked()
+{
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
+    ui->levelView->setCursor(tempCur);
 }
