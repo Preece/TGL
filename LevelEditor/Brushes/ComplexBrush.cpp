@@ -32,10 +32,10 @@ void ComplexBrush::AddTile(int listIndex, int type)
 int ComplexBrush::GetTile(int listIndex, int tileIndex)
 {
     if(listIndex < 0 || listIndex >= lists.count())
-        return 0;
+        return -1;
 
     if(tileIndex < 0 || tileIndex >= lists[listIndex].count())
-        return 0;
+        return -1;
 
     return lists[listIndex][tileIndex];
 }
@@ -43,10 +43,10 @@ int ComplexBrush::GetTile(int listIndex, int tileIndex)
 int ComplexBrush::GetRandomTile(int listIndex)
 {
     if(listIndex < 0 || listIndex >= lists.count())
-        return 0;
+        return -1;
 
     if(lists[listIndex].count() == 0)
-        return 0;
+        return -1;
 
     int rand = qrand() % (lists[listIndex].count());
 
