@@ -31,5 +31,18 @@
         <file>Icons/size4.png</file>
         <file>Icons/scatter.png</file>
         <file>Icons/selectionbox.png</file>
+        <file>Icons/BrushGuides/bottomleft.png</file>
+        <file>Icons/BrushGuides/bottomleftcorner.png</file>
+        <file>Icons/BrushGuides/bottommiddle.png</file>
+        <file>Icons/BrushGuides/bottomright.png</file>
+        <file>Icons/BrushGuides/bottomrightcorner.png</file>
+        <file>Icons/BrushGuides/middleleft.png</file>
+        <file>Icons/BrushGuides/middleright.png</file>
+        <file>Icons/BrushGuides/topleft.png</file>
+        <file>Icons/BrushGuides/topleftcorner.png</file>
+        <file>Icons/BrushGuides/topmiddle.png</file>
+        <file>Icons/BrushGuides/topright.png</file>
+        <file>Icons/BrushGuides/toprightcorner.png</file>
+        <file>Icons/BrushGuides/middle.png</file>
     </qresource>
 </RCC>

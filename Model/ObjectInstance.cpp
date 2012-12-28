@@ -4,6 +4,8 @@ bool ObjectInstance::SetPosition(int newX, int newY)
 {
     x = newX;
     y = newY;
+
+    return true;
 }
 
 

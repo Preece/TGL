@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>375</width>
-    <height>442</height>
+    <width>389</width>
+    <height>454</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,66 +54,101 @@
         </item>
         <item>
          <widget class="QToolButton" name="topLeftCorner">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/topleftcorner.png</normaloff>:/Icons/Icons/BrushGuides/topleftcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="topLeft">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/topleft.png</normaloff>:/Icons/Icons/BrushGuides/topleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="topMiddle">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/topmiddle.png</normaloff>:/Icons/Icons/BrushGuides/topmiddle.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="topRight">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/topright.png</normaloff>:/Icons/Icons/BrushGuides/topright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="topRightCorner">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/toprightcorner.png</normaloff>:/Icons/Icons/BrushGuides/toprightcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -149,21 +184,35 @@
         </item>
         <item>
          <widget class="QToolButton" name="middleLeft">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/middleleft.png</normaloff>:/Icons/Icons/BrushGuides/middleleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="middle">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/middle.png</normaloff>:/Icons/Icons/BrushGuides/middle.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -172,20 +221,27 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="middleRight">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/middleright.png</normaloff>:/Icons/Icons/BrushGuides/middleright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -221,66 +277,101 @@
         </item>
         <item>
          <widget class="QToolButton" name="bottomLeftCorner">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/bottomleftcorner.png</normaloff>:/Icons/Icons/BrushGuides/bottomleftcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="bottomLeft">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/bottomleft.png</normaloff>:/Icons/Icons/BrushGuides/bottomleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="bottomMiddle">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/bottommiddle.png</normaloff>:/Icons/Icons/BrushGuides/bottommiddle.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="bottomRight">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/bottomright.png</normaloff>:/Icons/Icons/BrushGuides/bottomright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="bottomRightCorner">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../Icons.qrc">
+            <normaloff>:/Icons/Icons/BrushGuides/bottomrightcorner.png</normaloff>:/Icons/Icons/BrushGuides/bottomrightcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">smartBrushButtons</string>
+           <string>smartBrushButtons</string>
           </attribute>
          </widget>
         </item>

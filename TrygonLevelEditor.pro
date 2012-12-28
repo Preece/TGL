@@ -188,4 +188,17 @@ OTHER_FILES += \
     Icons/bucket.png \
     Icons/brush.png \
     Icons/autoframeselect.png \
-    Icons/addvalue.png
+    Icons/addvalue.png \
+    Icons/BrushGuides/toprightcorner.png \
+    Icons/BrushGuides/topright.png \
+    Icons/BrushGuides/topmiddle.png \
+    Icons/BrushGuides/topleftcorner.png \
+    Icons/BrushGuides/topleft.png \
+    Icons/BrushGuides/middleright.png \
+    Icons/BrushGuides/middleleft.png \
+    Icons/BrushGuides/bottomrightcorner.png \
+    Icons/BrushGuides/bottomright.png \
+    Icons/BrushGuides/bottommiddle.png \
+    Icons/BrushGuides/bottomleftcorner.png \
+    Icons/BrushGuides/bottomleft.png \
+    Icons/BrushGuides/middle.png
