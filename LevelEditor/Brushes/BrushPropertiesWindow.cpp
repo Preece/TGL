@@ -130,6 +130,27 @@ TileItem *BrushPropertiesWindow::GetTileFromID(int ID)
     return tempItem;
 }
 
+bool BrushPropertiesWindow::IsListTileSelected()
+{
+    if(tileList.selectedItems().count() > 0)
+        return true;
+
+    return false;
+}
+
+int BrushPropertiesWindow::GetSelectedListTileIndex()
+{
+    if(!IsListTileSelected())
+        return -1;
+
+    TileItem *tempTile =  static_cast<TileItem*>(tileList.selectedItems()[0]);
+
+    if(tempTile)
+        return tempTile->GetIndex();
+
+    return -1;
+}
+
 void BrushPropertiesWindow::RepopulateTileList()
 {
     tileList.clear();
@@ -143,6 +164,8 @@ void BrushPropertiesWindow::RepopulateTileList()
             //create a visible item for each one, and set its position
             TileItem *tempItem = GetTileFromID(currentBrush->GetTile(currentListIndex, i));
             tempItem->setPos((i * resourceManager->GetLevelProperties()->GetTileWidth()) + i, 0);
+            tempItem->setFlag(QGraphicsItem::ItemIsSelectable);
+            tempItem->SetIndex(i);
 
             //add the new tile to the tile list
             tileList.addItem(tempItem);
@@ -173,4 +196,13 @@ void BrushPropertiesWindow::SmartButtonPushed()
     currentListIndex = ui->smartBrushButtons->checkedId();
 
     RepopulateTileList();
+}
+
+void BrushPropertiesWindow::on_removeTile_clicked()
+{
+    if(IsListTileSelected())
+    {
+        currentBrush->RemoveTile(currentListIndex, GetSelectedListTileIndex());
+        RepopulateTileList();
+    }
 }

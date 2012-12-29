@@ -39,6 +39,9 @@ public:
     TileItem *GetSelectedTile();
     TileItem *GetTileFromID(int ID);
 
+    bool IsListTileSelected();
+    int GetSelectedListTileIndex();
+
     void RepopulateTileList();
     
 private slots:
@@ -49,6 +52,8 @@ private slots:
     void on_buttonBox_accepted();
 
     void SmartButtonPushed();
+
+    void on_removeTile_clicked();
 
 private:
     Ui::BrushPropertiesWindow *ui;

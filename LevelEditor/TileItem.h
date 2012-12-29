@@ -20,8 +20,13 @@ public:
     int GetOriginY() { if(tile) return tile->GetYOrigin(); return 0; }
     int GetTileID() { if(tile) return tile->GetID(); return 0; }
 
+    void SetIndex(int newIndex) { index = newIndex; }
+    int GetIndex() { return index; }
+
 private:
     Tile *tile;
+
+    int index;
 };
 
 #endif // TILEITEM_H

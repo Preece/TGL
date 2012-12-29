@@ -3,6 +3,7 @@
 TileItem::TileItem()
 {
     tile = NULL;
+    index = 0;
 }
 
 void TileItem::SetTilePixmap(QImage spritesheet, int w, int h)
