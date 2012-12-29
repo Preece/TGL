@@ -11,6 +11,9 @@ LayerManager::LayerManager()
     addItem(grid);
     grid->setPos(0, 0);
     grid->hide();
+
+    QBrush brush(Qt::white);
+    this->setBackgroundBrush(brush);
 }
 
 LayerManager::~LayerManager()
@@ -158,17 +161,17 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(!currentLayer || !currentBrush)
         return;
 
+    //translate the position to tile coordinates
+    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+    int tileX = event->scenePos().toPoint().x() / tileW;
+    int tileY = event->scenePos().toPoint().y() / tileH;
+
     if(event->button() == Qt::LeftButton && !IsObjectSelected())
     {
         //they have started painting, so nix the preview
         currentLayer->ClearPreview();
-
-        //translate the position to tile coordinates
-        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-
-        int tileX = event->scenePos().toPoint().x() / tileW;
-        int tileY = event->scenePos().toPoint().y() / tileH;
 
         currentBrush->Paint(tileX, tileY, currentLayer);
 
@@ -178,6 +181,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     else if(event->button() == Qt::RightButton)
     {
         EyedropTile(event->scenePos().toPoint());
+        currentBrush->Paint(tileX, tileY, currentLayer, true);
     }
 }
 

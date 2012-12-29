@@ -17,9 +17,6 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QComboBox" name="comboBox"/>
-     </item>
-     <item>
       <widget class="QLabel" name="label">
        <property name="text">
         <string>Brush Name:</string>

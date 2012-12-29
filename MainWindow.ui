@@ -44,7 +44,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
+           <string>toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -61,7 +61,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
+           <string>toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -78,7 +78,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
+           <string>toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -95,7 +95,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
+           <string>toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -112,7 +112,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
+           <string>toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -136,7 +136,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
+           <string>toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -149,7 +149,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
+           <string>toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -166,7 +166,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
+           <string>toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -264,6 +264,15 @@
         <property name="horizontalScrollBarPolicy">
          <enum>Qt::ScrollBarAlwaysOn</enum>
         </property>
+        <property name="backgroundBrush">
+         <brush brushstyle="DiagCrossPattern">
+          <color alpha="255">
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
@@ -282,7 +291,7 @@
       <item>
        <widget class="ResourceTab" name="resourceTab">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -347,7 +356,7 @@
       <item>
        <widget class="QListWidget" name="layerSelector">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -417,7 +426,7 @@
      <x>0</x>
      <y>0</y>
      <width>743</width>
-     <height>27</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
