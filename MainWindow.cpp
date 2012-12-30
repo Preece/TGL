@@ -378,3 +378,35 @@ void MainWindow::on_zoomOutTool_clicked()
         ui->levelView->scale(zoomLevel, zoomLevel);
     }
 }
+
+void MainWindow::on_actionUndo_triggered()
+{
+    if(resources)
+    {
+        resources->Undo();
+        RepopulateEverything();
+    }
+}
+
+void MainWindow::on_actionRedo_triggered()
+{
+    if(resources)
+    {
+        resources->Redo();
+        RepopulateEverything();
+    }
+}
+
+void MainWindow::RepopulateEverything()
+{
+    //RepopulateObjects();
+    RepopulateLayerSelector();
+
+    ui->resourceTab->RepopulateImageSelector();
+    //ui->resourceTab->RepopulateLinkSelector();
+    ui->resourceTab->RepopulateObjectSelector();
+    ui->resourceTab->RepopulateSpriteSelector();
+    ui->resourceTab->RepopulateTileSelector();
+
+    layers->RepopulateAllLayers();
+}

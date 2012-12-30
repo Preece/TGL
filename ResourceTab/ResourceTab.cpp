@@ -11,6 +11,7 @@ ResourceTab::ResourceTab(QWidget *parent) :
     spriteWindow = NULL;
     objectEditorWindow = NULL;
     tileSelector = NULL;
+    spritesheet = NULL;
 
     connect(ui->addSpriteButton, SIGNAL(clicked()), this, SIGNAL(NewSpriteButtonClicked()));
     connect(ui->addObjectButton, SIGNAL(clicked()), this, SIGNAL(NewObjectButtonClicked()));
@@ -43,6 +44,9 @@ void ResourceTab::RepopulateTileSelector()
     if(tileSelector)
         tileSelector->clear();
     else
+        return;
+
+    if(!spritesheet)
         return;
 
     if(!spritesheet->isNull())

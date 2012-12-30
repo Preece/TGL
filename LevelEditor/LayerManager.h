@@ -46,6 +46,8 @@ public:
 
     bool IsObjectSelected();
 
+    void RepopulateAllLayers();
+
 public slots:
     void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
 

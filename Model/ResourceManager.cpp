@@ -2,14 +2,18 @@
 
 ResourceManager::ResourceManager()
 {
+    undo.setUndoLimit(100);
 }
 
 int ResourceManager::AddSprite(Sprite *newSprite)
 {
     if(newSprite != NULL)
     {
-        spriteList.append(newSprite);
-        return newSprite->GetID();
+        //create an add sprite command
+        AddSpriteCommand *add = new AddSpriteCommand(newSprite, &spriteList);
+
+        //push it into the undo list
+        undo.push(add);
     }
 
     return 0;
@@ -312,6 +316,16 @@ void ResourceManager::DestroyAllResources()
     }
 
     imageList.clear();
+}
+
+void ResourceManager::Undo()
+{
+    undo.undo();
+}
+
+void ResourceManager::Redo()
+{
+    undo.redo();
 }
 
 

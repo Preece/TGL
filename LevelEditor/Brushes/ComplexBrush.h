@@ -23,6 +23,7 @@ public:
     int GetRandomTile(int listIndex);
     int GetTileCount(int listIndex);
     void RemoveTile(int listIndex, int tileIndex);
+    bool IsListEmpty(int listIndex);
 
     bool ListContainsTile(int listIndex, int type);
 

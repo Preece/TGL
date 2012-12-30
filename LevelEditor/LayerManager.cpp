@@ -17,6 +17,10 @@ LayerManager::~LayerManager()
 {
 }
 
+void LayerManager::RepopulateLayer(LayerGroup *dirtyLayer)
+{
+}
+
 void LayerManager::EyedropTile(QPoint pos)
 {
     if(!resourceManager || !currentLayer)
@@ -277,5 +281,11 @@ bool LayerManager::IsObjectSelected()
         return true;
 
     return false;
+}
+
+void LayerManager::RepopulateAllLayers()
+{
+    for(int i = 0; i < layers.count(); i++)
+        RepopulateLayer(layers[i]);
 }
 

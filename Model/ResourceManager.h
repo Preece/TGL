@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QList>
 #include <QStringList>
+#include <QUndoStack>
 
 #include "Sprite.h"
 #include "ObjectInstance.h"
@@ -12,6 +13,8 @@
 #include "Tile.h"
 #include "Layer.h"
 #include "Model/LevelProperties.h"
+
+#include "../Commands/AddSpriteCommand.h"
 
 class ResourceManager : public QObject
 {
@@ -65,12 +68,17 @@ public slots:
 
     void DestroyAllResources();
 
+    void Undo();
+    void Redo();
+
 signals:
     void SpriteListModified(QStringList spriteNameList);
 
     void ObjectPrototypeListModified(QStringList objectPrototypeNameList, int type);
 
     //void ObjectInstanceAdded(QImage symbol, int ID);
+
+    void UndoRedoPerformed();
 
 private:
     QList<Sprite*> spriteList;
@@ -81,6 +89,8 @@ private:
     QList<Layer*> layerList;
 
     LevelProperties levelProperties;
+
+    QUndoStack undo;
 };
 
 #endif // RESOURCEMANAGER_H

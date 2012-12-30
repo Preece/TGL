@@ -72,6 +72,17 @@ void ComplexBrush::RemoveTile(int listIndex, int tileIndex)
     lists[listIndex].removeAt(tileIndex);
 }
 
+bool ComplexBrush::IsListEmpty(int listIndex)
+{
+    if(listIndex < 0 || listIndex >= lists.count())
+        return true;
+
+    if(lists[listIndex].count() == 0)
+        return true;
+
+    return false;
+}
+
 bool ComplexBrush::ListContainsTile(int listIndex, int type)
 {
     if(listIndex < 0 || listIndex >= lists.count())

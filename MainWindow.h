@@ -40,7 +40,9 @@ public:
     bool IsLayerSelected();
 
     void RepopulateObjects();
-    
+
+    void RepopulateEverything();
+
 private slots:
 
     void on_actionProperties_triggered();
@@ -84,6 +86,10 @@ private slots:
     void on_zoomInTool_clicked();
 
     void on_zoomOutTool_clicked();
+
+    void on_actionUndo_triggered();
+
+    void on_actionRedo_triggered();
 
 private:
     Ui::MainWindow *ui;
