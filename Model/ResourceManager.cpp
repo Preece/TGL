@@ -26,8 +26,8 @@ bool ResourceManager::DeleteSprite(int ID)
     {
         if(spriteList[i]->GetID() == ID)
         {
-            delete spriteList[i];
-            spriteList.removeAt(i);
+            DeleteSpriteCommand *del = new DeleteSpriteCommand(spriteList[i], &spriteList);
+            undo->push(del);
 
             return true;
         }

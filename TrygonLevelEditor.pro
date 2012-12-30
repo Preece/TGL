@@ -42,7 +42,6 @@ SOURCES += main.cpp\
     Commands/AddObjectCommand.cpp \
     Commands/DeleteObjectCommand.cpp \
     Commands/AddSpriteCommand.cpp \
-    Commands/DeletesSriteCommand.cpp \
     Model/Tile.cpp \
     LevelEditor/Brushes/TileBrush.cpp \
     Model/LevelProperties.cpp \
@@ -63,7 +62,8 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/ComplexBrush.cpp \
     LevelEditor/ObjectInstanceItem.cpp \
     Model/ObjectInstance.cpp \
-    Model/Exporters/PackedBinaryExporter.cpp
+    Model/Exporters/PackedBinaryExporter.cpp \
+    Commands/DeletesSpriteCommand.cpp
   
 
 HEADERS  += \

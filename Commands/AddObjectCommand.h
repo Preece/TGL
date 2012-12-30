@@ -3,10 +3,22 @@
 
 #include <QUndoCommand>
 
+#include "../Model/ObjectInstance.h"
+
 class AddObjectCommand : public QUndoCommand
 {
 public:
-    AddObjectCommand();
+    AddObjectCommand(Sprite *newSprite, QList<Sprite*> *sprites);
+    ~AddObjectCommand();
+
+    virtual void undo();
+    virtual void redo();
+
+    bool ListContainsObject();
+
+private:
+    Sprite *sprite;
+    QList<Sprite*> *spriteList;
 };
 
 #endif // ADDOBJECTCOMMAND_H
