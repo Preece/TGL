@@ -54,7 +54,10 @@ AddResourceCommand::~AddResourceCommand()
     if(!ListContainsResource())
     {
         if(resource)
+        {
             delete resource;
+            resource = NULL;
+        }
     }
 }
 

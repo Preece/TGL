@@ -42,7 +42,10 @@ DeleteResourceCommand::~DeleteResourceCommand()
     if(!ListContainsResource())
     {
         if(resource)
+        {
             delete resource;
+            resource = NULL;
+        }
     }
 }
 

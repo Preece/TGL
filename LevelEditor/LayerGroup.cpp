@@ -85,6 +85,14 @@ void LayerGroup::DestroyAllItems()
     previewItems.clear();
 }
 
+void LayerGroup::RepopulateTiles()
+{
+}
+
+void LayerGroup::RepopulateObjects()
+{
+}
+
 void LayerGroup::ModifyTile(int x, int y, int newType)
 {
     //bounds check

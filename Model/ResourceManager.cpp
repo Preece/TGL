@@ -323,6 +323,7 @@ void ResourceManager::DestroyAllResources()
     {
         spriteList[i]->DestroyAllAnimations();
         delete spriteList[i];
+        spriteList[i] = NULL;
     }
 
     //clear the list
@@ -332,9 +333,42 @@ void ResourceManager::DestroyAllResources()
     for(int i = 0; i < imageList.count(); i++)
     {
         delete imageList[i];
+        imageList[i] = NULL;
     }
 
     imageList.clear();
+
+    for(int i = 0; i < objectPrototypeList.count(); i++)
+    {
+        delete objectPrototypeList[i];
+        objectPrototypeList[i] = NULL;
+    }
+
+    objectPrototypeList.clear();
+
+    for(int i = 0; i < tileList.count(); i++)
+    {
+        delete tileList[i];
+        tileList[i] = NULL;
+    }
+
+    tileList.clear();
+
+    for(int i = 0; i < objectInstanceList.count(); i++)
+    {
+        delete objectInstanceList[i];
+        objectInstanceList[i] = NULL;
+    }
+
+    objectInstanceList.clear();
+
+    for(int i = 0; i < layerList.count(); i++)
+    {
+        delete layerList[i];
+        layerList[i] = NULL;
+    }
+
+    layerList.clear();
 }
 
 void ResourceManager::Undo()

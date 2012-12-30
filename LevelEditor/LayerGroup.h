@@ -38,6 +38,9 @@ public:
 
     void DestroyAllItems();
 
+    void RepopulateTiles();
+    void RepopulateObjects();
+
 private:
     QList<TileInstanceItem*> items;
     int width, height;
