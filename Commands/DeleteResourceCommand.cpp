@@ -12,6 +12,30 @@ DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<ObjectI
     resourceList = reinterpret_cast<QList<Savable*>* >(resources);
 }
 
+DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<ObjectPrototype *> *resources)
+{
+    resource = newResource;
+    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
+}
+
+DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<Image *> *resources)
+{
+    resource = newResource;
+    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
+}
+
+DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<Layer *> *resources)
+{
+    resource = newResource;
+    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
+}
+
+DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<Tile *> *resources)
+{
+    resource = newResource;
+    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
+}
+
 DeleteResourceCommand::~DeleteResourceCommand()
 {
     //if the sprite is not in the list when this command is destroyed, destroy the sprite

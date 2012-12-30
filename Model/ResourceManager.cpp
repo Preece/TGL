@@ -58,8 +58,8 @@ int ResourceManager::AddObjectPrototype(ObjectPrototype *newObjectPrototype)
 {
     if(newObjectPrototype != NULL)
     {
-        objectPrototypeList.append(newObjectPrototype);
-        return newObjectPrototype->GetID();
+        AddResourceCommand *add = new AddResourceCommand(newObjectPrototype, &objectPrototypeList);
+        undo->push(add);
     }
 
     return 0;
@@ -71,8 +71,8 @@ bool ResourceManager::DeleteObjectPrototype(int ID)
     {
         if(objectPrototypeList[i]->GetID() == ID)
         {
-            delete objectPrototypeList[i];
-            objectPrototypeList.removeAt(i);
+            DeleteResourceCommand *del = new DeleteResourceCommand(objectPrototypeList[i], &objectPrototypeList);
+            undo->push(del);
 
             return true;
         }
@@ -113,9 +113,13 @@ ObjectInstance *ResourceManager::GetObjectInstance(int ID)
 
 int ResourceManager::AddImage(Image *newImage)
 {
-    imageList.append(newImage);
+    if(newImage)
+    {
+        AddResourceCommand *add = new AddResourceCommand(newImage, &imageList);
+        undo->push(add);
+    }
 
-    return newImage->GetID();
+    return 0;
 }
 
 bool ResourceManager::DeleteImage(int ID)
@@ -124,8 +128,8 @@ bool ResourceManager::DeleteImage(int ID)
     {
         if(imageList[i]->GetID() == ID)
         {
-            delete imageList[i];
-            imageList.removeAt(i);
+            DeleteResourceCommand *del = new DeleteResourceCommand(imageList[i], &imageList);
+            undo->push(del);
             return true;
         }
     }
@@ -216,13 +220,18 @@ void ResourceManager::AddTile(Tile *newTile)
 
 void ResourceManager::ClearTiles()
 {
+    undo->beginMacro("Clear Tiles");
+
+    DeleteResourceCommand *del;
+
     for(int i = 0; i < GetTileCount(); i++)
     {
-        if(tileList[i])
-            delete tileList[i];
+        //keep removing the first element
+        del = new DeleteResourceCommand(tileList[0], &tileList);
+        undo->push(del);
     }
 
-    tileList.clear();
+    undo->endMacro();
 }
 
 Tile *ResourceManager::GetTile(int ID)
@@ -250,7 +259,10 @@ Tile *ResourceManager::GetTile(int x, int y)
 void ResourceManager::AddLayer(Layer *newLayer)
 {
     if(newLayer)
-        layerList.insert(0, newLayer);
+    {
+        AddResourceCommand *add = new AddResourceCommand(newLayer, &layerList);
+        undo->push(add);
+    }
 }
 
 void ResourceManager::DeleteLayer(int ID)
@@ -259,9 +271,8 @@ void ResourceManager::DeleteLayer(int ID)
     {
         if(layerList[i]->GetID() == ID)
         {
-            delete layerList[i];
-            layerList.removeAt(i);
-            return;
+            DeleteResourceCommand *del = new DeleteResourceCommand(layerList[i], &layerList);
+            undo->push(del);
         }
     }
 }
