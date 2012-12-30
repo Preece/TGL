@@ -21,10 +21,28 @@ bool LevelProperties::IsPropertiesSet()
 
 bool LevelProperties::Export(Exporter *exporter)
 {
-    return false;
+    exporter->WriteInt(tileWidth);
+    exporter->WriteInt(tileHeight);
+    exporter->WriteInt(mapWidth);
+    exporter->WriteInt(mapHeight);
+
+    exporter->WriteString(levelName);
+
+    exporter->WriteInt(tilesetID);
+
+    return true;
 }
 
 bool LevelProperties::Import(Exporter *exporter)
 {
-    return false;
+    exporter->ReadInt(tileWidth);
+    exporter->ReadInt(tileHeight);
+    exporter->ReadInt(mapWidth);
+    exporter->ReadInt(mapHeight);
+
+    exporter->ReadString(levelName);
+
+    exporter->ReadInt(tilesetID);
+
+    return true;
 }

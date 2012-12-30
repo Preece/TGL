@@ -1,10 +1,5 @@
 #include "Sprite.h"
 
-bool Sprite::Import(Exporter *exporter)
-{
-    return false;
-}
-
 Sprite::Sprite()
 {
     imageID = 0;
@@ -12,7 +7,18 @@ Sprite::Sprite()
 
 bool Sprite::Export(Exporter *exporter)
 {
-    return false;
+    exporter->WriteString(name);
+    exporter->WriteInt(imageID);
+
+    return true;
+}
+
+bool Sprite::Import(Exporter *exporter)
+{
+    exporter->ReadString(name);
+    exporter->ReadInt(imageID);
+
+    return true;
 }
 
 void Sprite::DestroyAllAnimations()

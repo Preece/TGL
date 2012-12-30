@@ -36,8 +36,9 @@ public:
 
 private:
     int tileWidth, tileHeight;
-    QString levelName;
     int mapWidth, mapHeight;
+
+    QString levelName;
 
     int tilesetID;
 };

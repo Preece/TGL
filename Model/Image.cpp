@@ -13,12 +13,16 @@ Image::~Image()
 
 bool Image::Export(Exporter *exporter)
 {
-    return false;
+    exporter->WriteImage(*image);
+
+    return true;
 }
 
 bool Image::Import(Exporter *exporter)
 {
-    return false;
+    exporter->ReadImage(*image);
+
+    return true;
 }
 
 void Image::SetImageFromFile(QString filename)

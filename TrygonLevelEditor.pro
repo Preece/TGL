@@ -62,7 +62,8 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/BrushPropertiesWindow.cpp \
     LevelEditor/Brushes/ComplexBrush.cpp \
     LevelEditor/ObjectInstanceItem.cpp \
-    Model/ObjectInstance.cpp
+    Model/ObjectInstance.cpp \
+    Model/Exporters/PackedBinaryExporter.cpp
   
 
 HEADERS  += \
@@ -117,7 +118,8 @@ HEADERS  += \
     LevelEditor/Brushes/ScatterBrush.h \
     LevelEditor/Brushes/BrushPropertiesWindow.h \
     LevelEditor/Brushes/ComplexBrush.h \
-    LevelEditor/ObjectInstanceItem.h
+    LevelEditor/ObjectInstanceItem.h \
+    Model/Exporters/PackedBinaryExporter.h
    
 
 FORMS    += \
@@ -201,4 +203,5 @@ OTHER_FILES += \
     Icons/BrushGuides/bottommiddle.png \
     Icons/BrushGuides/bottomleftcorner.png \
     Icons/BrushGuides/bottomleft.png \
-    Icons/BrushGuides/middle.png
+    Icons/BrushGuides/middle.png \
+    Icons/scatterfill.png

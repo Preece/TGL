@@ -8,6 +8,7 @@ bool Frame::Export(Exporter *exporter)
     exporter->WritePoint(boundingBoxXY);
 
     exporter->WriteInt(hotspots.count());
+
     for(int i = 0; i < hotspots.count(); i++)
         exporter->WritePoint(hotspots[i]);
 
@@ -23,6 +24,7 @@ bool Frame::Import(Exporter *exporter)
 
     int hotspotCount;
     exporter->ReadInt(hotspotCount);
+
     for(int i = 0; i < hotspotCount; i++)
         exporter->ReadPoint(hotspots[i]);
 

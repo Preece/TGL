@@ -44,5 +44,6 @@
         <file>Icons/BrushGuides/topright.png</file>
         <file>Icons/BrushGuides/toprightcorner.png</file>
         <file>Icons/BrushGuides/middle.png</file>
+        <file>Icons/scatterfill.png</file>
     </qresource>
 </RCC>

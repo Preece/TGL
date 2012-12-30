@@ -6,12 +6,22 @@ Layer::Layer()
 
 bool Layer::Export(Exporter *exporter)
 {
-    return false;
+    exporter->WriteDouble(verticalParallax);
+    exporter->WriteDouble(horizontalParallax);
+    exporter->WriteString(name);
+    exporter->WriteInt(opacity);
+
+    return true;
 }
 
 bool Layer::Import(Exporter *exporter)
 {
-    return false;
+    exporter->ReadDouble(verticalParallax);
+    exporter->ReadDouble(horizontalParallax);
+    exporter->ReadString(name);
+    exporter->ReadInt(opacity);
+
+    return true;
 }
 
 TileInstance *Layer::GetTileAtIndex(int index)
