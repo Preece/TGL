@@ -438,6 +438,8 @@ void ResourceTab::on_selectTilesetButton_clicked()
             if(resourceManager->GetTileCount() != 0)
                 resourceManager->ClearTiles();
 
+            resourceManager->BeginUndoOperation("Add Tiles");
+
             for(int i = 0; i < sheetH; i++)
             {
                 for(int j = 0; j < sheetW; j++)
@@ -449,6 +451,8 @@ void ResourceTab::on_selectTilesetButton_clicked()
                     resourceManager->AddTile(tempTile);
                 }
             }
+
+            resourceManager->EndUndoOperation();
 
             //and repopulate the tile selector
             RepopulateTileSelector();

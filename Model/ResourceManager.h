@@ -72,6 +72,9 @@ public slots:
     void Undo();
     void Redo();
 
+    void BeginUndoOperation(QString name) { undo->beginMacro(name); }
+    void EndUndoOperation() { undo->endMacro(); }
+
 signals:
     void SpriteListModified(QStringList spriteNameList);
 

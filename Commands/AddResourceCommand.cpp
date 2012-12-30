@@ -40,6 +40,14 @@ AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Layer *> *res
     invertAdditions = true;
 }
 
+AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Tile *> *resources)
+{
+    resource = newResource;
+    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
+
+    invertAdditions = false;
+}
+
 AddResourceCommand::~AddResourceCommand()
 {
     //if the sprite is not in the list when this command is destroyed, destroy the sprite
@@ -62,7 +70,10 @@ void AddResourceCommand::undo()
 
 void AddResourceCommand::redo()
 {
-    resourceList->append(resource);
+    if(invertAdditions)
+        resourceList->insert(0, resource);
+    else
+        resourceList->append(resource);
 }
 
 bool AddResourceCommand::ListContainsResource()

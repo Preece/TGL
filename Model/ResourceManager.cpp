@@ -215,7 +215,10 @@ QPixmap ResourceManager::GetTilePixmap(int ID)
 void ResourceManager::AddTile(Tile *newTile)
 {
     if(newTile)
-        tileList.append(newTile);
+    {
+        AddResourceCommand *add = new AddResourceCommand(newTile, &tileList);
+        undo->push(add);
+    }
 }
 
 void ResourceManager::ClearTiles()
