@@ -90,7 +90,7 @@ private:
 
     LevelProperties levelProperties;
 
-    QUndoStack undo;
+    QUndoStack *undo;
 };
 
 #endif // RESOURCEMANAGER_H

@@ -2,7 +2,8 @@
 
 ResourceManager::ResourceManager()
 {
-    undo.setUndoLimit(100);
+    undo = new QUndoStack;
+    undo->setUndoLimit(100);
 }
 
 int ResourceManager::AddSprite(Sprite *newSprite)
@@ -13,7 +14,7 @@ int ResourceManager::AddSprite(Sprite *newSprite)
         AddSpriteCommand *add = new AddSpriteCommand(newSprite, &spriteList);
 
         //push it into the undo list
-        undo.push(add);
+        undo->push(add);
     }
 
     return 0;
@@ -299,6 +300,8 @@ Image *ResourceManager::GetImage(int ID)
 
 void ResourceManager::DestroyAllResources()
 {
+    delete undo;
+
     //destroy the sprite resources
     for(int i = 0; i < spriteList.count(); i++)
     {
@@ -320,12 +323,12 @@ void ResourceManager::DestroyAllResources()
 
 void ResourceManager::Undo()
 {
-    undo.undo();
+    undo->undo();
 }
 
 void ResourceManager::Redo()
 {
-    undo.redo();
+    undo->redo();
 }
 
 
