@@ -273,6 +273,8 @@ void ResourceManager::DeleteLayer(int ID)
         {
             DeleteResourceCommand *del = new DeleteResourceCommand(layerList[i], &layerList);
             undo->push(del);
+
+            return;
         }
     }
 }

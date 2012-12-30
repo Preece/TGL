@@ -6,6 +6,11 @@ LayerGroup::LayerGroup()
     height = 0;
 }
 
+LayerGroup::~LayerGroup()
+{
+    DestroyAllItems();
+}
+
 void LayerGroup::SetLayerSize(int w, int h)
 {
     //if the new size is the same as the current size

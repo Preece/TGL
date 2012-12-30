@@ -78,9 +78,6 @@ void LayerManager::RemoveLayer(Layer *dirtyLayer)
         if(layers[i]->GetLayer() == dirtyLayer)
         {
             resourceManager->DeleteLayer(layers[i]->GetLayer()->GetID());
-            layers[i]->DestroyAllItems();
-            delete layers[i];
-            layers.removeAt(i);
         }
     }
 }

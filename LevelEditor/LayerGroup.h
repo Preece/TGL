@@ -13,6 +13,7 @@ class LayerGroup : public QGraphicsRectItem
 {
 public:
     LayerGroup();
+    ~LayerGroup();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
