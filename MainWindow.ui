@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
-    <height>539</height>
+    <width>785</width>
+    <height>672</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -199,6 +199,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="zoomLevelLabel">
+          <property name="text">
+           <string>100% Zoom</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QToolButton" name="zoomInTool">
           <property name="text">
            <string>...</string>
@@ -265,7 +272,7 @@
          <enum>Qt::ScrollBarAlwaysOn</enum>
         </property>
         <property name="backgroundBrush">
-         <brush brushstyle="DiagCrossPattern">
+         <brush brushstyle="NoBrush">
           <color alpha="255">
            <red>0</red>
            <green>0</green>
@@ -425,7 +432,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>743</width>
+     <width>785</width>
      <height>21</height>
     </rect>
    </property>

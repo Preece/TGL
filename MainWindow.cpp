@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     layers = new LayerManager;
     ui->levelView->setScene(layers);
-    layers->setSceneRect(0, 0, 100, 100);
+    layers->setSceneRect(0, 0, 0, 0);
     layers->RegisterResourceManager(resources);
 
     ui->levelView->setMouseTracking(true);
@@ -347,7 +347,7 @@ void MainWindow::on_eyedropperTool_clicked()
 void MainWindow::on_zoomInTool_clicked()
 {
     //check that the zoom level is not too big
-    if(zoomLevel <= 1)
+    if(zoomLevel < 1)
     {
         //reset the scale
         ui->levelView->scale(1/zoomLevel, 1/zoomLevel);
@@ -355,7 +355,7 @@ void MainWindow::on_zoomInTool_clicked()
         //increase the zoom level
         zoomLevel += 0.1;
 
-        //ui->zoomLevelLabel->setText(QString::number(zoomLevel * 100) + "% Zoom");
+        ui->zoomLevelLabel->setText(QString::number(zoomLevel * 100) + "% Zoom");
 
         //set the new scale
         ui->levelView->scale(zoomLevel, zoomLevel);
@@ -372,7 +372,7 @@ void MainWindow::on_zoomOutTool_clicked()
 
         zoomLevel -= 0.1;
 
-        //ui->zoomLevelLabel->setText(QString::number(zoomLevel * 100) + "% Zoom");
+        ui->zoomLevelLabel->setText(QString::number(zoomLevel * 100) + "% Zoom");
 
         //set the new scale
         ui->levelView->scale(zoomLevel, zoomLevel);

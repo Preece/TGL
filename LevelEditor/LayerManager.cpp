@@ -11,9 +11,6 @@ LayerManager::LayerManager()
     addItem(grid);
     grid->setPos(0, 0);
     grid->hide();
-
-    QBrush brush(Qt::white);
-    this->setBackgroundBrush(brush);
 }
 
 LayerManager::~LayerManager()
@@ -64,6 +61,7 @@ void LayerManager::AddLayer(Layer *newLayer)
     //put the layer group into the list
     layers.insert(0, tempLayerGroup);
     addItem(tempLayerGroup);
+    setSceneRect(tempLayerGroup->rect());
 
     tempLayerGroup->show();
     tempLayerGroup->setPos(0,0);
