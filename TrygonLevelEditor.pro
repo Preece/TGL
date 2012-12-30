@@ -63,7 +63,9 @@ SOURCES += main.cpp\
     LevelEditor/ObjectInstanceItem.cpp \
     Model/ObjectInstance.cpp \
     Model/Exporters/PackedBinaryExporter.cpp \
-    Commands/DeletesSpriteCommand.cpp
+    Commands/DeletesSpriteCommand.cpp \
+    Commands/AddResourceCommand.cpp \
+    Commands/DeleteResourceCommand.cpp
   
 
 HEADERS  += \
@@ -94,12 +96,6 @@ HEADERS  += \
     LevelEditor/ObjectItem.h \
     LevelEditor/LayerManager.h \
     Commands/ModifyTilesCommand.h \
-    Commands/AddObjectInstanceCommand.h \
-    Commands/DeleteObjectInstanceCommand.h \
-    Commands/AddObjectCommand.h \
-    Commands/DeleteObjectCommand.h \
-    Commands/AddSpriteCommand.h \
-    Commands/DeleteSpriteCommand.h \
     Model/Tile.h \
     LevelEditor/Brushes/TileBrush.h \
     Model/LevelProperties.h \
@@ -119,7 +115,9 @@ HEADERS  += \
     LevelEditor/Brushes/BrushPropertiesWindow.h \
     LevelEditor/Brushes/ComplexBrush.h \
     LevelEditor/ObjectInstanceItem.h \
-    Model/Exporters/PackedBinaryExporter.h
+    Model/Exporters/PackedBinaryExporter.h \
+    Commands/AddResourceCommand.h \
+    Commands/DeleteResourceCommand.h
    
 
 FORMS    += \

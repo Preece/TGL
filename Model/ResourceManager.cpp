@@ -11,7 +11,7 @@ int ResourceManager::AddSprite(Sprite *newSprite)
     if(newSprite != NULL)
     {
         //create an add sprite command
-        AddSpriteCommand *add = new AddSpriteCommand(newSprite, &spriteList);
+        AddResourceCommand *add = new AddResourceCommand(newSprite, &spriteList);
 
         //push it into the undo list
         undo->push(add);
@@ -26,7 +26,7 @@ bool ResourceManager::DeleteSprite(int ID)
     {
         if(spriteList[i]->GetID() == ID)
         {
-            DeleteSpriteCommand *del = new DeleteSpriteCommand(spriteList[i], &spriteList);
+            DeleteResourceCommand *del = new DeleteResourceCommand(spriteList[i], &spriteList);
             undo->push(del);
 
             return true;

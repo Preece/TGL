@@ -14,8 +14,8 @@
 #include "Layer.h"
 #include "Model/LevelProperties.h"
 
-#include "../Commands/AddSpriteCommand.h"
-#include "../Commands/DeleteSpriteCommand.h"
+#include "../Commands/AddResourceCommand.h"
+#include "../Commands/DeleteResourceCommand.h"
 
 class ResourceManager : public QObject
 {
