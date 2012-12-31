@@ -263,8 +263,7 @@ void ResourceManager::AddLayer(Layer *newLayer)
 {
     if(newLayer)
     {
-        AddResourceCommand *add = new AddResourceCommand(newLayer, &layerList);
-        undo->push(add);
+        layerList.append(newLayer);
     }
 }
 
@@ -274,8 +273,8 @@ void ResourceManager::DeleteLayer(int ID)
     {
         if(layerList[i]->GetID() == ID)
         {
-            DeleteResourceCommand *del = new DeleteResourceCommand(layerList[i], &layerList);
-            undo->push(del);
+            delete layerList[i];
+            layerList.removeAt(i);
 
             return;
         }
