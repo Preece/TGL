@@ -259,6 +259,39 @@ Tile *ResourceManager::GetTile(int x, int y)
     return NULL;
 }
 
+TileInstance *ResourceManager::AddTileInstance(Layer *layer, int x, int y, int newType)
+{
+    AddTilesCommand *add = new AddTilesCommand(layer, x, y, newType);
+    undo->push(add);
+
+    return add->GetTileInstance();
+}
+
+void ResourceManager::ModifyTileInstance(Layer *layer, int x, int y, int newType, int oldType)
+{
+    ModifyTilesCommand *mod = new ModifyTilesCommand(layer, x, y, newType, oldType);
+    undo->push(mod);
+}
+
+TileInstance *ResourceManager::GetTileInstanceByIndex(Layer *layer, int i)
+{
+    if(i < 0 || i >= layer->GetTileCount())
+        return NULL;
+
+    if(!layer)
+        return NULL;
+
+    return layer->GetTileAtIndex(i);
+}
+
+int ResourceManager::GetTileInstanceCount(Layer *layer)
+{
+    if(!layer)
+        return 0;
+
+    return layer->GetTileCount();
+}
+
 void ResourceManager::AddLayer(Layer *newLayer)
 {
     if(newLayer)

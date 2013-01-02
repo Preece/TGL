@@ -87,6 +87,35 @@ void LayerGroup::DestroyAllItems()
 
 void LayerGroup::RepopulateTiles()
 {
+    //clear out all the tiles
+    for(int i = 0; i < items.count(); i++)
+    {
+        delete items[i];
+        items[i] = NULL;
+    }
+
+    //loop through all the tile instances in the model
+    for(int i = 0; i < layer->GetTileCount(); i++)
+    {
+        //add the tile instance to the group
+        TileInstanceItem *tempTile = new TileInstanceItem;
+
+        //add a tile to the model, and set it as the tileinstance for the item
+        tempTile->SetTileInstance(layer->GetTileAtIndex(i));
+
+        int tileID = tempTile->GetTileInstance()->GetTileID();
+
+        //update its Pixmap
+        tempTile->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
+
+        //set the position
+        tempTile->setPos(tempTile->GetX() * resourceManager->GetLevelProperties()->GetTileWidth(),
+                         tempTile->GetY() * resourceManager->GetLevelProperties()->GetTileHeight());
+
+        int pos = (tempTile->GetX() * resourceManager->GetLevelProperties()->GetTileWidth()) + tempTile->GetY();
+        items[pos] = tempTile;
+        tempTile->setParentItem(this);
+    }
 }
 
 void LayerGroup::RepopulateObjects()
@@ -107,10 +136,9 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
         TileInstanceItem *tempTile = new TileInstanceItem;
 
         //add a tile to the model, and set it as the tileinstance for the item
-        tempTile->SetTileInstance(layer->AddTile(x, y, newType));
+        tempTile->SetTileInstance(resourceManager->AddTileInstance(layer, x, y, newType));
 
         int tileID = tempTile->GetTileInstance()->GetTileID();
-
 
         //update its Pixmap
         tempTile->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
@@ -129,7 +157,7 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
         if(newType != 0)
         {
             //modify the Tile ID it references
-            items[pos]->GetTileInstance()->SetTileID(newType);
+            resourceManager->ModifyTileInstance(layer, x, y, newType, GetTileType(x, y));
 
             int tileID = items[pos]->GetTileInstance()->GetTileID();
 

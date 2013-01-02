@@ -16,6 +16,8 @@
 
 #include "../Commands/AddResourceCommand.h"
 #include "../Commands/DeleteResourceCommand.h"
+#include "../Commands/AddTilesCommand.h"
+#include "../Commands/ModifyTilesCommand.h"
 
 class ResourceManager : public QObject
 {
@@ -60,6 +62,11 @@ public slots:
     int GetTileCount() { return tileList.count(); }
     Tile *GetTile(int ID);
     Tile *GetTile(int x, int y);
+
+    TileInstance *AddTileInstance(Layer *layer, int x, int y, int newType);
+    void ModifyTileInstance(Layer *layer, int x, int y, int newType, int oldType);
+    TileInstance *GetTileInstanceByIndex(Layer *layer, int i);
+    int GetTileInstanceCount(Layer *layer);
 
     void AddLayer(Layer *newLayer);
     void DeleteLayer(int ID);

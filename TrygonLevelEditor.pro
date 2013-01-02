@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     Model/Exporters/PackedBinaryExporter.cpp \
     Commands/DeletesSpriteCommand.cpp \
     Commands/AddResourceCommand.cpp \
-    Commands/DeleteResourceCommand.cpp
+    Commands/DeleteResourceCommand.cpp \
+    Commands/AddTilesCommand.cpp
   
 
 HEADERS  += \
@@ -117,7 +118,8 @@ HEADERS  += \
     LevelEditor/ObjectInstanceItem.h \
     Model/Exporters/PackedBinaryExporter.h \
     Commands/AddResourceCommand.h \
-    Commands/DeleteResourceCommand.h
+    Commands/DeleteResourceCommand.h \
+    Commands/AddTilesCommand.h
    
 
 FORMS    += \

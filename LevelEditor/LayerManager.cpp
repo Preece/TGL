@@ -173,6 +173,8 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton && !IsObjectSelected())
     {
+        resourceManager->BeginUndoOperation("Painting Tiles");
+
         //they have started painting, so nix the preview
         currentLayer->ClearPreview();
 
@@ -225,6 +227,14 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         lastPreviewSpot.setX(tileX);
         lastPreviewSpot.setY(tileY);
+    }
+}
+
+void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton && !IsObjectSelected())
+    {
+        resourceManager->EndUndoOperation();
     }
 }
 
@@ -287,6 +297,6 @@ bool LayerManager::IsObjectSelected()
 void LayerManager::RepopulateAllLayers()
 {
     for(int i = 0; i < layers.count(); i++)
-        RepopulateLayer(layers[i]);
+        layers[i]->RepopulateTiles();
 }
 

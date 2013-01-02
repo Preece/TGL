@@ -30,6 +30,8 @@ public:
     TileInstance *GetTileAtIndex(int index);
 
     TileInstance *AddTile(int x = 0, int y = 0, int ID = 0);
+    void RemoveTile(int x, int y);
+    void ModifyTile(int x, int y, int ID);
 
 private:
     double verticalParallax, horizontalParallax;
