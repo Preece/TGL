@@ -109,10 +109,10 @@ void LayerGroup::RepopulateTiles()
         tempTile->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
 
         //set the position
-        tempTile->setPos(tempTile->GetX() * resourceManager->GetLevelProperties()->GetTileWidth(),
-                         tempTile->GetY() * resourceManager->GetLevelProperties()->GetTileHeight());
+        tempTile->setPos(tempTile->GetTileInstance()->GetX() * resourceManager->GetLevelProperties()->GetTileWidth(),
+                         tempTile->GetTileInstance()->GetY() * resourceManager->GetLevelProperties()->GetTileHeight());
 
-        int pos = (tempTile->GetX() * resourceManager->GetLevelProperties()->GetTileWidth()) + tempTile->GetY();
+        int pos = (tempTile->GetTileInstance()->GetX() * resourceManager->GetLevelProperties()->GetTileWidth()) + tempTile->GetTileInstance()->GetX();
         items[pos] = tempTile;
         tempTile->setParentItem(this);
     }
@@ -153,10 +153,14 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
     //if a tile already exists at this position
     else
     {
+        int oldID = GetTileType(x, y);
+
         //and the new type is not 0
-        if(newType != 0)
+        if(newType != 0 && oldID != newType)
         {
-            resourceManager->ModifyTileInstance(layer, x, y, newType, GetTileType(x, y));
+            int oldID = GetTileType(x, y);
+
+            resourceManager->ModifyTileInstance(layer, x, y, newType, oldID);
 
             int tileID = items[pos]->GetTileInstance()->GetTileID();
 
@@ -164,7 +168,7 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
             items[pos]->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
         }
         //if the new type is 0
-        else
+        else if(newType == 0)
         {
             //delete the tile and remove it from the layer model
             int oldID = items[pos]->GetTileInstance()->GetID();

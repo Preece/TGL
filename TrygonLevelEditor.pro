@@ -37,11 +37,6 @@ SOURCES += main.cpp\
     LevelEditor/ObjectItem.cpp \
     LevelEditor/LayerManager.cpp \
     Commands/ModifyTilesCommand.cpp \
-    Commands/AddObjectInstanceCommand.cpp \
-    Commands/DeleteObjectInstanceCommand.cpp \
-    Commands/AddObjectCommand.cpp \
-    Commands/DeleteObjectCommand.cpp \
-    Commands/AddSpriteCommand.cpp \
     Model/Tile.cpp \
     LevelEditor/Brushes/TileBrush.cpp \
     Model/LevelProperties.cpp \
@@ -63,7 +58,6 @@ SOURCES += main.cpp\
     LevelEditor/ObjectInstanceItem.cpp \
     Model/ObjectInstance.cpp \
     Model/Exporters/PackedBinaryExporter.cpp \
-    Commands/DeletesSpriteCommand.cpp \
     Commands/AddResourceCommand.cpp \
     Commands/DeleteResourceCommand.cpp \
     Commands/AddTilesCommand.cpp
