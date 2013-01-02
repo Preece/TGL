@@ -156,7 +156,6 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
         //and the new type is not 0
         if(newType != 0)
         {
-            //modify the Tile ID it references
             resourceManager->ModifyTileInstance(layer, x, y, newType, GetTileType(x, y));
 
             int tileID = items[pos]->GetTileInstance()->GetTileID();

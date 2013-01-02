@@ -269,6 +269,9 @@ TileInstance *ResourceManager::AddTileInstance(Layer *layer, int x, int y, int n
 
 void ResourceManager::ModifyTileInstance(Layer *layer, int x, int y, int newType, int oldType)
 {
+    if(newType == oldType)
+        return;
+
     ModifyTilesCommand *mod = new ModifyTilesCommand(layer, x, y, newType, oldType);
     undo->push(mod);
 }

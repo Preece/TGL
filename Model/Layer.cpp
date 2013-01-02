@@ -73,6 +73,7 @@ void Layer::ModifyTile(int x, int y, int ID)
         if(tempTile->GetX() == x && tempTile->GetY() == y)
         {
             tempTile->SetTileID(ID);
+            return;
         }
     }
 }
