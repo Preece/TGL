@@ -95,7 +95,9 @@ void LayerGroup::RepopulateTiles()
     //clear out all the tiles
     for(int i = 0; i < items.count(); i++)
     {
-        delete items[i];
+        if(items[i])
+            delete items[i];
+
         items[i] = NULL;
     }
 
@@ -105,7 +107,6 @@ void LayerGroup::RepopulateTiles()
         //add the tile instance to the group
         TileInstanceItem *tempTile = new TileInstanceItem;
 
-        //add a tile to the model, and set it as the tileinstance for the item
         tempTile->SetTileInstance(layer->GetTileAtIndex(i));
 
         int tileID = tempTile->GetTileInstance()->GetTileID();
@@ -158,13 +159,11 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
     //if a tile already exists at this position
     else
     {
-        int oldID = GetTileType(x, y);
+        int oldID = items[pos]->GetTileID();
 
         //and the new type is not 0
         if(newType != 0 && oldID != newType)
         {
-            int oldID = GetTileType(x, y);
-
             resourceManager->ModifyTileInstance(layer, x, y, newType, oldID);
 
             int tileID = items[pos]->GetTileInstance()->GetTileID();

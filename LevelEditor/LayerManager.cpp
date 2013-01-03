@@ -229,6 +229,8 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    QGraphicsScene::mouseReleaseEvent(event);
+
     if(event->button() == Qt::LeftButton && !IsObjectSelected())
     {
         resourceManager->EndUndoOperation();
