@@ -32,6 +32,24 @@ TileInstance *Layer::GetTileAtIndex(int index)
     return static_cast<TileInstance*>(GetChildByIndex(index));
 }
 
+int Layer::GetTileType(int x, int y)
+{
+    TileInstance *tempTile;
+
+    for(int i = 0; i < GetChildCount(); i++)
+    {
+        tempTile = static_cast<TileInstance*>(GetChildByIndex(i));
+
+        //if the tile exists at the specified position, change it
+        if(tempTile->GetX() == x && tempTile->GetY() == y)
+        {
+            return tempTile->GetTileID();
+        }
+    }
+
+    return 0;
+}
+
 TileInstance *Layer::AddTile(int x, int y, int ID)
 {
     TileInstance *tempTile = new TileInstance;

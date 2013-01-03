@@ -22,38 +22,6 @@ void LayerGroup::SetLayerSize(int w, int h)
 
     width = w;
     height = h;
-
-    //store the current list away
-    QList<TileInstanceItem*> tempList = items;
-
-    //clear out the current list
-    items.clear();
-
-    //build out the tiles array to be the correct size
-    for(int i = 0; i < (w*h); i++)
-    {
-        //fill it with NULL pointers
-        items.append(NULL);
-    }
-
-    int x = 0;
-    int y = 0;
-
-    //loop through the stored list
-    for(int j = 0; j < tempList.count(); j++)
-    {
-        //place each item from the temp list into the correct spot
-        x = tempList[j]->GetX();
-        y = tempList[j]->GetY();
-
-        if(tempList[j])
-        {
-            //simulation of 2D array. Refill the items list.
-            items[(w * x) + y] = tempList[j];
-        }
-        else
-            items[(w * x) + y] = NULL;
-    }
 }
 
 void LayerGroup::AddObjectItem(ObjectInstanceItem *newObj)
@@ -101,12 +69,14 @@ void LayerGroup::RepopulateTiles()
         items[i] = NULL;
     }
 
+    items.clear();
+
     //loop through all the tile instances in the model
     for(int i = 0; i < layer->GetTileCount(); i++)
     {
-        //add the tile instance to the group
         TileInstanceItem *tempTile = new TileInstanceItem;
 
+        //get the tile and set it as the tileinstance for the item
         tempTile->SetTileInstance(layer->GetTileAtIndex(i));
 
         int tileID = tempTile->GetTileInstance()->GetTileID();
@@ -118,8 +88,7 @@ void LayerGroup::RepopulateTiles()
         tempTile->setPos(tempTile->GetTileInstance()->GetX() * resourceManager->GetLevelProperties()->GetTileWidth(),
                          tempTile->GetTileInstance()->GetY() * resourceManager->GetLevelProperties()->GetTileHeight());
 
-        int pos = (tempTile->GetTileInstance()->GetX() * resourceManager->GetLevelProperties()->GetTileWidth()) + tempTile->GetTileInstance()->GetX();
-        items[pos] = tempTile;
+        items.append(tempTile);
         tempTile->setParentItem(this);
     }
 }
@@ -134,10 +103,9 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
     if(x >= width || y >= height || x < 0 || y < 0)
         return;
 
-    int pos = (x * width) + y;
-
+    int oldType = layer->GetTileType(x, y);
     //if there is not a tile at this position
-    if(items[pos] == NULL && newType != 0)
+    if(oldType == 0 && newType != 0)
     {
         TileInstanceItem *tempTile = new TileInstanceItem;
 
@@ -153,33 +121,29 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
         tempTile->setPos(x * resourceManager->GetLevelProperties()->GetTileWidth(),
                          y * resourceManager->GetLevelProperties()->GetTileHeight());
 
-        items[pos] = tempTile;
+        items.append(tempTile);
         tempTile->setParentItem(this);
     }
     //if a tile already exists at this position
     else
     {
-        int oldID = items[pos]->GetTileID();
-
         //and the new type is not 0
-        if(newType != 0 && oldID != newType)
+        if(newType != 0 && oldType != newType)
         {
-            resourceManager->ModifyTileInstance(layer, x, y, newType, oldID);
-
-            int tileID = items[pos]->GetTileInstance()->GetTileID();
+            resourceManager->ModifyTileInstance(layer, x, y, newType, oldType);
 
             //update its Pixmap
-            items[pos]->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
+            GetTileInstanceItem(x, y)->SetTilePixmap(resourceManager->GetTilePixmap(newType));
         }
         //if the new type is 0
         else if(newType == 0)
         {
             //delete the tile and remove it from the layer model
-            int oldID = items[pos]->GetTileInstance()->GetID();
-            layer->RemoveChild(oldID);
+            //int oldID = items[pos]->GetTileInstance()->GetID();
+            //layer->RemoveChild(oldID);
 
-            delete items[pos];
-            items[pos] = NULL;
+            //delete items[pos];
+            //items[pos] = NULL;
         }
     }
 }
@@ -209,18 +173,22 @@ void LayerGroup::ClearPreview()
     previewItems.clear();
 }
 
+TileInstanceItem *LayerGroup::GetTileInstanceItem(int x, int y)
+{
+    for(int i = 0; i < items.count(); i++)
+    {
+        if(items[i]->GetTileInstance()->GetX() == x && items[i]->GetTileInstance()->GetY() == y)
+            return items[i];
+    }
+
+    return NULL;
+}
+
 int LayerGroup::GetTileType(int x, int y)
 {
     //bounds check
     if(x >= width || y >= height || x < 0 || y < 0)
         return 0;
 
-    int pos = (x * width) + y;
-
-    TileInstanceItem *tempItem = items[pos];
-
-    if(tempItem == NULL)
-        return 0;
-    else
-        return tempItem->GetTileID();
+    return layer->GetTileType(x, y);
 }

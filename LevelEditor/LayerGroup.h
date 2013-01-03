@@ -23,6 +23,7 @@ public:
     void ModifyTile(int x, int y, int newType);
     void PreviewModifyTile(int x, int y, int newType);
     void ClearPreview();
+    TileInstanceItem *GetTileInstanceItem(int x, int y);
 
     int GetTileType(int x, int y);
     void SetLayerSize(int w, int h);
@@ -40,6 +41,7 @@ public:
 
     void RepopulateTiles();
     void RepopulateObjects();
+
 
 private:
     QList<TileInstanceItem*> items;

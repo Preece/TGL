@@ -234,6 +234,7 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if(event->button() == Qt::LeftButton && !IsObjectSelected())
     {
         resourceManager->EndUndoOperation();
+        currentLayer->RepopulateTiles();
     }
 }
 

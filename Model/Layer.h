@@ -28,6 +28,7 @@ public:
 
     int GetTileCount() { return GetChildCount(); }
     TileInstance *GetTileAtIndex(int index);
+    int GetTileType(int x, int y);
 
     TileInstance *AddTile(int x = 0, int y = 0, int ID = 0);
     void RemoveTile(int x, int y);
