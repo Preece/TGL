@@ -206,7 +206,7 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         //paint if the position is different from before
         //causes a bug where movement in the doand and right position trails
-        //if(tileX != lastPaintSpot.x() || tileY != lastPaintSpot.y())
+        if(tileX != lastPaintSpot.x() || tileY != lastPaintSpot.y())
         {
             currentBrush->Line(lastPaintSpot.x(), lastPaintSpot.y(), tileX, tileY, currentLayer);
 

@@ -108,7 +108,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
 {
     //if this is not a middle tile
-    if(!ListContainsTile(4, layer->GetTileType(x, y)))
+    if(!ListContainsTile(4, layer->GetTileType(x, y)) && !IsListEmpty(4))
     {
         //check for middle tiles that pinch this tile. That means paint a middle tile
         if(ListContainsTile(4, layer->GetTileType(x - 1, y)) &&
@@ -163,7 +163,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     if(ListContainsTile(4, layer->GetTileType(x + 1, y)) &&
        !ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
        !ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
-       !ListContainsTile(4, layer->GetTileType(x - 1, y)))
+       !ListContainsTile(4, layer->GetTileType(x - 1, y))  && !IsListEmpty(3))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(3));
@@ -177,7 +177,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     if(ListContainsTile(4, layer->GetTileType(x - 1, y)) &&
        !ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
        !ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
-       !ListContainsTile(4, layer->GetTileType(x + 1, y)))
+       !ListContainsTile(4, layer->GetTileType(x + 1, y)) && !IsListEmpty(5))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(5));
@@ -191,7 +191,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     if(ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
        !ListContainsTile(4, layer->GetTileType(x + 1, y)) &&
        !ListContainsTile(4, layer->GetTileType(x - 1, y)) &&
-       !ListContainsTile(4, layer->GetTileType(x, y - 1)))
+       !ListContainsTile(4, layer->GetTileType(x, y - 1)) && !IsListEmpty(1))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(1));
@@ -205,7 +205,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     if(ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
        !ListContainsTile(4, layer->GetTileType(x + 1, y)) &&
        !ListContainsTile(4, layer->GetTileType(x - 1, y)) &&
-       !ListContainsTile(4, layer->GetTileType(x, y + 1)))
+       !ListContainsTile(4, layer->GetTileType(x, y + 1)) && !IsListEmpty(7))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(7));
@@ -218,7 +218,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     //top left
     if(ListContainsTile(4, layer->GetTileType(x + 1, y + 1)) &&
        !ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
-       !ListContainsTile(4, layer->GetTileType(x + 1, y)))
+       !ListContainsTile(4, layer->GetTileType(x + 1, y)) && !IsListEmpty(0))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(0));
@@ -231,7 +231,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     //top right
     if(ListContainsTile(4, layer->GetTileType(x - 1, y + 1)) &&
        !ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
-       !ListContainsTile(4, layer->GetTileType(x - 1, y)))
+       !ListContainsTile(4, layer->GetTileType(x - 1, y)) && !IsListEmpty(2))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(2));
@@ -244,7 +244,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     //bottom left
     if(ListContainsTile(4, layer->GetTileType(x + 1, y - 1)) &&
        !ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
-       !ListContainsTile(4, layer->GetTileType(x + 1, y)))
+       !ListContainsTile(4, layer->GetTileType(x + 1, y)) && !IsListEmpty(6))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(6));
@@ -257,7 +257,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     //bottom right
     if(ListContainsTile(4, layer->GetTileType(x - 1, y - 1)) &&
        !ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
-       !ListContainsTile(4, layer->GetTileType(x - 1, y)))
+       !ListContainsTile(4, layer->GetTileType(x - 1, y)) && !IsListEmpty(8))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(8));
@@ -270,7 +270,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     //top left corner
     if(ListContainsTile(4, layer->GetTileType(x + 1, y + 1)) &&
        ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
-       ListContainsTile(4, layer->GetTileType(x + 1, y)))
+       ListContainsTile(4, layer->GetTileType(x + 1, y)) && !IsListEmpty(9))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(9));
@@ -283,7 +283,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     //top right
     if(ListContainsTile(4, layer->GetTileType(x - 1, y + 1)) &&
        ListContainsTile(4, layer->GetTileType(x, y + 1)) &&
-       ListContainsTile(4, layer->GetTileType(x - 1, y)))
+       ListContainsTile(4, layer->GetTileType(x - 1, y)) && !IsListEmpty(10))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(10));
@@ -296,7 +296,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     //bottom left
     if(ListContainsTile(4, layer->GetTileType(x + 1, y - 1)) &&
        ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
-       ListContainsTile(4, layer->GetTileType(x + 1, y)))
+       ListContainsTile(4, layer->GetTileType(x + 1, y)) && !IsListEmpty(11))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(11));
@@ -309,7 +309,7 @@ void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
     //bottom right
     if(ListContainsTile(4, layer->GetTileType(x - 1, y - 1)) &&
        ListContainsTile(4, layer->GetTileType(x, y - 1)) &&
-       ListContainsTile(4, layer->GetTileType(x - 1, y)))
+       ListContainsTile(4, layer->GetTileType(x - 1, y)) && !IsListEmpty(12))
     {
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(12));

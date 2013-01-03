@@ -14,6 +14,7 @@ void TileBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 
 void TileBrush::Line(int x1, int y1, int x2, int y2, LayerGroup *layer)
 {
+    //if the tiles are at the same spot
     if(x1 == x2 && y1 == y2)
         Paint(x1, y1, layer);
 
@@ -41,7 +42,7 @@ void TileBrush::Line(int x1, int y1, int x2, int y2, LayerGroup *layer)
 
     const int maxX = x2;
 
-    for(int x = x1; x < maxX; x++)
+    for(int x = x1; x <= maxX; x++)
     {
         if(steep)
         {
