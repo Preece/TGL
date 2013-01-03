@@ -24,13 +24,14 @@ void PencilBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
         {
             if((i*i) + (j*j) < (radius * radius))
             {
-                if(overwrite || layer->GetTileType(j + x, i + y) == 0)
-                {
-                    if(preview)
-                        layer->PreviewModifyTile(j + x, i + y, selectedTileID);
-                    else
-                        layer->ModifyTile(j + x, i + y, selectedTileID);
-                }
+                if(layer->GetTileType(j + x, i + y) != selectedTileID)
+                    if(overwrite || layer->GetTileType(j + x, i + y) == 0)
+                    {
+                        if(preview)
+                            layer->PreviewModifyTile(j + x, i + y, selectedTileID);
+                        else
+                            layer->ModifyTile(j + x, i + y, selectedTileID);
+                    }
             }
         }
     }

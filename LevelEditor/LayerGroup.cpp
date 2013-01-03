@@ -46,8 +46,13 @@ void LayerGroup::SetLayerSize(int w, int h)
         x = tempList[j]->GetX();
         y = tempList[j]->GetY();
 
-        //simulation of 2D array. Refill the items list.
-        items[(w * x) + y] = tempList[j];
+        if(tempList[j])
+        {
+            //simulation of 2D array. Refill the items list.
+            items[(w * x) + y] = tempList[j];
+        }
+        else
+            items[(w * x) + y] = NULL;
     }
 }
 

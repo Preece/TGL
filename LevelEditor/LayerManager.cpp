@@ -17,10 +17,6 @@ LayerManager::~LayerManager()
 {
 }
 
-void LayerManager::RepopulateLayer(LayerGroup *dirtyLayer)
-{
-}
-
 void LayerManager::EyedropTile(QPoint pos)
 {
     if(!resourceManager || !currentLayer)
@@ -178,7 +174,8 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
         //they have started painting, so nix the preview
         currentLayer->ClearPreview();
 
-        currentBrush->Paint(tileX, tileY, currentLayer);
+        if(tileX != lastPaintSpot.x() || tileY != lastPaintSpot.y())
+            currentBrush->Paint(tileX, tileY, currentLayer);
 
         lastPaintSpot.setX(tileX);
         lastPaintSpot.setY(tileY);
