@@ -91,6 +91,10 @@ private slots:
 
     void on_actionRedo_triggered();
 
+    void on_lineTool_clicked();
+
+    void on_replacerTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 

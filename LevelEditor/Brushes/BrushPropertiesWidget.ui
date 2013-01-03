@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>329</width>
-    <height>199</height>
+    <height>225</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -164,6 +164,51 @@
       </item>
       <item>
        <widget class="QToolButton" name="deleteSmartBrush">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../Icons.qrc">
+          <normaloff>:/Icons/Icons/removevalue.png</normaloff>:/Icons/Icons/removevalue.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="replacerGroup">
+     <property name="title">
+      <string>Replacer Brush</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QComboBox" name="replacerBrushCombo"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="addReplacerBrush">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../Icons.qrc">
+          <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="editReplacerBrush">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../Icons.qrc">
+          <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="deleteReplacerBrush">
         <property name="text">
          <string>...</string>
         </property>

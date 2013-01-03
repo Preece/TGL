@@ -410,3 +410,18 @@ void MainWindow::RepopulateEverything()
 
     layers->RepopulateAllLayers();
 }
+
+void MainWindow::on_lineTool_clicked()
+{
+
+}
+
+void MainWindow::on_replacerTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(9);
+    UpdateToolSelection();
+
+    //change the cursor
+    //QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    //ui->levelView->setCursor(tempCur);
+}

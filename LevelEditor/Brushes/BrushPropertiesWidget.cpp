@@ -10,9 +10,11 @@ BrushPropertiesWidget::BrushPropertiesWidget(QWidget *parent) :
     currentBrush = &pencil;
     scatterBrushIndex = 0;
     smartBrushIndex = 0;
+    replacerBrushIndex = 0;
 
     ui->scatterBrushGroup->hide();
     ui->smartBrushGroup->hide();
+    ui->replacerGroup->hide();
 
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
@@ -27,6 +29,7 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
 {
     ui->scatterBrushGroup->hide();
     ui->smartBrushGroup->hide();
+    ui->replacerGroup->hide();
 
     switch(type)
     {
@@ -59,6 +62,17 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
 
         break;
 
+    //smart
+    case 7:
+        if(smartBrushIndex < smart.count())
+        {
+            currentBrush = smart[smartBrushIndex];
+        }
+        else
+            currentBrush = NULL;
+
+        ui->smartBrushGroup->show();
+        break;
 
     //scatter fill
     case 8:
@@ -74,16 +88,17 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
         ui->scatterBrushGroup->show();
         break;
 
-    //smart
-    case 7:
-        if(smartBrushIndex < smart.count())
+    //replacer brush
+    case 9:
+        if(replacerBrushIndex < replacer.count())
         {
-            currentBrush = smart[smartBrushIndex];
+            currentBrush = replacer[replacerBrushIndex];
+
         }
         else
             currentBrush = NULL;
 
-        ui->smartBrushGroup->show();
+        ui->replacerGroup->show();
         break;
 
     default:
@@ -113,6 +128,15 @@ void BrushPropertiesWidget::RepopulateBrushLists()
         ui->smartBrushCombo->addItem(smart[i]->GetName());
         ui->smartBrushCombo->setCurrentIndex(i);
         smartBrushIndex = i;
+    }
+
+    ui->replacerBrushCombo->clear();
+
+    for(int i = 0; i < replacer.count(); i++)
+    {
+        ui->replacerBrushCombo->addItem(replacer[i]->GetName());
+        ui->replacerBrushCombo->setCurrentIndex(i);
+        replacerBrushIndex = i;
     }
 }
 
@@ -242,5 +266,67 @@ void BrushPropertiesWidget::on_editSmartBrushes_clicked()
         propertiesWindow.exec();
 
         RepopulateBrushLists();
+    }
+}
+
+void BrushPropertiesWidget::on_addReplacerBrush_clicked()
+{
+    //create a new brush and pass it to the properties window
+    ReplacerBrush *tempBrush = new ReplacerBrush;
+    propertiesWindow.NewBrush(tempBrush);
+    propertiesWindow.ShowReplacerControls();
+
+    //execute the window, and check if it was accepted
+    if(propertiesWindow.exec() == QDialog::Accepted)
+    {
+        //add the new brush to the list
+        replacer.append(tempBrush);
+
+        //and repopulate the lists
+        RepopulateBrushLists();
+    }
+    //if it wasnt accepted
+    else
+    {
+        //get rid of our new brush
+        delete tempBrush;
+    }
+}
+
+void BrushPropertiesWidget::on_editReplacerBrush_clicked()
+{
+    if(ui->replacerBrushCombo->currentIndex() != -1)
+    {
+        propertiesWindow.EditBrush(replacer[replacerBrushIndex]);
+        propertiesWindow.SetListIndex(0);
+        propertiesWindow.exec();
+
+        RepopulateBrushLists();
+    }
+}
+
+void BrushPropertiesWidget::on_deleteReplacerBrush_clicked()
+{
+    //if a brush is selected
+    if(ui->replacerBrushCombo->currentIndex() != -1)
+    {
+        delete replacer[replacerBrushIndex];
+        replacer.removeAt(replacerBrushIndex);
+
+        RepopulateBrushLists();
+    }
+}
+
+void BrushPropertiesWidget::on_replacerBrushCombo_currentIndexChanged(int index)
+{
+    if(index == -1)
+        return;
+
+    replacerBrushIndex = index;
+
+    if(replacerBrushIndex < replacer.count())
+    {
+        currentBrush = replacer[replacerBrushIndex];
+        emit BrushChanged();
     }
 }

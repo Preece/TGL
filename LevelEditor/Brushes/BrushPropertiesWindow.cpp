@@ -77,6 +77,13 @@ void BrushPropertiesWindow::ShowSmartControls()
     SetListIndex(4);
 }
 
+void BrushPropertiesWindow::ShowReplacerControls()
+{
+    ui->smartBrushGroup->hide();
+    ui->replacerBrushGroup->show();
+    SetListIndex(1);
+}
+
 void BrushPropertiesWindow::on_addTile_clicked()
 {
     if(currentBrush)
@@ -205,4 +212,16 @@ void BrushPropertiesWindow::on_removeTile_clicked()
         currentBrush->RemoveTile(currentListIndex, GetSelectedListTileIndex());
         RepopulateTileList();
     }
+}
+
+void BrushPropertiesWindow::on_dirtyTilesButton_clicked()
+{
+    currentListIndex = 1;
+    RepopulateTileList();
+}
+
+void BrushPropertiesWindow::on_cleanTilesButton_clicked()
+{
+    currentListIndex = 0;
+    RepopulateTileList();
 }

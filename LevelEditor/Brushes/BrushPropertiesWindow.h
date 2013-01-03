@@ -33,6 +33,7 @@ public:
 
     void ShowScatterControls();
     void ShowSmartControls();
+    void ShowReplacerControls();
 
     bool IsTileSelected();
     int GetSelectedTileID();
@@ -54,6 +55,10 @@ private slots:
     void SmartButtonPushed();
 
     void on_removeTile_clicked();
+
+    void on_dirtyTilesButton_clicked();
+
+    void on_cleanTilesButton_clicked();
 
 private:
     Ui::BrushPropertiesWindow *ui;

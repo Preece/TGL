@@ -66,6 +66,19 @@
          </widget>
         </item>
         <item>
+         <widget class="QToolButton" name="lineTool">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
          <widget class="QToolButton" name="bucketTool">
           <property name="text">
            <string>...</string>
@@ -148,6 +161,19 @@
           <property name="icon">
            <iconset resource="Icons.qrc">
             <normaloff>:/Icons/Icons/scatterfill.png</normaloff>:/Icons/Icons/scatterfill.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="replacerTool">
+          <property name="text">
+           <string>...</string>
           </property>
           <property name="checkable">
            <bool>true</bool>

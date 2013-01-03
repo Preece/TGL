@@ -12,6 +12,7 @@
 #include "FillBrush.h"
 #include "SmartBrush.h"
 #include "ScatterBrush.h"
+#include "ReplacerBrush.h"
 
 namespace Ui {
 class BrushPropertiesWidget;
@@ -55,6 +56,14 @@ private slots:
 
     void on_editSmartBrushes_clicked();
 
+    void on_addReplacerBrush_clicked();
+
+    void on_editReplacerBrush_clicked();
+
+    void on_deleteReplacerBrush_clicked();
+
+    void on_replacerBrushCombo_currentIndexChanged(int index);
+
 signals:
     void BrushChanged();
 
@@ -72,6 +81,9 @@ private:
 
     QList<SmartBrush*> smart;
     int smartBrushIndex;
+
+    QList<ReplacerBrush*> replacer;
+    int replacerBrushIndex;
 };
 
 #endif // BRUSHPROPERTIESWIDGET_H
