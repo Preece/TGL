@@ -38,7 +38,7 @@
    <enum>QTabWidget::Triangular</enum>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>0</number>
   </property>
   <widget class="QWidget" name="tilesTab">
    <attribute name="title">
@@ -374,7 +374,7 @@
   <customwidget>
    <class>TileSelectorView</class>
    <extends>QGraphicsView</extends>
-   <header>../TGL/ResourceTab/TileSelectorView.h</header>
+   <header>ResourceTab/TileSelectorView.h</header>
   </customwidget>
  </customwidgets>
  <resources>
