@@ -38,7 +38,7 @@
    <enum>QTabWidget::Triangular</enum>
   </property>
   <property name="currentIndex">
-   <number>0</number>
+   <number>1</number>
   </property>
   <widget class="QWidget" name="tilesTab">
    <attribute name="title">
@@ -89,6 +89,9 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QTreeWidget" name="objectSelector">
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::NoDragDrop</enum>
+      </property>
       <attribute name="headerVisible">
        <bool>false</bool>
       </attribute>

@@ -200,4 +200,6 @@ OTHER_FILES += \
     Icons/BrushGuides/bottomleftcorner.png \
     Icons/BrushGuides/bottomleft.png \
     Icons/BrushGuides/middle.png \
-    Icons/scatterfill.png
+    Icons/scatterfill.png \
+    Icons/replacer.png \
+    Icons/line.png

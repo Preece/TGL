@@ -68,12 +68,14 @@ void BrushPropertiesWindow::EditBrush(ComplexBrush *editBrush)
 void BrushPropertiesWindow::ShowScatterControls()
 {
     ui->smartBrushGroup->hide();
+    ui->replacerBrushGroup->hide();
     SetListIndex(0);
 }
 
 void BrushPropertiesWindow::ShowSmartControls()
 {
     ui->smartBrushGroup->show();
+    ui->replacerBrushGroup->hide();
     SetListIndex(4);
 }
 

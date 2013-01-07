@@ -9,6 +9,8 @@ public:
     ReplacerBrush();
 
     void Paint(int x, int y, LayerGroup *layer, bool preview);
+
+    QString GetType() { return "replacer"; }
 };
 
 #endif // REPLACERBRUSH_H

@@ -13,6 +13,8 @@ public:
 
     void SetFill(bool toFill) { fill = toFill; }
     void Fill(int tileX, int tileY, int newTile, int oldTile, LayerGroup *newLayer);
+
+    QString GetType() { return "scatter"; }
 private:
 
     static bool fill;

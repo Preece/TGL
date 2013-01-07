@@ -11,6 +11,8 @@ public:
     void Paint(int x, int y, LayerGroup *layer, bool preview = false);
     void Fill(int tileX, int tileY, int newTile, int oldTile, LayerGroup *newLayer);
 
+    QString GetType() { return "fill"; }
+
     void SetSelectedTileID(int newID) { selectedTileID = newID; }
 
 private:

@@ -10,6 +10,8 @@ public:
 
     void Paint(int x, int y, LayerGroup *layer, bool preview = false);
 
+    QString GetType() { return "eraser"; }
+
 private:
 };
 

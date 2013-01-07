@@ -16,6 +16,8 @@ public:
     virtual void Paint(int x, int y, LayerGroup *layer, bool preview = false);
     void Line(int x1, int y1, int x2, int y2, LayerGroup *layer);
 
+    virtual QString GetType() = 0;
+
     void SetSize(int newSize) { size = newSize; }
     void SetOverwrite(bool over) { overwrite = over; }
 

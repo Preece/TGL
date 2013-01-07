@@ -377,6 +377,24 @@ void ResourceTab::on_addObjectButton_clicked()
     }
 
     ObjectPrototype *tempObject = new ObjectPrototype;
+
+    tempObject->SetObjectType(0);
+
+    if(ui->objectSelector->selectedItems().count() > 0)
+    {
+        if(ui->objectSelector->selectedItems()[0] == NPCTree)
+            tempObject->SetObjectType(0);
+
+        if(ui->objectSelector->selectedItems()[0] == EnemyTree)
+            tempObject->SetObjectType(1);
+
+        if(ui->objectSelector->selectedItems()[0] == ItemTree)
+            tempObject->SetObjectType(2);
+
+        if(ui->objectSelector->selectedItems()[0] == DoodadTree)
+            tempObject->SetObjectType(3);
+    }
+
     objectEditorWindow->NewObject(tempObject);
 
     if(objectEditorWindow->exec() == QDialog::Accepted)

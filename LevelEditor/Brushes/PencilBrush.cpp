@@ -3,6 +3,7 @@
 PencilBrush::PencilBrush()
 {
     selectedTileID = 0;
+    lineMode = false;
 }
 
 void PencilBrush::Paint(int x, int y, LayerGroup *layer, bool preview)

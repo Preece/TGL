@@ -20,7 +20,7 @@ void ObjectEditor::NewObject(ObjectPrototype *newObject)
     currentObject = newObject;
 
     ui->objectNameInput->setText("");
-    ui->objectTypeSelector->setCurrentIndex(0);
+    ui->objectTypeSelector->setCurrentIndex(newObject->GetObjectType());
     ui->customValues->clear();
 
     RepopulateSpriteList();
