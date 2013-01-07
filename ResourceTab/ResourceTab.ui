@@ -46,7 +46,7 @@
    </attribute>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QGraphicsView" name="tileSelector">
+     <widget class="TileSelectorView" name="tileSelector">
       <property name="dragMode">
        <enum>QGraphicsView::RubberBandDrag</enum>
       </property>
@@ -370,6 +370,13 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TileSelectorView</class>
+   <extends>QGraphicsView</extends>
+   <header>../TGL/ResourceTab/TileSelectorView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../Icons.qrc"/>
  </resources>
