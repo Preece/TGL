@@ -48,7 +48,7 @@
     <item>
      <widget class="TileSelectorView" name="tileSelector">
       <property name="dragMode">
-       <enum>QGraphicsView::RubberBandDrag</enum>
+       <enum>QGraphicsView::NoDrag</enum>
       </property>
      </widget>
     </item>
