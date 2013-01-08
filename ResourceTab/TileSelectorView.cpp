@@ -3,6 +3,12 @@
 TileSelectorView::TileSelectorView(QObject *parent)
 {
     selection = new QRubberBand(QRubberBand::Rectangle, this);
+
+    QPalette palette;
+    palette.setBrush(QPalette::Foreground, QBrush(Qt::green));
+    palette.setBrush(QPalette::Base, QBrush(Qt::red));
+
+    selection->setPalette(palette);
 }
 
 TileSelectorView::~TileSelectorView()
