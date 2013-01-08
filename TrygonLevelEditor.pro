@@ -62,7 +62,8 @@ SOURCES += main.cpp\
     Commands/DeleteResourceCommand.cpp \
     Commands/AddTilesCommand.cpp \
     LevelEditor/Brushes/ReplacerBrush.cpp \
-    ResourceTab/TileSelectorView.cpp
+    ResourceTab/TileSelectorView.cpp \
+    ResourceTab/TileSelectorScene.cpp
   
 
 HEADERS  += \
@@ -117,7 +118,8 @@ HEADERS  += \
     Commands/DeleteResourceCommand.h \
     Commands/AddTilesCommand.h \
     LevelEditor/Brushes/ReplacerBrush.h \
-    ResourceTab/TileSelectorView.h
+    ResourceTab/TileSelectorView.h \
+    ResourceTab/TileSelectorScene.h
    
 
 FORMS    += \

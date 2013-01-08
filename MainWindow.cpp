@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect the add sprite button in the resource tab to the add sprite action
     connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
 
-    tileSelector = new QGraphicsScene;
+    tileSelector = new TileSelectorScene;
     ui->resourceTab->RegisterTileSelector(tileSelector);
 
     layers = new LayerManager;

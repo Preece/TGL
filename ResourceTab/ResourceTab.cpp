@@ -32,7 +32,7 @@ ResourceTab::~ResourceTab()
     delete ui;
 }
 
-void ResourceTab::RegisterTileSelector(QGraphicsScene *tiles)
+void ResourceTab::RegisterTileSelector(TileSelectorScene *tiles)
 {
     tileSelector = tiles;
     ui->tileSelector->setScene(tiles);

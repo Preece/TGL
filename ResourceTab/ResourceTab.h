@@ -15,6 +15,7 @@
 #include "ImageSelectorItem.h"
 #include "SpriteSelectorItem.h"
 #include "ObjectSelectorItem.h"
+#include "TileSelectorScene.h"
 
 #include "../Model/ResourceManager.h"
 #include "../Model/Image.h"
@@ -32,7 +33,7 @@ public:
     ~ResourceTab();
 
     void RegisterResourceManager(ResourceManager *newResourceManager) { resourceManager = newResourceManager; }
-    void RegisterTileSelector(QGraphicsScene *tiles);
+    void RegisterTileSelector(TileSelectorScene *tiles);
 
     void RepopulateObjectSelector();
     void RepopulateSpriteSelector();
@@ -88,7 +89,7 @@ private:
     QTreeWidgetItem *DoodadTree;
 
     QImage *spritesheet;
-    QGraphicsScene *tileSelector;
+    TileSelectorScene *tileSelector;
 };
 
 #endif // RESOURCETAB_H

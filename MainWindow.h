@@ -17,6 +17,8 @@
 #include "LevelEditor/Brushes/FillBrush.h"
 #include "LevelEditor/Brushes/EraserBrush.h"
 
+#include "ResourceTab/TileSelectorScene.h"
+
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"
 #include "ObjectEditor.h"
@@ -105,7 +107,7 @@ private:
     ResourceManager *resources;
 
     LayerManager *layers;
-    QGraphicsScene *tileSelector;
+    TileSelectorScene *tileSelector;
 
     double zoomLevel;
 };
