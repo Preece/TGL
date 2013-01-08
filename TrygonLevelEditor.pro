@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     ResourceTab/TileSelectorView.cpp \
     ResourceTab/TileSelectorScene.cpp \
     LevelEditor/Brushes/StampBrush.cpp \
-    LevelEditor/Brushes/LineBrush.cpp
+    LevelEditor/Brushes/LineBrush.cpp \
+    LevelEditor/Brushes/MatrixBrush.cpp
   
 
 HEADERS  += \
@@ -123,7 +124,8 @@ HEADERS  += \
     ResourceTab/TileSelectorView.h \
     ResourceTab/TileSelectorScene.h \
     LevelEditor/Brushes/StampBrush.h \
-    LevelEditor/Brushes/LineBrush.h
+    LevelEditor/Brushes/LineBrush.h \
+    LevelEditor/Brushes/MatrixBrush.h
    
 
 FORMS    += \
