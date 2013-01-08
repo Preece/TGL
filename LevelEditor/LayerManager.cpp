@@ -213,6 +213,9 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsScene::mouseReleaseEvent(event);
 
+    if(!currentLayer || !currentBrush)
+        return;
+
     //translate the position to tile coordinates
     int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
     int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
