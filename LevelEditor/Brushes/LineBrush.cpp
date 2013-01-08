@@ -18,11 +18,15 @@ void LineBrush::Move(int x, int y, LayerGroup *layer, bool leftButtonDown)
     //if the left mouse is down
     if(leftButtonDown)
     {
-        layer->ClearPreview();
-        Line(clickPoint.x(), clickPoint.y(), x, y, layer, true);
+        //if the position has changed
+        if(movePoint.x() != x || movePoint.y() != y)
+        {
+            layer->ClearPreview();
+            Line(clickPoint.x(), clickPoint.y(), x, y, layer, true);
 
-        movePoint.setX(x);
-        movePoint.setY(y);
+            movePoint.setX(x);
+            movePoint.setY(y);
+        }
     }
 }
 
