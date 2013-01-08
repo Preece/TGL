@@ -13,13 +13,11 @@ public:
 
     QString GetType() { return "pencil"; }
 
-    void SetSelectedTileID(int newID) { selectedTileID = newID; }
-
     void SetLineMode(bool state) { lineMode = state; }
     bool GetLineMode() { return lineMode; }
 private:
 
-    int selectedTileID;
+
 
     bool lineMode;
 };

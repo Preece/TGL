@@ -73,7 +73,7 @@ private:
     QGraphicsItemGroup *grid;
 
     TileBrush *currentBrush;
-    QPoint lastPaintSpot;
+
     QPoint lastPreviewSpot;
 };
 

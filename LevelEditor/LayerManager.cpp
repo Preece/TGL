@@ -171,14 +171,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         resourceManager->BeginUndoOperation("Painting Tiles");
 
-        //they have started painting, so nix the preview
-        currentLayer->ClearPreview();
-
-        if(tileX != lastPaintSpot.x() || tileY != lastPaintSpot.y())
-            currentBrush->Paint(tileX, tileY, currentLayer);
-
-        lastPaintSpot.setX(tileX);
-        lastPaintSpot.setY(tileY);
+        currentBrush->Press(tileX, tileY, currentLayer);
     }
     else if(event->button() == Qt::RightButton)
     {
@@ -204,23 +197,12 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->buttons() == Qt::LeftButton && !IsObjectSelected())
     {
-        //paint if the position is different from before
-        //causes a bug where movement in the doand and right position trails
-        if(tileX != lastPaintSpot.x() || tileY != lastPaintSpot.y())
-        {
-            currentBrush->Line(lastPaintSpot.x(), lastPaintSpot.y(), tileX, tileY, currentLayer);
-
-            //this spot is not the last spot
-            lastPaintSpot.setX(tileX);
-            lastPaintSpot.setY(tileY);
-        }
+        currentBrush->Move(tileX, tileY, currentLayer, true);
     }
     //if the left mouse button was not down
     else if(currentLayer)
     {
-        //paint a preview, if the position is different from before
-        if(tileX != lastPreviewSpot.x() || tileY != lastPreviewSpot.y())
-            currentBrush->Paint(tileX, tileY, currentLayer, true);
+        currentBrush->Move(tileX, tileY, currentLayer, false);
 
         lastPreviewSpot.setX(tileX);
         lastPreviewSpot.setY(tileY);
@@ -231,9 +213,17 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsScene::mouseReleaseEvent(event);
 
+    //translate the position to tile coordinates
+    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+    int tileX = event->scenePos().toPoint().x() / tileW;
+    int tileY = event->scenePos().toPoint().y() / tileH;
+
     if(event->button() == Qt::LeftButton && !IsObjectSelected())
     {
         resourceManager->EndUndoOperation();
+        currentBrush->Release(tileX, tileY, currentLayer);
         currentLayer->RepopulateTiles();
     }
 }

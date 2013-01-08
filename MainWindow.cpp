@@ -413,7 +413,12 @@ void MainWindow::RepopulateEverything()
 
 void MainWindow::on_lineTool_clicked()
 {
+    ui->brushProperties->SetCurrentBrush(10);
+    UpdateToolSelection();
 
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/line.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_replacerTool_clicked()

@@ -25,6 +25,7 @@ BrushPropertiesWidget::~BrushPropertiesWidget()
     delete ui;
 }
 
+//high is 10
 void BrushPropertiesWidget::SetCurrentBrush(int type)
 {
     ui->scatterBrushGroup->hide();
@@ -46,6 +47,11 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
     //eraser
     case 3:
         currentBrush = &eraser;
+        break;
+
+    //line
+    case 10:
+        currentBrush = &line;
         break;
 
     //scatter

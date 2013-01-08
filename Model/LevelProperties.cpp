@@ -2,8 +2,8 @@
 
 LevelProperties::LevelProperties()
 {
-    tileWidth = 32;
-    tileHeight = 32;
+    tileWidth = 16;
+    tileHeight = 16;
     mapWidth  = 99;
     mapHeight = 99;
     tilesetID = 0;

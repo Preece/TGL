@@ -5,6 +5,11 @@ FillBrush::FillBrush()
     selectedTileID = 0;
 }
 
+void FillBrush::Move(int x, int y, LayerGroup *layer)
+{
+    //we don't want this to do anything for a fill brush
+}
+
 void FillBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 {
     //the fill brush has no preview mode

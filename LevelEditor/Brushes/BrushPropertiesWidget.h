@@ -10,6 +10,7 @@
 #include "PencilBrush.h"
 #include "EraserBrush.h"
 #include "FillBrush.h"
+#include "LineBrush.h"
 #include "SmartBrush.h"
 #include "ScatterBrush.h"
 #include "ReplacerBrush.h"
@@ -75,6 +76,7 @@ private:
     PencilBrush pencil;
     EraserBrush eraser;
     FillBrush bucket;
+    LineBrush line;
 
     QList<ScatterBrush*> scatter;
     int scatterBrushIndex;
