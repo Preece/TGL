@@ -3,9 +3,9 @@
 
 #include <QRect>
 
-#include "ComplexBrush.h"
+#include "SmartBrush.h"
 
-class MatrixBrush : public ComplexBrush
+class MatrixBrush : public SmartBrush
 {
 public:
     MatrixBrush();
@@ -18,8 +18,6 @@ public:
     void Press(int x, int y, LayerGroup *layer);
     void Move(int x, int y, LayerGroup *layer, bool leftButtonDown);
     void Release(int x, int y, LayerGroup *layer);
-
-    void ContextPaintTile(int x, int y, LayerGroup *layer, bool preview);
 
 private:
     QRect currentRect;

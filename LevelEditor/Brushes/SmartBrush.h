@@ -7,13 +7,13 @@ class SmartBrush : public ComplexBrush
 {
 public:
 
-    void Paint(int x, int y, LayerGroup *layer, bool preview);
+    virtual void Paint(int x, int y, LayerGroup *layer, bool preview);
 
     void ContextPaintTile(int x, int y, LayerGroup *layer, bool preview);
 
     SmartBrush();
 
-    QString GetType() { return "smart"; }
+    virtual QString GetType() { return "smart"; }
 };
 
 #endif // SMARTBRUSH_H
