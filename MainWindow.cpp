@@ -427,6 +427,16 @@ void MainWindow::on_replacerTool_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    //QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
-    //ui->levelView->setCursor(tempCur);
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_matrixBrushButton_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(11);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
 }

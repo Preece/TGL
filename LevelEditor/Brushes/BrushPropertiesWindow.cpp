@@ -74,6 +74,7 @@ void BrushPropertiesWindow::ShowScatterControls()
 
 void BrushPropertiesWindow::ShowSmartControls()
 {
+    ui->smartBrushGroup->setTitle("Smart Brush");
     ui->smartBrushGroup->show();
     ui->replacerBrushGroup->hide();
     SetListIndex(4);
@@ -84,6 +85,14 @@ void BrushPropertiesWindow::ShowReplacerControls()
     ui->smartBrushGroup->hide();
     ui->replacerBrushGroup->show();
     SetListIndex(1);
+}
+
+void BrushPropertiesWindow::ShowMatrixControls()
+{
+    ui->smartBrushGroup->setTitle("Matrix Brush");
+    ui->smartBrushGroup->show();
+    ui->replacerBrushGroup->hide();
+    SetListIndex(4);
 }
 
 void BrushPropertiesWindow::on_addTile_clicked()

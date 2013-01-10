@@ -14,6 +14,7 @@
 #include "SmartBrush.h"
 #include "ScatterBrush.h"
 #include "ReplacerBrush.h"
+#include "MatrixBrush.h"
 
 namespace Ui {
 class BrushPropertiesWidget;
@@ -65,6 +66,14 @@ private slots:
 
     void on_replacerBrushCombo_currentIndexChanged(int index);
 
+    void on_addMatrixBrush_clicked();
+
+    void on_editMatrixBrush_clicked();
+
+    void on_deleteMatrixBrush_clicked();
+
+    void on_matrixBrushCombo_currentIndexChanged(int index);
+
 signals:
     void BrushChanged();
 
@@ -86,6 +95,9 @@ private:
 
     QList<ReplacerBrush*> replacer;
     int replacerBrushIndex;
+
+    QList<MatrixBrush*> matrix;
+    int matrixBrushIndex;
 };
 
 #endif // BRUSHPROPERTIESWIDGET_H

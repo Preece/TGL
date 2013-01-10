@@ -34,6 +34,7 @@ public:
     void ShowScatterControls();
     void ShowSmartControls();
     void ShowReplacerControls();
+    void ShowMatrixControls();
 
     bool IsTileSelected();
     int GetSelectedTileID();

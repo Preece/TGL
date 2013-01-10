@@ -192,6 +192,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QToolButton" name="matrixBrushButton">
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QToolButton" name="brushTool">
           <property name="text">
            <string>...</string>

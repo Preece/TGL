@@ -11,10 +11,12 @@ BrushPropertiesWidget::BrushPropertiesWidget(QWidget *parent) :
     scatterBrushIndex = 0;
     smartBrushIndex = 0;
     replacerBrushIndex = 0;
+    matrixBrushIndex = 0;
 
     ui->scatterBrushGroup->hide();
     ui->smartBrushGroup->hide();
     ui->replacerGroup->hide();
+    ui->matrixBrushGroup->hide();
 
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
@@ -25,12 +27,13 @@ BrushPropertiesWidget::~BrushPropertiesWidget()
     delete ui;
 }
 
-//high is 10
+//high is 11
 void BrushPropertiesWidget::SetCurrentBrush(int type)
 {
     ui->scatterBrushGroup->hide();
     ui->smartBrushGroup->hide();
     ui->replacerGroup->hide();
+    ui->matrixBrushGroup->hide();
 
     switch(type)
     {
@@ -107,6 +110,18 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
         ui->replacerGroup->show();
         break;
 
+    //matrix brush
+    case 11:
+        if(matrixBrushIndex < matrix.count())
+        {
+            currentBrush = matrix[matrixBrushIndex];
+        }
+        else
+            currentBrush = NULL;
+
+        ui->matrixBrushGroup->show();
+        break;
+
     default:
         currentBrush = &pencil;
         break;
@@ -143,6 +158,15 @@ void BrushPropertiesWidget::RepopulateBrushLists()
         ui->replacerBrushCombo->addItem(replacer[i]->GetName());
         ui->replacerBrushCombo->setCurrentIndex(i);
         replacerBrushIndex = i;
+    }
+
+    ui->matrixBrushCombo->clear();
+
+    for(int i = 0; i < matrix.count(); i++)
+    {
+        ui->matrixBrushCombo->addItem(matrix[i]->GetName());
+        ui->matrixBrushCombo->setCurrentIndex(i);
+        matrixBrushIndex = i;
     }
 }
 
@@ -333,6 +357,68 @@ void BrushPropertiesWidget::on_replacerBrushCombo_currentIndexChanged(int index)
     if(replacerBrushIndex < replacer.count())
     {
         currentBrush = replacer[replacerBrushIndex];
+        emit BrushChanged();
+    }
+}
+
+void BrushPropertiesWidget::on_addMatrixBrush_clicked()
+{
+    //create a new brush and pass it to the properties window
+    MatrixBrush *tempBrush = new MatrixBrush;
+    propertiesWindow.NewBrush(tempBrush);
+    propertiesWindow.ShowMatrixControls();
+
+    //execute the window, and check if it was accepted
+    if(propertiesWindow.exec() == QDialog::Accepted)
+    {
+        //add the new brush to the list
+        matrix.append(tempBrush);
+
+        //and repopulate the lists
+        RepopulateBrushLists();
+    }
+    //if it wasnt accepted
+    else
+    {
+        //get rid of our new brush
+        delete tempBrush;
+    }
+}
+
+void BrushPropertiesWidget::on_editMatrixBrush_clicked()
+{
+    if(ui->matrixBrushCombo->currentIndex() != -1)
+    {
+        propertiesWindow.EditBrush(matrix[matrixBrushIndex]);
+        propertiesWindow.SetListIndex(0);
+        propertiesWindow.exec();
+
+        RepopulateBrushLists();
+    }
+}
+
+void BrushPropertiesWidget::on_deleteMatrixBrush_clicked()
+{
+    //if a brush is selected
+    if(ui->matrixBrushCombo->currentIndex() != -1)
+    {
+        delete matrix[matrixBrushIndex];
+        matrix.removeAt(matrixBrushIndex);
+
+        RepopulateBrushLists();
+    }
+}
+
+void BrushPropertiesWidget::on_matrixBrushCombo_currentIndexChanged(int index)
+{
+    if(index == -1)
+        return;
+
+    matrixBrushIndex = index;
+
+    if(matrixBrushIndex < matrix.count())
+    {
+        currentBrush = matrix[matrixBrushIndex];
         emit BrushChanged();
     }
 }

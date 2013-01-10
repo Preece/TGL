@@ -581,7 +581,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="smartBrushButtons"/>
   <buttongroup name="replacerBrushButtons"/>
+  <buttongroup name="smartBrushButtons"/>
  </buttongroups>
 </ui>

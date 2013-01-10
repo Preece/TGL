@@ -97,6 +97,8 @@ private slots:
 
     void on_replacerTool_clicked();
 
+    void on_matrixBrushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
