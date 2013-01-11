@@ -33,6 +33,9 @@ ResourceTab::~ResourceTab()
 
     if(spriteWindow)
         delete spriteWindow;
+
+    if(objectEditorWindow)
+        delete objectEditorWindow;
 }
 
 void ResourceTab::RegisterTileSelector(TileSelectorScene *tiles)

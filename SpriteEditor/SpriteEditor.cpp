@@ -39,6 +39,9 @@ SpriteEditor::~SpriteEditor()
 
     if(animationEditor)
         delete animationEditor;
+
+    if(spritesheetSelector)
+        delete spritesheetSelector;
 }
 
 
