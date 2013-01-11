@@ -294,7 +294,6 @@ void SpriteEditor::EditSprite(Sprite *editSprite)
 
 }
 
-
 void SpriteEditor::on_buttonBox_accepted()
 {
     //check that the name is filled out
