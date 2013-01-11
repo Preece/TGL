@@ -212,4 +212,5 @@ OTHER_FILES += \
     Icons/BrushGuides/middle.png \
     Icons/scatterfill.png \
     Icons/replacer.png \
-    Icons/line.png
+    Icons/line.png \
+    Icons/matrix.png

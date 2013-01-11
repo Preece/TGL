@@ -196,6 +196,10 @@
           <property name="text">
            <string>...</string>
           </property>
+          <property name="icon">
+           <iconset resource="Icons.qrc">
+            <normaloff>:/Icons/Icons/matrix.png</normaloff>:/Icons/Icons/matrix.png</iconset>
+          </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
