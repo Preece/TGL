@@ -37,6 +37,8 @@ public:
 
     void RegisterTileSelector(QGraphicsScene *selector) { propertiesWindow.RegisterTileSelector(selector); }
     void RegisterResourceManager(ResourceManager *newRM) { propertiesWindow.RegisterResourceManager(newRM); }
+
+    void DestroyBrushes();
     
 private slots:
 

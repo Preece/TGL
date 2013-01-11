@@ -61,6 +61,11 @@ MainWindow::~MainWindow()
 
     //call a cleanup function?
     delete layers;
+
+    delete tileSelector;
+
+    if(layerPropertiesWindow)
+        delete layerPropertiesWindow;
 }
 
 bool MainWindow::IsTileSelected()

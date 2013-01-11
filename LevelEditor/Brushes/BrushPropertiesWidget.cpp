@@ -25,6 +25,8 @@ BrushPropertiesWidget::BrushPropertiesWidget(QWidget *parent) :
 BrushPropertiesWidget::~BrushPropertiesWidget()
 {
     delete ui;
+
+    DestroyBrushes();
 }
 
 //high is 11
@@ -168,6 +170,37 @@ void BrushPropertiesWidget::RepopulateBrushLists()
         ui->matrixBrushCombo->setCurrentIndex(i);
         matrixBrushIndex = i;
     }
+}
+
+void BrushPropertiesWidget::DestroyBrushes()
+{
+    for(int i = 0; i < scatter.count(); i++)
+    {
+        delete scatter[i];
+    }
+
+    scatter.clear();
+
+    for(int i = 0; i < smart.count(); i++)
+    {
+        delete smart[i];
+    }
+
+    smart.clear();
+
+    for(int i = 0; i < replacer.count(); i++)
+    {
+        delete replacer[i];
+    }
+
+    replacer.clear();
+
+    for(int i = 0; i < matrix.count(); i++)
+    {
+        delete matrix[i];
+    }
+
+    matrix.clear();
 }
 
 void BrushPropertiesWidget::SetSelectedTileID(int newID)

@@ -30,6 +30,9 @@ ResourceTab::ResourceTab(QWidget *parent) :
 ResourceTab::~ResourceTab()
 {
     delete ui;
+
+    if(spriteWindow)
+        delete spriteWindow;
 }
 
 void ResourceTab::RegisterTileSelector(TileSelectorScene *tiles)

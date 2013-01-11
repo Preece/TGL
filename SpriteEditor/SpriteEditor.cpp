@@ -36,6 +36,9 @@ SpriteEditor::SpriteEditor(QWidget *parent) :
 SpriteEditor::~SpriteEditor()
 {
     delete ui;
+
+    if(animationEditor)
+        delete animationEditor;
 }
 
 
