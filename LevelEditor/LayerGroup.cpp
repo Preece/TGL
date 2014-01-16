@@ -70,26 +70,34 @@ void LayerGroup::RepopulateTiles()
     }
 
     items.clear();
+    layer->ResetIterator();
 
     //loop through all the tile instances in the model
     for(int i = 0; i < layer->GetTileCount(); i++)
     {
         TileInstanceItem *tempTile = new TileInstanceItem;
 
-        //get the tile and set it as the tileinstance for the item
-        tempTile->SetTileInstance(layer->GetTileAtIndex(i));
+        //if the tileinstance we want is valid
+        if(layer->GetTileInstance() != 0)
+        {
+            //get the tile and set it as the tileinstance for the item
+            tempTile->SetTileInstance(layer->GetTileInstance());
 
-        int tileID = tempTile->GetTileInstance()->GetTileID();
+            int tileID = tempTile->GetTileInstance()->GetTileID();
 
-        //update its Pixmap
-        tempTile->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
+            //update its Pixmap
+            tempTile->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
 
-        //set the position
-        tempTile->setPos(tempTile->GetTileInstance()->GetX() * resourceManager->GetLevelProperties()->GetTileWidth(),
-                         tempTile->GetTileInstance()->GetY() * resourceManager->GetLevelProperties()->GetTileHeight());
+            //set the position
+            tempTile->setPos(tempTile->GetTileInstance()->GetX() * resourceManager->GetLevelProperties()->GetTileWidth(),
+                            tempTile->GetTileInstance()->GetY() * resourceManager->GetLevelProperties()->GetTileHeight());
 
-        items.append(tempTile);
-        tempTile->setParentItem(this);
+            items.append(tempTile);
+            tempTile->setParentItem(this);
+        }
+
+        //advance the iterator
+        layer->AdvanceIterator();
     }
 }
 

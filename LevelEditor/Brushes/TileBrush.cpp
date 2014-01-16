@@ -29,9 +29,22 @@ void TileBrush::Move(int x, int y, LayerGroup *layer, bool leftButtonDown)
         {
             Line(lastPaintSpot.x(), lastPaintSpot.y(), x, y, layer);
 
-            //this spot is not the last spot
+            //this spot is now the last spot
             lastPaintSpot.setX(x);
             lastPaintSpot.setY(y);
+        }
+    }
+    else
+    {
+        //paint if the position is different from before
+        if(x != lastPreviewSpot.x() || y != lastPreviewSpot.y())
+        {
+            layer->ClearPreview();
+            Paint(x, y, layer, true);
+
+            //this spot is now the last spot
+            lastPreviewSpot.setX(x);
+            lastPreviewSpot.setY(y);
         }
     }
 }

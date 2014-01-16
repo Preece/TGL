@@ -195,6 +195,7 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
+    //if the left button is down
     if(event->buttons() == Qt::LeftButton && !IsObjectSelected())
     {
         currentBrush->Move(tileX, tileY, currentLayer, true);
@@ -203,9 +204,6 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     else if(currentLayer)
     {
         currentBrush->Move(tileX, tileY, currentLayer, false);
-
-        lastPreviewSpot.setX(tileX);
-        lastPreviewSpot.setY(tileY);
     }
 }
 

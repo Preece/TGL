@@ -66,7 +66,10 @@ SOURCES += main.cpp\
     ResourceTab/TileSelectorScene.cpp \
     LevelEditor/Brushes/StampBrush.cpp \
     LevelEditor/Brushes/LineBrush.cpp \
-    LevelEditor/Brushes/MatrixBrush.cpp
+    LevelEditor/Brushes/MatrixBrush.cpp \
+    Commands/MoveObjectCommand.cpp \
+    Commands/AddObjectCommand.cpp \
+    LevelEditor/TileGrid.cpp
   
 
 HEADERS  += \
@@ -125,7 +128,10 @@ HEADERS  += \
     ResourceTab/TileSelectorScene.h \
     LevelEditor/Brushes/StampBrush.h \
     LevelEditor/Brushes/LineBrush.h \
-    LevelEditor/Brushes/MatrixBrush.h
+    LevelEditor/Brushes/MatrixBrush.h \
+    Commands/MoveObjectCommand.h \
+    Commands/AddObjectCommand.h \
+    LevelEditor/TileGrid.h
    
 
 FORMS    += \

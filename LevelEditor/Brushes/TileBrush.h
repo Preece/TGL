@@ -33,6 +33,7 @@ protected:
     static int selectedTileID;
 
     QPoint lastPaintSpot;
+    QPoint lastPreviewSpot;
 };
 
 #endif // TILEBRUSH_H
