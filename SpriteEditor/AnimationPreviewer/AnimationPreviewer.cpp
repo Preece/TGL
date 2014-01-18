@@ -40,6 +40,9 @@ void AnimationPreviewer::on_frameDelayInput_valueChanged(int arg1)
 {
     if(ui->animationLabel->IsAnimationLoaded())
     {
-        currentAnimation->GetFrameAtIndex(ui->animationLabel->GetCurrentFrameIndex())->SetDelay(arg1);
+        Frame *tempFrame = currentAnimation->GetFrameAtIndex(ui->animationLabel->GetCurrentFrameIndex());
+
+        if(tempFrame)
+            tempFrame->SetDelay(arg1);
     }
 }

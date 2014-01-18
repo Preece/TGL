@@ -316,6 +316,7 @@ void MainWindow::on_scatterFillTool_clicked()
 
 void MainWindow::on_addObject_clicked()
 {
+    //here, we need to use the addobjectinstance command
     if(ui->resourceTab->IsObjectSelected())
     {
         ObjectInstanceItem *tempObjItem = new ObjectInstanceItem;

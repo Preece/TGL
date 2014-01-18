@@ -103,11 +103,29 @@ int ResourceManager::AddObjectInstance(ObjectInstance *newObjectInstance)
 
 bool ResourceManager::DeleteObjectInstance(int ID)
 {
+    //here, we only remove the thing from the list. we dont delete it, because the undo stack holds onto a reference of the item.
+    //when it leaves the undo stack, it will be deleted
+    for(int i = 0; i < objectInstanceList.count(); i++)
+    {
+        if(objectInstanceList[i]->GetID() == ID)
+        {
+            objectInstanceList.removeAt(i);
+            return true;
+        }
+    }
+
     return false;
 }
 
 ObjectInstance *ResourceManager::GetObjectInstance(int ID)
 {
+    for(int i = 0; i < objectInstanceList.count(); i++)
+    {
+        if(objectInstanceList[i]->GetID() == ID)
+        {
+            return objectInstanceList[i];
+        }
+    }
     return NULL;
 }
 

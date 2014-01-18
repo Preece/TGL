@@ -158,6 +158,10 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
 
 void LayerGroup::PreviewModifyTile(int x, int y, int newType)
 {
+    //bounds check
+    if(x >= width || y >= height || x < 0 || y < 0)
+        return;
+
     TileInstanceItem *tempTile = new TileInstanceItem;
 
     //update its Pixmap

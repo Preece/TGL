@@ -44,17 +44,6 @@ int Layer::GetTileType(int x, int y)
 {
     TileInstance *tempTile;
 
-    /*for(int i = 0; i < GetChildCount(); i++)
-    {
-        tempTile = static_cast<TileInstance*>(GetChildByIndex(i));
-
-        //if the tile exists at the specified position, change it
-        if(tempTile->GetX() == x && tempTile->GetY() == y)
-        {
-            return tempTile->GetTileID();
-        }
-    }*/
-
     //get the tile at that position
     tempTile = tiles[TileCoord(x, y)];
 
@@ -81,8 +70,6 @@ TileInstance *Layer::AddTile(int x, int y, int ID)
 
     //add it to the map of tiles
     tiles[TileCoord(x, y)] = tempTile;
-
-    //AddChild(tempTile);
 
     //return the new tile
     return tempTile;

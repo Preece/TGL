@@ -52,6 +52,10 @@ int Animation::GetFrameCount()
 
 Frame *Animation::GetFrameAtIndex(int i)
 {
+    //bounds check
+    if(i < 0 || i >= children.count())
+        return NULL;
+
     return static_cast<Frame*>(GetChildByIndex(i));
 }
 

@@ -5,8 +5,7 @@ bool ScatterBrush::fill = false;
 void ScatterBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next
-    if(preview)
-        layer->ClearPreview();
+    layer->ClearPreview();
 
     if(fill && !preview)
     {
