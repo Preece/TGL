@@ -43,9 +43,12 @@ void LayerManager::EyedropTile(QPoint pos)
 
 void LayerManager::AddObjectItem(ObjectInstanceItem *object)
 {
-    if(currentLayer && object)
+    if(currentLayer)
     {
-        currentLayer->AddObjectItem(object);
+        if(object)
+            currentLayer->AddObjectItem(object);
+        else
+            QMessageBox::warning(NULL, "Warning", "Please select an object first");
     }
 }
 
@@ -201,7 +204,7 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         currentBrush->Move(tileX, tileY, currentLayer, true);
     }
     //if the left mouse button was not down
-    else if(currentLayer)
+    else if(currentLayer&& !IsObjectSelected())
     {
         currentBrush->Move(tileX, tileY, currentLayer, false);
     }
