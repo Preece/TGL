@@ -41,17 +41,6 @@ void LayerManager::EyedropTile(QPoint pos)
     }
 }
 
-void LayerManager::AddObjectItem(ObjectInstanceItem *object)
-{
-    if(currentLayer)
-    {
-        if(object)
-            currentLayer->AddObjectItem(object);
-        else
-            QMessageBox::warning(NULL, "Warning", "Please select an object first");
-    }
-}
-
 void LayerManager::AddLayer(Layer *newLayer)
 {
     //create a layer group, and assign the new layer

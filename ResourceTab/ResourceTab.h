@@ -8,13 +8,11 @@
 
 #include "../SpriteEditor/SpriteEditor.h"
 #include "../SpriteEditor/SpritesheetSelector.h"
-#include "../ObjectEditor.h"
 #include "../LevelEditor/TileItem.h"
 #include "../Model/Tile.h"
 #include "ImageViewer.h"
 #include "ImageSelectorItem.h"
 #include "SpriteSelectorItem.h"
-#include "ObjectSelectorItem.h"
 #include "TileSelectorScene.h"
 
 #include "../Model/ResourceManager.h"
@@ -35,7 +33,6 @@ public:
     void RegisterResourceManager(ResourceManager *newResourceManager) { resourceManager = newResourceManager; }
     void RegisterTileSelector(TileSelectorScene *tiles);
 
-    void RepopulateObjectSelector();
     void RepopulateSpriteSelector();
     void RepopulateImageSelector();
     void RepopulateLinkSelector();
@@ -48,10 +45,6 @@ public:
     SpriteSelectorItem *GetSelectedSpriteItem();
     Sprite *GetSelectedSprite();
 
-    bool IsObjectSelected();
-    ObjectSelectorItem *GetSelectedObjectItem();
-    ObjectPrototype *GetSelectedObject();
-
     void RepopulateTileSelector();
 
 private slots:
@@ -59,34 +52,24 @@ private slots:
     void on_addImageButton_clicked();
     void on_viewImageButton_clicked();
     void on_deleteImageButton_clicked();
+
     void on_editSpriteButton_clicked();
     void on_addSpriteButton_clicked();
-    void on_addObjectButton_clicked();
-    void on_editObjectButton_clicked();
+    void on_deleteSpriteButton_clicked();
+
     void on_selectTilesetButton_clicked();
 
-    void on_deleteObjectButton_clicked();
-
-    void on_deleteSpriteButton_clicked();
 
 signals:
     void NewSpriteButtonClicked();
-    void NewObjectButtonClicked();
 
 private:
     Ui::ResourceTab *ui;
 
     ImageViewer *imageViewer;
     SpriteEditor *spriteWindow;
-    ObjectEditor *objectEditorWindow;
 
     ResourceManager *resourceManager;
-
-    //will eventually be a list of QTWI's
-    QTreeWidgetItem *NPCTree;
-    QTreeWidgetItem *EnemyTree;
-    QTreeWidgetItem *ItemTree;
-    QTreeWidgetItem *DoodadTree;
 
     QImage *spritesheet;
     TileSelectorScene *tileSelector;

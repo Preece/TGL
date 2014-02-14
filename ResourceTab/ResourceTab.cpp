@@ -9,22 +9,10 @@ ResourceTab::ResourceTab(QWidget *parent) :
 
     imageViewer = NULL;
     spriteWindow = NULL;
-    objectEditorWindow = NULL;
     tileSelector = NULL;
     spritesheet = NULL;
 
     connect(ui->addSpriteButton, SIGNAL(clicked()), this, SIGNAL(NewSpriteButtonClicked()));
-    connect(ui->addObjectButton, SIGNAL(clicked()), this, SIGNAL(NewObjectButtonClicked()));
-
-    //set up the tree view
-    NPCTree = new QTreeWidgetItem(ui->objectSelector);
-    NPCTree->setText(0, "NPCs");
-    EnemyTree = new QTreeWidgetItem(ui->objectSelector);
-    EnemyTree->setText(0, "Enemies");
-    ItemTree = new QTreeWidgetItem(ui->objectSelector);
-    ItemTree->setText(0, "Items");
-    DoodadTree = new QTreeWidgetItem(ui->objectSelector);
-    DoodadTree->setText(0, "Doodads");
 }
 
 ResourceTab::~ResourceTab()
@@ -33,9 +21,6 @@ ResourceTab::~ResourceTab()
 
     if(spriteWindow)
         delete spriteWindow;
-
-    if(objectEditorWindow)
-        delete objectEditorWindow;
 }
 
 void ResourceTab::RegisterTileSelector(TileSelectorScene *tiles)
@@ -91,38 +76,6 @@ void ResourceTab::RepopulateTileSelector()
                 }
             }
         }
-    }
-}
-
-void ResourceTab::RepopulateObjectSelector()
-{
-    //clear the object selector
-    qDeleteAll(NPCTree->takeChildren());
-    qDeleteAll(EnemyTree->takeChildren());
-    qDeleteAll(ItemTree->takeChildren());
-    qDeleteAll(DoodadTree->takeChildren());
-
-    ObjectSelectorItem *tempObject;
-
-    //loop through all the objects
-    for(int i = 0; i < resourceManager->GetObjectPrototypeCount(); i++)
-    {
-        //add the object to the proper category
-        tempObject = new ObjectSelectorItem;
-        tempObject->SetObject(resourceManager->GetObjectPrototypeByIndex(i));
-
-        tempObject->setText(0, tempObject->GetObject()->GetObjectName());
-
-        if(tempObject->GetObject()->GetObjectType() == 0)
-            NPCTree->addChild(tempObject);
-        else if(tempObject->GetObject()->GetObjectType() == 1)
-            EnemyTree->addChild(tempObject);
-        else if(tempObject->GetObject()->GetObjectType() == 2)
-            ItemTree->addChild(tempObject);
-        else if(tempObject->GetObject()->GetObjectType() == 3)
-            DoodadTree->addChild(tempObject);
-        else
-            delete tempObject;
     }
 }
 
@@ -275,45 +228,6 @@ Sprite *ResourceTab::GetSelectedSprite()
     return NULL;
 }
 
-bool ResourceTab::IsObjectSelected()
-{
-    QTreeWidgetItem *item = ui->objectSelector->currentItem();
-    if(item == NULL)
-        return false;
-
-    if(item == NPCTree || item == EnemyTree || item == ItemTree || item == DoodadTree)
-        return false;
-
-    return true;
-}
-
-ObjectSelectorItem *ResourceTab::GetSelectedObjectItem()
-{
-    if(IsObjectSelected())
-    {
-        //retrieve the list item
-        ObjectSelectorItem *tempItem = dynamic_cast<ObjectSelectorItem*>(ui->objectSelector->currentItem());
-
-        //warn if the cast failed
-        if(tempItem == 0)
-            QMessageBox::warning(this, "Warning", "The dynamic cast has failed!");
-
-        return tempItem;
-    }
-
-    return NULL;
-}
-
-ObjectPrototype *ResourceTab::GetSelectedObject()
-{
-    if(IsObjectSelected())
-    {
-        return GetSelectedObjectItem()->GetObject();
-    }
-
-    return NULL;
-}
-
 void ResourceTab::on_deleteImageButton_clicked()
 {
     //make sure an image is selected
@@ -374,65 +288,6 @@ void ResourceTab::on_addSpriteButton_clicked()
     }
 }
 
-void ResourceTab::on_addObjectButton_clicked()
-{
-    if(!objectEditorWindow)
-    {
-        objectEditorWindow = new ObjectEditor;
-        objectEditorWindow->RegisterResourceManager(resourceManager);
-    }
-
-    ObjectPrototype *tempObject = new ObjectPrototype;
-
-    tempObject->SetObjectType(0);
-
-    if(ui->objectSelector->selectedItems().count() > 0)
-    {
-        if(ui->objectSelector->selectedItems()[0] == NPCTree)
-            tempObject->SetObjectType(0);
-
-        if(ui->objectSelector->selectedItems()[0] == EnemyTree)
-            tempObject->SetObjectType(1);
-
-        if(ui->objectSelector->selectedItems()[0] == ItemTree)
-            tempObject->SetObjectType(2);
-
-        if(ui->objectSelector->selectedItems()[0] == DoodadTree)
-            tempObject->SetObjectType(3);
-    }
-
-    objectEditorWindow->NewObject(tempObject);
-
-    if(objectEditorWindow->exec() == QDialog::Accepted)
-    {
-        resourceManager->AddObjectPrototype(tempObject);
-        RepopulateObjectSelector();
-    }
-    else
-    {
-        delete tempObject;
-    }
-}
-
-void ResourceTab::on_editObjectButton_clicked()
-{
-    if(IsObjectSelected())
-    {
-        //create the sprite editing window if it does not already exist
-        if(!objectEditorWindow)
-        {
-            objectEditorWindow = new ObjectEditor;
-            objectEditorWindow->RegisterResourceManager(resourceManager);
-        }
-
-        objectEditorWindow->EditObject(GetSelectedObject());
-
-        objectEditorWindow->exec();
-
-        RepopulateObjectSelector();
-    }
-}
-
 void ResourceTab::on_selectTilesetButton_clicked()
 {
     //bring up an image selection window
@@ -481,15 +336,6 @@ void ResourceTab::on_selectTilesetButton_clicked()
             //and repopulate the tile selector
             RepopulateTileSelector();
         }
-    }
-}
-
-void ResourceTab::on_deleteObjectButton_clicked()
-{
-    if(IsObjectSelected())
-    {
-        resourceManager->DeleteObjectPrototype(GetSelectedObject()->GetID());
-        RepopulateObjectSelector();
     }
 }
 

@@ -6,18 +6,6 @@ DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<Sprite*
     resourceList = reinterpret_cast<QList<Savable*>* >(resources);
 }
 
-DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<ObjectInstance *> *resources)
-{
-    resource = newResource;
-    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
-}
-
-DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<ObjectPrototype *> *resources)
-{
-    resource = newResource;
-    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
-}
-
 DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<Image *> *resources)
 {
     resource = newResource;

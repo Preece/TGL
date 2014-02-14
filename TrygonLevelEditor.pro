@@ -17,7 +17,6 @@ SOURCES += main.cpp\
     Model/ResourceManager.cpp \
     Model/Savable.cpp \
     SpriteEditor/AnimationListItem.cpp \
-    ObjectEditor.cpp \
     MainWindow.cpp \
     SpriteEditor/SpriteEditor.cpp \
     SpriteEditor/AnimationEditor.cpp \
@@ -31,10 +30,7 @@ SOURCES += main.cpp\
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.cpp \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
     ResourceTab/SpriteSelectorItem.cpp \
-    Model/ObjectPrototype.cpp \
-    ResourceTab/ObjectSelectorItem.cpp \
     LevelEditor/TileItem.cpp \
-    LevelEditor/ObjectItem.cpp \
     LevelEditor/LayerManager.cpp \
     Commands/ModifyTilesCommand.cpp \
     Model/Tile.cpp \
@@ -55,8 +51,6 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/ScatterBrush.cpp \
     LevelEditor/Brushes/BrushPropertiesWindow.cpp \
     LevelEditor/Brushes/ComplexBrush.cpp \
-    LevelEditor/ObjectInstanceItem.cpp \
-    Model/ObjectInstance.cpp \
     Model/Exporters/PackedBinaryExporter.cpp \
     Commands/AddResourceCommand.cpp \
     Commands/DeleteResourceCommand.cpp \
@@ -67,22 +61,17 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/StampBrush.cpp \
     LevelEditor/Brushes/LineBrush.cpp \
     LevelEditor/Brushes/MatrixBrush.cpp \
-    Commands/MoveObjectCommand.cpp \
-    Commands/AddObjectCommand.cpp \
     LevelEditor/TileGrid.cpp
   
 
 HEADERS  += \
     Model/Sprite.h \
-    Model/ObjectPrototype.h \
-    Model/ObjectInstance.h \
     Model/Animation.h \
     Model/Frame.h \
     Model/Savable.h \
     Model/ResourceManager.h \
     SpriteEditor/AnimationListItem.h \
     MainWindow.h \
-    ObjectEditor.h \
     SpriteEditor/SpriteEditor.h \
     SpriteEditor/AnimationEditor.h \ 
     SpriteEditor/FrameListItem.h \
@@ -95,9 +84,7 @@ HEADERS  += \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.h \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
     ResourceTab/SpriteSelectorItem.h \
-    ResourceTab/ObjectSelectorItem.h \
     LevelEditor/TileItem.h \
-    LevelEditor/ObjectItem.h \
     LevelEditor/LayerManager.h \
     Commands/ModifyTilesCommand.h \
     Model/Tile.h \
@@ -118,7 +105,6 @@ HEADERS  += \
     LevelEditor/Brushes/ScatterBrush.h \
     LevelEditor/Brushes/BrushPropertiesWindow.h \
     LevelEditor/Brushes/ComplexBrush.h \
-    LevelEditor/ObjectInstanceItem.h \
     Model/Exporters/PackedBinaryExporter.h \
     Commands/AddResourceCommand.h \
     Commands/DeleteResourceCommand.h \
@@ -129,8 +115,6 @@ HEADERS  += \
     LevelEditor/Brushes/StampBrush.h \
     LevelEditor/Brushes/LineBrush.h \
     LevelEditor/Brushes/MatrixBrush.h \
-    Commands/MoveObjectCommand.h \
-    Commands/AddObjectCommand.h \
     LevelEditor/TileGrid.h
    
 
@@ -140,7 +124,6 @@ FORMS    += \
     SpriteEditor/SpriteEditor.ui \
     SpriteEditor/AnimationEditor.ui \
     MainWindow.ui \
-    ObjectEditor.ui \
     SpriteEditor/SpritesheetSelector.ui \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.ui \
     LevelPropertiesDialog.ui \

@@ -38,7 +38,7 @@
    <enum>QTabWidget::Triangular</enum>
   </property>
   <property name="currentIndex">
-   <number>4</number>
+   <number>2</number>
   </property>
   <widget class="QWidget" name="tilesTab">
    <attribute name="title">
@@ -67,78 +67,6 @@
       </item>
       <item>
        <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="objectsTab">
-   <attribute name="title">
-    <string>Objects</string>
-   </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
-     <widget class="QTreeWidget" name="objectSelector">
-      <property name="dragDropMode">
-       <enum>QAbstractItemView::NoDragDrop</enum>
-      </property>
-      <attribute name="headerVisible">
-       <bool>false</bool>
-      </attribute>
-      <column>
-       <property name="text">
-        <string notr="true">1</string>
-       </property>
-      </column>
-     </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <widget class="QPushButton" name="addObjectButton">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../Icons.qrc">
-          <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="editObjectButton">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../Icons.qrc">
-          <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="deleteObjectButton">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../Icons.qrc">
-          <normaloff>:/Icons/Icons/removevalue.png</normaloff>:/Icons/Icons/removevalue.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -299,11 +227,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="triggerTab">
-   <attribute name="title">
-    <string>Triggers</string>
-   </attribute>
-  </widget>
  </widget>
  <customwidgets>
   <customwidget>
@@ -336,22 +259,6 @@
    <sender>spriteSelector</sender>
    <signal>itemDoubleClicked(QListWidgetItem*)</signal>
    <receiver>editSpriteButton</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>145</x>
-     <y>174</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>145</x>
-     <y>343</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>objectSelector</sender>
-   <signal>itemDoubleClicked(QTreeWidgetItem*,int)</signal>
-   <receiver>editObjectButton</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">

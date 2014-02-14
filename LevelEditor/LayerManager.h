@@ -9,7 +9,6 @@
 #include <QItemSelectionModel>
 
 #include "../Model/Layer.h"
-#include "../Model/ObjectPrototype.h"
 #include "../Model/ResourceManager.h"
 #include "LayerGroup.h"
 #include "TileItem.h"
@@ -29,8 +28,6 @@ public:
     void RemoveLayer(Layer *dirtyLayer);
 
     void EyedropTile(QPoint pos);
-
-    void AddObjectItem(ObjectInstanceItem *object);
 
     bool IsLayerSelected();
     LayerGroup *GetSelectedLayer();

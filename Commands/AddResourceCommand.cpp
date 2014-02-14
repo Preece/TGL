@@ -8,22 +8,6 @@ AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Sprite*> *res
     invertAdditions = false;
 }
 
-AddResourceCommand::AddResourceCommand(Savable *newResource, QList<ObjectInstance *> *resources)
-{
-    resource = newResource;
-    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
-
-    invertAdditions = false;
-}
-
-AddResourceCommand::AddResourceCommand(Savable *newResource, QList<ObjectPrototype *> *resources)
-{
-    resource = newResource;
-    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
-
-    invertAdditions = false;
-}
-
 AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Image *> *resources)
 {
     resource = newResource;

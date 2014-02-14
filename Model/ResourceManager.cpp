@@ -54,81 +54,6 @@ Sprite *ResourceManager::GetSpriteByIndex(int index)
     return spriteList[index];
 }
 
-int ResourceManager::AddObjectPrototype(ObjectPrototype *newObjectPrototype)
-{
-    if(newObjectPrototype != NULL)
-    {
-        AddResourceCommand *add = new AddResourceCommand(newObjectPrototype, &objectPrototypeList);
-        undo->push(add);
-    }
-
-    return 0;
-}
-
-bool ResourceManager::DeleteObjectPrototype(int ID)
-{
-    for(int i = 0; i < objectPrototypeList.count(); i++)
-    {
-        if(objectPrototypeList[i]->GetID() == ID)
-        {
-            DeleteResourceCommand *del = new DeleteResourceCommand(objectPrototypeList[i], &objectPrototypeList);
-            undo->push(del);
-
-            return true;
-        }
-    }
-    return false;
-}
-
-ObjectPrototype *ResourceManager::GetObjectPrototype(int ID)
-{
-    return NULL;
-}
-
-ObjectPrototype *ResourceManager::GetObjectPrototypeByIndex(int index)
-{
-    if(index < 0 || index >= objectPrototypeList.count())
-        return NULL;
-
-    return objectPrototypeList[index];
-}
-
-int ResourceManager::AddObjectInstance(ObjectInstance *newObjectInstance)
-{
-    if(newObjectInstance)
-        objectInstanceList.append(newObjectInstance);
-
-    return 0;
-}
-
-bool ResourceManager::DeleteObjectInstance(int ID)
-{
-    //here, we only remove the thing from the list. we dont delete it, because the undo stack holds onto a reference of the item.
-    //when it leaves the undo stack, it will be deleted
-    for(int i = 0; i < objectInstanceList.count(); i++)
-    {
-        if(objectInstanceList[i]->GetID() == ID)
-        {
-            objectInstanceList.removeAt(i);
-            return true;
-        }
-    }
-
-    return false;
-}
-
-ObjectInstance *ResourceManager::GetObjectInstance(int ID)
-{
-    for(int i = 0; i < objectInstanceList.count(); i++)
-    {
-        if(objectInstanceList[i]->GetID() == ID)
-        {
-            return objectInstanceList[i];
-        }
-    }
-    return NULL;
-}
-
 int ResourceManager::AddImage(Image *newImage)
 {
     if(newImage)
@@ -391,14 +316,6 @@ void ResourceManager::DestroyAllResources()
 
     imageList.clear();
 
-    for(int i = 0; i < objectPrototypeList.count(); i++)
-    {
-        delete objectPrototypeList[i];
-        objectPrototypeList[i] = NULL;
-    }
-
-    objectPrototypeList.clear();
-
     for(int i = 0; i < tileList.count(); i++)
     {
         delete tileList[i];
@@ -406,14 +323,6 @@ void ResourceManager::DestroyAllResources()
     }
 
     tileList.clear();
-
-    for(int i = 0; i < objectInstanceList.count(); i++)
-    {
-        delete objectInstanceList[i];
-        objectInstanceList[i] = NULL;
-    }
-
-    objectInstanceList.clear();
 
     for(int i = 0; i < layerList.count(); i++)
     {

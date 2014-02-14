@@ -314,28 +314,6 @@ void MainWindow::on_scatterFillTool_clicked()
     ui->levelView->setCursor(tempCur);
 }
 
-void MainWindow::on_addObject_clicked()
-{
-    //here, we need to use the addobjectinstance command
-    if(ui->resourceTab->IsObjectSelected())
-    {
-        ObjectInstanceItem *tempObjItem = new ObjectInstanceItem;
-        ObjectInstance *tempObj = new ObjectInstance;
-
-        tempObj->SetPosition(0, 0);
-        tempObj->SetPrototypeID(ui->resourceTab->GetSelectedObject()->GetID());
-        tempObjItem->SetObjectInstance(tempObj);
-
-        resources->AddObjectInstance(tempObj);
-
-        tempObjItem->setPixmap(resources->GetSpriteSymbol(ui->resourceTab->GetSelectedObject()->GetSpriteID()));
-        //tempObjItem->setPos(100, 100);
-
-        tempObjItem->show();
-        layers->AddObjectItem(tempObjItem);
-    }
-}
-
 void MainWindow::on_pointerTool_clicked()
 {
     //change the cursor
@@ -409,8 +387,6 @@ void MainWindow::RepopulateEverything()
     RepopulateLayerSelector();
 
     ui->resourceTab->RepopulateImageSelector();
-    //ui->resourceTab->RepopulateLinkSelector();
-    ui->resourceTab->RepopulateObjectSelector();
     ui->resourceTab->RepopulateSpriteSelector();
     ui->resourceTab->RepopulateTileSelector();
 

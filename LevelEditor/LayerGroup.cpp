@@ -24,15 +24,6 @@ void LayerGroup::SetLayerSize(int w, int h)
     height = h;
 }
 
-void LayerGroup::AddObjectItem(ObjectInstanceItem *newObj)
-{
-    if(newObj)
-    {
-        objects.append(newObj);
-        newObj->setParentItem(this);
-    }
-}
-
 void LayerGroup::ToggleVisibility(bool visible)
 {
     if(visible)

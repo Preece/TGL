@@ -7,8 +7,6 @@
 #include <QUndoStack>
 
 #include "Sprite.h"
-#include "ObjectInstance.h"
-#include "ObjectPrototype.h"
 #include "Image.h"
 #include "Tile.h"
 #include "Layer.h"
@@ -36,16 +34,6 @@ public slots:
     Sprite *GetSprite(int ID);
     Sprite *GetSpriteByIndex(int index);
     int GetSpriteCount() { return spriteList.count(); }
-
-    int AddObjectPrototype(ObjectPrototype *newObjectPrototype);
-    bool DeleteObjectPrototype(int ID);
-    ObjectPrototype *GetObjectPrototype(int ID);
-    ObjectPrototype *GetObjectPrototypeByIndex(int index);
-    int GetObjectPrototypeCount() { return objectPrototypeList.count(); }
-
-    int AddObjectInstance(ObjectInstance *newObjectInstance);
-    bool DeleteObjectInstance(int ID);
-    ObjectInstance *GetObjectInstance(int ID);
 
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);
@@ -93,8 +81,6 @@ signals:
 
 private:
     QList<Sprite*> spriteList;
-    QList<ObjectPrototype*> objectPrototypeList;
-    QList<ObjectInstance*> objectInstanceList;
     QList<Image*> imageList;
     QList<Tile*> tileList;
     QList<Layer*> layerList;

@@ -6,8 +6,6 @@
 #include <QGraphicsScene>
 
 #include "Model/Sprite.h"
-#include "Model/ObjectInstance.h"
-#include "Model/ObjectPrototype.h"
 #include "Model/ResourceManager.h"
 #include "LevelEditor/LayerManager.h"
 #include "LevelEditor/LayerProperties.h"
@@ -21,7 +19,6 @@
 
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"
-#include "ObjectEditor.h"
 
 namespace Ui {
 class MainWindow;
@@ -78,8 +75,6 @@ private slots:
     void on_brushTool_clicked();
 
     void on_scatterFillTool_clicked();
-
-    void on_addObject_clicked();
 
     void on_pointerTool_clicked();
 
