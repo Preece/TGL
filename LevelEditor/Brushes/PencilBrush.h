@@ -2,14 +2,14 @@
 #define PENCILBRUSH_H
 
 #include "TileBrush.h"
-#include "../LayerGroup.h"
+#include "../TileLayer.h"
 
 class PencilBrush : public TileBrush
 {
 public:
     PencilBrush();
 
-    void Paint(int x, int y, LayerGroup *layer, bool preview = false);
+    void Paint(int x, int y, TileLayer *layer, bool preview = false);
 
     QString GetType() { return "pencil"; }
 

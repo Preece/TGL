@@ -4,14 +4,14 @@ StampBrush::StampBrush()
 {
 }
 
-void StampBrush::Move(int x, int y, LayerGroup *layer, bool leftButtonDown)
+void StampBrush::Move(int x, int y, TileLayer *layer, bool leftButtonDown)
 {
     layer->ClearPreview();
 
     Paint(x, y, layer, true);
 }
 
-void StampBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
+void StampBrush::Paint(int x, int y, TileLayer *layer, bool preview)
 {
     for(int i = 0; i < tiles.count(); i++)
     {

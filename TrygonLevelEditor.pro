@@ -23,14 +23,11 @@ SOURCES += main.cpp\
     SpriteEditor/FrameListItem.cpp \
     ResourceTab/ResourceTab.cpp \
     Model/Image.cpp \
-    ResourceTab/ImageSelectorItem.cpp \
     ResourceTab/ImageViewer.cpp \
     SpriteEditor/SpritesheetSelector.cpp \
     SpriteEditor/SelectionGraphicsScene.cpp \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.cpp \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
-    ResourceTab/SpriteSelectorItem.cpp \
-    LevelEditor/TileItem.cpp \
     LevelEditor/LayerManager.cpp \
     Commands/ModifyTilesCommand.cpp \
     Model/Tile.cpp \
@@ -40,7 +37,6 @@ SOURCES += main.cpp\
     Model/Layer.cpp \
     Model/Exporter.cpp \
     Model/TileInstance.cpp \
-    LevelEditor/LayerGroup.cpp \
     LevelEditor/TileInstanceItem.cpp \
     LevelEditor/Brushes/PencilBrush.cpp \
     LevelEditor/Brushes/FillBrush.cpp \
@@ -61,7 +57,10 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/StampBrush.cpp \
     LevelEditor/Brushes/LineBrush.cpp \
     LevelEditor/Brushes/MatrixBrush.cpp \
-    LevelEditor/TileGrid.cpp
+    ResourceTab/SpriteListWidgetItem.cpp \
+    ResourceTab/ImageListWidgetItem.cpp \
+    LevelEditor/TileLayer.cpp \
+    ResourceTab/TileWidgetItem.cpp
   
 
 HEADERS  += \
@@ -77,14 +76,11 @@ HEADERS  += \
     SpriteEditor/FrameListItem.h \
     ResourceTab/ResourceTab.h \
     Model/Image.h \
-    ResourceTab/ImageSelectorItem.h \
     ResourceTab/ImageViewer.h \
     SpriteEditor/SpritesheetSelector.h \
     SpriteEditor/SelectionGraphicsScene.h \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.h \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
-    ResourceTab/SpriteSelectorItem.h \
-    LevelEditor/TileItem.h \
     LevelEditor/LayerManager.h \
     Commands/ModifyTilesCommand.h \
     Model/Tile.h \
@@ -94,7 +90,6 @@ HEADERS  += \
     Model/Layer.h \
     Model/Exporter.h \
     Model/TileInstance.h \
-    LevelEditor/LayerGroup.h \
     LevelEditor/TileInstanceItem.h \
     LevelEditor/Brushes/PencilBrush.h \
     LevelEditor/Brushes/FillBrush.h \
@@ -115,7 +110,10 @@ HEADERS  += \
     LevelEditor/Brushes/StampBrush.h \
     LevelEditor/Brushes/LineBrush.h \
     LevelEditor/Brushes/MatrixBrush.h \
-    LevelEditor/TileGrid.h
+    ResourceTab/SpriteListWidgetItem.h \
+    ResourceTab/ImageListWidgetItem.h \
+    LevelEditor/TileLayer.h \
+    ResourceTab/TileWidgetItem.h
    
 
 FORMS    += \

@@ -50,7 +50,7 @@ void ResourceTab::RepopulateTileSelector()
             int imageW = spritesheet->width() / tileW;
             int imageH = spritesheet->height() / tileH;
 
-            TileItem *tempItem;
+            TileWidgetItem *tempItem;
             Tile *tempTile;
 
             //loop for the width of the spritesheet divided by the width of a tile
@@ -60,7 +60,7 @@ void ResourceTab::RepopulateTileSelector()
                 for(int j = 0; j < imageW; j++)
                 {
                     //copy the correct fragment of the image into a new TileItem
-                    tempItem = new TileItem;
+                    tempItem = new TileWidgetItem;
 
                     //create and add the actual tile
                     tempTile = resourceManager->GetTile(j, i);
@@ -84,13 +84,13 @@ void ResourceTab::RepopulateSpriteSelector()
     //clear the sprite selector
     ui->spriteSelector->clear();
 
-    SpriteSelectorItem *tempItem;
+    SpriteListWidgetItem *tempItem;
 
     //loop through all of the sprites
     for(int i = 0; i < resourceManager->GetSpriteCount(); i++)
     {
         //create a new sprite selector item and add the sprite to it
-        tempItem = new SpriteSelectorItem;
+        tempItem = new SpriteListWidgetItem;
         tempItem->SetSprite(resourceManager->GetSpriteByIndex(i));
 
         //add the sprite to the selector
@@ -103,13 +103,13 @@ void ResourceTab::RepopulateImageSelector()
     //clear the image selector
     ui->imageSelector->clear();
 
-    ImageSelectorItem *tempImageItem;
+    ImageListWidgetItem *tempImageItem;
 
     //loop through the images in the resource manager
     for(int i = 0; i < resourceManager->GetImageCount(); i++)
     {
         //assign the image from the RM to a new selector item
-        tempImageItem = new ImageSelectorItem;
+        tempImageItem = new ImageListWidgetItem;
         tempImageItem->SetImage(resourceManager->GetImageByIndex(i));
 
         //add the selector item into the list
@@ -170,12 +170,12 @@ bool ResourceTab::IsImageSelected()
     return true;
 }
 
-ImageSelectorItem *ResourceTab::GetSelectedImageItem()
+ImageListWidgetItem *ResourceTab::GetSelectedImageItem()
 {
     if(IsImageSelected())
     {
         //retrieve the list item
-        ImageSelectorItem *tempItem = dynamic_cast<ImageSelectorItem*>(ui->imageSelector->currentItem());
+        ImageListWidgetItem *tempItem = dynamic_cast<ImageListWidgetItem*>(ui->imageSelector->currentItem());
 
         //warn if the cast failed
         if(tempItem == 0)
@@ -203,12 +203,12 @@ bool ResourceTab::IsSpriteSelected()
     return true;
 }
 
-SpriteSelectorItem *ResourceTab::GetSelectedSpriteItem()
+SpriteListWidgetItem *ResourceTab::GetSelectedSpriteItem()
 {
     if(IsSpriteSelected())
     {
         //retrieve the list item
-        SpriteSelectorItem *tempItem = dynamic_cast<SpriteSelectorItem*>(ui->spriteSelector->currentItem());
+        SpriteListWidgetItem *tempItem = dynamic_cast<SpriteListWidgetItem*>(ui->spriteSelector->currentItem());
 
         //warn if the cast failed
         if(tempItem == 0)

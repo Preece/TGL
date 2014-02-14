@@ -1,17 +1,17 @@
-#include "LayerGroup.h"
+#include "TileLayer.h"
 
-LayerGroup::LayerGroup()
+TileLayer::TileLayer()
 {
     width = 0;
     height = 0;
 }
 
-LayerGroup::~LayerGroup()
+TileLayer::~TileLayer()
 {
     DestroyAllItems();
 }
 
-void LayerGroup::SetLayerSize(int w, int h)
+void TileLayer::SetLayerSize(int w, int h)
 {
     //if the new size is the same as the current size
     if(width == w && height == h)
@@ -24,7 +24,7 @@ void LayerGroup::SetLayerSize(int w, int h)
     height = h;
 }
 
-void LayerGroup::ToggleVisibility(bool visible)
+void TileLayer::ToggleVisibility(bool visible)
 {
     if(visible)
         show();
@@ -32,7 +32,7 @@ void LayerGroup::ToggleVisibility(bool visible)
         hide();
 }
 
-void LayerGroup::DestroyAllItems()
+void TileLayer::DestroyAllItems()
 {
     for(int i = 0; i < items.count(); i++)
     {
@@ -49,7 +49,7 @@ void LayerGroup::DestroyAllItems()
     previewItems.clear();
 }
 
-void LayerGroup::RepopulateTiles()
+void TileLayer::RepopulateTiles()
 {
     //clear out all the tiles
     for(int i = 0; i < items.count(); i++)
@@ -92,11 +92,11 @@ void LayerGroup::RepopulateTiles()
     }
 }
 
-void LayerGroup::RepopulateObjects()
+void TileLayer::RepopulateObjects()
 {
 }
 
-void LayerGroup::ModifyTile(int x, int y, int newType)
+void TileLayer::ModifyTile(int x, int y, int newType)
 {
     //bounds check
     if(x >= width || y >= height || x < 0 || y < 0)
@@ -147,7 +147,7 @@ void LayerGroup::ModifyTile(int x, int y, int newType)
     }
 }
 
-void LayerGroup::PreviewModifyTile(int x, int y, int newType)
+void TileLayer::PreviewModifyTile(int x, int y, int newType)
 {
     //bounds check
     if(x >= width || y >= height || x < 0 || y < 0)
@@ -166,7 +166,7 @@ void LayerGroup::PreviewModifyTile(int x, int y, int newType)
     tempTile->setParentItem(this);
 }
 
-void LayerGroup::ClearPreview()
+void TileLayer::ClearPreview()
 {
     for(int i = 0; i < previewItems.count(); i++)
     {
@@ -176,7 +176,7 @@ void LayerGroup::ClearPreview()
     previewItems.clear();
 }
 
-TileInstanceItem *LayerGroup::GetTileInstanceItem(int x, int y)
+TileInstanceItem *TileLayer::GetTileInstanceItem(int x, int y)
 {
     for(int i = 0; i < items.count(); i++)
     {
@@ -187,7 +187,7 @@ TileInstanceItem *LayerGroup::GetTileInstanceItem(int x, int y)
     return NULL;
 }
 
-int LayerGroup::GetTileType(int x, int y)
+int TileLayer::GetTileType(int x, int y)
 {
     //bounds check
     if(x >= width || y >= height || x < 0 || y < 0)

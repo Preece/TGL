@@ -4,7 +4,7 @@
 #include <QPoint>
 #include <qmath.h>
 
-#include "../LayerGroup.h"
+#include "../TileLayer.h"
 
 class TileBrush
 {
@@ -13,12 +13,12 @@ private:
 public:
     TileBrush();
 
-    virtual void Press(int x, int y, LayerGroup *layer);
-    virtual void Move(int x, int y, LayerGroup *layer, bool leftButtonDown);
-    virtual void Release(int x, int y, LayerGroup *layer);
+    virtual void Press(int x, int y, TileLayer *layer);
+    virtual void Move(int x, int y, TileLayer *layer, bool leftButtonDown);
+    virtual void Release(int x, int y, TileLayer *layer);
 
-    virtual void Paint(int x, int y, LayerGroup *layer, bool preview = false);
-    void Line(int x1, int y1, int x2, int y2, LayerGroup *layer, bool preview = false);
+    virtual void Paint(int x, int y, TileLayer *layer, bool preview = false);
+    void Line(int x1, int y1, int x2, int y2, TileLayer *layer, bool preview = false);
 
     virtual QString GetType() = 0;
 

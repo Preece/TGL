@@ -8,11 +8,11 @@
 #include "../Model/Layer.h"
 #include "../Model/ResourceManager.h"
 
-class LayerGroup : public QGraphicsRectItem
+class TileLayer : public QGraphicsRectItem
 {
 public:
-    LayerGroup();
-    ~LayerGroup();
+    TileLayer();
+    ~TileLayer();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 

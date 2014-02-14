@@ -8,7 +8,7 @@ class EraserBrush : public TileBrush
 public:
     EraserBrush();
 
-    void Paint(int x, int y, LayerGroup *layer, bool preview = false);
+    void Paint(int x, int y, TileLayer *layer, bool preview = false);
 
     QString GetType() { return "eraser"; }
 

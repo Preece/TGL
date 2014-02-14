@@ -10,8 +10,8 @@
 
 #include "../Model/Layer.h"
 #include "../Model/ResourceManager.h"
-#include "LayerGroup.h"
-#include "TileItem.h"
+#include "TileLayer.h"
+#include "../ResourceTab/TileWidgetItem.h"
 #include "Brushes/TileBrush.h"
 
 class LayerManager : public QGraphicsScene
@@ -23,14 +23,14 @@ public:
     ~LayerManager();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
-    void RepopulateLayer(LayerGroup *dirtyLayer);
+    void RepopulateLayer(TileLayer *dirtyLayer);
     void AddLayer(Layer *newLayer);
     void RemoveLayer(Layer *dirtyLayer);
 
     void EyedropTile(QPoint pos);
 
     bool IsLayerSelected();
-    LayerGroup *GetSelectedLayer();
+    TileLayer *GetSelectedLayer();
     int GetLayerCount() { return layers.count(); }
     void SetLayerSelection(int newSelection);
     QString GetLayerName(int index);
@@ -46,7 +46,7 @@ public:
     void RepopulateAllLayers();
 
 public slots:
-    void SetSelectedTile(TileItem *newTile) { currentTile = newTile; }
+    void SetSelectedTile(TileWidgetItem *newTile) { currentTile = newTile; }
 
     void ToggleGrid(bool show = true);
 
@@ -61,11 +61,11 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    QList<LayerGroup*> layers;
-    LayerGroup *currentLayer;
+    QList<TileLayer*> layers;
+    TileLayer *currentLayer;
 
     ResourceManager *resourceManager;
-    TileItem *currentTile;
+    TileWidgetItem *currentTile;
 
     QGraphicsItemGroup *grid;
 

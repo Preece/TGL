@@ -9,7 +9,7 @@
 #include "ScatterBrush.h"
 #include "SmartBrush.h"
 
-#include "../TileItem.h"
+#include "../../ResourceTab/TileWidgetItem.h"
 
 namespace Ui {
 class BrushPropertiesWindow;
@@ -38,8 +38,8 @@ public:
 
     bool IsTileSelected();
     int GetSelectedTileID();
-    TileItem *GetSelectedTile();
-    TileItem *GetTileFromID(int ID);
+    TileWidgetItem *GetSelectedTile();
+    TileWidgetItem *GetTileFromID(int ID);
 
     bool IsListTileSelected();
     int GetSelectedListTileIndex();

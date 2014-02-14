@@ -1,11 +1,11 @@
-#include "ImageSelectorItem.h"
+#include "ImageListWidgetItem.h"
 
-ImageSelectorItem::ImageSelectorItem()
+ImageListWidgetItem::ImageListWidgetItem()
 {
     image = NULL;
 }
 
-void ImageSelectorItem::SetImage(Image *newImage)
+void ImageListWidgetItem::SetImage(Image *newImage)
 {
     //assign the image
     image = newImage;
@@ -18,7 +18,7 @@ void ImageSelectorItem::SetImage(Image *newImage)
 
 }
 
-Image *ImageSelectorItem::GetImage()
+Image *ImageListWidgetItem::GetImage()
 {
     if(image == NULL)
             QMessageBox::warning(NULL, "Warning", "You tried to get an Image from an ImageSelectorItem. But it has no associated image.");

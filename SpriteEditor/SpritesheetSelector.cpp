@@ -23,13 +23,13 @@ void SpritesheetSelector::RepopulateImageList()
     if(!resourceManager)
         return;
 
-    ImageSelectorItem *tempImageItem;
+    ImageListWidgetItem *tempImageItem;
 
     //loop through the images in the resource manager
     for(int i = 0; i < resourceManager->GetImageCount(); i++)
     {
         //assign the image from the RM to a new selector item
-        tempImageItem = new ImageSelectorItem;
+        tempImageItem = new ImageListWidgetItem;
         tempImageItem->SetImage(resourceManager->GetImageByIndex(i));
 
         //add the selector item into the list
@@ -69,7 +69,7 @@ void SpritesheetSelector::on_imageList_currentItemChanged(QListWidgetItem *curre
 {
     if(IsImageSelected())
     {
-        ImageSelectorItem *tempItem = dynamic_cast<ImageSelectorItem*>(current);
+        ImageListWidgetItem *tempItem = dynamic_cast<ImageListWidgetItem*>(current);
         selectedImage = tempItem->GetImage();
     }
     else

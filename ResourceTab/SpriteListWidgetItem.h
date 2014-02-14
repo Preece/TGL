@@ -4,13 +4,13 @@
 #include <QListWidgetItem>
 #include "../Model/Sprite.h"
 
-class SpriteSelectorItem : public QListWidgetItem
+class SpriteListWidgetItem : public QListWidgetItem
 {
 private:
     Sprite *sprite;
 
 public:
-    SpriteSelectorItem();
+    SpriteListWidgetItem();
 
     void SetSprite(Sprite *newSprite);
     Sprite *GetSprite();

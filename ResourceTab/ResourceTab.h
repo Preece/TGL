@@ -8,11 +8,11 @@
 
 #include "../SpriteEditor/SpriteEditor.h"
 #include "../SpriteEditor/SpritesheetSelector.h"
-#include "../LevelEditor/TileItem.h"
+#include "TileWidgetItem.h"
 #include "../Model/Tile.h"
 #include "ImageViewer.h"
-#include "ImageSelectorItem.h"
-#include "SpriteSelectorItem.h"
+#include "ImageListWidgetItem.h"
+#include "SpriteListWidgetItem.h"
 #include "TileSelectorScene.h"
 
 #include "../Model/ResourceManager.h"
@@ -38,11 +38,11 @@ public:
     void RepopulateLinkSelector();
 
     bool IsImageSelected();
-    ImageSelectorItem *GetSelectedImageItem();
+    ImageListWidgetItem *GetSelectedImageItem();
     Image *GetSelectedImage();
 
     bool IsSpriteSelected();
-    SpriteSelectorItem *GetSelectedSpriteItem();
+    SpriteListWidgetItem *GetSelectedSpriteItem();
     Sprite *GetSelectedSprite();
 
     void RepopulateTileSelector();

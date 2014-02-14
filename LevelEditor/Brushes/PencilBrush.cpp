@@ -6,7 +6,7 @@ PencilBrush::PencilBrush()
     lineMode = false;
 }
 
-void PencilBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
+void PencilBrush::Paint(int x, int y, TileLayer *layer, bool preview)
 {
     //if no tile is selected, bail
     if(selectedTileID == 0)

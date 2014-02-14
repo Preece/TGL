@@ -119,7 +119,7 @@ int BrushPropertiesWindow::GetSelectedTileID()
 {
     if(IsTileSelected())
     {
-        TileItem *tempItem = dynamic_cast<TileItem*>(tileSelector->selectedItems()[0]);
+        TileWidgetItem *tempItem = dynamic_cast<TileWidgetItem*>(tileSelector->selectedItems()[0]);
 
         if(tempItem)
             return tempItem->GetTileID();
@@ -128,19 +128,19 @@ int BrushPropertiesWindow::GetSelectedTileID()
     return 0;
 }
 
-TileItem *BrushPropertiesWindow::GetSelectedTile()
+TileWidgetItem *BrushPropertiesWindow::GetSelectedTile()
 {
     if(IsTileSelected())
     {
-        return dynamic_cast<TileItem*>(tileSelector->selectedItems()[0]);
+        return dynamic_cast<TileWidgetItem*>(tileSelector->selectedItems()[0]);
     }
 
     return NULL;
 }
 
-TileItem *BrushPropertiesWindow::GetTileFromID(int ID)
+TileWidgetItem *BrushPropertiesWindow::GetTileFromID(int ID)
 {
-    TileItem *tempItem = new TileItem;
+    TileWidgetItem *tempItem = new TileWidgetItem;
 
     tempItem->SetTile(resourceManager->GetTile(ID));
     tempItem->setPixmap(resourceManager->GetTilePixmap(ID));
@@ -161,7 +161,7 @@ int BrushPropertiesWindow::GetSelectedListTileIndex()
     if(!IsListTileSelected())
         return -1;
 
-    TileItem *tempTile =  static_cast<TileItem*>(tileList.selectedItems()[0]);
+    TileWidgetItem *tempTile =  static_cast<TileWidgetItem*>(tileList.selectedItems()[0]);
 
     if(tempTile)
         return tempTile->GetIndex();
@@ -180,7 +180,7 @@ void BrushPropertiesWindow::RepopulateTileList()
         for(int i = 0; i < currentBrush->GetTileCount(currentListIndex); i++)
         {
             //create a visible item for each one, and set its position
-            TileItem *tempItem = GetTileFromID(currentBrush->GetTile(currentListIndex, i));
+            TileWidgetItem *tempItem = GetTileFromID(currentBrush->GetTile(currentListIndex, i));
             tempItem->setPos((i * resourceManager->GetLevelProperties()->GetTileWidth()) + i, 0);
             tempItem->setFlag(QGraphicsItem::ItemIsSelectable);
             tempItem->SetIndex(i);

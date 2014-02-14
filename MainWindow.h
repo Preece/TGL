@@ -33,7 +33,7 @@ public:
     ~MainWindow();
 
     bool IsTileSelected();
-    TileItem *GetSelectedTileItem();
+    TileWidgetItem *GetSelectedTileItem();
 
     void RepopulateLayerSelector();
     bool IsLayerSelected();

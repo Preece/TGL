@@ -1,6 +1,6 @@
 #include "SmartBrush.h"
 
-void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
+void SmartBrush::Paint(int x, int y, TileLayer *layer, bool preview)
 {
     //erase the previous preview
     layer->ClearPreview();
@@ -105,7 +105,7 @@ void SmartBrush::Paint(int x, int y, LayerGroup *layer, bool preview)
     }
 }
 
-void SmartBrush::ContextPaintTile(int x, int y, LayerGroup *layer, bool preview)
+void SmartBrush::ContextPaintTile(int x, int y, TileLayer *layer, bool preview)
 {
     //if this is not a middle tile
     if(!ListContainsTile(4, layer->GetTileType(x, y)) && !IsListEmpty(4))

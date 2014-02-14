@@ -4,7 +4,7 @@
 #include <QDialog>
 
 #include "../Model/ResourceManager.h"
-#include "../ResourceTab/ImageSelectorItem.h"
+#include "../ResourceTab/ImageListWidgetItem.h"
 
 namespace Ui {
 class SpritesheetSelector;

@@ -5,13 +5,13 @@
 
 #include "../Model/Image.h"
 
-class ImageSelectorItem : public QListWidgetItem
+class ImageListWidgetItem : public QListWidgetItem
 {
 private:
     Image *image;
 
 public:
-    ImageSelectorItem();
+    ImageListWidgetItem();
 
     void SetImage(Image *newImage);
     Image *GetImage();

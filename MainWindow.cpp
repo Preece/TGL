@@ -97,11 +97,11 @@ void MainWindow::UpdateSelectedTile()
     }
 }
 
-TileItem *MainWindow::GetSelectedTileItem()
+TileWidgetItem *MainWindow::GetSelectedTileItem()
 {
     if(IsTileSelected())
     {
-        return dynamic_cast<TileItem*>(tileSelector->selectedItems()[0]);
+        return dynamic_cast<TileWidgetItem*>(tileSelector->selectedItems()[0]);
     }
 
     return NULL;
