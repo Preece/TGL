@@ -7,9 +7,9 @@ class SmartBrush : public ComplexBrush
 {
 public:
 
-    virtual void Paint(int x, int y, TileLayer *layer, bool preview);
+    virtual void Paint(int x, int y, TileLayerView *layer, bool preview);
 
-    void ContextPaintTile(int x, int y, TileLayer *layer, bool preview);
+    void ContextPaintTile(int x, int y, TileLayerView *layer, bool preview);
 
     SmartBrush();
 

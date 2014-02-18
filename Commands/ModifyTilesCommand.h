@@ -3,18 +3,18 @@
 
 #include <QUndoCommand>
 
-#include "../Model/Layer.h"
+#include "../Model/TileLayer.h"
 
 class ModifyTilesCommand : public QUndoCommand
 {
 public:
-    ModifyTilesCommand(Layer * newLayer, int newX, int newY, int newT, int oldT);
+    ModifyTilesCommand(TileLayer * newLayer, int newX, int newY, int newT, int oldT);
 
     void undo();
     void redo();
 
 private:
-    Layer *holdLayer;
+    TileLayer *holdLayer;
     int x, y;
     int newType;
     int oldType;

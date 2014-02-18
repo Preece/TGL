@@ -1,6 +1,6 @@
 #include "AddTilesCommand.h"
 
-AddTilesCommand::AddTilesCommand(Layer *newLayer, int newX, int newY, int newT)
+AddTilesCommand::AddTilesCommand(TileLayerView *newLayer, int newX, int newY, int newT)
 {
     layer = newLayer;
     x = newX;

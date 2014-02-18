@@ -2,8 +2,7 @@
 #define TILEITEM_H
 
 #include <QGraphicsPixmapItem>
-#include <Model/Tile.h>
-#include "../Model/TileInstance.h"
+#include "../Model/TileLayer.h"
 
 class TileWidgetItem : public QGraphicsPixmapItem
 {

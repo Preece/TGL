@@ -6,16 +6,14 @@
 #include "../Model/Savable.h"
 #include "../Model/Sprite.h"
 #include "../Model/Image.h"
-#include "../Model/Layer.h"
-#include "../Model/Tile.h"
+#include "../Model/TileLayer.h"
 
 class DeleteResourceCommand : public QUndoCommand
 {
 public:
     DeleteResourceCommand(Savable *newResource, QList<Sprite*> *resources);
     DeleteResourceCommand(Savable *newResource, QList<Image*> *resources);
-    DeleteResourceCommand(Savable *newResource, QList<Layer*> *resources);
-    DeleteResourceCommand(Savable *newResource, QList<Tile*> *resources);
+    DeleteResourceCommand(Savable *newResource, QList<TileLayer*> *resources);
     ~DeleteResourceCommand();
 
     virtual void undo();

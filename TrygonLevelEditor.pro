@@ -30,14 +30,10 @@ SOURCES += main.cpp\
     SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
     LevelEditor/LayerManager.cpp \
     Commands/ModifyTilesCommand.cpp \
-    Model/Tile.cpp \
     LevelEditor/Brushes/TileBrush.cpp \
     Model/LevelProperties.cpp \
     LevelPropertiesDialog.cpp \
-    Model/Layer.cpp \
     Model/Exporter.cpp \
-    Model/TileInstance.cpp \
-    LevelEditor/TileInstanceItem.cpp \
     LevelEditor/Brushes/PencilBrush.cpp \
     LevelEditor/Brushes/FillBrush.cpp \
     LevelEditor/Brushes/SmartBrush.cpp \
@@ -59,8 +55,9 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/MatrixBrush.cpp \
     ResourceTab/SpriteListWidgetItem.cpp \
     ResourceTab/ImageListWidgetItem.cpp \
-    LevelEditor/TileLayer.cpp \
-    ResourceTab/TileWidgetItem.cpp
+    ResourceTab/TileWidgetItem.cpp \
+    Model/TileLayer.cpp \
+    LevelEditor/TileLayerView.cpp
   
 
 HEADERS  += \
@@ -83,14 +80,10 @@ HEADERS  += \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
     LevelEditor/LayerManager.h \
     Commands/ModifyTilesCommand.h \
-    Model/Tile.h \
     LevelEditor/Brushes/TileBrush.h \
     Model/LevelProperties.h \
     LevelPropertiesDialog.h \
-    Model/Layer.h \
     Model/Exporter.h \
-    Model/TileInstance.h \
-    LevelEditor/TileInstanceItem.h \
     LevelEditor/Brushes/PencilBrush.h \
     LevelEditor/Brushes/FillBrush.h \
     LevelEditor/Brushes/SmartBrush.h \
@@ -112,8 +105,9 @@ HEADERS  += \
     LevelEditor/Brushes/MatrixBrush.h \
     ResourceTab/SpriteListWidgetItem.h \
     ResourceTab/ImageListWidgetItem.h \
-    LevelEditor/TileLayer.h \
-    ResourceTab/TileWidgetItem.h
+    ResourceTab/TileWidgetItem.h \
+    Model/TileLayer.h \
+    LevelEditor/TileLayerView.h
    
 
 FORMS    += \

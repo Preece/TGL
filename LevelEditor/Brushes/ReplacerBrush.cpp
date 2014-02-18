@@ -5,7 +5,7 @@ ReplacerBrush::ReplacerBrush()
     AddList(2);
 }
 
-void ReplacerBrush::Paint(int x, int y, TileLayer *layer, bool preview)
+void ReplacerBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next
     layer->ClearPreview();

@@ -8,7 +8,7 @@ TileBrush::TileBrush()
     overwrite = true;
 }
 
-void TileBrush::Press(int x, int y, TileLayer *layer)
+void TileBrush::Press(int x, int y, TileLayerView *layer)
 {
     //they have started painting, so nix the preview
     layer->ClearPreview();
@@ -20,7 +20,7 @@ void TileBrush::Press(int x, int y, TileLayer *layer)
     lastPaintSpot.setY(y);
 }
 
-void TileBrush::Move(int x, int y, TileLayer *layer, bool leftButtonDown)
+void TileBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
 {
     if(leftButtonDown)
     {
@@ -49,16 +49,16 @@ void TileBrush::Move(int x, int y, TileLayer *layer, bool leftButtonDown)
     }
 }
 
-void TileBrush::Release(int x, int y, TileLayer *layer)
+void TileBrush::Release(int x, int y, TileLayerView *layer)
 {
 }
 
-void TileBrush::Paint(int x, int y, TileLayer *layer, bool preview)
+void TileBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     //do nothing
 }
 
-void TileBrush::Line(int x1, int y1, int x2, int y2, TileLayer *layer, bool preview)
+void TileBrush::Line(int x1, int y1, int x2, int y2, TileLayerView *layer, bool preview)
 {
     //if the tiles are at the same spot
     if(x1 == x2 && y1 == y2)

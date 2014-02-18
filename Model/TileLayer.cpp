@@ -1,11 +1,11 @@
-#include "Layer.h"
+#include "TileLayer.h"
 
-Layer::Layer()
+TileLayer::TileLayer()
 {
     iter = tiles.begin();
 }
 
-bool Layer::Export(Exporter *exporter)
+bool TileLayer::Export(Exporter *exporter)
 {
     exporter->WriteDouble(verticalParallax);
     exporter->WriteDouble(horizontalParallax);
@@ -15,7 +15,7 @@ bool Layer::Export(Exporter *exporter)
     return true;
 }
 
-bool Layer::Import(Exporter *exporter)
+bool TileLayer::Import(Exporter *exporter)
 {
     exporter->ReadDouble(verticalParallax);
     exporter->ReadDouble(horizontalParallax);
@@ -25,7 +25,7 @@ bool Layer::Import(Exporter *exporter)
     return true;
 }
 
-TileInstance *Layer::GetTileAtIndex(int index)
+Tile *TileLayer::GetTileAtIndex(int index)
 {
     if(index < 0 || index >= GetTileCount())
         return NULL;
@@ -35,7 +35,7 @@ TileInstance *Layer::GetTileAtIndex(int index)
 
 }
 
-TileInstance *Layer::GetTileAtPos(int x, int y)
+Tile *TileLayer::GetTileAtPos(int x, int y)
 {
     return tiles[TileCoord(x, y)];
 }
@@ -58,7 +58,7 @@ int Layer::GetTileType(int x, int y)
     return tempTile->GetTileID();
 }
 
-TileInstance *Layer::AddTile(int x, int y, int ID)
+Tile *TileLayer::AddTile(int x, int y, int ID)
 {
     //create a new tile instance
     TileInstance *tempTile = new TileInstance;
@@ -75,7 +75,7 @@ TileInstance *Layer::AddTile(int x, int y, int ID)
     return tempTile;
 }
 
-void Layer::RemoveTile(int x, int y)
+void TileLayer::RemoveTile(int x, int y)
 {
     TileInstance *tempTile;
 
@@ -95,7 +95,7 @@ void Layer::RemoveTile(int x, int y)
     tiles.remove(TileCoord(x, y));
 }
 
-void Layer::ModifyTile(int x, int y, int ID)
+void TileLayer::ModifyTile(int x, int y, int ID)
 {
     TileInstance *tempTile;
 

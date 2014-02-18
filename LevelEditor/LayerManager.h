@@ -8,9 +8,9 @@
 #include <QAbstractListModel>
 #include <QItemSelectionModel>
 
-#include "../Model/Layer.h"
+#include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
-#include "TileLayer.h"
+#include "TileLayerView.h"
 #include "../ResourceTab/TileWidgetItem.h"
 #include "Brushes/TileBrush.h"
 
@@ -23,14 +23,14 @@ public:
     ~LayerManager();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
-    void RepopulateLayer(TileLayer *dirtyLayer);
+    void RepopulateLayer(TileLayerView *dirtyLayer);
     void AddLayer(Layer *newLayer);
     void RemoveLayer(Layer *dirtyLayer);
 
     void EyedropTile(QPoint pos);
 
     bool IsLayerSelected();
-    TileLayer *GetSelectedLayer();
+    TileLayerView *GetSelectedLayer();
     int GetLayerCount() { return layers.count(); }
     void SetLayerSelection(int newSelection);
     QString GetLayerName(int index);
@@ -61,8 +61,8 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    QList<TileLayer*> layers;
-    TileLayer *currentLayer;
+    QList<TileLayerView*> layers;
+    TileLayerView *currentLayer;
 
     ResourceManager *resourceManager;
     TileWidgetItem *currentTile;

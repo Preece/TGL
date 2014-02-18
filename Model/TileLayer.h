@@ -6,18 +6,23 @@
 #include <QMap>
 
 #include "Savable.h"
-#include "TileInstance.h"
 
 typedef QPair<int, int> TileCoord;
 
-class Layer : public Savable
+struct Tile
+{
+    int x, y;
+    int originX, originY;
+};
+
+class TileLayer : public Savable
 {
 public:
     bool Export(Exporter *exporter);
     bool Import(Exporter *exporter);
     QString GetType() { return "LAYR"; }
 
-    Layer();
+    TileLayer();
 
     QString GetName() { return name; }
     void SetName(QString newName) { name = newName; }
@@ -31,16 +36,16 @@ public:
     int GetOpacity() { return opacity; }
 
     int GetTileCount() { return tiles.count(); }
-    TileInstance *GetTileAtIndex(int index);
-    TileInstance *GetTileAtPos(int x, int y);
+    Tile *GetTileAtIndex(int index);
+    Tile *GetTileAtPos(int x, int y);
     int GetTileType(int x, int y);
 
-    TileInstance *AddTile(int x = 0, int y = 0, int ID = 0);
+    Tile *AddTile(int x = 0, int y = 0, int oX = 0, int oY = 0);
     void RemoveTile(int x, int y);
-    void ModifyTile(int x, int y, int ID);
+    void ModifyTile(int x, int y, int oX, int oY);
 
     void ResetIterator() { iter = tiles.begin(); }
-    TileInstance *GetTileInstance() { return iter.value(); }
+    Tile *GetTileInstance() { return iter.value(); }
     void AdvanceIterator() { iter++; }
 
 private:
@@ -49,8 +54,8 @@ private:
 
     int opacity;
 
-    QMap<TileCoord, TileInstance*> tiles;
-    QMap<TileCoord, TileInstance*>::iterator iter;
+    QMap<TileCoord, Tile*> tiles;
+    QMap<TileCoord, Tile*>::iterator iter;
 };
 
 #endif // LAYER_H

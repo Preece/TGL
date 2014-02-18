@@ -8,7 +8,7 @@ class ReplacerBrush : public ComplexBrush
 public:
     ReplacerBrush();
 
-    void Paint(int x, int y, TileLayer *layer, bool preview);
+    void Paint(int x, int y, TileLayerView *layer, bool preview);
 
     QString GetType() { return "replacer"; }
 };

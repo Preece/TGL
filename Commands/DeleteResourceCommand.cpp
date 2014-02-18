@@ -12,7 +12,7 @@ DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<Image *
     resourceList = reinterpret_cast<QList<Savable*>* >(resources);
 }
 
-DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<Layer *> *resources)
+DeleteResourceCommand::DeleteResourceCommand(Savable *newResource, QList<TileLayerView *> *resources)
 {
     resource = newResource;
     resourceList = reinterpret_cast<QList<Savable*>* >(resources);

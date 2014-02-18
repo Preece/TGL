@@ -2,7 +2,7 @@
 
 bool ScatterBrush::fill = false;
 
-void ScatterBrush::Paint(int x, int y, TileLayer *layer, bool preview)
+void ScatterBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next
     layer->ClearPreview();
@@ -47,7 +47,7 @@ ScatterBrush::~ScatterBrush()
 {
 }
 
-void ScatterBrush::Fill(int tileX, int tileY, int newTile, int oldTile, TileLayer *newLayer)
+void ScatterBrush::Fill(int tileX, int tileY, int newTile, int oldTile, TileLayerView *newLayer)
 {
     //this is a recursive function. It calls itself in tiles to the north, east, south and west.
     //it will return if the tile is different from the one being replaced, or off the edge of the grid

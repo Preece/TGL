@@ -9,7 +9,7 @@ class PencilBrush : public TileBrush
 public:
     PencilBrush();
 
-    void Paint(int x, int y, TileLayer *layer, bool preview = false);
+    void Paint(int x, int y, TileLayerView *layer, bool preview = false);
 
     QString GetType() { return "pencil"; }
 

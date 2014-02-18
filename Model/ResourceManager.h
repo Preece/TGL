@@ -8,8 +8,7 @@
 
 #include "Sprite.h"
 #include "Image.h"
-#include "Tile.h"
-#include "Layer.h"
+#include "TileLayer.h"
 #include "Model/LevelProperties.h"
 
 #include "../Commands/AddResourceCommand.h"
@@ -45,21 +44,10 @@ public slots:
     QImage *GetTileset();
     QPixmap GetTilePixmap(int ID);
 
-    void AddTile(Tile *newTile);
-    void ClearTiles();
-    int GetTileCount() { return tileList.count(); }
-    Tile *GetTile(int ID);
-    Tile *GetTile(int x, int y);
-
-    TileInstance *AddTileInstance(Layer *layer, int x, int y, int newType);
-    void ModifyTileInstance(Layer *layer, int x, int y, int newType, int oldType);
-    TileInstance *GetTileInstanceByIndex(Layer *layer, int i);
-    int GetTileInstanceCount(Layer *layer);
-
-    void AddLayer(Layer *newLayer);
-    void DeleteLayer(int ID);
-    Layer *GetLayer(int ID);
-    Layer *GetLayerByIndex(int index);
+    void AddTileLayer(TileLayer *newLayer);
+    void DeleteTileLayer(int ID);
+    TileLayer *GetTileLayer(int ID);
+    TileLayer *GetLayerByIndex(int index);
     int GetLayerCount() { return layerList.count(); }
 
     void DestroyAllResources();
@@ -82,8 +70,7 @@ signals:
 private:
     QList<Sprite*> spriteList;
     QList<Image*> imageList;
-    QList<Tile*> tileList;
-    QList<Layer*> layerList;
+    QList<TileLayer*> layerList;
 
     LevelProperties levelProperties;
 

@@ -4,7 +4,7 @@ EraserBrush::EraserBrush()
 {
 }
 
-void EraserBrush::Paint(int x, int y, TileLayer *layer, bool preview)
+void EraserBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     if(preview)
         return;

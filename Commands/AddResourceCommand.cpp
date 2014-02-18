@@ -16,7 +16,7 @@ AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Image *> *res
     invertAdditions = false;
 }
 
-AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Layer *> *resources)
+AddResourceCommand::AddResourceCommand(Savable *newResource, QList<TileLayerView *> *resources)
 {
     resource = newResource;
     resourceList = reinterpret_cast<QList<Savable*>* >(resources);

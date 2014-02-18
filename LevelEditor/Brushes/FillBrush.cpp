@@ -5,12 +5,12 @@ FillBrush::FillBrush()
     selectedTileID = 0;
 }
 
-void FillBrush::Move(int x, int y, TileLayer *layer)
+void FillBrush::Move(int x, int y, TileLayerView *layer)
 {
     //we don't want this to do anything for a fill brush
 }
 
-void FillBrush::Paint(int x, int y, TileLayer *layer, bool preview)
+void FillBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     //the fill brush has no preview mode
     if(preview)
@@ -21,7 +21,7 @@ void FillBrush::Paint(int x, int y, TileLayer *layer, bool preview)
     Fill(x, y, selectedTileID, old, layer);
 }
 
-void FillBrush::Fill(int tileX, int tileY, int newTile, int oldTile, TileLayer *newLayer)
+void FillBrush::Fill(int tileX, int tileY, int newTile, int oldTile, TileLayerView *newLayer)
 {
     //this is a recursive function. It calls itself in tiles to the north, east, south and west.
     //it will return if the tile is different from the one being replaced, or off the edge of the grid

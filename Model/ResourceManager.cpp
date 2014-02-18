@@ -137,7 +137,9 @@ QImage *ResourceManager::GetTileset()
 
 QPixmap ResourceManager::GetTilePixmap(int ID)
 {
-    QImage *tempTileset = GetTileset();
+    //commented out for refactoring
+
+   /* QImage *tempTileset = GetTileset();
     QImage tempImage = *tempTileset;
 
     if(tempImage.isNull())
@@ -152,93 +154,10 @@ QPixmap ResourceManager::GetTilePixmap(int ID)
                                 levelProperties.GetTileHeight() * tempTile->GetYOrigin(),
                                 levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
 
-    return QPixmap::fromImage(tempImage);
+    return QPixmap::fromImage(tempImage); */
 }
 
-void ResourceManager::AddTile(Tile *newTile)
-{
-    if(newTile)
-    {
-        AddResourceCommand *add = new AddResourceCommand(newTile, &tileList);
-        undo->push(add);
-    }
-}
-
-void ResourceManager::ClearTiles()
-{
-    undo->beginMacro("Clear Tiles");
-
-    DeleteResourceCommand *del;
-
-    for(int i = 0; i < GetTileCount(); i++)
-    {
-        //keep removing the first element
-        del = new DeleteResourceCommand(tileList[0], &tileList);
-        undo->push(del);
-    }
-
-    undo->endMacro();
-}
-
-Tile *ResourceManager::GetTile(int ID)
-{
-    for(int i = 0; i < GetTileCount(); i++)
-    {
-        if(tileList[i]->GetID() == ID)
-            return tileList[i];
-    }
-
-    return NULL;
-}
-
-Tile *ResourceManager::GetTile(int x, int y)
-{
-    for(int i = 0; i < GetTileCount(); i++)
-    {
-        if(tileList[i]->GetXOrigin() == x && tileList[i]->GetYOrigin() == y)
-            return tileList[i];
-    }
-
-    return NULL;
-}
-
-TileInstance *ResourceManager::AddTileInstance(Layer *layer, int x, int y, int newType)
-{
-    AddTilesCommand *add = new AddTilesCommand(layer, x, y, newType);
-    undo->push(add);
-
-    return add->GetTileInstance();
-}
-
-void ResourceManager::ModifyTileInstance(Layer *layer, int x, int y, int newType, int oldType)
-{
-    //if(newType == oldType)
-      //  return;
-
-    ModifyTilesCommand *mod = new ModifyTilesCommand(layer, x, y, newType, oldType);
-    undo->push(mod);
-}
-
-TileInstance *ResourceManager::GetTileInstanceByIndex(Layer *layer, int i)
-{
-    if(i < 0 || i >= layer->GetTileCount())
-        return NULL;
-
-    if(!layer)
-        return NULL;
-
-    return layer->GetTileAtIndex(i);
-}
-
-int ResourceManager::GetTileInstanceCount(Layer *layer)
-{
-    if(!layer)
-        return 0;
-
-    return layer->GetTileCount();
-}
-
-void ResourceManager::AddLayer(Layer *newLayer)
+void ResourceManager::AddTileLayer(TileLayer *newLayer)
 {
     if(newLayer)
     {
@@ -246,7 +165,7 @@ void ResourceManager::AddLayer(Layer *newLayer)
     }
 }
 
-void ResourceManager::DeleteLayer(int ID)
+void ResourceManager::DeleteTileLayer(int ID)
 {
     for(int i = 0; i < layerList.count(); i++)
     {
@@ -260,7 +179,7 @@ void ResourceManager::DeleteLayer(int ID)
     }
 }
 
-Layer *ResourceManager::GetLayer(int ID)
+TileLayer *ResourceManager::GetTileLayer(int ID)
 {
     for(int i = 0; i < layerList.count(); i++)
     {
@@ -273,7 +192,7 @@ Layer *ResourceManager::GetLayer(int ID)
     return NULL;
 }
 
-Layer *ResourceManager::GetLayerByIndex(int index)
+TileLayer *ResourceManager::GetLayerByIndex(int index)
 {
     if(index < 0 || index > layerList.count())
         return NULL;
@@ -315,14 +234,6 @@ void ResourceManager::DestroyAllResources()
     }
 
     imageList.clear();
-
-    for(int i = 0; i < tileList.count(); i++)
-    {
-        delete tileList[i];
-        tileList[i] = NULL;
-    }
-
-    tileList.clear();
 
     for(int i = 0; i < layerList.count(); i++)
     {

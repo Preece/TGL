@@ -44,7 +44,7 @@ void LayerManager::EyedropTile(QPoint pos)
 void LayerManager::AddLayer(Layer *newLayer)
 {
     //create a layer group, and assign the new layer
-    TileLayer *tempLayerGroup = new TileLayer;
+    TileLayerView *tempLayerGroup = new TileLayerView;
     tempLayerGroup->SetLayer(newLayer);
     tempLayerGroup->RegisterResourceManager(resourceManager);
     tempLayerGroup->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(),
@@ -82,7 +82,7 @@ bool LayerManager::IsLayerSelected()
     return true;
 }
 
-TileLayer *LayerManager::GetSelectedLayer()
+TileLayerView *LayerManager::GetSelectedLayer()
 {
     return currentLayer;
 }

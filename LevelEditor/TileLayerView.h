@@ -1,28 +1,25 @@
 #ifndef LAYERGROUP_H
 #define LAYERGROUP_H
 
-#include <QGraphicsItemGroup>
-
-#include "TileInstanceItem.h"
-
-#include "../Model/Layer.h"
+#include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
+#include "../ResourceTab/TileWidgetItem.h"
 
-class TileLayer : public QGraphicsRectItem
+class TileLayerView : public QGraphicsRectItem
 {
 public:
-    TileLayer();
-    ~TileLayer();
+    TileLayerView();
+    ~TileLayerView();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
-    void SetLayer(Layer *newLayer) { layer = newLayer; }
-    Layer *GetLayer() { return layer; }
+    void SetLayer(TileLayer *newLayer) { layer = newLayer; }
+    TileLayer *GetLayer() { return layer; }
 
     void ModifyTile(int x, int y, int newType);
     void PreviewModifyTile(int x, int y, int newType);
     void ClearPreview();
-    TileInstanceItem *GetTileInstanceItem(int x, int y);
+    Tile *GetTile(int x, int y);
 
     int GetTileType(int x, int y);
     void SetLayerSize(int w, int h);
@@ -39,12 +36,12 @@ public:
 
 
 private:
-    QList<TileInstanceItem*> items;
+    QList<TileWidgetItem*> items;
     int width, height;
 
-    QList<TileInstanceItem*> previewItems;
+    QList<TileWidgetItem*> previewItems;
 
-    Layer *layer;
+    TileLayer *layer;
     ResourceManager *resourceManager;
 };
 
