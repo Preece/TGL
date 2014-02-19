@@ -155,6 +155,7 @@ QPixmap ResourceManager::GetTilePixmap(int ID)
                                 levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
 
     return QPixmap::fromImage(tempImage); */
+    return QPixmap();
 }
 
 void ResourceManager::AddTileLayer(TileLayer *newLayer)

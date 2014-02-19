@@ -15,7 +15,7 @@ LayerProperties::~LayerProperties()
     delete ui;
 }
 
-void LayerProperties::NewLayer(Layer *newLayer)
+void LayerProperties::NewLayer(TileLayer *newLayer)
 {
     currentLayer = newLayer;
 
@@ -26,7 +26,7 @@ void LayerProperties::NewLayer(Layer *newLayer)
     ui->horizontalPValue->setValue(1.00);
 }
 
-void LayerProperties::EditLayer(Layer *newLayer)
+void LayerProperties::EditLayer(TileLayer *newLayer)
 {
     currentLayer = newLayer;
 

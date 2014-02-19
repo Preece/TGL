@@ -15,7 +15,8 @@ public:
     void SetTilePixmap(QImage spritesheet, int w, int h);
     QPixmap GetTilePixmap();
 
-    int GetTileID() { if(tile) return tile->GetID(); return 0; }
+    int GetTileOriginX() { if(tile) return tile->originX; return 0; }
+    int GetTileOriginY() { if(tile) return tile->originY; return 0; }
 
     void SetIndex(int newIndex) { index = newIndex; }
     int GetIndex() { return index; }

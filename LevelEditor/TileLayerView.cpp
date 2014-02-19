@@ -1,4 +1,4 @@
-#include "TileLayer.h"
+#include "TileLayerView.h"
 
 TileLayerView::TileLayerView()
 {
@@ -66,7 +66,7 @@ void TileLayerView::RepopulateTiles()
     //loop through all the tile instances in the model
     for(int i = 0; i < layer->GetTileCount(); i++)
     {
-        TileInstanceItem *tempTile = new TileInstanceItem;
+        TileWidgetItem *tempTile = new TileWidgetItem;
 
         //if the tileinstance we want is valid
         if(layer->GetTileInstance() != 0)

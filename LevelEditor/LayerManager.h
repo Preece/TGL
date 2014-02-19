@@ -24,8 +24,8 @@ public:
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
     void RepopulateLayer(TileLayerView *dirtyLayer);
-    void AddLayer(Layer *newLayer);
-    void RemoveLayer(Layer *dirtyLayer);
+    void AddLayer(TileLayer *newLayer);
+    void RemoveLayer(TileLayer *dirtyLayer);
 
     void EyedropTile(QPoint pos);
 
@@ -35,13 +35,9 @@ public:
     void SetLayerSelection(int newSelection);
     QString GetLayerName(int index);
 
-    void UpdateLayerOpacity(Layer *opaqueLayer);
+    void UpdateLayerOpacity(TileLayer *opaqueLayer);
 
     void ToggleLayerVisibility(int layerIndex, bool show);
-
-    int GetSelectedTileID();
-
-    bool IsObjectSelected();
 
     void RepopulateAllLayers();
 

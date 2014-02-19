@@ -2,7 +2,7 @@
 #define PENCILBRUSH_H
 
 #include "TileBrush.h"
-#include "../TileLayer.h"
+#include "../TileLayerView.h"
 
 class PencilBrush : public TileBrush
 {

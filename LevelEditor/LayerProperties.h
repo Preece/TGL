@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include "../Model/Layer.h"
+#include "../Model/TileLayer.h"
 
 namespace Ui {
 class LayerProperties;
@@ -17,8 +17,8 @@ public:
     explicit LayerProperties(QWidget *parent = 0);
     ~LayerProperties();
 
-    void NewLayer(Layer *newLayer);
-    void EditLayer(Layer *newLayer);
+    void NewLayer(TileLayer *newLayer);
+    void EditLayer(TileLayer *newLayer);
     
 private slots:
     void on_buttonBox_accepted();
@@ -26,7 +26,7 @@ private slots:
 private:
     Ui::LayerProperties *ui;
 
-    Layer *currentLayer;
+    TileLayer *currentLayer;
 };
 
 #endif // LAYERPROPERTIES_H

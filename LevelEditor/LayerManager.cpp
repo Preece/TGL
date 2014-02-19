@@ -41,7 +41,7 @@ void LayerManager::EyedropTile(QPoint pos)
     }
 }
 
-void LayerManager::AddLayer(Layer *newLayer)
+void LayerManager::AddLayer(TileLayer *newLayer)
 {
     //create a layer group, and assign the new layer
     TileLayerView *tempLayerGroup = new TileLayerView;
@@ -59,13 +59,13 @@ void LayerManager::AddLayer(Layer *newLayer)
     tempLayerGroup->setPos(0,0);
 }
 
-void LayerManager::RemoveLayer(Layer *dirtyLayer)
+void LayerManager::RemoveLayer(TileLayer *dirtyLayer)
 {
     for(int i = 0; i < layers.count(); i++)
     {
         if(layers[i]->GetLayer() == dirtyLayer)
         {
-            resourceManager->DeleteLayer(layers[i]->GetLayer()->GetID());
+            resourceManager->DeleteTileLayer(layers[i]->GetLayer()->GetID());
 
             layers[i]->DestroyAllItems();
             delete layers[i];
@@ -159,7 +159,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
-    if(event->button() == Qt::LeftButton && !IsObjectSelected())
+    if(event->button() == Qt::LeftButton)
     {
         resourceManager->BeginUndoOperation("Painting Tiles");
 
@@ -188,12 +188,12 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     int tileY = event->scenePos().toPoint().y() / tileH;
 
     //if the left button is down
-    if(event->buttons() == Qt::LeftButton && !IsObjectSelected())
+    if(event->buttons() == Qt::LeftButton)
     {
         currentBrush->Move(tileX, tileY, currentLayer, true);
     }
     //if the left mouse button was not down
-    else if(currentLayer&& !IsObjectSelected())
+    else if(currentLayer)
     {
         currentBrush->Move(tileX, tileY, currentLayer, false);
     }
@@ -213,7 +213,7 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
-    if(event->button() == Qt::LeftButton && !IsObjectSelected())
+    if(event->button() == Qt::LeftButton)
     {
         resourceManager->EndUndoOperation();
         currentBrush->Release(tileX, tileY, currentLayer);
@@ -240,7 +240,7 @@ QString LayerManager::GetLayerName(int index)
     return resourceManager->GetLayerByIndex(index)->GetName();
 }
 
-void LayerManager::UpdateLayerOpacity(Layer *opaqueLayer)
+void LayerManager::UpdateLayerOpacity(TileLayer *opaqueLayer)
 {
     for(int i = 0; i < layers.count(); i++)
     {
@@ -259,22 +259,6 @@ void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
         return;
 
     layers[layerIndex]->ToggleVisibility(show);
-}
-
-int LayerManager::GetSelectedTileID()
-{
-    if(currentTile)
-        return currentTile->GetTileID();
-
-    return 0;
-}
-
-bool LayerManager::IsObjectSelected()
-{
-    if(this->selectedItems().count() > 0)
-        return true;
-
-    return false;
 }
 
 void LayerManager::RepopulateAllLayers()

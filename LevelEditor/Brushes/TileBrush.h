@@ -4,7 +4,7 @@
 #include <QPoint>
 #include <qmath.h>
 
-#include "../TileLayer.h"
+#include "../TileLayerView.h"
 
 class TileBrush
 {

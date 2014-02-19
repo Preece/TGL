@@ -1,6 +1,6 @@
 #include "ModifyTilesCommand.h"
 
-ModifyTilesCommand::ModifyTilesCommand(Layer *newLayer, int newX, int newY, int newT, int oldT)
+ModifyTilesCommand::ModifyTilesCommand(TileLayer *newLayer, int newX, int newY, int newT, int oldT)
 {
     holdLayer = newLayer;
     x = newX;
