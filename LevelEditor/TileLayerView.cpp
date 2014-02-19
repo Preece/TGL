@@ -68,13 +68,11 @@ void TileLayerView::RepopulateTiles()
     {
         TileWidgetItem *tempTile = new TileWidgetItem;
 
-        //if the tileinstance we want is valid
-        if(layer->GetTileInstance() != 0)
+        //if the tile we want is valid
+        if(layer->GetTileFromIterator() != 0)
         {
             //get the tile and set it as the tileinstance for the item
-            tempTile->SetTileInstance(layer->GetTileInstance());
-
-            int tileID = tempTile->GetTileInstance()->GetTileID();
+            tempTile->SetTile(layer->GetTileFromIterator());
 
             //update its Pixmap
             tempTile->SetTilePixmap(resourceManager->GetTilePixmap(tileID));

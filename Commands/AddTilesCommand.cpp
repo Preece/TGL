@@ -1,11 +1,12 @@
 #include "AddTilesCommand.h"
 
-AddTilesCommand::AddTilesCommand(TileLayerView *newLayer, int newX, int newY, int newT)
+AddTilesCommand::AddTilesCommand(TileLayer *newLayer, int newX, int newY, int newOX, int newOY)
 {
     layer = newLayer;
     x = newX;
     y = newY;
-    newType = newT;
+    newOriginX = newOX;
+    newOriginY = newOY;
 
     tile = NULL;
 }

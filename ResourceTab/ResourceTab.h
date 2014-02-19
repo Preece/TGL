@@ -9,6 +9,7 @@
 #include "../SpriteEditor/SpriteEditor.h"
 #include "../SpriteEditor/SpritesheetSelector.h"
 #include "TileWidgetItem.h"
+#include "../Model/Tile.h"
 #include "ImageViewer.h"
 #include "ImageListWidgetItem.h"
 #include "SpriteListWidgetItem.h"

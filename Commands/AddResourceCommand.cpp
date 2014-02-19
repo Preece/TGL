@@ -16,20 +16,12 @@ AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Image *> *res
     invertAdditions = false;
 }
 
-AddResourceCommand::AddResourceCommand(Savable *newResource, QList<TileLayerView *> *resources)
+AddResourceCommand::AddResourceCommand(Savable *newResource, QList<TileLayer *> *resources)
 {
     resource = newResource;
     resourceList = reinterpret_cast<QList<Savable*>* >(resources);
 
     invertAdditions = true;
-}
-
-AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Tile *> *resources)
-{
-    resource = newResource;
-    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
-
-    invertAdditions = false;
 }
 
 AddResourceCommand::~AddResourceCommand()

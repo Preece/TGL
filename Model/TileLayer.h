@@ -45,7 +45,7 @@ public:
     void ModifyTile(int x, int y, int oX, int oY);
 
     void ResetIterator() { iter = tiles.begin(); }
-    Tile *GetTileInstance() { return iter.value(); }
+    Tile *GetTileFromIterator() { return iter.value(); }
     void AdvanceIterator() { iter++; }
 
 private:
