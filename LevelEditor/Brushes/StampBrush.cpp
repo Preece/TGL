@@ -16,9 +16,9 @@ void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
     for(int i = 0; i < tiles.count(); i++)
     {
         if(preview)
-            layer->PreviewModifyTile(x + tiles[i].x, y + tiles[i].y, tiles[i].type);
+            layer->PreviewModifyTile(x + tiles[i].x, y + tiles[i].y, TileCoord(tiles[i].originX, tiles[i].originY));
         else
-            layer->ModifyTile(x + tiles[i].x, y + tiles[i].y, tiles[i].type);
+            layer->ModifyTile(x + tiles[i].x, y + tiles[i].y, TileCoord(tiles[i].originX, tiles[i].originY));
     }
 }
 

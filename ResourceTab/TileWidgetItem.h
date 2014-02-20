@@ -12,7 +12,7 @@ public:
     void SetTile(Tile *newTile) { tile = newTile; }
     Tile *GetTile() { return tile; }
 
-    void SetTilePixmap(QImage spritesheet, int originX, int originY);
+    void SetTilePixmap(QPixmap newPix);
     QPixmap GetTilePixmap();
 
     void SetIndex(int newIndex) { index = newIndex; }

@@ -24,7 +24,7 @@ public:
     void CreateGrid(QList<QGraphicsItem*> items, int w, int h);
 
 private:
-    QList<TilePos> tiles;
+    QList<Tile> tiles;
 };
 
 #endif // STAMPBRUSH_H

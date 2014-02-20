@@ -28,7 +28,7 @@ public:
     explicit BrushPropertiesWidget(QWidget *parent = 0);
     ~BrushPropertiesWidget();
 
-    void SetSelectedTileID(int newID);
+    void SetSelectedTileOrigin(TileCoord newOrigin);
 
     void SetCurrentBrush(int type);
     TileBrush *GetCurrentBrush() { return currentBrush; }

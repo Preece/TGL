@@ -1,7 +1,7 @@
 #include "TileBrush.h"
 
 int TileBrush::size = 1;
-int TileBrush::selectedTileID = 0;
+TileCoord TileBrush::selectedTileOrigin = TileCoord(-1, -1);
 
 TileBrush::TileBrush()
 {

@@ -24,13 +24,13 @@ public:
 
     void SetSize(int newSize) { size = newSize; }
     void SetOverwrite(bool over) { overwrite = over; }
-    void SetSelectedTileID(int newID) { selectedTileID = newID; }
+    void SetSelectedTileOrigin(TileCoord newOrigin) { selectedTileOrigin = newOrigin; }
 
 protected:
     static int size;
     bool overwrite;
 
-    static int selectedTileID;
+    static TileCoord selectedTileOrigin;
 
     QPoint lastPaintSpot;
     QPoint lastPreviewSpot;

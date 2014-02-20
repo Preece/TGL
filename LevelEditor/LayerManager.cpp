@@ -37,7 +37,7 @@ void LayerManager::EyedropTile(QPoint pos)
            tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
             return;
 
-        emit SelectNewTile(currentLayer->GetTileType(tileX, tileY));
+        emit SelectNewTile(currentLayer->GetTileOrigin(tileX, tileY));
     }
 }
 

@@ -42,7 +42,7 @@ void LineBrush::Release(int x, int y, TileLayerView *layer)
 void LineBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     //if no tile is selected, bail
-    if(selectedTileID == 0)
+    if(selectedTileOrigin == TileCoord(-1, -1))
         return;
 
     int radius = size;
@@ -55,13 +55,13 @@ void LineBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
         {
             if((i*i) + (j*j) < (radius * radius))
             {
-                if(layer->GetTileType(j + x, i + y) != selectedTileID)
-                    if(overwrite || layer->GetTileType(j + x, i + y) == 0)
+                if(layer->GetTileOrigin(j + x, i + y) != selectedTileOrigin)
+                    if(overwrite || layer->GetTileOrigin(j + x, i + y) == TileCoord(-1, -1))
                     {
                         if(preview)
-                            layer->PreviewModifyTile(j + x, i + y, selectedTileID);
+                            layer->PreviewModifyTile(j + x, i + y, selectedTileOrigin);
                         else
-                            layer->ModifyTile(j + x, i + y, selectedTileID);
+                            layer->ModifyTile(j + x, i + y, selectedTileOrigin);
                     }
             }
         }

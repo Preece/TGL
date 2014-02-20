@@ -38,7 +38,7 @@ public:
     int GetTileCount() { return tiles.count(); }
     Tile *GetTileAtIndex(int index);
     Tile *GetTileAtPos(int x, int y);
-    int GetTileType(int x, int y);
+    TileCoord GetTileOrigin(int x, int y);
 
     Tile *AddTile(int x = 0, int y = 0, int oX = 0, int oY = 0);
     void RemoveTile(int x, int y);

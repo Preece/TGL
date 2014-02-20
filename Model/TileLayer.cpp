@@ -40,9 +40,9 @@ Tile *TileLayer::GetTileAtPos(int x, int y)
     return tiles[TileCoord(x, y)];
 }
 
-int Layer::GetTileType(int x, int y)
+TileCoord TileLayer::GetTileOrigin(int x, int y)
 {
-    TileInstance *tempTile;
+    Tile *tempTile;
 
     //get the tile at that position
     tempTile = tiles[TileCoord(x, y)];
@@ -51,22 +51,23 @@ int Layer::GetTileType(int x, int y)
     if(tempTile == 0)
     {
         //so return nothing
-        return 0;
+        return TileCoord(0, 0);
     }
 
     //otherwise, return the ID of the tile
-    return tempTile->GetTileID();
+    return TileCoord(tempTile->originX, tempTile->originY);
 }
 
-Tile *TileLayer::AddTile(int x, int y, int ID)
+Tile *TileLayer::AddTile(int x, int y, int oX, int oY)
 {
     //create a new tile instance
-    TileInstance *tempTile = new TileInstance;
+    Tile *tempTile = new Tile;
 
     //fill out its values
-    tempTile->SetX(x);
-    tempTile->SetY(y);
-    tempTile->SetTileID(ID);
+    tempTile->x = x;
+    tempTile->y = y;
+    tempTile->originX = oX;
+    tempTile->originY = oY;
 
     //add it to the map of tiles
     tiles[TileCoord(x, y)] = tempTile;
@@ -77,45 +78,20 @@ Tile *TileLayer::AddTile(int x, int y, int ID)
 
 void TileLayer::RemoveTile(int x, int y)
 {
-    TileInstance *tempTile;
-
-    /*for(int i = 0; i < GetChildCount(); i++)
-    {
-        tempTile = static_cast<TileInstance*>(GetChildByIndex(i));
-
-        //if the tile exists at the specified position, change it
-        if(tempTile->GetX() == x && tempTile->GetY() == y)
-        {
-            RemoveChild(tempTile->GetID());
-            return;
-        }
-    }*/
-
     //remove the specified tile
     tiles.remove(TileCoord(x, y));
 }
 
-void TileLayer::ModifyTile(int x, int y, int ID)
+void TileLayer::ModifyTile(int x, int y, int oX, int oY)
 {
-    TileInstance *tempTile;
-
-    /*for(int i = 0; i < GetChildCount(); i++)
-    {
-        tempTile = static_cast<TileInstance*>(GetChildByIndex(i));
-
-        //if the tile exists at the specified position, change it
-        if(tempTile->GetX() == x && tempTile->GetY() == y)
-        {
-            tempTile->SetTileID(ID);
-            return;
-        }
-    }*/
+    Tile *tempTile;
 
     //if the tile they are trying to modify exists
     if(tiles[TileCoord(x, y)] != 0)
     {
         //access the pointer to it and change its tileID
         tempTile = tiles[TileCoord(x, y)];
-        tempTile->SetTileID(ID);
+        tempTile->originX = oX;
+        tempTile->originY = oY;
     }
 }

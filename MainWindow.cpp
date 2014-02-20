@@ -90,10 +90,16 @@ void MainWindow::on_actionProperties_triggered()
 
 void MainWindow::UpdateSelectedTile()
 {
+    //this function triggers when the tile selection changes
+
+    //if anything is selected
     if(tileSelector->selectedItems().count() > 0)
     {
+        //inform the layer manager
         layers->SetSelectedTile(GetSelectedTileItem());
-        ui->brushProperties->SetSelectedTileID(GetSelectedTileItem()->GetTileID());
+
+        //inform the brush properties widget
+        ui->brushProperties->SetSelectedTileOrigin(GetSelectedTileItem()->GetTileID());
     }
 }
 

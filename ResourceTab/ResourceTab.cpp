@@ -62,11 +62,7 @@ void ResourceTab::RepopulateTileSelector()
                     //copy the correct fragment of the image into a new TileItem
                     tempItem = new TileWidgetItem;
 
-                    //create and add the actual tile
-                    tempTile = resourceManager->GetTile(j, i);
-                    tempItem->SetTile(tempTile);
-
-                    tempItem->SetTilePixmap(*spritesheet, tileW, tileH);
+                    tempItem->SetTilePixmap(resourceManager->GetTilePixmap(i, j));
 
                     //add the tile item to the tile selector at (i * tilewidth) + i
                     tileSelector->addItem(tempItem);
@@ -307,31 +303,6 @@ void ResourceTab::on_selectTilesetButton_clicked()
 
             //store its ID as the image to be used as the tileset
             resourceManager->GetLevelProperties()->SetTilesetID(spritesheetWindow.GetSelectedImage()->GetID());
-
-            //create and store the Tiles
-            Tile *tempTile;
-            int sheetW = spritesheet->width() / resourceManager->GetLevelProperties()->GetTileWidth();
-            int sheetH = spritesheet->height() / resourceManager->GetLevelProperties()->GetTileHeight();
-
-            //if there are already tiles, get rid of em
-            if(resourceManager->GetTileCount() != 0)
-                resourceManager->ClearTiles();
-
-            resourceManager->BeginUndoOperation("Add Tiles");
-
-            for(int i = 0; i < sheetH; i++)
-            {
-                for(int j = 0; j < sheetW; j++)
-                {
-                    tempTile = new Tile;
-                    tempTile->SetOrigin(j, i);
-                    tempTile->SetTilesheetID(spritesheetWindow.GetSelectedImage()->GetID());
-
-                    resourceManager->AddTile(tempTile);
-                }
-            }
-
-            resourceManager->EndUndoOperation();
 
             //and repopulate the tile selector
             RepopulateTileSelector();

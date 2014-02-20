@@ -9,7 +9,7 @@ void ScatterBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 
     if(fill && !preview)
     {
-        int old = layer->GetTileType(x, y);
+        TileCoord old = layer->GetTileOrigin(x, y);
 
         Fill(x, y, GetRandomTile(0), old, layer);
 
@@ -26,7 +26,7 @@ void ScatterBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
         {
             if((i*i) + (j*j) < (radius * radius))
             {
-                if(overwrite || layer->GetTileType(j + x, i + y) == 0)
+                if(overwrite || layer->GetTileOrigin(j + x, i + y) == TileCoord(-1, -1))
                 {
                     if(preview)
                         layer->PreviewModifyTile(j + x, i + y, GetRandomTile(0));
@@ -47,12 +47,12 @@ ScatterBrush::~ScatterBrush()
 {
 }
 
-void ScatterBrush::Fill(int tileX, int tileY, int newTile, int oldTile, TileLayerView *newLayer)
+void ScatterBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileLayerView *newLayer)
 {
     //this is a recursive function. It calls itself in tiles to the north, east, south and west.
     //it will return if the tile is different from the one being replaced, or off the edge of the grid
 
-    if(!newLayer || newTile == 0 || newTile == oldTile)
+    if(!newLayer || newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
         return;
 
     //if the position is beyond the bounds of the scene, ignore it
@@ -62,15 +62,15 @@ void ScatterBrush::Fill(int tileX, int tileY, int newTile, int oldTile, TileLaye
            return;
 
     //if the current tile is of the type to be replaced
-    if(newLayer->GetTileType(tileX, tileY) == oldTile)
+    if(newLayer->GetTileOrigin(tileX, tileY) == oldOrigin)
     {
         //replace this tile with the new type
-        newLayer->ModifyTile(tileX, tileY, newTile);
+        newLayer->ModifyTile(tileX, tileY, newOrigin);
 
         //call this function on the surrounding tiles
-        Fill(tileX - 1, tileY, GetRandomTile(0), oldTile, newLayer);
-        Fill(tileX + 1, tileY, GetRandomTile(0), oldTile, newLayer);
-        Fill(tileX, tileY - 1, GetRandomTile(0), oldTile, newLayer);
-        Fill(tileX, tileY + 1, GetRandomTile(0), oldTile, newLayer);
+        Fill(tileX - 1, tileY, GetRandomTile(0), oldOrigin, newLayer);
+        Fill(tileX + 1, tileY, GetRandomTile(0), oldOrigin, newLayer);
+        Fill(tileX, tileY - 1, GetRandomTile(0), oldOrigin, newLayer);
+        Fill(tileX, tileY + 1, GetRandomTile(0), oldOrigin, newLayer);
     }
 }

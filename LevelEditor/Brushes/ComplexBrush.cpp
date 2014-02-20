@@ -21,32 +21,32 @@ void ComplexBrush::RemoveList(int index)
     lists.removeAt(index);
 }
 
-void ComplexBrush::AddTile(int listIndex, int type)
+void ComplexBrush::AddTile(int listIndex, TileCoord origin)
 {
     if(listIndex < 0 || listIndex >= lists.count())
         return;
 
-    lists[listIndex].append(type);
+    lists[listIndex].append(origin);
 }
 
-int ComplexBrush::GetTile(int listIndex, int tileIndex)
+TileCoord ComplexBrush::GetTile(int listIndex, int tileIndex)
 {
     if(listIndex < 0 || listIndex >= lists.count())
-        return -1;
+        return TileCoord(-1, -1);
 
     if(tileIndex < 0 || tileIndex >= lists[listIndex].count())
-        return -1;
+        return TileCoord(-1, -1);
 
     return lists[listIndex][tileIndex];
 }
 
-int ComplexBrush::GetRandomTile(int listIndex)
+TileCoord ComplexBrush::GetRandomTile(int listIndex)
 {
     if(listIndex < 0 || listIndex >= lists.count())
-        return -1;
+        return TileCoord(-1, -1);
 
     if(lists[listIndex].count() == 0)
-        return -1;
+        return TileCoord(-1, -1);
 
     int rand = qrand() % (lists[listIndex].count());
 
@@ -83,14 +83,14 @@ bool ComplexBrush::IsListEmpty(int listIndex)
     return false;
 }
 
-bool ComplexBrush::ListContainsTile(int listIndex, int type)
+bool ComplexBrush::ListContainsTile(int listIndex, TileCoord origin)
 {
     if(listIndex < 0 || listIndex >= lists.count())
         return false;
 
     for(int i = 0; i < lists[listIndex].count(); i++)
     {
-        if(lists[listIndex][i] == type)
+        if(lists[listIndex][i] == origin)
             return true;
     }
 

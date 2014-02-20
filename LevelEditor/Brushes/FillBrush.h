@@ -11,14 +11,14 @@ public:
     void Move(int x, int y, TileLayerView *layer);
 
     void Paint(int x, int y, TileLayerView *layer, bool preview = false);
-    void Fill(int tileX, int tileY, int newTile, int oldTile, TileLayerView *newLayer);
+    void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileLayerView *newLayer);
 
     QString GetType() { return "fill"; }
 
-    void SetSelectedTileID(int newID) { selectedTileID = newID; }
+    void SetSelectedTileOrigin(TileCoord newOrigin) { selectedTileOrigin = newOrigin; }
 
 private:
-    int selectedTileID;
+    TileCoord selectedTileOrigin;
 };
 
 #endif // FILLBRUSH_H

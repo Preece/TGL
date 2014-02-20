@@ -30,22 +30,22 @@ void MatrixBrush::Rect(int x, int y, int w, int h, TileLayerView *layer, bool pr
     //paint around the edges
     for(signed int i = -1; i <= w; i++)
     {
-        if(!ListContainsTile(4, layer->GetTileType(x + i, currentRect.top() - 1)))
+        if(!ListContainsTile(4, layer->GetTileOrigin(x + i, currentRect.top() - 1)))
             ContextPaintTile(x + i, currentRect.top() - 1, layer, preview);
 
         //bottom
-        if(!ListContainsTile(4, layer->GetTileType(x + i, currentRect.bottom() + 1)))
+        if(!ListContainsTile(4, layer->GetTileOrigin(x + i, currentRect.bottom() + 1)))
             ContextPaintTile(x + i, currentRect.bottom() + 1, layer, preview);
     }
 
     for(signed int i = -1; i <= h; i++)
     {
         //left
-        if(!ListContainsTile(4, layer->GetTileType(currentRect.left() - 1, y + i)))
+        if(!ListContainsTile(4, layer->GetTileOrigin(currentRect.left() - 1, y + i)))
             ContextPaintTile(currentRect.left() - 1, y + i, layer, preview);
 
         //right
-        if(!ListContainsTile(4, layer->GetTileType(currentRect.right() + 1, y + i)))
+        if(!ListContainsTile(4, layer->GetTileOrigin(currentRect.right() + 1, y + i)))
             ContextPaintTile(currentRect.right() + 1, y + i, layer, preview);
     }
 }

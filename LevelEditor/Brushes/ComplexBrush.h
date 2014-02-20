@@ -5,7 +5,9 @@
 
 #include "TileBrush.h"
 
-typedef QList<int> TileList;
+typedef QList<TileCoord> TileList;
+
+
 
 class ComplexBrush : public TileBrush
 {
@@ -18,14 +20,14 @@ public:
     void AddList(int count = 1);
     void RemoveList(int index);
 
-    void AddTile(int listIndex, int type);
-    int GetTile(int listIndex, int tileIndex);
-    int GetRandomTile(int listIndex);
+    void AddTile(int listIndex, TileCoord origin);
+    TileCoord GetTile(int listIndex, int tileIndex);
+    TileCoord GetRandomTile(int listIndex);
     int GetTileCount(int listIndex);
     void RemoveTile(int listIndex, int tileIndex);
     bool IsListEmpty(int listIndex);
 
-    bool ListContainsTile(int listIndex, int type);
+    bool ListContainsTile(int listIndex, TileCoord origin);
 
 private:
     QList<TileList> lists;

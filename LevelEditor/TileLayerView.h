@@ -16,12 +16,15 @@ public:
     void SetLayer(TileLayer *newLayer) { layer = newLayer; }
     TileLayer *GetLayer() { return layer; }
 
-    void ModifyTile(int x, int y, int newType);
-    void PreviewModifyTile(int x, int y, int newType);
+    void AddTileWidgetItem(Tile *newTile);
+    void ModifyTile(int x, int y, TileCoord newOrigin);
+    void PreviewModifyTile(int x, int y, TileCoord newOrigin);
     void ClearPreview();
     Tile *GetTile(int x, int y);
 
-    int GetTileType(int x, int y);
+    TileWidgetItem *GetTileWidgetItem(int x, int y);
+
+    TileCoord GetTileOrigin(int x, int y);
     void SetLayerSize(int w, int h);
 
     void ToggleVisibility(bool visible);

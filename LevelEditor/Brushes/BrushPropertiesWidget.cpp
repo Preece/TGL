@@ -203,10 +203,10 @@ void BrushPropertiesWidget::DestroyBrushes()
     matrix.clear();
 }
 
-void BrushPropertiesWidget::SetSelectedTileID(int newID)
+void BrushPropertiesWidget::SetSelectedTileOrigin(TileCoord newOrigin)
 {
-    pencil.SetSelectedTileID(newID);
-    bucket.SetSelectedTileID(newID);
+    pencil.SetSelectedTileOrigin(newOrigin);
+    bucket.SetSelectedTileOrigin(newOrigin);
 }
 
 void BrushPropertiesWidget::on_overwriteCheckbox_toggled(bool checked)

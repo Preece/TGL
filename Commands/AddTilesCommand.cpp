@@ -19,5 +19,5 @@ void AddTilesCommand::undo()
 
 void AddTilesCommand::redo()
 {
-    tile = layer->AddTile(x, y, newType);
+    tile = layer->AddTile(x, y, newOriginX, newOriginY);
 }

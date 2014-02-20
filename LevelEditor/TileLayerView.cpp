@@ -11,15 +11,32 @@ TileLayerView::~TileLayerView()
     DestroyAllItems();
 }
 
+void TileLayerView::AddTileWidgetItem(Tile *newTile)
+{
+    if(newTile == NULL)
+        return;
+
+    TileWidgetItem *tempTileItem = new TileWidgetItem;
+
+    int tileW, tileH;
+    tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+    tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+    //get the tile and set it as the tileinstance for the item
+    tempTileItem->SetTile(newTile);
+
+    //update its Pixmap
+    tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newTile->originX, newTile->originY));
+
+    //set the position
+    tempTileItem->setPos(newTile->x * tileW, newTile->y * tileH);
+
+    items.append(tempTileItem);
+    tempTileItem->setParentItem(this);
+}
+
 void TileLayerView::SetLayerSize(int w, int h)
 {
-    //if the new size is the same as the current size
-    if(width == w && height == h)
-    {
-        //nothing needs to be done
-        return;
-    }
-
     width = w;
     height = h;
 }
@@ -61,28 +78,16 @@ void TileLayerView::RepopulateTiles()
     }
 
     items.clear();
+
     layer->ResetIterator();
 
     //loop through all the tile instances in the model
     for(int i = 0; i < layer->GetTileCount(); i++)
     {
-        TileWidgetItem *tempTile = new TileWidgetItem;
-
         //if the tile we want is valid
         if(layer->GetTileFromIterator() != 0)
         {
-            //get the tile and set it as the tileinstance for the item
-            tempTile->SetTile(layer->GetTileFromIterator());
-
-            //update its Pixmap
-            tempTile->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
-
-            //set the position
-            tempTile->setPos(tempTile->GetTileInstance()->GetX() * resourceManager->GetLevelProperties()->GetTileWidth(),
-                            tempTile->GetTileInstance()->GetY() * resourceManager->GetLevelProperties()->GetTileHeight());
-
-            items.append(tempTile);
-            tempTile->setParentItem(this);
+            AddTileWidgetItem(layer->GetTileFromIterator());
         }
 
         //advance the iterator
@@ -90,71 +95,43 @@ void TileLayerView::RepopulateTiles()
     }
 }
 
-void TileLayerView::RepopulateObjects()
-{
-}
-
-void TileLayerView::ModifyTile(int x, int y, int newType)
+void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
 {
     //bounds check
     if(x >= width || y >= height || x < 0 || y < 0)
         return;
 
-    int oldType = layer->GetTileType(x, y);
+    Tile *tempTile = layer->GetTileAtPos(x, y);
+
     //if there is not a tile at this position
-    if(oldType == 0 && newType != 0)
+    if(tempTile == 0)
     {
-        TileInstanceItem *tempTile = new TileInstanceItem;
-
-        //add a tile to the model, and set it as the tileinstance for the item
-        tempTile->SetTileInstance(resourceManager->AddTileInstance(layer, x, y, newType));
-
-        int tileID = tempTile->GetTileInstance()->GetTileID();
-
-        //update its Pixmap
-        tempTile->SetTilePixmap(resourceManager->GetTilePixmap(tileID));
-
-        //set the position
-        tempTile->setPos(x * resourceManager->GetLevelProperties()->GetTileWidth(),
-                         y * resourceManager->GetLevelProperties()->GetTileHeight());
-
-        items.append(tempTile);
-        tempTile->setParentItem(this);
+        //add a new one
+        AddTileWidgetItem(layer->AddTile(x, y, newOrigin.first, newOrigin.second));
     }
     //if a tile already exists at this position
     else
     {
-        //and the new type is not 0
-        if(newType != 0 && oldType != newType)
-        {
-            resourceManager->ModifyTileInstance(layer, x, y, newType, oldType);
+        //modify the tile origin values
+        tempTile->originX = newOrigin.first;
+        tempTile->originY = newOrigin.second;
 
-            //update its Pixmap
-            GetTileInstanceItem(x, y)->SetTilePixmap(resourceManager->GetTilePixmap(newType));
-        }
-        //if the new type is 0
-        else if(newType == 0)
-        {
-            //delete the tile and remove it from the layer model
-            //int oldID = items[pos]->GetTileInstance()->GetID();
-            //layer->RemoveChild(oldID);
-
-            //delete items[pos];
-            //items[pos] = NULL;
-        }
+        //and change its pixmap
+        //THIS IS NOT FINAL. WAY TOO INEFFICIENT. USE ANOTHER QMAP FOR THE TILEWIDGETITEMS
+        RepopulateTiles();
     }
 }
 
-void TileLayerView::PreviewModifyTile(int x, int y, int newType)
+void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
 {
     //bounds check
     if(x >= width || y >= height || x < 0 || y < 0)
         return;
 
-    TileInstanceItem *tempTile = new TileInstanceItem;
+    TileWidgetItem *tempTile = new TileWidgetItem;
 
     //update its Pixmap
-    tempTile->SetTilePixmap(resourceManager->GetTilePixmap(newType));
+    tempTile->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin.first, newOrigin.second));
 
     //set the position
     tempTile->setPos(x * resourceManager->GetLevelProperties()->GetTileWidth(),
@@ -174,22 +151,22 @@ void TileLayerView::ClearPreview()
     previewItems.clear();
 }
 
-TileInstanceItem *TileLayerView::GetTileInstanceItem(int x, int y)
+TileWidgetItem *TileLayerView::GetTileWidgetItem(int x, int y)
 {
     for(int i = 0; i < items.count(); i++)
     {
-        if(items[i]->GetTileInstance()->GetX() == x && items[i]->GetTileInstance()->GetY() == y)
+        if(items[i]->GetTile()->x == x && items[i]->GetTile()->y == y)
             return items[i];
     }
 
     return NULL;
 }
 
-int TileLayerView::GetTileType(int x, int y)
+TileCoord TileLayerView::GetTileOrigin(int x, int y)
 {
     //bounds check
     if(x >= width || y >= height || x < 0 || y < 0)
-        return 0;
+        return TileCoord(-1, -1);
 
-    return layer->GetTileType(x, y);
+    return layer->GetTileOrigin(x, y);
 }

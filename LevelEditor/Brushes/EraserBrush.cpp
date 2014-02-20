@@ -19,8 +19,8 @@ void EraserBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
         {
             if((i*i) + (j*j) < radius * radius)
             {
-                if(layer->GetTileType(j + x, i + y) != 0)
-                    layer->ModifyTile(j + x, i + y, 0);
+                if(layer->GetTileOrigin(j + x, i + y) != TileCoord(-1, -1))
+                    layer->ModifyTile(j + x, i + y, TileCoord(-1, -1));
             }
         }
     }

@@ -6,17 +6,9 @@ TileWidgetItem::TileWidgetItem()
     index = 0;
 }
 
-void TileWidgetItem::SetTilePixmap(QImage spritesheet, int originX, int originY)
+void TileWidgetItem::SetTilePixmap(QPixmap newPix)
 {
-    //if the tile is not set, abort
-    if(!tile)
-        return;
-
-    //create an image from the tileset, representing this single tile
-    QImage tempImage;
-    tempImage = spritesheet.copy((originX * w), (originY * h), w, h);
-
-    setPixmap(QPixmap::fromImage(tempImage));
+    setPixmap(newPix);
 }
 
 QPixmap TileWidgetItem::GetTilePixmap()

@@ -21,7 +21,7 @@ void ReplacerBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
             if((i*i) + (j*j) < (radius * radius))
             {
                 //if the tile exists in the dirty list
-                if(ListContainsTile(1, layer->GetTileType(j + x, i + y)))
+                if(ListContainsTile(1, layer->GetTileOrigin(j + x, i + y)))
                 {
                     //draw a tile from the clean list
                     if(preview)
