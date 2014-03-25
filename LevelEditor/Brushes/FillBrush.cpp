@@ -39,7 +39,7 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
     if(newLayer->GetTileOrigin(tileX, tileY) == oldOrigin)
     {
         //replace this tile with the new type
-        newLayer->ModifyTile(tileX, tileY, newOrigin.first, newOrigin.second);
+        newLayer->ModifyTile(tileX, tileY, newOrigin);
 
         //call this function on the surrounding tiles
         Fill(tileX - 1, tileY, newOrigin, oldOrigin, newLayer);

@@ -99,7 +99,7 @@ void BrushPropertiesWindow::on_addTile_clicked()
 {
     if(currentBrush)
     {
-        currentBrush->AddTile(currentListIndex, GetSelectedTileID());
+        currentBrush->AddTile(currentListIndex, GetSelectedTileOrigin());
         RepopulateTileList();
     }
 }
@@ -115,17 +115,17 @@ bool BrushPropertiesWindow::IsTileSelected()
     return false;
 }
 
-int BrushPropertiesWindow::GetSelectedTileID()
+TileCoord BrushPropertiesWindow::GetSelectedTileOrigin()
 {
     if(IsTileSelected())
     {
         TileWidgetItem *tempItem = dynamic_cast<TileWidgetItem*>(tileSelector->selectedItems()[0]);
 
         if(tempItem)
-            return tempItem->GetTileID();
+            return tempItem->GetTileOrigin();
     }
 
-    return 0;
+    return TileCoord(-1, -1);
 }
 
 TileWidgetItem *BrushPropertiesWindow::GetSelectedTile()
@@ -138,12 +138,11 @@ TileWidgetItem *BrushPropertiesWindow::GetSelectedTile()
     return NULL;
 }
 
-TileWidgetItem *BrushPropertiesWindow::GetTileFromID(int ID)
+TileWidgetItem *BrushPropertiesWindow::GetTileFromOrigin(TileCoord coord)
 {
     TileWidgetItem *tempItem = new TileWidgetItem;
 
-    tempItem->SetTile(resourceManager->GetTile(ID));
-    tempItem->setPixmap(resourceManager->GetTilePixmap(ID));
+    tempItem->setPixmap(resourceManager->GetTilePixmap(coord.first, coord.second));
 
     return tempItem;
 }
@@ -180,7 +179,7 @@ void BrushPropertiesWindow::RepopulateTileList()
         for(int i = 0; i < currentBrush->GetTileCount(currentListIndex); i++)
         {
             //create a visible item for each one, and set its position
-            TileWidgetItem *tempItem = GetTileFromID(currentBrush->GetTile(currentListIndex, i));
+            TileWidgetItem *tempItem = GetTileFromOrigin(currentBrush->GetTile(currentListIndex, i));
             tempItem->setPos((i * resourceManager->GetLevelProperties()->GetTileWidth()) + i, 0);
             tempItem->setFlag(QGraphicsItem::ItemIsSelectable);
             tempItem->SetIndex(i);

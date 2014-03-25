@@ -37,9 +37,9 @@ public:
     void ShowMatrixControls();
 
     bool IsTileSelected();
-    int GetSelectedTileID();
+    TileCoord GetSelectedTileOrigin();
     TileWidgetItem *GetSelectedTile();
-    TileWidgetItem *GetTileFromID(int ID);
+    TileWidgetItem *GetTileFromOrigin(TileCoord coord);
 
     bool IsListTileSelected();
     int GetSelectedListTileIndex();

@@ -29,9 +29,9 @@ void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
                     if(overwrite || layer->GetTileOrigin(j + x, i + y) == TileCoord(-1, -1))
                     {
                         if(preview)
-                            layer->PreviewModifyTile(j + x, i + y, selectedTileOrigin.first, selectedTileOrigin.second);
+                            layer->PreviewModifyTile(j + x, i + y, selectedTileOrigin);
                         else
-                            layer->ModifyTile(j + x, i + y, selectedTileOrigin.first, selectedTileOrigin.second);
+                            layer->ModifyTile(j + x, i + y, selectedTileOrigin);
                     }
             }
         }

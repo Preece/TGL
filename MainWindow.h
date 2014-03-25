@@ -60,7 +60,7 @@ private slots:
 
     void on_pencilTool_clicked();
 
-    void SelectNewTile(int ID);
+    void SelectNewTile(TileCoord origin);
 
     void on_bucketTool_clicked();
 

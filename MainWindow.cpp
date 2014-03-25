@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     UpdateToolSelection();
 
-    connect(layers, SIGNAL(SelectNewTile(int)), this, SLOT(SelectNewTile(int)));
+    connect(layers, SIGNAL(SelectNewTile(TileCoord)), this, SLOT(SelectNewTile(TileCoord)));
 
     //change the cursor
     QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
@@ -99,7 +99,7 @@ void MainWindow::UpdateSelectedTile()
         layers->SetSelectedTile(GetSelectedTileItem());
 
         //inform the brush properties widget
-        ui->brushProperties->SetSelectedTileOrigin(GetSelectedTileItem()->GetTileID());
+        ui->brushProperties->SetSelectedTileOrigin(GetSelectedTileItem()->GetTileOrigin());
     }
 }
 
@@ -153,13 +153,13 @@ void MainWindow::on_addLayerButton_clicked()
         layerPropertiesWindow = new LayerProperties;
     }
 
-    Layer *newLayer = new Layer;
+    TileLayer *newLayer = new TileLayer;
 
     layerPropertiesWindow->NewLayer(newLayer);
 
     if(layerPropertiesWindow->exec() == QDialog::Accepted)
     {
-        resources->AddLayer(newLayer);
+        resources->AddTileLayer(newLayer);
         layers->AddLayer(newLayer);
 
         layers->UpdateLayerOpacity(newLayer);
@@ -203,21 +203,14 @@ void MainWindow::on_pencilTool_clicked()
     ui->levelView->setCursor(tempCur);
 }
 
-void MainWindow::SelectNewTile(int ID)
+void MainWindow::SelectNewTile(TileCoord origin)
 {
     int tileW = resources->GetLevelProperties()->GetTileWidth();
     int tileH = resources->GetLevelProperties()->GetTileHeight();
 
-    //get a tile based on the given ID
-    Tile *tempTile = resources->GetTile(ID);
-
-    //if the tile doesn't exist, bail
-    if(!tempTile)
-        return;
-
     //find the x and y position of the tile
-    int tileX = (tileW * tempTile->GetXOrigin()) + tileW - 1;
-    int tileY = (tileH * tempTile->GetYOrigin()) + tileH - 1;
+    int tileX = (tileW * origin.first) + tileW - 1;
+    int tileY = (tileH * origin.second) + tileH - 1;
 
     tileSelector->clearSelection();
 
@@ -259,7 +252,7 @@ void MainWindow::on_editLayerButton_clicked()
 
     if(IsLayerSelected())
     {
-        Layer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
+        TileLayer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
 
         if(tempLayer)
         {
@@ -277,7 +270,7 @@ void MainWindow::on_deleteLayerButton_clicked()
 {
     if(IsLayerSelected())
     {
-        Layer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
+        TileLayer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
 
         if(tempLayer)
         {

@@ -59,10 +59,20 @@ void ResourceTab::RepopulateTileSelector()
                 //loop for the height of the spritesheet divided by the height of a tile
                 for(int j = 0; j < imageW; j++)
                 {
-                    //copy the correct fragment of the image into a new TileItem
                     tempItem = new TileWidgetItem;
 
+                    //copy the correct fragment of the image into a new TileItem
                     tempItem->SetTilePixmap(resourceManager->GetTilePixmap(i, j));
+
+                    //create a tile with the correct origin points, and add it in
+                    //the x and y and -1 to indicate that this doesnt exist in the tile
+                    //grid, only in the selector pane
+                    tempTile = new Tile();
+                    tempTile->originX = i;
+                    tempTile->originY = j;
+                    tempTile->x = -1;
+                    tempTile->y = -1;
+                    tempItem->SetTile(tempTile);
 
                     //add the tile item to the tile selector at (i * tilewidth) + i
                     tileSelector->addItem(tempItem);

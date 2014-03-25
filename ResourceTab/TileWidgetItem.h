@@ -8,6 +8,7 @@ class TileWidgetItem : public QGraphicsPixmapItem
 {
 public:
     TileWidgetItem();
+    ~TileWidgetItem();
 
     void SetTile(Tile *newTile) { tile = newTile; }
     Tile *GetTile() { return tile; }
@@ -17,6 +18,8 @@ public:
 
     void SetIndex(int newIndex) { index = newIndex; }
     int GetIndex() { return index; }
+
+    TileCoord GetTileOrigin();
 
 private:
     Tile *tile;
