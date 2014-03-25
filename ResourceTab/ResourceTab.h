@@ -58,7 +58,6 @@ private slots:
 
     void on_selectTilesetButton_clicked();
 
-
 signals:
     void NewSpriteButtonClicked();
 
