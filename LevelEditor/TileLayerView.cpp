@@ -2,8 +2,8 @@
 
 TileLayerView::TileLayerView()
 {
-    width = 0;
-    height = 0;
+    widthInTiles = 0;
+    heightInTiles = 0;
 }
 
 TileLayerView::~TileLayerView()
@@ -31,14 +31,15 @@ void TileLayerView::AddTileWidgetItem(Tile *newTile)
     //set the position
     tempTileItem->setPos(newTile->x * tileW, newTile->y * tileH);
 
-    items.append(tempTileItem);
+    //put the new tile item into the map, with the new tiles position as the key
+    items[TileCoord(newTile->x, newTile->y)] = tempTileItem;
     tempTileItem->setParentItem(this);
 }
 
 void TileLayerView::SetLayerSize(int w, int h)
 {
-    width = w;
-    height = h;
+    widthInTiles = w;
+    heightInTiles = h;
 }
 
 void TileLayerView::ToggleVisibility(bool visible)
@@ -51,9 +52,15 @@ void TileLayerView::ToggleVisibility(bool visible)
 
 void TileLayerView::DestroyAllItems()
 {
-    for(int i = 0; i < items.count(); i++)
+    //iterate through all elements in the map, and delete the tilewidgets
+    QMap<TileCoord, TileWidgetItem*>::const_iterator i = items.constBegin();
+
+    while (i != items.constEnd())
     {
-        delete items[i];
+        if(i.value())
+            delete i.value();
+
+        i++;
     }
 
     items.clear();
@@ -69,15 +76,7 @@ void TileLayerView::DestroyAllItems()
 void TileLayerView::RepopulateTiles()
 {
     //clear out all the tiles
-    for(int i = 0; i < items.count(); i++)
-    {
-        if(items[i])
-            delete items[i];
-
-        items[i] = NULL;
-    }
-
-    items.clear();
+    DestroyAllItems();
 
     layer->ResetIterator();
 
@@ -98,7 +97,7 @@ void TileLayerView::RepopulateTiles()
 void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
 {
     //bounds check
-    if(x >= width || y >= height || x < 0 || y < 0)
+    if(x >= widthInTiles || y >= heightInTiles || x < 0 || y < 0)
         return;
 
     Tile *tempTile = layer->GetTileAtPos(x, y);
@@ -117,15 +116,20 @@ void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
         tempTile->originY = newOrigin.second;
 
         //and change its pixmap
+        TileWidgetItem *tempTileItem = items[TileCoord(x, y)];
+
+        if(tempTileItem)
+            tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin.first, newOrigin.second))
+                    ;
         //THIS IS NOT FINAL. WAY TOO INEFFICIENT. USE ANOTHER QMAP FOR THE TILEWIDGETITEMS
-        RepopulateTiles();
+        //RepopulateTiles();
     }
 }
 
 void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
 {
     //bounds check
-    if(x >= width || y >= height || x < 0 || y < 0)
+    if(x >= widthInTiles || y >= heightInTiles || x < 0 || y < 0)
         return;
 
     TileWidgetItem *tempTile = new TileWidgetItem;
@@ -153,19 +157,13 @@ void TileLayerView::ClearPreview()
 
 TileWidgetItem *TileLayerView::GetTileWidgetItem(int x, int y)
 {
-    for(int i = 0; i < items.count(); i++)
-    {
-        if(items[i]->GetTile()->x == x && items[i]->GetTile()->y == y)
-            return items[i];
-    }
-
-    return NULL;
+    return items[TileCoord(x, y)];
 }
 
 TileCoord TileLayerView::GetTileOrigin(int x, int y)
 {
     //bounds check
-    if(x >= width || y >= height || x < 0 || y < 0)
+    if(x >= widthInTiles || y >= heightInTiles || x < 0 || y < 0)
         return TileCoord(-1, -1);
 
     return layer->GetTileOrigin(x, y);

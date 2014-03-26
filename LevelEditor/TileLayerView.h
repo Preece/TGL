@@ -29,8 +29,8 @@ public:
 
     void ToggleVisibility(bool visible);
 
-    int GetLayerWidth() { return width; }
-    int GetLayerHeight() { return height; }
+    int GetLayerWidth() { return widthInTiles; }
+    int GetLayerHeight() { return heightInTiles; }
 
     void DestroyAllItems();
 
@@ -39,8 +39,8 @@ public:
 
 
 private:
-    QList<TileWidgetItem*> items;
-    int width, height;
+    QMap<TileCoord, TileWidgetItem*> items;
+    int widthInTiles, heightInTiles;
 
     QList<TileWidgetItem*> previewItems;
 
