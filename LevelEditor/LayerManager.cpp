@@ -217,7 +217,6 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         resourceManager->EndUndoOperation();
         currentBrush->Release(tileX, tileY, currentLayer);
-        currentLayer->RepopulateTiles();
     }
 }
 

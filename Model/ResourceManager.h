@@ -42,7 +42,7 @@ public slots:
 
     QPixmap GetSpriteSymbol(int spriteID);
     QImage *GetTileset();
-    QPixmap GetTilePixmap(int oX, int oY);
+    QPixmap GetTilePixmap(TileCoord coord);
 
     void AddTileLayer(TileLayer *newLayer);
     void DeleteTileLayer(int ID);

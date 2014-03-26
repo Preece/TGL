@@ -135,7 +135,7 @@ QImage *ResourceManager::GetTileset()
     return GetImage(levelProperties.GetTilesetID())->GetImage();
 }
 
-QPixmap ResourceManager::GetTilePixmap(int oX, int oY)
+QPixmap ResourceManager::GetTilePixmap(TileCoord coord)
 {
     //commented out for refactoring
 
@@ -145,7 +145,7 @@ QPixmap ResourceManager::GetTilePixmap(int oX, int oY)
     if(tempImage.isNull())
         return QPixmap();
 
-    tempImage = tempImage.copy(levelProperties.GetTileWidth() * oX, levelProperties.GetTileHeight() * oY, levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
+    tempImage = tempImage.copy(levelProperties.GetTileWidth() * coord.first, levelProperties.GetTileHeight() * coord.second, levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
 
     return QPixmap::fromImage(tempImage);
 }

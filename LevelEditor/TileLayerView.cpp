@@ -26,7 +26,7 @@ void TileLayerView::AddTileWidgetItem(Tile *newTile)
     tempTileItem->SetTile(newTile);
 
     //update its Pixmap
-    tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newTile->originX, newTile->originY));
+    tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(TileCoord(newTile->originX, newTile->originY)));
 
     //set the position
     tempTileItem->setPos(newTile->x * tileW, newTile->y * tileH);
@@ -119,10 +119,8 @@ void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
         TileWidgetItem *tempTileItem = items[TileCoord(x, y)];
 
         if(tempTileItem)
-            tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin.first, newOrigin.second))
-                    ;
-        //THIS IS NOT FINAL. WAY TOO INEFFICIENT. USE ANOTHER QMAP FOR THE TILEWIDGETITEMS
-        //RepopulateTiles();
+            tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
+
     }
 }
 
@@ -135,7 +133,7 @@ void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
     TileWidgetItem *tempTile = new TileWidgetItem;
 
     //update its Pixmap
-    tempTile->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin.first, newOrigin.second));
+    tempTile->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
 
     //set the position
     tempTile->setPos(x * resourceManager->GetLevelProperties()->GetTileWidth(),

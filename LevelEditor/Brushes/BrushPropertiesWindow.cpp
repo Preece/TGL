@@ -142,7 +142,7 @@ TileWidgetItem *BrushPropertiesWindow::GetTileFromOrigin(TileCoord coord)
 {
     TileWidgetItem *tempItem = new TileWidgetItem;
 
-    tempItem->setPixmap(resourceManager->GetTilePixmap(coord.first, coord.second));
+    tempItem->setPixmap(resourceManager->GetTilePixmap(coord));
 
     return tempItem;
 }
