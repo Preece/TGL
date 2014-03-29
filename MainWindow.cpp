@@ -128,6 +128,8 @@ void MainWindow::RepopulateLayerSelector()
         tempItem->setCheckState(Qt::Checked);
 
         ui->layerSelector->addItem(tempItem);
+
+        //select the latest added layer, in the layer manager and the list view
         ui->layerSelector->setItemSelected(tempItem, true);
         layers->SetLayerSelection(i);
     }
@@ -148,18 +150,25 @@ void MainWindow::on_gridToggle_toggled(bool checked)
 
 void MainWindow::on_addLayerButton_clicked()
 {
+    //if the layer properties window has not yet been created
     if(layerPropertiesWindow == NULL)
     {
+        //create it
         layerPropertiesWindow = new LayerProperties;
     }
 
+    //then create a new tile layer for the model
     TileLayer *newLayer = new TileLayer;
 
+    //and pass the new tile layer model into the editor window
     layerPropertiesWindow->NewLayer(newLayer);
 
+    //execute the window, and check if the changes were accepted
     if(layerPropertiesWindow->exec() == QDialog::Accepted)
     {
+        //if so add the new layer to the model
         resources->AddTileLayer(newLayer);
+        //and give a reference to the layer manager
         layers->AddLayer(newLayer);
 
         layers->UpdateLayerOpacity(newLayer);
