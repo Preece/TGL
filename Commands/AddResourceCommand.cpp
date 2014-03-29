@@ -1,25 +1,25 @@
 #include "AddResourceCommand.h"
 
-AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Sprite*> *resources)
+AddResourceCommand::AddResourceCommand(ItemNode *newResource, QList<Sprite*> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
+    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
 
     invertAdditions = false;
 }
 
-AddResourceCommand::AddResourceCommand(Savable *newResource, QList<Image *> *resources)
+AddResourceCommand::AddResourceCommand(ItemNode *newResource, QList<Image *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
+    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
 
     invertAdditions = false;
 }
 
-AddResourceCommand::AddResourceCommand(Savable *newResource, QList<TileLayer *> *resources)
+AddResourceCommand::AddResourceCommand(ItemNode *newResource, QList<TileLayer *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<Savable*>* >(resources);
+    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
 
     invertAdditions = true;
 }

@@ -3,7 +3,7 @@
 
 #include <QUndoCommand>
 
-#include "../Model/Savable.h"
+#include "../Model/ItemNode.h"
 #include "../Model/Sprite.h"
 #include "../Model/Image.h"
 #include "../Model/TileLayer.h"
@@ -11,9 +11,9 @@
 class DeleteResourceCommand : public QUndoCommand
 {
 public:
-    DeleteResourceCommand(Savable *newResource, QList<Sprite*> *resources);
-    DeleteResourceCommand(Savable *newResource, QList<Image*> *resources);
-    DeleteResourceCommand(Savable *newResource, QList<TileLayer*> *resources);
+    DeleteResourceCommand(ItemNode *newResource, QList<Sprite*> *resources);
+    DeleteResourceCommand(ItemNode *newResource, QList<Image*> *resources);
+    DeleteResourceCommand(ItemNode *newResource, QList<TileLayer*> *resources);
     ~DeleteResourceCommand();
 
     virtual void undo();
@@ -22,8 +22,8 @@ public:
     bool ListContainsResource();
 
 private:
-    Savable *resource;
-    QList<Savable*> *resourceList;
+    ItemNode *resource;
+    QList<ItemNode*> *resourceList;
 };
 
 #endif // DELETERESOURCECOMMAND_H

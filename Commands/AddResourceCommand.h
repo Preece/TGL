@@ -3,7 +3,7 @@
 
 #include <QUndoCommand>
 
-#include "../Model/Savable.h"
+#include "../Model/ItemNode.h"
 #include "../Model/Sprite.h"
 #include "../Model/Image.h"
 #include "../Model/TileLayer.h"
@@ -11,9 +11,9 @@
 class AddResourceCommand : public QUndoCommand
 {
 public:
-    AddResourceCommand(Savable *newResource, QList<Sprite*> *resources);
-    AddResourceCommand(Savable *newResource, QList<Image*> *resources);
-    AddResourceCommand(Savable *newResource, QList<TileLayer*> *resources);
+    AddResourceCommand(ItemNode *newResource, QList<Sprite*> *resources);
+    AddResourceCommand(ItemNode *newResource, QList<Image*> *resources);
+    AddResourceCommand(ItemNode *newResource, QList<TileLayer*> *resources);
 
     ~AddResourceCommand();
 
@@ -23,8 +23,8 @@ public:
     bool ListContainsResource();
 
 private:
-    Savable *resource;
-    QList<Savable*> *resourceList;
+    ItemNode *resource;
+    QList<ItemNode*> *resourceList;
 
     bool invertAdditions;
 };

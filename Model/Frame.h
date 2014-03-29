@@ -5,9 +5,9 @@
 #include <QPoint>
 #include <QList>
 
-#include "Savable.h"
+#include "ItemNode.h"
 
-class Frame : public Savable
+class Frame : public ItemNode
 {
 public:
     bool Export(Exporter *exporter);

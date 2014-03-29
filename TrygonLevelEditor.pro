@@ -15,7 +15,6 @@ SOURCES += main.cpp\
     Model/Sprite.cpp \
     Model/Animation.cpp \
     Model/ResourceManager.cpp \
-    Model/Savable.cpp \
     SpriteEditor/AnimationListItem.cpp \
     MainWindow.cpp \
     SpriteEditor/SpriteEditor.cpp \
@@ -57,14 +56,14 @@ SOURCES += main.cpp\
     ResourceTab/ImageListWidgetItem.cpp \
     ResourceTab/TileWidgetItem.cpp \
     Model/TileLayer.cpp \
-    LevelEditor/TileLayerView.cpp
+    LevelEditor/TileLayerView.cpp \
+    Model/ItemNode.cpp
   
 
 HEADERS  += \
     Model/Sprite.h \
     Model/Animation.h \
     Model/Frame.h \
-    Model/Savable.h \
     Model/ResourceManager.h \
     SpriteEditor/AnimationListItem.h \
     MainWindow.h \
@@ -107,7 +106,8 @@ HEADERS  += \
     ResourceTab/ImageListWidgetItem.h \
     ResourceTab/TileWidgetItem.h \
     Model/TileLayer.h \
-    LevelEditor/TileLayerView.h
+    LevelEditor/TileLayerView.h \
+    Model/ItemNode.h
    
 
 FORMS    += \

@@ -4,9 +4,9 @@
 #include <QList>
 
 #include "Frame.h"
-#include "Savable.h"
+#include "ItemNode.h"
 
-class Animation : public Savable
+class Animation : public ItemNode
 {
 public:
     bool Export(Exporter *exporter);

@@ -5,7 +5,7 @@
 #include <QPair>
 #include <QMap>
 
-#include "Savable.h"
+#include "ItemNode.h"
 
 typedef QPair<int, int> TileCoord;
 
@@ -15,7 +15,7 @@ struct Tile
     int originX, originY;
 };
 
-class TileLayer : public Savable
+class TileLayer : public ItemNode
 {
 public:
     bool Export(Exporter *exporter);

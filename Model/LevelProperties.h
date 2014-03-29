@@ -1,11 +1,11 @@
 #ifndef LEVELPROPERTIES_H
 #define LEVELPROPERTIES_H
 
-#include "Savable.h"
+#include "ItemNode.h"
 
 #include <QString>
 
-class LevelProperties : public Savable
+class LevelProperties : public ItemNode
 {
 public:
     bool Export(Exporter *exporter);

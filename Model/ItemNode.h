@@ -9,13 +9,13 @@
 #include <QImage>
 #include <QList>
 
-class Savable
+class ItemNode
 {
 protected:
     static int newID;
 
     int ID;
-    QList<Savable*> children;
+    QList<ItemNode*> children;
 
     int GenerateID();
 
@@ -25,8 +25,8 @@ protected:
     void RegisterID(int registeredID);
 
 public:
-    Savable();
-    virtual ~Savable();
+    ItemNode();
+    virtual ~ItemNode();
 
     int GetID() { return ID; }
 
@@ -37,9 +37,9 @@ public:
     void Save(Exporter *exporter);
     void Load(Exporter *exporter);
 
-    void AddChild(Savable *newChild);
-    Savable *GetChild(int ID);
-    Savable *GetChildByIndex(int i);
+    void AddChild(ItemNode *newChild);
+    ItemNode *GetChild(int ID);
+    ItemNode *GetChildByIndex(int i);
     int GetChildCount();
     void RemoveChild(int ID);
 

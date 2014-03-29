@@ -6,9 +6,9 @@
 #include <QFile>
 #include <QMessageBox>
 
-#include "Savable.h"
+#include "ItemNode.h"
 
-class Image : public Savable
+class Image : public ItemNode
 {
 public:
     bool Export(Exporter *exporter);

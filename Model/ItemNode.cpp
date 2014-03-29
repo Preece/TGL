@@ -1,18 +1,18 @@
-#include "Savable.h"
+#include "ItemNode.h"
 
-int Savable::newID = 1;
+int ItemNode::newID = 1;
 
-Savable::Savable()
+ItemNode::ItemNode()
 {
     //when the object is created, automatically generate an ID
     ID = GenerateID();
 }
 
-Savable::~Savable()
+ItemNode::~ItemNode()
 {
 }
 
-void Savable::Save(Exporter *exporter)
+void ItemNode::Save(Exporter *exporter)
 {
     exporter->WriteType(ID, GetType());
 
@@ -24,12 +24,12 @@ void Savable::Save(Exporter *exporter)
     }
 }
 
-void Savable::AddChild(Savable *newChild)
+void ItemNode::AddChild(ItemNode *newChild)
 {
     children.append(newChild);
 }
 
-Savable *Savable::GetChild(int ID)
+ItemNode *ItemNode::GetChild(int ID)
 {
     for(int i = 0; i < children.count(); i++)
     {
@@ -42,7 +42,7 @@ Savable *Savable::GetChild(int ID)
     return NULL;
 }
 
-Savable *Savable::GetChildByIndex(int i)
+ItemNode *ItemNode::GetChildByIndex(int i)
 {
     if(i < 0 || i >= children.count())
         return NULL;
@@ -50,12 +50,12 @@ Savable *Savable::GetChildByIndex(int i)
     return children[i];
 }
 
-int Savable::GetChildCount()
+int ItemNode::GetChildCount()
 {
     return children.count();
 }
 
-void Savable::RemoveChild(int ID)
+void ItemNode::RemoveChild(int ID)
 {
     for(int i = 0; i < children.count(); i++)
     {
@@ -67,12 +67,12 @@ void Savable::RemoveChild(int ID)
     }
 }
 
-int Savable::GenerateID()
+int ItemNode::GenerateID()
 {
     return newID++;
 }
 
-void Savable::RegisterID(int registeredID)
+void ItemNode::RegisterID(int registeredID)
 {
     //loop and increase the newID value until it is bigger than the
     //ID being registered

@@ -6,13 +6,13 @@
 #include <QList>
 #include <QStringList>
 
-#include "Savable.h"
+#include "ItemNode.h"
 
 #include "Animation.h"
 #include "Frame.h"
 #include "Image.h"
 
-class Sprite : public Savable
+class Sprite : public ItemNode
 {
 public:
     bool Export(Exporter *exporter);
