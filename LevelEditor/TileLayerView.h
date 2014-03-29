@@ -39,8 +39,9 @@ public:
 
 
 private:
-    QMap<TileCoord, TileWidgetItem*> items;
     int widthInTiles, heightInTiles;
+
+    QMap<TileCoord, TileWidgetItem*> items;
 
     QList<TileWidgetItem*> previewItems;
 

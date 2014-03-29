@@ -15,6 +15,9 @@ LayerManager::LayerManager()
 
 LayerManager::~LayerManager()
 {
+    //fine-tune this value for optimal performance. 0 if the default,
+    //and Qt will try to automatically find a good value
+    setBspTreeDepth(5);
 }
 
 void LayerManager::EyedropTile(QPoint pos)

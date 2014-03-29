@@ -26,10 +26,10 @@ public:
     void SetOverwrite(bool over) { overwrite = over; }
     void SetSelectedTileOrigin(TileCoord newOrigin) { selectedTileOrigin = newOrigin; }
 
-protected:
-    static int size;
+protected:  
     bool overwrite;
 
+    static int size;
     static TileCoord selectedTileOrigin;
 
     QPoint lastPaintSpot;
