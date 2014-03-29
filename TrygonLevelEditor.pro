@@ -57,7 +57,8 @@ SOURCES += main.cpp\
     ResourceTab/ImageListWidgetItem.cpp \
     ResourceTab/TileWidgetItem.cpp \
     Model/TileLayer.cpp \
-    LevelEditor/TileLayerView.cpp
+    LevelEditor/TileLayerView.cpp \
+    LayerListView.cpp
   
 
 HEADERS  += \
@@ -107,7 +108,8 @@ HEADERS  += \
     ResourceTab/ImageListWidgetItem.h \
     ResourceTab/TileWidgetItem.h \
     Model/TileLayer.h \
-    LevelEditor/TileLayerView.h
+    LevelEditor/TileLayerView.h \
+    LayerListView.h
    
 
 FORMS    += \
