@@ -26,28 +26,30 @@ void ItemNode::Save(Exporter *exporter)
 
 void ItemNode::AddChild(ItemNode *newChild)
 {
-    children.append(newChild);
+    //if the new child exists
+    if(!newChild)
+        return;
+
+    //place it in the list
+    children[newChild->GetID()] = newChild;
 }
 
 ItemNode *ItemNode::GetChild(int ID)
 {
-    for(int i = 0; i < children.count(); i++)
-    {
-        if(ID == children[i]->GetID())
-        {
-            return children[i];
-        }
-    }
+    if(children.value(ID))
+        return children[ID];
 
     return NULL;
 }
 
 ItemNode *ItemNode::GetChildByIndex(int i)
 {
-    if(i < 0 || i >= children.count())
+    QList<ItemNode*> childList = children.values();
+
+    if(i < 0 || i >= childList.count())
         return NULL;
 
-    return children[i];
+    return childList[i];
 }
 
 int ItemNode::GetChildCount()
@@ -57,13 +59,11 @@ int ItemNode::GetChildCount()
 
 void ItemNode::RemoveChild(int ID)
 {
-    for(int i = 0; i < children.count(); i++)
+    if(children.value(ID))
     {
-        if(ID == children[i]->GetID())
-        {
-            delete children[i];
-            children.removeAt(i);
-        }
+        delete children[ID];
+        children[ID] = NULL;
+        children.remove(ID);
     }
 }
 
