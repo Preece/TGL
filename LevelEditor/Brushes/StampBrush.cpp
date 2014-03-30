@@ -29,7 +29,7 @@ void StampBrush::CreateGrid(QList<QGraphicsItem *> items, int w, int h)
     //loop through the items and fill the list
     for(int i = 0; i < items.count(); i++)
     {
-        TilePos tempTile;
+
 
     }
 }

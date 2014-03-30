@@ -156,13 +156,11 @@ void SpriteEditor::RepopulateFrameList()
     //if an animation is selected
     if(IsAnimationSelected())
     {
-        FrameListItem *newFrameListItem;
-
         //loop through the frames of the selected animation
         for(int i = 0; i < GetSelectedAnimation()->GetFrameCount(); i++)
         {
             //create a frame list item
-            newFrameListItem = new FrameListItem;
+            FrameListItem *newFrameListItem = new FrameListItem;
 
             //attach the frame at the current loop index
             newFrameListItem->SetFrame(GetSelectedAnimation()->GetFrameAtIndex(i));
@@ -281,14 +279,12 @@ void SpriteEditor::EditSprite(Sprite *editSprite)
     //load the image and put it into the graphics view
     UpdateDisplayImage();
 
-    //loop through all the animations and fill the animation list
-    AnimationListItem *tempItem;
-
     ui->animationList->clear();
 
+    //loop through all the animations and fill the animation list
     for(int i = 0; i < currentSprite->GetAnimationCount(); i++)
     {
-        tempItem = new AnimationListItem;
+        AnimationListItem *tempItem = new AnimationListItem;
         tempItem->SetAnimation(currentSprite->GetAnimationByIndex(i));
 
         ui->animationList->addItem(tempItem);

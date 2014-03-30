@@ -15,10 +15,6 @@ public:
 
     QString GetType() { return "fill"; }
 
-    void SetSelectedTileOrigin(TileCoord newOrigin) { selectedTileOrigin = newOrigin; }
-
-private:
-    TileCoord selectedTileOrigin;
 };
 
 #endif // FILLBRUSH_H

@@ -3,6 +3,10 @@
 TileLayer::TileLayer()
 {
     iter = tiles.begin();
+
+    opacity = 100;
+    verticalParallax = 1.0;
+    horizontalParallax = 1.0;
 }
 
 bool TileLayer::Export(Exporter *exporter)
@@ -23,16 +27,6 @@ bool TileLayer::Import(Exporter *exporter)
     exporter->ReadInt(opacity);
 
     return true;
-}
-
-Tile *TileLayer::GetTileAtIndex(int index)
-{
-    if(index < 0 || index >= GetTileCount())
-        return NULL;
-
-    //temporarily commented out as I try to make a QMap hold the tiles
-    //return static_cast<TileInstance*>(GetChildByIndex(index));
-
 }
 
 Tile *TileLayer::GetTileAtPos(int x, int y)
@@ -84,13 +78,11 @@ void TileLayer::RemoveTile(int x, int y)
 
 void TileLayer::ModifyTile(int x, int y, int oX, int oY)
 {
-    Tile *tempTile;
-
     //if the tile they are trying to modify exists
     if(tiles[TileCoord(x, y)] != 0)
     {
         //access the pointer to it and change its tileID
-        tempTile = tiles[TileCoord(x, y)];
+        Tile *tempTile = tiles[TileCoord(x, y)];
         tempTile->originX = oX;
         tempTile->originY = oY;
     }

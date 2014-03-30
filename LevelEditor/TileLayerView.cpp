@@ -4,6 +4,9 @@ TileLayerView::TileLayerView()
 {
     widthInTiles = 0;
     heightInTiles = 0;
+
+    layer = NULL;
+    resourceManager = NULL;
 }
 
 TileLayerView::~TileLayerView()
@@ -60,7 +63,7 @@ void TileLayerView::DestroyAllItems()
         if(i.value())
             delete i.value();
 
-        i++;
+        ++i;
     }
 
     items.clear();

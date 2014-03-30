@@ -90,13 +90,11 @@ void ResourceTab::RepopulateSpriteSelector()
     //clear the sprite selector
     ui->spriteSelector->clear();
 
-    SpriteListWidgetItem *tempItem;
-
     //loop through all of the sprites
     for(int i = 0; i < resourceManager->GetSpriteCount(); i++)
     {
         //create a new sprite selector item and add the sprite to it
-        tempItem = new SpriteListWidgetItem;
+        SpriteListWidgetItem *tempItem = new SpriteListWidgetItem;
         tempItem->SetSprite(resourceManager->GetSpriteByIndex(i));
 
         //add the sprite to the selector
@@ -109,13 +107,11 @@ void ResourceTab::RepopulateImageSelector()
     //clear the image selector
     ui->imageSelector->clear();
 
-    ImageListWidgetItem *tempImageItem;
-
     //loop through the images in the resource manager
     for(int i = 0; i < resourceManager->GetImageCount(); i++)
     {
         //assign the image from the RM to a new selector item
-        tempImageItem = new ImageListWidgetItem;
+        ImageListWidgetItem *tempImageItem = new ImageListWidgetItem;
         tempImageItem->SetImage(resourceManager->GetImageByIndex(i));
 
         //add the selector item into the list
@@ -126,16 +122,13 @@ void ResourceTab::RepopulateImageSelector()
 
 void ResourceTab::on_addImageButton_clicked()
 {
-    //create a new temporary image
-    Image *tempImage;
-
     //ask the user where to load the file from.
     QString filename = QFileDialog::getOpenFileName(this, "Add Image", ".", "Portable Network Graphics (*.png)");
 
     //if the dialog succeeds
     if(!filename.isEmpty())
     {
-        tempImage = new Image;
+        Image *tempImage = new Image;
 
         //load the file
         tempImage->SetImageFromFile(filename);

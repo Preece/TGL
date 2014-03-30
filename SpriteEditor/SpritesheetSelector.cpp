@@ -23,13 +23,11 @@ void SpritesheetSelector::RepopulateImageList()
     if(!resourceManager)
         return;
 
-    ImageListWidgetItem *tempImageItem;
-
     //loop through the images in the resource manager
     for(int i = 0; i < resourceManager->GetImageCount(); i++)
     {
         //assign the image from the RM to a new selector item
-        tempImageItem = new ImageListWidgetItem;
+        ImageListWidgetItem *tempImageItem = new ImageListWidgetItem;
         tempImageItem->SetImage(resourceManager->GetImageByIndex(i));
 
         //add the selector item into the list

@@ -36,7 +36,6 @@ public:
     int GetOpacity() { return opacity; }
 
     int GetTileCount() { return tiles.count(); }
-    Tile *GetTileAtIndex(int index);
     Tile *GetTileAtPos(int x, int y);
     TileCoord GetTileOrigin(int x, int y);
 
@@ -46,7 +45,7 @@ public:
 
     void ResetIterator() { iter = tiles.begin(); }
     Tile *GetTileFromIterator() { return iter.value(); }
-    void AdvanceIterator() { iter++; }
+    void AdvanceIterator() { ++iter; }
 
 private:
     double verticalParallax, horizontalParallax;

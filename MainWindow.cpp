@@ -117,11 +117,9 @@ void MainWindow::RepopulateLayerSelector()
 {
     ui->layerSelector->clear();
 
-    QListWidgetItem *tempItem;
-
     for(int i = 0; i < layers->GetLayerCount(); i++)
     {
-        tempItem = new QListWidgetItem;
+        QListWidgetItem *tempItem = new QListWidgetItem;
         tempItem->setText(layers->GetLayerName(i));
 
         tempItem->setFlags(tempItem->flags() | Qt::ItemIsUserCheckable);
