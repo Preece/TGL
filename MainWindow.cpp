@@ -7,41 +7,34 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //zero out these pointers
-    levelPropertiesWindow = NULL;
-    layerPropertiesWindow = NULL;
-
     //create a resource manager
-    resources = new ResourceManager;
+    resources               = new ResourceManager;
+    levelPropertiesWindow   = new LayerPropertiesDialog;
+    layerPropertiesWindow   = new LayerPropertiesDialog;
+    tileSelector            = new TileSelectorScene;
+    layers = new LayerManager;
 
     //register the resource manager with the resource tab. The resource tab will
     //keep itself in synch with the resource manager
     ui->resourceTab->RegisterResourceManager(resources);
-
-    //connect the add sprite button in the resource tab to the add sprite action
-    connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
-
-    tileSelector = new TileSelectorScene;
-    ui->resourceTab->RegisterTileSelector(tileSelector);
-
-    layers = new LayerManager;
-    ui->levelView->setScene(layers);
-    layers->setSceneRect(0, 0, 0, 0);
+    levelPropertiesWindow->RegisterResourceManager(resources);
     layers->RegisterResourceManager(resources);
-
-    ui->levelView->setMouseTracking(true);
-
-    ui->brushProperties->RegisterTileSelector(tileSelector);
     ui->brushProperties->RegisterResourceManager(resources);
+    
+    ui->resourceTab->RegisterTileSelector(tileSelector);
+    ui->brushProperties->RegisterTileSelector(tileSelector);
 
-    //when the selection changes in tileSelector, notify the layer manager
+    connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
-
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
-    UpdateToolSelection();
-
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), this, SLOT(SelectNewTile(TileCoord)));
+    
+    ui->levelView->setScene(layers);
+    layers->setSceneRect(0, 0, 0, 0);
+    ui->levelView->setMouseTracking(true);
+    
+    UpdateToolSelection();
 
     //change the cursor
     QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
@@ -57,15 +50,13 @@ MainWindow::~MainWindow()
     delete ui;
 
     resources->DestroyAllResources();
+    
     delete resources;
-
     //call a cleanup function?
     delete layers;
-
     delete tileSelector;
-
-    if(layerPropertiesWindow)
-        delete layerPropertiesWindow;
+    delete layerPropertiesWindow;
+    delete levelpropertiesWindow;
 }
 
 bool MainWindow::IsTileSelected()
@@ -78,12 +69,6 @@ bool MainWindow::IsTileSelected()
 
 void MainWindow::on_actionProperties_triggered()
 {
-    if(!levelPropertiesWindow)
-    {
-        levelPropertiesWindow = new LevelPropertiesDialog;
-        levelPropertiesWindow->RegisterResourceManager(resources);
-    }
-
     levelPropertiesWindow->LoadValues();
     levelPropertiesWindow->exec();
 }
@@ -148,14 +133,7 @@ void MainWindow::on_gridToggle_toggled(bool checked)
 
 void MainWindow::on_addLayerButton_clicked()
 {
-    //if the layer properties window has not yet been created
-    if(layerPropertiesWindow == NULL)
-    {
-        //create it
-        layerPropertiesWindow = new LayerProperties;
-    }
-
-    //then create a new tile layer for the model
+    //create a new tile layer for the model
     TileLayer *newLayer = new TileLayer;
 
     //and pass the new tile layer model into the editor window
@@ -166,6 +144,7 @@ void MainWindow::on_addLayerButton_clicked()
     {
         //if so add the new layer to the model
         resources->AddTileLayer(newLayer);
+        
         //and give a reference to the layer manager
         layers->AddLayer(newLayer);
 
@@ -252,11 +231,6 @@ void MainWindow::on_eraserButton_clicked()
 
 void MainWindow::on_editLayerButton_clicked()
 {
-    if(layerPropertiesWindow == NULL)
-    {
-        layerPropertiesWindow = new LayerProperties;
-    }
-
     if(IsLayerSelected())
     {
         TileLayer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
