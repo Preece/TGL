@@ -32,8 +32,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    TileWidgetItem *GetSelectedTileItem();
-
     void RepopulateLayerSelector();
     bool IsLayerSelected();
 
