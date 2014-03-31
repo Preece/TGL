@@ -59,14 +59,6 @@ MainWindow::~MainWindow()
     delete levelpropertiesWindow;
 }
 
-bool MainWindow::IsTileSelected()
-{
-    if(tileSelector->selectedItems().count() > 0)
-        return true;
-
-    return false;
-}
-
 void MainWindow::on_actionProperties_triggered()
 {
     levelPropertiesWindow->LoadValues();
@@ -90,7 +82,7 @@ void MainWindow::UpdateSelectedTile()
 
 TileWidgetItem *MainWindow::GetSelectedTileItem()
 {
-    if(IsTileSelected())
+    if(tileSelector->IsTileSelected())
     {
         return dynamic_cast<TileWidgetItem*>(tileSelector->selectedItems()[0]);
     }
