@@ -46,7 +46,6 @@ private slots:
 
     void on_actionProperties_triggered();
     void UpdateSelectedTile();
-    void on_gridToggle_toggled(bool checked);
     void on_addLayerButton_clicked();
     void UpdateToolSelection();
     void on_pencilTool_clicked();

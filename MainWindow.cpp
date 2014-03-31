@@ -45,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
 
+    connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
+
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     UpdateToolSelection();
 
@@ -128,11 +130,6 @@ bool MainWindow::IsLayerSelected()
             return true;
 
     return false;
-}
-
-void MainWindow::on_gridToggle_toggled(bool checked)
-{
-    layers->ToggleGrid(checked);
 }
 
 void MainWindow::on_addLayerButton_clicked()
@@ -407,8 +404,9 @@ void MainWindow::on_matrixBrushButton_clicked()
 
 void MainWindow::on_resourceView_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
-    int selectedID = ui->resourceView->GetSelectedID();
     //get the ID from the selection
+    int selectedID = ui->resourceView->GetSelectedID();
+
     if(selectedID)
     {
         //if the new selection is a layer, update the selection in the layer manager
