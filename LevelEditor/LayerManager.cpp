@@ -225,13 +225,19 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::SetLayerSelection(int newSelection)
 {
-    if(newSelection < 0 || newSelection > layers.count())
+    //loop through all the layers
+    for(int i = 0; i < layers.count(); i++)
     {
-        currentLayer = NULL;
-        return;
+        //and if there is a layer associated with the correct ID, set it as the current layer
+        if(layers[i]->GetLayerID() == newSelection)
+        {
+            currentLayer = layers[i];
+            return;
+        }
     }
 
-    currentLayer = layers[newSelection];
+    //if it was not found, just NULL out the current layer. Checks elsewhere will prevent drawing
+    currentLayer = NULL;
 }
 
 QString LayerManager::GetLayerName(int index)

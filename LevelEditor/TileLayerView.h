@@ -15,6 +15,7 @@ public:
 
     void SetLayer(TileLayer *newLayer) { layer = newLayer; }
     TileLayer *GetLayer() { return layer; }
+    int GetLayerID() { if(layer) return layer->GetID(); }
 
     void AddTileWidgetItem(Tile *newTile);
     void ModifyTile(int x, int y, TileCoord newOrigin);

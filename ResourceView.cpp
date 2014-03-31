@@ -43,15 +43,41 @@ void ResourceView::RepopulateEverything()
     for(int i = 0; i < resources->GetLayerCount(); i++)
     {
         //fetch the layer from the model
-        TileLayer *newLayer = resources->GetLayerByIndex(i);
+        TileLayer *layer = resources->GetLayerByIndex(i);
 
         //create a new tree widget item
         QTreeWidgetItem *newLayerItem = new QTreeWidgetItem;
 
         //use the layers name as the item text
-        newLayerItem->setText(0, newLayer->GetName());
+        newLayerItem->setText(0, layer->GetName());
+
+        //and store the ID of the layer
+        newLayerItem->setData(0, Qt::UserRole, QVariant(layer->GetID()));
 
         //add the new item as a child of the layer root
         layerRoot->addChild(newLayerItem);
     }
+}
+
+int ResourceView::GetSelectedID()
+{
+    QList<QTreeWidgetItem*> selectedItem = selectedItems();
+
+    if(selectedItem.count() > 0)
+    {
+        return GetItemID(selectedItem[0]);
+    }
+
+    return 0;
+}
+
+int ResourceView::GetItemID(QTreeWidgetItem *item)
+{
+    if(item)
+    {
+        QVariant id = item->data(0, Qt::UserRole);
+        return id.toInt();
+    }
+
+    return 0;
 }

@@ -2,6 +2,7 @@
 #define RESOURCEVIEW_H
 
 #include <QTreeWidget>
+#include <QString>
 
 #include "Model/ResourceManager.h"
 
@@ -14,6 +15,8 @@ public:
     void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
 
     void RepopulateEverything();
+
+    int GetSelectedID();
     
 signals:
     
@@ -21,6 +24,8 @@ public slots:
 
 private:
     ResourceManager *resources;
+
+    int GetItemID(QTreeWidgetItem *item);
     
 };
 
