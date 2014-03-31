@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>785</width>
-    <height>672</height>
+    <width>989</width>
+    <height>667</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -47,8 +47,20 @@
       <property name="alternatingRowColors">
        <bool>true</bool>
       </property>
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="indentation">
+       <number>10</number>
+      </property>
       <property name="rootIsDecorated">
        <bool>true</bool>
+      </property>
+      <property name="animated">
+       <bool>false</bool>
       </property>
       <attribute name="headerVisible">
        <bool>true</bool>
@@ -591,7 +603,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>785</width>
+     <width>989</width>
      <height>21</height>
     </rect>
    </property>

@@ -18,17 +18,24 @@ MainWindow::MainWindow(QWidget *parent) :
     //keep itself in synch with the resource manager
     ui->resourceTab->RegisterResourceManager(resources);
 
+    //attach the resource manager to the resource view
+    ui->resourceView->RegisterResourceManager(resources);
+    ui->resourceView->RepopulateEverything();
+
     //connect the add sprite button in the resource tab to the add sprite action
     connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
 
     tileSelector = new TileSelectorScene;
     ui->resourceTab->RegisterTileSelector(tileSelector);
 
+    //the layer manager is a derivative of QGraphicsScene. It coordinates all the
+    //graphical representations of the layers, which are QGraphicsItemGroups
     layers = new LayerManager;
     ui->levelView->setScene(layers);
     layers->setSceneRect(0, 0, 0, 0);
     layers->RegisterResourceManager(resources);
 
+    //this will make sure the mouse events are sent to the level view
     ui->levelView->setMouseTracking(true);
 
     ui->brushProperties->RegisterTileSelector(tileSelector);
@@ -180,6 +187,9 @@ void MainWindow::on_addLayerButton_clicked()
     }
 
     RepopulateLayerSelector();
+
+    //refresh the resource viewer. In the future, this could perhaps only refresh the layer section
+    ui->resourceView->RepopulateEverything();
 }
 
 void MainWindow::on_layerSelector_currentRowChanged(int currentRow)
@@ -286,6 +296,9 @@ void MainWindow::on_deleteLayerButton_clicked()
 
             //repopulate the layer selector
             RepopulateLayerSelector();
+
+            //refresh the resource view
+            ui->resourceView->RepopulateEverything();
         }
     }
 }
