@@ -67,10 +67,11 @@ void MainWindow::on_actionProperties_triggered()
 
 void MainWindow::UpdateSelectedTile()
 {
-    //this function triggers when the tile selection changes
+    //this function triggers when the tile selection changes, and notifies the correct
+    //components about the change
 
     //if anything is selected
-    if(tileSelector->selectedItems().count() > 0)
+    if(tileSelector->IsTileSelected())
     {
         //inform the layer manager
         layers->SetSelectedTile(tileSelector->GetSelectedTile());
@@ -161,16 +162,6 @@ void MainWindow::UpdateToolSelection()
     layers->SetBrush(ui->brushProperties->GetCurrentBrush());
 }
 
-void MainWindow::on_pencilTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(0);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
 void MainWindow::SelectNewTile(TileCoord origin)
 {
     int tileW = resources->GetLevelProperties()->GetTileWidth();
@@ -189,26 +180,6 @@ void MainWindow::SelectNewTile(TileCoord origin)
     if(tempTileItem)
         tempTileItem->setSelected(true);
 
-}
-
-void MainWindow::on_bucketTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(2);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_eraserButton_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(3);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/eraser.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_editLayerButton_clicked()
@@ -244,50 +215,6 @@ void MainWindow::on_deleteLayerButton_clicked()
             RepopulateLayerSelector();
         }
     }
-}
-
-void MainWindow::on_scatterTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(6);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_brushTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(7);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/brush.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_scatterFillTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(8);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_pointerTool_clicked()
-{
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/selector.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_eyedropperTool_clicked()
-{
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
-    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_zoomInTool_clicked()
@@ -355,6 +282,36 @@ void MainWindow::RepopulateEverything()
     layers->RepopulateAllLayers();
 }
 
+void MainWindow::on_pencilTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(0);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_bucketTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(2);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_eraserButton_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(3);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/eraser.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
 void MainWindow::on_lineTool_clicked()
 {
     ui->brushProperties->SetCurrentBrush(10);
@@ -382,5 +339,49 @@ void MainWindow::on_matrixBrushButton_clicked()
 
     //change the cursor
     QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_scatterTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(6);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_brushTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(7);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/brush.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_scatterFillTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(8);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_pointerTool_clicked()
+{
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/selector.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_eyedropperTool_clicked()
+{
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
     ui->levelView->setCursor(tempCur);
 }
