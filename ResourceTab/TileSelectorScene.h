@@ -9,6 +9,7 @@ class TileSelectorScene : public QGraphicsScene
 public:
     explicit TileSelectorScene(QObject *parent = 0);
     
+    bool IsTileSelected() { if(selectedItems().count() > 0) return true; return false; }
 signals:
     
 public slots:
