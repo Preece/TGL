@@ -10,6 +10,8 @@ public:
     explicit TileSelectorScene(QObject *parent = 0);
     
     bool IsTileSelected() { if(selectedItems().count() > 0) return true; return false; }
+    
+    TileWidgetItem *GetSelectedTile() { if(IsTileSelected()) return selectedItems()[0]; return NULL; }
 signals:
     
 public slots:
