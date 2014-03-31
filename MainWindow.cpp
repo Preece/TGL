@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     levelPropertiesWindow   = new LayerPropertiesDialog;
     layerPropertiesWindow   = new LayerPropertiesDialog;
     tileSelector            = new TileSelectorScene;
-    layers = new LayerManager;
+    layers                  = new LayerManager;
 
     //register the resource manager with the resource tab. The resource tab will
     //keep itself in synch with the resource manager
@@ -73,21 +73,11 @@ void MainWindow::UpdateSelectedTile()
     if(tileSelector->selectedItems().count() > 0)
     {
         //inform the layer manager
-        layers->SetSelectedTile(GetSelectedTileItem());
+        layers->SetSelectedTile(tileSelector->GetSelectedTile());
 
         //inform the brush properties widget
-        ui->brushProperties->SetSelectedTileOrigin(GetSelectedTileItem()->GetTileOrigin());
+        ui->brushProperties->SetSelectedTileOrigin(tileSelector->GetSelectedTile()->GetTileOrigin());
     }
-}
-
-TileWidgetItem *MainWindow::GetSelectedTileItem()
-{
-    if(tileSelector->IsTileSelected())
-    {
-        return dynamic_cast<TileWidgetItem*>(tileSelector->selectedItems()[0]);
-    }
-
-    return NULL;
 }
 
 void MainWindow::RepopulateLayerSelector()
