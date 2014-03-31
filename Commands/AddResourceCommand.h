@@ -11,9 +11,9 @@
 class AddResourceCommand : public QUndoCommand
 {
 public:
-    AddResourceCommand(ItemNode *newResource, QList<Sprite*> *resources);
-    AddResourceCommand(ItemNode *newResource, QList<Image*> *resources);
-    AddResourceCommand(ItemNode *newResource, QList<TileLayer*> *resources);
+    AddResourceCommand(ItemNode *newResource, QMap<int, Sprite*> *resources);
+    AddResourceCommand(ItemNode *newResource, QMap<int, Image*> *resources);
+    AddResourceCommand(ItemNode *newResource, QMap<int, TileLayer*> *resources);
 
     ~AddResourceCommand();
 
@@ -24,7 +24,7 @@ public:
 
 private:
     ItemNode *resource;
-    QList<ItemNode*> *resourceList;
+    QMap<int, ItemNode*> *resourceList;
 
     bool invertAdditions;
 };

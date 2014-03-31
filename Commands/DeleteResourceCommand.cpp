@@ -1,21 +1,21 @@
 #include "DeleteResourceCommand.h"
 
-DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QList<Sprite*> *resources)
+DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QMap<int, Sprite*> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
 }
 
-DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QList<Image *> *resources)
+DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QMap<int, Image *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
 }
 
-DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QList<TileLayer *> *resources)
+DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QMap<int, TileLayer *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
 }
 
 DeleteResourceCommand::~DeleteResourceCommand()
@@ -33,26 +33,21 @@ DeleteResourceCommand::~DeleteResourceCommand()
 
 void DeleteResourceCommand::undo()
 {
-    resourceList->append(resource);
+    if(resource)
+        resourceList->remove(resource->GetID());
 }
 
 void DeleteResourceCommand::redo()
 {
-    for(int i = 0; i < resourceList->count(); i++)
-    {
-        //if this resource is the one being held
-        if(resourceList->value(i) == resource)
-            resourceList->removeAt(i);
-    }
+    if(resource)
+        resourceList->insert(resource->GetID(), resource);
 }
 
 bool DeleteResourceCommand::ListContainsResource()
 {
-    for(int i = 0; i < resourceList->count(); i++)
-    {
-        if(resourceList->value(i) == resource)
+    if(resource)
+        if(resourceList->value(resource->GetID()))
             return true;
-    }
 
     return false;
 }

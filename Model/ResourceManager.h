@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QList>
+#include <QMap>
 #include <QStringList>
 #include <QUndoStack>
 
@@ -32,13 +33,13 @@ public slots:
     bool DeleteSprite(int ID);
     Sprite *GetSprite(int ID);
     Sprite *GetSpriteByIndex(int index);
-    int GetSpriteCount() { return spriteList.count(); }
+    int GetSpriteCount() { return spriteMap.count(); }
 
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);
     Image *GetImage(int ID);
     Image *GetImageByIndex(int index);
-    int GetImageCount() { return imageList.count(); }
+    int GetImageCount() { return imageMap.count(); }
 
     QPixmap GetSpriteSymbol(int spriteID);
     QImage *GetTileset();
@@ -48,7 +49,7 @@ public slots:
     void DeleteTileLayer(int ID);
     TileLayer *GetTileLayer(int ID);
     TileLayer *GetLayerByIndex(int index);
-    int GetLayerCount() { return layerList.count(); }
+    int GetLayerCount() { return layerMap.count(); }
 
     void DestroyAllResources();
 
@@ -68,9 +69,9 @@ signals:
     void UndoRedoPerformed();
 
 private:
-    QList<Sprite*> spriteList;
-    QList<Image*> imageList;
-    QList<TileLayer*> layerList;
+    QMap<int, Sprite*> spriteMap;
+    QMap<int, Image*> imageMap;
+    QMap<int, TileLayer*> layerMap;
 
     LevelProperties levelProperties;
 

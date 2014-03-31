@@ -11,7 +11,7 @@ int ResourceManager::AddSprite(Sprite *newSprite)
     if(newSprite != NULL)
     {
         //create an add sprite command
-        AddResourceCommand *add = new AddResourceCommand(newSprite, &spriteList);
+        AddResourceCommand *add = new AddResourceCommand(newSprite, &spriteMap);
 
         //push it into the undo list
         undo->push(add);
@@ -22,43 +22,40 @@ int ResourceManager::AddSprite(Sprite *newSprite)
 
 bool ResourceManager::DeleteSprite(int ID)
 {
-    for(int i = 0; i < spriteList.count(); i++)
+    if(spriteMap.value(ID))
     {
-        if(spriteList[i]->GetID() == ID)
-        {
-            DeleteResourceCommand *del = new DeleteResourceCommand(spriteList[i], &spriteList);
-            undo->push(del);
+        DeleteResourceCommand *del = new DeleteResourceCommand(spriteMap[ID], &spriteMap);
+        undo->push(del);
 
-            return true;
-        }
+        return true;
     }
+
     return false;
 }
 
 Sprite *ResourceManager::GetSprite(int ID)
 {
-    for(int i = 0; i < spriteList.count(); i++)
-    {
-        if(spriteList[i]->GetID() == ID)
-            return spriteList[i];
-    }
+    if(spriteMap.value(ID))
+        return spriteMap[ID];
 
     return NULL;
 }
 
 Sprite *ResourceManager::GetSpriteByIndex(int index)
 {
-    if(index >= spriteList.count() || index < 0)
+    QList<Sprite*> sprites = spriteMap.values();
+
+    if(index >= sprites.count() || index < 0)
         return NULL;
 
-    return spriteList[index];
+    return sprites[index];
 }
 
 int ResourceManager::AddImage(Image *newImage)
 {
     if(newImage)
     {
-        AddResourceCommand *add = new AddResourceCommand(newImage, &imageList);
+        AddResourceCommand *add = new AddResourceCommand(newImage, &imageMap);
         undo->push(add);
     }
 
@@ -67,14 +64,11 @@ int ResourceManager::AddImage(Image *newImage)
 
 bool ResourceManager::DeleteImage(int ID)
 {
-    for(int i = 0; i < imageList.count(); i++)
+    if(imageMap.value(ID))
     {
-        if(imageList[i]->GetID() == ID)
-        {
-            DeleteResourceCommand *del = new DeleteResourceCommand(imageList[i], &imageList);
-            undo->push(del);
-            return true;
-        }
+        DeleteResourceCommand *del = new DeleteResourceCommand(imageMap[ID], &imageMap);
+        undo->push(del);
+        return true;
     }
 
     return false;
@@ -82,12 +76,12 @@ bool ResourceManager::DeleteImage(int ID)
 
 Image *ResourceManager::GetImageByIndex(int index)
 {
-    if(index >= imageList.count() || index < 0)
-    {
-        return NULL;
-    }
+    QList<Image*> images = imageMap.values();
 
-    return imageList[index];
+    if(index >= images.count() || index < 0)
+        return NULL;
+
+    return images[index];
 }
 
 QPixmap ResourceManager::GetSpriteSymbol(int spriteID)
@@ -154,52 +148,44 @@ void ResourceManager::AddTileLayer(TileLayer *newLayer)
 {
     if(newLayer)
     {
-        layerList.append(newLayer);
+        layerMap[newLayer->GetID()] = newLayer;
     }
 }
 
 void ResourceManager::DeleteTileLayer(int ID)
 {
-    for(int i = 0; i < layerList.count(); i++)
+    if(layerMap.value(ID))
     {
-        if(layerList[i]->GetID() == ID)
-        {
-            delete layerList[i];
-            layerList.removeAt(i);
+        delete layerMap[ID];
+        layerMap[ID] = NULL;
+        layerMap.remove(ID);
 
-            return;
-        }
+        return;
     }
 }
 
 TileLayer *ResourceManager::GetTileLayer(int ID)
 {
-    for(int i = 0; i < layerList.count(); i++)
-    {
-        if(layerList[i]->GetID() == ID)
-        {
-            return layerList[i];
-        }
-    }
+    if(layerMap.value(ID))
+        return layerMap[ID];
 
     return NULL;
 }
 
 TileLayer *ResourceManager::GetLayerByIndex(int index)
 {
-    if(index < 0 || index > layerList.count())
+    QList<TileLayer*> layers = layerMap.values();
+
+    if(index < 0 || index > layers.count())
         return NULL;
 
-    return layerList[index];
+    return layers[index];
 }
 
 Image *ResourceManager::GetImage(int ID)
 {
-    for(int i = 0; i < imageList.count(); i++)
-    {
-        if(imageList[i]->GetID() == ID)
-            return imageList[i];
-    }
+    if(imageMap.value(ID))
+        return imageMap[ID];
 
     return NULL;
 }
@@ -209,32 +195,35 @@ void ResourceManager::DestroyAllResources()
     delete undo;
 
     //destroy the sprite resources
-    for(int i = 0; i < spriteList.count(); i++)
+    for(int i = 0; i < spriteMap.count(); i++)
     {
-        spriteList[i]->DestroyAllAnimations();
-        delete spriteList[i];
-        spriteList[i] = NULL;
+        Sprite *sprite = GetSpriteByIndex(i);
+        sprite->DestroyAllAnimations();
+        delete sprite;
+        sprite = NULL;
     }
 
     //clear the list
-    spriteList.clear();
+    spriteMap.clear();
 
     //destroy the images
-    for(int i = 0; i < imageList.count(); i++)
+    for(int i = 0; i < imageMap.count(); i++)
     {
-        delete imageList[i];
-        imageList[i] = NULL;
+        Image *image = GetImageByIndex(i);
+        delete image;
+        image = NULL;
     }
 
-    imageList.clear();
+    imageMap.clear();
 
-    for(int i = 0; i < layerList.count(); i++)
+    for(int i = 0; i < layerMap.count(); i++)
     {
-        delete layerList[i];
-        layerList[i] = NULL;
+        TileLayer *layer = GetLayerByIndex(i);
+        delete layer;
+        layer = NULL;
     }
 
-    layerList.clear();
+    layerMap.clear();
 }
 
 void ResourceManager::Undo()

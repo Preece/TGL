@@ -1,25 +1,25 @@
 #include "AddResourceCommand.h"
 
-AddResourceCommand::AddResourceCommand(ItemNode *newResource, QList<Sprite*> *resources)
+AddResourceCommand::AddResourceCommand(ItemNode *newResource, QMap<int, Sprite*> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
 
     invertAdditions = false;
 }
 
-AddResourceCommand::AddResourceCommand(ItemNode *newResource, QList<Image *> *resources)
+AddResourceCommand::AddResourceCommand(ItemNode *newResource, QMap<int, Image *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
 
     invertAdditions = false;
 }
 
-AddResourceCommand::AddResourceCommand(ItemNode *newResource, QList<TileLayer *> *resources)
+AddResourceCommand::AddResourceCommand(ItemNode *newResource, QMap<int, TileLayer *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QList<ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
 
     invertAdditions = true;
 }
@@ -39,29 +39,19 @@ AddResourceCommand::~AddResourceCommand()
 
 void AddResourceCommand::undo()
 {
-    for(int i = 0; i < resourceList->count(); i++)
-    {
-        //if this resource is the one being held
-        if(resourceList->value(i) == resource)
-            resourceList->removeAt(i);
-    }
+    if(resource)
+        resourceList->remove(resource->GetID());
 }
 
 void AddResourceCommand::redo()
 {
-    if(invertAdditions)
-        resourceList->insert(0, resource);
-    else
-        resourceList->append(resource);
+    resourceList->insert(resource->GetID(), resource);
 }
 
 bool AddResourceCommand::ListContainsResource()
 {
-    for(int i = 0; i < resourceList->count(); i++)
-    {
-        if(resourceList->value(i) == resource)
-            return true;
-    }
+    if(resourceList->value(resource->GetID()))
+        return true;
 
     return false;
 }

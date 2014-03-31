@@ -11,9 +11,9 @@
 class DeleteResourceCommand : public QUndoCommand
 {
 public:
-    DeleteResourceCommand(ItemNode *newResource, QList<Sprite*> *resources);
-    DeleteResourceCommand(ItemNode *newResource, QList<Image*> *resources);
-    DeleteResourceCommand(ItemNode *newResource, QList<TileLayer*> *resources);
+    DeleteResourceCommand(ItemNode *newResource, QMap<int, Sprite*> *resources);
+    DeleteResourceCommand(ItemNode *newResource, QMap<int, Image*> *resources);
+    DeleteResourceCommand(ItemNode *newResource, QMap<int, TileLayer*> *resources);
     ~DeleteResourceCommand();
 
     virtual void undo();
@@ -23,7 +23,7 @@ public:
 
 private:
     ItemNode *resource;
-    QList<ItemNode*> *resourceList;
+    QMap<int, ItemNode*> *resourceList;
 };
 
 #endif // DELETERESOURCECOMMAND_H
