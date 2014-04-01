@@ -21,25 +21,10 @@ void ResourceView::RepopulateEverything()
     projectRoot->setExpanded(true);
 
     //add children nodes for each of the types of objects
-    QTreeWidgetItem *layerRoot = new QTreeWidgetItem;
-    layerRoot->setText(0, "Layers");
-    layerRoot->setIcon(0, QIcon(":/Icons/Icons/open.png"));
-    projectRoot->addChild(layerRoot);
-
-    QTreeWidgetItem *imageRoot = new QTreeWidgetItem;
-    imageRoot->setText(0, "Images");
-    imageRoot->setIcon(0, QIcon(":/Icons/Icons/open.png"));
-    projectRoot->addChild(imageRoot);
-
-    QTreeWidgetItem *spriteRoot = new QTreeWidgetItem;
-    spriteRoot->setText(0, "Sprites");
-    spriteRoot->setIcon(0, QIcon(":/Icons/Icons/open.png"));
-    projectRoot->addChild(spriteRoot);
-
-    QTreeWidgetItem *tilesetRoot = new QTreeWidgetItem;
-    tilesetRoot->setText(0, "Tilesets");
-    tilesetRoot->setIcon(0, QIcon(":/Icons/Icons/open.png"));
-    projectRoot->addChild(tilesetRoot);
+    layerRoot = AddNode(projectRoot, "Layer", ":/Icons/Icons/open.png");
+    imageRoot = AddNode(projectRoot, "Images", ":/Icons/Icons/open.png");
+    spriteRoot = AddNode(projectRoot, "Sprites", ":/Icons/Icons/open.png");
+    tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/Icons/open.png");
 
     //get each layer and add it as a child node of the layer root
     for(int i = 0; i < resources->GetLayerCount(); i++)
@@ -47,17 +32,7 @@ void ResourceView::RepopulateEverything()
         //fetch the layer from the model
         TileLayer *layer = resources->GetLayerByIndex(i);
 
-        //create a new tree widget item
-        QTreeWidgetItem *newLayerItem = new QTreeWidgetItem;
-
-        //use the layers name as the item text
-        newLayerItem->setText(0, layer->GetName());
-
-        //and store the ID of the layer
-        newLayerItem->setData(0, Qt::UserRole, QVariant(layer->GetID()));
-
-        //add the new item as a child of the layer root
-        layerRoot->addChild(newLayerItem);
+        AddNode(layerRoot, layer->GetName(), ":/Icons/Icons/save.png", layer->GetID());
     }
 }
 
@@ -82,6 +57,20 @@ int ResourceView::GetItemID(QTreeWidgetItem *item)
     }
 
     return 0;
+}
+
+QTreeWidgetItem *ResourceView::AddNode(QTreeWidgetItem *parent, QString name, QString icon, int ID)
+{
+    QTreeWidgetItem *newNode = new QTreeWidgetItem;
+    newNode->setText(0, name);
+    newNode->setIcon(0, QIcon(icon));
+
+    if(ID)
+        newNode->setData(0, Qt::UserRole, QVariant(ID));
+
+    parent->addChild(newNode);
+
+    return newNode;
 }
 
 

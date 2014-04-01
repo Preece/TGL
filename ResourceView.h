@@ -13,23 +13,26 @@ public:
     explicit ResourceView(QWidget *parent = 0);
 
     void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
-
     void RepopulateEverything();
 
     int GetSelectedID();
     
 signals:
-
     void NewLayerSelected(int newID);
     
 public slots:
-
     void selectionUpdated(QTreeWidgetItem *item, int column);
 
 private:
     ResourceManager *resources;
 
+    QTreeWidgetItem *layerRoot;
+    QTreeWidgetItem *imageRoot;
+    QTreeWidgetItem *spriteRoot;
+    QTreeWidgetItem *tilesetRoot;
+
     int GetItemID(QTreeWidgetItem *item);
+    QTreeWidgetItem *AddNode(QTreeWidgetItem *parent, QString name, QString icon, int ID = 0);
     
 };
 
