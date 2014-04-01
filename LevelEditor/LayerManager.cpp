@@ -62,6 +62,8 @@ void LayerManager::AddLayer(TileLayer *newLayer)
 
     tempLayerGroup->show();
     tempLayerGroup->setPos(0,0);
+    
+    UpdateLayerOpacity(newLayer);
 }
 
 void LayerManager::RemoveLayer(TileLayer *dirtyLayer)
