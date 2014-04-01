@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
+    connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
@@ -293,18 +294,6 @@ void MainWindow::on_matrixBrushButton_clicked()
     //change the cursor
     QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
     ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_resourceView_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
-{
-    int selectedID = ui->resourceView->GetSelectedID();
-    //get the ID from the selection
-    if(selectedID)
-    {
-        //if the new selection is a layer, update the selection in the layer manager
-        if(resources->GetTileLayer(selectedID))
-            layers->SetLayerSelection(selectedID);
-    }
 }
 
 void MainWindow::on_scatterTool_clicked()

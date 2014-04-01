@@ -64,8 +64,6 @@ private slots:
     void on_replacerTool_clicked();
     void on_matrixBrushButton_clicked();
 
-    void on_resourceView_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-
 private:
     Ui::MainWindow *ui;
 
