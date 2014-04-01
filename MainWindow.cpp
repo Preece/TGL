@@ -130,11 +130,6 @@ void MainWindow::on_addLayerButton_clicked()
         
         //and give a reference to the layer manager
         layers->AddLayer(newLayer);
-
-        layers->UpdateLayerOpacity(newLayer);
-
-        layers->setSceneRect(0, 0, resources->GetLevelProperties()->GetMapWidth() * resources->GetLevelProperties()->GetTileWidth(),
-                             resources->GetLevelProperties()->GetMapHeight() * resources->GetLevelProperties()->GetTileHeight());
     }
     else
     {
