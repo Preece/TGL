@@ -57,8 +57,6 @@ private slots:
 
     void on_pencilTool_clicked();
 
-    void SelectNewTile(TileCoord origin);
-
     void on_bucketTool_clicked();
 
     void on_eraserButton_clicked();

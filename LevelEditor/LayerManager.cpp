@@ -11,6 +11,8 @@ LayerManager::LayerManager()
     addItem(grid);
     grid->setPos(0, 0);
     grid->hide();
+
+    setSceneRect(0, 0, 0, 0);
 }
 
 LayerManager::~LayerManager()

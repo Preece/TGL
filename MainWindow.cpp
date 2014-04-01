@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //create a resource manager
     resources               = new ResourceManager;
-    levelPropertiesWindow   = new LayerPropertiesDialog;
-    layerPropertiesWindow   = new LayerPropertiesDialog;
+    levelPropertiesWindow   = new LevelPropertiesDialog;
+    layerPropertiesWindow   = new LayerProperties;
     tileSelector            = new TileSelectorScene;
     layers                  = new LayerManager;
 
@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     levelPropertiesWindow->RegisterResourceManager(resources);
     layers->RegisterResourceManager(resources);
     ui->brushProperties->RegisterResourceManager(resources);
+    tileSelector->RegisterResourceManager(resources);
     
     ui->resourceTab->RegisterTileSelector(tileSelector);
     ui->brushProperties->RegisterTileSelector(tileSelector);
@@ -28,10 +29,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
-    connect(layers, SIGNAL(SelectNewTile(TileCoord)), this, SLOT(SelectNewTile(TileCoord)));
+    connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     
     ui->levelView->setScene(layers);
-    layers->setSceneRect(0, 0, 0, 0);
     ui->levelView->setMouseTracking(true);
     
     UpdateToolSelection();
@@ -56,7 +56,7 @@ MainWindow::~MainWindow()
     delete layers;
     delete tileSelector;
     delete layerPropertiesWindow;
-    delete levelpropertiesWindow;
+    delete levelPropertiesWindow;
 }
 
 void MainWindow::on_actionProperties_triggered()
@@ -160,26 +160,6 @@ void MainWindow::on_layerSelector_itemClicked(QListWidgetItem *item)
 void MainWindow::UpdateToolSelection()
 {
     layers->SetBrush(ui->brushProperties->GetCurrentBrush());
-}
-
-void MainWindow::SelectNewTile(TileCoord origin)
-{
-    int tileW = resources->GetLevelProperties()->GetTileWidth();
-    int tileH = resources->GetLevelProperties()->GetTileHeight();
-
-    //find the x and y position of the tile
-    int tileX = (tileW * origin.first) + tileW - 1;
-    int tileY = (tileH * origin.second) + tileH - 1;
-
-    tileSelector->clearSelection();
-
-    //find that tile based on position
-    QGraphicsItem *tempTileItem = tileSelector->itemAt(tileX, tileY);
-
-    //select the new tile
-    if(tempTileItem)
-        tempTileItem->setSelected(true);
-
 }
 
 void MainWindow::on_editLayerButton_clicked()
