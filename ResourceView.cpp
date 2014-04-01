@@ -5,7 +5,7 @@ ResourceView::ResourceView(QWidget *parent) :
 {
     resources = NULL;
 
-    connect(this, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(selectionUpdated(QTreeWidgetItem*,QTreeWidgetItem*)));
+    connect(this, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(selectionUpdated(QTreeWidgetItem*,QTreeWidgetItem*)));
 }
 
 void ResourceView::RepopulateEverything()
