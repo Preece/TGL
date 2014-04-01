@@ -32,7 +32,7 @@ public:
     bool IsLayerSelected();
     TileLayerView *GetSelectedLayer();
     int GetLayerCount() { return layers.count(); }
-    void SetLayerSelection(int newSelection);
+
     QString GetLayerName(int index);
 
     void UpdateLayerOpacity(TileLayer *opaqueLayer);
@@ -47,6 +47,8 @@ public slots:
     void ToggleGrid(bool show = true);
 
     void SetBrush(TileBrush *newBrush);
+
+    void SetLayerSelection(int newSelection);
 
 signals:
     void SelectNewTile(TileCoord ID);

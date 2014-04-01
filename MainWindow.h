@@ -33,9 +33,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    bool IsTileSelected();
-    TileWidgetItem *GetSelectedTileItem();
-
     bool IsLayerSelected();
 
     void RepopulateObjects();
@@ -49,7 +46,6 @@ private slots:
     void on_addLayerButton_clicked();
     void UpdateToolSelection();
     void on_pencilTool_clicked();
-    void SelectNewTile(TileCoord origin);
     void on_bucketTool_clicked();
     void on_eraserButton_clicked();
     void on_editLayerButton_clicked();
@@ -66,8 +62,6 @@ private slots:
     void on_lineTool_clicked();
     void on_replacerTool_clicked();
     void on_matrixBrushButton_clicked();
-
-    void on_resourceView_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
 private:
     Ui::MainWindow *ui;

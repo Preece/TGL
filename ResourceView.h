@@ -19,8 +19,12 @@ public:
     int GetSelectedID();
     
 signals:
+
+    void NewLayerSelected(int newID);
     
 public slots:
+
+    void selectionUpdated(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
 private:
     ResourceManager *resources;

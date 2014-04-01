@@ -4,6 +4,8 @@ ResourceView::ResourceView(QWidget *parent) :
     QTreeWidget(parent)
 {
     resources = NULL;
+
+    connect(this, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(selectionUpdated(QTreeWidgetItem*,QTreeWidgetItem*)));
 }
 
 void ResourceView::RepopulateEverything()
@@ -80,4 +82,18 @@ int ResourceView::GetItemID(QTreeWidgetItem *item)
     }
 
     return 0;
+}
+
+
+void ResourceView::selectionUpdated(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+    int selectedID = GetSelectedID();
+
+    //get the ID from the selection
+    if(selectedID)
+    {
+        //if the new selection is a layer, update the selection in the layer manager
+        if(resources->GetTileLayer(selectedID))
+            emit NewLayerSelected(selectedID);
+    }
 }
