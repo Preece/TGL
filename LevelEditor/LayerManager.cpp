@@ -17,8 +17,9 @@ LayerManager::LayerManager()
 
 LayerManager::~LayerManager()
 {
-    //fine-tune this value for optimal performance. 0 if the default,
-    //and Qt will try to automatically find a good value
+    //fine-tune this value for optimal performance. 0 is the default,
+    //and Qt will try to automatically find a good value. 10 seems to
+    //crash the application
     setBspTreeDepth(5);
 }
 
@@ -52,8 +53,8 @@ void LayerManager::AddLayer(TileLayer *newLayer)
     TileLayerView *tempLayerGroup = new TileLayerView;
     tempLayerGroup->SetLayer(newLayer);
     tempLayerGroup->RegisterResourceManager(resourceManager);
-    tempLayerGroup->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth() * resources->GetLevelProperties()->GetTileWidth(),
-                                 resourceManager->GetLevelProperties()->GetMapHeight() * resources->GetLevelProperties()->GetTileHeight());
+    tempLayerGroup->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(),
+                                 resourceManager->GetLevelProperties()->GetMapHeight());
 
     //put the layer group into the list
     layers.insert(0, tempLayerGroup);
@@ -62,7 +63,8 @@ void LayerManager::AddLayer(TileLayer *newLayer)
     tempLayerGroup->show();
     tempLayerGroup->setPos(0,0);
     
-    setSceneRect(tempLayerGroup->rect());
+    setSceneRect(0, 0, resourceManager->GetLevelProperties()->GetMapWidth() * resources->GetLevelProperties()->GetTileWidth(),
+                       resourceManager->GetLevelProperties()->GetMapHeight() * resources->GetLevelProperties()->GetTileHeight());
 }
 
 void LayerManager::RemoveLayer(TileLayer *dirtyLayer)
