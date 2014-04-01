@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layers->RegisterResourceManager(resources);
     ui->brushProperties->RegisterResourceManager(resources);
     tileSelector->RegisterResourceManager(resources);
+    ui->resourceView->RegisterResourceManager(resources);
     
     ui->resourceTab->RegisterTileSelector(tileSelector);
     ui->brushProperties->RegisterTileSelector(tileSelector);
@@ -44,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     zoomLevel = 1;
     //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
     //connect(scroll, SIGNAL(valueChanged(int)), )
+
+    ui->resourceView->RepopulateEverything();
 }
 
 MainWindow::~MainWindow()
