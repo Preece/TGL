@@ -30,12 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
-<<<<<<< HEAD
-
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
-
-=======
->>>>>>> 59cb1372f1f9139f450c398601f7e7ffb71d846f
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
