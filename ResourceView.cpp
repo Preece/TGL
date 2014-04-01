@@ -5,7 +5,7 @@ ResourceView::ResourceView(QWidget *parent) :
 {
     resources = NULL;
 
-    connect(this, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(selectionUpdated(QTreeWidgetItem*,QTreeWidgetItem*)));
+    connect(this, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(selectionUpdated(QTreeWidgetItem*,int)));
 }
 
 void ResourceView::RepopulateEverything()
@@ -85,7 +85,7 @@ int ResourceView::GetItemID(QTreeWidgetItem *item)
 }
 
 
-void ResourceView::selectionUpdated(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+void ResourceView::selectionUpdated(QTreeWidgetItem *item, int column)
 {
     int selectedID = GetSelectedID();
 

@@ -24,7 +24,7 @@ signals:
     
 public slots:
 
-    void selectionUpdated(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+    void selectionUpdated(QTreeWidgetItem *item, int column);
 
 private:
     ResourceManager *resources;

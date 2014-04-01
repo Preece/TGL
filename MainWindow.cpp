@@ -294,17 +294,6 @@ void MainWindow::on_matrixBrushButton_clicked()
 
 void MainWindow::on_scatterTool_clicked()
 {
-<<<<<<< HEAD
-    //get the ID from the selection
-    int selectedID = ui->resourceView->GetSelectedID();
-
-    if(selectedID)
-    {
-        //if the new selection is a layer, update the selection in the layer manager
-        if(resources->GetTileLayer(selectedID))
-            layers->SetLayerSelection(selectedID);
-    }
-=======
     ui->brushProperties->SetCurrentBrush(6);
     UpdateToolSelection();
 
@@ -345,5 +334,4 @@ void MainWindow::on_eyedropperTool_clicked()
     //change the cursor
     QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
     ui->levelView->setCursor(tempCur);
->>>>>>> 59cb1372f1f9139f450c398601f7e7ffb71d846f
 }
