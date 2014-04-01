@@ -52,16 +52,17 @@ void LayerManager::AddLayer(TileLayer *newLayer)
     TileLayerView *tempLayerGroup = new TileLayerView;
     tempLayerGroup->SetLayer(newLayer);
     tempLayerGroup->RegisterResourceManager(resourceManager);
-    tempLayerGroup->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(),
-                                 resourceManager->GetLevelProperties()->GetMapHeight());
+    tempLayerGroup->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth() * resources->GetLevelProperties()->GetTileWidth(),
+                                 resourceManager->GetLevelProperties()->GetMapHeight() * resources->GetLevelProperties()->GetTileHeight());
 
     //put the layer group into the list
     layers.insert(0, tempLayerGroup);
     addItem(tempLayerGroup);
-    setSceneRect(tempLayerGroup->rect());
 
     tempLayerGroup->show();
     tempLayerGroup->setPos(0,0);
+    
+    setSceneRect(tempLayerGroup->rect());
 }
 
 void LayerManager::RemoveLayer(TileLayer *dirtyLayer)
