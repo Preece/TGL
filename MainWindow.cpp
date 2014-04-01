@@ -7,48 +7,35 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //zero out these pointers
-    levelPropertiesWindow = NULL;
-    layerPropertiesWindow = NULL;
-
     //create a resource manager
-    resources = new ResourceManager;
+    resources               = new ResourceManager;
+    levelPropertiesWindow   = new LevelPropertiesDialog;
+    layerPropertiesWindow   = new LayerProperties;
+    tileSelector            = new TileSelectorScene;
+    layers                  = new LayerManager;
 
     //register the resource manager with the resource tab. The resource tab will
     //keep itself in synch with the resource manager
     ui->resourceTab->RegisterResourceManager(resources);
 
-    //attach the resource manager to the resource view
-    ui->resourceView->RegisterResourceManager(resources);
-    ui->resourceView->RepopulateEverything();
-
-    //connect the add sprite button in the resource tab to the add sprite action
-    connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
-
-    tileSelector = new TileSelectorScene;
-    ui->resourceTab->RegisterTileSelector(tileSelector);
-
-    //the layer manager is a derivative of QGraphicsScene. It coordinates all the
-    //graphical representations of the layers, which are QGraphicsItemGroups
-    layers = new LayerManager;
-    ui->levelView->setScene(layers);
-    layers->setSceneRect(0, 0, 0, 0);
+    levelPropertiesWindow->RegisterResourceManager(resources);
     layers->RegisterResourceManager(resources);
-
-    //this will make sure the mouse events are sent to the level view
-    ui->levelView->setMouseTracking(true);
-
-    ui->brushProperties->RegisterTileSelector(tileSelector);
     ui->brushProperties->RegisterResourceManager(resources);
+    tileSelector->RegisterResourceManager(resources);
+    
+    ui->resourceTab->RegisterTileSelector(tileSelector);
+    ui->brushProperties->RegisterTileSelector(tileSelector);
 
-    //when the selection changes in tileSelector, notify the layer manager
+    connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
-
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
+    connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
+    
+    ui->levelView->setScene(layers);
+    ui->levelView->setMouseTracking(true);
+    
     UpdateToolSelection();
-
-    connect(layers, SIGNAL(SelectNewTile(TileCoord)), this, SLOT(SelectNewTile(TileCoord)));
 
     //change the cursor
     QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
@@ -64,60 +51,35 @@ MainWindow::~MainWindow()
     delete ui;
 
     resources->DestroyAllResources();
+    
     delete resources;
-
     //call a cleanup function?
     delete layers;
-
     delete tileSelector;
-
-    if(layerPropertiesWindow)
-        delete layerPropertiesWindow;
-}
-
-bool MainWindow::IsTileSelected()
-{
-    if(tileSelector->selectedItems().count() > 0)
-        return true;
-
-    return false;
+    delete layerPropertiesWindow;
+    delete levelPropertiesWindow;
 }
 
 void MainWindow::on_actionProperties_triggered()
 {
-    if(!levelPropertiesWindow)
-    {
-        levelPropertiesWindow = new LevelPropertiesDialog;
-        levelPropertiesWindow->RegisterResourceManager(resources);
-    }
-
     levelPropertiesWindow->LoadValues();
     levelPropertiesWindow->exec();
 }
 
 void MainWindow::UpdateSelectedTile()
 {
-    //this function triggers when the tile selection changes
+    //this function triggers when the tile selection changes, and notifies the correct
+    //components about the change
 
     //if anything is selected
-    if(tileSelector->selectedItems().count() > 0)
+    if(tileSelector->IsTileSelected())
     {
         //inform the layer manager
-        layers->SetSelectedTile(GetSelectedTileItem());
+        layers->SetSelectedTile(tileSelector->GetSelectedTile());
 
         //inform the brush properties widget
-        ui->brushProperties->SetSelectedTileOrigin(GetSelectedTileItem()->GetTileOrigin());
+        ui->brushProperties->SetSelectedTileOrigin(tileSelector->GetSelectedTile()->GetTileOrigin());
     }
-}
-
-TileWidgetItem *MainWindow::GetSelectedTileItem()
-{
-    if(IsTileSelected())
-    {
-        return dynamic_cast<TileWidgetItem*>(tileSelector->selectedItems()[0]);
-    }
-
-    return NULL;
 }
 
 bool MainWindow::IsLayerSelected()
@@ -137,14 +99,7 @@ void MainWindow::on_gridToggle_toggled(bool checked)
 
 void MainWindow::on_addLayerButton_clicked()
 {
-    //if the layer properties window has not yet been created
-    if(layerPropertiesWindow == NULL)
-    {
-        //create it
-        layerPropertiesWindow = new LayerProperties;
-    }
-
-    //then create a new tile layer for the model
+    //create a new tile layer for the model
     TileLayer *newLayer = new TileLayer;
 
     //and pass the new tile layer model into the editor window
@@ -155,6 +110,7 @@ void MainWindow::on_addLayerButton_clicked()
     {
         //if so add the new layer to the model
         resources->AddTileLayer(newLayer);
+        
         //and give a reference to the layer manager
         layers->AddLayer(newLayer);
 
@@ -177,63 +133,8 @@ void MainWindow::UpdateToolSelection()
     layers->SetBrush(ui->brushProperties->GetCurrentBrush());
 }
 
-void MainWindow::on_pencilTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(0);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::SelectNewTile(TileCoord origin)
-{
-    int tileW = resources->GetLevelProperties()->GetTileWidth();
-    int tileH = resources->GetLevelProperties()->GetTileHeight();
-
-    //find the x and y position of the tile
-    int tileX = (tileW * origin.first) + tileW - 1;
-    int tileY = (tileH * origin.second) + tileH - 1;
-
-    tileSelector->clearSelection();
-
-    //find that tile based on position
-    QGraphicsItem *tempTileItem = tileSelector->itemAt(tileX, tileY);
-
-    //select the new tile
-    if(tempTileItem)
-        tempTileItem->setSelected(true);
-
-}
-
-void MainWindow::on_bucketTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(2);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_eraserButton_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(3);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/eraser.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
 void MainWindow::on_editLayerButton_clicked()
 {
-    if(layerPropertiesWindow == NULL)
-    {
-        layerPropertiesWindow = new LayerProperties;
-    }
-
     if(IsLayerSelected())
     {
         TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
@@ -265,50 +166,6 @@ void MainWindow::on_deleteLayerButton_clicked()
             ui->resourceView->RepopulateEverything();
         }
     }
-}
-
-void MainWindow::on_scatterTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(6);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_brushTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(7);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/brush.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_scatterFillTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(8);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_pointerTool_clicked()
-{
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/selector.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_eyedropperTool_clicked()
-{
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
-    ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_zoomInTool_clicked()
@@ -375,6 +232,36 @@ void MainWindow::RepopulateEverything()
     layers->RepopulateAllLayers();
 }
 
+void MainWindow::on_pencilTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(0);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_bucketTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(2);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_eraserButton_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(3);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/eraser.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
 void MainWindow::on_lineTool_clicked()
 {
     ui->brushProperties->SetCurrentBrush(10);
@@ -415,4 +302,48 @@ void MainWindow::on_resourceView_currentItemChanged(QTreeWidgetItem *current, QT
         if(resources->GetTileLayer(selectedID))
             layers->SetLayerSelection(selectedID);
     }
+}
+
+void MainWindow::on_scatterTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(6);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_brushTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(7);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/brush.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_scatterFillTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(8);
+    UpdateToolSelection();
+
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_pointerTool_clicked()
+{
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/selector.png"), 1, 1);
+    ui->levelView->setCursor(tempCur);
+}
+
+void MainWindow::on_eyedropperTool_clicked()
+{
+    //change the cursor
+    QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
+    ui->levelView->setCursor(tempCur);
 }
