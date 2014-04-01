@@ -4,6 +4,7 @@ ResourceView::ResourceView(QWidget *parent) :
     QTreeWidget(parent)
 {
     resources = NULL;
+    currentSelection = 0;
 
     connect(this, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(selectionUpdated(QTreeWidgetItem*,int)));
 }
@@ -32,7 +33,14 @@ void ResourceView::RepopulateEverything()
         //fetch the layer from the model
         TileLayer *layer = resources->GetLayerByIndex(i);
 
-        AddNode(layerRoot, layer->GetName(), ":/Icons/Icons/save.png", layer->GetID());
+        QTreeWidgetItem *newLayerNode = AddNode(layerRoot, layer->GetName(), ":/Icons/Icons/save.png", layer->GetID());
+
+        //if this layer was the current selection, select it again
+        if(layer->GetID() == currentSelection)
+        {
+            newLayerNode->setSelected(true);
+            layerRoot->setExpanded(true);
+        }
     }
 }
 
@@ -81,8 +89,16 @@ void ResourceView::selectionUpdated(QTreeWidgetItem *item, int column)
     //get the ID from the selection
     if(selectedID)
     {
-        //if the new selection is a layer, update the selection in the layer manager
+        //store the selection
+        currentSelection = selectedID;
+
+        //if the new selection is a layer, broadcast the change
         if(resources->GetTileLayer(selectedID))
             emit NewLayerSelected(selectedID);
+    }
+    else
+    {
+        //if nothing is selected, zero out the current selection
+        currentSelection = 0;
     }
 }

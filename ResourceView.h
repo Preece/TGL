@@ -15,6 +15,8 @@ public:
     void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
     void RepopulateEverything();
 
+    void RepopulateLayers();
+
     int GetSelectedID();
     
 signals:
@@ -30,6 +32,8 @@ private:
     QTreeWidgetItem *imageRoot;
     QTreeWidgetItem *spriteRoot;
     QTreeWidgetItem *tilesetRoot;
+
+    int currentSelection;
 
     int GetItemID(QTreeWidgetItem *item);
     QTreeWidgetItem *AddNode(QTreeWidgetItem *parent, QString name, QString icon, int ID = 0);
