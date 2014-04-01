@@ -75,6 +75,7 @@ void LayerManager::RemoveLayer(TileLayer *dirtyLayer)
             layers[i]->DestroyAllItems();
             delete layers[i];
             layers.removeAt(i);
+            currentLayer = NULL;
         }
     }
 }
