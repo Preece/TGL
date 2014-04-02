@@ -15,10 +15,10 @@ public:
     void Paint(int x, int y, TileLayerView *layer, bool preview);
     QString GetType() { return "stamp"; }
 
-    void CreateGrid(QList<TileOrigin> items);
+    void CreateGrid(QList<TileCoord> items);
 
 private:
-    QList<TileItem*> tiles;
+    QList<TileCoord> tiles;
     
     int avgX, avgY;
 };
