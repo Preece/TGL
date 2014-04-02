@@ -5,12 +5,6 @@
 
 #include "TileBrush.h"
 
-struct TilePos
-{
-    int x, y;
-    int type;
-};
-
 class StampBrush : public TileBrush
 {
 public:
