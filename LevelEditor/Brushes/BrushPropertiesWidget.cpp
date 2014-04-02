@@ -58,6 +58,11 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
     case 10:
         currentBrush = &line;
         break;
+        
+    //stamp
+    case 12:
+        currentBrush = &stamp;
+        break;
 
     //scatter
     case 6:
