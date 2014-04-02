@@ -23,17 +23,17 @@ void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
     
     for(int i = 0; i < tiles.count(); i++)
     {
-        int paintSpotX = x + tiles[i]->GetTileOrigin().first - avgX;
-        int paintSpotY = y + tiles[i]->GetTileOrigin().second - avgY;
+        int paintSpotX = x + tiles[i].first - avgX;
+        int paintSpotY = y + tiles[i].second - avgY;
         
         if(preview)
-            layer->PreviewModifyTile(paintSpotX, paintSporY, tiles[i]->GetTileOrigin());
+            layer->PreviewModifyTile(paintSpotX, paintSporY, tiles[i]);
         else
-            layer->ModifyTile(paintSpotX, paintSpotY, TileCoord(tiles[i].originX, tiles[i].originY));
+            layer->ModifyTile(paintSpotX, paintSpotY, tiles[i]);
     }
 }
 
-void StampBrush::CreateGrid(QList<QGraphicsItem *> items, int w, int h)
+void StampBrush::CreateGrid(QList<TileOrigin> items)
 {
     //remove all current items
     tiles.clear();
@@ -41,20 +41,12 @@ void StampBrush::CreateGrid(QList<QGraphicsItem *> items, int w, int h)
     //loop through the items and fill the list
     for(int i = 0; i < items.count(); i++)
     {
-        //cast the graphics items into a temporary tile item
-        TileWidgetItem *tempItem = dynamic_cast<TileWidgetItem*>(items[i]);
-        
-        //if the item was casted correctly
-        if(tempItem)
-        {
-            //add it into the list of items
-            tiles.append(tempItem);
+        //add it into the list of items
+        tiles.append(items[i]);
             
-            //add its origin points to the tally of origins
-            avgX += tempItem->GetTileOrigin().first;
-            avgY += tempItem->GetTileorigin().second;
-        }
-
+        //add its origin points to the tally of origins
+        avgX += items[i].first;
+        avgY += items[i].second;
     }
     
     //create the averages
