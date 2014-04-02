@@ -25,6 +25,7 @@ ResourceView::ResourceView(QWidget *parent) :
 void ResourceView::RepopulateEverything()
 {
     RepopulateLayers();
+    RepopulateImages();
 }
 
 void ResourceView::RepopulateLayers()
@@ -45,6 +46,28 @@ void ResourceView::RepopulateLayers()
         {
             newLayerNode->setSelected(true);
             layerRoot->setExpanded(true);
+        }
+    }
+}
+
+void ResourceView::RepopulateImages()
+{
+    //get rid of the children
+    RemoveChildrenNodes(imageRoot);
+
+    //get each layer and add it as a child node of the layer root
+    for(int i = 0; i < resources->GetImageCount(); i++)
+    {
+        //fetch the layer from the model
+        Image *img = resources->GetImageByIndex(i);
+
+        QTreeWidgetItem *newImageNode = AddNode(imageRoot, img->GetType(), ":/Icons/Icons/save.png", img->GetID());
+
+        //if this layer was the current selection, select it again
+        if(img->GetID() == currentSelection)
+        {
+            newImageNode->setSelected(true);
+            imageRoot->setExpanded(true);
         }
     }
 }

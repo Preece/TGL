@@ -15,7 +15,6 @@ public:
     void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
 
     void RepopulateEverything();
-    void RepopulateLayers();
 
     int GetSelectedID();
 
@@ -26,6 +25,9 @@ signals:
     
 public slots:
     void selectionUpdated(QTreeWidgetItem *item, int column);
+
+    void RepopulateLayers();
+    void RepopulateImages();
 
 private:
     ResourceManager *resources;

@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
+    connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
+    connect(resources, SIGNAL(LayerListModified()), ui->resourceView, SLOT(RepopulateLayers()));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
@@ -104,9 +106,6 @@ void MainWindow::on_addLayerButton_clicked()
     {
         delete newLayer;
     }
-
-    //refresh the resource viewer. In the future, this could perhaps only refresh the layer section
-    ui->resourceView->RepopulateLayers();
 }
 
 void MainWindow::UpdateToolSelection()
@@ -125,8 +124,6 @@ void MainWindow::on_editLayerButton_clicked()
             layerPropertiesWindow->EditLayer(tempLayer);
             layers->UpdateLayerOpacity(tempLayer);
         }
-
-        ui->resourceView->RepopulateLayers();
     }
 }
 
@@ -140,9 +137,6 @@ void MainWindow::on_deleteLayerButton_clicked()
         {
             //remove the layer from the layer manager (which will take it out of the RM)
             layers->RemoveLayer(tempLayer);
-
-            //refresh the resource view
-            ui->resourceView->RepopulateLayers();
         }
     }
 }
