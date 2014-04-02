@@ -18,7 +18,7 @@ public:
     void CreateGrid(QList<QGraphicsItem*> items);
 
 private:
-    QList<Tile*> tiles;
+    QList<TileItem*> tiles;
     
     int avgX, avgY;
 };
