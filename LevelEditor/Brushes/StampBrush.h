@@ -25,6 +25,8 @@ public:
 
 private:
     QList<Tile*> tiles;
+    
+    int avgX, avgY;
 };
 
 #endif // STAMPBRUSH_H
