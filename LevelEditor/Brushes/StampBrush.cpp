@@ -13,6 +13,14 @@ void StampBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
 
 void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
+    //the trick is to take the position to paint
+    //add the tile origin coordinates
+    //remove the average of the tile origin coordinates.
+    
+    //the result is that you will paint the tiles in the
+    //configuration in which they have been selected in the
+    //tile selector, from the middlemost point
+    
     for(int i = 0; i < tiles.count(); i++)
     {
         if(preview)
@@ -24,12 +32,18 @@ void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 
 void StampBrush::CreateGrid(QList<QGraphicsItem *> items, int w, int h)
 {
-    items.clear();
+    tiles.clear();
 
     //loop through the items and fill the list
     for(int i = 0; i < items.count(); i++)
     {
-
+        //cast the graphics items into a temporary tile item
+        TileItem *tempItem = dynamic_cast<TileItem*>(items[i]);
+        
+        //if the item was casted correctly
+        if(tempItem)
+            //add it into the list of items
+            tiles.append(tempItem);
 
     }
 }
