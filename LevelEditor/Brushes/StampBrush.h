@@ -21,10 +21,10 @@ public:
     void Paint(int x, int y, TileLayerView *layer, bool preview);
     QString GetType() { return "stamp"; }
 
-    void CreateGrid(QList<QGraphicsItem*> items, int w, int h);
+    void CreateGrid(QList<QGraphicsItem*> items);
 
 private:
-    QList<Tile> tiles;
+    QList<Tile*> tiles;
 };
 
 #endif // STAMPBRUSH_H
