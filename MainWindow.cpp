@@ -86,15 +86,6 @@ void MainWindow::UpdateSelectedTile()
     }
 }
 
-bool MainWindow::IsLayerSelected()
-{
-    //if anything is selected
-    if(resources->GetTileLayer(ui->resourceView->GetSelectedID()))
-        return true;
-
-    return false;
-}
-
 void MainWindow::on_addLayerButton_clicked()
 {
     //create a new tile layer for the model
@@ -125,7 +116,7 @@ void MainWindow::UpdateToolSelection()
 
 void MainWindow::on_editLayerButton_clicked()
 {
-    if(IsLayerSelected())
+    if(ui->resourceView->IsLayerSelected())
     {
         TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
 
@@ -141,7 +132,7 @@ void MainWindow::on_editLayerButton_clicked()
 
 void MainWindow::on_deleteLayerButton_clicked()
 {
-    if(IsLayerSelected())
+    if(ui->resourceView->IsLayerSelected())
     {
         TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
 

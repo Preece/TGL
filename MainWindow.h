@@ -33,10 +33,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    bool IsLayerSelected();
-
-    void RepopulateObjects();
-
     void RepopulateEverything();
 
 private slots:
@@ -75,7 +71,7 @@ private:
     LayerManager *layers;
     TileSelectorScene *tileSelector;
 
-    double zoomLevel;
+    float zoomLevel;
 };
 
 #endif // MAINWINDOW_H

@@ -18,6 +18,8 @@ public:
     void RepopulateLayers();
 
     int GetSelectedID();
+
+    bool IsLayerSelected();
     
 signals:
     void NewLayerSelected(int newID);

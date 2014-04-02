@@ -61,6 +61,15 @@ int ResourceView::GetSelectedID()
     return 0;
 }
 
+bool ResourceView::IsLayerSelected()
+{
+    //if anything is selected
+    if(resources->GetTileLayer(GetSelectedID()))
+        return true;
+
+    return false;
+}
+
 int ResourceView::GetItemID(QTreeWidgetItem *item)
 {
     if(item)
