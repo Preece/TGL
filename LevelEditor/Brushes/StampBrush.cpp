@@ -23,27 +23,41 @@ void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
     
     for(int i = 0; i < tiles.count(); i++)
     {
+        int paintSpotX = x + tiles[i]->GetTileOrigin().first - avgX;
+        int paintSpotY = y + tiles[i]->GetTileOrigin().second - avgY;
+        
         if(preview)
-            layer->PreviewModifyTile(x + tiles[i].x, y + tiles[i].y, TileCoord(tiles[i].originX, tiles[i].originY));
+            layer->PreviewModifyTile(paintSpotX, paintSporY, tiles[i]->GetTileOrigin());
         else
-            layer->ModifyTile(x + tiles[i].x, y + tiles[i].y, TileCoord(tiles[i].originX, tiles[i].originY));
+            layer->ModifyTile(paintSpotX, paintSpotY, TileCoord(tiles[i].originX, tiles[i].originY));
     }
 }
 
 void StampBrush::CreateGrid(QList<QGraphicsItem *> items, int w, int h)
 {
+    //remove all current items
     tiles.clear();
 
     //loop through the items and fill the list
     for(int i = 0; i < items.count(); i++)
     {
         //cast the graphics items into a temporary tile item
-        TileItem *tempItem = dynamic_cast<TileItem*>(items[i]);
+        TileWidgetItem *tempItem = dynamic_cast<TileWidgetItem*>(items[i]);
         
         //if the item was casted correctly
         if(tempItem)
+        {
             //add it into the list of items
             tiles.append(tempItem);
+            
+            //add its origin points to the tally of origins
+            avgX += tempItem->GetTileOrigin().first;
+            avgY += tempItem->GetTileorigin().second;
+        }
 
     }
+    
+    //create the averages
+    avgX = (int)(avgX / tiles.count());
+    avgY = (int)(avgY / tiles.count());
 }
