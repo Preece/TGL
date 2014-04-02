@@ -22,3 +22,24 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
     if(tempTileItem)
         tempTileItem->setSelected(true);
 }
+
+TileCoordList TileSelectorScene::GetAllSelectedTiles()
+{
+    TileCoordList coordList;
+    
+    //pull out a list of all selected items
+    QList<QGraphicsItem*> selectedItems = selectedItems();
+    
+    //for every one
+    for(int i = 0; i < selectedItems.count(); i++)
+    {
+        //cast it into a tilewidget item
+        TileWidgetItem *tempItem = dynamic_cast<TileWidgetItem*>(selectedItems()[i]);
+        
+        //and add its origin coordinates to the list
+        if(tempItem)
+            coordList.push_back(tempItem->GetTileOrigin());
+    }
+
+    return coordList;
+}
