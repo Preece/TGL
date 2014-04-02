@@ -59,6 +59,7 @@ void LayerManager::AddLayer(TileLayer *newLayer)
     //put the layer group into the list
     layers.insert(0, tempLayerGroup);
     addItem(tempLayerGroup);
+    UpdateLayerOpacity(newLayer);
 
     tempLayerGroup->show();
     tempLayerGroup->setPos(0,0);

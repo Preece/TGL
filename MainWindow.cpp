@@ -100,22 +100,14 @@ void MainWindow::on_addLayerButton_clicked()
     //create a new tile layer for the model
     TileLayer *newLayer = new TileLayer;
 
-    //and pass the new tile layer model into the editor window
-    layerPropertiesWindow->NewLayer(newLayer);
-
     //execute the window, and check if the changes were accepted
-    if(layerPropertiesWindow->exec() == QDialog::Accepted)
+    if(layerPropertiesWindow->SetupNewLayer(newLayer) == QDialog::Accepted)
     {
         //if so add the new layer to the model
         resources->AddTileLayer(newLayer);
         
         //and give a reference to the layer manager
         layers->AddLayer(newLayer);
-
-        layers->UpdateLayerOpacity(newLayer);
-
-        layers->setSceneRect(0, 0, resources->GetLevelProperties()->GetMapWidth() * resources->GetLevelProperties()->GetTileWidth(),
-                             resources->GetLevelProperties()->GetMapHeight() * resources->GetLevelProperties()->GetTileHeight());
     }
     else
     {
@@ -123,7 +115,7 @@ void MainWindow::on_addLayerButton_clicked()
     }
 
     //refresh the resource viewer. In the future, this could perhaps only refresh the layer section
-    ui->resourceView->RepopulateEverything();
+    ui->resourceView->RepopulateLayers();
 }
 
 void MainWindow::UpdateToolSelection()
@@ -140,8 +132,6 @@ void MainWindow::on_editLayerButton_clicked()
         if(tempLayer)
         {
             layerPropertiesWindow->EditLayer(tempLayer);
-            layerPropertiesWindow->exec();
-
             layers->UpdateLayerOpacity(tempLayer);
         }
 
