@@ -13,8 +13,8 @@ public:
     explicit ResourceView(QWidget *parent = 0);
 
     void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
-    void RepopulateEverything();
 
+    void RepopulateEverything();
     void RepopulateLayers();
 
     int GetSelectedID();
@@ -37,6 +37,7 @@ private:
 
     int GetItemID(QTreeWidgetItem *item);
     QTreeWidgetItem *AddNode(QTreeWidgetItem *parent, QString name, QString icon, int ID = 0);
+    void RemoveChildrenNodes(QTreeWidgetItem *parent);
     
 };
 

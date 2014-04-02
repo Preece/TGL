@@ -63,8 +63,8 @@ void LayerManager::AddLayer(TileLayer *newLayer)
     tempLayerGroup->show();
     tempLayerGroup->setPos(0,0);
     
-    setSceneRect(0, 0, resourceManager->GetLevelProperties()->GetMapWidth() * resources->GetLevelProperties()->GetTileWidth(),
-                       resourceManager->GetLevelProperties()->GetMapHeight() * resources->GetLevelProperties()->GetTileHeight());
+    setSceneRect(0, 0, resourceManager->GetLevelProperties()->GetMapWidth() * resourceManager->GetLevelProperties()->GetTileWidth(),
+                       resourceManager->GetLevelProperties()->GetMapHeight() * resourceManager->GetLevelProperties()->GetTileHeight());
 }
 
 void LayerManager::RemoveLayer(TileLayer *dirtyLayer)

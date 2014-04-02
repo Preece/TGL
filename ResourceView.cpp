@@ -7,12 +7,6 @@ ResourceView::ResourceView(QWidget *parent) :
     currentSelection = 0;
 
     connect(this, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(selectionUpdated(QTreeWidgetItem*,int)));
-}
-
-void ResourceView::RepopulateEverything()
-{
-    //clear out all the items that exist now
-    this->clear();
 
     //create and add a root node for the project
     QTreeWidgetItem *projectRoot = new QTreeWidgetItem;
@@ -26,6 +20,17 @@ void ResourceView::RepopulateEverything()
     imageRoot = AddNode(projectRoot, "Images", ":/Icons/Icons/open.png");
     spriteRoot = AddNode(projectRoot, "Sprites", ":/Icons/Icons/open.png");
     tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/Icons/open.png");
+}
+
+void ResourceView::RepopulateEverything()
+{
+    RepopulateLayers();
+}
+
+void ResourceView::RepopulateLayers()
+{
+    //get rid of the children
+    RemoveChildrenNodes(layerRoot);
 
     //get each layer and add it as a child node of the layer root
     for(int i = 0; i < resources->GetLayerCount(); i++)
@@ -79,6 +84,19 @@ QTreeWidgetItem *ResourceView::AddNode(QTreeWidgetItem *parent, QString name, QS
     parent->addChild(newNode);
 
     return newNode;
+}
+
+void ResourceView::RemoveChildrenNodes(QTreeWidgetItem *parent)
+{
+    if(!parent)
+        return;
+
+    //loop from the last item to the first, deleting them
+    for(int i = (parent->childCount()); i >= 0; i--)
+    {
+        if(parent->child(i))
+            delete parent->child(i);
+    }
 }
 
 

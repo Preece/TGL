@@ -14,10 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     tileSelector            = new TileSelectorScene;
     layers                  = new LayerManager;
 
-    //register the resource manager with the resource tab. The resource tab will
-    //keep itself in synch with the resource manager
+    //register the resource manager with the various modules. They will
+    //keep themselves in sync with the resource manager
     ui->resourceTab->RegisterResourceManager(resources);
-
     levelPropertiesWindow->RegisterResourceManager(resources);
     layers->RegisterResourceManager(resources);
     ui->brushProperties->RegisterResourceManager(resources);
@@ -90,9 +89,8 @@ void MainWindow::UpdateSelectedTile()
 bool MainWindow::IsLayerSelected()
 {
     //if anything is selected
-    if(ui->resourceView->selectedItems().count() > 0)
-        if(resources->GetTileLayer(ui->resourceView->GetSelectedID()))
-            return true;
+    if(resources->GetTileLayer(ui->resourceView->GetSelectedID()))
+        return true;
 
     return false;
 }
@@ -147,7 +145,7 @@ void MainWindow::on_editLayerButton_clicked()
             layers->UpdateLayerOpacity(tempLayer);
         }
 
-        ui->resourceView->RepopulateEverything();
+        ui->resourceView->RepopulateLayers();
     }
 }
 
@@ -163,7 +161,7 @@ void MainWindow::on_deleteLayerButton_clicked()
             layers->RemoveLayer(tempLayer);
 
             //refresh the resource view
-            ui->resourceView->RepopulateEverything();
+            ui->resourceView->RepopulateLayers();
         }
     }
 }
