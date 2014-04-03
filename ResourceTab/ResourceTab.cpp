@@ -62,14 +62,14 @@ void ResourceTab::RepopulateTileSelector()
                     tempItem = new TileWidgetItem;
 
                     //copy the correct fragment of the image into a new TileItem
-                    tempItem->SetTilePixmap(resourceManager->GetTilePixmap(TileCoord(i, j)));
+                    tempItem->SetTilePixmap(resourceManager->GetTilePixmap(TileCoord(j, i)));
 
                     //create a tile with the correct origin points, and add it in.
                     //the x and y are -1 to indicate that this doesnt exist in the tile
                     //grid, only in the selector pane
                     tempTile = new Tile();
-                    tempTile->originX = i;
-                    tempTile->originY = j;
+                    tempTile->originX = j;
+                    tempTile->originY = i;
                     tempTile->x = -1;
                     tempTile->y = -1;
                     tempItem->SetTile(tempTile);

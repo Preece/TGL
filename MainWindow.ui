@@ -282,6 +282,22 @@
          </widget>
         </item>
         <item>
+         <widget class="QToolButton" name="stampTool">
+          <property name="toolTip">
+           <string>Stamp Brush</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string>toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
          <widget class="QToolButton" name="eraserButton">
           <property name="toolTip">
            <string>Eraser</string>

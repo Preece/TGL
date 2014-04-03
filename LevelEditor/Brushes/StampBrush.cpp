@@ -2,6 +2,8 @@
 
 StampBrush::StampBrush()
 {
+    avgX = 0;
+    avgY = 0;
 }
 
 void StampBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)

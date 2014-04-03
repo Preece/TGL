@@ -21,6 +21,8 @@
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"
 
+typedef QList<TileCoord> TileList;
+
 namespace Ui {
 class MainWindow;
 }
@@ -38,7 +40,6 @@ public:
 private slots:
 
     void on_actionProperties_triggered();
-    void UpdateSelectedTile();
     void on_addLayerButton_clicked();
     void UpdateToolSelection();
     void on_pencilTool_clicked();
@@ -58,6 +59,8 @@ private slots:
     void on_lineTool_clicked();
     void on_replacerTool_clicked();
     void on_matrixBrushButton_clicked();
+
+    void on_stampTool_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -3,7 +3,6 @@
 LayerManager::LayerManager()
 {
     resourceManager = NULL;
-    currentTile = NULL;
     currentLayer = NULL;
     currentBrush = NULL;
 

@@ -208,10 +208,20 @@ void BrushPropertiesWidget::DestroyBrushes()
     matrix.clear();
 }
 
-void BrushPropertiesWidget::SetSelectedTileOrigin(TileCoord newOrigin)
+void BrushPropertiesWidget::SetSelectedTiles(TileList newList)
 {
-    pencil.SetSelectedTileOrigin(newOrigin);
-    bucket.SetSelectedTileOrigin(newOrigin);
+    if(newList.count() > 0)
+    {
+        pencil.SetSelectedTileOrigin(newList[0]);
+        bucket.SetSelectedTileOrigin(newList[0]);
+    }
+
+    stamp.CreateGrid(newList);
+
+    //if multiple tiles were selected, go ahead and select the stamp.
+    //this might prove to be annoying
+    if(newList.count() > 1)
+        SetCurrentBrush(12);
 }
 
 void BrushPropertiesWidget::on_overwriteCheckbox_toggled(bool checked)
