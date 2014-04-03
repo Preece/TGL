@@ -28,13 +28,13 @@ TileCoordList TileSelectorScene::GetAllSelectedTiles()
     TileCoordList coordList;
     
     //pull out a list of all selected items
-    QList<QGraphicsItem*> selectedItems = selectedItems();
+    QList<QGraphicsItem*> selectedTiles = selectedItems();
     
     //for every one
-    for(int i = 0; i < selectedItems.count(); i++)
+    for(int i = 0; i < selectedTiles.count(); i++)
     {
         //cast it into a tilewidget item
-        TileWidgetItem *tempItem = dynamic_cast<TileWidgetItem*>(selectedItems()[i]);
+        TileWidgetItem *tempItem = dynamic_cast<TileWidgetItem*>(selectedTiles[i]);
         
         //and add its origin coordinates to the list
         if(tempItem)

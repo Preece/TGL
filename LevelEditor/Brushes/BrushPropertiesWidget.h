@@ -15,6 +15,7 @@
 #include "ScatterBrush.h"
 #include "ReplacerBrush.h"
 #include "MatrixBrush.h"
+#include "StampBrush.h""
 
 namespace Ui {
 class BrushPropertiesWidget;
@@ -88,6 +89,7 @@ private:
     EraserBrush eraser;
     FillBrush bucket;
     LineBrush line;
+    StampBrush stamp;
 
     QList<ScatterBrush*> scatter;
     int scatterBrushIndex;
