@@ -12,18 +12,6 @@ ItemNode::~ItemNode()
 {
 }
 
-void ItemNode::Save(Exporter *exporter)
-{
-    exporter->WriteType(ID, GetType());
-
-    Export(exporter);
-
-    for(int i = 0 ; i < GetChildCount(); i++)
-    {
-        GetChildByIndex(i)->Save(exporter);
-    }
-}
-
 void ItemNode::AddChild(ItemNode *newChild)
 {
     //if the new child exists
