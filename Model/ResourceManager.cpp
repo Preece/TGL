@@ -247,4 +247,16 @@ void ResourceManager::Redo()
     undo->redo();
 }
 
+void ResourceManager::BeginUndoOperation(QString name) 
+{ 
+    undoing = true;
+    undo->beginMacro(name); 
+}
+
+void ResourceManager::EndUndoOperation() 
+{ 
+    undoing = false;
+    undo->endMacro(); 
+}
+
 
