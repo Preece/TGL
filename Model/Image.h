@@ -11,8 +11,6 @@
 class Image : public ItemNode
 {
 public:
-    bool Export(Exporter *exporter);
-    bool Import(Exporter *exporter);
     QString GetType() { return "image"; }
 
     Image();
