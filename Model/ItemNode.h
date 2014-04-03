@@ -32,11 +32,6 @@ public:
     int GetID() { return ID; }
 
     virtual QString GetType() = 0;
-    virtual bool Export(Exporter *exporter) = 0;
-    virtual bool Import(Exporter *exporter) = 0;
-
-    void Save(Exporter *exporter);
-    void Load(Exporter *exporter);
 
     void AddChild(ItemNode *newChild);
     ItemNode *GetChild(int ID);
