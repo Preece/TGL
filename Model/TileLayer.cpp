@@ -9,26 +9,6 @@ TileLayer::TileLayer()
     horizontalParallax = 1.0;
 }
 
-bool TileLayer::Export(Exporter *exporter)
-{
-    exporter->WriteDouble(verticalParallax);
-    exporter->WriteDouble(horizontalParallax);
-    exporter->WriteString(name);
-    exporter->WriteInt(opacity);
-
-    return true;
-}
-
-bool TileLayer::Import(Exporter *exporter)
-{
-    exporter->ReadDouble(verticalParallax);
-    exporter->ReadDouble(horizontalParallax);
-    exporter->ReadString(name);
-    exporter->ReadInt(opacity);
-
-    return true;
-}
-
 Tile *TileLayer::GetTileAtPos(int x, int y)
 {
     return tiles[TileCoord(x, y)];
