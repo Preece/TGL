@@ -4,6 +4,8 @@ ResourceManager::ResourceManager()
 {
     undo = new QUndoStack;
     undo->setUndoLimit(500);
+    
+    undoing = false;
 }
 
 int ResourceManager::AddSprite(Sprite *newSprite)
