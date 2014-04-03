@@ -5,6 +5,8 @@
 #include "Model/ResourceManager.h"
 #include "TileWidgetItem.h"
 
+typedef QList<TileCoord> TileCoordList;
+
 class TileSelectorScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -16,6 +18,8 @@ public:
     bool IsTileSelected() { if(selectedItems().count() > 0) return true; return false; }
     
     TileWidgetItem *GetSelectedTile() { if(IsTileSelected()) return dynamic_cast<TileWidgetItem*>(selectedItems()[0]); return NULL; }
+    TileCoordList GetAllSelectedTiles();
+    
 signals:
     
 public slots:
