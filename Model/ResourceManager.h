@@ -58,6 +58,8 @@ public slots:
 
     void BeginUndoOperation(QString name);
     void EndUndoOperation();
+    
+    bool IsUndoHappening() { return undoing; }
 
 signals:
     void SpriteListModified(QStringList spriteNameList);
