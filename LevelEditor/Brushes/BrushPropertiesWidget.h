@@ -29,7 +29,7 @@ public:
     explicit BrushPropertiesWidget(QWidget *parent = 0);
     ~BrushPropertiesWidget();
 
-    void SetSelectedTileOrigin(TileCoord newOrigin);
+
 
     void SetCurrentBrush(int type);
     TileBrush *GetCurrentBrush() { return currentBrush; }
@@ -42,6 +42,8 @@ public:
     void DestroyBrushes();
     
 private slots:
+
+    void SetSelectedTiles(TileList newList);
 
     void on_overwriteCheckbox_toggled(bool checked);
 

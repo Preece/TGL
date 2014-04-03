@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushProperties->RegisterTileSelector(tileSelector);
 
     connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
-    connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
+    connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushProperties, SLOT(SetSelectedTiles(TileList)));
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
@@ -63,22 +63,6 @@ void MainWindow::on_actionProperties_triggered()
 {
     levelPropertiesWindow->LoadValues();
     levelPropertiesWindow->exec();
-}
-
-void MainWindow::UpdateSelectedTile()
-{
-    //this function triggers when the tile selection changes, and notifies the correct
-    //components about the change
-
-    //if anything is selected
-    if(tileSelector->IsTileSelected())
-    {
-        //inform the layer manager
-        layers->SetSelectedTile(tileSelector->GetSelectedTile());
-
-        //inform the brush properties widget
-        ui->brushProperties->SetSelectedTileOrigin(tileSelector->GetSelectedTile()->GetTileOrigin());
-    }
 }
 
 void MainWindow::RepopulateLayerSelector()

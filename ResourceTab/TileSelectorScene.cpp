@@ -2,6 +2,7 @@
 
 TileSelectorScene::TileSelectorScene(QObject *parent)
 {
+    connect(this, SIGNAL(selectionChanged()), this, SLOT(PackageAndEmitSelection()));
 }
 
 void TileSelectorScene::SelectNewTile(TileCoord origin)
@@ -23,7 +24,7 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
         tempTileItem->setSelected(true);
 }
 
-TileList TileSelectorScene::GetAllSelectedTiles()
+TileList TileSelectorScene::GetSelectedTiles()
 {
     TileList coordList;
     
@@ -42,4 +43,9 @@ TileList TileSelectorScene::GetAllSelectedTiles()
     }
 
     return coordList;
+}
+
+void TileSelectorScene::PackageAndEmitSelection()
+{
+    emit SelectionChanged(GetSelectedTiles());
 }

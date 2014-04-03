@@ -44,8 +44,6 @@ public:
     void RepopulateAllLayers();
 
 public slots:
-    void SetSelectedTile(TileWidgetItem *newTile) { currentTile = newTile; }
-
     void ToggleGrid(bool show = true);
 
     void SetBrush(TileBrush *newBrush);
@@ -63,8 +61,6 @@ private:
     TileLayerView *currentLayer;
 
     ResourceManager *resourceManager;
-    TileWidgetItem *currentTile;
-    TileList selectedTileList;
 
     QGraphicsItemGroup *grid;
 

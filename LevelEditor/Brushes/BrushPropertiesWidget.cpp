@@ -208,10 +208,15 @@ void BrushPropertiesWidget::DestroyBrushes()
     matrix.clear();
 }
 
-void BrushPropertiesWidget::SetSelectedTileOrigin(TileCoord newOrigin)
+void BrushPropertiesWidget::SetSelectedTiles(TileList newList)
 {
-    pencil.SetSelectedTileOrigin(newOrigin);
-    bucket.SetSelectedTileOrigin(newOrigin);
+    if(newList.count() > 0)
+    {
+        pencil.SetSelectedTileOrigin(newList[0]);
+        bucket.SetSelectedTileOrigin(newList[0]);
+    }
+
+    stamp.CreateGrid(newList);
 }
 
 void BrushPropertiesWidget::on_overwriteCheckbox_toggled(bool checked)

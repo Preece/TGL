@@ -18,12 +18,14 @@ public:
     bool IsTileSelected() { if(selectedItems().count() > 0) return true; return false; }
     
     TileWidgetItem *GetSelectedTile() { if(IsTileSelected()) return dynamic_cast<TileWidgetItem*>(selectedItems()[0]); return NULL; }
-    TileList GetAllSelectedTiles();
+    TileList GetSelectedTiles();
     
 signals:
+    void SelectionChanged(TileList newSelection);
     
 public slots:
 
+    void PackageAndEmitSelection();
     void SelectNewTile(TileCoord origin);
 
 private:
