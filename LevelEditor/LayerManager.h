@@ -14,6 +14,8 @@
 #include "../ResourceTab/TileWidgetItem.h"
 #include "Brushes/TileBrush.h"
 
+typedef QList<TileCoord> TileList;
+
 class LayerManager : public QGraphicsScene
 {
     Q_OBJECT
@@ -62,6 +64,7 @@ private:
 
     ResourceManager *resourceManager;
     TileWidgetItem *currentTile;
+    TileList selectedTileList;
 
     QGraphicsItemGroup *grid;
 

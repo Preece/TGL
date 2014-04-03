@@ -20,6 +20,8 @@
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"
 
+typedef QList<TileCoord> TileList;
+
 namespace Ui {
 class MainWindow;
 }

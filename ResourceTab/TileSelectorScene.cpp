@@ -23,9 +23,9 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
         tempTileItem->setSelected(true);
 }
 
-TileCoordList TileSelectorScene::GetAllSelectedTiles()
+TileList TileSelectorScene::GetAllSelectedTiles()
 {
-    TileCoordList coordList;
+    TileList coordList;
     
     //pull out a list of all selected items
     QList<QGraphicsItem*> selectedTiles = selectedItems();

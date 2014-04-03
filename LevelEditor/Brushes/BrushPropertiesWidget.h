@@ -15,7 +15,7 @@
 #include "ScatterBrush.h"
 #include "ReplacerBrush.h"
 #include "MatrixBrush.h"
-#include "StampBrush.h""
+#include "StampBrush.h"
 
 namespace Ui {
 class BrushPropertiesWidget;
