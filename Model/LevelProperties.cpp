@@ -18,31 +18,3 @@ bool LevelProperties::IsPropertiesSet()
 
     return false;
 }
-
-bool LevelProperties::Export(Exporter *exporter)
-{
-    exporter->WriteInt(tileWidth);
-    exporter->WriteInt(tileHeight);
-    exporter->WriteInt(mapWidth);
-    exporter->WriteInt(mapHeight);
-
-    exporter->WriteString(levelName);
-
-    exporter->WriteInt(tilesetID);
-
-    return true;
-}
-
-bool LevelProperties::Import(Exporter *exporter)
-{
-    exporter->ReadInt(tileWidth);
-    exporter->ReadInt(tileHeight);
-    exporter->ReadInt(mapWidth);
-    exporter->ReadInt(mapHeight);
-
-    exporter->ReadString(levelName);
-
-    exporter->ReadInt(tilesetID);
-
-    return true;
-}
