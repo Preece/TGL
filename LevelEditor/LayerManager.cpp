@@ -17,8 +17,9 @@ LayerManager::LayerManager()
 
 LayerManager::~LayerManager()
 {
-    //fine-tune this value for optimal performance. 0 if the default,
-    //and Qt will try to automatically find a good value
+    //fine-tune this value for optimal performance. 0 is the default,
+    //and Qt will try to automatically find a good value. 10 seems to
+    //crash the application
     setBspTreeDepth(5);
 }
 
@@ -58,12 +59,13 @@ void LayerManager::AddLayer(TileLayer *newLayer)
     //put the layer group into the list
     layers.insert(0, tempLayerGroup);
     addItem(tempLayerGroup);
-    setSceneRect(tempLayerGroup->rect());
+    UpdateLayerOpacity(newLayer);
 
     tempLayerGroup->show();
     tempLayerGroup->setPos(0,0);
     
-    UpdateLayerOpacity(newLayer);
+    setSceneRect(0, 0, resourceManager->GetLevelProperties()->GetMapWidth() * resourceManager->GetLevelProperties()->GetTileWidth(),
+                       resourceManager->GetLevelProperties()->GetMapHeight() * resourceManager->GetLevelProperties()->GetTileHeight());
 }
 
 void LayerManager::RemoveLayer(TileLayer *dirtyLayer)
@@ -77,6 +79,7 @@ void LayerManager::RemoveLayer(TileLayer *dirtyLayer)
             layers[i]->DestroyAllItems();
             delete layers[i];
             layers.removeAt(i);
+            currentLayer = NULL;
         }
     }
 }
@@ -229,13 +232,19 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::SetLayerSelection(int newSelection)
 {
-    if(newSelection < 0 || newSelection > layers.count())
+    //loop through all the layers
+    for(int i = 0; i < layers.count(); i++)
     {
-        currentLayer = NULL;
-        return;
+        //and if there is a layer associated with the correct ID, set it as the current layer
+        if(layers[i]->GetLayerID() == newSelection)
+        {
+            currentLayer = layers[i];
+            return;
+        }
     }
 
-    currentLayer = layers[newSelection];
+    //if it was not found, just NULL out the current layer. Checks elsewhere will prevent drawing
+    currentLayer = NULL;
 }
 
 QString LayerManager::GetLayerName(int index)

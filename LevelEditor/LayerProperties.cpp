@@ -15,7 +15,7 @@ LayerProperties::~LayerProperties()
     delete ui;
 }
 
-void LayerProperties::NewLayer(TileLayer *newLayer)
+int LayerProperties::SetupNewLayer(TileLayer *newLayer)
 {
     currentLayer = newLayer;
 
@@ -24,20 +24,26 @@ void LayerProperties::NewLayer(TileLayer *newLayer)
     ui->opacitySlider->setValue(100);
     ui->verticalPValue->setValue(1.00);
     ui->horizontalPValue->setValue(1.00);
+
+    return exec();
 }
 
-void LayerProperties::EditLayer(TileLayer *newLayer)
+int LayerProperties::EditLayer(TileLayer *newLayer)
 {
     currentLayer = newLayer;
 
-    if(newLayer)
+    if(currentLayer)
     {
         //set all the values to the layers
         ui->layerNameInput->setText(currentLayer->GetName());
         ui->opacitySlider->setValue(currentLayer->GetOpacity());
         ui->verticalPValue->setValue(currentLayer->GetVerticalParallax());
         ui->horizontalPValue->setValue(currentLayer->GetHorizontalParallax());
+
+        return exec();
     }
+
+    return NULL;
 }
 
 void LayerProperties::on_buttonBox_accepted()

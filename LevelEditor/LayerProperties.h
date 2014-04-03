@@ -17,8 +17,8 @@ public:
     explicit LayerProperties(QWidget *parent = 0);
     ~LayerProperties();
 
-    void NewLayer(TileLayer *newLayer);
-    void EditLayer(TileLayer *newLayer);
+    int SetupNewLayer(TileLayer *newLayer);
+    int EditLayer(TileLayer *newLayer);
     
 private slots:
     void on_buttonBox_accepted();

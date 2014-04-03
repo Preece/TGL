@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStringList>
 #include <QGraphicsScene>
+#include <QTreeWidget>
 
 #include "Model/Sprite.h"
 #include "Model/ResourceManager.h"
@@ -32,61 +33,30 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void RepopulateLayerSelector();
-    bool IsLayerSelected();
-
-    void RepopulateObjects();
-
     void RepopulateEverything();
 
 private slots:
 
     void on_actionProperties_triggered();
-
     void UpdateSelectedTile();
-
-    void on_gridToggle_toggled(bool checked);
-
     void on_addLayerButton_clicked();
-
-    void on_layerSelector_currentRowChanged(int currentRow);
-
-    void on_layerSelector_itemClicked(QListWidgetItem *item);
-
     void UpdateToolSelection();
-
     void on_pencilTool_clicked();
-
     void on_bucketTool_clicked();
-
     void on_eraserButton_clicked();
-
     void on_editLayerButton_clicked();
-
     void on_deleteLayerButton_clicked();
-
     void on_scatterTool_clicked();
-
     void on_brushTool_clicked();
-
     void on_scatterFillTool_clicked();
-
     void on_pointerTool_clicked();
-
     void on_eyedropperTool_clicked();
-
     void on_zoomInTool_clicked();
-
     void on_zoomOutTool_clicked();
-
     void on_actionUndo_triggered();
-
     void on_actionRedo_triggered();
-
     void on_lineTool_clicked();
-
     void on_replacerTool_clicked();
-
     void on_matrixBrushButton_clicked();
 
 private:
@@ -101,7 +71,7 @@ private:
     LayerManager *layers;
     TileSelectorScene *tileSelector;
 
-    double zoomLevel;
+    float zoomLevel;
 };
 
 #endif // MAINWINDOW_H

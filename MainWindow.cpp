@@ -14,13 +14,14 @@ MainWindow::MainWindow(QWidget *parent) :
     tileSelector            = new TileSelectorScene;
     layers                  = new LayerManager;
 
-    //register the resource manager with the resource tab. The resource tab will
-    //keep itself in synch with the resource manager
+    //register the resource manager with the various modules. They will
+    //keep themselves in sync with the resource manager
     ui->resourceTab->RegisterResourceManager(resources);
     levelPropertiesWindow->RegisterResourceManager(resources);
     layers->RegisterResourceManager(resources);
     ui->brushProperties->RegisterResourceManager(resources);
     tileSelector->RegisterResourceManager(resources);
+    ui->resourceView->RegisterResourceManager(resources);
     
     ui->resourceTab->RegisterTileSelector(tileSelector);
     ui->brushProperties->RegisterTileSelector(tileSelector);
@@ -28,8 +29,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
     connect(tileSelector, SIGNAL(selectionChanged()), this, SLOT(UpdateSelectedTile()));
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
+    connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
+    connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
+    connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
+    connect(resources, SIGNAL(LayerListModified()), ui->resourceView, SLOT(RepopulateLayers()));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
@@ -43,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
     zoomLevel = 1;
     //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
     //connect(scroll, SIGNAL(valueChanged(int)), )
+
+    ui->resourceView->RepopulateEverything();
 }
 
 MainWindow::~MainWindow()
@@ -81,49 +88,13 @@ void MainWindow::UpdateSelectedTile()
     }
 }
 
-void MainWindow::RepopulateLayerSelector()
-{
-    ui->layerSelector->clear();
-
-    for(int i = 0; i < layers->GetLayerCount(); i++)
-    {
-        QListWidgetItem *tempItem = new QListWidgetItem;
-        tempItem->setText(layers->GetLayerName(i));
-
-        tempItem->setFlags(tempItem->flags() | Qt::ItemIsUserCheckable);
-        tempItem->setCheckState(Qt::Checked);
-
-        ui->layerSelector->addItem(tempItem);
-
-        //select the latest added layer, in the layer manager and the list view
-        ui->layerSelector->setItemSelected(tempItem, true);
-        layers->SetLayerSelection(i);
-    }
-}
-
-bool MainWindow::IsLayerSelected()
-{
-    if(ui->layerSelector->currentRow() != -1)
-        return true;
-
-    return false;
-}
-
-void MainWindow::on_gridToggle_toggled(bool checked)
-{
-    layers->ToggleGrid(checked);
-}
-
 void MainWindow::on_addLayerButton_clicked()
 {
     //create a new tile layer for the model
     TileLayer *newLayer = new TileLayer;
 
-    //and pass the new tile layer model into the editor window
-    layerPropertiesWindow->NewLayer(newLayer);
-
     //execute the window, and check if the changes were accepted
-    if(layerPropertiesWindow->exec() == QDialog::Accepted)
+    if(layerPropertiesWindow->SetupNewLayer(newLayer) == QDialog::Accepted)
     {
         //if so add the new layer to the model
         resources->AddTileLayer(newLayer);
@@ -135,21 +106,6 @@ void MainWindow::on_addLayerButton_clicked()
     {
         delete newLayer;
     }
-
-    RepopulateLayerSelector();
-}
-
-void MainWindow::on_layerSelector_currentRowChanged(int currentRow)
-{
-    layers->SetLayerSelection(currentRow);
-}
-
-void MainWindow::on_layerSelector_itemClicked(QListWidgetItem *item)
-{
-    if(item->checkState() == Qt::Checked)
-        layers->ToggleLayerVisibility(ui->layerSelector->row(item), true);
-    else
-        layers->ToggleLayerVisibility(ui->layerSelector->row(item), false);
 }
 
 void MainWindow::UpdateToolSelection()
@@ -159,35 +115,28 @@ void MainWindow::UpdateToolSelection()
 
 void MainWindow::on_editLayerButton_clicked()
 {
-    if(IsLayerSelected())
+    if(ui->resourceView->IsLayerSelected())
     {
-        TileLayer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
+        TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
 
         if(tempLayer)
         {
             layerPropertiesWindow->EditLayer(tempLayer);
-            layerPropertiesWindow->exec();
-
             layers->UpdateLayerOpacity(tempLayer);
         }
-
-        RepopulateLayerSelector();
     }
 }
 
 void MainWindow::on_deleteLayerButton_clicked()
 {
-    if(IsLayerSelected())
+    if(ui->resourceView->IsLayerSelected())
     {
-        TileLayer *tempLayer = resources->GetLayerByIndex(ui->layerSelector->currentRow());
+        TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
 
         if(tempLayer)
         {
             //remove the layer from the layer manager (which will take it out of the RM)
             layers->RemoveLayer(tempLayer);
-
-            //repopulate the layer selector
-            RepopulateLayerSelector();
         }
     }
 }
@@ -247,12 +196,11 @@ void MainWindow::on_actionRedo_triggered()
 
 void MainWindow::RepopulateEverything()
 {
-    //RepopulateObjects();
-    RepopulateLayerSelector();
-
     ui->resourceTab->RepopulateImageSelector();
     ui->resourceTab->RepopulateSpriteSelector();
     ui->resourceTab->RepopulateTileSelector();
+
+    ui->resourceView->RepopulateEverything();
 
     layers->RepopulateAllLayers();
 }
