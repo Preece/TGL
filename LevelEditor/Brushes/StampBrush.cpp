@@ -51,7 +51,15 @@ void StampBrush::CreateGrid(QList<TileCoord> items)
         avgY += items[i].second;
     }
     
-    //create the averages
-    avgX = (int)(avgX / tiles.count());
-    avgY = (int)(avgY / tiles.count());
+    if(tiles.count() > 0)
+    {
+        //create the averages
+        avgX = (int)(avgX / tiles.count());
+        avgY = (int)(avgY / tiles.count());
+    }
+    else
+    {
+        avgX = 0;
+        avgY = 0;
+    }
 }
