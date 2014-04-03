@@ -89,6 +89,8 @@ private slots:
 
     void on_matrixBrushButton_clicked();
 
+    void on_stampTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 

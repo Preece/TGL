@@ -344,3 +344,9 @@ void MainWindow::on_eyedropperTool_clicked()
     QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
     ui->levelView->setCursor(tempCur);
 }
+
+void MainWindow::on_stampTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(12);
+    UpdateToolSelection();
+}
