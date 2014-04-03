@@ -27,13 +27,13 @@ void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
         int paintSpotY = y + tiles[i].second - avgY;
         
         if(preview)
-            layer->PreviewModifyTile(paintSpotX, paintSporY, tiles[i]);
+            layer->PreviewModifyTile(paintSpotX, paintSpotY, tiles[i]);
         else
             layer->ModifyTile(paintSpotX, paintSpotY, tiles[i]);
     }
 }
 
-void StampBrush::CreateGrid(QList<TileOrigin> items)
+void StampBrush::CreateGrid(QList<TileCoord> items)
 {
     //remove all current items
     tiles.clear();
