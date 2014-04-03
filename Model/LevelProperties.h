@@ -8,7 +8,7 @@
 class LevelProperties : public ItemNode
 {
 public:
-    QString GetType() { return "LVLP"; }
+    QString GetType() { return "levelproperties"; }
 
     LevelProperties();
 
