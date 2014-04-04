@@ -8,7 +8,7 @@ PropertyBrowser::PropertyBrowser(QWidget *parent) :
     propertyManager = new QtVariantPropertyManager;
     widgetFactory = new QtVariantEditorFactory;
 
-
+    setFactoryForManager(propertyManager, widgetFactory);
 }
 
 PropertyBrowser::~PropertyBrowser()
@@ -40,10 +40,20 @@ void PropertyBrowser::DisplayResource(int ID)
 
 void PropertyBrowser::DisplayLevelProperties(LevelProperties *properties)
 {
-    QtVariantProperty *levelName = propertyManager->addProperty(QVariant::String, "Level Name");
-    levelName->setAttribute("value", properties->GetLevelName());
+    //add the level name
+    QtVariantProperty *newProperty = propertyManager->addProperty(QVariant::String, "Level Name");
+    newProperty->setAttribute("value", properties->GetLevelName());
+    addProperty(newProperty);
 
-    setFactoryForManager(propertyManager, widgetFactory);
+    //add the tile size
+    newProperty = propertyManager->addProperty(QVariant::Point, "Tile Size");
+    item->setValue(QPoint(properties->GetTileWidth(), properties->GetTileHeight()));
+    addProperty(newProperty);
+
+    //add the map size
+    newProperty = propertyManager->addProperty(QVariant::Point, "Map Size (in tiles)");
+    item->setValue(QPoint(properties->GetMapWidth(), properties->GetMapHeight()));
+    addProperty(newProperty);
 }
 
 void PropertyBrowser::DisplayLayer(TileLayer *layer)
