@@ -53,6 +53,11 @@ void TileLayerView::ToggleVisibility(bool visible)
         hide();
 }
 
+bool TileLayerView::IsVisible()
+{
+    return visible;
+}
+
 void TileLayerView::DestroyAllItems()
 {
     //iterate through all elements in the map, and delete the tilewidgets
