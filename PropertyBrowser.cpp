@@ -40,6 +40,11 @@ void PropertyBrowser::DisplayResource(int ID)
 
 void PropertyBrowser::DisplayLevelProperties(LevelProperties *properties)
 {
+    //valueChanged(QtProperty *property, const QVariant &val);
+    //this is the signal emitted by the property manager when a value is modified.
+    //another function should connect into this, determine what property is being 
+    //modified, and actually change it in the resource manager
+
     //add the level name
     QtVariantProperty *newProperty = propertyManager->addProperty(QVariant::String, "Level Name");
     newProperty->setAttribute("value", properties->GetLevelName());
