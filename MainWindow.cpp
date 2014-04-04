@@ -213,6 +213,7 @@ void MainWindow::on_bucketTool_clicked()
 void MainWindow::on_eraserButton_clicked()
 {
     ui->brushProperties->SetCurrentBrush(3);
+    ui->eraserButton->setChecked(true);
     UpdateToolSelection();
 
     //change the cursor

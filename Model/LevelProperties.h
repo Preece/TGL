@@ -32,7 +32,7 @@ public:
     void SetTilesetID(int newID) { tilesetID = newID; }
     int GetTilesetID() { return tilesetID; }
 
-    bool IsPropertiesSet();
+    bool ArePropertiesSet();
 
 private:
     int tileWidth, tileHeight;

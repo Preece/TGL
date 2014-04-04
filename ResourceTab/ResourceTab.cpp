@@ -299,7 +299,7 @@ void ResourceTab::on_selectTilesetButton_clicked()
     if(spritesheetWindow.exec() == QDialog::Accepted)
     {
         //and if an image was selected
-        if(spritesheetWindow.IsImageSelected() && resourceManager->GetLevelProperties()->IsPropertiesSet())
+        if(spritesheetWindow.IsImageSelected() && resourceManager->GetLevelProperties()->ArePropertiesSet())
         {
             //set the spritesheet as that image
             spritesheet = spritesheetWindow.GetSelectedImage()->GetImage();

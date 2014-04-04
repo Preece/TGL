@@ -27,7 +27,7 @@ void LayerManager::EyedropTile(QPoint pos)
     if(!resourceManager || !currentLayer)
         return;
 
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    if(resourceManager->GetLevelProperties()->ArePropertiesSet())
     {
         //translate the position to tile coordinates
         int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
@@ -110,7 +110,7 @@ void LayerManager::ToggleGrid(bool show)
         grid = new QGraphicsItemGroup;
     }
 
-    if(resourceManager->GetLevelProperties()->IsPropertiesSet())
+    if(resourceManager->GetLevelProperties()->ArePropertiesSet())
     {
         QPen pen(Qt::DashLine);
         pen.setColor(QColor(Qt::gray));

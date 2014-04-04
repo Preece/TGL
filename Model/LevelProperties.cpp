@@ -11,7 +11,7 @@ LevelProperties::LevelProperties()
     levelName = "";
 }
 
-bool LevelProperties::IsPropertiesSet()
+bool LevelProperties::ArePropertiesSet()
 {
     if(tileWidth && tileHeight && mapWidth && mapHeight)
         return true;
