@@ -29,6 +29,7 @@ public:
     void SetLayerSize(int w, int h);
 
     void ToggleVisibility(bool visible);
+    bool IsVisible();
 
     int GetLayerWidth() { return widthInTiles; }
     int GetLayerHeight() { return heightInTiles; }
