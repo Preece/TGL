@@ -9,6 +9,7 @@ QT       += core gui
 TARGET = TrygonLevelEditor
 TEMPLATE = app
 
+include(qtpropertybrowser/src/qtpropertybrowser.pri)
 
 SOURCES += main.cpp\
     Model/Frame.cpp \
