@@ -75,6 +75,16 @@
        </widget>
       </item>
       <item>
+       <widget class="PropertyBrowser" name="propertyBrowser" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="ResourceTab" name="resourceTab">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -740,6 +750,12 @@
    <class>ResourceView</class>
    <extends>QTreeWidget</extends>
    <header>ResourceView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PropertyBrowser</class>
+   <extends>QWidget</extends>
+   <header>PropertyBrowser.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

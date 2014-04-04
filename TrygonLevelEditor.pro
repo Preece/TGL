@@ -59,7 +59,8 @@ SOURCES += main.cpp\
     Model/TileLayer.cpp \
     LevelEditor/TileLayerView.cpp \
     Model/ItemNode.cpp \
-    ResourceView.cpp
+    ResourceView.cpp \
+    PropertyBrowser.cpp
   
 
 HEADERS  += \
@@ -110,7 +111,8 @@ HEADERS  += \
     Model/TileLayer.h \
     LevelEditor/TileLayerView.h \
     Model/ItemNode.h \
-    ResourceView.h
+    ResourceView.h \
+    PropertyBrowser.h
    
 
 FORMS    += \
