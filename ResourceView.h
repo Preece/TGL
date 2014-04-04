@@ -21,6 +21,7 @@ public:
     bool IsLayerSelected();
     
 signals:
+    void NewResourceSelected(int newID);
     void NewLayerSelected(int newID);
     
 public slots:
@@ -32,6 +33,7 @@ public slots:
 private:
     ResourceManager *resources;
 
+    QTreeWidgetItem *projectRoot;
     QTreeWidgetItem *layerRoot;
     QTreeWidgetItem *imageRoot;
     QTreeWidgetItem *spriteRoot;

@@ -9,7 +9,7 @@ ResourceView::ResourceView(QWidget *parent) :
     connect(this, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(selectionUpdated(QTreeWidgetItem*,int)));
 
     //create and add a root node for the project
-    QTreeWidgetItem *projectRoot = new QTreeWidgetItem;
+    projectRoot = new QTreeWidgetItem;
     projectRoot->setText(0, "Project Root");
     projectRoot->setIcon(0, QIcon(":/Icons/Icons/open.png"));
     addTopLevelItem(projectRoot);
@@ -24,6 +24,10 @@ ResourceView::ResourceView(QWidget *parent) :
 
 void ResourceView::RepopulateEverything()
 {
+    //store the level properties ID in the project root
+    if(resources)
+        projectRoot->setData(0, Qt::UserRole, QVariant(resources->GetLevelProperties()->GetID()));
+
     RepopulateLayers();
     RepopulateImages();
 }
@@ -139,6 +143,9 @@ void ResourceView::selectionUpdated(QTreeWidgetItem *item, int column)
     //get the ID from the selection
     if(selectedID)
     {
+        //emit a message for broad listeners, then more specific ones
+        emit NewResourceSelected(selectedID);
+
         //store the selection
         currentSelection = selectedID;
 

@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushProperties->RegisterResourceManager(resources);
     tileSelector->RegisterResourceManager(resources);
     ui->resourceView->RegisterResourceManager(resources);
+    ui->propertyBrowser->RegisterResourceManager(resources);
     
     ui->resourceTab->RegisterTileSelector(tileSelector);
     ui->brushProperties->RegisterTileSelector(tileSelector);
@@ -36,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified()), ui->resourceView, SLOT(RepopulateLayers()));
     connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
+    connect(ui->resourceView, SIGNAL(NewResourceSelected(int)), ui->propertyBrowser, SLOT(DisplayResource(int)));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);

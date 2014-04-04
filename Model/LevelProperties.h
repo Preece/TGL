@@ -10,7 +10,7 @@ class LevelProperties : public ItemNode
 public:
     bool Export(Exporter *exporter);
     bool Import(Exporter *exporter);
-    QString GetType() { return "LVLP"; }
+    QString GetType() { return "levelproperties"; }
 
     LevelProperties();
 
