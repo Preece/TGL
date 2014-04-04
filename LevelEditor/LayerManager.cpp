@@ -168,7 +168,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
-    if(event->button() == Qt::LeftButton)
+    if(event->button() == Qt::LeftButton && currentLayer->IsVisible())
     {
         resourceManager->BeginUndoOperation("Painting Tiles");
 
