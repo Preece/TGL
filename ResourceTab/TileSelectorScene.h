@@ -22,6 +22,8 @@ public:
     
 signals:
     void SelectionChanged(TileList newSelection);
+
+    void SelectEraser();
     
 public slots:
 

@@ -16,16 +16,17 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
 
     clearSelection();
 
+    if(origin.first == -1 && origin.second == -1)
+    {
+        emit SelectEraser();
+    }
+
     //find that tile based on position
     QGraphicsItem *tempTileItem = itemAt(tileX, tileY);
 
     //select the new tile
     if(tempTileItem)
         tempTileItem->setSelected(true);
-
-    //if the origin is -1, -1
-        //somehow select the eraser tool, they eyedropped a blank spot
-
 }
 
 TileList TileSelectorScene::GetSelectedTiles()

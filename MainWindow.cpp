@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified()), ui->resourceView, SLOT(RepopulateLayers()));
+    connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
