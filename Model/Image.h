@@ -5,6 +5,7 @@
 #include <QString>
 #include <QFile>
 #include <QMessageBox>
+#include <QFileInfo>
 
 #include "ItemNode.h"
 
@@ -19,11 +20,15 @@ public:
     ~Image();
 
     void SetImage(QImage *newImage) { image = newImage; }
-    void SetImageFromFile(QString filename);
+    void SetImageFromFile(QString file);
     QImage *GetImage();
+
+    void SetFilename(QString newName) { filename = newName; }
+    QString GetFilename() { return filename; }
 
 private:
     QImage *image;
+    QString filename;
 };
 
 #endif // IMAGE_H

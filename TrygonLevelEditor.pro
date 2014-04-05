@@ -53,7 +53,6 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/StampBrush.cpp \
     LevelEditor/Brushes/LineBrush.cpp \
     LevelEditor/Brushes/MatrixBrush.cpp \
-    ResourceTab/SpriteListWidgetItem.cpp \
     ResourceTab/ImageListWidgetItem.cpp \
     ResourceTab/TileWidgetItem.cpp \
     Model/TileLayer.cpp \
@@ -105,7 +104,6 @@ HEADERS  += \
     LevelEditor/Brushes/StampBrush.h \
     LevelEditor/Brushes/LineBrush.h \
     LevelEditor/Brushes/MatrixBrush.h \
-    ResourceTab/SpriteListWidgetItem.h \
     ResourceTab/ImageListWidgetItem.h \
     ResourceTab/TileWidgetItem.h \
     Model/TileLayer.h \

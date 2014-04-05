@@ -25,7 +25,7 @@ bool Image::Import(Exporter *exporter)
     return true;
 }
 
-void Image::SetImageFromFile(QString filename)
+void Image::SetImageFromFile(QString file)
 {
     //check if the image already exists
     if(image != NULL)
@@ -38,7 +38,11 @@ void Image::SetImageFromFile(QString filename)
     //create a new image
     image = new QImage;
     //and load it from the specified filename
-    image->load(filename);    
+    image->load(file);
+
+    filename = QFileInfo(file).fileName();
+
+
 }
 
 QImage *Image::GetImage()

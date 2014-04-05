@@ -11,7 +11,6 @@
 #include "TileWidgetItem.h"
 #include "ImageViewer.h"
 #include "ImageListWidgetItem.h"
-#include "SpriteListWidgetItem.h"
 #include "TileSelectorScene.h"
 
 #include "../Model/ResourceManager.h"

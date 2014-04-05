@@ -43,8 +43,14 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::WinPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <property name="geometry">
@@ -52,9 +58,13 @@
            <x>0</x>
            <y>0</y>
            <width>320</width>
-           <height>286</height>
+           <height>296</height>
           </rect>
          </property>
+         <attribute name="icon">
+          <iconset resource="Icons.qrc">
+           <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
+         </attribute>
          <attribute name="label">
           <string>Resources</string>
          </attribute>
@@ -185,10 +195,14 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>300</width>
-           <height>323</height>
+           <width>296</width>
+           <height>316</height>
           </rect>
          </property>
+         <attribute name="icon">
+          <iconset resource="Icons.qrc">
+           <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+         </attribute>
          <attribute name="label">
           <string>Tile Painting</string>
          </attribute>
