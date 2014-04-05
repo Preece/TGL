@@ -52,12 +52,12 @@ void PropertyBrowser::DisplayLevelProperties(LevelProperties *properties)
 
     //add the tile size
     newProperty = propertyManager->addProperty(QVariant::Point, "Tile Size");
-    item->setValue(QPoint(properties->GetTileWidth(), properties->GetTileHeight()));
+    newProperty->setValue(QPoint(properties->GetTileWidth(), properties->GetTileHeight()));
     addProperty(newProperty);
 
     //add the map size
     newProperty = propertyManager->addProperty(QVariant::Point, "Map Size (in tiles)");
-    item->setValue(QPoint(properties->GetMapWidth(), properties->GetMapHeight()));
+    newProperty->setValue(QPoint(properties->GetMapWidth(), properties->GetMapHeight()));
     addProperty(newProperty);
 }
 

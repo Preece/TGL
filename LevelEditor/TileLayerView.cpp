@@ -55,7 +55,7 @@ void TileLayerView::ToggleVisibility(bool visible)
 
 bool TileLayerView::IsVisible()
 {
-    return visible;
+    return IsVisible();
 }
 
 void TileLayerView::DestroyAllItems()
