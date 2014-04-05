@@ -8,19 +8,12 @@ ResourceTab::ResourceTab(QWidget *parent) :
     ui->setupUi(this);
 
     imageViewer = NULL;
-    spriteWindow = NULL;
     tileSelector = NULL;
-    spritesheet = NULL;
-
-    connect(ui->addSpriteButton, SIGNAL(clicked()), this, SIGNAL(NewSpriteButtonClicked()));
 }
 
 ResourceTab::~ResourceTab()
 {
     delete ui;
-
-    if(spriteWindow)
-        delete spriteWindow;
 }
 
 void ResourceTab::RegisterTileSelector(TileSelectorScene *tiles)
@@ -82,23 +75,6 @@ void ResourceTab::RepopulateTileSelector()
                 }
             }
         }
-    }
-}
-
-void ResourceTab::RepopulateSpriteSelector()
-{
-    //clear the sprite selector
-    ui->spriteSelector->clear();
-
-    //loop through all of the sprites
-    for(int i = 0; i < resourceManager->GetSpriteCount(); i++)
-    {
-        //create a new sprite selector item and add the sprite to it
-        SpriteListWidgetItem *tempItem = new SpriteListWidgetItem;
-        tempItem->SetSprite(resourceManager->GetSpriteByIndex(i));
-
-        //add the sprite to the selector
-        ui->spriteSelector->addItem(tempItem);
     }
 }
 
@@ -194,39 +170,6 @@ Image *ResourceTab::GetSelectedImage()
     return NULL;
 }
 
-bool ResourceTab::IsSpriteSelected()
-{
-    if(ui->spriteSelector->currentRow() == -1)
-        return false;
-
-    return true;
-}
-
-SpriteListWidgetItem *ResourceTab::GetSelectedSpriteItem()
-{
-    if(IsSpriteSelected())
-    {
-        //retrieve the list item
-        SpriteListWidgetItem *tempItem = dynamic_cast<SpriteListWidgetItem*>(ui->spriteSelector->currentItem());
-
-        //warn if the cast failed
-        if(tempItem == 0)
-            QMessageBox::warning(this, "Warning", "The dynamic cast has failed!");
-
-        return tempItem;
-    }
-
-    return NULL;
-}
-
-Sprite *ResourceTab::GetSelectedSprite()
-{
-    if(IsSpriteSelected())
-        return GetSelectedSpriteItem()->GetSprite();
-
-    return NULL;
-}
-
 void ResourceTab::on_deleteImageButton_clicked()
 {
     //make sure an image is selected
@@ -237,53 +180,6 @@ void ResourceTab::on_deleteImageButton_clicked()
 
         //and repopulate the image list
         RepopulateImageSelector();
-    }
-}
-
-void ResourceTab::on_editSpriteButton_clicked()
-{
-    if(IsSpriteSelected())
-    {
-        //create the sprite editing window if it does not already exist
-        if(!spriteWindow)
-        {
-            spriteWindow = new SpriteEditor;
-            spriteWindow->RegisterResourceManager(resourceManager);
-        }
-
-        spriteWindow->EditSprite(GetSelectedSprite());
-
-        spriteWindow->exec();
-
-        RepopulateSpriteSelector();
-    }
-}
-
-void ResourceTab::on_addSpriteButton_clicked()
-{
-    //create the sprite editing window if it does not already exist
-    if(!spriteWindow)
-    {
-        spriteWindow = new SpriteEditor;
-        spriteWindow->RegisterResourceManager(resourceManager);
-    }
-
-    //create a temporary sprite for the dialog to operate upon
-    Sprite *temporarySprite = new Sprite;
-
-    //pass the temporary sprite to the dialog
-    spriteWindow->NewSprite(temporarySprite);
-
-    //add the sprite to the resource manager if the dialog is accepted
-    if(spriteWindow->exec() == QDialog::Accepted)
-    {
-        resourceManager->AddSprite(temporarySprite);
-        RepopulateSpriteSelector();
-    }
-    //delete the temporary sprite if the dialog is rejected
-    else
-    {
-        delete temporarySprite;
     }
 }
 
@@ -310,14 +206,5 @@ void ResourceTab::on_selectTilesetButton_clicked()
             //and repopulate the tile selector
             RepopulateTileSelector();
         }
-    }
-}
-
-void ResourceTab::on_deleteSpriteButton_clicked()
-{
-    if(IsSpriteSelected())
-    {
-        resourceManager->DeleteSprite(GetSelectedSprite()->GetID());
-        RepopulateSpriteSelector();
     }
 }

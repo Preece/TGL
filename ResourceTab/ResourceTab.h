@@ -32,17 +32,12 @@ public:
     void RegisterResourceManager(ResourceManager *newResourceManager) { resourceManager = newResourceManager; }
     void RegisterTileSelector(TileSelectorScene *tiles);
 
-    void RepopulateSpriteSelector();
     void RepopulateImageSelector();
     void RepopulateLinkSelector();
 
     bool IsImageSelected();
     ImageListWidgetItem *GetSelectedImageItem();
     Image *GetSelectedImage();
-
-    bool IsSpriteSelected();
-    SpriteListWidgetItem *GetSelectedSpriteItem();
-    Sprite *GetSelectedSprite();
 
     void RepopulateTileSelector();
 
@@ -52,20 +47,14 @@ private slots:
     void on_viewImageButton_clicked();
     void on_deleteImageButton_clicked();
 
-    void on_editSpriteButton_clicked();
-    void on_addSpriteButton_clicked();
-    void on_deleteSpriteButton_clicked();
-
     void on_selectTilesetButton_clicked();
 
 signals:
-    void NewSpriteButtonClicked();
 
 private:
     Ui::ResourceTab *ui;
 
     ImageViewer *imageViewer;
-    SpriteEditor *spriteWindow;
 
     ResourceManager *resourceManager;
 

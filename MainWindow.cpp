@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->resourceTab->RegisterTileSelector(tileSelector);
     ui->brushProperties->RegisterTileSelector(tileSelector);
 
-    connect(ui->resourceTab, SIGNAL(NewSpriteButtonClicked()), ui->actionAdd_Sprite, SLOT(trigger()));
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushProperties, SLOT(SetSelectedTiles(TileList)));
     connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
@@ -184,7 +183,6 @@ void MainWindow::on_actionRedo_triggered()
 void MainWindow::RepopulateEverything()
 {
     ui->resourceTab->RepopulateImageSelector();
-    ui->resourceTab->RepopulateSpriteSelector();
     ui->resourceTab->RepopulateTileSelector();
 
     ui->resourceView->RepopulateEverything();
