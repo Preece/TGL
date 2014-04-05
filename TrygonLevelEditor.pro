@@ -21,7 +21,6 @@ SOURCES += main.cpp\
     SpriteEditor/SpriteEditor.cpp \
     SpriteEditor/AnimationEditor.cpp \
     SpriteEditor/FrameListItem.cpp \
-    ResourceTab/ResourceTab.cpp \
     Model/Image.cpp \
     ResourceTab/ImageViewer.cpp \
     SpriteEditor/SpritesheetSelector.cpp \
@@ -72,7 +71,6 @@ HEADERS  += \
     SpriteEditor/SpriteEditor.h \
     SpriteEditor/AnimationEditor.h \ 
     SpriteEditor/FrameListItem.h \
-    ResourceTab/ResourceTab.h \
     Model/Image.h \
     ResourceTab/ImageViewer.h \
     SpriteEditor/SpritesheetSelector.h \

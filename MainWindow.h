@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <QGraphicsScene>
 #include <QTreeWidget>
+#include <QFileDialog>
 
 #include "Model/Sprite.h"
 #include "Model/ResourceManager.h"
@@ -40,13 +41,10 @@ public:
 private slots:
 
     void on_actionProperties_triggered();
-    void on_addLayerButton_clicked();
     void UpdateToolSelection();
     void on_pencilTool_clicked();
     void on_bucketTool_clicked();
     void on_eraserButton_clicked();
-    void on_editLayerButton_clicked();
-    void on_deleteLayerButton_clicked();
     void on_scatterTool_clicked();
     void on_brushTool_clicked();
     void on_scatterFillTool_clicked();
@@ -59,8 +57,11 @@ private slots:
     void on_lineTool_clicked();
     void on_replacerTool_clicked();
     void on_matrixBrushButton_clicked();
-
     void on_stampTool_clicked();
+    void on_actionAdd_Image_triggered();
+    void on_actionAdd_Layer_triggered();
+    void on_actionDelete_Layer_triggered();
+    void on_actionEdit_Layer_triggered();
 
 private:
     Ui::MainWindow *ui;

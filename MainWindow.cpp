@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //register the resource manager with the various modules. They will
     //keep themselves in sync with the resource manager
-    ui->resourceTab->RegisterResourceManager(resources);
     levelPropertiesWindow->RegisterResourceManager(resources);
     layers->RegisterResourceManager(resources);
     ui->brushProperties->RegisterResourceManager(resources);
@@ -76,57 +75,9 @@ void MainWindow::on_actionProperties_triggered()
     levelPropertiesWindow->exec();
 }
 
-void MainWindow::on_addLayerButton_clicked()
-{
-    //create a new tile layer for the model
-    TileLayer *newLayer = new TileLayer;
-
-    //execute the window, and check if the changes were accepted
-    if(layerPropertiesWindow->SetupNewLayer(newLayer) == QDialog::Accepted)
-    {
-        //if so add the new layer to the model
-        resources->AddTileLayer(newLayer);
-        
-        //and give a reference to the layer manager
-        layers->AddLayer(newLayer);
-    }
-    else
-    {
-        delete newLayer;
-    }
-}
-
 void MainWindow::UpdateToolSelection()
 {
     layers->SetBrush(ui->brushProperties->GetCurrentBrush());
-}
-
-void MainWindow::on_editLayerButton_clicked()
-{
-    if(ui->resourceView->IsLayerSelected())
-    {
-        TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
-
-        if(tempLayer)
-        {
-            layerPropertiesWindow->EditLayer(tempLayer);
-            layers->UpdateLayerOpacity(tempLayer);
-        }
-    }
-}
-
-void MainWindow::on_deleteLayerButton_clicked()
-{
-    if(ui->resourceView->IsLayerSelected())
-    {
-        TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
-
-        if(tempLayer)
-        {
-            //remove the layer from the layer manager (which will take it out of the RM)
-            layers->RemoveLayer(tempLayer);
-        }
-    }
 }
 
 void MainWindow::on_zoomInTool_clicked()
@@ -184,7 +135,6 @@ void MainWindow::on_actionRedo_triggered()
 
 void MainWindow::RepopulateEverything()
 {
-    ui->resourceTab->RepopulateImageSelector();
     tileSelector->RepopulateTileSelector();
 
     ui->resourceView->RepopulateEverything();
@@ -301,4 +251,70 @@ void MainWindow::on_stampTool_clicked()
 {
     ui->brushProperties->SetCurrentBrush(12);
     UpdateToolSelection();
+}
+
+void MainWindow::on_actionAdd_Image_triggered()
+{
+    //ask the user where to load the file from.
+    QString filename = QFileDialog::getOpenFileName(this, "Add Image", ".", "Portable Network Graphics (*.png)");
+
+    //if the dialog succeeds
+    if(!filename.isEmpty())
+    {
+        Image *tempImage = new Image;
+
+        //load the file
+        tempImage->SetImageFromFile(filename);
+
+        //add the image to the resource manager
+        resources->AddImage(tempImage);
+    }
+}
+
+void MainWindow::on_actionAdd_Layer_triggered()
+{
+    //create a new tile layer for the model
+    TileLayer *newLayer = new TileLayer;
+
+    //execute the window, and check if the changes were accepted
+    if(layerPropertiesWindow->SetupNewLayer(newLayer) == QDialog::Accepted)
+    {
+        //if so add the new layer to the model
+        resources->AddTileLayer(newLayer);
+
+        //and give a reference to the layer manager
+        layers->AddLayer(newLayer);
+    }
+    else
+    {
+        delete newLayer;
+    }
+}
+
+void MainWindow::on_actionDelete_Layer_triggered()
+{
+    if(ui->resourceView->IsLayerSelected())
+    {
+        TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
+
+        if(tempLayer)
+        {
+            //remove the layer from the layer manager (which will take it out of the RM)
+            layers->RemoveLayer(tempLayer);
+        }
+    }
+}
+
+void MainWindow::on_actionEdit_Layer_triggered()
+{
+    if(ui->resourceView->IsLayerSelected())
+    {
+        TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
+
+        if(tempLayer)
+        {
+            layerPropertiesWindow->EditLayer(tempLayer);
+            layers->UpdateLayerOpacity(tempLayer);
+        }
+    }
 }
