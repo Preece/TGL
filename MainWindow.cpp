@@ -37,9 +37,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(resources, SIGNAL(LayerListModified()), ui->resourceView, SLOT(RepopulateLayers()));
     connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
     connect(ui->resourceView, SIGNAL(NewResourceSelected(int)), ui->propertyBrowser, SLOT(DisplayResource(int)));
+    connect(ui->selectTilesetButton, SIGNAL(clicked()), tileSelector, SLOT(SelectTileset()));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
+
+    ui->tileSelectorView->setScene(tileSelector);
     
     UpdateToolSelection();
 
@@ -183,7 +186,7 @@ void MainWindow::on_actionRedo_triggered()
 void MainWindow::RepopulateEverything()
 {
     ui->resourceTab->RepopulateImageSelector();
-    ui->resourceTab->RepopulateTileSelector();
+    tileSelector->RepopulateTileSelector();
 
     ui->resourceView->RepopulateEverything();
 

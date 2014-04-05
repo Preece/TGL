@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include "Model/ResourceManager.h"
+#include "../SpriteEditor/SpritesheetSelector.h"
 #include "TileWidgetItem.h"
 
 typedef QList<TileCoord> TileList;
@@ -19,6 +20,8 @@ public:
     
     TileWidgetItem *GetSelectedTile() { if(IsTileSelected()) return dynamic_cast<TileWidgetItem*>(selectedItems()[0]); return NULL; }
     TileList GetSelectedTiles();
+
+    void RepopulateTileSelector();
     
 signals:
     void SelectionChanged(TileList newSelection);
@@ -30,8 +33,14 @@ public slots:
     void PackageAndEmitSelection();
     void SelectNewTile(TileCoord origin);
 
+    void SelectTileset();
+
+
+
 private:
     ResourceManager *resources;
+
+    QImage *spritesheet;
     
 };
 

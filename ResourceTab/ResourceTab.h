@@ -39,15 +39,11 @@ public:
     ImageListWidgetItem *GetSelectedImageItem();
     Image *GetSelectedImage();
 
-    void RepopulateTileSelector();
-
 private slots:
 
     void on_addImageButton_clicked();
     void on_viewImageButton_clicked();
     void on_deleteImageButton_clicked();
-
-    void on_selectTilesetButton_clicked();
 
 signals:
 
