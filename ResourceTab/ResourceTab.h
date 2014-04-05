@@ -30,7 +30,6 @@ public:
     ~ResourceTab();
 
     void RegisterResourceManager(ResourceManager *newResourceManager) { resourceManager = newResourceManager; }
-    void RegisterTileSelector(TileSelectorScene *tiles);
 
     void RepopulateImageSelector();
     void RepopulateLinkSelector();
@@ -54,8 +53,6 @@ private:
 
     ResourceManager *resourceManager;
 
-    QImage *spritesheet;
-    TileSelectorScene *tileSelector;
 };
 
 #endif // RESOURCETAB_H

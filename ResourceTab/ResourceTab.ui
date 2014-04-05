@@ -40,37 +40,6 @@
   <property name="currentIndex">
    <number>0</number>
   </property>
-  <widget class="QWidget" name="tilesTab">
-   <attribute name="title">
-    <string>Tiles</string>
-   </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="TileSelectorView" name="tileSelector">
-      <property name="dragMode">
-       <enum>QGraphicsView::NoDrag</enum>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="imagesTab">
    <attribute name="title">
     <string>Images</string>
@@ -157,13 +126,6 @@
    </layout>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TileSelectorView</class>
-   <extends>QGraphicsView</extends>
-   <header>ResourceTab/TileSelectorView.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../Icons.qrc"/>
  </resources>

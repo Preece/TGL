@@ -8,18 +8,11 @@ ResourceTab::ResourceTab(QWidget *parent) :
     ui->setupUi(this);
 
     imageViewer = NULL;
-    tileSelector = NULL;
 }
 
 ResourceTab::~ResourceTab()
 {
     delete ui;
-}
-
-void ResourceTab::RegisterTileSelector(TileSelectorScene *tiles)
-{
-    tileSelector = tiles;
-    ui->tileSelector->setScene(tiles);
 }
 
 void ResourceTab::RepopulateImageSelector()

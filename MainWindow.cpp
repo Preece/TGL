@@ -24,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->resourceView->RegisterResourceManager(resources);
     ui->propertyBrowser->RegisterResourceManager(resources);
     
-    ui->resourceTab->RegisterTileSelector(tileSelector);
     ui->brushProperties->RegisterTileSelector(tileSelector);
 
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushProperties, SLOT(SetSelectedTiles(TileList)));
