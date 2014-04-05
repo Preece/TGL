@@ -35,10 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(resources, SIGNAL(LayerListModified()), ui->resourceView, SLOT(RepopulateLayers()));
     connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
     connect(ui->resourceView, SIGNAL(NewResourceSelected(int)), ui->propertyBrowser, SLOT(DisplayResource(int)));
-    connect(ui->selectTilesetButton, SIGNAL(clicked()), tileSelector, SLOT(SelectTileset()));
+    connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
+
+    ui->miniMap->setScene(layers);
 
     ui->tileSelectorView->setScene(tileSelector);
     

@@ -39,7 +39,7 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>300</width>
+          <width>16777215</width>
           <height>16777215</height>
          </size>
         </property>
@@ -50,15 +50,15 @@
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>296</width>
-           <height>313</height>
+           <width>378</width>
+           <height>508</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -74,7 +74,7 @@
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
+              <verstretch>2</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
@@ -117,6 +117,28 @@
             </column>
            </widget>
           </item>
+          <item>
+           <widget class="PropertyBrowser" name="propertyBrowser" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>1</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="page_2">
@@ -124,8 +146,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>296</width>
-           <height>313</height>
+           <width>378</width>
+           <height>508</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -138,19 +160,24 @@
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <widget class="TileSelectorView" name="tileSelectorView">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>2</verstretch>
+             </sizepolicy>
+            </property>
             <property name="dragMode">
              <enum>QGraphicsView::NoDrag</enum>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="selectTilesetButton">
-            <property name="text">
-             <string/>
+           <widget class="QGraphicsView" name="miniMap">
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
-            <property name="icon">
-             <iconset resource="Icons.qrc">
-              <normaloff>:/Icons/Icons/new.png</normaloff>:/Icons/Icons/new.png</iconset>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
            </widget>
           </item>
@@ -184,28 +211,6 @@
           </item>
          </layout>
         </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="PropertyBrowser" name="propertyBrowser" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>1</horstretch>
-          <verstretch>1</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>300</width>
-          <height>16777215</height>
-         </size>
-        </property>
        </widget>
       </item>
      </layout>
@@ -535,6 +540,9 @@
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
@@ -650,6 +658,8 @@
    <addaction name="separator"/>
    <addaction name="actionAdd_Layer"/>
    <addaction name="actionDelete_Layer"/>
+   <addaction name="separator"/>
+   <addaction name="actionSelect_Tileset"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNew">
@@ -774,6 +784,14 @@
    </property>
    <property name="toolTip">
     <string>Edit the selected layer</string>
+   </property>
+  </action>
+  <action name="actionSelect_Tileset">
+   <property name="text">
+    <string>Select Tileset</string>
+   </property>
+   <property name="toolTip">
+    <string>Select a tileset from the images</string>
    </property>
   </action>
  </widget>
