@@ -205,7 +205,11 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QGraphicsView" name="tileSelectorView"/>
+           <widget class="TileSelectorView" name="tileSelectorView">
+            <property name="dragMode">
+             <enum>QGraphicsView::NoDrag</enum>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="ResourceTab" name="resourceTab">
@@ -855,6 +859,11 @@
    <extends>QWidget</extends>
    <header>PropertyBrowser.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TileSelectorView</class>
+   <extends>QGraphicsView</extends>
+   <header>ResourceTab/TileSelectorView.h</header>
   </customwidget>
  </customwidgets>
  <resources>
