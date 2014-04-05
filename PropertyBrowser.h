@@ -25,6 +25,7 @@ public slots:
 private:
     void DisplayLevelProperties(LevelProperties *properties);
     void DisplayLayer(TileLayer *layer);
+    void DisplayImage(Image *img);
 
     ResourceManager *resources;
     QtVariantPropertyManager *propertyManager;

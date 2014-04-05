@@ -23,6 +23,7 @@ public:
 signals:
     void NewResourceSelected(int newID);
     void NewLayerSelected(int newID);
+    void NewImageSelected(int newID);
     
 public slots:
     void selectionUpdated(QTreeWidgetItem *item, int column);

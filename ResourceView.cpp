@@ -65,7 +65,7 @@ void ResourceView::RepopulateImages()
         //fetch the layer from the model
         Image *img = resources->GetImageByIndex(i);
 
-        QTreeWidgetItem *newImageNode = AddNode(imageRoot, img->GetFilename(), ":/Icons/Icons/save.png", img->GetID());
+        QTreeWidgetItem *newImageNode = AddNode(imageRoot, img->GetImageName(), ":/Icons/Icons/save.png", img->GetID());
 
         //if this layer was the current selection, select it again
         if(img->GetID() == currentSelection)
@@ -152,6 +152,9 @@ void ResourceView::selectionUpdated(QTreeWidgetItem *item, int column)
         //if the new selection is a layer, broadcast the change
         if(resources->GetTileLayer(selectedID))
             emit NewLayerSelected(selectedID);
+
+        if(resources->GetImage(selectedID))
+            emit NewImageSelected(selectedID);
     }
     else
     {

@@ -40,9 +40,8 @@ void Image::SetImageFromFile(QString file)
     //and load it from the specified filename
     image->load(file);
 
-    filename = QFileInfo(file).fileName();
-
-
+    imageName = QFileInfo(file).fileName();
+    filename = file;
 }
 
 QImage *Image::GetImage()

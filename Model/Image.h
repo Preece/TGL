@@ -23,11 +23,14 @@ public:
     void SetImageFromFile(QString file);
     QImage *GetImage();
 
-    void SetFilename(QString newName) { filename = newName; }
+    void SetImageName(QString newName) { imageName = newName; }
+    QString GetImageName() { return imageName; }
+
     QString GetFilename() { return filename; }
 
 private:
     QImage *image;
+    QString imageName;
     QString filename;
 };
 
