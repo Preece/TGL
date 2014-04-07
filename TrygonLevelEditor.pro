@@ -58,7 +58,8 @@ SOURCES += main.cpp\
     LevelEditor/TileLayerView.cpp \
     Model/ItemNode.cpp \
     ResourceView.cpp \
-    PropertyBrowser.cpp
+    PropertyBrowser.cpp \
+    MiniMap.cpp
   
 
 HEADERS  += \
@@ -108,7 +109,8 @@ HEADERS  += \
     LevelEditor/TileLayerView.h \
     Model/ItemNode.h \
     ResourceView.h \
-    PropertyBrowser.h
+    PropertyBrowser.h \
+    MiniMap.h
    
 
 FORMS    += \

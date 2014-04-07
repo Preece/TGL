@@ -50,7 +50,7 @@
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <property name="geometry">
@@ -172,7 +172,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QGraphicsView" name="miniMap">
+           <widget class="MiniMap" name="miniMap">
             <property name="verticalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
@@ -818,6 +818,11 @@
    <class>TileSelectorView</class>
    <extends>QGraphicsView</extends>
    <header>ResourceTab/TileSelectorView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MiniMap</class>
+   <extends>QGraphicsView</extends>
+   <header>MiniMap.h</header>
   </customwidget>
  </customwidgets>
  <resources>
