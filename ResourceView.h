@@ -28,7 +28,7 @@ signals:
 public slots:
     void selectionUpdated(QTreeWidgetItem *item, int column);
 
-    void RepopulateLayers();
+    void RepopulateLayers(int newID);
     void RepopulateImages();
 
 private:

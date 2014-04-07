@@ -63,7 +63,7 @@ public slots:
 
 signals:
     void SpriteListModified(QStringList spriteNameList);
-    void LayerListModified();
+    void LayerListModified(int newID);
     void ImageListModified();
 
     void ObjectPrototypeListModified(QStringList objectPrototypeNameList, int type);

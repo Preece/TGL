@@ -157,7 +157,7 @@ void ResourceManager::AddTileLayer(TileLayer *newLayer)
     {
         layerMap[newLayer->GetID()] = newLayer;
 
-        emit LayerListModified();
+        emit LayerListModified(newLayer->GetID());
     }
 }
 
@@ -169,7 +169,7 @@ void ResourceManager::DeleteTileLayer(int ID)
         layerMap[ID] = NULL;
         layerMap.remove(ID);
 
-        emit LayerListModified();
+        emit LayerListModified(ID);
 
         return;
     }

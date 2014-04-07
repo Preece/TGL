@@ -28,11 +28,11 @@ void ResourceView::RepopulateEverything()
     if(resources)
         projectRoot->setData(0, Qt::UserRole, QVariant(resources->GetLevelProperties()->GetID()));
 
-    RepopulateLayers();
+    RepopulateLayers(0);
     RepopulateImages();
 }
 
-void ResourceView::RepopulateLayers()
+void ResourceView::RepopulateLayers(int newID)
 {
     //get rid of the children
     RemoveChildrenNodes(layerRoot);
@@ -45,11 +45,12 @@ void ResourceView::RepopulateLayers()
 
         QTreeWidgetItem *newLayerNode = AddNode(layerRoot, layer->GetName(), ":/Icons/Icons/save.png", layer->GetID());
 
-        //if this layer was the current selection, select it again
-        if(layer->GetID() == currentSelection)
+        //if this layer was the current selection or the new addition, select it again
+        if(layer->GetID() == currentSelection || newID == layer->GetID())
         {
             newLayerNode->setSelected(true);
             layerRoot->setExpanded(true);
+            emit NewLayerSelected(newID);
         }
     }
 }
