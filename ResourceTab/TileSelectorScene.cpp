@@ -3,6 +3,19 @@
 TileSelectorScene::TileSelectorScene(QObject *parent)
 {
     connect(this, SIGNAL(selectionChanged()), this, SLOT(PackageAndEmitSelection()));
+
+    selection = new QRubberBand(QRubberBand::Rectangle);
+
+    QPalette palette;
+    palette.setBrush(QPalette::Foreground, QBrush(Qt::green));
+    palette.setBrush(QPalette::Base, QBrush(Qt::red));
+
+    selection->setPalette(palette);
+}
+
+TileSelectorScene::~TileSelectorScene()
+{
+    delete selection;
 }
 
 void TileSelectorScene::RepopulateTileSelector()
@@ -104,6 +117,43 @@ void TileSelectorScene::SelectTileset()
             //and repopulate the tile selector
             RepopulateTileSelector();
         }
+    }
+}
+
+void TileSelectorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsScene::mousePressEvent(event);
+
+    if(event->button() == Qt::LeftButton)
+    {
+        clickSpot = event->scenePos().toPoint();
+    }
+}
+
+void TileSelectorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsScene::mouseMoveEvent(event);
+
+    if(event->buttons() & Qt::LeftButton)
+    {
+        selection->setGeometry(clickSpot.x(), clickSpot.y(),
+                               event->scenePos().x() - clickSpot.x(), event->scenePos().y() - clickSpot.y());
+
+        QPainterPath path;
+        path.addRect(clickSpot.x(), clickSpot.y(),
+                     event->scenePos().x() - clickSpot.x(), event->scenePos().y() - clickSpot.y());
+
+        setSelectionArea(path);
+    }
+}
+
+void TileSelectorScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsScene::mouseReleaseEvent(event);
+
+    if(event->button() == Qt::LeftButton)
+    {
+        selection->setGeometry(0, 0, 0, 0);
     }
 }
 

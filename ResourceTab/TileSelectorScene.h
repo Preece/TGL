@@ -2,6 +2,7 @@
 #define TILESELECTORSCENE_H
 
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 #include "Model/ResourceManager.h"
 #include "../SpriteEditor/SpritesheetSelector.h"
 #include "TileWidgetItem.h"
@@ -13,6 +14,7 @@ class TileSelectorScene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit TileSelectorScene(QObject *parent = 0);
+    ~TileSelectorScene();
 
     void RegisterResourceManager(ResourceManager * newRM) { resources = newRM; }
     
@@ -35,12 +37,17 @@ public slots:
 
     void SelectTileset();
 
-
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
     ResourceManager *resources;
-
     QImage *spritesheet;
+
+    QRubberBand *selection;
+    QPoint clickSpot;
     
 };
 
