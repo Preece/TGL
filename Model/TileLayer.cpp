@@ -29,11 +29,6 @@ bool TileLayer::Import(Exporter *exporter)
     return true;
 }
 
-Tile *TileLayer::GetTileAtPos(int x, int y)
-{
-    return tiles[TileCoord(x, y)];
-}
-
 TileCoord TileLayer::GetTileOrigin(int x, int y)
 {
     Tile *tempTile;
@@ -49,41 +44,38 @@ TileCoord TileLayer::GetTileOrigin(int x, int y)
     tempTile = tiles[TileCoord(x, y)];
 
     //return the ID of the tile
-    return TileCoord(tempTile->originX, tempTile->originY);
+    return TileCoord(tempTile->origin.first, tempTile->origin.second);
 }
 
-Tile *TileLayer::AddTile(int x, int y, int oX, int oY)
+Tile *TileLayer::AddTile(TileCoord newPos, TileCoord newOrigin)
 {
     //create a new tile instance
     Tile *tempTile = new Tile;
 
     //fill out its values
-    tempTile->x = x;
-    tempTile->y = y;
-    tempTile->originX = oX;
-    tempTile->originY = oY;
+    tempTile->pos = newPos;
+    tempTile->origin = newOrigin;
 
     //add it to the map of tiles
-    tiles[TileCoord(x, y)] = tempTile;
+    tiles[newPos] = tempTile;
 
     //return the new tile
     return tempTile;
 }
 
-void TileLayer::RemoveTile(int x, int y)
+void TileLayer::RemoveTile(TileCoord pos)
 {
     //remove the specified tile
-    tiles.remove(TileCoord(x, y));
+    tiles.remove(pos);
 }
 
-void TileLayer::ModifyTile(int x, int y, int oX, int oY)
+void TileLayer::ModifyTile(int x, int y, TileCoord newOrigin)
 {
     //if the tile they are trying to modify exists
     if(tiles[TileCoord(x, y)] != 0)
     {
         //access the pointer to it and change its tileID
         Tile *tempTile = tiles[TileCoord(x, y)];
-        tempTile->originX = oX;
-        tempTile->originY = oY;
+        tempTile->origin = newOrigin;
     }
 }

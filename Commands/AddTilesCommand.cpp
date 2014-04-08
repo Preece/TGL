@@ -1,23 +1,21 @@
 #include "AddTilesCommand.h"
 
-AddTilesCommand::AddTilesCommand(TileLayer *newLayer, int newX, int newY, int newOX, int newOY)
+AddTilesCommand::AddTilesCommand(TileLayer *newLayer, TileCoord pos, TileCoord origin)
 {
     layer = newLayer;
-    x = newX;
-    y = newY;
-    newOriginX = newOX;
-    newOriginY = newOY;
+    newPos = pos;
+    newOrigin = origin;
 
     tile = NULL;
 }
 
 void AddTilesCommand::undo()
 {
-    layer->RemoveTile(x, y);
+    layer->RemoveTile(newPos);
     tile = NULL;
 }
 
 void AddTilesCommand::redo()
 {
-    tile = layer->AddTile(x, y, newOriginX, newOriginY);
+    tile = layer->AddTile(newPos, newOrigin);
 }

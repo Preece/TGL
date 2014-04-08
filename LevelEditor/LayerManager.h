@@ -26,8 +26,8 @@ public:
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
     void RepopulateLayer(TileLayerView *dirtyLayer);
-    void AddLayer(TileLayer *newLayer);
-    void RemoveLayer(TileLayer *dirtyLayer);
+    void AddLayer(int newLayerID);
+    void RemoveLayer(int dirtyLayerID);
 
     void EyedropTile(QPoint pos);
 
@@ -37,7 +37,7 @@ public:
 
     QString GetLayerName(int index);
 
-    void UpdateLayerOpacity(TileLayer *opaqueLayer);
+    void UpdateLayerOpacity(int opaqueLayerID);
 
     void ToggleLayerVisibility(int layerIndex, bool show);
 

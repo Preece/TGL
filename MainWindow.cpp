@@ -285,7 +285,7 @@ void MainWindow::on_actionAdd_Layer_triggered()
         resources->AddTileLayer(newLayer);
 
         //and give a reference to the layer manager
-        layers->AddLayer(newLayer);
+        layers->AddLayer(newLayer->GetID());
     }
     else
     {
@@ -302,7 +302,7 @@ void MainWindow::on_actionDelete_Layer_triggered()
         if(tempLayer)
         {
             //remove the layer from the layer manager (which will take it out of the RM)
-            layers->RemoveLayer(tempLayer);
+            layers->RemoveLayer(tempLayer->GetID());
         }
     }
 }
@@ -316,7 +316,7 @@ void MainWindow::on_actionEdit_Layer_triggered()
         if(tempLayer)
         {
             layerPropertiesWindow->EditLayer(tempLayer);
-            layers->UpdateLayerOpacity(tempLayer);
+            layers->UpdateLayerOpacity(tempLayer->GetID());
         }
     }
 }

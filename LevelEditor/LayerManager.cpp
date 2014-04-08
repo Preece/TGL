@@ -46,34 +46,34 @@ void LayerManager::EyedropTile(QPoint pos)
     }
 }
 
-void LayerManager::AddLayer(TileLayer *newLayer)
+void LayerManager::AddLayer(int newLayerID)
 {
     //create a layer group, and assign the new layer
-    TileLayerView *tempLayerGroup = new TileLayerView;
-    tempLayerGroup->SetLayer(newLayer);
-    tempLayerGroup->RegisterResourceManager(resourceManager);
-    tempLayerGroup->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(),
+    TileLayerView *tempLayerView = new TileLayerView;
+    tempLayerView->SetLayerID(newLayerID);
+    tempLayerView->RegisterResourceManager(resourceManager);
+    tempLayerView->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(),
                                  resourceManager->GetLevelProperties()->GetMapHeight());
 
     //put the layer group into the list
-    layers.insert(0, tempLayerGroup);
-    addItem(tempLayerGroup);
-    UpdateLayerOpacity(newLayer);
+    layers.insert(0, tempLayerView);
+    addItem(tempLayerView);
+    UpdateLayerOpacity(newLayerID);
 
-    tempLayerGroup->show();
-    tempLayerGroup->setPos(0,0);
+    tempLayerView->show();
+    tempLayerView->setPos(0,0);
     
     setSceneRect(0, 0, resourceManager->GetLevelProperties()->GetMapWidth() * resourceManager->GetLevelProperties()->GetTileWidth(),
                        resourceManager->GetLevelProperties()->GetMapHeight() * resourceManager->GetLevelProperties()->GetTileHeight());
 }
 
-void LayerManager::RemoveLayer(TileLayer *dirtyLayer)
+void LayerManager::RemoveLayer(int dirtyLayerID)
 {
     for(int i = 0; i < layers.count(); i++)
     {
-        if(layers[i]->GetLayer() == dirtyLayer)
+        if(layers[i]->GetLayerID() == dirtyLayerID)
         {
-            resourceManager->DeleteTileLayer(layers[i]->GetLayer()->GetID());
+            resourceManager->DeleteTileLayer(layers[i]->GetLayerID());
 
             layers[i]->DestroyAllItems();
             delete layers[i];
@@ -254,13 +254,13 @@ QString LayerManager::GetLayerName(int index)
     return resourceManager->GetLayerByIndex(index)->GetName();
 }
 
-void LayerManager::UpdateLayerOpacity(TileLayer *opaqueLayer)
+void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
 {
     for(int i = 0; i < layers.count(); i++)
     {
-        if(layers[i]->GetLayer() == opaqueLayer)
+        if(layers[i]->GetLayerID() == opaqueLayerID)
         {
-            qreal opacity = opaqueLayer->GetOpacity();
+            qreal opacity = resourceManager->GetLayerOpacity(opaqueLayerID);
             opacity = opacity / 100;
             layers[i]->setOpacity(opacity);
         }

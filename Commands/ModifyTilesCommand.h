@@ -8,7 +8,7 @@
 class ModifyTilesCommand : public QUndoCommand
 {
 public:
-    ModifyTilesCommand(TileLayer * newLayer, int newX, int newY, int newOX, int newOY, int oldOX, int oldOY);
+    ModifyTilesCommand(TileLayer * newLayer, int newX, int newY, TileCoord newOrgn, TileCoord oldOrgn);
 
     void undo();
     void redo();
@@ -16,8 +16,8 @@ public:
 private:
     TileLayer *holdLayer;
     int x, y;
-    int newOriginX, newOriginY;
-    int oldOriginX, oldOriginY;
+    TileCoord newOrigin;
+    TileCoord oldOrigin;
 };
 
 #endif // MODIFYTILESCOMMAND_H

@@ -1,23 +1,20 @@
 #include "ModifyTilesCommand.h"
 
-ModifyTilesCommand::ModifyTilesCommand(TileLayer *newLayer, int newX, int newY, int newOX, int newOY, int oldOX, int oldOY)
+ModifyTilesCommand::ModifyTilesCommand(TileLayer *newLayer, int newX, int newY, TileCoord newOrgn, TileCoord oldOrgn)
 {
     holdLayer = newLayer;
     x = newX;
     y = newY;
-    newOriginX = newOX;
-    newOriginY = newOY;
-    oldOriginX = oldOX;
-    oldOriginY = oldOY;
-
+    newOrigin = newOrgn;
+    oldOrigin = oldOrgn;
 }
 
 void ModifyTilesCommand::undo()
 {
-    holdLayer->ModifyTile(x, y, oldOriginX, oldOriginY);
+    holdLayer->ModifyTile(x, y, oldOrigin);
 }
 
 void ModifyTilesCommand::redo()
 {
-    holdLayer->ModifyTile(x, y, newOriginX, newOriginY);
+    holdLayer->ModifyTile(x, y, newOrigin);
 }

@@ -13,17 +13,13 @@ public:
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
-    void SetLayer(TileLayer *newLayer) { layer = newLayer; }
-    TileLayer *GetLayer() { return layer; }
-    int GetLayerID() { if(layer) return layer->GetID(); return 0; }
+    void SetLayerID(int newID) { layerID = newID; }
+    int GetLayerID() { return layerID; }
 
     void AddTileWidgetItem(Tile *newTile);
     void ModifyTile(int x, int y, TileCoord newOrigin);
     void PreviewModifyTile(int x, int y, TileCoord newOrigin);
     void ClearPreview();
-    Tile *GetTile(int x, int y);
-
-    TileWidgetItem *GetTileWidgetItem(int x, int y);
 
     TileCoord GetTileOrigin(int x, int y);
     void SetLayerSize(int w, int h);
@@ -47,7 +43,7 @@ private:
 
     QList<TileWidgetItem*> previewItems;
 
-    TileLayer *layer;
+    int layerID;
     ResourceManager *resourceManager;
 };
 

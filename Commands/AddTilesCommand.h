@@ -8,7 +8,7 @@
 class AddTilesCommand : public QUndoCommand
 {
 public:
-    AddTilesCommand(TileLayer * newLayer, int newX, int newY, int newOX, int newOY);
+    AddTilesCommand(TileLayer * newLayer, TileCoord pos, TileCoord origin);
 
     void undo();
     void redo();
@@ -16,7 +16,8 @@ public:
     Tile *GetTile() { return tile; }
 
 private:
-    int x, y, newOriginX, newOriginY;
+    TileCoord newPos;
+    TileCoord newOrigin;
     TileLayer *layer;
     Tile *tile;
 };

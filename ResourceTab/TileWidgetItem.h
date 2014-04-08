@@ -10,19 +10,16 @@ public:
     TileWidgetItem();
     ~TileWidgetItem();
 
-    void SetTile(Tile *newTile) { tile = newTile; }
-    Tile *GetTile() { return tile; }
-
     void SetTilePixmap(QPixmap newPix);
-    QPixmap GetTilePixmap();
 
     void SetIndex(int newIndex) { index = newIndex; }
     int GetIndex() { return index; }
 
-    TileCoord GetTileOrigin();
+    void SetTileOrigin(TileCoord newOrigin) { origin = newOrigin; }
+    TileCoord GetTileOrigin() { return origin; }
 
 private:
-    Tile *tile;
+    TileCoord origin;
 
     int index;
 };

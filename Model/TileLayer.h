@@ -11,8 +11,8 @@ typedef QPair<int, int> TileCoord;
 
 struct Tile
 {
-    int x, y;
-    int originX, originY;
+    TileCoord pos;
+    TileCoord origin;
 };
 
 class TileLayer : public ItemNode
@@ -36,12 +36,11 @@ public:
     int GetOpacity() { return opacity; }
 
     int GetTileCount() { return tiles.count(); }
-    Tile *GetTileAtPos(int x, int y);
     TileCoord GetTileOrigin(int x, int y);
 
-    Tile *AddTile(int x = 0, int y = 0, int oX = 0, int oY = 0);
-    void RemoveTile(int x, int y);
-    void ModifyTile(int x, int y, int oX, int oY);
+    Tile *AddTile(TileCoord newPos, TileCoord newOrigin);
+    void RemoveTile(TileCoord pos);
+    void ModifyTile(int x, int y, TileCoord newOrigin);
 
     void ResetIterator() { iter = tiles.begin(); }
     Tile *GetTileFromIterator() { return iter.value(); }

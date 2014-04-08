@@ -51,6 +51,10 @@ public slots:
     TileLayer *GetLayerByIndex(int index);
     int GetLayerCount() { return layerMap.count(); }
 
+    int GetLayerOpacity(int layerID);
+    void ModifyTile(int layerID, int x, int y, TileCoord origin);
+    TileCoord GetTileOrigin(int layerID, int x, int y);
+
     void DestroyAllResources();
 
     void Undo();

@@ -193,6 +193,38 @@ TileLayer *ResourceManager::GetLayerByIndex(int index)
     return layers[index];
 }
 
+int ResourceManager::GetLayerOpacity(int layerID)
+{
+    TileLayer *tempLayer = GetTileLayer(layerID);
+
+    if(tempLayer)
+        return tempLayer->GetOpacity();
+}
+
+void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
+{
+    //use a modify tile command
+    if(layerMap.value(layerID))
+    {
+        layerMap[layerID]->ModifyTile(x, y, origin);
+    }
+}
+
+TileCoord ResourceManager::GetTileOrigin(int layerID, int x, int y)
+{
+    if(layerMap.value(layerID))
+    {
+        TileLayer *tempLayer = layerMap.value(layerID);
+
+        if(tempLayer)
+        {
+            return tempLayer->GetTileOrigin(x, y);
+        }
+    }
+
+    return TileCoord(-1, -1);
+}
+
 Image *ResourceManager::GetImage(int ID)
 {
     if(imageMap.value(ID))

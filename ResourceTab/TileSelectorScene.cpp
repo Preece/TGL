@@ -36,7 +36,6 @@ void TileSelectorScene::RepopulateTileSelector()
             int imageH = spritesheet->height() / tileH;
 
             TileWidgetItem *tempItem;
-            Tile *tempTile;
 
             //loop for the width of the spritesheet divided by the width of a tile
             for(int i = 0; i < imageH; i++)
@@ -50,14 +49,7 @@ void TileSelectorScene::RepopulateTileSelector()
                     tempItem->SetTilePixmap(resources->GetTilePixmap(TileCoord(j, i)));
 
                     //create a tile with the correct origin points, and add it in.
-                    //the x and y are -1 to indicate that this doesnt exist in the tile
-                    //grid, only in the selector pane
-                    tempTile = new Tile();
-                    tempTile->originX = j;
-                    tempTile->originY = i;
-                    tempTile->x = -1;
-                    tempTile->y = -1;
-                    tempItem->SetTile(tempTile);
+                    tempItem->SetTileOrigin(TileCoord(j, i));
 
                     //add the tile item to the tile selector at (i * tilewidth) + i
                     addItem(tempItem);
