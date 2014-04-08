@@ -55,6 +55,8 @@ public slots:
     void ModifyTile(int layerID, int x, int y, TileCoord origin);
     TileCoord GetTileOrigin(int layerID, int x, int y);
     void AddTileToLayer(int layerID, int x, int y, TileCoord origin);
+    int GetTileCount(int layerID);
+    Tile *GetTileByIndex(int layerID, int i);
 
     void DestroyAllResources();
 

@@ -46,6 +46,8 @@ public:
     Tile *GetTileFromIterator() { return iter.value(); }
     void AdvanceIterator() { ++iter; }
 
+    Tile *GetTileByIndex(int layerID, int index);
+
 private:
     double verticalParallax, horizontalParallax;
     QString name;

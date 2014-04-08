@@ -14,12 +14,28 @@ TileLayerView::~TileLayerView()
     DestroyAllItems();
 }
 
-void TileLayerView::AddTileWidgetItem(Tile *newTile)
+void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
 {
-    if(newTile == NULL)
-        return;
+    TileWidgetItem *tempTileItem = new TileWidgetItem;
 
+    //store the tile origin coordinates in the item
+    tempTileItem->SetTileOrigin(newOrigin);
 
+    //add the new tile into the model through the resource manager
+    resourceManager->AddTileToLayer(layerID, x, y, newOrigin);
+
+    //update its Pixmap
+    tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
+
+    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+    //set the position
+    tempTileItem->setPos(x * tileW, y * tileH);
+
+    //put the new tile item into the map, with the new tiles position as the key
+    items[TileCoord(x, y)] = tempTileItem;
+    tempTileItem->setParentItem(this);
 }
 
 void TileLayerView::SetLayerSize(int w, int h)
@@ -70,6 +86,11 @@ void TileLayerView::RepopulateTiles()
     DestroyAllItems();
 
     //build and add all tile widget items from the model
+    for(int i = 0; i < resourceManager->GetTileCount(layerID); i++)
+    {
+        Tile *tempTile = resourceManager->GetTileByIndex(layerID, i);
+        AddTileWidgetItem(tempTile->pos.first, tempTile->pos.second, tempTile->origin);
+    }
 
 }
 
@@ -83,26 +104,8 @@ void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
     if(resourceManager->GetTileOrigin(layerID, x, y) == TileCoord(-1, -1))
     {
         //add a new one
-        TileWidgetItem *tempTileItem = new TileWidgetItem;
+        AddTileWidgetItem(x, y, newOrigin);
 
-        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-
-        //get the tile and set it as the tileinstance for the item
-        tempTileItem->SetTileOrigin(newOrigin);
-
-        //add the new tile into the model through the resource manager
-        resourceManager->AddTileToLayer(layerID, x, y, newOrigin);
-
-        //update its Pixmap
-        tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
-
-        //set the position
-        tempTileItem->setPos(x * tileW, y * tileH);
-
-        //put the new tile item into the map, with the new tiles position as the key
-        items[TileCoord(x, y)] = tempTileItem;
-        tempTileItem->setParentItem(this);
     }
     //if a tile already exists at this position
     else

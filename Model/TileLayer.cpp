@@ -79,3 +79,11 @@ void TileLayer::ModifyTile(int x, int y, TileCoord newOrigin)
         tempTile->origin = newOrigin;
     }
 }
+
+Tile *TileLayer::GetTileByIndex(int layerID, int index)
+{
+    QList<Tile*> tileList = tiles.values();
+
+    if(index >= 0 && index < tileList.count())
+        return tileList[index];
+}

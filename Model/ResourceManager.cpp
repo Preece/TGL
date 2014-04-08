@@ -227,12 +227,31 @@ TileCoord ResourceManager::GetTileOrigin(int layerID, int x, int y)
 
 void ResourceManager::AddTileToLayer(int layerID, int x, int y, TileCoord origin)
 {
-    //use the command
     if(layerMap.value(layerID))
     {
         AddTilesCommand *addTiles = new AddTilesCommand(GetTileLayer(layerID), TileCoord(x, y), origin);
         undo->push(addTiles);
     }
+}
+
+int ResourceManager::GetTileCount(int layerID)
+{
+    if(layerMap.value(layerID))
+    {
+        return layerMap[layerID]->GetTileCount();
+    }
+
+    return 0;
+}
+
+Tile *ResourceManager::GetTileByIndex(int layerID, int i)
+{
+    if(layerMap.value(layerID))
+    {
+        return layerMap[layerID]->GetTileByIndex(layerID, i);
+    }
+
+    return NULL;
 }
 
 Image *ResourceManager::GetImage(int ID)
