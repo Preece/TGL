@@ -4,8 +4,16 @@ ResourceManager::ResourceManager()
 {
     undo = new QUndoStack;
     undo->setUndoLimit(500);
+
+    modifyTiles = new ModifyTilesCommand;
     
     undoing = false;
+}
+
+ResourceManager::~ResourceManager()
+{
+    if(modifyTiles)
+        delete modifyTiles;
 }
 
 int ResourceManager::AddSprite(Sprite *newSprite)
@@ -205,8 +213,7 @@ void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
 {
     if(layerMap.value(layerID))
     {
-        ModifyTilesCommand *modTiles = new ModifyTilesCommand(GetTileLayer(layerID), x, y, origin, GetTileOrigin(layerID, x, y));
-        undo->push(modTiles);
+        modifyTiles->AddModification(GetTileLayer(layerID), x, y, origin, GetTileOrigin(layerID, x, y));
     }
 }
 
@@ -308,16 +315,13 @@ void ResourceManager::Redo()
     undo->redo();
 }
 
-void ResourceManager::BeginUndoOperation(QString name) 
+void ResourceManager::EndPaintOperation() 
 { 
-    undoing = true;
-    undo->beginMacro(name); 
-}
+    //push the current bundle of modifications into the undo stack
+    undo->push(modifyTiles); 
 
-void ResourceManager::EndUndoOperation() 
-{ 
-    undoing = false;
-    undo->endMacro(); 
+    //create a fresh bundle for the next operation
+    modifyTiles = new ModifyTilesCommand;
 }
 
 

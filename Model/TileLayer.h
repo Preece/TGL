@@ -38,8 +38,8 @@ public:
     int GetTileCount() { return tiles.count(); }
     TileCoord GetTileOrigin(int x, int y);
 
-    Tile *AddTile(TileCoord newPos, TileCoord newOrigin);
-    void RemoveTile(TileCoord pos);
+    Tile *AddTile(int x, int y, TileCoord newOrigin);
+    void RemoveTile(int x, int y);
     void ModifyTile(int x, int y, TileCoord newOrigin);
 
     void ResetIterator() { iter = tiles.begin(); }

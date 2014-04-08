@@ -169,8 +169,6 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {
-        resourceManager->BeginUndoOperation("Painting Tiles");
-
         currentBrush->Press(tileX, tileY, currentLayer);
     }
     else if(event->button() == Qt::RightButton)
@@ -223,7 +221,9 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {    
         currentBrush->Release(tileX, tileY, currentLayer);
-        resourceManager->EndUndoOperation();
+
+        //this will package the changes into an undo command and implement them into the model
+        resourceManager->EndPaintOperation();
     }
 }
 

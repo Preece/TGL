@@ -47,26 +47,27 @@ TileCoord TileLayer::GetTileOrigin(int x, int y)
     return TileCoord(tempTile->origin.first, tempTile->origin.second);
 }
 
-Tile *TileLayer::AddTile(TileCoord newPos, TileCoord newOrigin)
+Tile *TileLayer::AddTile(int x, int y, TileCoord newOrigin)
 {
     //create a new tile instance
     Tile *tempTile = new Tile;
 
     //fill out its values
-    tempTile->pos = newPos;
+    tempTile->pos.first = x;
+    tempTile->pos.second = y;
     tempTile->origin = newOrigin;
 
     //add it to the map of tiles
-    tiles[newPos] = tempTile;
+    tiles[TileCoord(x, y)] = tempTile;
 
     //return the new tile
     return tempTile;
 }
 
-void TileLayer::RemoveTile(TileCoord pos)
+void TileLayer::RemoveTile(int x, int y)
 {
     //remove the specified tile
-    tiles.remove(pos);
+    tiles.remove(TileCoord(x, y));
 }
 
 void TileLayer::ModifyTile(int x, int y, TileCoord newOrigin)

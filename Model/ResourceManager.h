@@ -24,6 +24,7 @@ class ResourceManager : public QObject
     //ResourceManager(QObject *parent = 0);
 public:
     ResourceManager();
+    ~ResourceManager();
 
 public slots:
 
@@ -54,7 +55,6 @@ public slots:
     int GetLayerOpacity(int layerID);
     void ModifyTile(int layerID, int x, int y, TileCoord origin);
     TileCoord GetTileOrigin(int layerID, int x, int y);
-    void AddTileToLayer(int layerID, int x, int y, TileCoord origin);
     int GetTileCount(int layerID);
     Tile *GetTileByIndex(int layerID, int i);
 
@@ -63,8 +63,7 @@ public slots:
     void Undo();
     void Redo();
 
-    void BeginUndoOperation(QString name);
-    void EndUndoOperation();
+    void EndPaintOperation();
     
     bool IsUndoHappening() { return undoing; }
 
@@ -74,8 +73,6 @@ signals:
     void ImageListModified();
 
     void ObjectPrototypeListModified(QStringList objectPrototypeNameList, int type);
-
-    //void ObjectInstanceAdded(QImage symbol, int ID);
 
     void UndoRedoPerformed();
 
@@ -87,6 +84,7 @@ private:
     LevelProperties levelProperties;
 
     QUndoStack *undo;
+    ModifyTilesCommand *modifyTiles;
     
     bool undoing;
 };
