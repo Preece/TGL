@@ -225,6 +225,20 @@ TileCoord ResourceManager::GetTileOrigin(int layerID, int x, int y)
     return TileCoord(-1, -1);
 }
 
+void ResourceManager::AddTileToLayer(int layerID, int x, int y, TileCoord origin)
+{
+    //use the command
+    if(layerMap.value(layerID))
+    {
+        TileLayer *tempLayer = layerMap.value(layerID);
+
+        if(tempLayer)
+        {
+            tempLayer->AddTile(TileCoord(x, y), origin);
+        }
+    }
+}
+
 Image *ResourceManager::GetImage(int ID)
 {
     if(imageMap.value(ID))

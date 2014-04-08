@@ -91,6 +91,9 @@ void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
         //get the tile and set it as the tileinstance for the item
         tempTileItem->SetTileOrigin(newOrigin);
 
+        //add the new tile into the model through the resource manager
+        resourceManager->AddTileToLayer(layerID, x, y, newOrigin);
+
         //update its Pixmap
         tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
 

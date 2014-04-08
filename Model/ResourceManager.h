@@ -54,6 +54,7 @@ public slots:
     int GetLayerOpacity(int layerID);
     void ModifyTile(int layerID, int x, int y, TileCoord origin);
     TileCoord GetTileOrigin(int layerID, int x, int y);
+    void AddTileToLayer(int layerID, int x, int y, TileCoord origin);
 
     void DestroyAllResources();
 
