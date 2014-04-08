@@ -14,7 +14,6 @@
 
 #include "../Commands/AddResourceCommand.h"
 #include "../Commands/DeleteResourceCommand.h"
-#include "../Commands/AddTilesCommand.h"
 #include "../Commands/ModifyTilesCommand.h"
 
 class ResourceManager : public QObject
