@@ -203,10 +203,10 @@ int ResourceManager::GetLayerOpacity(int layerID)
 
 void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
 {
-    //use a modify tile command
     if(layerMap.value(layerID))
     {
-        layerMap[layerID]->ModifyTile(x, y, origin);
+        ModifyTilesCommand *modTiles = new ModifyTilesCommand(GetTileLayer(layerID), x, y, origin, GetTileOrigin(layerID, x, y));
+        undo->push(modTiles);
     }
 }
 
@@ -230,12 +230,8 @@ void ResourceManager::AddTileToLayer(int layerID, int x, int y, TileCoord origin
     //use the command
     if(layerMap.value(layerID))
     {
-        TileLayer *tempLayer = layerMap.value(layerID);
-
-        if(tempLayer)
-        {
-            tempLayer->AddTile(TileCoord(x, y), origin);
-        }
+        AddTilesCommand *addTiles = new AddTilesCommand(GetTileLayer(layerID), TileCoord(x, y), origin);
+        undo->push(addTiles);
     }
 }
 
