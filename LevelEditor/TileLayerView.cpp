@@ -64,25 +64,8 @@ void TileLayerView::DestroyAllItems()
 
     items.clear();
 
-    //iterate through all elements in the map, and delete the tilewidgets
-    /*QMap<TileCoord, TileWidgetItem*>::const_iterator i = items.constBegin();
-
-    while (i != items.constEnd())
-    {
-        if(i.value())
-            delete i.value();
-
-        ++i;
-    }
-
-    items.clear(); */
-
-   /* for(int i = 0; i < previewItems.count(); i++)
-    {
-        delete previewItems[i];
-    }
-
-    previewItems.clear();*/
+    //previews are children, they have already been deleted
+    previewItems.clear();
 }
 
 void TileLayerView::RepopulateTiles()
@@ -154,7 +137,11 @@ void TileLayerView::ClearPreview()
 {
     for(int i = 0; i < previewItems.count(); i++)
     {
-        delete previewItems[i];
+        if(previewItems[i])
+        {
+            delete previewItems[i];
+            previewItems[i] = NULL;
+        }
     }
 
     previewItems.clear();
