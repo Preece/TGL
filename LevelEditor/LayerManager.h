@@ -41,9 +41,9 @@ public:
 
     void ToggleLayerVisibility(int layerIndex, bool show);
 
+public slots:
     void RepopulateAllLayers();
 
-public slots:
     void ToggleGrid(bool show = true);
 
     void SetBrush(TileBrush *newBrush);

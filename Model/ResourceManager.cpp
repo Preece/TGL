@@ -6,59 +6,12 @@ ResourceManager::ResourceManager()
     undo->setUndoLimit(500);
 
     modifyTiles = new ModifyTilesCommand;
-    
-    undoing = false;
 }
 
 ResourceManager::~ResourceManager()
 {
     if(modifyTiles)
         delete modifyTiles;
-}
-
-int ResourceManager::AddSprite(Sprite *newSprite)
-{
-    if(newSprite != NULL)
-    {
-        //create an add sprite command
-        AddResourceCommand *add = new AddResourceCommand(newSprite, &spriteMap);
-
-        //push it into the undo list
-        undo->push(add);
-    }
-
-    return 0;
-}
-
-bool ResourceManager::DeleteSprite(int ID)
-{
-    if(spriteMap.value(ID))
-    {
-        DeleteResourceCommand *del = new DeleteResourceCommand(spriteMap[ID], &spriteMap);
-        undo->push(del);
-
-        return true;
-    }
-
-    return false;
-}
-
-Sprite *ResourceManager::GetSprite(int ID)
-{
-    if(spriteMap.value(ID))
-        return spriteMap[ID];
-
-    return NULL;
-}
-
-Sprite *ResourceManager::GetSpriteByIndex(int index)
-{
-    QList<Sprite*> sprites = spriteMap.values();
-
-    if(index >= sprites.count() || index < 0)
-        return NULL;
-
-    return sprites[index];
 }
 
 int ResourceManager::AddImage(Image *newImage)
@@ -99,43 +52,6 @@ Image *ResourceManager::GetImageByIndex(int index)
     return images[index];
 }
 
-QPixmap ResourceManager::GetSpriteSymbol(int spriteID)
-{
-    //get the sprite based on its ID
-    Sprite *tempSprite = GetSprite(spriteID);
-
-    //if its a valid sprite
-    if(tempSprite)
-    {
-        Image *tempImage = GetImage(tempSprite->GetImageID());
-
-        //if the image is valid
-        if(tempImage)
-        {
-            //get the image
-            QImage *tempQImage = tempImage->GetImage();
-
-            //if the image is valid
-            if(tempQImage)
-            {
-                //if the sprite has an animation and frame
-                if(tempSprite->GetAnimationCount() > 0)
-                    if(tempSprite->GetAnimationByIndex(0)->GetFrameCount() > 0)
-                    {
-                        //get the frame rect and make a pixmap from it
-                        QRect frameRect = tempSprite->GetAnimationByIndex(0)->GetFrameAtIndex(0)->GetFrameRect();
-                        QPixmap tempPixmap = QPixmap::fromImage(tempQImage->copy(frameRect));
-                        return tempPixmap;
-                    }
-            }
-
-        }
-    }
-
-    //return the missing file symbol
-    return QPixmap(":/Icons/Icons/MissingFile.png");
-}
-
 QImage *ResourceManager::GetTileset()
 {
     if(levelProperties.GetTilesetID() == 0)
@@ -146,8 +62,6 @@ QImage *ResourceManager::GetTileset()
 
 QPixmap ResourceManager::GetTilePixmap(TileCoord coord)
 {
-    //commented out for refactoring
-
     QImage *tempTileset = GetTileset();
     QImage tempImage = *tempTileset;
 
@@ -268,18 +182,6 @@ Image *ResourceManager::GetImage(int ID)
 void ResourceManager::DestroyAllResources()
 {
     delete undo;
-
-    //destroy the sprite resources
-    for(int i = 0; i < spriteMap.count(); i++)
-    {
-        Sprite *sprite = GetSpriteByIndex(i);
-        sprite->DestroyAllAnimations();
-        delete sprite;
-        sprite = NULL;
-    }
-
-    //clear the list
-    spriteMap.clear();
 
     //destroy the images
     for(int i = 0; i < imageMap.count(); i++)
