@@ -68,7 +68,7 @@ QPixmap ResourceManager::GetTilePixmap(TileCoord coord)
     if(tempImage.isNull())
         return QPixmap();
 
-    tempImage = tempImage.copy(levelProperties.GetTileWidth() * coord.first, levelProperties.GetTileHeight() * coord.second, levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
+    tempImage = tempImage.copy(levelProperties.GetTileWidth() * coord.x, levelProperties.GetTileHeight() * coord.y, levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
 
     return QPixmap::fromImage(tempImage);
 }

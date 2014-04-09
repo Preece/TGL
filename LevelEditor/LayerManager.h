@@ -11,7 +11,7 @@
 #include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
 #include "TileLayerView.h"
-#include "../ResourceTab/TileWidgetItem.h"
+#include "../Toolbox/TileWidgetItem.h"
 #include "Brushes/TileBrush.h"
 
 typedef QList<TileCoord> TileList;
@@ -25,29 +25,21 @@ public:
     ~LayerManager();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
-    void RepopulateLayer(TileLayerView *dirtyLayer);
+    
     void AddLayer(int newLayerID);
     void RemoveLayer(int dirtyLayerID);
 
     void EyedropTile(QPoint pos);
-
-    bool IsLayerSelected();
-    TileLayerView *GetSelectedLayer();
-    int GetLayerCount() { return layers.count(); }
-
-    QString GetLayerName(int index);
-
     void UpdateLayerOpacity(int opaqueLayerID);
-
-    void ToggleLayerVisibility(int layerIndex, bool show);
 
 public slots:
     void RepopulateAllLayers();
+    void RepopulateLayer(TileLayerView *dirtyLayer);
 
+    void ToggleLayerVisibility(int layerIndex, bool show);
     void ToggleGrid(bool show = true);
 
     void SetBrush(TileBrush *newBrush);
-
     void SetLayerSelection(int newSelection);
 
 signals:

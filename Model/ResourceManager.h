@@ -2,7 +2,6 @@
 #define RESOURCEMANAGER_H
 
 #include <QDialog>
-#include <QList>
 #include <QMap>
 #include <QStringList>
 #include <QUndoStack>
@@ -10,22 +9,23 @@
 #include "Sprite.h"
 #include "Image.h"
 #include "TileLayer.h"
-#include "Model/LevelProperties.h"
+#include "LevelProperties.h"
 
-#include "../Commands/AddResourceCommand.h"
-#include "../Commands/DeleteResourceCommand.h"
-#include "../Commands/ModifyTilesCommand.h"
+#include "Commands/AddResourceCommand.h"
+#include "Commands/DeleteResourceCommand.h"
+#include "Commands/ModifyTilesCommand.h"
 
 class ResourceManager : public QObject
 {
     Q_OBJECT
 
-    //ResourceManager(QObject *parent = 0);
 public:
     ResourceManager();
     ~ResourceManager();
 
 public slots:
+    void Undo();
+    void Redo();
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
 
@@ -43,19 +43,15 @@ public slots:
     TileLayer *GetTileLayer(int ID);
     TileLayer *GetLayerByIndex(int index);
     int GetLayerCount() { return layerMap.count(); }
-
     int GetLayerOpacity(int layerID);
+
     void ModifyTile(int layerID, int x, int y, TileCoord origin, TileCoord oldOrigin);
     TileCoord GetTileOrigin(int layerID, int x, int y);
     int GetTileCount(int layerID);
     Tile *GetTileByIndex(int layerID, int i);
+    void EndPaintOperation();
 
     void DestroyAllResources();
-
-    void Undo();
-    void Redo();
-
-    void EndPaintOperation();
 
 signals:
     void LayerListModified(int newID);

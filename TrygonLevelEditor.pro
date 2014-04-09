@@ -12,27 +12,31 @@ TEMPLATE = app
 include(qtpropertybrowser/src/qtpropertybrowser.pri)
 
 SOURCES += main.cpp\
+    MainWindow.cpp \
+    Model/ItemNode.cpp \
     Model/Frame.cpp \
     Model/Sprite.cpp \
     Model/Animation.cpp \
     Model/ResourceManager.cpp \
-    SpriteEditor/AnimationListItem.cpp \
-    MainWindow.cpp \
-    SpriteEditor/SpriteEditor.cpp \
-    SpriteEditor/AnimationEditor.cpp \
-    SpriteEditor/FrameListItem.cpp \
     Model/Image.cpp \
-    ResourceTab/ImageViewer.cpp \
-    SpriteEditor/SpritesheetSelector.cpp \
-    SpriteEditor/SelectionGraphicsScene.cpp \
-    SpriteEditor/AnimationPreviewer/AnimationPreviewer.cpp \
-    SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
-    LevelEditor/LayerManager.cpp \
-    Commands/ModifyTilesCommand.cpp \
-    LevelEditor/Brushes/TileBrush.cpp \
     Model/LevelProperties.cpp \
-    LevelPropertiesDialog.cpp \
+    Model/TileLayer.cpp \
     Model/Exporter.cpp \
+    Model/Exporters/PackedBinaryExporter.cpp \
+    Model/Commands/ModifyTilesCommand.cpp \
+    Model/Commands/AddResourceCommand.cpp \
+    Model/Commands/DeleteResourceCommand.cpp \
+    Toolbox/ResourceView.cpp \
+    Toolbox/PropertyBrowser.cpp \
+    Toolbox/MiniMap.cpp \
+    Toolbox/TileSelectorView.cpp \
+    Toolbox/TileSelectorScene.cpp \
+    Toolbox/ImageViewer.cpp \
+    Toolbox/ImageListWidgetItem.cpp \
+    Toolbox/TileWidgetItem.cpp \
+    LevelPropertiesDialog.cpp \
+    LevelEditor/LayerManager.cpp \
+    LevelEditor/Brushes/TileBrush.cpp \
     LevelEditor/Brushes/PencilBrush.cpp \
     LevelEditor/Brushes/FillBrush.cpp \
     LevelEditor/Brushes/SmartBrush.cpp \
@@ -42,47 +46,44 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/ScatterBrush.cpp \
     LevelEditor/Brushes/BrushPropertiesWindow.cpp \
     LevelEditor/Brushes/ComplexBrush.cpp \
-    Model/Exporters/PackedBinaryExporter.cpp \
-    Commands/AddResourceCommand.cpp \
-    Commands/DeleteResourceCommand.cpp \
-    LevelEditor/Brushes/ReplacerBrush.cpp \
-    ResourceTab/TileSelectorView.cpp \
-    ResourceTab/TileSelectorScene.cpp \
     LevelEditor/Brushes/StampBrush.cpp \
     LevelEditor/Brushes/LineBrush.cpp \
     LevelEditor/Brushes/MatrixBrush.cpp \
-    ResourceTab/ImageListWidgetItem.cpp \
-    ResourceTab/TileWidgetItem.cpp \
-    Model/TileLayer.cpp \
+    LevelEditor/Brushes/ReplacerBrush.cpp \
     LevelEditor/TileLayerView.cpp \
-    Model/ItemNode.cpp \
-    ResourceView.cpp \
-    PropertyBrowser.cpp \
-    MiniMap.cpp
-  
+    SpriteEditor/AnimationListItem.cpp \
+    SpriteEditor/SpriteEditor.cpp \
+    SpriteEditor/AnimationEditor.cpp \
+    SpriteEditor/FrameListItem.cpp \
+    SpriteEditor/SpritesheetSelector.cpp \
+    SpriteEditor/SelectionGraphicsScene.cpp \
+    SpriteEditor/AnimationPreviewer/AnimationPreviewer.cpp \
+    SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp
 
 HEADERS  += \
+    MainWindow.h \
+    Model/ItemNode.h \
     Model/Sprite.h \
     Model/Animation.h \
     Model/Frame.h \
     Model/ResourceManager.h \
-    SpriteEditor/AnimationListItem.h \
-    MainWindow.h \
-    SpriteEditor/SpriteEditor.h \
-    SpriteEditor/AnimationEditor.h \ 
-    SpriteEditor/FrameListItem.h \
     Model/Image.h \
-    ResourceTab/ImageViewer.h \
-    SpriteEditor/SpritesheetSelector.h \
-    SpriteEditor/SelectionGraphicsScene.h \
-    SpriteEditor/AnimationPreviewer/AnimationPreviewer.h \
-    SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
-    LevelEditor/LayerManager.h \
-    Commands/ModifyTilesCommand.h \
-    LevelEditor/Brushes/TileBrush.h \
-    Model/LevelProperties.h \
-    LevelPropertiesDialog.h \
     Model/Exporter.h \
+    Model/LevelProperties.h \
+    Model/TileLayer.h \
+    Model/Exporters/PackedBinaryExporter.h \
+    Model/Commands/ModifyTilesCommand.h \
+    Model/Commands/AddResourceCommand.h \
+    Model/Commands/DeleteResourceCommand.h \
+    Toolbox/ImageViewer.h \
+    Toolbox/TileSelectorView.h \
+    Toolbox/TileSelectorScene.h \
+    Toolbox/ImageListWidgetItem.h \
+    Toolbox/TileWidgetItem.h \
+    Toolbox/ResourceView.h \
+    ToolBox/PropertyBrowser.h \
+    Toolbox/MiniMap.h \
+    LevelPropertiesDialog.h \
     LevelEditor/Brushes/PencilBrush.h \
     LevelEditor/Brushes/FillBrush.h \
     LevelEditor/Brushes/SmartBrush.h \
@@ -92,37 +93,34 @@ HEADERS  += \
     LevelEditor/Brushes/ScatterBrush.h \
     LevelEditor/Brushes/BrushPropertiesWindow.h \
     LevelEditor/Brushes/ComplexBrush.h \
-    Model/Exporters/PackedBinaryExporter.h \
-    Commands/AddResourceCommand.h \
-    Commands/DeleteResourceCommand.h \
     LevelEditor/Brushes/ReplacerBrush.h \
-    ResourceTab/TileSelectorView.h \
-    ResourceTab/TileSelectorScene.h \
     LevelEditor/Brushes/StampBrush.h \
     LevelEditor/Brushes/LineBrush.h \
     LevelEditor/Brushes/MatrixBrush.h \
-    ResourceTab/ImageListWidgetItem.h \
-    ResourceTab/TileWidgetItem.h \
-    Model/TileLayer.h \
     LevelEditor/TileLayerView.h \
-    Model/ItemNode.h \
-    ResourceView.h \
-    PropertyBrowser.h \
-    MiniMap.h
-   
+    LevelEditor/LayerManager.h \
+    LevelEditor/Brushes/TileBrush.h \
+    SpriteEditor/AnimationListItem.h \
+    SpriteEditor/SpriteEditor.h \
+    SpriteEditor/AnimationEditor.h \ 
+    SpriteEditor/FrameListItem.h \
+    SpriteEditor/SpritesheetSelector.h \
+    SpriteEditor/SelectionGraphicsScene.h \
+    SpriteEditor/AnimationPreviewer/AnimationPreviewer.h \
+    SpriteEditor/AnimationPreviewer/AnimatedLabel.h
 
 FORMS    += \
-    ResourceTab/ResourceTab.ui \
-    ResourceTab/ImageViewer.ui \
-    SpriteEditor/SpriteEditor.ui \
-    SpriteEditor/AnimationEditor.ui \
     MainWindow.ui \
-    SpriteEditor/SpritesheetSelector.ui \
-    SpriteEditor/AnimationPreviewer/AnimationPreviewer.ui \
+    Toolbox/Toolbox.ui \
+    Toolbox/ImageViewer.ui \
     LevelPropertiesDialog.ui \
     LevelEditor/LayerProperties.ui \
     LevelEditor/Brushes/BrushPropertiesWidget.ui \
-    LevelEditor/Brushes/BrushPropertiesWindow.ui
+    LevelEditor/Brushes/BrushPropertiesWindow.ui \
+    SpriteEditor/SpriteEditor.ui \
+    SpriteEditor/AnimationEditor.ui \
+    SpriteEditor/SpritesheetSelector.ui \
+    SpriteEditor/AnimationPreviewer/AnimationPreviewer.ui
 
 RESOURCES += \
     Icons.qrc

@@ -17,7 +17,7 @@
 #include "LevelEditor/Brushes/FillBrush.h"
 #include "LevelEditor/Brushes/EraserBrush.h"
 
-#include "ResourceTab/TileSelectorScene.h"
+#include "Toolbox/TileSelectorScene.h"
 
 #include "SpriteEditor/SpriteEditor.h"
 #include "LevelPropertiesDialog.h"

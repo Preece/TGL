@@ -83,19 +83,6 @@ void LayerManager::RemoveLayer(int dirtyLayerID)
     }
 }
 
-bool LayerManager::IsLayerSelected()
-{
-    if(currentLayer == NULL)
-        return false;
-
-    return true;
-}
-
-TileLayerView *LayerManager::GetSelectedLayer()
-{
-    return currentLayer;
-}
-
 void LayerManager::ToggleGrid(bool show)
 {
     if(show == false)
@@ -242,14 +229,6 @@ void LayerManager::SetLayerSelection(int newSelection)
 
     //if it was not found, just NULL out the current layer. Checks elsewhere will prevent drawing
     currentLayer = NULL;
-}
-
-QString LayerManager::GetLayerName(int index)
-{
-    if(index < 0 || index >= layers.count())
-        return QString("Invalid index");
-
-    return resourceManager->GetLayerByIndex(index)->GetName();
 }
 
 void LayerManager::UpdateLayerOpacity(int opaqueLayerID)

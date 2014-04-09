@@ -9,7 +9,7 @@
 #include "ScatterBrush.h"
 #include "SmartBrush.h"
 
-#include "../../ResourceTab/TileWidgetItem.h"
+#include "../../Toolbox/TileWidgetItem.h"
 
 namespace Ui {
 class BrushPropertiesWindow;

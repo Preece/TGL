@@ -44,7 +44,7 @@ TileCoord TileLayer::GetTileOrigin(int x, int y)
     tempTile = tiles[TileCoord(x, y)];
 
     //return the ID of the tile
-    return TileCoord(tempTile->origin.first, tempTile->origin.second);
+    return TileCoord(tempTile->origin.x, tempTile->origin.y);
 }
 
 Tile *TileLayer::AddTile(int x, int y, TileCoord newOrigin)
@@ -56,8 +56,8 @@ Tile *TileLayer::AddTile(int x, int y, TileCoord newOrigin)
     Tile *tempTile = new Tile;
 
     //fill out its values
-    tempTile->pos.first = x;
-    tempTile->pos.second = y;
+    tempTile->pos.x = x;
+    tempTile->pos.y = y;
     tempTile->origin = newOrigin;
 
     //add it to the map of tiles

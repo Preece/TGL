@@ -14,30 +14,6 @@ TileLayerView::~TileLayerView()
     DestroyAllItems();
 }
 
-void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
-{
-    if(items.value(TileCoord(x, y)))
-        return;
-
-    TileWidgetItem *tempTileItem = new TileWidgetItem;
-
-    //store the tile origin coordinates in the item
-    tempTileItem->SetTileOrigin(newOrigin);
-
-    //update its Pixmap
-    tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
-
-    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-
-    //set the position
-    tempTileItem->setPos(x * tileW, y * tileH);
-
-    //put the new tile item into the map, with the position as the key
-    items[TileCoord(x, y)] = tempTileItem;
-    tempTileItem->setParentItem(this);
-}
-
 void TileLayerView::SetLayerSize(int w, int h)
 {
     widthInTiles = w;
@@ -79,7 +55,7 @@ void TileLayerView::RepopulateTiles()
         Tile *tempTile = resourceManager->GetTileByIndex(layerID, i);
 
         if(tempTile)
-            AddTileWidgetItem(tempTile->pos.first, tempTile->pos.second, tempTile->origin);
+            AddTileWidgetItem(tempTile->pos.x, tempTile->pos.y, tempTile->origin);
     }
 
 }
@@ -131,6 +107,32 @@ void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
 
     previewItems.append(tempTile);
     tempTile->setParentItem(this);
+}
+
+//this is a convenience function for adding the graphical element to represent a tile.
+//it does not change the model
+void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
+{
+    if(items.value(TileCoord(x, y)))
+        return;
+
+    TileWidgetItem *tempTileItem = new TileWidgetItem;
+
+    //store the tile origin coordinates in the item
+    tempTileItem->SetTileOrigin(newOrigin);
+
+    //update its Pixmap
+    tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
+
+    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+    //set the position
+    tempTileItem->setPos(x * tileW, y * tileH);
+
+    //put the new tile item into the map, with the position as the key
+    items[TileCoord(x, y)] = tempTileItem;
+    tempTileItem->setParentItem(this);
 }
 
 void TileLayerView::ClearPreview()

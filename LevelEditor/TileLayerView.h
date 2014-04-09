@@ -3,7 +3,7 @@
 
 #include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
-#include "../ResourceTab/TileWidgetItem.h"
+#include "../Toolbox/TileWidgetItem.h"
 
 class TileLayerView : public QGraphicsRectItem
 {
@@ -16,7 +16,6 @@ public:
     void SetLayerID(int newID) { layerID = newID; }
     int GetLayerID() { return layerID; }
 
-    void AddTileWidgetItem(int x, int y, TileCoord newOrigin);
     void ModifyTileItem(int x, int y, TileCoord newOrigin);
     void PreviewModifyTile(int x, int y, TileCoord newOrigin);
     void ClearPreview();
@@ -25,16 +24,16 @@ public:
     void SetLayerSize(int w, int h);
 
     void ToggleVisibility(bool visible);
-    bool IsVisible();
 
     int GetLayerWidth() { return widthInTiles; }
     int GetLayerHeight() { return heightInTiles; }
 
     void DestroyAllItems();
-
     void RepopulateTiles();
 
 private:
+    void AddTileWidgetItem(int x, int y, TileCoord newOrigin);
+
     int widthInTiles, heightInTiles;
 
     QMap<TileCoord, TileWidgetItem*> items;

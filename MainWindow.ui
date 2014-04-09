@@ -820,7 +820,7 @@
   <customwidget>
    <class>TileSelectorView</class>
    <extends>QGraphicsView</extends>
-   <header>ResourceTab/TileSelectorView.h</header>
+   <header>Toolbox/TileSelectorView.h</header>
   </customwidget>
   <customwidget>
    <class>MiniMap</class>

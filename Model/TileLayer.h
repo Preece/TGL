@@ -7,7 +7,10 @@
 
 #include "ItemNode.h"
 
-typedef QPair<int, int> TileCoord;
+struct TileCoord
+{
+    int x, y;
+};
 
 struct Tile
 {
