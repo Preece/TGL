@@ -16,13 +16,13 @@ TileLayerView::~TileLayerView()
 
 void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
 {
+    if(items.value(TileCoord(x, y)))
+        return;
+
     TileWidgetItem *tempTileItem = new TileWidgetItem;
 
     //store the tile origin coordinates in the item
     tempTileItem->SetTileOrigin(newOrigin);
-
-    //add the new tile into the model through the resource manager
-    resourceManager->ModifyTile(layerID, x, y, newOrigin);
 
     //update its Pixmap
     tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
@@ -33,7 +33,7 @@ void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
     //set the position
     tempTileItem->setPos(x * tileW, y * tileH);
 
-    //put the new tile item into the map, with the new tiles position as the key
+    //put the new tile item into the map, with the position as the key
     items[TileCoord(x, y)] = tempTileItem;
     tempTileItem->setParentItem(this);
 }
@@ -52,31 +52,19 @@ void TileLayerView::ToggleVisibility(bool visible)
         hide();
 }
 
-bool TileLayerView::IsVisible()
-{
-    return IsVisible();
-}
-
 void TileLayerView::DestroyAllItems()
 {
-    //iterate through all elements in the map, and delete the tilewidgets
-    QMap<TileCoord, TileWidgetItem*>::const_iterator i = items.constBegin();
+    QList<QGraphicsItem*> children = this->children();
 
-    while (i != items.constEnd())
+    for(int i = 0; i < children.count(); i++)
     {
-        if(i.value())
-            delete i.value();
-
-        ++i;
+        if(children[i])
+            delete children[i];
     }
 
     items.clear();
 
-    for(int i = 0; i < previewItems.count(); i++)
-    {
-        delete previewItems[i];
-    }
-
+    //previews are children, they have already been deleted
     previewItems.clear();
 }
 
@@ -89,29 +77,32 @@ void TileLayerView::RepopulateTiles()
     for(int i = 0; i < resourceManager->GetTileCount(layerID); i++)
     {
         Tile *tempTile = resourceManager->GetTileByIndex(layerID, i);
-        AddTileWidgetItem(tempTile->pos.first, tempTile->pos.second, tempTile->origin);
+
+        if(tempTile)
+            AddTileWidgetItem(tempTile->pos.first, tempTile->pos.second, tempTile->origin);
     }
 
 }
 
-void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
+void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
 {
     //bounds check
     if(x >= widthInTiles || y >= heightInTiles || x < 0 || y < 0)
         return;
 
-    //if there is not a tile at this position
+    //if there is not a tile at this position in the model
     if(resourceManager->GetTileOrigin(layerID, x, y) == TileCoord(-1, -1))
     {
         //add a new one
         AddTileWidgetItem(x, y, newOrigin);
 
+        //add the new tile into the model through the resource manager
+        resourceManager->ModifyTile(layerID, x, y, newOrigin, TileCoord(-1, -1));
     }
-    //if a tile already exists at this position
     else
     {
         //modify the tile origin values in the model
-        resourceManager->ModifyTile(layerID, x, y, newOrigin);
+        resourceManager->ModifyTile(layerID, x, y, newOrigin, resourceManager->GetTileOrigin(layerID, x, y));
 
         //get the visible tile widget
         TileWidgetItem *tempTileItem = items[TileCoord(x, y)];
@@ -146,7 +137,11 @@ void TileLayerView::ClearPreview()
 {
     for(int i = 0; i < previewItems.count(); i++)
     {
-        delete previewItems[i];
+        if(previewItems[i])
+        {
+            delete previewItems[i];
+            previewItems[i] = NULL;
+        }
     }
 
     previewItems.clear();

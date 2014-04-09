@@ -49,6 +49,9 @@ TileCoord TileLayer::GetTileOrigin(int x, int y)
 
 Tile *TileLayer::AddTile(int x, int y, TileCoord newOrigin)
 {
+    if(tiles.value(TileCoord(x, y)))
+        return NULL;
+
     //create a new tile instance
     Tile *tempTile = new Tile;
 
@@ -73,7 +76,7 @@ void TileLayer::RemoveTile(int x, int y)
 void TileLayer::ModifyTile(int x, int y, TileCoord newOrigin)
 {
     //if the tile they are trying to modify exists
-    if(tiles[TileCoord(x, y)] != 0)
+    if(tiles.value(TileCoord(x, y)))
     {
         //access the pointer to it and change its tileID
         Tile *tempTile = tiles[TileCoord(x, y)];
@@ -87,4 +90,6 @@ Tile *TileLayer::GetTileByIndex(int layerID, int index)
 
     if(index >= 0 && index < tileList.count())
         return tileList[index];
+
+    return NULL;
 }

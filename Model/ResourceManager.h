@@ -29,19 +29,12 @@ public slots:
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
 
-    int AddSprite(Sprite *newSprite);
-    bool DeleteSprite(int ID);
-    Sprite *GetSprite(int ID);
-    Sprite *GetSpriteByIndex(int index);
-    int GetSpriteCount() { return spriteMap.count(); }
-
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);
     Image *GetImage(int ID);
     Image *GetImageByIndex(int index);
     int GetImageCount() { return imageMap.count(); }
 
-    QPixmap GetSpriteSymbol(int spriteID);
     QImage *GetTileset();
     QPixmap GetTilePixmap(TileCoord coord);
 
@@ -52,7 +45,7 @@ public slots:
     int GetLayerCount() { return layerMap.count(); }
 
     int GetLayerOpacity(int layerID);
-    void ModifyTile(int layerID, int x, int y, TileCoord origin);
+    void ModifyTile(int layerID, int x, int y, TileCoord origin, TileCoord oldOrigin);
     TileCoord GetTileOrigin(int layerID, int x, int y);
     int GetTileCount(int layerID);
     Tile *GetTileByIndex(int layerID, int i);
@@ -63,20 +56,12 @@ public slots:
     void Redo();
 
     void EndPaintOperation();
-    
-    bool IsUndoHappening() { return undoing; }
 
 signals:
-    void SpriteListModified(QStringList spriteNameList);
     void LayerListModified(int newID);
     void ImageListModified();
 
-    void ObjectPrototypeListModified(QStringList objectPrototypeNameList, int type);
-
-    void UndoRedoPerformed();
-
 private:
-    QMap<int, Sprite*> spriteMap;
     QMap<int, Image*> imageMap;
     QMap<int, TileLayer*> layerMap;
 
@@ -84,8 +69,6 @@ private:
 
     QUndoStack *undo;
     ModifyTilesCommand *modifyTiles;
-    
-    bool undoing;
 };
 
 #endif // RESOURCEMANAGER_H

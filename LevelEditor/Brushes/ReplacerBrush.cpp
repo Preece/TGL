@@ -27,7 +27,7 @@ void ReplacerBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
                     if(preview)
                         layer->PreviewModifyTile(j + x, i + y, GetRandomTile(0));
                     else
-                        layer->ModifyTile(j + x, i + y, GetRandomTile(0));
+                        layer->ModifyTileItem(j + x, i + y, GetRandomTile(0));
                 }
             }
         }
