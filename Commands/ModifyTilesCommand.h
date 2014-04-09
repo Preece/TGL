@@ -27,6 +27,8 @@ public:
 
     void AddModification(TileLayer *layer, int newX, int newY, TileCoord newOrgn, TileCoord oldOrgn);
 
+    TileCoord GetTileOrigin(int layerID, int x, int y);
+
     void undo();
     void redo();
 

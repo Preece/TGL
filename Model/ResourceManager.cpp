@@ -207,18 +207,21 @@ int ResourceManager::GetLayerOpacity(int layerID)
 
     if(tempLayer)
         return tempLayer->GetOpacity();
+
+    return 100;
 }
 
-void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
+void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin, TileCoord oldOrigin)
 {
     if(layerMap.value(layerID))
     {
-        modifyTiles->AddModification(GetTileLayer(layerID), x, y, origin, GetTileOrigin(layerID, x, y));
+        modifyTiles->AddModification(GetTileLayer(layerID), x, y, origin, oldOrigin);
     }
 }
 
 TileCoord ResourceManager::GetTileOrigin(int layerID, int x, int y)
 {
+    //check if the tile exists in the normal model
     if(layerMap.value(layerID))
     {
         TileLayer *tempLayer = layerMap.value(layerID);
@@ -229,16 +232,9 @@ TileCoord ResourceManager::GetTileOrigin(int layerID, int x, int y)
         }
     }
 
-    return TileCoord(-1, -1);
-}
-
-void ResourceManager::AddTileToLayer(int layerID, int x, int y, TileCoord origin)
-{
-    if(layerMap.value(layerID))
-    {
-        AddTilesCommand *addTiles = new AddTilesCommand(GetTileLayer(layerID), TileCoord(x, y), origin);
-        undo->push(addTiles);
-    }
+    //check to see if its currently queued up in the modifytilescommand
+    //(if not it will return a -1-1 tile)
+    return modifyTiles->GetTileOrigin(layerID, x, y);
 }
 
 int ResourceManager::GetTileCount(int layerID)

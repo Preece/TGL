@@ -17,7 +17,7 @@ public:
     int GetLayerID() { return layerID; }
 
     void AddTileWidgetItem(int x, int y, TileCoord newOrigin);
-    void ModifyTile(int x, int y, TileCoord newOrigin);
+    void ModifyTileItem(int x, int y, TileCoord newOrigin);
     void PreviewModifyTile(int x, int y, TileCoord newOrigin);
     void ClearPreview();
 
@@ -33,8 +33,6 @@ public:
     void DestroyAllItems();
 
     void RepopulateTiles();
-    void RepopulateObjects();
-
 
 private:
     int widthInTiles, heightInTiles;

@@ -45,7 +45,6 @@ SOURCES += main.cpp\
     Model/Exporters/PackedBinaryExporter.cpp \
     Commands/AddResourceCommand.cpp \
     Commands/DeleteResourceCommand.cpp \
-    Commands/AddTilesCommand.cpp \
     LevelEditor/Brushes/ReplacerBrush.cpp \
     ResourceTab/TileSelectorView.cpp \
     ResourceTab/TileSelectorScene.cpp \
@@ -96,7 +95,6 @@ HEADERS  += \
     Model/Exporters/PackedBinaryExporter.h \
     Commands/AddResourceCommand.h \
     Commands/DeleteResourceCommand.h \
-    Commands/AddTilesCommand.h \
     LevelEditor/Brushes/ReplacerBrush.h \
     ResourceTab/TileSelectorView.h \
     ResourceTab/TileSelectorScene.h \

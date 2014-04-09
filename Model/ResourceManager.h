@@ -14,7 +14,6 @@
 
 #include "../Commands/AddResourceCommand.h"
 #include "../Commands/DeleteResourceCommand.h"
-#include "../Commands/AddTilesCommand.h"
 #include "../Commands/ModifyTilesCommand.h"
 
 class ResourceManager : public QObject
@@ -53,7 +52,7 @@ public slots:
     int GetLayerCount() { return layerMap.count(); }
 
     int GetLayerOpacity(int layerID);
-    void ModifyTile(int layerID, int x, int y, TileCoord origin);
+    void ModifyTile(int layerID, int x, int y, TileCoord origin, TileCoord oldOrigin);
     TileCoord GetTileOrigin(int layerID, int x, int y);
     int GetTileCount(int layerID);
     Tile *GetTileByIndex(int layerID, int i);

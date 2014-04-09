@@ -31,7 +31,7 @@ void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
         if(preview)
             layer->PreviewModifyTile(paintSpotX, paintSpotY, tiles[i]);
         else
-            layer->ModifyTile(paintSpotX, paintSpotY, tiles[i]);
+            layer->ModifyTileItem(paintSpotX, paintSpotY, tiles[i]);
     }
 }
 

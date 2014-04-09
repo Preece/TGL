@@ -15,7 +15,19 @@ void ModifyTilesCommand::AddModification(TileLayer *layer, int newX, int newY, T
 	newMod.oldOrigin = oldOrgn;
 
 	//add the new modification to the end of the list
-	mods.push_back(newMod);
+    mods.push_back(newMod);
+}
+
+TileCoord ModifyTilesCommand::GetTileOrigin(int layerID, int x, int y)
+{
+    for(int i = 0; i < mods.count(); i++)
+    {
+        //if this is the tile we are looking for, return its original origin
+        if(mods[i].x == x && mods[i].y == y && mods[i].layer->GetID() == layerID)
+            return mods[i].oldOrigin;
+    }
+
+    return TileCoord(-1, -1);
 }
 
 void ModifyTilesCommand::undo()
@@ -27,13 +39,13 @@ void ModifyTilesCommand::undo()
 	    if(mods[i].oldOrigin == TileCoord(-1, -1))
 	    {
 	        //then remove the tile entirely
-	        holdLayer->RemoveTile(TileCoord(mods[i].x, mods[i].y));
+            mods[i].layer->RemoveTile(mods[i].x, mods[i].y);
 	    }
 	    //if the old origin was not empty
 	    else
 	    {
 	        //then restore the original origin of the tile
-            holdLayer->ModifyTile(mods[i].x, mods[i].y, mods[i].oldOrigin);
+            mods[i].layer->ModifyTile(mods[i].x, mods[i].y, mods[i].oldOrigin);
         }
     }
 }
@@ -53,7 +65,7 @@ void ModifyTilesCommand::redo()
 	    else
 	    {
 	        //modify the existing tile
-            mods[i].layer->ModifyTile(mods[i].x, mods[i].y, (mods[i].newOrigin);
+            mods[i].layer->ModifyTile(mods[i].x, mods[i].y, mods[i].newOrigin);
         }
     }
 }

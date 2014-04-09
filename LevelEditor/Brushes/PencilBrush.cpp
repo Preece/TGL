@@ -37,7 +37,7 @@ void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
                         if(preview)
                             layer->PreviewModifyTile(j + x, i + y, selectedTileOrigin);
                         else
-                            layer->ModifyTile(j + x, i + y, selectedTileOrigin);
+                            layer->ModifyTileItem(j + x, i + y, selectedTileOrigin);
                     }
                 }
             }
