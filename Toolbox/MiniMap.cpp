@@ -29,11 +29,22 @@ void MiniMap::wheelEvent(QWheelEvent *event)
     //zoom in
     if(event->delta() > 0)
     {
+        //if the zoom is less than 10x, zoom in
         scale(scaleFactor, scaleFactor);
     }
     else //zoom out
     {
-        scale(1/scaleFactor, 1/scaleFactor);
+        //if the size of the scene is smaller than the view
+        if(sceneRect()->contains(scene()->sceneRect()))
+        {
+            //make the scene fit nicely in there
+            fitInView(scene()->sceneRect());
+        }
+        else//otherwise
+        {
+            //zoom out
+            scale(1/scaleFactor, 1/scaleFactor);
+        }
     }
 
     event->accept();
