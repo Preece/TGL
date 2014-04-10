@@ -2,11 +2,27 @@
 
 TileLayer::TileLayer()
 {
-    iter = tiles.begin();
-
     opacity = 100;
     verticalParallax = 1.0;
     horizontalParallax = 1.0;
+}
+
+TileLayer::~TileLayer()
+{
+    DestroyTiles();
+}
+
+void TileLayer::DestroyTiles()
+{
+    QList<Tile*> tileList = tiles.values();
+
+    for(int i = 0; i < tileList.count(); i++)
+    {
+        if(tileList[i])
+            delete tileList[i];
+    }
+
+    tiles.clear();
 }
 
 bool TileLayer::Export(Exporter *exporter)

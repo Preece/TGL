@@ -2,15 +2,12 @@
 #define LAYER_H
 
 #include <QGraphicsItemGroup>
-#include <QPair>
+#include <QPoint>
 #include <QMap>
 
 #include "ItemNode.h"
 
-struct TileCoord
-{
-    int x, y;
-};
+typedef QPoint TileCoord;
 
 struct Tile
 {
@@ -26,6 +23,9 @@ public:
     QString GetType() { return "layer"; }
 
     TileLayer();
+    ~TileLayer();
+
+    void DestroyTiles();
 
     QString GetName() { return name; }
     void SetName(QString newName) { name = newName; }
@@ -45,10 +45,6 @@ public:
     void RemoveTile(int x, int y);
     void ModifyTile(int x, int y, TileCoord newOrigin);
 
-    void ResetIterator() { iter = tiles.begin(); }
-    Tile *GetTileFromIterator() { return iter.value(); }
-    void AdvanceIterator() { ++iter; }
-
     Tile *GetTileByIndex(int layerID, int index);
 
 private:
@@ -58,7 +54,6 @@ private:
     int opacity;
 
     QMap<TileCoord, Tile*> tiles;
-    QMap<TileCoord, Tile*>::iterator iter;
 };
 
 #endif // LAYER_H

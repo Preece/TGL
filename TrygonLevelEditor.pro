@@ -111,7 +111,6 @@ HEADERS  += \
 
 FORMS    += \
     MainWindow.ui \
-    Toolbox/Toolbox.ui \
     Toolbox/ImageViewer.ui \
     LevelPropertiesDialog.ui \
     LevelEditor/LayerProperties.ui \

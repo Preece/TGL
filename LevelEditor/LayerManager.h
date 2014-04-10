@@ -34,7 +34,6 @@ public:
 
 public slots:
     void RepopulateAllLayers();
-    void RepopulateLayer(TileLayerView *dirtyLayer);
 
     void ToggleLayerVisibility(int layerIndex, bool show);
     void ToggleGrid(bool show = true);

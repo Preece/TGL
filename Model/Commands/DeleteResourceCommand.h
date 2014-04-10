@@ -3,10 +3,10 @@
 
 #include <QUndoCommand>
 
-#include "../Model/ItemNode.h"
-#include "../Model/Sprite.h"
-#include "../Model/Image.h"
-#include "../Model/TileLayer.h"
+#include "../ItemNode.h"
+#include "../Sprite.h"
+#include "../Image.h"
+#include "../TileLayer.h"
 
 class DeleteResourceCommand : public QUndoCommand
 {

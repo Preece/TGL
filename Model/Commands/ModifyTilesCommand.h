@@ -4,7 +4,7 @@
 #include <QUndoCommand>
 #include <QList>
 
-#include "../Model/TileLayer.h"
+#include "../TileLayer.h"
 
 //this class should collect modifications with am AddModification function.
 //Then, the redo function will actually implement all those changes.
