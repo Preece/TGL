@@ -13,10 +13,12 @@ void MiniMap::mouseMoveEvent(QMouseEvent *event)
 
 void MiniMap::mousePressEvent(QMouseEvent *event)
 {
+   // QGraphicsView::mousePressEvent(event);
 }
 
 void MiniMap::mouseReleaseEvent(QMouseEvent *event)
 {
+   // QGraphicsView::mouseReleaseEvent(event);
 }
 
 void MiniMap::wheelEvent(QWheelEvent *event)

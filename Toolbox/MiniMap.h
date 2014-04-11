@@ -20,8 +20,6 @@ protected:
     void mouseReleaseEvent (QMouseEvent * event);
     void wheelEvent(QWheelEvent *event);
     void drawBackground(QPainter *painter, const QRectF &rect);
-    void drawFrame(QPainter *);
-    
 };
 
 #endif // MINIMAP_H

@@ -57,8 +57,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>477</width>
-           <height>508</height>
+           <width>98</width>
+           <height>147</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -212,6 +212,9 @@
             </property>
             <property name="cursor" stdset="0">
              <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="mouseTracking">
+             <bool>true</bool>
             </property>
             <property name="frameShape">
              <enum>QFrame::WinPanel</enum>
