@@ -2,7 +2,7 @@
 #define RESOURCEMANAGER_H
 
 #include <QDialog>
-#include <QMap>
+#include <QHash>
 #include <QStringList>
 #include <QUndoStack>
 
@@ -58,8 +58,8 @@ signals:
     void ImageListModified();
 
 private:
-    QMap<int, Image*> imageMap;
-    QMap<int, TileLayer*> layerMap;
+    QHash<int, Image*> imageMap;
+    QHash<int, TileLayer*> layerMap;
 
     LevelProperties levelProperties;
 

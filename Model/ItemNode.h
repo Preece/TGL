@@ -7,8 +7,7 @@
 #include <QRect>
 #include <QPoint>
 #include <QImage>
-#include <QList>
-#include <QMap>
+#include <QHash>
 
 class ItemNode
 {
@@ -16,7 +15,7 @@ protected:
     static int newID;
 
     int ID;
-    QMap<int, ItemNode*> children;
+    QHash<int, ItemNode*> children;
 
     int GenerateID();
 

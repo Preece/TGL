@@ -52,6 +52,28 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
     //if its the level properties
     if(resources->GetLevelProperties()->GetID() == currentSelectionID)
     {
+        //get the level properties object
+        LevelProperties *props = resources->GetLevelProperties();
+
+        //determine what property was modified
+        if(property->propertyName() == "Level Name")
+        {
+            if(val.toString() == '')
+                props->SetLevelName("Unnamed Level");
+            else
+                props->SetLevelname(val.toString());
+        }
+
+        if(property->propertyName() == "Tile Size")
+        {
+            props->SetTileWidth(val.toPoint().x());
+            props->SetTileHeight(val.toPoint().y());
+        }
+
+        if(property->propertyName() == "Map Size (in tiles)")
+        {
+            props->SetMapSize(val.toPoint().x(), val.toPoint().y());
+        }
 
     }
 

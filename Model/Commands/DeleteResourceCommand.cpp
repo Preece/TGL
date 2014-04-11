@@ -1,21 +1,21 @@
 #include "DeleteResourceCommand.h"
 
-DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QMap<int, Sprite*> *resources)
+DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QHash<int, Sprite*> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QHash<int, ItemNode*>* >(resources);
 }
 
-DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QMap<int, Image *> *resources)
+DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QHash<int, Image *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QHash<int, ItemNode*>* >(resources);
 }
 
-DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QMap<int, TileLayer *> *resources)
+DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QHash<int, TileLayer *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QMap<int, ItemNode*>* >(resources);
+    resourceList = reinterpret_cast<QHash<int, ItemNode*>* >(resources);
 }
 
 DeleteResourceCommand::~DeleteResourceCommand()
