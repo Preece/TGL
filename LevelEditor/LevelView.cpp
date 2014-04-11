@@ -1,25 +1,12 @@
-#include "MiniMap.h"
+#include "LevelView.h"
 
-MiniMap::MiniMap(QWidget *parent) :
+LevelView::LevelView(QWidget *parent) :
     QGraphicsView(parent)
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 }
 
-void MiniMap::mouseMoveEvent(QMouseEvent *event)
-{
-    QGraphicsView::mouseMoveEvent(event);
-}
-
-void MiniMap::mousePressEvent(QMouseEvent *event)
-{
-}
-
-void MiniMap::mouseReleaseEvent(QMouseEvent *event)
-{
-}
-
-void MiniMap::wheelEvent(QWheelEvent *event)
+void LevelView::wheelEvent(QWheelEvent *event)
 {
     double scaleFactor = 1.15;
 

@@ -557,7 +557,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QGraphicsView" name="levelView">
+       <widget class="LevelView" name="levelView">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>3</horstretch>
@@ -826,6 +826,11 @@
    <class>MiniMap</class>
    <extends>QGraphicsView</extends>
    <header>Toolbox/MiniMap.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LevelView</class>
+   <extends>QGraphicsView</extends>
+   <header>LevelEditor/LevelView.h</header>
   </customwidget>
  </customwidgets>
  <resources>
