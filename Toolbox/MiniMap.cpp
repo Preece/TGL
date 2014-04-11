@@ -47,3 +47,11 @@ void MiniMap::wheelEvent(QWheelEvent *event)
         }
     }
 }
+
+void MiniMap::drawBackground(QPainter *painter, const QRectF &rect)
+{
+
+    painter->setBrush(QBrush(Qt::white));
+    painter->setPen(Qt::DashLine);
+    painter->drawRect(sceneRect());
+}

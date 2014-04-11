@@ -82,41 +82,6 @@ void MainWindow::UpdateToolSelection()
     layers->SetBrush(ui->brushProperties->GetCurrentBrush());
 }
 
-void MainWindow::on_zoomInTool_clicked()
-{
-    //check that the zoom level is not too big
-    if(zoomLevel < 1)
-    {
-        //reset the scale
-        ui->levelView->scale(1/zoomLevel, 1/zoomLevel);
-
-        //increase the zoom level
-        zoomLevel += 0.1;
-
-        ui->zoomLevelLabel->setText(QString::number(zoomLevel * 100) + "% Zoom");
-
-        //set the new scale
-        ui->levelView->scale(zoomLevel, zoomLevel);
-    }
-}
-
-void MainWindow::on_zoomOutTool_clicked()
-{
-    //check that the zoom level is not too small
-    if(zoomLevel > 0.2)
-    {
-        //reset the scale
-        ui->levelView->scale(1/zoomLevel, 1/zoomLevel);
-
-        zoomLevel -= 0.1;
-
-        ui->zoomLevelLabel->setText(QString::number(zoomLevel * 100) + "% Zoom");
-
-        //set the new scale
-        ui->levelView->scale(zoomLevel, zoomLevel);
-    }
-}
-
 void MainWindow::on_actionUndo_triggered()
 {
     if(resources)

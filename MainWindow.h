@@ -50,8 +50,6 @@ private slots:
     void on_scatterFillTool_clicked();
     void on_pointerTool_clicked();
     void on_eyedropperTool_clicked();
-    void on_zoomInTool_clicked();
-    void on_zoomOutTool_clicked();
     void on_actionUndo_triggered();
     void on_actionRedo_triggered();
     void on_lineTool_clicked();

@@ -50,14 +50,14 @@
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>378</width>
+           <width>477</width>
            <height>508</height>
           </rect>
          </property>
@@ -146,7 +146,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>378</width>
+           <width>477</width>
            <height>508</height>
           </rect>
          </property>
@@ -173,11 +173,63 @@
           </item>
           <item>
            <widget class="MiniMap" name="miniMap">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>220</red>
+                  <green>234</green>
+                  <blue>234</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>220</red>
+                  <green>234</green>
+                  <blue>234</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>240</red>
+                  <green>240</green>
+                  <blue>240</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="cursor" stdset="0">
+             <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::WinPanel</enum>
+            </property>
             <property name="verticalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
             <property name="horizontalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="backgroundBrush">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
             </property>
             <property name="dragMode">
              <enum>QGraphicsView::ScrollHandDrag</enum>
@@ -490,61 +542,12 @@
          </widget>
         </item>
         <item>
-         <widget class="Line" name="line_3">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="zoomLevelLabel">
-          <property name="text">
-           <string>100% Zoom</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="zoomInTool">
-          <property name="toolTip">
-           <string>Zoom In</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/zoomin.png</normaloff>:/Icons/Icons/zoomin.png</iconset>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="zoomOutTool">
-          <property name="toolTip">
-           <string>Zoom Out</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/zoomout.png</normaloff>:/Icons/Icons/zoomout.png</iconset>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="Line" name="line_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Preferred</enum>
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -574,11 +577,11 @@
          <enum>Qt::ScrollBarAlwaysOn</enum>
         </property>
         <property name="backgroundBrush">
-         <brush brushstyle="NoBrush">
+         <brush brushstyle="Dense2Pattern">
           <color alpha="255">
-           <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <red>245</red>
+           <green>245</green>
+           <blue>245</blue>
           </color>
          </brush>
         </property>
