@@ -34,3 +34,11 @@ void LevelView::wheelEvent(QWheelEvent *event)
         }
     }
 }
+
+void LevelView::drawBackground(QPainter *painter, const QRectF &rect)
+{
+    QGraphicsView::drawBackground(painter, rect);
+
+    painter->setPen(Qt::DashLine);
+    painter->drawRect(sceneRect());
+}
