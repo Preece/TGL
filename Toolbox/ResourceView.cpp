@@ -48,9 +48,11 @@ void ResourceView::RepopulateLayers(int newID)
         //if this layer was the current selection or the new addition, select it again
         if(layer->GetID() == currentSelection || newID == layer->GetID())
         {
+            clearSelection();
             newLayerNode->setSelected(true);
             layerRoot->setExpanded(true);
             emit NewLayerSelected(newID);
+            selectionUpdated(newLayerNode, 0);
         }
     }
 }
@@ -71,8 +73,10 @@ void ResourceView::RepopulateImages()
         //if this layer was the current selection, select it again
         if(img->GetID() == currentSelection)
         {
+            clearSelection();
             newImageNode->setSelected(true);
             imageRoot->setExpanded(true);
+            selectionUpdated(newImageNode, 0);
         }
     }
 }
