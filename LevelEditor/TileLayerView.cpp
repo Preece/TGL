@@ -55,7 +55,7 @@ void TileLayerView::RepopulateTiles()
         Tile *tempTile = resourceManager->GetTileByIndex(layerID, i);
 
         if(tempTile)
-            AddTileWidgetItem(tempTile->pos.x(), tempTile->pos.y(), tempTile->origin);
+            AddTileWidgetItem(tempTile->pos.first, tempTile->pos.second, tempTile->origin);
     }
 
 }

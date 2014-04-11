@@ -34,11 +34,15 @@ void MiniMap::wheelEvent(QWheelEvent *event)
     }
     else //zoom out
     {
+        //get the transformed size of the scene in this view
+        int sceneWidthInView = transform().m11() * sceneRect().width();
+        int sceneHeightInView = transform().m22() * sceneRect().height();
+
         //if the size of the scene is smaller than the view
-        if(sceneRect()->contains(scene()->sceneRect()))
+        if(sceneWidthInView <= frameRect().width() && sceneHeightInView <= frameRect().height())
         {
             //make the scene fit nicely in there
-            fitInView(scene()->sceneRect());
+            fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
         }
         else//otherwise
         {

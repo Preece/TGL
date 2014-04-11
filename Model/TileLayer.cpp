@@ -72,8 +72,8 @@ Tile *TileLayer::AddTile(int x, int y, TileCoord newOrigin)
     Tile *tempTile = new Tile;
 
     //fill out its values
-    tempTile->pos.x(x);
-    tempTile->pos.y(y);
+    tempTile->pos.first = x;
+    tempTile->pos.second = y;
     tempTile->origin = newOrigin;
 
     //add it to the map of tiles

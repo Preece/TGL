@@ -25,8 +25,8 @@ void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
     
     for(int i = 0; i < tiles.count(); i++)
     {
-        int paintSpotX = x + tiles[i].x() - avgX;
-        int paintSpotY = y + tiles[i].y() - avgY;
+        int paintSpotX = x + tiles[i].first - avgX;
+        int paintSpotY = y + tiles[i].second - avgY;
         
         if(preview)
             layer->PreviewModifyTile(paintSpotX, paintSpotY, tiles[i]);
@@ -47,8 +47,8 @@ void StampBrush::CreateGrid(QList<TileCoord> items)
         tiles.append(items[i]);
             
         //add its origin points to the tally of origins
-        avgX += items[i].x();
-        avgY += items[i].y();
+        avgX += items[i].first;
+        avgY += items[i].second;
     }
     
     if(tiles.count() > 0)

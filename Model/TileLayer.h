@@ -3,11 +3,11 @@
 
 #include <QGraphicsItemGroup>
 #include <QPoint>
-#include <QMap>
+#include <QHash>
 
 #include "ItemNode.h"
 
-typedef QPoint TileCoord;
+typedef QPair<int, int> TileCoord;
 
 struct Tile
 {
@@ -53,7 +53,7 @@ private:
 
     int opacity;
 
-    QMap<TileCoord, Tile*> tiles;
+    QHash<TileCoord, Tile*> tiles;
 };
 
 #endif // LAYER_H

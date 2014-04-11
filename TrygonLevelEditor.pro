@@ -81,7 +81,7 @@ HEADERS  += \
     Toolbox/ImageListWidgetItem.h \
     Toolbox/TileWidgetItem.h \
     Toolbox/ResourceView.h \
-    ToolBox/PropertyBrowser.h \
+    Toolbox/PropertyBrowser.h \
     Toolbox/MiniMap.h \
     LevelPropertiesDialog.h \
     LevelEditor/Brushes/PencilBrush.h \

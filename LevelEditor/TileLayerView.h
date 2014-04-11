@@ -36,7 +36,7 @@ private:
 
     int widthInTiles, heightInTiles;
 
-    QMap<TileCoord, TileWidgetItem*> items;
+    QHash<TileCoord, TileWidgetItem*> items;
 
     QList<TileWidgetItem*> previewItems;
 
