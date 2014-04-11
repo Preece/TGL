@@ -4,11 +4,14 @@ PropertyBrowser::PropertyBrowser(QWidget *parent) :
     QtTreePropertyBrowser(parent)
 {
     resources = NULL;
+    currentSelectionID = 0;
 
     propertyManager = new QtVariantPropertyManager;
     widgetFactory = new QtVariantEditorFactory;
 
     setFactoryForManager(propertyManager, widgetFactory);
+
+    connect(propertyManager, SIGNAL(valueChanged(QtProperty*,QVariant)), this, SLOT(UpdateValue(QtProperty*,QVariant)));
 }
 
 PropertyBrowser::~PropertyBrowser()
@@ -24,6 +27,8 @@ void PropertyBrowser::DisplayResource(int ID)
 
     if(!resources)
         return;
+
+    currentSelectionID = ID;
 
     //check sequentially against each type of resource to see what it is
 
@@ -42,13 +47,34 @@ void PropertyBrowser::DisplayResource(int ID)
     //if its a tileset
 }
 
+void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
+{
+    //if its the level properties
+    if(resources->GetLevelProperties()->GetID() == currentSelectionID)
+    {
+
+    }
+
+
+    //if its a layer
+    if(resources->GetTileLayer(currentSelectionID))
+    {
+
+    }
+
+
+    //if its an image
+    if(resources->GetImage(currentSelectionID))
+    {
+
+    }
+
+
+    //if its a tileset
+}
+
 void PropertyBrowser::DisplayLevelProperties(LevelProperties *properties)
 {
-    //valueChanged(QtProperty *property, const QVariant &val);
-    //this is the signal emitted by the property manager when a value is modified.
-    //another function should connect into this, determine what property is being 
-    //modified, and actually change it in the resource manager
-
     //add the level name
     QtVariantProperty *newProperty = propertyManager->addProperty(QVariant::String, "Level Name");
     newProperty->setAttribute("value", properties->GetLevelName());

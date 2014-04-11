@@ -21,6 +21,7 @@ signals:
 public slots:
 
     void DisplayResource(int ID);
+    void UpdateValue(QtProperty *property, const QVariant &val);
 
 private:
     void DisplayLevelProperties(LevelProperties *properties);
@@ -30,6 +31,8 @@ private:
     ResourceManager *resources;
     QtVariantPropertyManager *propertyManager;
     QtVariantEditorFactory *widgetFactory;
+
+    int currentSelectionID;
     
 };
 

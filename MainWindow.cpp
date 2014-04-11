@@ -116,7 +116,7 @@ void MainWindow::on_pencilTool_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
     ui->levelView->setCursor(tempCur);
 }
 
@@ -126,7 +126,7 @@ void MainWindow::on_bucketTool_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 3, 13);
     ui->levelView->setCursor(tempCur);
 }
 
@@ -137,7 +137,7 @@ void MainWindow::on_eraserButton_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/eraser.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/eraser.png"), 12, 14);
     ui->levelView->setCursor(tempCur);
 }
 
@@ -157,7 +157,7 @@ void MainWindow::on_replacerTool_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
     ui->levelView->setCursor(tempCur);
 }
 
@@ -167,7 +167,7 @@ void MainWindow::on_matrixBrushButton_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
     ui->levelView->setCursor(tempCur);
 }
 
@@ -177,7 +177,7 @@ void MainWindow::on_scatterTool_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
     ui->levelView->setCursor(tempCur);
 }
 
@@ -187,7 +187,7 @@ void MainWindow::on_brushTool_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/brush.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/brush.png"), 2, 1);
     ui->levelView->setCursor(tempCur);
 }
 
@@ -197,14 +197,14 @@ void MainWindow::on_scatterFillTool_clicked()
     UpdateToolSelection();
 
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 3, 13);
     ui->levelView->setCursor(tempCur);
 }
 
 void MainWindow::on_pointerTool_clicked()
 {
     //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/selector.png"), 1, 1);
+    QCursor tempCur(QPixmap(":/Icons/Icons/selector.png"), 11, 1);
     ui->levelView->setCursor(tempCur);
 }
 
