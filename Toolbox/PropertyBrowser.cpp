@@ -56,12 +56,12 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
         LevelProperties *props = resources->GetLevelProperties();
 
         //determine what property was modified
-        if(property->propertyName() == "Level Name")
+        if(property->propertyName() == QString("Level Name"))
         {
-            if(val.toString() == '')
+            if(val.toString().isEmpty())
                 props->SetLevelName("Unnamed Level");
             else
-                props->SetLevelname(val.toString());
+                props->SetLevelName(val.toString());
         }
 
         if(property->propertyName() == "Tile Size")
@@ -99,13 +99,12 @@ void PropertyBrowser::DisplayLevelProperties(LevelProperties *properties)
 {
     //add the level name
     QtVariantProperty *newProperty = propertyManager->addProperty(QVariant::String, "Level Name");
-    newProperty->setAttribute("value", properties->GetLevelName());
+    newProperty->setValue(properties->GetLevelName());
     addProperty(newProperty);
 
     //add the tile size
     newProperty = propertyManager->addProperty(QVariant::Point, "Tile Size");
     newProperty->setValue(QPoint(properties->GetTileWidth(), properties->GetTileHeight()));
-    newProperty->setAttribute("expanded", false);
     addProperty(newProperty);
 
     //add the map size

@@ -33,7 +33,6 @@ private:
     QtVariantEditorFactory *widgetFactory;
 
     int currentSelectionID;
-    
 };
 
 #endif // PROPERTYBROWSER_H
