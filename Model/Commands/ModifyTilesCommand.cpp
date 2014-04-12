@@ -24,7 +24,7 @@ TileCoord ModifyTilesCommand::GetTileOrigin(int layerID, int x, int y)
     {
         //if this is the tile we are looking for, return its original origin
         if(mods[i].x == x && mods[i].y == y && mods[i].layer->GetID() == layerID)
-            return mods[i].oldOrigin;
+            return mods[i].newOrigin;
     }
 
     return TileCoord(-1, -1);

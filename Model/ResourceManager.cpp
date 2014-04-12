@@ -142,12 +142,17 @@ TileCoord ResourceManager::GetTileOrigin(int layerID, int x, int y)
 
         if(tempLayer)
         {
-            return tempLayer->GetTileOrigin(x, y);
+            TileCoord origin = tempLayer->GetTileOrigin(x, y);
+
+            //deliver the tile if it exists
+            if(origin != TileCoord(-1, -1))
+                return origin;
         }
     }
 
+    //if the tile does not exist in the tilelayer model, we can
     //check to see if its currently queued up in the modifytilescommand
-    //(if not it will return a -1-1 tile)
+    //(if not it will return a -1,-1 tile)
     return modifyTiles->GetTileOrigin(layerID, x, y);
 }
 
