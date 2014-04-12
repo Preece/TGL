@@ -17,6 +17,10 @@ public slots:
 protected:
     void wheelEvent(QWheelEvent *event);
     void drawBackground(QPainter *painter, const QRectF &rect);
+    void resizeEvent(QResizeEvent *event);
+
+private:
+    bool maxZoom;
 };
 
 #endif // LEVELVIEW_H

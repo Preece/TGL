@@ -56,7 +56,7 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
         LevelProperties *props = resources->GetLevelProperties();
 
         //determine what property was modified
-        if(property->propertyName() == QString("Level Name"))
+        if(property->propertyName() == "Level Name")
         {
             if(val.toString().isEmpty())
                 props->SetLevelName("Unnamed Level");
@@ -74,7 +74,6 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
         {
             props->SetMapSize(val.toPoint().x(), val.toPoint().y());
         }
-
     }
 
 

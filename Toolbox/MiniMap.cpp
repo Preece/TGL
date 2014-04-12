@@ -4,6 +4,7 @@ MiniMap::MiniMap(QWidget *parent) :
     QGraphicsView(parent)
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    maxZoomed = false;
 }
 
 void MiniMap::mouseMoveEvent(QMouseEvent *event)
@@ -30,12 +31,20 @@ void MiniMap::wheelEvent(QWheelEvent *event)
     {
         //if the zoom is less than 10x, zoom in
         if(transform().m11() <= 10 && transform().m22() <= 10)
+        {
             scale(scaleFactor, scaleFactor);
+            maxZoomed = false;
+        }
+        else
+        {
+            maxZoomed = true;
+        }
     }
     else //zoom out
     {
         //zoom out
         scale(1/scaleFactor, 1/scaleFactor);
+        maxZoomed = false;
 
         //get the transformed size of the scene in this view
         int sceneWidthInView = transform().m11() * sceneRect().width();
@@ -46,6 +55,7 @@ void MiniMap::wheelEvent(QWheelEvent *event)
         {
             //make the scene fit nicely in there
             fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
+            maxZoomed = true;
         }
     }
 }
@@ -56,4 +66,10 @@ void MiniMap::drawBackground(QPainter *painter, const QRectF &rect)
     painter->setBrush(QBrush(Qt::white));
     painter->setPen(Qt::DashLine);
     painter->drawRect(sceneRect());
+}
+
+void MiniMap::resizeEvent(QResizeEvent *event)
+{
+    if(maxZoomed)
+        fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
 }

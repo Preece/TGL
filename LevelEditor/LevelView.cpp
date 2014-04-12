@@ -4,6 +4,7 @@ LevelView::LevelView(QWidget *parent) :
     QGraphicsView(parent)
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    maxZoom = false;
 }
 
 void LevelView::wheelEvent(QWheelEvent *event)
@@ -15,12 +16,20 @@ void LevelView::wheelEvent(QWheelEvent *event)
     {
         //if the zoom is less than 10x, zoom in
         if(transform().m11() <= 10 && transform().m22() <= 10)
+        {
             scale(scaleFactor, scaleFactor);
+            maxZoom = false;
+        }
+        else
+        {
+            maxZoom = true;
+        }
     }
     else //zoom out
     {
         //zoom out
         scale(1/scaleFactor, 1/scaleFactor);
+        maxZoom = false;
 
         //get the transformed size of the scene in this view
         int sceneWidthInView = transform().m11() * sceneRect().width();
@@ -31,6 +40,7 @@ void LevelView::wheelEvent(QWheelEvent *event)
         {
             //make the scene fit nicely in there
             fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
+            maxZoom = true;
         }
     }
 }
@@ -41,4 +51,10 @@ void LevelView::drawBackground(QPainter *painter, const QRectF &rect)
 
     painter->setPen(Qt::DashLine);
     painter->drawRect(sceneRect());
+}
+
+void LevelView::resizeEvent(QResizeEvent *event)
+{
+    if(maxZoom)
+        fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
 }
