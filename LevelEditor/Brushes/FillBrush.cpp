@@ -83,6 +83,34 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
             seedQueue.push_back(TileCoord(tempCoord.first, tempCoord.second - 1));
             seedQueue.push_back(TileCoord(tempCoord.first, tempCoord.second + 1));
         }
-    // 13. Return.
     }
+
+    //1. Set Q to the empty queue.
+    //QList<TileCoord> seedQueue;
+
+    //3. Add node to Q.
+    //seedQueue.push_back(TileCoord(tileX, tileY));
+
+    //4. For each element N of Q:
+    //while(!seedQueue.isEmpty())
+    //{
+        //if the position is beyond the bounds of the scene, ignore it
+        //if(tempCoord.first >= newLayer->GetLayerWidth() ||
+            //tempCoord.second >= newLayer->GetLayerHeight() ||
+            //tempCoord.first < 0 || tempCoord.second < 0)
+                //continue;
+
+         //5.     If the color of N is equal to target-color:
+        //if(newLayer->GetTileOrigin(tempCoord.first, tempCoord.second) == oldOrigin)
+        //{
+
+    //6.         Set w and e equal to N.
+    //7.         Move w to the west until the color of the node to the west of w no longer matches target-color.
+    //8.         Move e to the east until the color of the node to the east of e no longer matches target-color.
+    //9.         For each node n between w and e:
+   //10.             Set the color of n to replacement-color.
+   //11.             If the color of the node to the north of n is target-color, add that node to Q.
+   //12.             If the color of the node to the south of n is target-color, add that node to Q.
+        //}
+   //}
 }

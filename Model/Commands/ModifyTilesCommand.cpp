@@ -14,24 +14,48 @@ void ModifyTilesCommand::AddModification(TileLayer *layer, int newX, int newY, T
 	newMod.newOrigin = newOrgn;
 	newMod.oldOrigin = oldOrgn;
 
-	//add the new modification to the end of the list
-    mods.push_back(newMod);
+    //add the new modification keyed by its position. Its ok if it overwrites
+    //another modification because only the most recent one matters
+    mods.insert(TileCoord(newMod.x, newMod.y), newMod);
 }
 
 TileCoord ModifyTilesCommand::GetTileOrigin(int layerID, int x, int y)
 {
-    for(int i = 0; i < mods.count(); i++)
+    /*for(int i = 0; i < mods.count(); i++)
     {
         //if this is the tile we are looking for, return its original origin
         if(mods[i].x == x && mods[i].y == y && mods[i].layer->GetID() == layerID)
             return mods[i].newOrigin;
-    }
+    }*/
 
+    //if a modification exists at this position, return it
+    if(mods.contains(TileCoord(x, y)))
+        return mods[TileCoord(x, y)].newOrigin;
+
+    //otherwise return a null tile
     return TileCoord(-1, -1);
 }
 
 void ModifyTilesCommand::undo()
 {
+    QHash<TileCoord, TileModification>::iterator iter;
+
+    for(iter = mods.begin(); iter != mods.end(); iter++)
+    {
+        //if the old origin was empty
+        if(iter.value().oldOrigin == TileCoord(-1, -1))
+        {
+            //then remove the tile entirely
+            iter.value().layer->RemoveTile(iter.value().x, iter.value().y);
+        }
+        //if the old origin was not empty
+        else
+        {
+            //then restore the original origin of the tile
+            iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().oldOrigin);
+        }
+    }
+    /*
 	//loop backwards through the list of modifications
 	for(int i = (mods.count() - 1); i >= 0; i--)
 	{
@@ -48,11 +72,29 @@ void ModifyTilesCommand::undo()
             mods[i].layer->ModifyTile(mods[i].x, mods[i].y, mods[i].oldOrigin);
         }
     }
+    */
 }
 
 void ModifyTilesCommand::redo()
 {
-	//loop through the list of modifications
+    QHash<TileCoord, TileModification>::iterator iter;
+
+    for(iter = mods.begin(); iter != mods.end(); iter++)
+    {
+        //if the old origin was empty
+        if(iter.value().oldOrigin == TileCoord(-1, -1))
+        {
+            //if so, add a new tile
+            iter.value().layer->AddTile(iter.value().x, iter.value().y, iter.value().newOrigin);
+        }
+        //if the old origin was not empty
+        else
+        {
+            //modify the existing tile
+            iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().newOrigin);
+        }
+    }
+    /*//loop through the list of modifications
 	for(int i = 0; i < mods.count(); i++)
 	{
 	    //check if the old origin was empty
@@ -67,5 +109,5 @@ void ModifyTilesCommand::redo()
 	        //modify the existing tile
             mods[i].layer->ModifyTile(mods[i].x, mods[i].y, mods[i].newOrigin);
         }
-    }
+    }*/
 }

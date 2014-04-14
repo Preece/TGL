@@ -2,7 +2,7 @@
 #define MODIFYTILESCOMMAND_H
 
 #include <QUndoCommand>
-#include <QList>
+#include <QMultiMap>
 
 #include "../TileLayer.h"
 
@@ -34,7 +34,7 @@ public:
 
 private:
 
-    QList<TileModification> mods;
+    QHash<TileCoord, TileModification> mods;
 };
 
 #endif // MODIFYTILESCOMMAND_H
