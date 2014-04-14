@@ -62,9 +62,18 @@ void TileLayerView::RepopulateTiles()
 
 void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
 {
-    //bounds check
-    if(x >= widthInTiles || y >= heightInTiles || x < 0 || y < 0)
-        return;
+    //bounds check    
+    if(x >= widthInTiles)
+        x = widthInTiles - 1;
+
+    if(y >= heightInTiles)
+        y = heightInTiles - 1;
+
+    if(x < 0)
+        x = 0;
+
+    if(y < 0)
+        y = 0;
 
     //if there is not a tile at this position in the model
     if(resourceManager->GetTileOrigin(layerID, x, y) == TileCoord(-1, -1))
@@ -93,8 +102,17 @@ void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
 void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
 {
     //bounds check
-    if(x >= widthInTiles || y >= heightInTiles || x < 0 || y < 0)
-        return;
+    if(x >= widthInTiles)
+        x = widthInTiles - 1;
+
+    if(y >= heightInTiles)
+        y = heightInTiles - 1;
+
+    if(x < 0)
+        x = 0;
+
+    if(y < 0)
+        y = 0;
 
     TileWidgetItem *tempTile = new TileWidgetItem;
 
