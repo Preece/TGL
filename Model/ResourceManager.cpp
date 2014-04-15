@@ -63,7 +63,7 @@ QImage *ResourceManager::GetTileset()
 QPixmap ResourceManager::GetTilePixmap(TileCoord coord)
 {
     if(pixmapCache.contains(coord))
-        return QPixmap(pixmapCache[coord]);
+        return pixmapCache[coord];
 
     QImage *tempTileset = GetTileset();
     QImage tempImage = *tempTileset;
@@ -74,7 +74,7 @@ QPixmap ResourceManager::GetTilePixmap(TileCoord coord)
     tempImage = tempImage.copy(levelProperties.GetTileWidth() * coord.first, levelProperties.GetTileHeight() * coord.second, levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
 
     pixmapCache[coord] = QPixmap::fromImage(tempImage);
-    return QPixmap(pixmapCache[coord]);
+    return pixmapCache[coord];
 }
 
 void ResourceManager::AddTileLayer(TileLayer *newLayer)

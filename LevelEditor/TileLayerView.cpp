@@ -154,6 +154,5 @@ void TileLayerView::ClearPreview()
 
 TileCoord TileLayerView::GetTileOrigin(int x, int y)
 {
-
     return resourceManager->GetTileOrigin(layerID, x, y);
 }

@@ -21,13 +21,6 @@ void ModifyTilesCommand::AddModification(TileLayer *layer, int newX, int newY, T
 
 TileCoord ModifyTilesCommand::GetTileOrigin(int layerID, int x, int y)
 {
-    /*for(int i = 0; i < mods.count(); i++)
-    {
-        //if this is the tile we are looking for, return its original origin
-        if(mods[i].x == x && mods[i].y == y && mods[i].layer->GetID() == layerID)
-            return mods[i].newOrigin;
-    }*/
-
     //if a modification exists at this position, return it
     if(mods.contains(TileCoord(x, y)))
         return mods[TileCoord(x, y)].newOrigin;

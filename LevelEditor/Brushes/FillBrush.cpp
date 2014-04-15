@@ -35,38 +35,22 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
        tileX < 0 || tileY < 0)
            return;
 
-    /*
-    //if the current tile is of the type to be replaced
-    if(newLayer->GetTileOrigin(tileX, tileY) == oldOrigin)
-    {
-        //replace this tile with the new type
-        newLayer->ModifyTileItem(tileX, tileY, newOrigin);
-
-        //call this function on the surrounding tiles
-        Fill(tileX - 1, tileY, newOrigin, oldOrigin, newLayer);
-        Fill(tileX + 1, tileY, newOrigin, oldOrigin, newLayer);
-        Fill(tileX, tileY - 1, newOrigin, oldOrigin, newLayer);
-        Fill(tileX, tileY + 1, newOrigin, oldOrigin, newLayer);
-    }
-    */
-
     // 2. Set Q to the empty queue.
-    QList<TileCoord> seedQueue;
+    QStack<TileCoord> seedQueue;
 
     // 3. Add node to the end of Q.
-    seedQueue.push_back(TileCoord(tileX, tileY));
+    seedQueue.push(TileCoord(tileX, tileY));
 
     int layerWidth = newLayer->GetLayerWidth();
     int layerHeight = newLayer->GetLayerHeight();
+
+    QHash<TileCoord,bool> examinedTiles;
 
     // 4. While Q is not empty:
     while(!seedQueue.isEmpty())
     {
         // 5.     Set n equal to the last element of Q.
-        TileCoord tempCoord = seedQueue.back();
-
-        // 6.     Remove last element from Q.
-        seedQueue.removeLast();
+        TileCoord tempCoord = seedQueue.pop();
 
         //if the position is beyond the bounds of the scene, ignore it
         if(tempCoord.first >= layerWidth ||
@@ -74,13 +58,20 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
            tempCoord.first < 0 || tempCoord.second < 0)
                continue;
 
-        // 7.     If the color of n is equal to target-color:
+        //if this tile has already been examined, move on. No need to check again
+        if(examinedTiles.contains(tempCoord))
+            continue;
+
+        //indicate that this spot has been examined
+        examinedTiles[tempCoord] = true;
+
+        //if this tile is of the type to be replaced
         if(newLayer->GetTileOrigin(tempCoord.first, tempCoord.second) == oldOrigin)
         {
-            // 8.         Set the color of n to replacement-color.
             //replace this tile with the new type
             newLayer->ModifyTileItem(tempCoord.first, tempCoord.second, newOrigin);
 
+            //put the four surrounding tiles on the stack
             seedQueue.push_back(TileCoord(tempCoord.first - 1, tempCoord.second));
             seedQueue.push_back(TileCoord(tempCoord.first + 1, tempCoord.second));
             seedQueue.push_back(TileCoord(tempCoord.first, tempCoord.second - 1));
