@@ -141,25 +141,21 @@ void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
 
 TileCoord ResourceManager::GetTileOrigin(int layerID, int x, int y)
 {
-    //check if the tile exists in the normal model
+    //see if there is an upcoming modification to this tile
+    TileCoord modOrigin = modifyTiles->GetTileOrigin(layerID, x, y);
+    if(modOrigin != TileCoord(-1, -1))
+        return modOrigin;
+
+    //otherwise, check if the tile exists in the normal model
     if(layerMap.value(layerID))
     {
         TileLayer *tempLayer = layerMap.value(layerID);
 
         if(tempLayer)
-        {
-            TileCoord origin = tempLayer->GetTileOrigin(x, y);
-
-            //deliver the tile if it exists
-            if(origin != TileCoord(-1, -1))
-                return origin;
-        }
+            return tempLayer->GetTileOrigin(x, y);
     }
 
-    //if the tile does not exist in the tilelayer model, we can
-    //check to see if its currently queued up in the modifytilescommand
-    //(if not it will return a -1,-1 tile)
-    return modifyTiles->GetTileOrigin(layerID, x, y);
+    return TileCoord(-1, -1);
 }
 
 int ResourceManager::GetTileCount(int layerID)
