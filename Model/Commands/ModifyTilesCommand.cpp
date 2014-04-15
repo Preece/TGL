@@ -40,7 +40,7 @@ void ModifyTilesCommand::undo()
 {
     QHash<TileCoord, TileModification>::iterator iter;
 
-    for(iter = mods.begin(); iter != mods.end(); iter++)
+    for(iter = mods.begin(); iter != mods.end(); ++iter)
     {
         //if the old origin was empty
         if(iter.value().oldOrigin == TileCoord(-1, -1))
@@ -79,7 +79,7 @@ void ModifyTilesCommand::redo()
 {
     QHash<TileCoord, TileModification>::iterator iter;
 
-    for(iter = mods.begin(); iter != mods.end(); iter++)
+    for(iter = mods.begin(); iter != mods.end(); ++iter)
     {
         //if the old origin was empty
         if(iter.value().oldOrigin == TileCoord(-1, -1))

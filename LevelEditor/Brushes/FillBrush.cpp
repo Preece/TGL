@@ -56,6 +56,9 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
     // 3. Add node to the end of Q.
     seedQueue.push_back(TileCoord(tileX, tileY));
 
+    int layerWidth = newLayer->GetLayerWidth();
+    int layerHeight = newLayer->GetLayerHeight();
+
     // 4. While Q is not empty:
     while(!seedQueue.isEmpty())
     {
@@ -66,8 +69,8 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
         seedQueue.removeLast();
 
         //if the position is beyond the bounds of the scene, ignore it
-        if(tempCoord.first >= newLayer->GetLayerWidth() ||
-           tempCoord.second >= newLayer->GetLayerHeight() ||
+        if(tempCoord.first >= layerWidth ||
+           tempCoord.second >= layerHeight ||
            tempCoord.first < 0 || tempCoord.second < 0)
                continue;
 

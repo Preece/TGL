@@ -62,6 +62,9 @@ QImage *ResourceManager::GetTileset()
 
 QPixmap ResourceManager::GetTilePixmap(TileCoord coord)
 {
+    if(pixmapCache.contains(coord))
+        return QPixmap(pixmapCache[coord]);
+
     QImage *tempTileset = GetTileset();
     QImage tempImage = *tempTileset;
 
@@ -70,7 +73,8 @@ QPixmap ResourceManager::GetTilePixmap(TileCoord coord)
 
     tempImage = tempImage.copy(levelProperties.GetTileWidth() * coord.first, levelProperties.GetTileHeight() * coord.second, levelProperties.GetTileWidth(), levelProperties.GetTileHeight());
 
-    return QPixmap::fromImage(tempImage);
+    pixmapCache[coord] = QPixmap::fromImage(tempImage);
+    return QPixmap(pixmapCache[coord]);
 }
 
 void ResourceManager::AddTileLayer(TileLayer *newLayer)
@@ -125,11 +129,13 @@ int ResourceManager::GetLayerOpacity(int layerID)
     return 100;
 }
 
-void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin, TileCoord oldOrigin)
+void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
 {
-    if(layerMap.value(layerID))
+    TileLayer *tempLayer = layerMap.value(layerID);
+
+    if(tempLayer)
     {
-        modifyTiles->AddModification(GetTileLayer(layerID), x, y, origin, oldOrigin);
+        modifyTiles->AddModification(GetTileLayer(layerID), x, y, origin, tempLayer->GetTileOrigin(x, y));
     }
 }
 

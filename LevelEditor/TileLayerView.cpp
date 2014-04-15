@@ -75,28 +75,13 @@ void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
     if(y < 0)
         y = 0;
 
-    //if there is not a tile at this position in the model
-    if(resourceManager->GetTileOrigin(layerID, x, y) == TileCoord(-1, -1))
-    {
-        //add a new one
-        AddTileWidgetItem(x, y, newOrigin);
 
-        //add the new tile into the model through the resource manager
-        resourceManager->ModifyTile(layerID, x, y, newOrigin, TileCoord(-1, -1));
-    }
-    else
-    {
-        //modify the tile origin values in the model
-        resourceManager->ModifyTile(layerID, x, y, newOrigin, resourceManager->GetTileOrigin(layerID, x, y));
+    //add a new one
+    AddTileWidgetItem(x, y, newOrigin);
 
-        //get the visible tile widget
-        TileWidgetItem *tempTileItem = items[TileCoord(x, y)];
+    //add the new tile into the model through the resource manager
+    resourceManager->ModifyTile(layerID, x, y, newOrigin);
 
-        //and update its pixmap
-        if(tempTileItem)
-            tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
-
-    }
 }
 
 void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
@@ -132,7 +117,7 @@ void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
 void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
 {
     if(items.value(TileCoord(x, y)))
-        return;
+        delete items[TileCoord(x, y)];
 
     TileWidgetItem *tempTileItem = new TileWidgetItem;
 
@@ -169,9 +154,6 @@ void TileLayerView::ClearPreview()
 
 TileCoord TileLayerView::GetTileOrigin(int x, int y)
 {
-    //bounds check
-    if(x >= widthInTiles || y >= heightInTiles || x < 0 || y < 0)
-        return TileCoord(-1, -1);
 
     return resourceManager->GetTileOrigin(layerID, x, y);
 }
