@@ -3,6 +3,7 @@
 
 #include <QGraphicsView>
 #include <QWheelEvent>
+#include <QtOpenGL>
 
 class LevelView : public QGraphicsView
 {

@@ -5,6 +5,9 @@ LevelView::LevelView(QWidget *parent) :
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     maxZoom = false;
+
+    setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+    setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 
 void LevelView::wheelEvent(QWheelEvent *event)
