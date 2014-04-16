@@ -6,7 +6,11 @@ LevelView::LevelView(QWidget *parent) :
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     maxZoom = false;
 
-    setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+    QGLFormat format;
+    format.setSamples(2);
+    format.setSampleBuffers(true);
+    format.setDepth(false);
+    setViewport(new QGLWidget(format));
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 

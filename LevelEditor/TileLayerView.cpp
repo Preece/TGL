@@ -117,7 +117,13 @@ void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
 void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
 {
     if(items.value(TileCoord(x, y)))
-        delete items[TileCoord(x, y)];
+    {
+        //if the right tile is already here, just bail
+        if(items[TileCoord(x, y)]->GetTileOrigin() == newOrigin)
+            return;
+        else
+            delete items[TileCoord(x, y)];
+    }
 
     TileWidgetItem *tempTileItem = new TileWidgetItem;
 
