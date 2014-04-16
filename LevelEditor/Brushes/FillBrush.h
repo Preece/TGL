@@ -1,6 +1,8 @@
 #ifndef FILLBRUSH_H
 #define FILLBRUSH_H
 
+#include <QStack>
+
 #include "TileBrush.h"
 
 class FillBrush : public TileBrush

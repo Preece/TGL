@@ -12,14 +12,11 @@ LayerManager::LayerManager()
     grid->hide();
 
     setSceneRect(0, 0, 0, 0);
+    setItemIndexMethod(NoIndex);
 }
 
 LayerManager::~LayerManager()
 {
-    //fine-tune this value for optimal performance. 0 is the default,
-    //and Qt will try to automatically find a good value. 10 seems to
-    //crash the application
-    setBspTreeDepth(5);
 }
 
 void LayerManager::EyedropTile(QPoint pos)

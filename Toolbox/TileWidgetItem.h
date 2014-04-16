@@ -10,6 +10,20 @@ public:
     TileWidgetItem();
     ~TileWidgetItem();
 
+    TileWidgetItem(TileWidgetItem &copyItem)
+    {
+        origin = copyItem.origin;
+        index = copyItem.index;
+        setPixmap(copyItem.pixmap());
+    }
+
+    TileWidgetItem& operator= (const TileWidgetItem &copyItem)
+    {
+        origin = copyItem.origin;
+        index = copyItem.index;
+        setPixmap(copyItem.pixmap());
+    }
+
     void SetTilePixmap(QPixmap newPix);
 
     void SetIndex(int newIndex) { index = newIndex; }
