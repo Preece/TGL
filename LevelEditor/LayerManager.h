@@ -7,6 +7,7 @@
 #include <QVariant>
 #include <QAbstractListModel>
 #include <QItemSelectionModel>
+#include <QRubberBand>
 
 #include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
@@ -37,6 +38,7 @@ public slots:
 
     void ToggleLayerVisibility(int layerIndex, bool show);
     void ToggleGrid(bool show = true);
+    void ToggleSelectionMode(bool selection);
 
     void SetBrush(TileBrush *newBrush);
     void SetLayerSelection(int newSelection);
@@ -60,6 +62,10 @@ private:
     TileBrush *currentBrush;
 
     QPoint lastPreviewSpot;
+
+    bool selectionMode;
+    QPoint clickSpot;
+    QRubberBand *selection;
 };
 
 #endif // LAYERMANAGER_H

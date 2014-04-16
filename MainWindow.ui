@@ -57,8 +57,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>98</width>
-           <height>147</height>
+           <width>477</width>
+           <height>508</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -296,7 +296,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -316,7 +316,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -336,7 +336,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -356,7 +356,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -372,7 +372,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -392,7 +392,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -409,7 +409,20 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="selectionTool">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -436,7 +449,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -456,7 +469,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -476,7 +489,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -496,7 +509,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>
@@ -516,7 +529,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>toolGroup</string>
+           <string notr="true">toolGroup</string>
           </attribute>
          </widget>
         </item>

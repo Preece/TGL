@@ -13,10 +13,13 @@ LayerManager::LayerManager()
 
     setSceneRect(0, 0, 0, 0);
     setItemIndexMethod(NoIndex);
+
+    selection = new QRubberBand(QRubberBand::Rectangle);
 }
 
 LayerManager::~LayerManager()
 {
+    delete selection;
 }
 
 void LayerManager::EyedropTile(QPoint pos)
@@ -153,7 +156,10 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {
-        currentBrush->Press(tileX, tileY, currentLayer);
+        if(!selectionMode)
+            currentBrush->Press(tileX, tileY, currentLayer);
+        else
+            clickSpot = event->scenePos().toPoint();
     }
     else if(event->button() == Qt::RightButton)
     {
@@ -179,12 +185,25 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     //if the left button is down
     if(event->buttons() == Qt::LeftButton)
     {
-        currentBrush->Move(tileX, tileY, currentLayer, true);
+        if(!selectionMode)
+            currentBrush->Move(tileX, tileY, currentLayer, true);
+        else
+        {
+            selection->setGeometry(clickSpot.x(), clickSpot.y(),
+                                   event->scenePos().x() - clickSpot.x(), event->scenePos().y() - clickSpot.y());
+
+            QPainterPath path;
+            path.addRect(clickSpot.x(), clickSpot.y(),
+                         event->scenePos().x() - clickSpot.x(), event->scenePos().y() - clickSpot.y());
+
+            setSelectionArea(path);
+        }
     }
     //if the left mouse button was not down
     else if(currentLayer)
     {
-        currentBrush->Move(tileX, tileY, currentLayer, false);
+        if(!selectionMode)
+            currentBrush->Move(tileX, tileY, currentLayer, false);
     }
 }
 
@@ -204,10 +223,15 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {    
-        currentBrush->Release(tileX, tileY, currentLayer);
+        if(!selectionMode)
+        {
+            currentBrush->Release(tileX, tileY, currentLayer);
 
-        //this will package the changes into an undo command and implement them into the model
-        resourceManager->EndPaintOperation();
+            //this will package the changes into an undo command and implement them into the model
+            resourceManager->EndPaintOperation();
+        }
+        else
+            selection->setGeometry(0, 0, 0, 0);
     }
 }
 
@@ -247,6 +271,31 @@ void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
         return;
 
     layers[layerIndex]->ToggleVisibility(show);
+}
+
+void LayerManager::ToggleSelectionMode(bool selection)
+{
+    //store the mode
+    selectionMode = selection;
+
+    QList<QGraphicsItem*> childrenList = items();
+
+    //make every current item selectable
+    if(selection)
+    {
+        for(int i = 0; i < childrenList.count(); i++)
+            childrenList[i]->setFlag(QGraphicsItem::ItemIsSelectable);
+
+        resourceManager->EndPaintOperation();
+    }
+    //make all items non-selectable
+    else
+    {
+        for(int i = 0; i < childrenList.count(); i++)
+            childrenList[i]->setFlag(QGraphicsItem::ItemIsSelectable, false);
+
+        currentLayer->ClearPreview();
+    }
 }
 
 void LayerManager::RepopulateAllLayers()
