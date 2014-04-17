@@ -32,7 +32,7 @@ public:
     void RepopulateTiles();
 
 private:
-    void AddTileWidgetItem(int x, int y, TileCoord newOrigin);
+    void ModifyTileWidgetItem(int x, int y, TileCoord newOrigin);
 
     int widthInTiles, heightInTiles;
 

@@ -32,8 +32,12 @@ public:
     void SetTileOrigin(TileCoord newOrigin) { origin = newOrigin; }
     TileCoord GetTileOrigin() { return origin; }
 
+    void SetPosition(TileCoord newPos) { position = newPos; }
+    TileCoord GetPosition() { return position; }
+
 private:
     TileCoord origin;
+    TileCoord position;
 
     int index;
 };

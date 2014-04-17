@@ -102,10 +102,9 @@ void TileLayer::ModifyTile(int x, int y, TileCoord newOrigin)
 
 Tile *TileLayer::GetTileByIndex(int layerID, int index)
 {
+    if(index < 0 || index >= tiles.count())
+        return NULL;
+
     QList<Tile*> tileList = tiles.values();
-
-    if(index >= 0 && index < tileList.count())
-        return tileList[index];
-
-    return NULL;
+    return tileList[index];
 }
