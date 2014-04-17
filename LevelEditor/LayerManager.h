@@ -62,10 +62,6 @@ private:
     TileBrush *currentBrush;
 
     QPoint lastPreviewSpot;
-
-    bool selectionMode;
-    QPoint clickSpot;
-    QRubberBand *selection;
 };
 
 #endif // LAYERMANAGER_H

@@ -1,6 +1,8 @@
 #ifndef LAYERGROUP_H
 #define LAYERGROUP_H
 
+#include <QGraphicsScene>
+
 #include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
 #include "../Toolbox/TileWidgetItem.h"
@@ -30,6 +32,8 @@ public:
 
     void DestroyAllItems();
     void RepopulateTiles();
+
+    void SelectTilesInArea(QRect area);
 
 private:
     void AddTileWidgetItem(int x, int y, TileCoord newOrigin);

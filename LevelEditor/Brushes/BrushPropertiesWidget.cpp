@@ -64,6 +64,10 @@ void BrushPropertiesWidget::SetCurrentBrush(int type)
         currentBrush = &stamp;
         break;
 
+    case 13:
+        currentBrush = &selector;
+        break;
+
     //scatter
     case 6:
         if(scatterBrushIndex < scatter.count())

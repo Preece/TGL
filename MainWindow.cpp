@@ -222,6 +222,12 @@ void MainWindow::on_stampTool_clicked()
     UpdateToolSelection();
 }
 
+void MainWindow::on_selectionTool_clicked()
+{
+    ui->brushProperties->SetCurrentBrush(13);
+    UpdateToolSelection();
+}
+
 void MainWindow::on_actionAdd_Image_triggered()
 {
     //ask the user where to load the file from.
@@ -287,3 +293,4 @@ void MainWindow::on_actionEdit_Layer_triggered()
         }
     }
 }
+

@@ -61,7 +61,8 @@ SOURCES += main.cpp\
     SpriteEditor/SelectionGraphicsScene.cpp \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.cpp \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
-    LevelEditor/LevelView.cpp
+    LevelEditor/LevelView.cpp \
+    LevelEditor/Brushes/SelectionBrush.cpp
 
 HEADERS  += \
     MainWindow.h \
@@ -111,7 +112,8 @@ HEADERS  += \
     SpriteEditor/SelectionGraphicsScene.h \
     SpriteEditor/AnimationPreviewer/AnimationPreviewer.h \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
-    LevelEditor/LevelView.h
+    LevelEditor/LevelView.h \
+    LevelEditor/Brushes/SelectionBrush.h
 
 FORMS    += \
     MainWindow.ui \

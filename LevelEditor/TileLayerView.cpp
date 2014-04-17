@@ -60,6 +60,17 @@ void TileLayerView::RepopulateTiles()
 
 }
 
+void TileLayerView::SelectTilesInArea(QRect area)
+{
+    //translate the position to tile coordinates
+    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
+    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+
+    QPainterPath path;
+    path.addRect((area.left() * tileW) + 1, (area.top() * tileH) + 1, (area.width() * tileW) - 2, (area.height() * tileH) - 2);
+    scene()->setSelectionArea(path);
+}
+
 void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
 {
     //bounds check    

@@ -61,6 +61,8 @@ private slots:
     void on_actionDelete_Layer_triggered();
     void on_actionEdit_Layer_triggered();
 
+    void on_selectionTool_clicked();
+
 private:
     Ui::MainWindow *ui;
 
