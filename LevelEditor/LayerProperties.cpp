@@ -43,7 +43,7 @@ int LayerProperties::EditLayer(TileLayer *newLayer)
         return exec();
     }
 
-    return NULL;
+    return 0;
 }
 
 void LayerProperties::on_buttonBox_accepted()

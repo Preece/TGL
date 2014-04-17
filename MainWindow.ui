@@ -604,6 +604,9 @@
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
+        <property name="dragMode">
+         <enum>QGraphicsView::NoDrag</enum>
+        </property>
         <property name="viewportUpdateMode">
          <enum>QGraphicsView::MinimalViewportUpdate</enum>
         </property>

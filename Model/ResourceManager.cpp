@@ -222,6 +222,10 @@ void ResourceManager::Redo()
 
 void ResourceManager::EndPaintOperation() 
 { 
+    //if there are no changes that occured, no undo operation needs to be processed
+    if(modifyTiles->GetModificationCount() == 0)
+        return;
+
     //push the current bundle of modifications into the undo stack
     undo->push(modifyTiles); 
 
