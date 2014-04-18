@@ -1,5 +1,5 @@
-#ifndef BRUSHPROPERTIESWIDGET_H
-#define BRUSHPROPERTIESWIDGET_H
+#ifndef BrushManager_H
+#define BrushManager_H
 
 #include <QFrame>
 #include <QTime>
@@ -19,20 +19,17 @@
 #include "SelectionBrush.h"
 
 namespace Ui {
-class BrushPropertiesWidget;
+class BrushManager;
 }
 
-class BrushPropertiesWidget : public QFrame
+class BrushManager : public QFrame
 {
     Q_OBJECT
     
 public:
-    explicit BrushPropertiesWidget(QWidget *parent = 0);
-    ~BrushPropertiesWidget();
+    explicit BrushManager(QWidget *parent = 0);
+    ~BrushManager();
 
-
-
-    void SetCurrentBrush(int type);
     TileBrush *GetCurrentBrush() { return currentBrush; }
 
     void RepopulateBrushLists();
@@ -41,50 +38,52 @@ public:
     void RegisterResourceManager(ResourceManager *newRM) { propertiesWindow.RegisterResourceManager(newRM); }
 
     void DestroyBrushes();
-    
+
+    enum BrushTypes 
+    {
+        Pencil = 0,
+        Bucket,
+        Eraser,
+        Line = 10,
+        Stamp = 12,
+        Selector = 13,
+        Scatter = 6,
+        Smart = 7,
+        ScatterFill = 8,
+        Replacer = 9,
+        Matrix = 11
+    }
+
+public slots:
+    void SetCurrentBrush(int type);
+
 private slots:
 
     void SetSelectedTiles(TileList newList);
 
     void on_overwriteCheckbox_toggled(bool checked);
-
     void on_brushSizeInput_valueChanged(int arg1);
-
     void on_addScatterBrush_clicked();
-
     void on_scatterBrushCombo_currentIndexChanged(int index);
-
     void on_editScatterBrush_clicked();
-
     void on_deleteScatterBrush_clicked();
-
     void on_smartBrushCombo_currentIndexChanged(int index);
-
     void on_addSmartBrush_clicked();
-
     void on_editSmartBrushes_clicked();
-
     void on_addReplacerBrush_clicked();
-
     void on_editReplacerBrush_clicked();
-
     void on_deleteReplacerBrush_clicked();
-
     void on_replacerBrushCombo_currentIndexChanged(int index);
-
     void on_addMatrixBrush_clicked();
-
     void on_editMatrixBrush_clicked();
-
     void on_deleteMatrixBrush_clicked();
-
     void on_matrixBrushCombo_currentIndexChanged(int index);
 
 signals:
-    void BrushChanged();
+    void BrushChanged(TileBrush *newBrush, QCursor newCursor);
 
 private:
-    Ui::BrushPropertiesWidget *ui;
+    Ui::BrushManager *ui;
     BrushPropertiesWindow propertiesWindow;
 
     TileBrush *currentBrush;
@@ -108,4 +107,4 @@ private:
     int matrixBrushIndex;
 };
 
-#endif // BRUSHPROPERTIESWIDGET_H
+#endif // BrushManager_H
