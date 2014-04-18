@@ -5,21 +5,43 @@ MiniMap::MiniMap(QWidget *parent) :
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     maxZoomed = false;
+    panning = false;
 }
 
 void MiniMap::mouseMoveEvent(QMouseEvent *event)
 {
-    QGraphicsView::mouseMoveEvent(event);
+    if (panning)
+    {
+        horizontalScrollBar()->setValue(horizontalScrollBar()->value() - (event->x() - clickSpot.x()));
+        verticalScrollBar()->setValue(verticalScrollBar()->value() - (event->y() - clickSpot.y()));
+        clickSpot = event->pos();
+        event->accept();
+        return;
+    }
+    event->ignore();
 }
 
 void MiniMap::mousePressEvent(QMouseEvent *event)
 {
-   // QGraphicsView::mousePressEvent(event);
+    if (event->button() == Qt::LeftButton)
+    {
+        panning = true;
+        clickSpot = event->pos();
+        setCursor(Qt::ClosedHandCursor);
+        event->accept();
+        return;
+    }
 }
 
 void MiniMap::mouseReleaseEvent(QMouseEvent *event)
 {
-   // QGraphicsView::mouseReleaseEvent(event);
+    if (event->button() == Qt::LeftButton)
+    {
+        panning = false;
+        setCursor(Qt::ArrowCursor);
+        event->accept();
+        return;
+    }
 }
 
 void MiniMap::wheelEvent(QWheelEvent *event)

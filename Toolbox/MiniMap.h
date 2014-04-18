@@ -3,6 +3,8 @@
 
 #include <QGraphicsView>
 #include <QWheelEvent>
+#include <QPoint>
+#include <QScrollBar>
 
 class MiniMap : public QGraphicsView
 {
@@ -24,6 +26,9 @@ protected:
 
 private:
     bool maxZoomed;
+
+    bool panning;
+    QPoint clickSpot;
 };
 
 #endif // MINIMAP_H
