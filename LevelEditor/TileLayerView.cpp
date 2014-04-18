@@ -46,18 +46,54 @@ void TileLayerView::DestroyAllItems()
 
 void TileLayerView::RepopulateTiles()
 {
-    //clear out all the tiles
-    DestroyAllItems();
+    //the strategy is to loop through all the items in the scene,
+    //comparing them against the model and updating them accordingly.
+    //all tiles that are synchronized in this was are flagged.
+    //then, loop through all the tiles in the model, comparing them
+    //against the scene items, skipping any flagged ones.
+    //this ensures that additions/deletions from the model are 
+    //present in the scene
 
-    //build and add all tile widget items from the model
-    for(int i = 0; i < resourceManager->GetTileCount(layerID); i++)
+    QList<TileCoord> inspectedItems;
+    QHash<TileCoord, TileWidgetItem*>::iterator itemIterator = items.begin();
+
+    //loop through every item in the *scene*
+    while(itemIterator != items.end())
+    {
+        TileWidgetItem *tempItem = itemIterator.value();
+        TileCoord itemPos = tempItem->GetPosition();
+        TileCoord modelTileOrigin = GetTileOrigin(itemPos.first, itemPos.second);
+
+        //if the items tile origin in the model does not match the tile origin on the scene
+        if(modelTileOrigin != tempItem->GetTileOrigin())
+        {
+            //update the tile to be in line with the model. If the tile doesn't
+            //exist in the model, modelTileOrigin will be -1,-1, and this
+            //function is smart enough to simply delete that tile and move on
+            ModifyTileWidgetItem(itemPos.first, itemPos.second, modelTileOrigin);
+        }
+
+        //make note of the fact that the tile at this position has been inspected
+        inspectedItems.insert(itemPos);
+
+        ++itemIterator;
+    }
+
+    //now loop through every tile in the *model*
+    int tileCount = resourceManager->GetTileCount(layerID);
+
+    for(int i = 0; i < tileCount; i++)
     {
         Tile *tempTile = resourceManager->GetTileByIndex(layerID, i);
 
-        if(tempTile)
-            AddTileWidgetItem(tempTile->pos.first, tempTile->pos.second, tempTile->origin);
+        //skip any items that were previously inspected
+        if(inspectedItems.contains(tempTile->pos))
+            continue;
+    
+        //if we got here, there is a discrepancy between the model and the scene.
+        //This function should resolve it        
+        ModifyTileWidgetItem(tempTile->pos.first, tempTile->pos.second, tempTile->origin);
     }
-
 }
 
 void TileLayerView::SelectTilesInArea(QRect area)
@@ -88,7 +124,7 @@ void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
 
 
     //add a new one
-    AddTileWidgetItem(x, y, newOrigin);
+    ModifyTileWidgetItem(x, y, newOrigin);
 
     //add the new tile into the model through the resource manager
     resourceManager->ModifyTile(layerID, x, y, newOrigin);
@@ -125,7 +161,7 @@ void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
 
 //this is a convenience function for adding the graphical element to represent a tile.
 //it does not change the model
-void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
+void TileLayerView::ModifyTileWidgetItem(int x, int y, TileCoord newOrigin)
 {
     if(items.value(TileCoord(x, y)))
     {
@@ -134,6 +170,11 @@ void TileLayerView::AddTileWidgetItem(int x, int y, TileCoord newOrigin)
             return;
         else
             delete items[TileCoord(x, y)];
+
+        //if they passed in a null tile as the new origin, just bail,
+        //its been deleted
+        if(newOrigin == TileCoord(-1, -1))
+            return;
     }
 
     TileWidgetItem *tempTileItem = new TileWidgetItem;
