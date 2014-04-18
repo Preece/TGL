@@ -66,6 +66,12 @@ void LevelView::mouseReleaseEvent(QMouseEvent *event)
 
 void LevelView::wheelEvent(QWheelEvent *event)
 {
+    if(event->modifiers() == Qt::ControlModifier)
+    {
+        //emit a signal that either the next or previous tiles in the history
+        //stack should be selected. This stack should be in the tile selector
+        return;
+    }
     double scaleFactor = 1.15;
 
     //zoom in
