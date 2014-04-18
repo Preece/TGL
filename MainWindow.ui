@@ -20,12 +20,50 @@
    <string>Trygon Level Editor</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QToolBox::tab {
+   <string notr="true">QWidget {
+	font: 75 9pt &quot;MS Gothic&quot;;
+}
+
+QMainWindow {
+	margin: 0px;
+	padding: 0px;
+}
+
+QToolBox::tab {
 	background-color: rgb(132, 255, 140);
 	border-style: outset;
-	border-width: 2px;
+	border-width: 1px;
 	border-color: rgb(79, 197, 93);
- }</string>
+	border-radius: 2px;
+ }
+
+QToolBox &gt; QScrollArea &gt; QWidget {
+	margin: 0;
+	padding: 0;
+}
+
+QToolButton {
+	background-color: rgb(232, 228, 245);
+	border-style: outset;
+	border-width:1px;
+ 	border-radius:2px;
+ 	border-color: rgb(187, 185, 200);
+	padding: 1px;
+}
+
+QToolButton:checked {
+	border-style: inset;
+	background-color: rgb(212, 208, 225);
+}
+
+#propertyBrowser {
+	alternate-background-color: rgb(184, 255, 184);
+}
+
+#viewStack {
+	margin: 0px;
+	padding: 0px;
+}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -58,13 +96,13 @@
          <string notr="true"/>
         </property>
         <property name="frameShape">
-         <enum>QFrame::WinPanel</enum>
+         <enum>QFrame::Box</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="tabSpacing">
          <number>3</number>
@@ -74,8 +112,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>296</width>
-           <height>487</height>
+           <width>298</width>
+           <height>493</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -101,7 +139,7 @@
              </size>
             </property>
             <property name="frameShape">
-             <enum>QFrame::WinPanel</enum>
+             <enum>QFrame::Box</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Sunken</enum>
@@ -163,8 +201,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>296</width>
-           <height>486</height>
+           <width>298</width>
+           <height>493</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -182,6 +220,9 @@
               <horstretch>0</horstretch>
               <verstretch>2</verstretch>
              </sizepolicy>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
             </property>
             <property name="dragMode">
              <enum>QGraphicsView::NoDrag</enum>
@@ -240,7 +281,7 @@
              <bool>true</bool>
             </property>
             <property name="frameShape">
-             <enum>QFrame::WinPanel</enum>
+             <enum>QFrame::Box</enum>
             </property>
             <property name="verticalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -293,6 +334,14 @@
          </layout>
         </widget>
         <widget class="QWidget" name="collisionBox">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>298</width>
+           <height>493</height>
+          </rect>
+         </property>
          <attribute name="icon">
           <iconset resource="Icons.qrc">
            <normaloff>:/Icons/Icons/grid.png</normaloff>:/Icons/Icons/grid.png</iconset>
@@ -319,7 +368,7 @@
          <enum>QFrame::NoFrame</enum>
         </property>
         <property name="lineWidth">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="currentIndex">
          <number>0</number>
@@ -635,7 +684,7 @@
              </sizepolicy>
             </property>
             <property name="frameShape">
-             <enum>QFrame::WinPanel</enum>
+             <enum>QFrame::Box</enum>
             </property>
             <property name="verticalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -681,7 +730,7 @@
      <x>0</x>
      <y>0</y>
      <width>989</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
