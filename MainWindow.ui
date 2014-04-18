@@ -20,10 +20,15 @@
    <string>Trygon Level Editor</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QToolBox::tab {
+	background-color: rgb(132, 255, 140);
+	border-style: outset;
+	border-width: 2px;
+	border-color: rgb(79, 197, 93);
+ }</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="sizeConstraint">
@@ -32,16 +37,25 @@
       <item>
        <widget class="QToolBox" name="toolBox">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>1</horstretch>
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
           <verstretch>2</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::WinPanel</enum>
@@ -50,20 +64,23 @@
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
-        <widget class="QWidget" name="page">
+        <property name="tabSpacing">
+         <number>3</number>
+        </property>
+        <widget class="QWidget" name="resourcesBox">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>477</width>
-           <height>508</height>
+           <width>296</width>
+           <height>487</height>
           </rect>
          </property>
          <attribute name="icon">
           <iconset resource="Icons.qrc">
-           <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
+           <normaloff>:/Icons/Icons/new.png</normaloff>:/Icons/Icons/new.png</iconset>
          </attribute>
          <attribute name="label">
           <string>Resources</string>
@@ -121,7 +138,7 @@
            <widget class="PropertyBrowser" name="propertyBrowser" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>1</horstretch>
+              <horstretch>0</horstretch>
               <verstretch>1</verstretch>
              </sizepolicy>
             </property>
@@ -141,13 +158,13 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_2">
+        <widget class="QWidget" name="tilePaintingBox">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>477</width>
-           <height>508</height>
+           <width>296</width>
+           <height>486</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -161,7 +178,7 @@
           <item>
            <widget class="TileSelectorView" name="tileSelectorView">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>2</verstretch>
              </sizepolicy>
@@ -173,6 +190,12 @@
           </item>
           <item>
            <widget class="MiniMap" name="miniMap">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="palette">
              <palette>
               <active>
@@ -269,6 +292,15 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="collisionBox">
+         <attribute name="icon">
+          <iconset resource="Icons.qrc">
+           <normaloff>:/Icons/Icons/grid.png</normaloff>:/Icons/Icons/grid.png</iconset>
+         </attribute>
+         <attribute name="label">
+          <string>Collision</string>
+         </attribute>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -276,343 +308,367 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QToolButton" name="pencilTool">
-          <property name="toolTip">
-           <string>Pencil</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="eyedropperTool">
-          <property name="toolTip">
-           <string>Eye-Dropper</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/eyedropper.png</normaloff>:/Icons/Icons/eyedropper.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="lineTool">
-          <property name="toolTip">
-           <string>Line</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/line.png</normaloff>:/Icons/Icons/line.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="bucketTool">
-          <property name="toolTip">
-           <string>Fill</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/bucket.png</normaloff>:/Icons/Icons/bucket.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="stampTool">
-          <property name="toolTip">
-           <string>Stamp Brush</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="eraserButton">
-          <property name="toolTip">
-           <string>Eraser</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/eraser.png</normaloff>:/Icons/Icons/eraser.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="pointerTool">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/selector.png</normaloff>:/Icons/Icons/selector.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="selectionTool">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="Line" name="line_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="scatterTool">
-          <property name="toolTip">
-           <string>Scatter Brush</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/scatter.png</normaloff>:/Icons/Icons/scatter.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="scatterFillTool">
-          <property name="toolTip">
-           <string>Scatter Fill</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/scatterfill.png</normaloff>:/Icons/Icons/scatterfill.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="replacerTool">
-          <property name="toolTip">
-           <string>Replacer Brush</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/replacer.png</normaloff>:/Icons/Icons/replacer.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="matrixBrushButton">
-          <property name="toolTip">
-           <string>Matrix Brush</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/matrix.png</normaloff>:/Icons/Icons/matrix.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="brushTool">
-          <property name="toolTip">
-           <string>Smart Brush</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/brush.png</normaloff>:/Icons/Icons/brush.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">toolGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="gridToggle">
-          <property name="toolTip">
-           <string>Show/Hide Grid</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Icons.qrc">
-            <normaloff>:/Icons/Icons/grid.png</normaloff>:/Icons/Icons/grid.png</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="LevelView" name="levelView">
+       <widget class="QStackedWidget" name="viewStack">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>3</horstretch>
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>1</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="frameShape">
-         <enum>QFrame::WinPanel</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOn</enum>
+        <property name="lineWidth">
+         <number>1</number>
         </property>
-        <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOn</enum>
+        <property name="currentIndex">
+         <number>0</number>
         </property>
-        <property name="backgroundBrush">
-         <brush brushstyle="Dense2Pattern">
-          <color alpha="255">
-           <red>245</red>
-           <green>245</green>
-           <blue>245</blue>
-          </color>
-         </brush>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-        </property>
-        <property name="dragMode">
-         <enum>QGraphicsView::NoDrag</enum>
-        </property>
-        <property name="viewportUpdateMode">
-         <enum>QGraphicsView::MinimalViewportUpdate</enum>
-        </property>
-        <property name="rubberBandSelectionMode">
-         <enum>Qt::IntersectsItemShape</enum>
-        </property>
+        <widget class="QWidget" name="tilePaintView">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QToolButton" name="pencilTool">
+              <property name="toolTip">
+               <string>Pencil</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="eyedropperTool">
+              <property name="toolTip">
+               <string>Eye-Dropper</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/eyedropper.png</normaloff>:/Icons/Icons/eyedropper.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="lineTool">
+              <property name="toolTip">
+               <string>Line</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/line.png</normaloff>:/Icons/Icons/line.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="bucketTool">
+              <property name="toolTip">
+               <string>Fill</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/bucket.png</normaloff>:/Icons/Icons/bucket.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="stampTool">
+              <property name="toolTip">
+               <string>Stamp Brush</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="eraserButton">
+              <property name="toolTip">
+               <string>Eraser</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/eraser.png</normaloff>:/Icons/Icons/eraser.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="pointerTool">
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/selector.png</normaloff>:/Icons/Icons/selector.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="selectionTool">
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="Line" name="line_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="scatterTool">
+              <property name="toolTip">
+               <string>Scatter Brush</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/scatter.png</normaloff>:/Icons/Icons/scatter.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="scatterFillTool">
+              <property name="toolTip">
+               <string>Scatter Fill</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/scatterfill.png</normaloff>:/Icons/Icons/scatterfill.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="replacerTool">
+              <property name="toolTip">
+               <string>Replacer Brush</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/replacer.png</normaloff>:/Icons/Icons/replacer.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="matrixBrushButton">
+              <property name="toolTip">
+               <string>Matrix Brush</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/matrix.png</normaloff>:/Icons/Icons/matrix.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="brushTool">
+              <property name="toolTip">
+               <string>Smart Brush</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/brush.png</normaloff>:/Icons/Icons/brush.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="Line" name="line">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="gridToggle">
+              <property name="toolTip">
+               <string>Show/Hide Grid</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/grid.png</normaloff>:/Icons/Icons/grid.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="LevelView" name="levelView">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>3</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::WinPanel</enum>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOn</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOn</enum>
+            </property>
+            <property name="backgroundBrush">
+             <brush brushstyle="Dense2Pattern">
+              <color alpha="255">
+               <red>245</red>
+               <green>245</green>
+               <blue>245</blue>
+              </color>
+             </brush>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="dragMode">
+             <enum>QGraphicsView::NoDrag</enum>
+            </property>
+            <property name="viewportUpdateMode">
+             <enum>QGraphicsView::MinimalViewportUpdate</enum>
+            </property>
+            <property name="rubberBandSelectionMode">
+             <enum>Qt::IntersectsItemShape</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_4"/>
        </widget>
       </item>
      </layout>

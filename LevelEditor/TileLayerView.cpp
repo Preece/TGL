@@ -74,7 +74,7 @@ void TileLayerView::RepopulateTiles()
         }
 
         //make note of the fact that the tile at this position has been inspected
-        inspectedItems.insert(itemPos);
+        inspectedItems.push_back(itemPos);
 
         ++itemIterator;
     }
@@ -181,6 +181,7 @@ void TileLayerView::ModifyTileWidgetItem(int x, int y, TileCoord newOrigin)
 
     //store the tile origin coordinates in the item
     tempTileItem->SetTileOrigin(newOrigin);
+    tempTileItem->SetPosition(TileCoord(x, y));
 
     //update its Pixmap
     tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
