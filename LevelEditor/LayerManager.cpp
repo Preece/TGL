@@ -242,6 +242,12 @@ void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
     }
 }
 
+void LayerManager::ClearPreview()
+{
+    if(currentLayer)
+        currentLayer->ClearPreview();
+}
+
 void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
 {
     if(layerIndex < 0 || layerIndex >= layers.count())

@@ -18,7 +18,8 @@ void MiniMap::mouseMoveEvent(QMouseEvent *event)
         event->accept();
         return;
     }
-    event->ignore();
+
+    QGraphicsView::mouseMoveEvent(event);
 }
 
 void MiniMap::mousePressEvent(QMouseEvent *event)

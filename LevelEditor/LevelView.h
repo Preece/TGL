@@ -5,6 +5,8 @@
 #include <QWheelEvent>
 #include <QtOpenGL>
 
+#include "LayerManager.h"
+
 class LevelView : public QGraphicsView
 {
     Q_OBJECT
@@ -16,12 +18,19 @@ signals:
 public slots:
 
 protected:
+    void mouseMoveEvent (QMouseEvent * event);
+    void mousePressEvent (QMouseEvent * event);
+    void mouseReleaseEvent (QMouseEvent * event);
+
     void wheelEvent(QWheelEvent *event);
     void drawBackground(QPainter *painter, const QRectF &rect);
     void resizeEvent(QResizeEvent *event);
 
 private:
     bool maxZoom;
+
+    bool panning;
+    QPoint clickSpot;
 };
 
 #endif // LEVELVIEW_H

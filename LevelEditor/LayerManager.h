@@ -33,6 +33,8 @@ public:
     void EyedropTile(QPoint pos);
     void UpdateLayerOpacity(int opaqueLayerID);
 
+    void ClearPreview();
+
 public slots:
     void RepopulateAllLayers();
 

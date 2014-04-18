@@ -14,6 +14,56 @@ LevelView::LevelView(QWidget *parent) :
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 
+void LevelView::mouseMoveEvent(QMouseEvent *event)
+{
+    if (panning)
+    {
+        horizontalScrollBar()->setValue(horizontalScrollBar()->value() - (event->x() - clickSpot.x()));
+        verticalScrollBar()->setValue(verticalScrollBar()->value() - (event->y() - clickSpot.y()));
+        clickSpot = event->pos();
+        event->accept();
+        return;
+    }
+    else
+    {
+        QGraphicsView::mouseMoveEvent(event);
+    }
+}
+
+void LevelView::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && event->modifiers() == Qt::ControlModifier)
+    {
+        panning = true;
+        clickSpot = event->pos();
+        setCursor(Qt::ClosedHandCursor);
+        event->accept();
+
+        dynamic_cast<LayerManager*>(scene())->ClearPreview();
+
+        return;
+    }
+    else
+    {
+        QGraphicsView::mousePressEvent(event);
+    }
+}
+
+void LevelView::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && panning)
+    {
+        panning = false;
+        setCursor(Qt::ArrowCursor);
+        event->accept();
+        return;
+    }
+    else
+    {
+        QGraphicsView::mouseReleaseEvent(event);
+    }
+}
+
 void LevelView::wheelEvent(QWheelEvent *event)
 {
     double scaleFactor = 1.15;
