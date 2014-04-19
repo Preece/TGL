@@ -41,13 +41,14 @@ public:
 private slots:
 
     void on_actionProperties_triggered();
-    void UpdateToolSelection();
     void on_actionUndo_triggered();
     void on_actionRedo_triggered();
     void on_actionAdd_Image_triggered();
     void on_actionAdd_Layer_triggered();
     void on_actionDelete_Layer_triggered();
     void on_actionEdit_Layer_triggered();
+
+    void CenterMinimapOnLevel();
 
 private:
     Ui::MainWindow *ui;

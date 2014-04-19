@@ -26,17 +26,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushManager->RegisterTileSelector(tileSelector);
 
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
-    connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
+    //connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
     connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*, QCursor)), layers, SLOT(SetBrush(TileBrush*, QCursor)));
+    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*, QCursor)), ui->levelView, SLOT(SetCursor(TileBrush*,QCursor)));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
-    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int));
+    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
     connect(ui->resourceView, SIGNAL(NewResourceSelected(int)), ui->propertyBrowser, SLOT(DisplayResource(int)));
     connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
+    connect(ui->miniMap, SIGNAL(CenterMinimapOnLevel()), this, SLOT(CenterMinimapOnLevel()));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
@@ -46,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->tileSelectorView->setScene(tileSelector);
     
-    ui->brushManager->SetCurrentBrush(Brushmanager::BrushTypes::Pencil);
+    ui->brushManager->SetCurrentBrush(0);
 
     //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
     //connect(scroll, SIGNAL(valueChanged(int)), )
@@ -165,5 +167,17 @@ void MainWindow::on_actionEdit_Layer_triggered()
             layers->UpdateLayerOpacity(tempLayer->GetID());
         }
     }
+}
+
+void MainWindow::CenterMinimapOnLevel()
+{
+    QPointF topLeft     = ui->levelView->mapToScene( 0, 0 );
+    QPointF bottomRight = ui->levelView->mapToScene( ui->levelView->viewport()->width() - 1, ui->levelView->viewport()->height() - 1 );
+    QRectF rect(topLeft, bottomRight);
+
+    int centerX = rect.left() + (rect.width() / 2);
+    int centerY = rect.top() + (rect.height() / 2);
+
+    ui->miniMap->centerOn(centerX, centerY);
 }
 

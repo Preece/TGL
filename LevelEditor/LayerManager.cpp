@@ -135,8 +135,6 @@ void LayerManager::SetBrush(TileBrush *newBrush, QCursor newCursor)
         currentLayer->ClearPreview();
 
     currentBrush = newBrush;
-
-    setCursor(newCursor);
 }
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)

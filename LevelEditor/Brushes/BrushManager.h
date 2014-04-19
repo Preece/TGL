@@ -39,7 +39,7 @@ public:
 
     void DestroyBrushes();
 
-    enum BrushTypes 
+    enum
     {
         Pencil = 0,
         Bucket,
@@ -52,7 +52,7 @@ public:
         ScatterFill = 8,
         Replacer = 9,
         Matrix = 11
-    }
+    };
 
 public slots:
     void SetCurrentBrush(int type);

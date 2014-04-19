@@ -339,8 +339,8 @@ QToolButton:checked {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>100</width>
-           <height>30</height>
+           <width>298</width>
+           <height>493</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -467,7 +467,7 @@ QToolButton:checked {
                <string>Stamp Brush</string>
               </property>
               <property name="text">
-               <string>...</string>
+               <string>stamp</string>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -517,7 +517,7 @@ QToolButton:checked {
             <item>
              <widget class="QToolButton" name="selectionTool">
               <property name="text">
-               <string>...</string>
+               <string>select</string>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -929,12 +929,6 @@ QToolButton:checked {
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>BrushManager</class>
-   <extends>QFrame</extends>
-   <header>LevelEditor/Brushes/BrushManager.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ResourceView</class>
    <extends>QTreeWidget</extends>
    <header>Toolbox/ResourceView.h</header>
@@ -959,6 +953,12 @@ QToolButton:checked {
    <class>LevelView</class>
    <extends>QGraphicsView</extends>
    <header>LevelEditor/LevelView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>BrushManager</class>
+   <extends>QFrame</extends>
+   <header>LevelEditor/Brushes/BrushManager.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

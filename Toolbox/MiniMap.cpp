@@ -45,6 +45,11 @@ void MiniMap::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
+void MiniMap::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    emit CenterMinimapOnLevel();
+}
+
 void MiniMap::wheelEvent(QWheelEvent *event)
 {
     double scaleFactor = 1.15;

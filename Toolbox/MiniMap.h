@@ -13,13 +13,15 @@ public:
     explicit MiniMap(QWidget *parent = 0);
     
 signals:
-    
+    void CenterMinimapOnLevel();
+
 public slots:
 
 protected:
     void mouseMoveEvent (QMouseEvent * event);
     void mousePressEvent (QMouseEvent * event);
     void mouseReleaseEvent (QMouseEvent * event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
     void drawBackground(QPainter *painter, const QRectF &rect);
     void resizeEvent(QResizeEvent *event);

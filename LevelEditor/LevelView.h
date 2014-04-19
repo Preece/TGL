@@ -16,6 +16,7 @@ public:
 signals:
     
 public slots:
+    void SetCursor(TileBrush *, QCursor newCursor);
 
 protected:
     void mouseMoveEvent (QMouseEvent * event);

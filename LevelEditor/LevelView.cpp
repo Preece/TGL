@@ -15,6 +15,11 @@ LevelView::LevelView(QWidget *parent) :
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 
+void LevelView::SetCursor(TileBrush *, QCursor newCursor)
+{
+    setCursor(newCursor);
+}
+
 void LevelView::mouseMoveEvent(QMouseEvent *event)
 {
     if (panning)
