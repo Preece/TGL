@@ -45,6 +45,8 @@ public slots:
     void SetBrush(TileBrush *newBrush, QCursor newCursor);
     void SetLayerSelection(int newSelection);
 
+    void RefreshPreview();
+
 signals:
     void SelectNewTile(TileCoord ID);
 

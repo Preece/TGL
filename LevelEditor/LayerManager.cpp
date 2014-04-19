@@ -229,6 +229,11 @@ void LayerManager::SetLayerSelection(int newSelection)
     currentLayer = NULL;
 }
 
+void LayerManager::RefreshPreview()
+{
+    //this should get called when they scroll through their brush history
+}
+
 void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
 {
     for(int i = 0; i < layers.count(); i++)
