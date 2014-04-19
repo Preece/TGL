@@ -305,7 +305,7 @@ QToolButton:checked {
            </widget>
           </item>
           <item>
-           <widget class="BrushPropertiesWidget" name="brushProperties">
+           <widget class="BrushManager" name="brushManager">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -929,9 +929,9 @@ QToolButton:checked {
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>BrushPropertiesWidget</class>
+   <class>BrushManager</class>
    <extends>QFrame</extends>
-   <header>LevelEditor/Brushes/BrushPropertiesWidget.h</header>
+   <header>LevelEditor/Brushes/BrushManager.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

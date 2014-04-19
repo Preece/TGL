@@ -18,22 +18,22 @@ MainWindow::MainWindow(QWidget *parent) :
     //keep themselves in sync with the resource manager
     levelPropertiesWindow->RegisterResourceManager(resources);
     layers->RegisterResourceManager(resources);
-    ui->brushProperties->RegisterResourceManager(resources);
+    ui->brushManager->RegisterResourceManager(resources);
     tileSelector->RegisterResourceManager(resources);
     ui->resourceView->RegisterResourceManager(resources);
     ui->propertyBrowser->RegisterResourceManager(resources);
     
-    ui->brushProperties->RegisterTileSelector(tileSelector);
+    ui->brushManager->RegisterTileSelector(tileSelector);
 
-    connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushProperties, SLOT(SetSelectedTiles(TileList)));
-    connect(ui->brushProperties, SIGNAL(BrushChanged()), this, SLOT(UpdateToolSelection()));
-    connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
-    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), this, SLOT(UpdateToolSelection()));
+    connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
+    connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
-    connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
-    connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
+    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*, QCursor)), layers, SLOT(SetBrush(TileBrush*, QCursor)));
+    connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
+    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int));
+    connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
     connect(ui->resourceView, SIGNAL(NewResourceSelected(int)), ui->propertyBrowser, SLOT(DisplayResource(int)));
     connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
@@ -46,13 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->tileSelectorView->setScene(tileSelector);
     
-    UpdateToolSelection();
+    ui->brushManager->SetCurrentBrush(Brushmanager::BrushTypes::Pencil);
 
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-
-    zoomLevel = 1;
     //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
     //connect(scroll, SIGNAL(valueChanged(int)), )
 
@@ -77,11 +72,6 @@ void MainWindow::on_actionProperties_triggered()
 {
     levelPropertiesWindow->LoadValues();
     levelPropertiesWindow->exec();
-}
-
-void MainWindow::UpdateToolSelection()
-{
-    layers->SetBrush(ui->brushProperties->GetCurrentBrush());
 }
 
 void MainWindow::on_actionUndo_triggered()
@@ -109,123 +99,6 @@ void MainWindow::RepopulateEverything()
     ui->resourceView->RepopulateEverything();
 
     layers->RepopulateAllLayers();
-}
-
-void MainWindow::on_pencilTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(0);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_bucketTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(2);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 3, 13);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_eraserButton_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(3);
-    ui->eraserButton->setChecked(true);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/eraser.png"), 12, 14);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_lineTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(10);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/line.png"), 1, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_replacerTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(9);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_matrixBrushButton_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(11);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_scatterTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(6);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_brushTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(7);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/brush.png"), 2, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_scatterFillTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(8);
-    UpdateToolSelection();
-
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/bucket.png"), 3, 13);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_pointerTool_clicked()
-{
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/selector.png"), 11, 1);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_eyedropperTool_clicked()
-{
-    //change the cursor
-    QCursor tempCur(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
-    ui->levelView->setCursor(tempCur);
-}
-
-void MainWindow::on_stampTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(12);
-    UpdateToolSelection();
-}
-
-void MainWindow::on_selectionTool_clicked()
-{
-    ui->brushProperties->SetCurrentBrush(13);
-    UpdateToolSelection();
 }
 
 void MainWindow::on_actionAdd_Image_triggered()

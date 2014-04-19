@@ -129,12 +129,14 @@ void LayerManager::ToggleGrid(bool show)
     }
 }
 
-void LayerManager::SetBrush(TileBrush *newBrush)
+void LayerManager::SetBrush(TileBrush *newBrush, QCursor newCursor)
 {
     if(currentLayer)
         currentLayer->ClearPreview();
 
     currentBrush = newBrush;
+
+    setCursor(newCursor);
 }
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)

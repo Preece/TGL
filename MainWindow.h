@@ -42,26 +42,12 @@ private slots:
 
     void on_actionProperties_triggered();
     void UpdateToolSelection();
-    void on_pencilTool_clicked();
-    void on_bucketTool_clicked();
-    void on_eraserButton_clicked();
-    void on_scatterTool_clicked();
-    void on_brushTool_clicked();
-    void on_scatterFillTool_clicked();
-    void on_pointerTool_clicked();
-    void on_eyedropperTool_clicked();
     void on_actionUndo_triggered();
     void on_actionRedo_triggered();
-    void on_lineTool_clicked();
-    void on_replacerTool_clicked();
-    void on_matrixBrushButton_clicked();
-    void on_stampTool_clicked();
     void on_actionAdd_Image_triggered();
     void on_actionAdd_Layer_triggered();
     void on_actionDelete_Layer_triggered();
     void on_actionEdit_Layer_triggered();
-
-    void on_selectionTool_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -74,8 +60,6 @@ private:
 
     LayerManager *layers;
     TileSelectorScene *tileSelector;
-
-    float zoomLevel;
 };
 
 #endif // MAINWINDOW_H

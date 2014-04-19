@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>BrushPropertiesWidget</class>
- <widget class="QFrame" name="BrushPropertiesWidget">
+ <class>BrushManager</class>
+ <widget class="QFrame" name="BrushManager">
   <property name="geometry">
    <rect>
     <x>0</x>
