@@ -279,7 +279,7 @@ void LayerManager::ToggleSelectionMode(bool selection)
         for(int i = 0; i < childrenList.count(); i++)
             childrenList[i]->setFlag(QGraphicsItem::ItemIsSelectable, false);
 
-        currentLayer->ClearPreview();
+        ClearPreview();
     }
 }
 

@@ -55,6 +55,20 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(scroll, SIGNAL(valueChanged(int)), )
 
     ui->resourceView->RepopulateEverything();
+
+    //assign IDs to each child in the toolgroup
+    ui->toolGroup->setId(ui->pencilTool, 0);
+    ui->toolGroup->setId(ui->eraserTool, 1);
+    ui->toolGroup->setId(ui->bucketTool, 2);
+    ui->toolGroup->setId(ui->lineTool, 3);
+    ui->toolGroup->setId(ui->stampTool, 4);
+    ui->toolGroup->setId(ui->eyedropperTool, 5);
+    ui->toolGroup->setId(ui->selectionTool, 6);
+    ui->toolGroup->setId(ui->scatterTool, 7);
+    ui->toolGroup->setId(ui->scatterFillTool, 8);
+    ui->toolGroup->setId(ui->replacerTool, 9);
+    ui->toolGroup->setId(ui->matrixBrushTool, 10);
+    ui->toolGroup->setId(ui->smartBrushTool, 11);
 }
 
 MainWindow::~MainWindow()

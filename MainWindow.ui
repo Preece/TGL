@@ -47,14 +47,14 @@ QToolButton {
 	background-color: rgb(232, 228, 245);
 	border-style: outset;
 	border-width:1px;
- 	border-radius:2px;
- 	border-color: rgb(187, 185, 200);
+ 	border-radius:3px;
+ 	border-color: rgb(60, 83, 127);
 	padding: 1px;
 }
 
 QToolButton:checked {
 	border-style: inset;
-	background-color: rgb(212, 208, 225);
+	background-color: rgb(133, 138, 229);
 }
 
 #propertyBrowser {
@@ -103,7 +103,7 @@ QToolButton:checked {
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="tabSpacing">
          <number>3</number>
@@ -402,36 +402,16 @@ QToolButton:checked {
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="eyedropperTool">
+             <widget class="QToolButton" name="eraserTool">
               <property name="toolTip">
-               <string>Eye-Dropper</string>
+               <string>Eraser</string>
               </property>
               <property name="text">
                <string>...</string>
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/eyedropper.png</normaloff>:/Icons/Icons/eyedropper.png</iconset>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">toolGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="lineTool">
-              <property name="toolTip">
-               <string>Line</string>
-              </property>
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/line.png</normaloff>:/Icons/Icons/line.png</iconset>
+                <normaloff>:/Icons/Icons/eraser.png</normaloff>:/Icons/Icons/eraser.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -462,6 +442,26 @@ QToolButton:checked {
              </widget>
             </item>
             <item>
+             <widget class="QToolButton" name="lineTool">
+              <property name="toolTip">
+               <string>Line</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/line.png</normaloff>:/Icons/Icons/line.png</iconset>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">toolGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
              <widget class="QToolButton" name="stampTool">
               <property name="toolTip">
                <string>Stamp Brush</string>
@@ -478,33 +478,16 @@ QToolButton:checked {
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="eraserButton">
+             <widget class="QToolButton" name="eyedropperTool">
               <property name="toolTip">
-               <string>Eraser</string>
+               <string>Eye-Dropper</string>
               </property>
               <property name="text">
                <string>...</string>
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/eraser.png</normaloff>:/Icons/Icons/eraser.png</iconset>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">toolGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="pointerTool">
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/selector.png</normaloff>:/Icons/Icons/selector.png</iconset>
+                <normaloff>:/Icons/Icons/eyedropper.png</normaloff>:/Icons/Icons/eyedropper.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -595,7 +578,7 @@ QToolButton:checked {
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="matrixBrushButton">
+             <widget class="QToolButton" name="matrixBrushTool">
               <property name="toolTip">
                <string>Matrix Brush</string>
               </property>
@@ -615,7 +598,7 @@ QToolButton:checked {
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="brushTool">
+             <widget class="QToolButton" name="smartBrushTool">
               <property name="toolTip">
                <string>Smart Brush</string>
               </property>

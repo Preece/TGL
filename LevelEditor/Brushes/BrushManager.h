@@ -42,16 +42,17 @@ public:
     enum
     {
         Pencil = 0,
-        Bucket,
         Eraser,
-        Line = 10,
-        Stamp = 12,
-        Selector = 13,
-        Scatter = 6,
-        Smart = 7,
-        ScatterFill = 8,
-        Replacer = 9,
-        Matrix = 11
+        Bucket,
+        Line,
+        Stamp,
+        Eyedropper,
+        Selector,
+        Scatter,
+        ScatterFill,
+        Replacer,
+        Matrix,
+        Smart
     };
 
 public slots:
