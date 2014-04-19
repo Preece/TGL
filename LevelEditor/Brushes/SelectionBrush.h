@@ -24,7 +24,8 @@ public:
 
 private:
    QPoint clickSpot;
-   QRubberBand *selection;
+
+   bool dragMode;
 };
 
 #endif // SELECTIONBRUSH_H

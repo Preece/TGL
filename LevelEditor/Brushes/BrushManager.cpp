@@ -68,12 +68,12 @@ void BrushManager::SetCurrentBrush(int type)
 
     case BrushManager::Stamp:
         currentBrush = &stamp;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
+        tempCur = QCursor(QPixmap(":/Icons/Icons/stamp.png"), 8, 13);
         break;
 
     case BrushManager::Selector:
         currentBrush = &selector;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/selector.png"), 11, 1);
+        tempCur = QCursor(Qt::CrossCursor);
         break;
 
     case BrushManager::Scatter:
@@ -113,7 +113,7 @@ void BrushManager::SetCurrentBrush(int type)
             currentBrush = NULL;
 
         ui->scatterBrushGroup->show();
-        tempCur = QCursor(QPixmap(":/Icons/Icons/bucket.png"), 3, 13);
+        tempCur = QCursor(QPixmap(":/Icons/Icons/scatterfill.png"), 3, 13);
         break;
 
     case BrushManager::Replacer:

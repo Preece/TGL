@@ -48,5 +48,6 @@
         <file>Icons/replacer.png</file>
         <file>Icons/line.png</file>
         <file>Icons/matrix.png</file>
+        <file>Icons/stamp.png</file>
     </qresource>
 </RCC>

@@ -84,6 +84,8 @@ void LevelView::wheelEvent(QWheelEvent *event)
         else
             emit TraverseTileHistory(false);
 
+        dynamic_cast<LayerManager*>(scene())->RefreshPreview();
+
         return;
     }
 

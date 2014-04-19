@@ -29,7 +29,7 @@ QMainWindow {
 	padding: 0px;
 }
 
-QToolBox::tab {
+QToolBox::tab, QComboBox,  QComboBox::drop-down {
 	background-color: rgb(132, 255, 140);
 	border-style: outset;
 	border-width: 1px;
@@ -55,6 +55,10 @@ QToolButton {
 QToolButton:checked {
 	border-style: inset;
 	background-color: rgb(133, 138, 229);
+}
+
+QComboBox::down-arrow {
+	image: url(:/Icons/Icons/addvalue.png);
 }
 
 #propertyBrowser {
@@ -103,7 +107,7 @@ QToolButton:checked {
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="tabSpacing">
          <number>3</number>
@@ -114,7 +118,7 @@ QToolButton:checked {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>493</height>
+           <height>505</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -203,7 +207,7 @@ QToolButton:checked {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>493</height>
+           <height>501</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -340,7 +344,7 @@ QToolButton:checked {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>493</height>
+           <height>505</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -467,7 +471,11 @@ QToolButton:checked {
                <string>Stamp Brush</string>
               </property>
               <property name="text">
-               <string>stamp</string>
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/stamp.png</normaloff>:/Icons/Icons/stamp.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -500,7 +508,11 @@ QToolButton:checked {
             <item>
              <widget class="QToolButton" name="selectionTool">
               <property name="text">
-               <string>select</string>
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="Icons.qrc">
+                <normaloff>:/Icons/Icons/frameselect.png</normaloff>:/Icons/Icons/frameselect.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -754,6 +766,12 @@ QToolButton:checked {
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>16</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>

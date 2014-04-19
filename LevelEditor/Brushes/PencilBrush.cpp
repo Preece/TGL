@@ -17,7 +17,7 @@ void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
     if(selectedTileOrigin == TileCoord(-1, -1))
         return;
 
-    //erase the previous preview, if we are in preview mode. Get ready for the next
+    //erase the previous preview, if we are in preview mode. Get ready for the next.
     //test removing this. might be wasting time doing nothing here
     //layer->ClearPreview();
 

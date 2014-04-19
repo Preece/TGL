@@ -40,6 +40,8 @@ void LayerManager::EyedropTile(QPoint pos)
             return;
 
         emit SelectNewTile(currentLayer->GetTileOrigin(tileX, tileY));
+
+        RefreshPreview();
     }
 }
 
@@ -178,6 +180,9 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
+    lastPreviewSpot.setX(tileX);
+    lastPreviewSpot.setY(tileY);
+
     //if the left button is down
     if(event->buttons() == Qt::LeftButton)
     {
@@ -233,7 +238,7 @@ void LayerManager::SetLayerSelection(int newSelection)
 
 void LayerManager::RefreshPreview()
 {
-    //this should get called when they scroll through their brush history
+    currentBrush->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), currentLayer, true);
 }
 
 void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
