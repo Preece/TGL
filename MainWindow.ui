@@ -37,9 +37,10 @@ QToolBox::tab {
 	border-radius: 2px;
  }
 
-QToolBox &gt; QScrollArea &gt; QWidget {
-	margin: 0;
-	padding: 0;
+QToolBox &gt; QScrollArea &gt; QWidget &gt; QWidget {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
 }
 
 QToolButton {
@@ -338,8 +339,8 @@ QToolButton:checked {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>298</width>
-           <height>493</height>
+           <width>100</width>
+           <height>30</height>
           </rect>
          </property>
          <attribute name="icon">

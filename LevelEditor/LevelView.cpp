@@ -5,6 +5,7 @@ LevelView::LevelView(QWidget *parent) :
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     maxZoom = false;
+    panning = false;
 
     QGLFormat format;
     format.setSamples(2);
@@ -22,6 +23,9 @@ void LevelView::mouseMoveEvent(QMouseEvent *event)
         verticalScrollBar()->setValue(verticalScrollBar()->value() - (event->y() - clickSpot.y()));
         clickSpot = event->pos();
         event->accept();
+
+        dynamic_cast<LayerManager*>(scene())->ClearPreview();
+
         return;
     }
     else
@@ -72,6 +76,7 @@ void LevelView::wheelEvent(QWheelEvent *event)
         //stack should be selected. This stack should be in the tile selector
         return;
     }
+
     double scaleFactor = 1.15;
 
     //zoom in
