@@ -8,6 +8,7 @@ class PencilBrush : public TileBrush
 {
 public:
     PencilBrush();
+    ~PencilBrush();
 
     void Paint(int x, int y, TileLayerView *layer, bool preview = false);
 

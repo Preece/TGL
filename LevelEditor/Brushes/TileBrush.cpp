@@ -8,6 +8,11 @@ TileBrush::TileBrush()
     overwrite = true;
 }
 
+TileBrush::~TileBrush()
+{
+
+}
+
 void TileBrush::Press(int x, int y, TileLayerView *layer)
 {
     //they have started painting, so nix the preview

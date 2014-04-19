@@ -5,6 +5,11 @@ FillBrush::FillBrush()
     selectedTileOrigin = TileCoord(-1, -1);
 }
 
+FillBrush::~FillBrush()
+{
+
+}
+
 void FillBrush::Move(int x, int y, TileLayerView *layer)
 {
     //we don't want this to do anything for a fill brush

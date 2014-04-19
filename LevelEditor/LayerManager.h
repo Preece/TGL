@@ -29,11 +29,12 @@ public:
     
     void AddLayer(int newLayerID);
     void RemoveLayer(int dirtyLayerID);
-
-    void EyedropTile(QPoint pos);
     void UpdateLayerOpacity(int opaqueLayerID);
-
     void ClearPreview();
+
+signals:
+    void SelectNewTile(TileCoord ID);
+    void SelectNewBrush(int brushID);
 
 public slots:
     void RepopulateAllLayers();
@@ -42,13 +43,10 @@ public slots:
     void ToggleGrid(bool show = true);
     void ToggleSelectionMode(bool selection);
 
-    void SetBrush(TileBrush *newBrush, QCursor newCursor);
+    void SetBrushSelection(TileBrush *newBrush, QCursor newCursor);
     void SetLayerSelection(int newSelection);
 
     void RefreshPreview();
-
-signals:
-    void SelectNewTile(TileCoord ID);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -56,6 +54,8 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
+    void EyedropTile(QPoint pos);
+
     QList<TileLayerView*> layers;
     TileLayerView *currentLayer;
 

@@ -6,6 +6,11 @@ StampBrush::StampBrush()
     avgY = 0;
 }
 
+StampBrush::~StampBrush()
+{
+
+}
+
 void StampBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
 {
     layer->ClearPreview();

@@ -6,13 +6,11 @@
 class SmartBrush : public ComplexBrush
 {
 public:
+    SmartBrush();
+    ~SmartBrush();
 
     virtual void Paint(int x, int y, TileLayerView *layer, bool preview);
-
     void ContextPaintTile(int x, int y, TileLayerView *layer, bool preview);
-
-    SmartBrush();
-
     virtual QString GetType() { return "smart"; }
 };
 

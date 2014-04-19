@@ -4,6 +4,11 @@ ComplexBrush::ComplexBrush()
 {
 }
 
+ComplexBrush::~ComplexBrush()
+{
+
+}
+
 void ComplexBrush::AddList(int count)
 {
     for(int i = 0; i < count; i++)

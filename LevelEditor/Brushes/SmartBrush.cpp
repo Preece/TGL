@@ -1,5 +1,16 @@
 #include "SmartBrush.h"
 
+SmartBrush::SmartBrush()
+{
+    AddList(13);
+}
+
+SmartBrush::~SmartBrush()
+{
+
+}
+
+
 void SmartBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     //erase the previous preview
@@ -321,7 +332,3 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
 }
 
 
-SmartBrush::SmartBrush()
-{
-    AddList(13);
-}

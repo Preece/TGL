@@ -129,7 +129,7 @@ void LayerManager::ToggleGrid(bool show)
     }
 }
 
-void LayerManager::SetBrush(TileBrush *newBrush, QCursor newCursor)
+void LayerManager::SetBrushSelection(TileBrush *newBrush, QCursor newCursor)
 {
     if(currentLayer)
         currentLayer->ClearPreview();
@@ -158,6 +158,8 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
     else if(event->button() == Qt::RightButton)
     {
         EyedropTile(event->scenePos().toPoint());
+
+        //refresh the preview
         currentBrush->Paint(tileX, tileY, currentLayer, true);
     }
 }

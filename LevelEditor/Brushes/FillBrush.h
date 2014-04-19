@@ -9,6 +9,7 @@ class FillBrush : public TileBrush
 {
 public:
     FillBrush();
+    ~FillBrush();
 
     void Move(int x, int y, TileLayerView *layer);
 

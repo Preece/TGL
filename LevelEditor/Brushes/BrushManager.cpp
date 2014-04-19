@@ -61,6 +61,11 @@ void BrushManager::SetCurrentBrush(int type)
         tempCur = QCursor(QPixmap(":/Icons/Icons/line.png"), 1, 1);
         break;
 
+    case BrushManager::Eyedropper:
+        currentBrush = &eyedropper;
+        tempCur = QCursor(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
+        break;
+
     case BrushManager::Stamp:
         currentBrush = &stamp;
         tempCur = QCursor(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);

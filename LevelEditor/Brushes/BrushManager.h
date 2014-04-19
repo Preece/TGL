@@ -10,6 +10,7 @@
 #include "PencilBrush.h"
 #include "EraserBrush.h"
 #include "FillBrush.h"
+#include "EyedropperBrush.h"
 #include "LineBrush.h"
 #include "SmartBrush.h"
 #include "ScatterBrush.h"
@@ -91,6 +92,7 @@ private:
     PencilBrush pencil;
     EraserBrush eraser;
     FillBrush bucket;
+    EyedropperBrush eyedropper;
     LineBrush line;
     StampBrush stamp;
     SelectionBrush selector;

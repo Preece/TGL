@@ -13,6 +13,7 @@ class ComplexBrush : public TileBrush
 {
 public:
     ComplexBrush();
+    ~ComplexBrush();
 
     QString GetName() { return name; }
     void SetName(QString newName) { name = newName; }

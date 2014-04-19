@@ -12,6 +12,7 @@ private:
 
 public:
     TileBrush();
+    virtual ~TileBrush();
 
     virtual void Press(int x, int y, TileLayerView *layer);
     virtual void Move(int x, int y, TileLayerView *layer, bool leftButtonDown);

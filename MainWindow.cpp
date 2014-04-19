@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
-    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*, QCursor)), layers, SLOT(SetBrush(TileBrush*, QCursor)));
+    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*, QCursor)), layers, SLOT(SetBrushSelection(TileBrush*, QCursor)));
     connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*, QCursor)), ui->levelView, SLOT(SetCursor(TileBrush*,QCursor)));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));

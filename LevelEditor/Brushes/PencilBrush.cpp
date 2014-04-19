@@ -6,6 +6,11 @@ PencilBrush::PencilBrush()
     lineMode = false;
 }
 
+PencilBrush::~PencilBrush()
+{
+
+}
+
 void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     //if no tile is selected, bail

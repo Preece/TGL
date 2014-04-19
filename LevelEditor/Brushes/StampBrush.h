@@ -9,6 +9,7 @@ class StampBrush : public TileBrush
 {
 public:
     StampBrush();
+    ~StampBrush();
 
     void Move(int x, int y, TileLayerView *layer, bool leftButtonDown);
 
