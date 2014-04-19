@@ -123,12 +123,12 @@ void TileSelectorScene::TraverseTileHistory(bool forward)
         //and there is something to move to
         if(selectionIndex - 1 >= 0)
         {
+            //set this flag so this change in selections isnt added to the history
+            selectionChangeFromHistory = true;
+
             //clear the current selection, and select the next item
             clearSelection();
             selectionHistory[--selectionIndex]->setSelected(true);
-
-            //set this flag so this change in selections isnt added to the history
-            selectionChangeFromHistory = true;
         }
     }
     //if we are moving backwards
@@ -137,11 +137,11 @@ void TileSelectorScene::TraverseTileHistory(bool forward)
         //and there is something to move to
         if(selectionIndex + 1 < selectionHistory.count())
         {
+            selectionChangeFromHistory = true;
+
             //clear the current selection, and select the previous item
             clearSelection();
             selectionHistory[++selectionIndex]->setSelected(true);
-
-            selectionChangeFromHistory = true;
         }
     }
 
@@ -222,6 +222,10 @@ void TileSelectorScene::PackageAndEmitSelection()
 
         //and reset the selection index
         selectionIndex = 0;
+
+        //chop down the list to 10 items
+        if(selectionHistory.count() > 10)
+            selectionHistory.pop_back();
     }
 
     //reset the flag
