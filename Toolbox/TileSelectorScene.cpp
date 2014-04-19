@@ -11,6 +11,9 @@ TileSelectorScene::TileSelectorScene(QObject *parent)
     palette.setBrush(QPalette::Base, QBrush(Qt::red));
 
     selection->setPalette(palette);
+
+    selectionIndex = 0;
+    selectionChangeFromHistory = false;
 }
 
 TileSelectorScene::~TileSelectorScene()
@@ -112,6 +115,38 @@ void TileSelectorScene::SelectTileset()
     }
 }
 
+void TileSelectorScene::TraverseTileHistory(bool forward)
+{
+    //if we are moving forward
+    if(forward)
+    {
+        //and there is something to move to
+        if(selectionIndex - 1 >= 0)
+        {
+            //clear the current selection, and select the next item
+            clearSelection();
+            selectionHistory[--selectionIndex]->setSelected(true);
+
+            //set this flag so this change in selections isnt added to the history
+            selectionChangeFromHistory = true;
+        }
+    }
+    //if we are moving backwards
+    else
+    {
+        //and there is something to move to
+        if(selectionIndex + 1 < selectionHistory.count())
+        {
+            //clear the current selection, and select the previous item
+            clearSelection();
+            selectionHistory[++selectionIndex]->setSelected(true);
+
+            selectionChangeFromHistory = true;
+        }
+    }
+
+}
+
 void TileSelectorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsScene::mousePressEvent(event);
@@ -170,7 +205,28 @@ TileList TileSelectorScene::GetSelectedTiles()
     return coordList;
 }
 
+//this is called when the selection in the scene changes. It will collect the list
+//of selected tiles and emit them
 void TileSelectorScene::PackageAndEmitSelection()
 {
-    emit SelectionChanged(GetSelectedTiles());
+    TileList selectedList = GetSelectedTiles();
+
+    if(selectedList.empty())
+        return;
+
+    //if this selection change is not spawned by a history traversal
+    if(!selectionChangeFromHistory)
+    {
+        //add the top most selected item into the front of the history
+        selectionHistory.push_front(selectedItems()[0]);
+
+        //and reset the selection index
+        selectionIndex = 0;
+    }
+
+    //reset the flag
+    selectionChangeFromHistory = false;
+
+    //send out the change so other things can know about the current selection
+    emit SelectionChanged(selectedList);
 }

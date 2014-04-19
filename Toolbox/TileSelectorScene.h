@@ -3,6 +3,8 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QList>
+
 #include "Model/ResourceManager.h"
 #include "../SpriteEditor/SpritesheetSelector.h"
 #include "TileWidgetItem.h"
@@ -17,17 +19,10 @@ public:
     ~TileSelectorScene();
 
     void RegisterResourceManager(ResourceManager * newRM) { resources = newRM; }
-    
-    bool IsTileSelected() { if(selectedItems().count() > 0) return true; return false; }
-    
-    TileWidgetItem *GetSelectedTile() { if(IsTileSelected()) return dynamic_cast<TileWidgetItem*>(selectedItems()[0]); return NULL; }
-    TileList GetSelectedTiles();
-
     void RepopulateTileSelector();
     
 signals:
     void SelectionChanged(TileList newSelection);
-
     void SelectEraser();
     
 public slots:
@@ -37,18 +32,26 @@ public slots:
 
     void SelectTileset();
 
+    void TraverseTileHistory(bool forward);
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
+    TileList GetSelectedTiles();
+
     ResourceManager *resources;
     QImage *spritesheet;
 
     QRubberBand *selection;
     QPoint clickSpot;
     
+    QList<QGraphicsItem*> selectionHistory;
+    int selectionIndex;
+
+    bool selectionChangeFromHistory;
 };
 
 #endif // TILESELECTORSCENE_H

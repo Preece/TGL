@@ -14,7 +14,8 @@ public:
     explicit LevelView(QWidget *parent = 0);
     
 signals:
-    
+    void TraverseTileHistory(bool forward);
+
 public slots:
     void SetCursor(TileBrush *, QCursor newCursor);
 

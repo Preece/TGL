@@ -79,6 +79,11 @@ void LevelView::wheelEvent(QWheelEvent *event)
     {
         //emit a signal that either the next or previous tiles in the history
         //stack should be selected. This stack should be in the tile selector
+        if(event->delta() > 0)
+            emit TraverseTileHistory(true);
+        else
+            emit TraverseTileHistory(false);
+
         return;
     }
 
