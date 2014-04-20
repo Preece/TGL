@@ -34,7 +34,7 @@ QToolBox::tab, QComboBox,  QComboBox::drop-down {
 	border-style: outset;
 	border-width: 1px;
 	border-color: rgb(79, 197, 93);
-	border-radius: 2px;
+	border-radius: 3px;
  }
 
 QToolBox &gt; QScrollArea &gt; QWidget &gt; QWidget {
@@ -44,25 +44,27 @@ QToolBox &gt; QScrollArea &gt; QWidget &gt; QWidget {
 }
 
 QToolButton {
-	background-color: rgb(232, 228, 245);
+	background-color: rgb(220, 216, 255);
 	border-style: outset;
 	border-width:1px;
  	border-radius:3px;
- 	border-color: rgb(60, 83, 127);
+ 	border-color: rgb(157, 155, 193);
 	padding: 1px;
 }
 
-QToolButton:checked {
+QToolButton:checked, QToolButton::pressed {
 	border-style: inset;
-	background-color: rgb(133, 138, 229);
+	background-color: rgb(170, 170, 243);
+	border-color: rgb(117, 119, 186);
 }
 
 QComboBox::down-arrow {
 	image: url(:/Icons/Icons/addvalue.png);
 }
 
-#propertyBrowser {
-	alternate-background-color: rgb(184, 255, 184);
+QTreeView, #propertyBrowser {
+	alternate-background-color: rgb(192, 255, 200);
+	background-color: rgb(242, 243, 255);
 }
 
 #viewStack {
@@ -107,10 +109,10 @@ QComboBox::down-arrow {
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="tabSpacing">
-         <number>3</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="resourcesBox">
          <property name="geometry">
@@ -118,7 +120,7 @@ QComboBox::down-arrow {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>505</height>
+           <height>507</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -207,7 +209,7 @@ QComboBox::down-arrow {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>501</height>
+           <height>507</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -344,7 +346,7 @@ QComboBox::down-arrow {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>505</height>
+           <height>507</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -512,7 +514,7 @@ QComboBox::down-arrow {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/frameselect.png</normaloff>:/Icons/Icons/frameselect.png</iconset>
+                <normaloff>:/Icons/Icons/selectionbox.png</normaloff>:/Icons/Icons/selectionbox.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>

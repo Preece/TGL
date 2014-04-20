@@ -23,7 +23,8 @@ public:
     
 signals:
     void SelectionChanged(TileList newSelection);
-    void SelectEraser();
+
+    void SelectNewBrush(int type);
     
 public slots:
 

@@ -76,11 +76,6 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
 
     clearSelection();
 
-    if(origin.first == -1 && origin.second == -1)
-    {
-        emit SelectEraser();
-    }
-
     //find that tile based on position
     QGraphicsItem *tempTileItem = itemAt(tileX, tileY);
 
@@ -154,6 +149,10 @@ void TileSelectorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {
         clickSpot = event->scenePos().toPoint();
+
+        //if there is no item here, select the eraser
+       // if(!itemAt(event->scenePos().toPoint()))
+            //emit SelectNewBrush(1);
     }
 }
 
@@ -217,6 +216,10 @@ void TileSelectorScene::PackageAndEmitSelection()
     //if this selection change is not spawned by a history traversal
     if(!selectionChangeFromHistory)
     {
+        //prune out any identical enteries before adding this new onw
+        if(selectionHistory.contains(selectedItems()[0]))
+            selectionHistory.removeAll(selectedItems()[0]);
+
         //add the top most selected item into the front of the history
         selectionHistory.push_front(selectedItems()[0]);
 
@@ -230,6 +233,13 @@ void TileSelectorScene::PackageAndEmitSelection()
 
     //reset the flag
     selectionChangeFromHistory = false;
+
+    //if there is just one item in the selected list, select the pencil
+    if(selectedList.count() == 1)
+        emit SelectNewBrush(0);
+    //if there are multiple items in the list, select the stamp
+    else if(selectedList.count() > 1)
+        emit SelectNewBrush(4);
 
     //send out the change so other things can know about the current selection
     emit SelectionChanged(selectedList);

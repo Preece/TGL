@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushManager->RegisterTileSelector(tileSelector);
 
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
-    //connect(tileSelector, SIGNAL(SelectEraser()), this, SLOT(on_eraserButton_clicked()));
+    connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
