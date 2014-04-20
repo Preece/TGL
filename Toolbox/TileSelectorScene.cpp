@@ -234,13 +234,13 @@ void TileSelectorScene::PackageAndEmitSelection()
     //reset the flag
     selectionChangeFromHistory = false;
 
+    //send out the change so other things can know about the current selection
+    emit SelectionChanged(selectedList);
+
     //if there is just one item in the selected list, select the pencil
     if(selectedList.count() == 1)
         emit SelectNewBrush(0);
     //if there are multiple items in the list, select the stamp
     else if(selectedList.count() > 1)
         emit SelectNewBrush(4);
-
-    //send out the change so other things can know about the current selection
-    emit SelectionChanged(selectedList);
 }
