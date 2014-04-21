@@ -44,6 +44,7 @@ void TileLayerView::DestroyAllItems()
     previewItems.clear();
 }
 
+//this function should also check again for the size of the layer, and update itself accordingly
 void TileLayerView::RepopulateTiles()
 {
     //the strategy is to loop through all the items in the scene,

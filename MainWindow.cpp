@@ -41,6 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
     connect(ui->miniMap, SIGNAL(CenterMinimapOnLevel()), this, SLOT(CenterMinimapOnLevel()));
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
+
+    //needs to be axed
+    connect(resources->GetLevelproperties(), SIGNAL(MapSizeChanged(int,int)), layers, SLOT(UpdateLayerSizes(int,int)));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);

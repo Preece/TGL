@@ -66,8 +66,7 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
 
         if(property->propertyName() == "Tile Size")
         {
-            props->SetTileWidth(val.toPoint().x());
-            props->SetTileHeight(val.toPoint().y());
+            props->SetTileSize(val.toPoint().x(), val.toPoint().y());
         }
 
         if(property->propertyName() == "Map Size (in tiles)")

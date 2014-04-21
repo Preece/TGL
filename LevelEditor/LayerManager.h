@@ -48,6 +48,8 @@ public slots:
 
     void RefreshPreview();
 
+    void UpdateLayerSizes(int newW, int newH);
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);

@@ -296,3 +296,9 @@ void LayerManager::RepopulateAllLayers()
         layers[i]->RepopulateTiles();
 }
 
+void LayerManager::UpdateLayerSizes(int newW, int newH)
+{
+    //loop through each layer and modify their sizes
+    for(int i = 0; i < layers.count(); i++)
+        layers[i]->SetLayerSize(newW, newH);
+}

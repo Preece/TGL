@@ -31,9 +31,7 @@ void LevelPropertiesDialog::on_buttonBox_accepted()
     if(resourceManager)
     {
         resourceManager->GetLevelProperties()->SetLevelName(ui->mapNameInput->text());
-        resourceManager->GetLevelProperties()->SetTileWidth(ui->tileSizeX->value());
-        resourceManager->GetLevelProperties()->SetTileHeight(ui->tileSizeY->value());
-        resourceManager->GetLevelProperties()->SetMapWidth(ui->mapSizeX->value());
-        resourceManager->GetLevelProperties()->SetMapHeight(ui->mapSizeY->value());
+        resourceManager->GetLevelProperties()->SetTileSize(ui->tileSizeX->value(), ui->tileSizeY->value());
+        resourceManager->GetLevelProperties()->SetMapSize(ui->mapSizeX->value(), ui->mapSizeY->value());
     }
 }

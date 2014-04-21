@@ -19,6 +19,17 @@ bool LevelProperties::ArePropertiesSet()
     return false;
 }
 
+void LevelProperties::SetLevelSize(int newW, int newH)
+{ 
+    if(newW != mapWidth || newH != mapHeight)
+    {
+        mapWidth = newW; 
+        mapHeight = newH; 
+
+        emit MapSizeChanged(newW, newH);
+    }
+}
+
 bool LevelProperties::Export(Exporter *exporter)
 {
     exporter->WriteInt(tileWidth);

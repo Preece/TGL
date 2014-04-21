@@ -6,6 +6,8 @@ ResourceManager::ResourceManager()
     undo->setUndoLimit(500);
 
     modifyTiles = new ModifyTilesCommand;
+
+    connect(GetLevelProperties(), SIGNAL(MapSizeChanged(int,int)), this, UpdateLayerSizes());
 }
 
 ResourceManager::~ResourceManager()

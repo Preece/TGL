@@ -175,11 +175,6 @@ TileList TileSelectorScene::GetSelectedTiles()
 
 void TileSelectorScene::TraverseTileHistory(bool forward)
 {
-    //the selection history should be a list of TileLists. When the history is traversed,
-    //each of those items should be selected. PackageAndEmitSelection will automatically
-    //select the stamp brush is there are more than one tile. Don't forget to set the
-    //selectionChangeFrameHistory for *each* iteration of the loop
-
     //if we are moving forward
     if(forward)
     {
