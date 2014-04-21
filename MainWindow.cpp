@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
     connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
+    connect(tileSelector, SIGNAL(SelectNewBrush(int)), this, SLOT(SetToolButtonSelection(int)));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
@@ -194,5 +195,10 @@ void MainWindow::CenterMinimapOnLevel()
     int centerY = rect.top() + (rect.height() / 2);
 
     ui->miniMap->centerOn(centerX, centerY);
+}
+
+void MainWindow::SetToolButtonSelection(int newSelection)
+{
+    ui->toolGroup->button(newSelection)->setChecked(true);
 }
 
