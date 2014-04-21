@@ -11,6 +11,7 @@
 #include "TileWidgetItem.h"
 
 typedef QList<TileCoord> TileList;
+typedef QList<QGraphicsItem*> GraphicsItemList;
 
 class TileSelectorScene : public QGraphicsScene
 {
@@ -50,7 +51,7 @@ private:
     QRubberBand *selection;
     QPoint clickSpot;
     
-    QList<QGraphicsItem*> selectionHistory;
+    QList<GraphicsItemList> selectionHistory;
     int selectionIndex;
 
     bool selectionChangeFromHistory;

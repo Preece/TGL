@@ -111,43 +111,6 @@ void TileSelectorScene::SelectTileset()
     }
 }
 
-void TileSelectorScene::TraverseTileHistory(bool forward)
-{
-    //the selection history should be a list of TileLists. When the history is traversed,
-    //each of those items should be selected. PackageAndEmitSelection will automatically
-    //select the stamp brush is there are more than one tile. Don't forget to set the
-    //selectionChangeFrameHistory for *each* iteration of the loop
-
-    //if we are moving forward
-    if(forward)
-    {
-        //and there is something to move to
-        if(selectionIndex - 1 >= 0)
-        {
-            //set this flag so this change in selections isnt added to the history
-            selectionChangeFromHistory = true;
-
-            //clear the current selection, and select the next item
-            clearSelection();
-            selectionHistory[--selectionIndex]->setSelected(true);
-        }
-    }
-    //if we are moving backwards
-    else
-    {
-        //and there is something to move to
-        if(selectionIndex + 1 < selectionHistory.count())
-        {
-            selectionChangeFromHistory = true;
-
-            //clear the current selection, and select the previous item
-            clearSelection();
-            selectionHistory[++selectionIndex]->setSelected(true);
-        }
-    }
-
-}
-
 void TileSelectorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsScene::mousePressEvent(event);
@@ -210,6 +173,44 @@ TileList TileSelectorScene::GetSelectedTiles()
     return coordList;
 }
 
+void TileSelectorScene::TraverseTileHistory(bool forward)
+{
+    //the selection history should be a list of TileLists. When the history is traversed,
+    //each of those items should be selected. PackageAndEmitSelection will automatically
+    //select the stamp brush is there are more than one tile. Don't forget to set the
+    //selectionChangeFrameHistory for *each* iteration of the loop
+
+    //if we are moving forward
+    if(forward)
+    {
+        //and there is something to move to
+        if(selectionIndex - 1 >= 0)
+            selectionIndex--;
+    }
+    //if we are moving backwards
+    else
+    {
+        //and there is something to move to
+        if(selectionIndex + 1 < selectionHistory.count())
+            selectionIndex++;
+    }
+
+    clearSelection();
+
+    //select all the right tiles for that history index
+    for(int i = 0; i < selectionHistory[selectionIndex].count(); i++)
+    {
+        selectionChangeFromHistory = true;
+        selectionHistory[selectionIndex][i]->setSelected(true);
+    }
+
+    //select the right tool
+    if(selectionHistory[selectionIndex].count() == 1)
+        emit SelectNewBrush(0);
+    else if(selectionHistory[selectionIndex].count() > 1)
+        emit SelectNewBrush(4);
+}
+
 //this is called when the selection in the scene changes. It will collect the list
 //of selected tiles and emit them
 void TileSelectorScene::PackageAndEmitSelection()
@@ -228,11 +229,11 @@ void TileSelectorScene::PackageAndEmitSelection()
     if(!selectionChangeFromHistory)
     {
         //prune out any identical enteries before adding this new onw
-        if(selectionHistory.contains(selectedItems()[0]))
-            selectionHistory.removeAll(selectedItems()[0]);
+        if(selectionHistory.contains(selectedItems()))
+            selectionHistory.removeAll(selectedItems());
 
-        //add the top most selected item into the front of the history
-        selectionHistory.push_front(selectedItems()[0]);
+        //add the list of selected items into the front of the history
+        selectionHistory.push_front(selectedItems());
 
         //and reset the selection index
         selectionIndex = 0;
