@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->levelView->setMouseTracking(true);
 
     ui->miniMap->setScene(layers);
-    ui->levelView->setMouseTracking(true);
+    //ui->levelView->setMouseTracking(true);
 
     ui->tileSelectorView->setScene(tileSelector);
     

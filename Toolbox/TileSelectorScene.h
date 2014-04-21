@@ -2,6 +2,7 @@
 #define TILESELECTORSCENE_H
 
 #include <QGraphicsScene>
+#include <QFileDialog>
 #include <QGraphicsSceneMouseEvent>
 #include <QList>
 

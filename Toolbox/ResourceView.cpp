@@ -51,7 +51,6 @@ void ResourceView::RepopulateLayers(int newID)
             clearSelection();
             newLayerNode->setSelected(true);
             layerRoot->setExpanded(true);
-            emit NewLayerSelected(newID);
             selectionUpdated(newLayerNode, 0);
         }
     }

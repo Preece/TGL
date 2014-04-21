@@ -86,32 +86,38 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
 
 void TileSelectorScene::SelectTileset()
 {
-    //bring up an image selection window
-    SpritesheetSelector spritesheetWindow;
+    //ask the user where to load the file from.
+    QString filename = QFileDialog::getOpenFileName(NULL, "Add Image", ".", "Portable Network Graphics (*.png)");
 
-    spritesheetWindow.RegisterResourceManager(resources);
-    spritesheetWindow.RepopulateImageList();
-
-    //if the user completes the dialog
-    if(spritesheetWindow.exec() == QDialog::Accepted)
+    //if the dialog succeeds
+    if(!filename.isEmpty())
     {
-        //and if an image was selected
-        if(spritesheetWindow.IsImageSelected() && resources->GetLevelProperties()->ArePropertiesSet())
-        {
-            //set the spritesheet as that image
-            spritesheet = spritesheetWindow.GetSelectedImage()->GetImage();
+        Image *tempImage = new Image;
 
-            //store its ID as the image to be used as the tileset
-            resources->GetLevelProperties()->SetTilesetID(spritesheetWindow.GetSelectedImage()->GetID());
+        //load the file
+        tempImage->SetImageFromFile(filename);
 
-            //and repopulate the tile selector
-            RepopulateTileSelector();
-        }
+        //add the image to the resource manager
+        resources->AddImage(tempImage);
+
+        //set the spritesheet as that image
+        spritesheet = tempImage->GetImage();
+
+        //store its ID as the image to be used as the tileset
+        resources->GetLevelProperties()->SetTilesetID(tempImage->GetID());
+
+        //and repopulate the tile selector
+        RepopulateTileSelector();
     }
 }
 
 void TileSelectorScene::TraverseTileHistory(bool forward)
 {
+    //the selection history should be a list of TileLists. When the history is traversed,
+    //each of those items should be selected. PackageAndEmitSelection will automatically
+    //select the stamp brush is there are more than one tile. Don't forget to set the
+    //selectionChangeFrameHistory for *each* iteration of the loop
+
     //if we are moving forward
     if(forward)
     {
@@ -208,6 +214,11 @@ TileList TileSelectorScene::GetSelectedTiles()
 //of selected tiles and emit them
 void TileSelectorScene::PackageAndEmitSelection()
 {
+    //there needs to be a better way to store the tool selection. Having the pencil be
+    //selected for single tile lists here is not tenable. Its annoying that it keeps
+    //switching to the pencil when you select a tile. However, it should deselect the
+    //stamp somehow, especially when traversing the selection history
+
     TileList selectedList = GetSelectedTiles();
 
     if(selectedList.empty())
@@ -237,10 +248,7 @@ void TileSelectorScene::PackageAndEmitSelection()
     //send out the change so other things can know about the current selection
     emit SelectionChanged(selectedList);
 
-    //if there is just one item in the selected list, select the pencil
-    if(selectedList.count() == 1)
-        emit SelectNewBrush(0);
-    //if there are multiple items in the list, select the stamp
-    else if(selectedList.count() > 1)
+    //if there are multiple items being selected, select the stamp brush
+    if(selectedList.count() > 1)
         emit SelectNewBrush(4);
 }
