@@ -108,6 +108,37 @@ void TileLayerView::SelectTilesInArea(QRect area)
     scene()->setSelectionArea(path);
 }
 
+QList<TileData> TileLayerView::GetSelectedItems()
+{
+    //get a list of selected tile widget items
+    QList<QTileWidgetItem*> items = dynamic_cast<QList<QTileWidgetItem*>>(scene()->selectedItems());
+
+    //remove all preview items that may be selected
+    for(int i = 0; i < previewItems.count(); i++)
+        items.removeAll(previewItems[i]);
+
+    //build a list of tile data
+    QList<TileData> tiles;
+
+    for(int i = 0; i < items.count; i++)
+    {
+        TileData tempData;
+        tempData.pos = items[i]->GetPosition();
+        tempData.origin = items[i]->GetTileOrigin();
+        tiles.push_back(tempData);
+    }
+
+    return tiles;
+}
+
+void TileLayerView::SelectPreviewItems()
+{
+    for(int i = 0; i < previewItems.count(); i++)
+    {
+        previewItems[i]->setSelected(true);
+    }
+}
+
 void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
 {
     //bounds check    
@@ -122,7 +153,6 @@ void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
 
     if(y < 0)
         y = 0;
-
 
     //add a new one
     ModifyTileWidgetItem(x, y, newOrigin);
