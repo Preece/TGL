@@ -25,6 +25,7 @@ void SelectionBrush::Press(int x, int y, TileLayerView *layer)
     //if there is a selected tile at this position
         //pop out all selected tiles and put them in a list
         //flag that we are currently dragging stuff
+    
     clickSpot.setX(x);
     clickSpot.setY(y);
 }
