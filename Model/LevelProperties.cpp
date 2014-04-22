@@ -19,15 +19,10 @@ bool LevelProperties::ArePropertiesSet()
     return false;
 }
 
-void LevelProperties::SetLevelSize(int newW, int newH)
+void LevelProperties::SetMapSize(int newW, int newH)
 { 
-    if(newW != mapWidth || newH != mapHeight)
-    {
-        mapWidth = newW; 
-        mapHeight = newH; 
-
-        emit MapSizeChanged(newW, newH);
-    }
+    mapWidth = newW;
+    mapHeight = newH;
 }
 
 bool LevelProperties::Export(Exporter *exporter)

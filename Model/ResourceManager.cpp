@@ -6,8 +6,6 @@ ResourceManager::ResourceManager()
     undo->setUndoLimit(500);
 
     modifyTiles = new ModifyTilesCommand;
-
-    connect(GetLevelProperties(), SIGNAL(MapSizeChanged(int,int)), this, UpdateLayerSizes());
 }
 
 ResourceManager::~ResourceManager()
@@ -131,6 +129,11 @@ int ResourceManager::GetLayerOpacity(int layerID)
     return 100;
 }
 
+void ResourceManager::UpdateLayerSize(int w, int h)
+{
+
+}
+
 void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
 {
     TileLayer *tempLayer = layerMap.value(layerID);
@@ -220,6 +223,13 @@ void ResourceManager::Undo()
 void ResourceManager::Redo()
 {
     undo->redo();
+}
+
+void ResourceManager::SetMapSize(int w, int h)
+{
+    levelProperties.SetMapSize(w, h);
+
+    emit MapSizeChanged(w, h);
 }
 
 void ResourceManager::EndPaintOperation() 

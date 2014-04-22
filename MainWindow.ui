@@ -63,7 +63,7 @@ QComboBox::down-arrow {
 }
 
 QTreeView, #propertyBrowser {
-	alternate-background-color: rgb(192, 255, 200);
+	alternate-background-color: rgb(203, 255, 208);
 	background-color: rgb(242, 243, 255);
 }
 

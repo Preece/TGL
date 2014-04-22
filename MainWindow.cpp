@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
 
     //needs to be axed
-    connect(resources->GetLevelproperties(), SIGNAL(MapSizeChanged(int,int)), layers, SLOT(UpdateLayerSizes(int,int)));
+    connect(resources, SIGNAL(MapSizeChanged(int,int)), layers, SLOT(UpdateLayerSizes(int,int)));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);

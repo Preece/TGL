@@ -4,21 +4,14 @@ TileSelectorScene::TileSelectorScene(QObject *parent)
 {
     connect(this, SIGNAL(selectionChanged()), this, SLOT(PackageAndEmitSelection()));
 
-    selection = new QRubberBand(QRubberBand::Rectangle);
-
-    QPalette palette;
-    palette.setBrush(QPalette::Foreground, QBrush(Qt::green));
-    palette.setBrush(QPalette::Base, QBrush(Qt::red));
-
-    selection->setPalette(palette);
-
     selectionIndex = 0;
     selectionChangeFromHistory = false;
+    selectionChangeFromDrag = false;
 }
 
 TileSelectorScene::~TileSelectorScene()
 {
-    delete selection;
+
 }
 
 void TileSelectorScene::RepopulateTileSelector()
@@ -118,10 +111,6 @@ void TileSelectorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {
         clickSpot = event->scenePos().toPoint();
-
-        //if there is no item here, select the eraser
-       // if(!itemAt(event->scenePos().toPoint()))
-            //emit SelectNewBrush(1);
     }
 }
 
@@ -129,14 +118,15 @@ void TileSelectorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsScene::mouseMoveEvent(event);
 
+    //if the left button is down while moving
     if(event->buttons() & Qt::LeftButton)
     {
-        selection->setGeometry(clickSpot.x(), clickSpot.y(),
-                               event->scenePos().x() - clickSpot.x(), event->scenePos().y() - clickSpot.y());
-
         QPainterPath path;
         path.addRect(clickSpot.x(), clickSpot.y(),
                      event->scenePos().x() - clickSpot.x(), event->scenePos().y() - clickSpot.y());
+
+        //must check whether the selection has actually change before calling this
+        selectionChangeFromDrag = true;
 
         setSelectionArea(path);
     }
@@ -144,12 +134,12 @@ void TileSelectorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void TileSelectorScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsScene::mouseReleaseEvent(event);
-
     if(event->button() == Qt::LeftButton)
     {
-        selection->setGeometry(0, 0, 0, 0);
+        //PackageAndEmitSelection();
     }
+
+    QGraphicsScene::mouseReleaseEvent(event);
 }
 
 TileList TileSelectorScene::GetSelectedTiles()
@@ -215,23 +205,31 @@ void TileSelectorScene::PackageAndEmitSelection()
     //switching to the pencil when you select a tile. However, it should deselect the
     //stamp somehow, especially when traversing the selection history
 
+    static TileList previousSelection;
+
     TileList selectedList = GetSelectedTiles();
 
-    if(selectedList.empty())
+    if(selectedList.empty() || selectedList == previousSelection)
         return;
 
     //if this selection change is not spawned by a history traversal
     if(!selectionChangeFromHistory)
     {
-        //prune out any identical enteries before adding this new onw
+        //prune out any identical enteries before adding this new one
         if(selectionHistory.contains(selectedItems()))
             selectionHistory.removeAll(selectedItems());
+
+        //if the selection change from drag flag is active, remove the most recent entry
+        if(selectionChangeFromDrag)
+            selectionHistory.pop_front();
 
         //add the list of selected items into the front of the history
         selectionHistory.push_front(selectedItems());
 
         //and reset the selection index
         selectionIndex = 0;
+
+
 
         //chop down the list to 10 items
         if(selectionHistory.count() > 10)
@@ -240,6 +238,7 @@ void TileSelectorScene::PackageAndEmitSelection()
 
     //reset the flag
     selectionChangeFromHistory = false;
+    selectionChangeFromDrag = false;
 
     //send out the change so other things can know about the current selection
     emit SelectionChanged(selectedList);
@@ -247,4 +246,6 @@ void TileSelectorScene::PackageAndEmitSelection()
     //if there are multiple items being selected, select the stamp brush
     if(selectedList.count() > 1)
         emit SelectNewBrush(4);
+
+    previousSelection = selectedList;
 }

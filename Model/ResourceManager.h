@@ -28,6 +28,7 @@ public slots:
     void Redo();
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
+    void SetMapSize(int w, int h);
 
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);
@@ -57,6 +58,8 @@ public slots:
 signals:
     void LayerListModified(int newID);
     void ImageListModified();
+
+    void MapSizeChanged(int w, int h);
 
 private:
     QHash<int, Image*> imageMap;

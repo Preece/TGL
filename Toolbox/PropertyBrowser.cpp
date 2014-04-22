@@ -71,7 +71,7 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
 
         if(property->propertyName() == "Map Size (in tiles)")
         {
-            props->SetMapSize(val.toPoint().x(), val.toPoint().y());
+            resources->SetMapSize(val.toPoint().x(), val.toPoint().y());
         }
     }
 

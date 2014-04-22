@@ -5,9 +5,8 @@
 
 #include <QString>
 
-class LevelProperties : public ItemNode, public QObject
+class LevelProperties : public ItemNode
 {
-    Q_OBJECT
 
 public:
     bool Export(Exporter *exporter);
@@ -32,9 +31,6 @@ public:
 
     bool ArePropertiesSet();
 
-signals:
-    void MapSizeChanged(int w, int h);
-    
 private:
     int tileWidth, tileHeight;
     int mapWidth, mapHeight;
