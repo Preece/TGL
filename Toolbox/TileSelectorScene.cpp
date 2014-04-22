@@ -2,7 +2,7 @@
 
 TileSelectorScene::TileSelectorScene(QObject *parent)
 {
-    connect(this, SIGNAL(selectionChanged()), this, SLOT(PackageAndEmitSelection()));
+    //connect(this, SIGNAL(selectionChanged()), this, SLOT(PackageAndEmitSelection()));
 
     selectionIndex = 0;
     selectionChangeFromHistory = false;
@@ -74,6 +74,8 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
     //select the new tile
     if(tempTileItem)
         tempTileItem->setSelected(true);
+
+    PackageAndEmitSelection();
 }
 
 void TileSelectorScene::SelectTileset()
@@ -132,7 +134,7 @@ void TileSelectorScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-        //PackageAndEmitSelection();
+        PackageAndEmitSelection();
     }
 
     QGraphicsScene::mouseReleaseEvent(event);
@@ -190,6 +192,8 @@ void TileSelectorScene::TraverseTileHistory(bool forward)
         emit SelectNewBrush(0);
     else if(selectionHistory[selectionIndex].count() > 1)
         emit SelectNewBrush(4);
+
+    PackageAndEmitSelection();
 }
 
 //this is called when the selection in the scene changes. It will collect the list
@@ -237,6 +241,4 @@ void TileSelectorScene::PackageAndEmitSelection()
 
     //send out the change so other things can know about the current selection
     emit SelectionChanged(selectedList);
-
-
 }
