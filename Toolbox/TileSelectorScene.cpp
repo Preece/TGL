@@ -6,7 +6,6 @@ TileSelectorScene::TileSelectorScene(QObject *parent)
 
     selectionIndex = 0;
     selectionChangeFromHistory = false;
-    selectionChangeFromDrag = false;
 }
 
 TileSelectorScene::~TileSelectorScene()
@@ -125,9 +124,6 @@ void TileSelectorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         path.addRect(clickSpot.x(), clickSpot.y(),
                      event->scenePos().x() - clickSpot.x(), event->scenePos().y() - clickSpot.y());
 
-        //must check whether the selection has actually change before calling this
-        selectionChangeFromDrag = true;
-
         setSelectionArea(path);
     }
 }
@@ -209,7 +205,7 @@ void TileSelectorScene::PackageAndEmitSelection()
 
     TileList selectedList = GetSelectedTiles();
 
-    if(selectedList.empty() || selectedList == previousSelection)
+    if(selectedList.empty())
         return;
 
     //if this selection change is not spawned by a history traversal
@@ -218,10 +214,6 @@ void TileSelectorScene::PackageAndEmitSelection()
         //prune out any identical enteries before adding this new one
         if(selectionHistory.contains(selectedItems()))
             selectionHistory.removeAll(selectedItems());
-
-        //if the selection change from drag flag is active, remove the most recent entry
-        if(selectionChangeFromDrag)
-            selectionHistory.pop_front();
 
         //add the list of selected items into the front of the history
         selectionHistory.push_front(selectedItems());
@@ -238,14 +230,13 @@ void TileSelectorScene::PackageAndEmitSelection()
 
     //reset the flag
     selectionChangeFromHistory = false;
-    selectionChangeFromDrag = false;
-
-    //send out the change so other things can know about the current selection
-    emit SelectionChanged(selectedList);
 
     //if there are multiple items being selected, select the stamp brush
     if(selectedList.count() > 1)
         emit SelectNewBrush(4);
 
-    previousSelection = selectedList;
+    //send out the change so other things can know about the current selection
+    emit SelectionChanged(selectedList);
+
+
 }

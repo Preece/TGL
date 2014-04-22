@@ -55,7 +55,6 @@ private:
     int selectionIndex;
 
     bool selectionChangeFromHistory;
-    bool selectionChangeFromDrag;
 };
 
 #endif // TILESELECTORSCENE_H
