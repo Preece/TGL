@@ -1,19 +1,19 @@
-#include "ImageViewer.h"
-#include "ui_ImageViewer.h"
+#include "ImageViewerDialog.h"
+#include "ui_ImageViewerDialog.h"
 
-ImageViewer::ImageViewer(QWidget *parent) :
+ImageViewerDialog::ImageViewerDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ImageViewer)
+    ui(new Ui::ImageViewerDialog)
 {
     ui->setupUi(this);
 }
 
-ImageViewer::~ImageViewer()
+ImageViewerDialog::~ImageViewerDialog()
 {
     delete ui;
 }
 
-void ImageViewer::DisplayImage(Image *display)
+void ImageViewerDialog::DisplayImage(Image *display)
 {
     //set the size of the label to match the size of the image
     ui->imageLabel->resize(display->GetImage()->width(), display->GetImage()->height());

@@ -12,16 +12,16 @@
 #include "../../Toolbox/TileWidgetItem.h"
 
 namespace Ui {
-class BrushPropertiesWindow;
+class BrushPropertiesDialog;
 }
 
-class BrushPropertiesWindow : public QDialog
+class BrushPropertiesDialog : public QDialog
 {
     Q_OBJECT
     
 public:
-    explicit BrushPropertiesWindow(QWidget *parent = 0);
-    ~BrushPropertiesWindow();
+    explicit BrushPropertiesDialog(QWidget *parent = 0);
+    ~BrushPropertiesDialog();
 
     void RegisterTileSelector(QGraphicsScene *selector);
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
@@ -62,7 +62,7 @@ private slots:
     void on_cleanTilesButton_clicked();
 
 private:
-    Ui::BrushPropertiesWindow *ui;
+    Ui::BrushPropertiesDialog *ui;
 
     ResourceManager *resourceManager;
 

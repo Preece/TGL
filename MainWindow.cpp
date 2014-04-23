@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //create a resource manager
     resources               = new ResourceManager;
     levelPropertiesWindow   = new LevelPropertiesDialog;
-    layerPropertiesWindow   = new LayerProperties;
+    layerPropertiesWindow   = new LayerPropertiesDialog;
     tileSelector            = new TileSelectorScene;
     layers                  = new LayerManager;
 

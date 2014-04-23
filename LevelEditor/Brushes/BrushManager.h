@@ -4,7 +4,7 @@
 #include <QFrame>
 #include <QTime>
 
-#include "BrushPropertiesWindow.h"
+#include "../../Dialogs/BrushPropertiesDialog.h"
 
 #include "TileBrush.h"
 #include "PencilBrush.h"
@@ -86,7 +86,7 @@ signals:
 
 private:
     Ui::BrushManager *ui;
-    BrushPropertiesWindow propertiesWindow;
+    BrushPropertiesDialog propertiesWindow;
 
     TileBrush *currentBrush;
     PencilBrush pencil;

@@ -9,9 +9,11 @@
 
 #include "Model/Sprite.h"
 #include "Model/ResourceManager.h"
-#include "LevelEditor/LayerManager.h"
-#include "LevelEditor/LayerProperties.h"
 
+#include "Dialogs/LayerPropertiesDialog.h"
+#include "Dialogs/LevelPropertiesDialog.h"
+
+#include "LevelEditor/LayerManager.h"
 #include "LevelEditor/Brushes/TileBrush.h"
 #include "LevelEditor/Brushes/PencilBrush.h"
 #include "LevelEditor/Brushes/FillBrush.h"
@@ -20,7 +22,7 @@
 #include "Toolbox/TileSelectorScene.h"
 
 #include "SpriteEditor/SpriteEditor.h"
-#include "LevelPropertiesDialog.h"
+
 
 typedef QList<TileCoord> TileList;
 
@@ -56,7 +58,7 @@ private:
 
     //Dialogs
     LevelPropertiesDialog *levelPropertiesWindow;
-    LayerProperties *layerPropertiesWindow;
+    LayerPropertiesDialog *layerPropertiesWindow;
 
     ResourceManager *resources;
 

@@ -6,16 +6,16 @@
 #include "../Model/TileLayer.h"
 
 namespace Ui {
-class LayerProperties;
+class LayerPropertiesDialog;
 }
 
-class LayerProperties : public QDialog
+class LayerPropertiesDialog : public QDialog
 {
     Q_OBJECT
     
 public:
-    explicit LayerProperties(QWidget *parent = 0);
-    ~LayerProperties();
+    explicit LayerPropertiesDialog(QWidget *parent = 0);
+    ~LayerPropertiesDialog();
 
     int SetupNewLayer(TileLayer *newLayer);
     int EditLayer(TileLayer *newLayer);
@@ -24,7 +24,7 @@ private slots:
     void on_buttonBox_accepted();
 
 private:
-    Ui::LayerProperties *ui;
+    Ui::LayerPropertiesDialog *ui;
 
     TileLayer *currentLayer;
 };

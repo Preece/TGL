@@ -33,26 +33,26 @@ SOURCES += main.cpp\
     Toolbox/MiniMap.cpp \
     Toolbox/TileSelectorView.cpp \
     Toolbox/TileSelectorScene.cpp \
-    Toolbox/ImageViewer.cpp \
     Toolbox/ImageListWidgetItem.cpp \
     Toolbox/TileWidgetItem.cpp \
-    LevelPropertiesDialog.cpp \
     LevelEditor/LayerManager.cpp \
     LevelEditor/Brushes/TileBrush.cpp \
     LevelEditor/Brushes/PencilBrush.cpp \
     LevelEditor/Brushes/FillBrush.cpp \
     LevelEditor/Brushes/SmartBrush.cpp \
     LevelEditor/Brushes/EraserBrush.cpp \
-    LevelEditor/LayerProperties.cpp \
     LevelEditor/Brushes/BrushManager.cpp \
     LevelEditor/Brushes/ScatterBrush.cpp \
-    LevelEditor/Brushes/BrushPropertiesWindow.cpp \
     LevelEditor/Brushes/ComplexBrush.cpp \
     LevelEditor/Brushes/StampBrush.cpp \
     LevelEditor/Brushes/LineBrush.cpp \
     LevelEditor/Brushes/MatrixBrush.cpp \
     LevelEditor/Brushes/ReplacerBrush.cpp \
     LevelEditor/TileLayerView.cpp \
+    Dialogs/ImageViewerDialog.cpp \
+    Dialogs/LayerPropertiesDialog.cpp \
+    Dialogs/BrushPropertiesDialog.cpp \
+    Dialogs/LevelPropertiesDialog.cpp \
     SpriteEditor/AnimationListItem.cpp \
     SpriteEditor/SpriteEditor.cpp \
     SpriteEditor/AnimationEditor.cpp \
@@ -80,7 +80,6 @@ HEADERS  += \
     Model/Commands/ModifyTilesCommand.h \
     Model/Commands/AddResourceCommand.h \
     Model/Commands/DeleteResourceCommand.h \
-    Toolbox/ImageViewer.h \
     Toolbox/TileSelectorView.h \
     Toolbox/TileSelectorScene.h \
     Toolbox/ImageListWidgetItem.h \
@@ -88,15 +87,12 @@ HEADERS  += \
     Toolbox/ResourceView.h \
     Toolbox/PropertyBrowser.h \
     Toolbox/MiniMap.h \
-    LevelPropertiesDialog.h \
     LevelEditor/Brushes/PencilBrush.h \
     LevelEditor/Brushes/FillBrush.h \
     LevelEditor/Brushes/SmartBrush.h \
     LevelEditor/Brushes/EraserBrush.h \
-    LevelEditor/LayerProperties.h \
     LevelEditor/Brushes/BrushManager.h \
     LevelEditor/Brushes/ScatterBrush.h \
-    LevelEditor/Brushes/BrushPropertiesWindow.h \
     LevelEditor/Brushes/ComplexBrush.h \
     LevelEditor/Brushes/ReplacerBrush.h \
     LevelEditor/Brushes/StampBrush.h \
@@ -105,6 +101,10 @@ HEADERS  += \
     LevelEditor/TileLayerView.h \
     LevelEditor/LayerManager.h \
     LevelEditor/Brushes/TileBrush.h \
+    Dialogs/LayerPropertiesDialog.h \
+    Dialogs/BrushPropertiesDialog.h \
+    Dialogs/ImageViewerDialog.h \
+    Dialogs/LevelPropertiesDialog.h \
     SpriteEditor/AnimationListItem.h \
     SpriteEditor/SpriteEditor.h \
     SpriteEditor/AnimationEditor.h \ 
@@ -119,11 +119,11 @@ HEADERS  += \
 
 FORMS    += \
     MainWindow.ui \
-    Toolbox/ImageViewer.ui \
-    LevelPropertiesDialog.ui \
-    LevelEditor/LayerProperties.ui \
     LevelEditor/Brushes/BrushManager.ui \
-    LevelEditor/Brushes/BrushPropertiesWindow.ui \
+    Dialogs/BrushPropertiesDialog.ui \
+    Dialogs/LayerPropertiesDialog.ui \
+    Dialogs/ImageViewerDialog.ui \
+    Dialogs/LevelPropertiesDialog.ui \
     SpriteEditor/SpriteEditor.ui \
     SpriteEditor/AnimationEditor.ui \
     SpriteEditor/SpritesheetSelector.ui \

@@ -1,9 +1,9 @@
-#include "BrushPropertiesWindow.h"
-#include "ui_BrushPropertiesWindow.h"
+#include "BrushPropertiesDialog.h"
+#include "ui_BrushPropertiesDialog.h"
 
-BrushPropertiesWindow::BrushPropertiesWindow(QWidget *parent) :
+BrushPropertiesDialog::BrushPropertiesDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::BrushPropertiesWindow)
+    ui(new Ui::BrushPropertiesDialog)
 {
     ui->setupUi(this);
 
@@ -32,18 +32,18 @@ BrushPropertiesWindow::BrushPropertiesWindow(QWidget *parent) :
     connect(ui->smartBrushButtons, SIGNAL(buttonClicked(int)), this, SLOT(SmartButtonPushed()));
 }
 
-BrushPropertiesWindow::~BrushPropertiesWindow()
+BrushPropertiesDialog::~BrushPropertiesDialog()
 {
     delete ui;
 }
 
-void BrushPropertiesWindow::RegisterTileSelector(QGraphicsScene *selector)
+void BrushPropertiesDialog::RegisterTileSelector(QGraphicsScene *selector)
 {
     ui->tileSelector->setScene(selector);
     tileSelector = selector;
 }
 
-void BrushPropertiesWindow::NewBrush(ComplexBrush *newBrush)
+void BrushPropertiesDialog::NewBrush(ComplexBrush *newBrush)
 {
     //clear out the tile list
     tileList.clear();
@@ -56,7 +56,7 @@ void BrushPropertiesWindow::NewBrush(ComplexBrush *newBrush)
     currentBrush = newBrush;
 }
 
-void BrushPropertiesWindow::EditBrush(ComplexBrush *editBrush)
+void BrushPropertiesDialog::EditBrush(ComplexBrush *editBrush)
 {
     currentBrush = editBrush;
 
@@ -65,14 +65,14 @@ void BrushPropertiesWindow::EditBrush(ComplexBrush *editBrush)
     RepopulateTileList();
 }
 
-void BrushPropertiesWindow::ShowScatterControls()
+void BrushPropertiesDialog::ShowScatterControls()
 {
     ui->smartBrushGroup->hide();
     ui->replacerBrushGroup->hide();
     SetListIndex(0);
 }
 
-void BrushPropertiesWindow::ShowSmartControls()
+void BrushPropertiesDialog::ShowSmartControls()
 {
     ui->smartBrushGroup->setTitle("Smart Brush");
     ui->smartBrushGroup->show();
@@ -80,14 +80,14 @@ void BrushPropertiesWindow::ShowSmartControls()
     SetListIndex(4);
 }
 
-void BrushPropertiesWindow::ShowReplacerControls()
+void BrushPropertiesDialog::ShowReplacerControls()
 {
     ui->smartBrushGroup->hide();
     ui->replacerBrushGroup->show();
     SetListIndex(1);
 }
 
-void BrushPropertiesWindow::ShowMatrixControls()
+void BrushPropertiesDialog::ShowMatrixControls()
 {
     ui->smartBrushGroup->setTitle("Matrix Brush");
     ui->smartBrushGroup->show();
@@ -95,7 +95,7 @@ void BrushPropertiesWindow::ShowMatrixControls()
     SetListIndex(4);
 }
 
-void BrushPropertiesWindow::on_addTile_clicked()
+void BrushPropertiesDialog::on_addTile_clicked()
 {
     if(currentBrush)
     {
@@ -104,7 +104,7 @@ void BrushPropertiesWindow::on_addTile_clicked()
     }
 }
 
-bool BrushPropertiesWindow::IsTileSelected()
+bool BrushPropertiesDialog::IsTileSelected()
 {
     if(!tileSelector)
         return false;
@@ -115,7 +115,7 @@ bool BrushPropertiesWindow::IsTileSelected()
     return false;
 }
 
-TileCoord BrushPropertiesWindow::GetSelectedTileOrigin()
+TileCoord BrushPropertiesDialog::GetSelectedTileOrigin()
 {
     if(IsTileSelected())
     {
@@ -128,7 +128,7 @@ TileCoord BrushPropertiesWindow::GetSelectedTileOrigin()
     return TileCoord(-1, -1);
 }
 
-TileWidgetItem *BrushPropertiesWindow::GetSelectedTile()
+TileWidgetItem *BrushPropertiesDialog::GetSelectedTile()
 {
     if(IsTileSelected())
     {
@@ -138,7 +138,7 @@ TileWidgetItem *BrushPropertiesWindow::GetSelectedTile()
     return NULL;
 }
 
-TileWidgetItem *BrushPropertiesWindow::GetTileFromOrigin(TileCoord coord)
+TileWidgetItem *BrushPropertiesDialog::GetTileFromOrigin(TileCoord coord)
 {
     TileWidgetItem *tempItem = new TileWidgetItem;
 
@@ -147,7 +147,7 @@ TileWidgetItem *BrushPropertiesWindow::GetTileFromOrigin(TileCoord coord)
     return tempItem;
 }
 
-bool BrushPropertiesWindow::IsListTileSelected()
+bool BrushPropertiesDialog::IsListTileSelected()
 {
     if(tileList.selectedItems().count() > 0)
         return true;
@@ -155,7 +155,7 @@ bool BrushPropertiesWindow::IsListTileSelected()
     return false;
 }
 
-int BrushPropertiesWindow::GetSelectedListTileIndex()
+int BrushPropertiesDialog::GetSelectedListTileIndex()
 {
     if(!IsListTileSelected())
         return -1;
@@ -168,7 +168,7 @@ int BrushPropertiesWindow::GetSelectedListTileIndex()
     return -1;
 }
 
-void BrushPropertiesWindow::RepopulateTileList()
+void BrushPropertiesDialog::RepopulateTileList()
 {
     tileList.clear();
 
@@ -190,7 +190,7 @@ void BrushPropertiesWindow::RepopulateTileList()
     }
 }
 
-void BrushPropertiesWindow::on_brushNameInput_textChanged(const QString &arg1)
+void BrushPropertiesDialog::on_brushNameInput_textChanged(const QString &arg1)
 {
     if(currentBrush)
     {
@@ -198,7 +198,7 @@ void BrushPropertiesWindow::on_brushNameInput_textChanged(const QString &arg1)
     }
 }
 
-void BrushPropertiesWindow::on_buttonBox_accepted()
+void BrushPropertiesDialog::on_buttonBox_accepted()
 {
     if(currentBrush)
         if(currentBrush->GetName() == "")
@@ -207,7 +207,7 @@ void BrushPropertiesWindow::on_buttonBox_accepted()
         }
 }
 
-void BrushPropertiesWindow::SmartButtonPushed()
+void BrushPropertiesDialog::SmartButtonPushed()
 {
     //the button IDs correspond to the list index
     currentListIndex = ui->smartBrushButtons->checkedId();
@@ -215,7 +215,7 @@ void BrushPropertiesWindow::SmartButtonPushed()
     RepopulateTileList();
 }
 
-void BrushPropertiesWindow::on_removeTile_clicked()
+void BrushPropertiesDialog::on_removeTile_clicked()
 {
     if(IsListTileSelected())
     {
@@ -224,13 +224,13 @@ void BrushPropertiesWindow::on_removeTile_clicked()
     }
 }
 
-void BrushPropertiesWindow::on_dirtyTilesButton_clicked()
+void BrushPropertiesDialog::on_dirtyTilesButton_clicked()
 {
     currentListIndex = 1;
     RepopulateTileList();
 }
 
-void BrushPropertiesWindow::on_cleanTilesButton_clicked()
+void BrushPropertiesDialog::on_cleanTilesButton_clicked()
 {
     currentListIndex = 0;
     RepopulateTileList();

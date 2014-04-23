@@ -7,21 +7,21 @@
 #include "../Model/Image.h"
 
 namespace Ui {
-class ImageViewer;
+class ImageViewerDialog;
 }
 
-class ImageViewer : public QDialog
+class ImageViewerDialog : public QDialog
 {
     Q_OBJECT
     
 public:
-    explicit ImageViewer(QWidget *parent = 0);
-    ~ImageViewer();
+    explicit ImageViewerDialog(QWidget *parent = 0);
+    ~ImageViewerDialog();
 
     void DisplayImage(Image *display);
     
 private:
-    Ui::ImageViewer *ui;
+    Ui::ImageViewerDialog *ui;
 };
 
 #endif // IMAGEVIEWER_H

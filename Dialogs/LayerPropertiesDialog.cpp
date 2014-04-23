@@ -1,21 +1,21 @@
-#include "LayerProperties.h"
-#include "ui_LayerProperties.h"
+#include "LayerPropertiesDialog.h"
+#include "ui_LayerPropertiesDialog.h"
 
-LayerProperties::LayerProperties(QWidget *parent) :
+LayerPropertiesDialog::LayerPropertiesDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::LayerProperties)
+    ui(new Ui::LayerPropertiesDialog)
 {
     ui->setupUi(this);
 
     currentLayer = NULL;
 }
 
-LayerProperties::~LayerProperties()
+LayerPropertiesDialog::~LayerPropertiesDialog()
 {
     delete ui;
 }
 
-int LayerProperties::SetupNewLayer(TileLayer *newLayer)
+int LayerPropertiesDialog::SetupNewLayer(TileLayer *newLayer)
 {
     currentLayer = newLayer;
 
@@ -28,7 +28,7 @@ int LayerProperties::SetupNewLayer(TileLayer *newLayer)
     return exec();
 }
 
-int LayerProperties::EditLayer(TileLayer *newLayer)
+int LayerPropertiesDialog::EditLayer(TileLayer *newLayer)
 {
     currentLayer = newLayer;
 
@@ -46,7 +46,7 @@ int LayerProperties::EditLayer(TileLayer *newLayer)
     return 0;
 }
 
-void LayerProperties::on_buttonBox_accepted()
+void LayerPropertiesDialog::on_buttonBox_accepted()
 {
     if(currentLayer)
     {
