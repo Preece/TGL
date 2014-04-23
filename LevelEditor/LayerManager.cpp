@@ -24,25 +24,21 @@ void LayerManager::EyedropTile(QPoint pos)
     if(!resourceManager || !currentLayer)
         return;
 
-    if(resourceManager->GetLevelProperties()->ArePropertiesSet())
-    {
-        //translate the position to tile coordinates
-        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+    //translate the position to tile coordinates
+    int tileW = resourceManager->GetTileWidth();
+    int tileH = resourceManager->GetTileHeight();
 
-        int tileX = pos.x() / tileW;
-        int tileY = pos.y() / tileH;
+    int tileX = pos.x() / tileW;
+    int tileY = pos.y() / tileH;
 
-        //if the position is beyond the bounds of the scene, ignore it
-        //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-        if(tileX >= resourceManager->GetLevelProperties()->GetMapWidth() ||
-           tileY >= resourceManager->GetLevelProperties()->GetMapHeight())
-            return;
+    //if the position is beyond the bounds of the scene, ignore it
+    //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
+    if(tileX >= resourceManager->GetMapWidth() || tileY >= resourceManager->GetMapHeight())
+        return;
 
-        emit SelectNewTile(currentLayer->GetTileOrigin(tileX, tileY));
+    emit SelectNewTile(currentLayer->GetTileOrigin(tileX, tileY));
 
-        RefreshPreview();
-    }
+    RefreshPreview();
 }
 
 void LayerManager::AddLayer(int newLayerID)
@@ -51,8 +47,8 @@ void LayerManager::AddLayer(int newLayerID)
     TileLayerView *tempLayerView = new TileLayerView;
     tempLayerView->SetLayerID(newLayerID);
     tempLayerView->RegisterResourceManager(resourceManager);
-    tempLayerView->SetLayerSize(resourceManager->GetLevelProperties()->GetMapWidth(),
-                                 resourceManager->GetLevelProperties()->GetMapHeight());
+    tempLayerView->SetLayerSize(resourceManager->GetMapWidth(),
+                                 resourceManager->GetMapHeight());
 
     //put the layer group into the list
     layers.insert(0, tempLayerView);
@@ -62,8 +58,8 @@ void LayerManager::AddLayer(int newLayerID)
     tempLayerView->show();
     tempLayerView->setPos(0,0);
     
-    setSceneRect(0, 0, resourceManager->GetLevelProperties()->GetMapWidth() * resourceManager->GetLevelProperties()->GetTileWidth(),
-                       resourceManager->GetLevelProperties()->GetMapHeight() * resourceManager->GetLevelProperties()->GetTileHeight());
+    setSceneRect(0, 0, resourceManager->GetMapWidth() * resourceManager->GetTileWidth(),
+                       resourceManager->GetMapHeight() * resourceManager->GetTileHeight());
 }
 
 void LayerManager::RemoveLayer(int dirtyLayerID)
@@ -103,10 +99,10 @@ void LayerManager::ToggleGrid(bool show)
 
         QGraphicsLineItem *tempLine;
 
-        int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-        int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
-        int mapH = resourceManager->GetLevelProperties()->GetMapHeight();
-        int mapW = resourceManager->GetLevelProperties()->GetMapWidth();
+        int tileW = resourceManager->GetTileWidth();
+        int tileH = resourceManager->GetTileHeight();
+        int mapH = resourceManager->GetMapHeight();
+        int mapW = resourceManager->GetMapWidth();
 
         //loop for the height of the map, draw horizontal lines
         for(int i = 1; i < mapH; i++)
@@ -147,8 +143,8 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
         return;
 
     //translate the position to tile coordinates
-    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+    int tileW = resourceManager->GetTileWidth();
+    int tileH = resourceManager->GetTileHeight();
 
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
@@ -174,8 +170,8 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         return;
 
     //translate the position to tile coordinates
-    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+    int tileW = resourceManager->GetTileWidth();
+    int tileH = resourceManager->GetTileHeight();
 
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
@@ -203,8 +199,8 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         return;
 
     //translate the position to tile coordinates
-    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+    int tileW = resourceManager->GetTileWidth();
+    int tileH = resourceManager->GetTileHeight();
 
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;

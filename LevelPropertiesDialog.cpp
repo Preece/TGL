@@ -20,10 +20,10 @@ void LevelPropertiesDialog::LoadValues()
     //put all the level properties values into the inputs
     ui->mapNameInput->setText(resourceManager->GetLevelProperties()->GetLevelName());
 
-    ui->tileSizeX->setValue(resourceManager->GetLevelProperties()->GetTileWidth());
-    ui->tileSizeY->setValue(resourceManager->GetLevelProperties()->GetTileHeight());
-    ui->mapSizeX->setValue(resourceManager->GetLevelProperties()->GetMapWidth());
-    ui->mapSizeY->setValue(resourceManager->GetLevelProperties()->GetMapHeight());
+    ui->tileSizeX->setValue(resourceManager->GetTileWidth());
+    ui->tileSizeY->setValue(resourceManager->GetTileHeight());
+    ui->mapSizeX->setValue(resourceManager->GetMapWidth());
+    ui->mapSizeY->setValue(resourceManager->GetMapHeight());
 }
 
 void LevelPropertiesDialog::on_buttonBox_accepted()

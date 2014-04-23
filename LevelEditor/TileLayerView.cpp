@@ -100,8 +100,8 @@ void TileLayerView::RepopulateTiles()
 void TileLayerView::SelectTilesInArea(QRect area)
 {
     //translate the position to tile coordinates
-    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+    int tileW = resourceManager->GetTileWidth();
+    int tileH = resourceManager->GetTileHeight();
 
     QPainterPath path;
     path.addRect((area.left() * tileW) + 1, (area.top() * tileH) + 1, (area.width() * tileW) - 2, (area.height() * tileH) - 2);
@@ -189,8 +189,8 @@ void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
     tempTile->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
 
     //set the position
-    tempTile->setPos(x * resourceManager->GetLevelProperties()->GetTileWidth(),
-                     y * resourceManager->GetLevelProperties()->GetTileHeight());
+    tempTile->setPos(x * resourceManager->GetTileWidth(),
+                     y * resourceManager->GetTileHeight());
 
     previewItems.append(tempTile);
     tempTile->setParentItem(this);
@@ -226,8 +226,8 @@ void TileLayerView::ModifyTileWidgetItem(int x, int y, TileCoord newOrigin)
     //update its Pixmap
     tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
 
-    int tileW = resourceManager->GetLevelProperties()->GetTileWidth();
-    int tileH = resourceManager->GetLevelProperties()->GetTileHeight();
+    int tileW = resourceManager->GetTileWidth();
+    int tileH = resourceManager->GetTileHeight();
 
     //set the position
     tempTileItem->setPos(x * tileW, y * tileH);

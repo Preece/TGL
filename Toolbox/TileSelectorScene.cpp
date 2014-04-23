@@ -22,8 +22,8 @@ void TileSelectorScene::RepopulateTileSelector()
 
     if(!spritesheet->isNull())
     {
-        int tileW = resources->GetLevelProperties()->GetTileWidth();
-        int tileH = resources->GetLevelProperties()->GetTileHeight();
+        int tileW = resources->GetTileWidth();
+        int tileH = resources->GetTileHeight();
 
         if(tileW && tileH)
         {
@@ -59,8 +59,8 @@ void TileSelectorScene::RepopulateTileSelector()
 
 void TileSelectorScene::SelectNewTile(TileCoord origin)
 {
-    int tileW = resources->GetLevelProperties()->GetTileWidth();
-    int tileH = resources->GetLevelProperties()->GetTileHeight();
+    int tileW = resources->GetTileWidth();
+    int tileH = resources->GetTileHeight();
 
     //find the x and y position of the tile
     int tileX = (tileW * origin.first) + tileW - 1;

@@ -14,6 +14,26 @@ ResourceManager::~ResourceManager()
         delete modifyTiles;
 }
 
+int ResourceManager::GetTileWidth()
+{
+    return levelProperties.GetTileWidth();
+}
+
+int ResourceManager::GetTileHeight()
+{
+    return levelProperties.GetTileHeight();
+}
+
+int ResourceManager::GetMapWidth()
+{
+    return levelProperties.GetMapWidth();
+}
+
+int ResourceManager::GetMapHeight()
+{
+    return levelProperties.GetMapHeight();
+}
+
 int ResourceManager::AddImage(Image *newImage)
 {
     if(newImage)

@@ -29,6 +29,10 @@ public slots:
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
     void SetMapSize(int w, int h);
+    int GetTileWidth();
+    int GetTileHeight();
+    int GetMapWidth();
+    int GetMapHeight();
 
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);

@@ -180,7 +180,7 @@ void BrushPropertiesWindow::RepopulateTileList()
         {
             //create a visible item for each one, and set its position
             TileWidgetItem *tempItem = GetTileFromOrigin(currentBrush->GetTile(currentListIndex, i));
-            tempItem->setPos((i * resourceManager->GetLevelProperties()->GetTileWidth()) + i, 0);
+            tempItem->setPos((i * resourceManager->GetTileWidth()) + i, 0);
             tempItem->setFlag(QGraphicsItem::ItemIsSelectable);
             tempItem->SetIndex(i);
 
