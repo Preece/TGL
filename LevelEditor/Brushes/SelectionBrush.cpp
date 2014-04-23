@@ -53,8 +53,8 @@ void SelectionBrush::Release(int x, int y, TileLayerView *layer)
     //otherwise, remove them all from the layer, and draw them again as previews
     for(int i = 0; i < selectedItems.count(); i++)
     {
-        layer->ModifyTileItem(selectedItems.pos.first, selectedItems.pos.second, TileCoord(-1, -1));
-        layer->PreviewModifyTile(selectedItems.pos.first, selectedItems.pos.second, selectedItems.origin);
+        layer->ModifyTileItem(selectedItems[i].pos.first, selectedItems[i].pos.second, TileCoord(-1, -1));
+        layer->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
     }
 
     //then select the preview items, to maintain visual consistency

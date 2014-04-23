@@ -111,20 +111,26 @@ void TileLayerView::SelectTilesInArea(QRect area)
 QList<TileData> TileLayerView::GetSelectedItems()
 {
     //get a list of selected tile widget items
-    QList<QTileWidgetItem*> items = dynamic_cast<QList<QTileWidgetItem*>>(scene()->selectedItems());
+    QList<QGraphicsItem*> items = scene()->selectedItems();
+    QList<TileWidgetItem*> tileItems;
+
+    foreach(QGraphicsItem* item, items)
+    {
+        tileItems.push_back(dynamic_cast<TileWidgetItem*>(item));
+    }
 
     //remove all preview items that may be selected
     for(int i = 0; i < previewItems.count(); i++)
-        items.removeAll(previewItems[i]);
+        tileItems.removeAll(previewItems[i]);
 
     //build a list of tile data
     QList<TileData> tiles;
 
-    for(int i = 0; i < items.count; i++)
+    for(int i = 0; i < tileItems.count(); i++)
     {
         TileData tempData;
-        tempData.pos = items[i]->GetPosition();
-        tempData.origin = items[i]->GetTileOrigin();
+        tempData.pos = tileItems[i]->GetPosition();
+        tempData.origin = tileItems[i]->GetTileOrigin();
         tiles.push_back(tempData);
     }
 
@@ -200,7 +206,10 @@ void TileLayerView::ModifyTileWidgetItem(int x, int y, TileCoord newOrigin)
         if(items[TileCoord(x, y)]->GetTileOrigin() == newOrigin)
             return;
         else
+        {
             delete items[TileCoord(x, y)];
+            items.remove(TileCoord(x, y));
+        }
 
         //if they passed in a null tile as the new origin, just bail,
         //its been deleted
