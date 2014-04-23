@@ -21,11 +21,17 @@ public:
 
     QString GetType() { return "selection"; }
 
+    void IntegrateSelectedTiles();
+
 
 private:
-   QPoint clickSpot;
+	bool SelectedTileAtPos(int x, int y);
+	
+    QPoint clickSpot;
 
-   bool dragMode;
+   	bool dragMode;
+
+   	QList<TileData> selectedItems;
 };
 
 #endif // SELECTIONBRUSH_H
