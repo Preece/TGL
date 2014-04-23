@@ -102,7 +102,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
+          <normaloff>:/Icons/addvalue.png</normaloff>:/Icons/addvalue.png</iconset>
         </property>
        </widget>
       </item>
@@ -113,7 +113,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+          <normaloff>:/Icons/pencil.png</normaloff>:/Icons/pencil.png</iconset>
         </property>
        </widget>
       </item>
@@ -124,7 +124,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/removevalue.png</normaloff>:/Icons/Icons/removevalue.png</iconset>
+          <normaloff>:/Icons/removevalue.png</normaloff>:/Icons/removevalue.png</iconset>
         </property>
        </widget>
       </item>
@@ -147,7 +147,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
+          <normaloff>:/Icons/addvalue.png</normaloff>:/Icons/addvalue.png</iconset>
         </property>
        </widget>
       </item>
@@ -158,7 +158,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+          <normaloff>:/Icons/pencil.png</normaloff>:/Icons/pencil.png</iconset>
         </property>
        </widget>
       </item>
@@ -169,7 +169,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/removevalue.png</normaloff>:/Icons/Icons/removevalue.png</iconset>
+          <normaloff>:/Icons/removevalue.png</normaloff>:/Icons/removevalue.png</iconset>
         </property>
        </widget>
       </item>
@@ -192,7 +192,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
+          <normaloff>:/Icons/addvalue.png</normaloff>:/Icons/addvalue.png</iconset>
         </property>
        </widget>
       </item>
@@ -203,7 +203,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+          <normaloff>:/Icons/pencil.png</normaloff>:/Icons/pencil.png</iconset>
         </property>
        </widget>
       </item>
@@ -214,7 +214,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/removevalue.png</normaloff>:/Icons/Icons/removevalue.png</iconset>
+          <normaloff>:/Icons/removevalue.png</normaloff>:/Icons/removevalue.png</iconset>
         </property>
        </widget>
       </item>
@@ -237,7 +237,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
+          <normaloff>:/Icons/addvalue.png</normaloff>:/Icons/addvalue.png</iconset>
         </property>
        </widget>
       </item>
@@ -248,7 +248,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+          <normaloff>:/Icons/pencil.png</normaloff>:/Icons/pencil.png</iconset>
         </property>
        </widget>
       </item>
@@ -259,7 +259,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../Icons.qrc">
-          <normaloff>:/Icons/Icons/removevalue.png</normaloff>:/Icons/Icons/removevalue.png</iconset>
+          <normaloff>:/Icons/removevalue.png</normaloff>:/Icons/removevalue.png</iconset>
         </property>
        </widget>
       </item>

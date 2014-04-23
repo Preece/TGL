@@ -11,7 +11,7 @@ SelectionGraphicsScene::SelectionGraphicsScene(QObject *parent) :
     selectionBox->setZValue(99);
     selectionBox->show();
 
-    renderSpot = new QGraphicsPixmapItem(QPixmap(":/Icons/Icons/renderspot.png"));
+    renderSpot = new QGraphicsPixmapItem(QPixmap(":/Icons/renderspot.png"));
     renderSpot->setOffset(-7, -7);
     renderSpot->setZValue(100);
     renderSpot->setParentItem(selectionBox);

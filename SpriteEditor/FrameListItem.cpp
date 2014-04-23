@@ -28,7 +28,7 @@ void FrameListItem::SetFrame(Frame *existingFrame)
 
 void FrameListItem::SetIcon(QImage *spritesheetImage)
 {
-    QIcon warningIcon(":/Icons/Icons/MissingFile.png");
+    QIcon warningIcon(":/Icons/MissingFile.png");
 
 
     //if the passed image is invalid or no associated frame

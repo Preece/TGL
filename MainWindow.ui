@@ -59,7 +59,7 @@ QToolButton:checked, QToolButton::pressed {
 }
 
 QComboBox::down-arrow {
-	image: url(:/Icons/Icons/addvalue.png);
+	image: url(:/Icons/addvalue.png);
 }
 
 QTreeView, #propertyBrowser {
@@ -125,7 +125,7 @@ QTreeView, #propertyBrowser {
          </property>
          <attribute name="icon">
           <iconset resource="Icons.qrc">
-           <normaloff>:/Icons/Icons/new.png</normaloff>:/Icons/Icons/new.png</iconset>
+           <normaloff>:/Icons/new.png</normaloff>:/Icons/new.png</iconset>
          </attribute>
          <attribute name="label">
           <string>Resources</string>
@@ -214,7 +214,7 @@ QTreeView, #propertyBrowser {
          </property>
          <attribute name="icon">
           <iconset resource="Icons.qrc">
-           <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+           <normaloff>:/Icons/pencil.png</normaloff>:/Icons/pencil.png</iconset>
          </attribute>
          <attribute name="label">
           <string>Tile Painting</string>
@@ -351,7 +351,7 @@ QTreeView, #propertyBrowser {
          </property>
          <attribute name="icon">
           <iconset resource="Icons.qrc">
-           <normaloff>:/Icons/Icons/grid.png</normaloff>:/Icons/Icons/grid.png</iconset>
+           <normaloff>:/Icons/grid.png</normaloff>:/Icons/grid.png</iconset>
          </attribute>
          <attribute name="label">
           <string>Collision</string>
@@ -394,7 +394,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/pencil.png</normaloff>:/Icons/Icons/pencil.png</iconset>
+                <normaloff>:/Icons/pencil.png</normaloff>:/Icons/pencil.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -417,7 +417,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/eraser.png</normaloff>:/Icons/Icons/eraser.png</iconset>
+                <normaloff>:/Icons/eraser.png</normaloff>:/Icons/eraser.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -437,7 +437,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/bucket.png</normaloff>:/Icons/Icons/bucket.png</iconset>
+                <normaloff>:/Icons/bucket.png</normaloff>:/Icons/bucket.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -457,7 +457,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/line.png</normaloff>:/Icons/Icons/line.png</iconset>
+                <normaloff>:/Icons/line.png</normaloff>:/Icons/line.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -477,7 +477,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/stamp.png</normaloff>:/Icons/Icons/stamp.png</iconset>
+                <normaloff>:/Icons/stamp.png</normaloff>:/Icons/stamp.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -497,7 +497,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/eyedropper.png</normaloff>:/Icons/Icons/eyedropper.png</iconset>
+                <normaloff>:/Icons/eyedropper.png</normaloff>:/Icons/eyedropper.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -514,7 +514,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/selectionbox.png</normaloff>:/Icons/Icons/selectionbox.png</iconset>
+                <normaloff>:/Icons/selectionbox.png</normaloff>:/Icons/selectionbox.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -541,7 +541,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/scatter.png</normaloff>:/Icons/Icons/scatter.png</iconset>
+                <normaloff>:/Icons/scatter.png</normaloff>:/Icons/scatter.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -561,7 +561,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/scatterfill.png</normaloff>:/Icons/Icons/scatterfill.png</iconset>
+                <normaloff>:/Icons/scatterfill.png</normaloff>:/Icons/scatterfill.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -581,7 +581,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/replacer.png</normaloff>:/Icons/Icons/replacer.png</iconset>
+                <normaloff>:/Icons/replacer.png</normaloff>:/Icons/replacer.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -601,7 +601,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/matrix.png</normaloff>:/Icons/Icons/matrix.png</iconset>
+                <normaloff>:/Icons/matrix.png</normaloff>:/Icons/matrix.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -621,7 +621,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/brush.png</normaloff>:/Icons/Icons/brush.png</iconset>
+                <normaloff>:/Icons/brush.png</normaloff>:/Icons/brush.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -648,7 +648,7 @@ QTreeView, #propertyBrowser {
               </property>
               <property name="icon">
                <iconset resource="Icons.qrc">
-                <normaloff>:/Icons/Icons/grid.png</normaloff>:/Icons/Icons/grid.png</iconset>
+                <normaloff>:/Icons/grid.png</normaloff>:/Icons/grid.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -799,7 +799,7 @@ QTreeView, #propertyBrowser {
   <action name="actionNew">
    <property name="icon">
     <iconset resource="Icons.qrc">
-     <normaloff>:/Icons/Icons/new.png</normaloff>:/Icons/Icons/new.png</iconset>
+     <normaloff>:/Icons/new.png</normaloff>:/Icons/new.png</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -808,7 +808,7 @@ QTreeView, #propertyBrowser {
   <action name="actionSave">
    <property name="icon">
     <iconset resource="Icons.qrc">
-     <normaloff>:/Icons/Icons/save.png</normaloff>:/Icons/Icons/save.png</iconset>
+     <normaloff>:/Icons/save.png</normaloff>:/Icons/save.png</iconset>
    </property>
    <property name="text">
     <string>Save...</string>
@@ -817,7 +817,7 @@ QTreeView, #propertyBrowser {
   <action name="actionSave_As">
    <property name="icon">
     <iconset resource="Icons.qrc">
-     <normaloff>:/Icons/Icons/save.png</normaloff>:/Icons/Icons/save.png</iconset>
+     <normaloff>:/Icons/save.png</normaloff>:/Icons/save.png</iconset>
    </property>
    <property name="text">
     <string>Save As...</string>
@@ -831,7 +831,7 @@ QTreeView, #propertyBrowser {
   <action name="actionOpen">
    <property name="icon">
     <iconset resource="Icons.qrc">
-     <normaloff>:/Icons/Icons/open.png</normaloff>:/Icons/Icons/open.png</iconset>
+     <normaloff>:/Icons/open.png</normaloff>:/Icons/open.png</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -855,7 +855,7 @@ QTreeView, #propertyBrowser {
   <action name="actionUndo">
    <property name="icon">
     <iconset>
-     <normalon>:/Icons/Icons/undo.png</normalon>
+     <normalon>:/Icons/undo.png</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -871,7 +871,7 @@ QTreeView, #propertyBrowser {
   <action name="actionRedo">
    <property name="icon">
     <iconset resource="Icons.qrc">
-     <normaloff>:/Icons/Icons/redo.png</normaloff>:/Icons/Icons/redo.png</iconset>
+     <normaloff>:/Icons/redo.png</normaloff>:/Icons/redo.png</iconset>
    </property>
    <property name="text">
     <string>Redo</string>

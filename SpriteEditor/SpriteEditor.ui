@@ -54,7 +54,7 @@
            </property>
            <property name="icon">
             <iconset resource="../Icons.qrc">
-             <normaloff>:/Icons/Icons/autoframeselect.png</normaloff>:/Icons/Icons/autoframeselect.png</iconset>
+             <normaloff>:/Icons/autoframeselect.png</normaloff>:/Icons/autoframeselect.png</iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -77,7 +77,7 @@
            </property>
            <property name="icon">
             <iconset resource="../Icons.qrc">
-             <normaloff>:/Icons/Icons/frameselect.png</normaloff>:/Icons/Icons/frameselect.png</iconset>
+             <normaloff>:/Icons/frameselect.png</normaloff>:/Icons/frameselect.png</iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -106,7 +106,7 @@
            </property>
            <property name="icon">
             <iconset resource="../Icons.qrc">
-             <normaloff>:/Icons/Icons/renderspot.png</normaloff>:/Icons/Icons/renderspot.png</iconset>
+             <normaloff>:/Icons/renderspot.png</normaloff>:/Icons/renderspot.png</iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -126,7 +126,7 @@
            </property>
            <property name="icon">
             <iconset resource="../Icons.qrc">
-             <normaloff>:/Icons/Icons/hotspot.png</normaloff>:/Icons/Icons/hotspot.png</iconset>
+             <normaloff>:/Icons/hotspot.png</normaloff>:/Icons/hotspot.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -155,7 +155,7 @@
            </property>
            <property name="icon">
             <iconset resource="../Icons.qrc">
-             <normaloff>:/Icons/Icons/selector.png</normaloff>:/Icons/Icons/selector.png</iconset>
+             <normaloff>:/Icons/selector.png</normaloff>:/Icons/selector.png</iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -192,7 +192,7 @@
            </property>
            <property name="icon">
             <iconset resource="../Icons.qrc">
-             <normaloff>:/Icons/Icons/zoomin.png</normaloff>:/Icons/Icons/zoomin.png</iconset>
+             <normaloff>:/Icons/zoomin.png</normaloff>:/Icons/zoomin.png</iconset>
            </property>
            <property name="checkable">
             <bool>false</bool>
@@ -209,7 +209,7 @@
            </property>
            <property name="icon">
             <iconset resource="../Icons.qrc">
-             <normaloff>:/Icons/Icons/zoomout.png</normaloff>:/Icons/Icons/zoomout.png</iconset>
+             <normaloff>:/Icons/zoomout.png</normaloff>:/Icons/zoomout.png</iconset>
            </property>
           </widget>
          </item>

@@ -59,7 +59,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/topleftcorner.png</normaloff>:/Icons/Icons/BrushGuides/topleftcorner.png</iconset>
+            <normaloff>:/Icons/BrushGuides/topleftcorner.png</normaloff>:/Icons/BrushGuides/topleftcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -79,7 +79,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/topleft.png</normaloff>:/Icons/Icons/BrushGuides/topleft.png</iconset>
+            <normaloff>:/Icons/BrushGuides/topleft.png</normaloff>:/Icons/BrushGuides/topleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -99,7 +99,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/topmiddle.png</normaloff>:/Icons/Icons/BrushGuides/topmiddle.png</iconset>
+            <normaloff>:/Icons/BrushGuides/topmiddle.png</normaloff>:/Icons/BrushGuides/topmiddle.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -119,7 +119,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/topright.png</normaloff>:/Icons/Icons/BrushGuides/topright.png</iconset>
+            <normaloff>:/Icons/BrushGuides/topright.png</normaloff>:/Icons/BrushGuides/topright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -139,7 +139,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/toprightcorner.png</normaloff>:/Icons/Icons/BrushGuides/toprightcorner.png</iconset>
+            <normaloff>:/Icons/BrushGuides/toprightcorner.png</normaloff>:/Icons/BrushGuides/toprightcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -189,7 +189,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/middleleft.png</normaloff>:/Icons/Icons/BrushGuides/middleleft.png</iconset>
+            <normaloff>:/Icons/BrushGuides/middleleft.png</normaloff>:/Icons/BrushGuides/middleleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -209,7 +209,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/middle.png</normaloff>:/Icons/Icons/BrushGuides/middle.png</iconset>
+            <normaloff>:/Icons/BrushGuides/middle.png</normaloff>:/Icons/BrushGuides/middle.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -232,7 +232,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/middleright.png</normaloff>:/Icons/Icons/BrushGuides/middleright.png</iconset>
+            <normaloff>:/Icons/BrushGuides/middleright.png</normaloff>:/Icons/BrushGuides/middleright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -282,7 +282,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/bottomleftcorner.png</normaloff>:/Icons/Icons/BrushGuides/bottomleftcorner.png</iconset>
+            <normaloff>:/Icons/BrushGuides/bottomleftcorner.png</normaloff>:/Icons/BrushGuides/bottomleftcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -302,7 +302,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/bottomleft.png</normaloff>:/Icons/Icons/BrushGuides/bottomleft.png</iconset>
+            <normaloff>:/Icons/BrushGuides/bottomleft.png</normaloff>:/Icons/BrushGuides/bottomleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -322,7 +322,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/bottommiddle.png</normaloff>:/Icons/Icons/BrushGuides/bottommiddle.png</iconset>
+            <normaloff>:/Icons/BrushGuides/bottommiddle.png</normaloff>:/Icons/BrushGuides/bottommiddle.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -342,7 +342,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/bottomright.png</normaloff>:/Icons/Icons/BrushGuides/bottomright.png</iconset>
+            <normaloff>:/Icons/BrushGuides/bottomright.png</normaloff>:/Icons/BrushGuides/bottomright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -362,7 +362,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../Icons.qrc">
-            <normaloff>:/Icons/Icons/BrushGuides/bottomrightcorner.png</normaloff>:/Icons/Icons/BrushGuides/bottomrightcorner.png</iconset>
+            <normaloff>:/Icons/BrushGuides/bottomrightcorner.png</normaloff>:/Icons/BrushGuides/bottomrightcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -492,7 +492,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../Icons.qrc">
-         <normaloff>:/Icons/Icons/addvalue.png</normaloff>:/Icons/Icons/addvalue.png</iconset>
+         <normaloff>:/Icons/addvalue.png</normaloff>:/Icons/addvalue.png</iconset>
        </property>
       </widget>
      </item>
@@ -503,7 +503,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../Icons.qrc">
-         <normaloff>:/Icons/Icons/removevalue.png</normaloff>:/Icons/Icons/removevalue.png</iconset>
+         <normaloff>:/Icons/removevalue.png</normaloff>:/Icons/removevalue.png</iconset>
        </property>
       </widget>
      </item>

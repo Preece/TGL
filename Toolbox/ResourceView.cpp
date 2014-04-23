@@ -11,15 +11,15 @@ ResourceView::ResourceView(QWidget *parent) :
     //create and add a root node for the project
     projectRoot = new QTreeWidgetItem;
     projectRoot->setText(0, "Project Root");
-    projectRoot->setIcon(0, QIcon(":/Icons/Icons/open.png"));
+    projectRoot->setIcon(0, QIcon(":/Icons/open.png"));
     addTopLevelItem(projectRoot);
     projectRoot->setExpanded(true);
 
     //add children nodes for each of the types of objects
-    layerRoot = AddNode(projectRoot, "Layer", ":/Icons/Icons/open.png");
-    imageRoot = AddNode(projectRoot, "Images", ":/Icons/Icons/open.png");
-    spriteRoot = AddNode(projectRoot, "Sprites", ":/Icons/Icons/open.png");
-    tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/Icons/open.png");
+    layerRoot = AddNode(projectRoot, "Layer", ":/Icons/open.png");
+    imageRoot = AddNode(projectRoot, "Images", ":/Icons/open.png");
+    spriteRoot = AddNode(projectRoot, "Sprites", ":/Icons/open.png");
+    tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/open.png");
 }
 
 void ResourceView::RepopulateEverything()
@@ -43,7 +43,7 @@ void ResourceView::RepopulateLayers(int newID)
         //fetch the layer from the model
         TileLayer *layer = resources->GetLayerByIndex(i);
 
-        QTreeWidgetItem *newLayerNode = AddNode(layerRoot, layer->GetName(), ":/Icons/Icons/save.png", layer->GetID());
+        QTreeWidgetItem *newLayerNode = AddNode(layerRoot, layer->GetName(), ":/Icons/save.png", layer->GetID());
 
         //if this layer was the current selection or the new addition, select it again
         if(layer->GetID() == currentSelection || newID == layer->GetID())
@@ -67,7 +67,7 @@ void ResourceView::RepopulateImages()
         //fetch the layer from the model
         Image *img = resources->GetImageByIndex(i);
 
-        QTreeWidgetItem *newImageNode = AddNode(imageRoot, img->GetImageName(), ":/Icons/Icons/save.png", img->GetID());
+        QTreeWidgetItem *newImageNode = AddNode(imageRoot, img->GetImageName(), ":/Icons/save.png", img->GetID());
 
         //if this layer was the current selection, select it again
         if(img->GetID() == currentSelection)

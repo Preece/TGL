@@ -43,32 +43,32 @@ void BrushManager::SetCurrentBrush(int type)
     {
     case BrushManager::Pencil:
         currentBrush = &pencil;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
+        tempCur = QCursor(QPixmap(":/Icons/pencil.png"), 1, 2);
         break;
 
     case BrushManager::Bucket:
         currentBrush = &bucket;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/bucket.png"), 3, 13);
+        tempCur = QCursor(QPixmap(":/Icons/bucket.png"), 3, 13);
         break;
 
     case BrushManager::Eraser:
         currentBrush = &eraser;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/eraser.png"), 12, 14);
+        tempCur = QCursor(QPixmap(":/Icons/eraser.png"), 12, 14);
         break;
 
     case BrushManager::Line:
         currentBrush = &line;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/line.png"), 1, 1);
+        tempCur = QCursor(QPixmap(":/Icons/line.png"), 1, 1);
         break;
 
     case BrushManager::Eyedropper:
         currentBrush = &eyedropper;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/eyedropper.png"), 14, 14);
+        tempCur = QCursor(QPixmap(":/Icons/eyedropper.png"), 14, 14);
         break;
 
     case BrushManager::Stamp:
         currentBrush = &stamp;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/stamp.png"), 8, 13);
+        tempCur = QCursor(QPixmap(":/Icons/stamp.png"), 8, 13);
         break;
 
     case BrushManager::Selector:
@@ -86,7 +86,7 @@ void BrushManager::SetCurrentBrush(int type)
             currentBrush = NULL;
 
         ui->scatterBrushGroup->show();
-        tempCur = QCursor(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
+        tempCur = QCursor(QPixmap(":/Icons/pencil.png"), 1, 2);
 
         break;
 
@@ -99,7 +99,7 @@ void BrushManager::SetCurrentBrush(int type)
             currentBrush = NULL;
 
         ui->smartBrushGroup->show();
-        tempCur = QCursor(QPixmap(":/Icons/Icons/brush.png"), 2, 1);
+        tempCur = QCursor(QPixmap(":/Icons/brush.png"), 2, 1);
         break;
 
     case BrushManager::ScatterFill:
@@ -113,7 +113,7 @@ void BrushManager::SetCurrentBrush(int type)
             currentBrush = NULL;
 
         ui->scatterBrushGroup->show();
-        tempCur = QCursor(QPixmap(":/Icons/Icons/scatterfill.png"), 3, 13);
+        tempCur = QCursor(QPixmap(":/Icons/scatterfill.png"), 3, 13);
         break;
 
     case BrushManager::Replacer:
@@ -126,7 +126,7 @@ void BrushManager::SetCurrentBrush(int type)
             currentBrush = NULL;
 
         ui->replacerGroup->show();
-        tempCur = QCursor(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
+        tempCur = QCursor(QPixmap(":/Icons/pencil.png"), 1, 2);
         break;
 
     case BrushManager::Matrix:
@@ -138,12 +138,12 @@ void BrushManager::SetCurrentBrush(int type)
             currentBrush = NULL;
 
         ui->matrixBrushGroup->show();
-        tempCur = QCursor(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
+        tempCur = QCursor(QPixmap(":/Icons/pencil.png"), 1, 2);
         break;
 
     default:
         currentBrush = &pencil;
-        tempCur = QCursor(QPixmap(":/Icons/Icons/pencil.png"), 1, 2);
+        tempCur = QCursor(QPixmap(":/Icons/pencil.png"), 1, 2);
         break;
 
     }
@@ -285,7 +285,7 @@ void BrushManager::on_scatterBrushCombo_currentIndexChanged(int index)
     if(scatterBrushIndex < scatter.count())
     {
         currentBrush = scatter[scatterBrushIndex];
-        emit BrushChanged(currentBrush, QCursor(QPixmap(":/Icons/Icons/brush.png"), 2, 1));
+        emit BrushChanged(currentBrush, QCursor(QPixmap(":/Icons/brush.png"), 2, 1));
     }
 }
 
@@ -323,7 +323,7 @@ void BrushManager::on_smartBrushCombo_currentIndexChanged(int index)
     if(smartBrushIndex < smart.count())
     {
         currentBrush = smart[smartBrushIndex];
-        emit BrushChanged(currentBrush, QCursor(QPixmap(":/Icons/Icons/brush.png"), 2, 1));
+        emit BrushChanged(currentBrush, QCursor(QPixmap(":/Icons/brush.png"), 2, 1));
     }
 }
 
@@ -421,7 +421,7 @@ void BrushManager::on_replacerBrushCombo_currentIndexChanged(int index)
     if(replacerBrushIndex < replacer.count())
     {
         currentBrush = replacer[replacerBrushIndex];
-        emit BrushChanged(currentBrush, QCursor(QPixmap(":/Icons/Icons/brush.png"), 2, 1));
+        emit BrushChanged(currentBrush, QCursor(QPixmap(":/Icons/brush.png"), 2, 1));
     }
 }
 
@@ -483,6 +483,6 @@ void BrushManager::on_matrixBrushCombo_currentIndexChanged(int index)
     if(matrixBrushIndex < matrix.count())
     {
         currentBrush = matrix[matrixBrushIndex];
-        emit BrushChanged(currentBrush, QCursor(QPixmap(":/Icons/Icons/brush.png"), 2, 1));
+        emit BrushChanged(currentBrush, QCursor(QPixmap(":/Icons/brush.png"), 2, 1));
     }
 }
