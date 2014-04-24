@@ -21,7 +21,7 @@ public:
 
     QString GetType() { return "selection"; }
 
-    void IntegrateSelectedTiles();
+    void IntegrateSelectedTiles(TileLayerView *layer);
 
 
 private:

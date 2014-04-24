@@ -119,7 +119,7 @@ bool SelectionBrush::SelectedTileAtPos(int x, int y)
 {
     TileCoord pos(x, y);
 
-    for(int i = 0; i < selectedItems.count(), i++)
+    for(int i = 0; i < selectedItems.count(); i++)
     {
         if(selectedItems[i].pos == pos)
             return true;

@@ -6,8 +6,8 @@
 
 #include "../../Model/ResourceManager.h"
 
-#include "ScatterBrush.h"
-#include "SmartBrush.h"
+#include "../LevelEditor/Brushes/ScatterBrush.h"
+#include "../LevelEditor/Brushes/SmartBrush.h"
 
 #include "../../Toolbox/TileWidgetItem.h"
 
