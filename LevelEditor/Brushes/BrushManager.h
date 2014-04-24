@@ -55,12 +55,13 @@ public:
         Matrix,
         Smart
     };
+    
+signals:
+    void BrushChanged(TileBrush *newBrush);
 
 public slots:
     void SetCurrentBrush(int type);
-
-private slots:
-
+    void RevertToPreviousSingleTileBrush();
     void SetSelectedTiles(TileList newList);
 
     void on_overwriteCheckbox_toggled(bool checked);
@@ -80,9 +81,6 @@ private slots:
     void on_editMatrixBrush_clicked();
     void on_deleteMatrixBrush_clicked();
     void on_matrixBrushCombo_currentIndexChanged(int index);
-
-signals:
-    void BrushChanged(TileBrush *newBrush, QCursor newCursor);
 
 private:
     Ui::BrushManager *ui;
@@ -108,6 +106,8 @@ private:
 
     QList<MatrixBrush*> matrix;
     int matrixBrushIndex;
+
+    int singleTileBrush;
 };
 
 #endif // BrushManager_H

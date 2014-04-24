@@ -27,6 +27,7 @@ signals:
     void SelectionChanged(TileList newSelection);
 
     void SelectNewBrush(int type);
+    void RevertToPreviousSingleTileBrush();
     
 public slots:
 

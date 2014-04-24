@@ -127,7 +127,7 @@ void LayerManager::ToggleGrid(bool show)
     }
 }
 
-void LayerManager::SetBrushSelection(TileBrush *newBrush, QCursor newCursor)
+void LayerManager::SetBrushSelection(TileBrush *newBrush)
 {
     if(currentLayer)
         currentLayer->ClearPreview();
@@ -176,6 +176,10 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
+    //do not send duplicate events
+    if(lastPreviewSpot.x() == tileX && lastPreviewSpot.y() == tileY)
+        return;
+    
     lastPreviewSpot.setX(tileX);
     lastPreviewSpot.setY(tileY);
 

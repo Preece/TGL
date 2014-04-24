@@ -20,6 +20,7 @@ public:
     void Paint(int x, int y, TileLayerView *layer, bool preview);
 
     QString GetType() { return "selection"; }
+    QCursor GetCursor() { return QCursor(Qt::CrossCursor); }
 
     void IntegrateSelectedTiles();
 

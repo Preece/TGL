@@ -28,11 +28,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
     connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(tileSelector, SIGNAL(SelectNewBrush(int)), this, SLOT(SetToolButtonSelection(int)));
+    connect(tileSelector, SIGNAL(RevertToPreviousSingleTileBrush()), ui->brushManager, SLOT(RevertToPreviousSingleTileBrush()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
-    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*, QCursor)), layers, SLOT(SetBrushSelection(TileBrush*, QCursor)));
-    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*, QCursor)), ui->levelView, SLOT(SetCursor(TileBrush*,QCursor)));
+    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*)), layers, SLOT(SetBrushSelection(TileBrush*)));
+    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*)), ui->levelView, SLOT(SetCursor(TileBrush*)));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));

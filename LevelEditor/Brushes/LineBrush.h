@@ -15,7 +15,9 @@ public:
     void Release(int x, int y, TileLayerView *layer);
 
     void Paint(int x, int y, TileLayerView *layer, bool preview);
+
     QString GetType() { return "line"; }
+    QCursor GetCursor() { return QCursor(QPixmap(":/Icons/line.png"), 1, 1); }
 
 private:
     QPoint clickPoint;
