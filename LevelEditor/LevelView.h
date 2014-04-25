@@ -17,7 +17,7 @@ signals:
     void TraverseTileHistory(bool forward);
 
 public slots:
-    void SetCursor(TileBrush *brush);
+    void SetCursor(TileBrush *brush, int type);
 
 protected:
     void mouseMoveEvent (QMouseEvent * event);

@@ -8,6 +8,7 @@
 #include <QAbstractListModel>
 #include <QItemSelectionModel>
 #include <QRubberBand>
+#include <QKeyEvent>
 
 #include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
@@ -32,6 +33,8 @@ public:
     void UpdateLayerOpacity(int opaqueLayerID);
     void ClearPreview();
 
+    void ShowTileCount();
+
 signals:
     void SelectNewTile(TileCoord ID);
     void SelectNewBrush(int brushID);
@@ -43,7 +46,7 @@ public slots:
     void ToggleGrid(bool show = true);
     void ToggleSelectionMode(bool selection);
 
-    void SetBrushSelection(TileBrush *newBrush);
+    void SetBrushSelection(TileBrush *newBrush, int type);
     void SetLayerSelection(int newSelection);
 
     void RefreshPreview();
@@ -54,6 +57,8 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     void EyedropTile(QPoint pos);

@@ -35,6 +35,8 @@ void SelectionBrush::Press(int x, int y, TileLayerView *layer)
     
     clickSpot.setX(x);
     clickSpot.setY(y);
+    previousMouseSpot.setX(x);
+    previousMouseSpot.setY(y);
 }
 
 void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
@@ -48,8 +50,8 @@ void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDow
             layer->ClearPreview();
 
             //get the amount of movement
-            signed int xDiff = x - clickSpot.x();
-            signed int yDiff = y - clickSpot.y();
+            signed int xDiff = x - previousMouseSpot.x();
+            signed int yDiff = y - previousMouseSpot.y();
 
             //apply the change to the position of each selected item, then draw
             for(int i = 0; i < selectedItems.count(); i++)
@@ -58,6 +60,11 @@ void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDow
                 selectedItems[i].pos.second += yDiff;
                 layer->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
             }
+
+            layer->SelectPreviewItems();
+
+            previousMouseSpot.setX(x);
+            previousMouseSpot.setY(y);
         }
         //if they are not dragging a selection, they are making a new selection
         else
@@ -109,13 +116,14 @@ void SelectionBrush::IntegrateSelectedTiles(TileLayerView *layer)
 
     //clear out the selection
     selectedItems.clear();
+    layer->ClearPreview();
 }
 
 bool SelectionBrush::SelectedTileAtPos(int x, int y)
 {
     TileCoord pos(x, y);
 
-    for(int i = 0; i < selectedItems.count(), i++)
+    for(int i = 0; i < selectedItems.count(); i++)
     {
         if(selectedItems[i].pos == pos)
             return true;

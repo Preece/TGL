@@ -22,13 +22,14 @@ public:
     QString GetType() { return "selection"; }
     QCursor GetCursor() { return QCursor(Qt::CrossCursor); }
 
-    void IntegrateSelectedTiles();
+    void IntegrateSelectedTiles(TileLayerView *layer);
 
 
 private:
 	bool SelectedTileAtPos(int x, int y);
 	
     QPoint clickSpot;
+    QPoint previousMouseSpot;
 
    	bool dragMode;
 
