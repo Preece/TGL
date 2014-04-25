@@ -137,8 +137,6 @@ void LayerManager::SetBrushSelection(TileBrush *newBrush, int type)
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsScene::mousePressEvent(event);
-
     if(!currentLayer || !currentBrush)
         return;
 
@@ -160,12 +158,12 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
         //refresh the preview
         currentBrush->Paint(tileX, tileY, currentLayer, true);
     }
+
+    QGraphicsScene::mousePressEvent(event);
 }
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsScene::mouseMoveEvent(event);
-
     if(!currentLayer || !currentBrush)
         return;
 
@@ -193,12 +191,12 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         currentBrush->Move(tileX, tileY, currentLayer, false);
     }
+
+    QGraphicsScene::mouseMoveEvent(event);
 }
 
 void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsScene::mouseReleaseEvent(event);
-
     if(!currentLayer || !currentBrush)
         return;
 
@@ -217,6 +215,14 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         //make it abort if the queue is empty
         resourceManager->EndPaintOperation();
     }
+
+    QGraphicsScene::mouseReleaseEvent(event);
+}
+
+void LayerManager::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_1)
+        QMessageBox::about(NULL, "test", QString::number(items().count()));
 }
 
 void LayerManager::SetLayerSelection(int newSelection)

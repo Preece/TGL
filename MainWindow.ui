@@ -21,55 +21,56 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
-	font: 75 9pt &quot;MS Gothic&quot;;
+        font: 75 9pt &quot;MS Gothic&quot;;
 }
 
 QMainWindow {
-	margin: 0px;
-	padding: 0px;
+        margin: 0px;
+        padding: 0px;
 }
 
 QToolBox::tab, QComboBox,  QComboBox::drop-down {
-	background-color: rgb(132, 255, 140);
-	border-style: outset;
-	border-width: 1px;
-	border-color: rgb(79, 197, 93);
-	border-radius: 3px;
+        background-color: rgb(132, 255, 140);
+        border-style: outset;
+        border-width: 1px;
+        border-color: rgb(79, 197, 93);
+        border-radius: 3px;
  }
 
 QToolBox &gt; QScrollArea &gt; QWidget &gt; QWidget {
-	margin: 0px;
-	padding: 0px;
-	border: 0px;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
 }
 
 QToolButton {
-	background-color: rgb(220, 216, 255);
-	border-style: outset;
-	border-width:1px;
- 	border-radius:3px;
- 	border-color: rgb(157, 155, 193);
-	padding: 1px;
+        background-color: rgb(220, 216, 255);
+        border-style: outset;
+        border-width:1px;
+        border-radius:3px;
+        border-color: rgb(157, 155, 193);
+        padding: 1px;
 }
 
 QToolButton:checked, QToolButton::pressed {
-	border-style: inset;
-	background-color: rgb(170, 170, 243);
-	border-color: rgb(117, 119, 186);
+        border-style: inset;
+        background-color: rgb(170, 170, 243);
+        border-color: rgb(117, 119, 186);
 }
 
 QComboBox::down-arrow {
-	image: url(:/Icons/addvalue.png);
+        image: url(:/Icons/addvalue.png);
 }
 
 QTreeView, #propertyBrowser {
-	alternate-background-color: rgb(203, 255, 208);
+        alternate-background-color: rgb(203, 255, 208);
 }
 
 #viewStack {
-	margin: 0px;
-	padding: 0px;
-}</string>
+        margin: 0px;
+        padding: 0px;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -207,8 +208,8 @@ QTreeView, #propertyBrowser {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>89</width>
-           <height>182</height>
+           <width>298</width>
+           <height>503</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -344,8 +345,8 @@ QTreeView, #propertyBrowser {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>100</width>
-           <height>30</height>
+           <width>298</width>
+           <height>503</height>
           </rect>
          </property>
          <attribute name="icon">
