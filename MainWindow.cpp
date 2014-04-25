@@ -27,13 +27,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
     connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
-    connect(tileSelector, SIGNAL(SelectNewBrush(int)), this, SLOT(SetToolButtonSelection(int)));
     connect(tileSelector, SIGNAL(RevertToPreviousSingleTileBrush()), ui->brushManager, SLOT(RevertToPreviousSingleTileBrush()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
-    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*)), layers, SLOT(SetBrushSelection(TileBrush*)));
-    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*)), ui->levelView, SLOT(SetCursor(TileBrush*)));
+    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*,int)), layers, SLOT(SetBrushSelection(TileBrush*,int)));
+    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*,int)), ui->levelView, SLOT(SetCursor(TileBrush*,int)));
+    connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*,int)), this, SLOT(SetToolButtonSelection(TileBrush*,int)));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
@@ -52,8 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->miniMap->setScene(layers);
 
     ui->tileSelectorView->setScene(tileSelector);
-    
-    ui->brushManager->SetCurrentBrush(0);
 
     //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
     //connect(scroll, SIGNAL(valueChanged(int)), )
@@ -73,6 +71,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolGroup->setId(ui->replacerTool, 9);
     ui->toolGroup->setId(ui->matrixBrushTool, 10);
     ui->toolGroup->setId(ui->smartBrushTool, 11);
+
+    ui->brushManager->SetCurrentBrush(0);
 }
 
 MainWindow::~MainWindow()
@@ -200,7 +200,7 @@ void MainWindow::CenterMinimapOnLevel()
     ui->miniMap->centerOn(centerX, centerY);
 }
 
-void MainWindow::SetToolButtonSelection(int newSelection)
+void MainWindow::SetToolButtonSelection(TileBrush* brush, int newSelection)
 {
     ui->toolGroup->button(newSelection)->setChecked(true);
 }

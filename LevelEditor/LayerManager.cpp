@@ -127,7 +127,7 @@ void LayerManager::ToggleGrid(bool show)
     }
 }
 
-void LayerManager::SetBrushSelection(TileBrush *newBrush)
+void LayerManager::SetBrushSelection(TileBrush *newBrush, int type)
 {
     if(currentLayer)
         currentLayer->ClearPreview();

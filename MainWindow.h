@@ -51,7 +51,7 @@ private slots:
     void on_actionEdit_Layer_triggered();
 
     void CenterMinimapOnLevel();
-    void SetToolButtonSelection(int newSelection);
+    void SetToolButtonSelection(TileBrush *brush, int newSelection);
 
 private:
     Ui::MainWindow *ui;
