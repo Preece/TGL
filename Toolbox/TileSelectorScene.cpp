@@ -205,8 +205,6 @@ void TileSelectorScene::PackageAndEmitSelection()
     //switching to the pencil when you select a tile. However, it should deselect the
     //stamp somehow, especially when traversing the selection history
 
-    static TileList previousSelection;
-
     TileList selectedList = GetSelectedTiles();
 
     if(selectedList.empty())

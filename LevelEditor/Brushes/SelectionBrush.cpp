@@ -61,6 +61,8 @@ void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDow
                 layer->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
             }
 
+            layer->SelectPreviewItems();
+
             previousMouseSpot.setX(x);
             previousMouseSpot.setY(y);
         }
@@ -114,6 +116,7 @@ void SelectionBrush::IntegrateSelectedTiles(TileLayerView *layer)
 
     //clear out the selection
     selectedItems.clear();
+    layer->ClearPreview();
 }
 
 bool SelectionBrush::SelectedTileAtPos(int x, int y)
