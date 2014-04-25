@@ -95,7 +95,6 @@ void BrushManager::SetCurrentBrush(int type)
             currentBrush = NULL;
 
         ui->smartBrushGroup->show();
-        tempCur = 
         break;
 
     case BrushManager::ScatterFill:
