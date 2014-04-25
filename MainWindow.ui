@@ -64,7 +64,6 @@ QComboBox::down-arrow {
 
 QTreeView, #propertyBrowser {
 	alternate-background-color: rgb(203, 255, 208);
-	background-color: rgb(242, 243, 255);
 }
 
 #viewStack {
@@ -208,8 +207,8 @@ QTreeView, #propertyBrowser {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>298</width>
-           <height>507</height>
+           <width>89</width>
+           <height>182</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -345,8 +344,8 @@ QTreeView, #propertyBrowser {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>298</width>
-           <height>507</height>
+           <width>100</width>
+           <height>30</height>
           </rect>
          </property>
          <attribute name="icon">

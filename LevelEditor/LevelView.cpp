@@ -17,7 +17,8 @@ LevelView::LevelView(QWidget *parent) :
 
 void LevelView::SetCursor(TileBrush *brush)
 {
-    setCursor(brush->GetCursor());
+    if(brush)
+        setCursor(brush->GetCursor());
 }
 
 void LevelView::mouseMoveEvent(QMouseEvent *event)

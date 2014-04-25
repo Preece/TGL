@@ -38,9 +38,6 @@ void BrushManager::SetCurrentBrush(int type)
     ui->replacerGroup->hide();
     ui->matrixBrushGroup->hide();
 
-    //one of the switches below will fill this out correctly
-    QCursor tempCur;
-
     switch(type)
     {
     case BrushManager::Pencil:
@@ -95,7 +92,6 @@ void BrushManager::SetCurrentBrush(int type)
             currentBrush = NULL;
 
         ui->smartBrushGroup->show();
-        tempCur = 
         break;
 
     case BrushManager::ScatterFill:

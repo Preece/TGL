@@ -29,6 +29,7 @@ private:
 	bool SelectedTileAtPos(int x, int y);
 	
     QPoint clickSpot;
+    QPoint previousMouseSpot;
 
    	bool dragMode;
 
