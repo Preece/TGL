@@ -200,28 +200,33 @@ void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
 //it does not change the model
 void TileLayerView::ModifyTileWidgetItem(int x, int y, TileCoord newOrigin)
 {
-    if(items.value(TileCoord(x, y)))
-    {
-        //if the right tile is already here, just bail
-        if(items[TileCoord(x, y)]->GetTileOrigin() == newOrigin)
+    TileCoord tilePos(x, y);
+
+    //first check that this is not a redundant move
+    if(items.contains(tilePos))
+        if(items[tilePos]->GetTileOrigin() == newOrigin)
             return;
-        else
+
+    //if they are deleting a tile
+    if(newOrigin == TileCoord(-1, -1))
+    {
+        //and one actually exists at the specified point
+        if(items.contains(tilePos))
         {
-            delete items[TileCoord(x, y)];
-            items.remove(TileCoord(x, y));
+            //remove it from the scene, delete it, and remove it from the item list
+            scene()->removeItem(items[tilePos]);
+            delete items[tilePos];
+            items.remove(tilePos);
         }
 
-        //if they passed in a null tile as the new origin, just bail,
-        //its been deleted
-        if(newOrigin == TileCoord(-1, -1))
-            return;
+        return;
     }
 
     TileWidgetItem *tempTileItem = new TileWidgetItem;
 
     //store the tile origin coordinates in the item
     tempTileItem->SetTileOrigin(newOrigin);
-    tempTileItem->SetPosition(TileCoord(x, y));
+    tempTileItem->SetPosition(tilePos);
 
     //update its Pixmap
     tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
@@ -233,7 +238,7 @@ void TileLayerView::ModifyTileWidgetItem(int x, int y, TileCoord newOrigin)
     tempTileItem->setPos(x * tileW, y * tileH);
 
     //put the new tile item into the map, with the position as the key
-    items[TileCoord(x, y)] = tempTileItem;
+    items[tilePos] = tempTileItem;
     tempTileItem->setParentItem(this);
 }
 

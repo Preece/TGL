@@ -80,12 +80,12 @@ void SelectionBrush::Release(int x, int y, TileLayerView *layer)
     //unset the dragging flag
     dragMode = false;
 
+    //if the list is empty, do nothing
+    if(layer->GetSelectedItems().empty())
+        return;
+
     //get a list of selected tiles that are not preview items
     selectedItems = layer->GetSelectedItems();
-
-    //if the list is empty, do nothing
-    if(selectedItems.empty())
-        return;
 
     //otherwise, remove them all from the layer, and draw them again as previews
     for(int i = 0; i < selectedItems.count(); i++)
