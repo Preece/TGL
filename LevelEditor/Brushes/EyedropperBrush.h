@@ -15,6 +15,7 @@ public:
     virtual void Paint(int x, int y, TileLayerView *layer, bool preview = false);
 
     QString GetType() { return "eyedropper"; }
+    QCursor GetCursor() { return QCursor(QPixmap(":/Icons/eyedropper.png"), 14, 14); }
 };
 
 #endif // EYEDROPPERBRUSH_H

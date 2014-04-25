@@ -15,9 +15,9 @@ LevelView::LevelView(QWidget *parent) :
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 }
 
-void LevelView::SetCursor(TileBrush *, QCursor newCursor)
+void LevelView::SetCursor(TileBrush *brush)
 {
-    setCursor(newCursor);
+    setCursor(brush->GetCursor());
 }
 
 void LevelView::mouseMoveEvent(QMouseEvent *event)

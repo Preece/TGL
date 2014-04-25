@@ -17,6 +17,7 @@ public:
     void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileLayerView *newLayer);
 
     QString GetType() { return "fill"; }
+    QCursor GetCursor() { return QCursor(QPixmap(":/Icons/bucket.png"), 3, 13); }
 
 };
 

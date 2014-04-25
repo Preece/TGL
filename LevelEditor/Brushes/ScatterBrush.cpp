@@ -2,6 +2,14 @@
 
 bool ScatterBrush::fill = false;
 
+QCursor ScatterBrush::GetCursor()
+{
+    if(ScatterBrush::fill)
+        return QCursor(QPixmap(":/Icons/scatterfill.png"), 3, 13);
+    else
+        return QCursor(QPixmap(":/Icons/pencil.png"), 1, 2);
+}
+
 void ScatterBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next

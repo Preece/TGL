@@ -2,6 +2,7 @@
 #define TILEBRUSH_H
 
 #include <QPoint>
+#include <QCursor>
 #include <qmath.h>
 
 #include "../TileLayerView.h"
@@ -22,6 +23,7 @@ public:
     void Line(int x1, int y1, int x2, int y2, TileLayerView *layer, bool preview = false);
 
     virtual QString GetType() = 0;
+    virtual QCursor GetCursor() { return QCursor(QPixmap(":/Icons/pencil.png"), 1, 2); }
 
     void SetSize(int newSize) { size = newSize; }
     void SetOverwrite(bool over) { overwrite = over; }

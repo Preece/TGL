@@ -41,10 +41,6 @@ void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDow
 {
     if(leftButtonDown)
     {
-        //check that there was actual movement
-        if(clickSpot.x() == x && clickSpot.y() == y)
-                return;
-
         //if they are dragging a selection around
         if(dragMode)
         {

@@ -18,6 +18,8 @@ public:
 
     void CreateGrid(QList<TileCoord> items);
 
+    QCursor GetCursor() { return QCursor(QPixmap(":/Icons/stamp.png"), 8, 13); }
+
 private:
     QList<TileCoord> tiles;
     

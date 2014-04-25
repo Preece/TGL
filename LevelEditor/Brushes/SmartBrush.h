@@ -11,7 +11,9 @@ public:
 
     virtual void Paint(int x, int y, TileLayerView *layer, bool preview);
     void ContextPaintTile(int x, int y, TileLayerView *layer, bool preview);
+
     virtual QString GetType() { return "smart"; }
+    QCursor GetCursor() { return QCursor(QPixmap(":/Icons/brush.png"), 2, 1); }
 };
 
 #endif // SMARTBRUSH_H

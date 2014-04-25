@@ -43,7 +43,7 @@ public slots:
     void ToggleGrid(bool show = true);
     void ToggleSelectionMode(bool selection);
 
-    void SetBrushSelection(TileBrush *newBrush, QCursor newCursor);
+    void SetBrushSelection(TileBrush *newBrush);
     void SetLayerSelection(int newSelection);
 
     void RefreshPreview();
