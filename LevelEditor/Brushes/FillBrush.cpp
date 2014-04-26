@@ -74,7 +74,7 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
         if(newLayer->GetTileOrigin(tempCoord.first, tempCoord.second) == oldOrigin)
         {
             //replace this tile with the new type
-            newLayer->ModifyTileItem(tempCoord.first, tempCoord.second, newOrigin);
+            newLayer->ModifyTile(tempCoord.first, tempCoord.second, newOrigin);
 
             //put the four surrounding tiles on the stack
             seedQueue.push_back(TileCoord(tempCoord.first - 1, tempCoord.second));

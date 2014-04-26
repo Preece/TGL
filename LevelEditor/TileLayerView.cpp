@@ -47,6 +47,8 @@ void TileLayerView::DestroyAllItems()
 //this function should also check again for the size of the layer, and update itself accordingly
 void TileLayerView::RepopulateTiles()
 {
+    ClearPreview();
+
     //the strategy is to loop through all the items in the scene,
     //comparing them against the model and updating them accordingly.
     //all tiles that are synchronized in this was are flagged.
@@ -145,7 +147,7 @@ void TileLayerView::SelectPreviewItems()
     }
 }
 
-void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
+void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
 {
     //bounds check    
     if(x >= widthInTiles)
@@ -207,20 +209,18 @@ void TileLayerView::ModifyTileWidgetItem(int x, int y, TileCoord newOrigin)
         if(items[tilePos]->GetTileOrigin() == newOrigin)
             return;
 
-    //if they are deleting a tile
-    if(newOrigin == TileCoord(-1, -1))
-    {
-        //and one actually exists at the specified point
-        if(items.contains(tilePos))
-        {
-            //remove it from the scene, delete it, and remove it from the item list
-            scene()->removeItem(items[tilePos]);
-            delete items[tilePos];
-            items.remove(tilePos);
-        }
 
-        return;
+    //then clear out any tile that already exists at this position
+    if(items.contains(tilePos))
+    {
+        scene()->removeItem(items[tilePos]);
+        delete items[tilePos];
+        items.remove(tilePos);
     }
+
+    //if they are deleting a tile, we can simply leave at this point
+    if(newOrigin == TileCoord(-1, -1))
+        return;
 
     TileWidgetItem *tempTileItem = new TileWidgetItem;
 

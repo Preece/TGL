@@ -23,7 +23,7 @@ void MatrixBrush::Rect(int x, int y, int w, int h, TileLayerView *layer, bool pr
             if(preview)
                 layer->PreviewModifyTile(j + x, i + y, GetRandomTile(4));
             else
-                layer->ModifyTileItem(j + x, i + y, GetRandomTile(4));
+                layer->ModifyTile(j + x, i + y, GetRandomTile(4));
         }
     }
 

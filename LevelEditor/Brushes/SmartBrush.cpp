@@ -30,7 +30,7 @@ void SmartBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
                 if(preview)
                     layer->PreviewModifyTile(j + x, i + y, GetRandomTile(4));
                 else
-                    layer->ModifyTileItem(j + x, i + y, GetRandomTile(4));
+                    layer->ModifyTile(j + x, i + y, GetRandomTile(4));
             }
         }
     }
@@ -129,7 +129,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
             if(preview)
                 layer->PreviewModifyTile(x, y, GetRandomTile(4));
             else
-                layer->ModifyTileItem(x, y, GetRandomTile(4));
+                layer->ModifyTile(x, y, GetRandomTile(4));
 
             return;
         }
@@ -140,7 +140,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
             if(preview)
                 layer->PreviewModifyTile(x, y, GetRandomTile(4));
             else
-                layer->ModifyTileItem(x, y, GetRandomTile(4));
+                layer->ModifyTile(x, y, GetRandomTile(4));
 
             return;
         }
@@ -151,7 +151,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
             if(preview)
                 layer->PreviewModifyTile(x, y, GetRandomTile(4));
             else
-                layer->ModifyTileItem(x, y, GetRandomTile(4));
+                layer->ModifyTile(x, y, GetRandomTile(4));
 
             return;
         }
@@ -162,7 +162,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
             if(preview)
                 layer->PreviewModifyTile(x, y, GetRandomTile(4));
             else
-                layer->ModifyTileItem(x, y, GetRandomTile(4));
+                layer->ModifyTile(x, y, GetRandomTile(4));
 
             return;
         }
@@ -179,7 +179,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(3));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(3));
+            layer->ModifyTile(x, y, GetRandomTile(3));
 
         return;
     }
@@ -193,7 +193,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(5));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(5));
+            layer->ModifyTile(x, y, GetRandomTile(5));
 
         return;
     }
@@ -207,7 +207,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(1));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(1));
+            layer->ModifyTile(x, y, GetRandomTile(1));
 
         return;
     }
@@ -221,7 +221,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(7));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(7));
+            layer->ModifyTile(x, y, GetRandomTile(7));
 
         return;
     }
@@ -234,7 +234,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(0));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(0));
+            layer->ModifyTile(x, y, GetRandomTile(0));
 
         return;
     }
@@ -247,7 +247,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(2));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(2));
+            layer->ModifyTile(x, y, GetRandomTile(2));
 
         return;
     }
@@ -260,7 +260,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(6));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(6));
+            layer->ModifyTile(x, y, GetRandomTile(6));
 
         return;
     }
@@ -273,7 +273,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(8));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(8));
+            layer->ModifyTile(x, y, GetRandomTile(8));
 
         return;
     }
@@ -286,7 +286,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(9));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(9));
+            layer->ModifyTile(x, y, GetRandomTile(9));
 
         return;
     }
@@ -299,7 +299,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(10));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(10));
+            layer->ModifyTile(x, y, GetRandomTile(10));
 
         return;
     }
@@ -312,7 +312,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(11));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(11));
+            layer->ModifyTile(x, y, GetRandomTile(11));
 
         return;
     }
@@ -325,7 +325,7 @@ void SmartBrush::ContextPaintTile(int x, int y, TileLayerView *layer, bool previ
         if(preview)
             layer->PreviewModifyTile(x, y, GetRandomTile(12));
         else
-            layer->ModifyTileItem(x, y, GetRandomTile(12));
+            layer->ModifyTile(x, y, GetRandomTile(12));
 
         return;
     }

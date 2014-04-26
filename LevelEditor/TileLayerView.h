@@ -24,7 +24,7 @@ public:
     void SetLayerID(int newID) { layerID = newID; }
     int GetLayerID() { return layerID; }
 
-    void ModifyTileItem(int x, int y, TileCoord newOrigin);
+    void ModifyTile(int x, int y, TileCoord newOrigin);
     void PreviewModifyTile(int x, int y, TileCoord newOrigin);
     void ClearPreview();
 

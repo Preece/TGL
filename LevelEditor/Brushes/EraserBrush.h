@@ -11,7 +11,7 @@ public:
     void Paint(int x, int y, TileLayerView *layer, bool preview = false);
 
     QString GetType() { return "eraser"; }
-    QCursor GetCursor() { return QCursor(QPixmap(":/Icons/eraser.png"), 12, 14); }
+    QCursor GetCursor() { return QCursor(QPixmap(":/Icons/eraser.png"), 2, 5); }
 
 private:
 };

@@ -39,7 +39,7 @@ void ScatterBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
                     if(preview)
                         layer->PreviewModifyTile(j + x, i + y, GetRandomTile(0));
                     else
-                        layer->ModifyTileItem(j + x, i + y, GetRandomTile(0));
+                        layer->ModifyTile(j + x, i + y, GetRandomTile(0));
                 }
             }
         }
@@ -73,7 +73,7 @@ void ScatterBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord old
     if(newLayer->GetTileOrigin(tileX, tileY) == oldOrigin)
     {
         //replace this tile with the new type
-        newLayer->ModifyTileItem(tileX, tileY, newOrigin);
+        newLayer->ModifyTile(tileX, tileY, newOrigin);
 
         //call this function on the surrounding tiles
         Fill(tileX - 1, tileY, GetRandomTile(0), oldOrigin, newLayer);

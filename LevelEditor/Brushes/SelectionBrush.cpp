@@ -85,7 +85,7 @@ void SelectionBrush::Release(int x, int y, TileLayerView *layer)
     //otherwise, remove them all from the layer, and draw them again as previews
     for(int i = 0; i < selectedItems.count(); i++)
     {
-        layer->ModifyTileItem(selectedItems[i].pos.first, selectedItems[i].pos.second, TileCoord(-1, -1));
+        layer->ModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, TileCoord(-1, -1));
         layer->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
     }
 
@@ -106,7 +106,7 @@ void SelectionBrush::IntegrateSelectedTiles(TileLayerView *layer)
     //for every selected item, draw it onto the layer
     for(int i = 0; i < selectedItems.count(); i++)
     {
-        layer->ModifyTileItem(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
+        layer->ModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
     }
 
     //clear out the selection
