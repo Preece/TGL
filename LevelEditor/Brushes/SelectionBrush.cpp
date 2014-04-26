@@ -3,6 +3,7 @@
 SelectionBrush::SelectionBrush()
 {
     dragMode = false;
+    clickAfterDrag = false;
 }
 
 SelectionBrush::~SelectionBrush()
@@ -11,14 +12,6 @@ SelectionBrush::~SelectionBrush()
 
 void SelectionBrush::Press(int x, int y, TileLayerView *layer)
 {
-    //once tiles are selected and the mouse is released, all selected tiles
-    //will be popped out into a list contained within this class, and drag mode
-    //will be activated. While in drag mode, all tiles are rendered to the preview,
-    //not the actual layer. If the user clicks outside of the selection, all current
-    //tiles in the list are integrated back into the actual layer by drawing
-    //them normally, and drag mode is deactivated. If they click within the selected 
-    //tiles, moving the mouse will drag the selection around.
-
     //later, cut and paste will draw from the tiles suspended in this class.
 
 
@@ -28,8 +21,10 @@ void SelectionBrush::Press(int x, int y, TileLayerView *layer)
         //flag that we are currently dragging stuff
         dragMode = true;
     }
+    //if there is not a selected tile at this position
     else
     {
+        //integrate these tiles into the layer
         IntegrateSelectedTiles(layer);
     }
     
@@ -77,7 +72,7 @@ void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDow
 
 void SelectionBrush::Release(int x, int y, TileLayerView *layer)
 {
-    //unset the dragging flag
+    //unset our flag
     dragMode = false;
 
     //if the list is empty, do nothing
@@ -98,14 +93,14 @@ void SelectionBrush::Release(int x, int y, TileLayerView *layer)
     layer->SelectPreviewItems();
 }
 
-void SelectionBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void SelectionBrush::Deselect(TileLayerView *layer)
 {
-
+    IntegrateSelectedTiles(layer);
 }
 
 void SelectionBrush::IntegrateSelectedTiles(TileLayerView *layer)
 {
-    if(selectedItems.empty())
+    if(selectedItems.empty() || layer == NULL)
         return;
 
     //for every selected item, draw it onto the layer

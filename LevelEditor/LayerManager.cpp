@@ -129,10 +129,22 @@ void LayerManager::ToggleGrid(bool show)
 
 void LayerManager::SetBrushSelection(TileBrush *newBrush, int type)
 {
+    if(currentBrush == newBrush)
+        return;
+
+    //inform the current brush that the selection is changing
+    if(currentBrush && currentLayer)
+        currentBrush->Deselect(currentLayer);
+
+    //assign the new brush
+    currentBrush = newBrush;
+
+    //and inform the new brush it has been selected
+    if(currentBrush && currentLayer)
+        currentBrush->Select(currentLayer);
+
     if(currentLayer)
         currentLayer->ClearPreview();
-
-    currentBrush = newBrush;
 }
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -217,12 +229,6 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     }
 
     QGraphicsScene::mouseReleaseEvent(event);
-}
-
-void LayerManager::keyPressEvent(QKeyEvent *event)
-{
-    if(event->key() == Qt::Key_1)
-        QMessageBox::about(NULL, "test", QString::number(items().count()));
 }
 
 void LayerManager::SetLayerSelection(int newSelection)

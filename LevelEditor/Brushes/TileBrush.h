@@ -18,6 +18,8 @@ public:
     virtual void Press(int x, int y, TileLayerView *layer);
     virtual void Move(int x, int y, TileLayerView *layer, bool leftButtonDown);
     virtual void Release(int x, int y, TileLayerView *layer);
+    virtual void Select(TileLayerView *layer) {}
+    virtual void Deselect(TileLayerView *layer) {}
 
     virtual void Paint(int x, int y, TileLayerView *layer, bool preview = false);
     void Line(int x1, int y1, int x2, int y2, TileLayerView *layer, bool preview = false);

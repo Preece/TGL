@@ -33,8 +33,6 @@ public:
     void UpdateLayerOpacity(int opaqueLayerID);
     void ClearPreview();
 
-    void ShowTileCount();
-
 signals:
     void SelectNewTile(TileCoord ID);
     void SelectNewBrush(int brushID);
@@ -57,8 +55,6 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-
-    void keyPressEvent(QKeyEvent *event);
 
 private:
     void EyedropTile(QPoint pos);

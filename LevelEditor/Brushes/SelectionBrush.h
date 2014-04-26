@@ -17,7 +17,7 @@ public:
     virtual void Press(int x, int y, TileLayerView *layer);
     virtual void Move(int x, int y, TileLayerView *layer, bool leftButtonDown);
     virtual void Release(int x, int y, TileLayerView *layer);
-    void Paint(int x, int y, TileLayerView *layer, bool preview);
+    virtual void Deselect(TileLayerView *layer);
 
     QString GetType() { return "selection"; }
     QCursor GetCursor() { return QCursor(Qt::CrossCursor); }
@@ -32,8 +32,9 @@ private:
     QPoint previousMouseSpot;
 
    	bool dragMode;
+    bool clickAfterDrag;
 
-   	QList<TileData> selectedItems;
+    QList<TileData> selectedItems;
 };
 
 #endif // SELECTIONBRUSH_H
