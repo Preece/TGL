@@ -33,6 +33,8 @@ private:
 
     bool panning;
     QPoint clickSpot;
+
+    QCursor currentCursor;
 };
 
 #endif // LEVELVIEW_H

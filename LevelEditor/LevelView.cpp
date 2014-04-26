@@ -13,12 +13,17 @@ LevelView::LevelView(QWidget *parent) :
     format.setDepth(false);
     setViewport(new QGLWidget(format));
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+
+    currentCursor = QCursor(Qt::ArrowCursor);
 }
 
 void LevelView::SetCursor(TileBrush *brush, int type)
 {
     if(brush)
+    {
         setCursor(brush->GetCursor());
+        currentCursor = brush->GetCursor();
+    }
 }
 
 void LevelView::mouseMoveEvent(QMouseEvent *event)
@@ -64,7 +69,7 @@ void LevelView::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton && panning)
     {
         panning = false;
-        setCursor(Qt::ArrowCursor);
+        setCursor(currentCursor);
         event->accept();
         return;
     }
