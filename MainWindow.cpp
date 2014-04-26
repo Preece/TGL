@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushManager->RegisterTileSelector(tileSelector);
 
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
+    //connect(tileSelector, SIGNAL(SelectionChanged(TileList)), layers, SLOT(RefreshPreview()));
     connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(tileSelector, SIGNAL(RevertToPreviousSingleTileBrush()), ui->brushManager, SLOT(RevertToPreviousSingleTileBrush()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));

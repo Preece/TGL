@@ -250,6 +250,9 @@ void LayerManager::SetLayerSelection(int newSelection)
 
 void LayerManager::RefreshPreview()
 {
+    if(currentLayer)
+        currentLayer->ClearPreview();
+
     currentBrush->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), currentLayer, true);
 }
 
