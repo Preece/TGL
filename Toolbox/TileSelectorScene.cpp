@@ -63,8 +63,8 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
     int tileH = resources->GetTileHeight();
 
     //find the x and y position of the tile
-    int tileX = (tileW * origin.first) + tileW - 1;
-    int tileY = (tileH * origin.second) + tileH - 1;
+    int tileX = (tileW * origin.first) + origin.first + 1;
+    int tileY = (tileH * origin.second) + origin.second + 1;
 
     clearSelection();
 

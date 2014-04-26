@@ -36,8 +36,11 @@ void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
             {
                 TileCoord currOrigin = layer->GetTileOrigin(j + x, i + y);
 
-                //and make sure the draw operation would not be painting the same tile
-                if(currOrigin != selectedTileOrigin)
+                //and make sure the draw operation would not be painting the same tile.
+                //the preview "or" clause is for when eyedropping a tile. the preview wont
+                //refresh if you eyedrop, because the model would suggest that it
+                //was already the right tile
+                if(preview || currOrigin != selectedTileOrigin)
                 {
                     //if they have either selected to overwrite other tiles,
                     //or the tile they are painting on is empty
