@@ -45,6 +45,9 @@ void StampBrush::CreateGrid(QList<TileCoord> items)
     //remove all current items
     tiles.clear();
 
+    avgX = 0;
+    avgY = 0;
+
     //loop through the items and fill the list
     for(int i = 0; i < items.count(); i++)
     {

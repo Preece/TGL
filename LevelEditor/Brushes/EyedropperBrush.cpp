@@ -6,7 +6,6 @@ EyedropperBrush::EyedropperBrush()
 
 void EyedropperBrush::Press(int x, int y, TileLayerView *layer)
 {
-
 }
 
 void EyedropperBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
