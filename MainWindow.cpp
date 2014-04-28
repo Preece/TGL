@@ -26,12 +26,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushManager->RegisterTileSelector(tileSelector);
 
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
-    //connect(tileSelector, SIGNAL(SelectionChanged(TileList)), layers, SLOT(RefreshPreview()));
     connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(tileSelector, SIGNAL(RevertToPreviousSingleTileBrush()), ui->brushManager, SLOT(RevertToPreviousSingleTileBrush()));
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
     connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
+    connect(resources, SIGNAL(TileUpdated(int,int,int,TileCoord)), layers, SLOT(UpdateTile(int,int,int,TileCoord)));
     connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*,int)), layers, SLOT(SetBrushSelection(TileBrush*,int)));
     connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*,int)), ui->levelView, SLOT(SetCursor(TileBrush*,int)));
     connect(ui->brushManager, SIGNAL(BrushChanged(TileBrush*,int)), this, SLOT(SetToolButtonSelection(TileBrush*,int)));

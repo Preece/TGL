@@ -319,3 +319,17 @@ void LayerManager::UpdateLayerSizes(int newW, int newH)
     for(int i = 0; i < layers.count(); i++)
         layers[i]->SetLayerSize(newW, newH);
 }
+
+void LayerManager::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
+{
+    //the layers should potentially be stored in a hash,
+    //to avoid this looping for every single tile
+    for(int i = 0; i < layers.count(); i++)
+    {
+        if(layers[i]->GetLayerID() == layerID)
+        {
+            layers[i]->ModifyTileWidgetItem(x, y, newOrigin);
+            return;
+        }
+    }
+}

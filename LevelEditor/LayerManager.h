@@ -51,6 +51,8 @@ public slots:
 
     void UpdateLayerSizes(int newW, int newH);
 
+    void UpdateTile(int layerID, int x, int y, TileCoord newOrigin);
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);

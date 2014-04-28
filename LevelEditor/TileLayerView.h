@@ -27,6 +27,7 @@ public:
     void ModifyTile(int x, int y, TileCoord newOrigin);
     void PreviewModifyTile(int x, int y, TileCoord newOrigin);
     void ClearPreview();
+    void ModifyTileWidgetItem(int x, int y, TileCoord newOrigin);
 
     TileCoord GetTileOrigin(int x, int y);
     void SetLayerSize(int w, int h);
@@ -45,8 +46,6 @@ public:
     bool SelectedTileAtPos(int x, int y);
 
 private:
-    void ModifyTileWidgetItem(int x, int y, TileCoord newOrigin);
-
     int widthInTiles, heightInTiles;
 
     QHash<TileCoord, TileWidgetItem*> items;

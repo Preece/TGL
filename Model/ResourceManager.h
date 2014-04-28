@@ -65,6 +65,8 @@ signals:
 
     void MapSizeChanged(int w, int h);
 
+    void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
+
 private:
     QHash<int, Image*> imageMap;
     QHash<int, TileLayer*> layerMap;

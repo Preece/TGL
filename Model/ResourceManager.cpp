@@ -161,6 +161,9 @@ void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
     if(tempLayer)
     {
         modifyTiles->AddModification(GetTileLayer(layerID), x, y, origin, tempLayer->GetTileOrigin(x, y));
+
+        //notify the view that this tile should be updated
+        emit TileUpdated(layerID, x, y, origin);
     }
 }
 
