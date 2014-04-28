@@ -141,3 +141,8 @@ void LevelView::resizeEvent(QResizeEvent *event)
     if(maxZoom)
         fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
 }
+
+void LevelView::leaveEvent(QEvent *event)
+{
+    dynamic_cast<LayerManager*>(scene())->ClearPreview();
+}

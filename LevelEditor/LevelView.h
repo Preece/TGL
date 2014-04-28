@@ -27,6 +27,7 @@ protected:
     void wheelEvent(QWheelEvent *event);
     void drawBackground(QPainter *painter, const QRectF &rect);
     void resizeEvent(QResizeEvent *event);
+    void leaveEvent(QEvent *event);
 
 private:
     bool maxZoom;
