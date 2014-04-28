@@ -19,7 +19,7 @@ public:
     virtual void Release(int x, int y, TileLayerView *layer);
     virtual void Deselect(TileLayerView *layer);
 
-    QString GetType() { return "selection"; }
+    QString GetType() { return "selector"; }
     QCursor GetCursor() { return QCursor(Qt::CrossCursor); }
 
     void IntegrateSelectedTiles(TileLayerView *layer);

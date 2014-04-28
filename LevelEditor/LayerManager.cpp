@@ -271,7 +271,9 @@ void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
 
 void LayerManager::ClearPreview()
 {
-    if(currentLayer)
+    //we don't want external things clearing away the selection. Only things that
+    //directly access the layer (like the brush) should clear that away
+    if(currentLayer && currentBrush->GetType() != "selector")
         currentLayer->ClearPreview();
 }
 
