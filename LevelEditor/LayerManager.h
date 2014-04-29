@@ -10,11 +10,10 @@
 #include <QRubberBand>
 #include <QKeyEvent>
 
-#include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
 #include "TileLayerView.h"
 #include "../Toolbox/TileWidgetItem.h"
-#include "Brushes/TileBrush.h"
+#include "Brushes/BrushManager.h"
 
 typedef QList<TileCoord> TileList;
 
@@ -27,6 +26,7 @@ public:
     ~LayerManager();
 
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
+    void RegisterBrushManager(BrushManager *newBM) { brushManager = newBM; }
     
     void AddLayer(int newLayerID);
     void RemoveLayer(int dirtyLayerID);
@@ -44,7 +44,6 @@ public slots:
     void ToggleGrid(bool show = true);
     void ToggleSelectionMode(bool selection);
 
-    void SetBrushSelection(TileBrush *newBrush, int type);
     void SetLayerSelection(int newSelection);
 
     void RefreshPreview();
@@ -65,10 +64,9 @@ private:
     TileLayerView *currentLayer;
 
     ResourceManager *resourceManager;
+    BrushManager *brushManager;
 
     QGraphicsItemGroup *grid;
-
-    TileBrush *currentBrush;
 
     QPoint lastPreviewSpot;
 };

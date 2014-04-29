@@ -17,13 +17,10 @@ LevelView::LevelView(QWidget *parent) :
     currentCursor = QCursor(Qt::ArrowCursor);
 }
 
-void LevelView::SetCursor(TileBrush *brush, int type)
+void LevelView::SetCursor(QCursor newCursor)
 {
-    if(brush)
-    {
-        setCursor(brush->GetCursor());
-        currentCursor = brush->GetCursor();
-    }
+    setCursor(newCursor);
+    currentCursor = newCursor;
 }
 
 void LevelView::mouseMoveEvent(QMouseEvent *event)

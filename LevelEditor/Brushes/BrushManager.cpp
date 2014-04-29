@@ -136,7 +136,7 @@ void BrushManager::SetCurrentBrush(int type)
 
     }
 
-    emit BrushChanged(currentBrush, type);
+    emit BrushChanged(currentBrush->GetCursor(), type);
 }
 
 void BrushManager::RevertToPreviousSingleTileBrush()
@@ -280,7 +280,7 @@ void BrushManager::on_scatterBrushCombo_currentIndexChanged(int index)
     if(scatterBrushIndex < scatter.count())
     {
         currentBrush = scatter[scatterBrushIndex];
-        emit BrushChanged(currentBrush, BrushManager::Scatter);
+        emit BrushChanged(currentBrush->GetCursor(), BrushManager::Scatter);
     }
 }
 
@@ -318,7 +318,7 @@ void BrushManager::on_smartBrushCombo_currentIndexChanged(int index)
     if(smartBrushIndex < smart.count())
     {
         currentBrush = smart[smartBrushIndex];
-        emit BrushChanged(currentBrush, BrushManager::Smart);
+        emit BrushChanged(currentBrush->GetCursor(), BrushManager::Smart);
     }
 }
 
@@ -416,7 +416,7 @@ void BrushManager::on_replacerBrushCombo_currentIndexChanged(int index)
     if(replacerBrushIndex < replacer.count())
     {
         currentBrush = replacer[replacerBrushIndex];
-        emit BrushChanged(currentBrush, BrushManager::Replacer);
+        emit BrushChanged(currentBrush->GetCursor(), BrushManager::Replacer);
     }
 }
 
@@ -478,6 +478,6 @@ void BrushManager::on_matrixBrushCombo_currentIndexChanged(int index)
     if(matrixBrushIndex < matrix.count())
     {
         currentBrush = matrix[matrixBrushIndex];
-        emit BrushChanged(currentBrush, BrushManager::Matrix);
+        emit BrushChanged(currentBrush->GetCursor(), BrushManager::Matrix);
     }
 }

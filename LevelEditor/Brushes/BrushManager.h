@@ -57,7 +57,7 @@ public:
     };
     
 signals:
-    void BrushChanged(TileBrush *newBrush, int type);
+    void BrushChanged(QCursor newCursor, int type);
 
 public slots:
     void SetCurrentBrush(int type);

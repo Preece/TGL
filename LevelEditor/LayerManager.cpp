@@ -4,7 +4,7 @@ LayerManager::LayerManager()
 {
     resourceManager = NULL;
     currentLayer = NULL;
-    currentBrush = NULL;
+    brushManager = NULL;
 
     grid = new QGraphicsItemGroup;
     addItem(grid);
@@ -127,29 +127,9 @@ void LayerManager::ToggleGrid(bool show)
     }
 }
 
-void LayerManager::SetBrushSelection(TileBrush *newBrush, int type)
-{
-    if(currentBrush == newBrush)
-        return;
-
-    //inform the current brush that the selection is changing
-    if(currentBrush && currentLayer)
-        currentBrush->Deselect(currentLayer);
-
-    //assign the new brush
-    currentBrush = newBrush;
-
-    //and inform the new brush it has been selected
-    if(currentBrush && currentLayer)
-        currentBrush->Select(currentLayer);
-
-    if(currentLayer)
-        currentLayer->ClearPreview();
-}
-
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(!currentLayer || !currentBrush)
+    if(!currentLayer)
         return;
 
     //translate the position to tile coordinates
@@ -161,14 +141,14 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {
-        currentBrush->Press(tileX, tileY, currentLayer);
+        brushManager->GetCurrentBrush()->Press(tileX, tileY, currentLayer);
     }
     else if(event->button() == Qt::RightButton)
     {
         EyedropTile(event->scenePos().toPoint());
 
         //refresh the preview
-        currentBrush->Paint(tileX, tileY, currentLayer, true);
+        brushManager->GetCurrentBrush()->Paint(tileX, tileY, currentLayer, true);
     }
 
     QGraphicsScene::mousePressEvent(event);
@@ -176,7 +156,7 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(!currentLayer || !currentBrush)
+    if(!currentLayer)
         return;
 
     //translate the position to tile coordinates
@@ -196,12 +176,12 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     //if the left button is down
     if(event->buttons() == Qt::LeftButton)
     {
-        currentBrush->Move(tileX, tileY, currentLayer, true);
+        brushManager->GetCurrentBrush()->Move(tileX, tileY, currentLayer, true);
     }
     //if the left mouse button was not down
     else if(currentLayer)
     {
-        currentBrush->Move(tileX, tileY, currentLayer, false);
+        brushManager->GetCurrentBrush()->Move(tileX, tileY, currentLayer, false);
     }
 
     QGraphicsScene::mouseMoveEvent(event);
@@ -209,7 +189,7 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(!currentLayer || !currentBrush)
+    if(!currentLayer)
         return;
 
     //translate the position to tile coordinates
@@ -221,7 +201,7 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {    
-        currentBrush->Release(tileX, tileY, currentLayer);
+        brushManager->GetCurrentBrush()->Release(tileX, tileY, currentLayer);
 
         //this will package the changes into an undo command and implement them into the model
         //make it abort if the queue is empty
@@ -253,7 +233,7 @@ void LayerManager::RefreshPreview()
     if(currentLayer)
         currentLayer->ClearPreview();
 
-    currentBrush->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), currentLayer, true);
+    brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), currentLayer, true);
 }
 
 void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
@@ -273,7 +253,7 @@ void LayerManager::ClearPreview()
 {
     //we don't want external things clearing away the selection. Only things that
     //directly access the layer (like the brush) should clear that away
-    if(currentLayer && currentBrush->GetType() != "selector")
+    if(currentLayer && brushManager->GetCurrentBrush()->GetType() != "selector")
         currentLayer->ClearPreview();
 }
 

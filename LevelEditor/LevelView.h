@@ -12,12 +12,11 @@ class LevelView : public QGraphicsView
     Q_OBJECT
 public:
     explicit LevelView(QWidget *parent = 0);
+
+    void SetCursor(QCursor newCursor);
     
 signals:
     void TraverseTileHistory(bool forward);
-
-public slots:
-    void SetCursor(TileBrush *brush, int type);
 
 protected:
     void mouseMoveEvent (QMouseEvent * event);
