@@ -11,9 +11,9 @@ public:
     FillBrush();
     ~FillBrush();
 
-    void Move(int x, int y, TileLayerView *layer);
+    void Move(int x, int y, ResourceManager *resources);
 
-    void Paint(int x, int y, TileLayerView *layer, bool preview = false);
+    void Paint(int x, int y, ResourceManager *resources, bool preview = false);
     void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileLayerView *newLayer);
 
     QString GetType() { return "fill"; }

@@ -10,20 +10,20 @@ FillBrush::~FillBrush()
 
 }
 
-void FillBrush::Move(int x, int y, TileLayerView *layer)
+void FillBrush::Move(int x, int y, ResourceManager *resources)
 {
     //we don't want this to do anything for a fill brush
 }
 
-void FillBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void FillBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
     //the fill brush has no preview mode
     if(preview)
         return;
 
-    TileCoord old = layer->GetTileOrigin(x, y);
+    TileCoord old = resources->GetTileOrigin(x, y);
 
-    Fill(x, y, selectedTileOrigin, old, layer);
+    Fill(x, y, selectedTileOrigin, old, resources);
 }
 
 void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileLayerView *newLayer)

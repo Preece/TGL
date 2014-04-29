@@ -10,7 +10,7 @@ SelectionBrush::~SelectionBrush()
 {
 }
 
-void SelectionBrush::Press(int x, int y, TileLayerView *layer)
+void SelectionBrush::Press(int x, int y, ResourceManager *resources)
 {
     //later, cut and paste will draw from the tiles suspended in this class.
 
@@ -25,7 +25,7 @@ void SelectionBrush::Press(int x, int y, TileLayerView *layer)
     else
     {
         //integrate these tiles into the layer
-        IntegrateSelectedTiles(layer);
+        IntegrateSelectedTiles(resources);
     }
     
     clickSpot.setX(x);
@@ -34,7 +34,7 @@ void SelectionBrush::Press(int x, int y, TileLayerView *layer)
     previousMouseSpot.setY(y);
 }
 
-void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
+void SelectionBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
 {
     if(leftButtonDown)
     {
@@ -42,7 +42,7 @@ void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDow
         if(dragMode)
         {
             //clear the current preview
-            layer->ClearPreview();
+            resources->ClearPreview();
 
             //get the amount of movement
             signed int xDiff = x - previousMouseSpot.x();
@@ -53,10 +53,10 @@ void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDow
             {
                 selectedItems[i].pos.first += xDiff;
                 selectedItems[i].pos.second += yDiff;
-                layer->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
+                resources->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
             }
 
-            layer->SelectPreviewItems();
+            resources->SelectPreviewItems();
 
             previousMouseSpot.setX(x);
             previousMouseSpot.setY(y);
@@ -65,40 +65,40 @@ void SelectionBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDow
         else
         {
             //so select new stuff
-            layer->SelectTilesInArea(QRect(clickSpot, QPoint(x, y)));
+            resources->SelectTilesInArea(QRect(clickSpot, QPoint(x, y)));
         }
     }
 }
 
-void SelectionBrush::Release(int x, int y, TileLayerView *layer)
+void SelectionBrush::Release(int x, int y, ResourceManager *resources)
 {
     //unset our flag
     dragMode = false;
 
     //if the list is empty, do nothing
-    if(layer->GetSelectedItems().empty())
+    if(resources->GetSelectedItems().empty())
         return;
 
     //get a list of selected tiles that are not preview items
-    selectedItems = layer->GetSelectedItems();
+    selectedItems = resources->GetSelectedItems();
 
-    //otherwise, remove them all from the layer, and draw them again as previews
+    //otherwise, remove them all from the resources, and draw them again as previews
     for(int i = 0; i < selectedItems.count(); i++)
     {
-        layer->ModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, TileCoord(-1, -1));
-        layer->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
+        resources->ModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, TileCoord(-1, -1));
+        resources->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
     }
 
     //then select the preview items, to maintain visual consistency
-    layer->SelectPreviewItems();
+    resources->SelectPreviewItems();
 }
 
-void SelectionBrush::Deselect(TileLayerView *layer)
+void SelectionBrush::Deselect(ResourceManager *resources)
 {
-    IntegrateSelectedTiles(layer);
+    IntegrateSelectedTiles(resources);
 }
 
-void SelectionBrush::IntegrateSelectedTiles(TileLayerView *layer)
+void SelectionBrush::IntegrateSelectedTiles(ResourceManager *resources)
 {
     if(selectedItems.empty() || layer == NULL)
         return;
@@ -106,12 +106,12 @@ void SelectionBrush::IntegrateSelectedTiles(TileLayerView *layer)
     //for every selected item, draw it onto the layer
     for(int i = 0; i < selectedItems.count(); i++)
     {
-        layer->ModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
+        resources->ModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
     }
 
     //clear out the selection
     selectedItems.clear();
-    layer->ClearPreview();
+    resources->ClearPreview();
 }
 
 bool SelectionBrush::SelectedTileAtPos(int x, int y)

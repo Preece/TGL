@@ -4,21 +4,21 @@ EyedropperBrush::EyedropperBrush()
 {
 }
 
-void EyedropperBrush::Press(int x, int y, TileLayerView *layer)
+void EyedropperBrush::Press(int x, int y, ResourceManager *resources)
 {
 }
 
-void EyedropperBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
-{
-
-}
-
-void EyedropperBrush::Release(int x, int y, TileLayerView *layer)
+void EyedropperBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
 {
 
 }
 
-void EyedropperBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void EyedropperBrush::Release(int x, int y, ResourceManager *resources)
+{
+
+}
+
+void EyedropperBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
 
 }

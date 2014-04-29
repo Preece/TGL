@@ -53,7 +53,9 @@ public slots:
     int GetLayerOpacity(int layerID);
     void UpdateLayerSize(int w, int h);
 
-    void ModifyTile(int layerID, int x, int y, TileCoord origin);
+    void ModifyTile(int x, int y, TileCoord origin);
+    void PreviewModifyTile(int x, int y, TileCoord origin);
+    void ClearPreview();
     TileCoord GetTileOrigin(int layerID, int x, int y);
     int GetTileCount(int layerID);
     Tile *GetTileByIndex(int layerID, int i);
@@ -68,10 +70,13 @@ signals:
     void MapSizeChanged(int w, int h);
 
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
+    void PreviewTileUpdated(int x, int y, TileCoord newOrigin);
 
 private:
     QHash<int, Image*> imageMap;
     QHash<int, TileLayer*> layerMap;
+    int currentLayerID;
+    QHash<int, Tile> previewTiles;
 
     LevelProperties levelProperties;
 

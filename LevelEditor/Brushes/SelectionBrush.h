@@ -14,15 +14,15 @@ public:
     SelectionBrush();
     ~SelectionBrush();
 
-    virtual void Press(int x, int y, TileLayerView *layer);
-    virtual void Move(int x, int y, TileLayerView *layer, bool leftButtonDown);
-    virtual void Release(int x, int y, TileLayerView *layer);
-    virtual void Deselect(TileLayerView *layer);
+    virtual void Press(int x, int y, ResourceManager *resources);
+    virtual void Move(int x, int y, ResourceManager *resources, bool leftButtonDown);
+    virtual void Release(int x, int y, ResourceManager *resources);
+    virtual void Deselect(ResourceManager *resources);
 
     QString GetType() { return "selector"; }
     QCursor GetCursor() { return QCursor(Qt::CrossCursor); }
 
-    void IntegrateSelectedTiles(TileLayerView *layer);
+    void IntegrateSelectedTiles(ResourceManager *resources);
 
     QList<TileData> GetSelectedTiles() { return selectedItems; }
     void SetSelectedTiles(QList<TileData> newTiles) { selectedItems = newTiles; }

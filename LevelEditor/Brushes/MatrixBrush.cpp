@@ -5,14 +5,14 @@ MatrixBrush::MatrixBrush()
     AddList(13);
 }
 
-void MatrixBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void MatrixBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
     //clear the preview
 
 
 }
 
-void MatrixBrush::Rect(int x, int y, int w, int h, TileLayerView *layer, bool preview)
+void MatrixBrush::Rect(int x, int y, int w, int h, ResourceManager *resources, bool preview)
 {
     //paint the interior
     for(int i = 0; i < h; i++)
@@ -21,36 +21,36 @@ void MatrixBrush::Rect(int x, int y, int w, int h, TileLayerView *layer, bool pr
         {
             //paint a middle tile
             if(preview)
-                layer->PreviewModifyTile(j + x, i + y, GetRandomTile(4));
+                resources->PreviewModifyTile(j + x, i + y, GetRandomTile(4));
             else
-                layer->ModifyTile(j + x, i + y, GetRandomTile(4));
+                resources->ModifyTile(j + x, i + y, GetRandomTile(4));
         }
     }
 
     //paint around the edges
     for(signed int i = -1; i <= w; i++)
     {
-        if(!ListContainsTile(4, layer->GetTileOrigin(x + i, currentRect.top() - 1)))
-            ContextPaintTile(x + i, currentRect.top() - 1, layer, preview);
+        if(!ListContainsTile(4, resources->GetTileOrigin(x + i, currentRect.top() - 1)))
+            ContextPaintTile(x + i, currentRect.top() - 1, resources, preview);
 
         //bottom
-        if(!ListContainsTile(4, layer->GetTileOrigin(x + i, currentRect.bottom() + 1)))
-            ContextPaintTile(x + i, currentRect.bottom() + 1, layer, preview);
+        if(!ListContainsTile(4, resources->GetTileOrigin(x + i, currentRect.bottom() + 1)))
+            ContextPaintTile(x + i, currentRect.bottom() + 1, resources, preview);
     }
 
     for(signed int i = -1; i <= h; i++)
     {
         //left
-        if(!ListContainsTile(4, layer->GetTileOrigin(currentRect.left() - 1, y + i)))
-            ContextPaintTile(currentRect.left() - 1, y + i, layer, preview);
+        if(!ListContainsTile(4, resources->GetTileOrigin(currentRect.left() - 1, y + i)))
+            ContextPaintTile(currentRect.left() - 1, y + i, resources, preview);
 
         //right
-        if(!ListContainsTile(4, layer->GetTileOrigin(currentRect.right() + 1, y + i)))
-            ContextPaintTile(currentRect.right() + 1, y + i, layer, preview);
+        if(!ListContainsTile(4, resources->GetTileOrigin(currentRect.right() + 1, y + i)))
+            ContextPaintTile(currentRect.right() + 1, y + i, resources, preview);
     }
 }
 
-void MatrixBrush::Press(int x, int y, TileLayerView *layer)
+void MatrixBrush::Press(int x, int y, ResourceManager *resources)
 {
     //if it was the left mouse button
     currentRect.setLeft(x);
@@ -58,10 +58,10 @@ void MatrixBrush::Press(int x, int y, TileLayerView *layer)
     currentRect.setWidth(1);
     currentRect.setHeight(1);
 
-    Rect(x, y, 1, 1, layer, true);
+    Rect(x, y, 1, 1, resources, true);
 }
 
-void MatrixBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
+void MatrixBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
 {
     //if the left mouse is down
     if(leftButtonDown)
@@ -69,22 +69,22 @@ void MatrixBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
         //if the rect is changed
         if(currentRect.right() != x || currentRect.bottom() != y)
         {
-            layer->ClearPreview();
+            resources->ClearPreview();
             currentRect.setRight(x);
             currentRect.setBottom(y);
 
-            Rect(currentRect.x(), currentRect.y(), currentRect.width(), currentRect.height(), layer, true);
+            Rect(currentRect.x(), currentRect.y(), currentRect.width(), currentRect.height(), resources, true);
         }
     }
 }
 
-void MatrixBrush::Release(int x, int y, TileLayerView *layer)
+void MatrixBrush::Release(int x, int y, ResourceManager *resources)
 {
     //if it was the left button being released
         //actually draw the line
-    Rect(currentRect.x(), currentRect.y(), currentRect.width(), currentRect.height(), layer, false);
+    Rect(currentRect.x(), currentRect.y(), currentRect.width(), currentRect.height(), resources, false);
 
-    layer->ClearPreview();
+    resources->ClearPreview();
 
     currentRect.setRect(0,0,0,0);
 }

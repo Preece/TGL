@@ -11,9 +11,9 @@ public:
     StampBrush();
     ~StampBrush();
 
-    void Move(int x, int y, TileLayerView *layer, bool leftButtonDown);
+    void Move(int x, int y, ResourceManager *resources, bool leftButtonDown);
 
-    void Paint(int x, int y, TileLayerView *layer, bool preview);
+    void Paint(int x, int y, ResourceManager *resources, bool preview);
     QString GetType() { return "stamp"; }
 
     void CreateGrid(QList<TileCoord> items);

@@ -13,26 +13,26 @@ TileBrush::~TileBrush()
 
 }
 
-void TileBrush::Press(int x, int y, TileLayerView *layer)
+void TileBrush::Press(int x, int y, ResourceManager *resources)
 {
     //they have started painting, so nix the preview
-    layer->ClearPreview();
+    resources->ClearPreview();
 
     if(x != lastPaintSpot.x() || y != lastPaintSpot.y())
-        Paint(x, y, layer);
+        Paint(x, y, resources);
 
     lastPaintSpot.setX(x);
     lastPaintSpot.setY(y);
 }
 
-void TileBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
+void TileBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
 {
     if(leftButtonDown)
     {
         //paint if the position is different from before
         if(x != lastPaintSpot.x() || y != lastPaintSpot.y())
         {
-            Line(lastPaintSpot.x(), lastPaintSpot.y(), x, y, layer);
+            Line(lastPaintSpot.x(), lastPaintSpot.y(), x, y, resources);
 
             //this spot is now the last spot
             lastPaintSpot.setX(x);
@@ -44,8 +44,8 @@ void TileBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
         //paint if the position is different from before
         if(x != lastPreviewSpot.x() || y != lastPreviewSpot.y())
         {
-            layer->ClearPreview();
-            Paint(x, y, layer, true);
+            resources->ClearPreview();
+            Paint(x, y, resources, true);
 
             //this spot is now the last spot
             lastPreviewSpot.setX(x);
@@ -54,20 +54,20 @@ void TileBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
     }
 }
 
-void TileBrush::Release(int x, int y, TileLayerView *layer)
+void TileBrush::Release(int x, int y, ResourceManager *resources)
 {
 }
 
-void TileBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void TileBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
     //do nothing
 }
 
-void TileBrush::Line(int x1, int y1, int x2, int y2, TileLayerView *layer, bool preview)
+void TileBrush::Line(int x1, int y1, int x2, int y2, ResourceManager *resources, bool preview)
 {
     //if the tiles are at the same spot
     if(x1 == x2 && y1 == y2)
-        Paint(x1, y1, layer, preview);
+        Paint(x1, y1, resources, preview);
 
     // Bresenham's line algorithm
     const bool steep = (qAbs(y2 - y1) > qAbs(x2 - x1));
@@ -97,11 +97,11 @@ void TileBrush::Line(int x1, int y1, int x2, int y2, TileLayerView *layer, bool 
     {
         if(steep)
         {
-            Paint(y, x, layer, preview);
+            Paint(y, x, resources, preview);
         }
         else
         {
-            Paint(x, y, layer, preview);
+            Paint(x, y, resources, preview);
         }
 
         error -= dy;

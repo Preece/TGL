@@ -10,16 +10,16 @@ QCursor ScatterBrush::GetCursor()
         return QCursor(QPixmap(":/Icons/pencil.png"), 1, 2);
 }
 
-void ScatterBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void ScatterBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next
-    layer->ClearPreview();
+    resources->ClearPreview();
 
     if(fill && !preview)
     {
-        TileCoord old = layer->GetTileOrigin(x, y);
+        TileCoord old = resources->GetTileOrigin(x, y);
 
-        Fill(x, y, GetRandomTile(0), old, layer);
+        Fill(x, y, GetRandomTile(0), old, resources);
 
         return;
     }
@@ -34,12 +34,12 @@ void ScatterBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
         {
             if((i*i) + (j*j) < (radius * radius))
             {
-                if(overwrite || layer->GetTileOrigin(j + x, i + y) == TileCoord(-1, -1))
+                if(overwrite || resources->GetTileOrigin(j + x, i + y) == TileCoord(-1, -1))
                 {
                     if(preview)
-                        layer->PreviewModifyTile(j + x, i + y, GetRandomTile(0));
+                        resources->PreviewModifyTile(j + x, i + y, GetRandomTile(0));
                     else
-                        layer->ModifyTile(j + x, i + y, GetRandomTile(0));
+                        resources->ModifyTile(j + x, i + y, GetRandomTile(0));
                 }
             }
         }

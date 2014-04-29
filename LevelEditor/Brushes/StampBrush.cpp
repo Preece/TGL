@@ -11,14 +11,14 @@ StampBrush::~StampBrush()
 
 }
 
-void StampBrush::Move(int x, int y, TileLayerView *layer, bool leftButtonDown)
+void StampBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
 {
-    layer->ClearPreview();
+    resources->ClearPreview();
 
-    Paint(x, y, layer, true);
+    Paint(x, y, resources, true);
 }
 
-void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void StampBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
     //the trick is to take the position to paint
     //add the tile origin coordinates
@@ -34,9 +34,9 @@ void StampBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
         int paintSpotY = y + tiles[i].second - avgY;
         
         if(preview)
-            layer->PreviewModifyTile(paintSpotX, paintSpotY, tiles[i]);
+            resources->PreviewModifyTile(paintSpotX, paintSpotY, tiles[i]);
         else
-            layer->ModifyTile(paintSpotX, paintSpotY, tiles[i]);
+            resources->ModifyTile(paintSpotX, paintSpotY, tiles[i]);
     }
 }
 

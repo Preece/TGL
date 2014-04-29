@@ -7,6 +7,8 @@ ResourceManager::ResourceManager()
 
     modifyTiles = new ModifyTilesCommand;
     clipboard = new Clipboard();
+
+    currentLayerID = 0;
 }
 
 ResourceManager::~ResourceManager()
@@ -152,35 +154,51 @@ int ResourceManager::GetLayerOpacity(int layerID)
     return 100;
 }
 
-void ResourceManager::UpdateLayerSize(int w, int h)
+void ResourceManager::ModifyTile(int x, int y, TileCoord origin)
 {
-
-}
-
-void ResourceManager::ModifyTile(int layerID, int x, int y, TileCoord origin)
-{
-    TileLayer *tempLayer = layerMap.value(layerID);
+    TileLayer *tempLayer = layerMap.value(currentLayerID);
 
     if(tempLayer)
     {
-        modifyTiles->AddModification(GetTileLayer(layerID), x, y, origin, tempLayer->GetTileOrigin(x, y));
+        modifyTiles->AddModification(GetTileLayer(currentLayerID), x, y, origin, tempLayer->GetTileOrigin(x, y));
 
         //notify the view that this tile should be updated
-        emit TileUpdated(layerID, x, y, origin);
+        emit TileUpdated(currentLayerID, x, y, origin);
     }
 }
 
-TileCoord ResourceManager::GetTileOrigin(int layerID, int x, int y)
+void ResourceManager::PreviewModifyTile(int x, int y, TileCoord origin)
+{
+    Tile tempTile;
+    tempTile.origin = origin;
+    tempTile.pos = TileCoord(x, y);
+    previewTiles[TileCoord(x, y)] = tempTile;
+
+    emit PreviewTileUpdated(x, y, origin);
+}
+
+void ResourceManager::ClearPreview()
+{
+    QList<Tile> previewList = previewTiles.values();
+    for(int i = 0; i < previewList.count(), i++)
+    {
+        PreviewModifyTile(previewList[i].pos.first, previewList[i].pos.second, TileCoord(-1, -1));
+    }
+
+    previewTiles.clear();
+}
+
+TileCoord ResourceManager::GetTileOrigin(int x, int y)
 {
     //see if there is an upcoming modification to this tile
-    TileCoord modOrigin = modifyTiles->GetTileOrigin(layerID, x, y);
+    TileCoord modOrigin = modifyTiles->GetTileOrigin(currentLayerID, x, y);
     if(modOrigin != TileCoord(-1, -1))
         return modOrigin;
 
     //otherwise, check if the tile exists in the normal model
-    if(layerMap.value(layerID))
+    if(layerMap.value(currentLayerID))
     {
-        TileLayer *tempLayer = layerMap.value(layerID);
+        TileLayer *tempLayer = layerMap.value(currentLayerID);
 
         if(tempLayer)
             return tempLayer->GetTileOrigin(x, y);

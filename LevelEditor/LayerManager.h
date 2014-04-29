@@ -51,6 +51,7 @@ public slots:
     void UpdateLayerSizes(int newW, int newH);
 
     void UpdateTile(int layerID, int x, int y, TileCoord newOrigin);
+    void UpdatePreviewTile(int x,int y, TileCoord origin);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -62,6 +63,8 @@ private:
 
     QList<TileLayerView*> layers;
     TileLayerView *currentLayer;
+
+    QHash<int, TileWidgetItem*> previewItems;
 
     ResourceManager *resourceManager;
     BrushManager *brushManager;

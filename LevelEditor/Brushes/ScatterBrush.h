@@ -6,7 +6,7 @@
 class ScatterBrush : public ComplexBrush
 {
 public:
-    void Paint(int x, int y, TileLayerView *layer, bool preview);
+    void Paint(int x, int y, ResourceManager *resources, bool preview);
 
     ScatterBrush();
     virtual ~ScatterBrush();

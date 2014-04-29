@@ -46,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->brushmanager, SIGNAL(SelectionCut(QList<TileData>)), resources->GetClipboard(), SLOT(Copy(QList<TileData>)));
     connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<TileData>)), ui->brushManager, SLOT(PasteTiles(QList<TileData>)));
 
+    connect(resources, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), layers, SLOT(UpdatePreviewTile(int,int,TileCoord)));
+    
     //needs to be axed
     connect(resources, SIGNAL(MapSizeChanged(int,int)), layers, SLOT(UpdateLayerSizes(int,int)));
     

@@ -10,7 +10,7 @@ public:
     PencilBrush();
     ~PencilBrush();
 
-    void Paint(int x, int y, TileLayerView *layer, bool preview = false);
+    void Paint(int x, int y, ResourceManager *resources, bool preview = false);
 
     QString GetType() { return "pencil"; }
 

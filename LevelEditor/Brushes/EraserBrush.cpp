@@ -4,7 +4,7 @@ EraserBrush::EraserBrush()
 {
 }
 
-void EraserBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void EraserBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
     if(preview)
         return;
@@ -19,7 +19,7 @@ void EraserBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
         {
             if((i*i) + (j*j) < radius * radius)
             {
-                layer->ModifyTile(j + x, i + y, TileCoord(-1, -1));
+                resources->ModifyTile(j + x, i + y, TileCoord(-1, -1));
             }
         }
     }

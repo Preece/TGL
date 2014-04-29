@@ -11,7 +11,7 @@ PencilBrush::~PencilBrush()
 
 }
 
-void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
+void PencilBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
     //if no tile is selected, bail
     if(selectedTileOrigin == TileCoord(-1, -1))
@@ -19,7 +19,7 @@ void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
 
     //erase the previous preview, if we are in preview mode. Get ready for the next.
     //test removing this. might be wasting time doing nothing here
-    //layer->ClearPreview();
+    //resources->ClearPreview();
 
     int radius = size;
     int radiusSquared = radius * radius;
@@ -34,7 +34,7 @@ void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
             //constrain to within the radius of the drawing circle
             if((iSquared + (j*j)) < radiusSquared)
             {
-                TileCoord currOrigin = layer->GetTileOrigin(j + x, i + y);
+                TileCoord currOrigin = resources->GetTileOrigin(j + x, i + y);
 
                 //and make sure the draw operation would not be painting the same tile.
                 //the preview "or" clause is for when eyedropping a tile. the preview wont
@@ -48,9 +48,9 @@ void PencilBrush::Paint(int x, int y, TileLayerView *layer, bool preview)
                     {
                         //paint either a preview or an actual tile
                         if(preview)
-                            layer->PreviewModifyTile(j + x, i + y, selectedTileOrigin);
+                            resources->PreviewModifyTile(j + x, i + y, selectedTileOrigin);
                         else
-                            layer->ModifyTile(j + x, i + y, selectedTileOrigin);
+                            resources->ModifyTile(j + x, i + y, selectedTileOrigin);
                     }
                 }
             }
