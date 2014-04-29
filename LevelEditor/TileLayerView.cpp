@@ -226,6 +226,7 @@ void TileLayerView::ModifyTileWidgetItem(int x, int y, TileCoord newOrigin)
     //store the tile origin coordinates in the item
     tempTileItem->SetTileOrigin(newOrigin);
     tempTileItem->SetPosition(tilePos);
+    tempTileItem->setFlag(QGraphicsItem::ItemIsSelectable);
 
     //update its Pixmap
     tempTileItem->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
