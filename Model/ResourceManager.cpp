@@ -6,12 +6,15 @@ ResourceManager::ResourceManager()
     undo->setUndoLimit(500);
 
     modifyTiles = new ModifyTilesCommand;
+    clipboard = new Clipboard();
 }
 
 ResourceManager::~ResourceManager()
 {
     if(modifyTiles)
         delete modifyTiles;
+
+    delete clipboard;
 }
 
 int ResourceManager::GetTileWidth()

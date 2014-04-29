@@ -24,6 +24,9 @@ public:
 
     void IntegrateSelectedTiles(TileLayerView *layer);
 
+    QList<TileData> GetSelectedTiles() { return selectedItems; }
+    void SetSelectedTiles(QList<TileData> newTiles) { selectedItems = newTiles; }
+    void ClearSelectedTiles();
 
 private:
 	bool SelectedTileAtPos(int x, int y);

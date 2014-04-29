@@ -43,6 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->miniMap, SIGNAL(CenterMinimapOnLevel()), this, SLOT(CenterMinimapOnLevel()));
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
 
+    connect(ui->brushmanager, SIGNAL(SelectionCut(QList<TileData>)), resources->GetClipboard(), SLOT(Copy(QList<TileData>)));
+    connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<TileData>)), ui->brushManager, SLOT(PasteTiles(QList<TileData>)));
+
     //needs to be axed
     connect(resources, SIGNAL(MapSizeChanged(int,int)), layers, SLOT(UpdateLayerSizes(int,int)));
     

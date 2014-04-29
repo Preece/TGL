@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QUndoStack>
 
+#include "Clipboard.h"
 #include "Sprite.h"
 #include "Image.h"
 #include "TileLayer.h"
@@ -26,6 +27,7 @@ public:
 public slots:
     void Undo();
     void Redo();
+    Clipboard *GetClipboard();
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
     void SetMapSize(int w, int h);
@@ -77,6 +79,8 @@ private:
     ModifyTilesCommand *modifyTiles;
 
     QHash<TileCoord, QPixmap> pixmapCache;
+
+    Clipboard *clipboard;
 };
 
 #endif // RESOURCEMANAGER_H
