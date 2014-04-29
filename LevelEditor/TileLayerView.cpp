@@ -184,6 +184,7 @@ void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
         y = 0;
 
     TileWidgetItem *tempTile = new TileWidgetItem;
+    tempTile->setFlag(QGraphicsItem::ItemIsSelectable);
 
     //update its Pixmap
     tempTile->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
