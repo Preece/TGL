@@ -6,11 +6,11 @@
 #include <QStringList>
 #include <QUndoStack>
 
-#include "Clipboard.h"
 #include "Sprite.h"
 #include "Image.h"
 #include "TileLayer.h"
 #include "LevelProperties.h"
+#include "Clipboard.h"
 
 #include "Commands/AddResourceCommand.h"
 #include "Commands/DeleteResourceCommand.h"

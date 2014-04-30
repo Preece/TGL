@@ -58,7 +58,7 @@ public:
     
 signals:
     void BrushChanged(QCursor newCursor, int type);
-    void SelectionCut(QList<TileData> tiles);
+    void SelectionCut(QList<Tile> tiles);
 
 public slots:
     void SetCurrentBrush(int type);
@@ -67,7 +67,7 @@ public slots:
 
     void CutTiles();
     void CopyTiles();
-    void PasteTiles(QList<TileData> pasteTiles);
+    void PasteTiles(QList<Tile> pasteTiles);
 
     void on_overwriteCheckbox_toggled(bool checked);
     void on_brushSizeInput_valueChanged(int arg1);

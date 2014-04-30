@@ -110,7 +110,7 @@ void TileLayerView::SelectTilesInArea(QRect area)
     scene()->setSelectionArea(path);
 }
 
-QList<TileData> TileLayerView::GetSelectedItems()
+QList<Tile> TileLayerView::GetSelectedItems()
 {
     //get a list of selected tile widget items
     QList<QGraphicsItem*> items = scene()->selectedItems();
@@ -126,11 +126,11 @@ QList<TileData> TileLayerView::GetSelectedItems()
         tileItems.removeAll(previewItems[i]);
 
     //build a list of tile data
-    QList<TileData> tiles;
+    QList<Tile> tiles;
 
     for(int i = 0; i < tileItems.count(); i++)
     {
-        TileData tempData;
+        Tile tempData;
         tempData.pos = tileItems[i]->GetPosition();
         tempData.origin = tileItems[i]->GetTileOrigin();
         tiles.push_back(tempData);
