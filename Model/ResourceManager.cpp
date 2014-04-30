@@ -174,10 +174,17 @@ void ResourceManager::ModifyTile(int x, int y, TileCoord origin)
 
 void ResourceManager::PreviewModifyTile(int x, int y, TileCoord origin)
 {
-    Tile tempTile;
-    tempTile.origin = origin;
-    tempTile.pos = TileCoord(x, y);
-    previewTiles[TileCoord(x, y)] = tempTile;
+    if(origin != TileCoord(-1, -1))
+    {
+        Tile tempTile;
+        tempTile.origin = origin;
+        tempTile.pos = TileCoord(x, y);
+        previewTiles[TileCoord(x, y)] = tempTile;
+    }
+    else
+    {
+        previewTiles.remove(TileCoord(x, y));
+    }
 
     emit PreviewTileUpdated(x, y, origin);
 }

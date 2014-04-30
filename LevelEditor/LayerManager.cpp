@@ -316,5 +316,40 @@ void LayerManager::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
 
 void LayerManager::UpdatePreviewTile(int x, int y, TileCoord origin)
 {
+    if(origin == TileCoord(-1, -1))
+    {
+        if(previewItems.contains(TileCoord(x, y)))
+        {
+            removeItem(previewItems[TileCoord(x, y)]);
+            delete previewItems[TileCoord(x, y)];
+            previewItems.remove(TileCoord(-1, 1));
+            return;
+        }
+    }
 
+    //bounds check
+    if(x >= resourceManager->GetMapWidth())
+        x = resourceManager->GetMapWidth() - 1;
+
+    if(y >= resourceManager->GetMapHeight())
+        y = resourceManager->GetMapHeight() - 1;
+
+    if(x < 0)
+        x = 0;
+
+    if(y < 0)
+        y = 0;
+
+    TileWidgetItem *tempTile = new TileWidgetItem;
+    tempTile->setFlag(QGraphicsItem::ItemIsSelectable);
+
+    //update its Pixmap
+    tempTile->SetTilePixmap(resourceManager->GetTilePixmap(origin));
+
+    //set the position
+    tempTile->setPos(x * resourceManager->GetTileWidth(),
+                     y * resourceManager->GetTileHeight());
+
+    previewItems[TileCoord(x, y)] = tempTile;
+    addItem(tempTile);
 }

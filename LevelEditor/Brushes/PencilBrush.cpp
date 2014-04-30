@@ -18,8 +18,7 @@ void PencilBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
         return;
 
     //erase the previous preview, if we are in preview mode. Get ready for the next.
-    //test removing this. might be wasting time doing nothing here
-    //resources->ClearPreview();
+    resources->ClearPreview();
 
     int radius = size;
     int radiusSquared = radius * radius;

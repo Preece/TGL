@@ -64,7 +64,7 @@ private:
     QList<TileLayerView*> layers;
     TileLayerView *currentLayer;
 
-    QHash<int, TileWidgetItem*> previewItems;
+    QHash<TileCoord, TileWidgetItem*> previewItems;
 
     ResourceManager *resourceManager;
     BrushManager *brushManager;
