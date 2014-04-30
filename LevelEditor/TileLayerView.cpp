@@ -165,7 +165,7 @@ void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
     //add the new tile into the model through the resource manager.
     //the resource manager will ping back a change that will update
     //the actual view with ModifyTileWidgetItem
-    resourceManager->ModifyTile(layerID, x, y, newOrigin);
+    resourceManager->ModifyTile(x, y, newOrigin);
 }
 
 void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
@@ -258,5 +258,5 @@ void TileLayerView::ClearPreview()
 
 TileCoord TileLayerView::GetTileOrigin(int x, int y)
 {
-    return resourceManager->GetTileOrigin(layerID, x, y);
+    return resourceManager->GetTileOrigin(x, y);
 }

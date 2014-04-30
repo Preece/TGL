@@ -141,14 +141,14 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {
-        brushManager->GetCurrentBrush()->Press(tileX, tileY, currentLayer);
+        brushManager->GetCurrentBrush()->Press(tileX, tileY, resourceManager);
     }
     else if(event->button() == Qt::RightButton)
     {
         EyedropTile(event->scenePos().toPoint());
 
         //refresh the preview
-        brushManager->GetCurrentBrush()->Paint(tileX, tileY, currentLayer, true);
+        brushManager->GetCurrentBrush()->Paint(tileX, tileY, resourceManager, true);
     }
 
     QGraphicsScene::mousePressEvent(event);
@@ -176,12 +176,12 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     //if the left button is down
     if(event->buttons() == Qt::LeftButton)
     {
-        brushManager->GetCurrentBrush()->Move(tileX, tileY, currentLayer, true);
+        brushManager->GetCurrentBrush()->Move(tileX, tileY, resourceManager, true);
     }
     //if the left mouse button was not down
     else if(currentLayer)
     {
-        brushManager->GetCurrentBrush()->Move(tileX, tileY, currentLayer, false);
+        brushManager->GetCurrentBrush()->Move(tileX, tileY, resourceManager, false);
     }
 
     QGraphicsScene::mouseMoveEvent(event);
@@ -201,7 +201,7 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {    
-        brushManager->GetCurrentBrush()->Release(tileX, tileY, currentLayer);
+        brushManager->GetCurrentBrush()->Release(tileX, tileY, resourceManager);
 
         //this will package the changes into an undo command and implement them into the model
         //make it abort if the queue is empty
@@ -233,7 +233,7 @@ void LayerManager::RefreshPreview()
     if(currentLayer)
         currentLayer->ClearPreview();
 
-    brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), currentLayer, true);
+    brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), resourceManager, true);
 }
 
 void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
@@ -312,4 +312,9 @@ void LayerManager::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
             return;
         }
     }
+}
+
+void LayerManager::UpdatePreviewTile(int x, int y, TileCoord origin)
+{
+
 }

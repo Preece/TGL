@@ -154,6 +154,11 @@ int ResourceManager::GetLayerOpacity(int layerID)
     return 100;
 }
 
+void ResourceManager::UpdateLayerSize(int w, int h)
+{
+
+}
+
 void ResourceManager::ModifyTile(int x, int y, TileCoord origin)
 {
     TileLayer *tempLayer = layerMap.value(currentLayerID);
@@ -180,7 +185,7 @@ void ResourceManager::PreviewModifyTile(int x, int y, TileCoord origin)
 void ResourceManager::ClearPreview()
 {
     QList<Tile> previewList = previewTiles.values();
-    for(int i = 0; i < previewList.count(), i++)
+    for(int i = 0; i < previewList.count(); i++)
     {
         PreviewModifyTile(previewList[i].pos.first, previewList[i].pos.second, TileCoord(-1, -1));
     }

@@ -26,17 +26,17 @@ void FillBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
     Fill(x, y, selectedTileOrigin, old, resources);
 }
 
-void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileLayerView *newLayer)
+void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources)
 {
     //this is a recursive function. It calls itself in tiles to the north, east, south and west.
     //it will return if the tile is different from the one being replaced, or off the edge of the grid
 
-    if(!newLayer || newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
+    if(!resources || newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
         return;
 
     //if the position is beyond the bounds of the scene, ignore it
-    if(tileX >= newLayer->GetLayerWidth() ||
-       tileY >= newLayer->GetLayerHeight() ||
+    if(tileX >= resources->GetMapWidth() ||
+       tileY >= resources->GetMapHeight() ||
        tileX < 0 || tileY < 0)
            return;
 
@@ -46,8 +46,8 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
     // 3. Add node to the end of Q.
     seedQueue.push(TileCoord(tileX, tileY));
 
-    int layerWidth = newLayer->GetLayerWidth();
-    int layerHeight = newLayer->GetLayerHeight();
+    int layerWidth = resources->GetMapWidth();
+    int layerHeight = resources->GetMapHeight();
 
     QHash<TileCoord,bool> examinedTiles;
 
@@ -71,10 +71,10 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
         examinedTiles[tempCoord] = true;
 
         //if this tile is of the type to be replaced
-        if(newLayer->GetTileOrigin(tempCoord.first, tempCoord.second) == oldOrigin)
+        if(resources->GetTileOrigin(tempCoord.first, tempCoord.second) == oldOrigin)
         {
             //replace this tile with the new type
-            newLayer->ModifyTile(tempCoord.first, tempCoord.second, newOrigin);
+            resources->ModifyTile(tempCoord.first, tempCoord.second, newOrigin);
 
             //put the four surrounding tiles on the stack
             seedQueue.push_back(TileCoord(tempCoord.first - 1, tempCoord.second));

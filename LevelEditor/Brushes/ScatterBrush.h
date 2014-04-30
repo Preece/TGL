@@ -12,7 +12,7 @@ public:
     virtual ~ScatterBrush();
 
     void SetFill(bool toFill) { fill = toFill; }
-    void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileLayerView *newLayer);
+    void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources);
 
     QString GetType() { return "scatter"; }
     QCursor GetCursor();

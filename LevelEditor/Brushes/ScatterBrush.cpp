@@ -55,30 +55,30 @@ ScatterBrush::~ScatterBrush()
 {
 }
 
-void ScatterBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileLayerView *newLayer)
+void ScatterBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources)
 {
     //this is a recursive function. It calls itself in tiles to the north, east, south and west.
     //it will return if the tile is different from the one being replaced, or off the edge of the grid
 
-    if(!newLayer || newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
+    if(newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
         return;
 
     //if the position is beyond the bounds of the scene, ignore it
-    if(tileX >= newLayer->GetLayerWidth() ||
-       tileY >= newLayer->GetLayerHeight() ||
+    if(tileX >= resources->GetMapWidth() ||
+       tileY >= resources->GetMapHeight() ||
        tileX < 0 || tileY < 0)
            return;
 
     //if the current tile is of the type to be replaced
-    if(newLayer->GetTileOrigin(tileX, tileY) == oldOrigin)
+    if(resources->GetTileOrigin(tileX, tileY) == oldOrigin)
     {
         //replace this tile with the new type
-        newLayer->ModifyTile(tileX, tileY, newOrigin);
+        resources->ModifyTile(tileX, tileY, newOrigin);
 
         //call this function on the surrounding tiles
-        Fill(tileX - 1, tileY, GetRandomTile(0), oldOrigin, newLayer);
-        Fill(tileX + 1, tileY, GetRandomTile(0), oldOrigin, newLayer);
-        Fill(tileX, tileY - 1, GetRandomTile(0), oldOrigin, newLayer);
-        Fill(tileX, tileY + 1, GetRandomTile(0), oldOrigin, newLayer);
+        Fill(tileX - 1, tileY, GetRandomTile(0), oldOrigin, resources);
+        Fill(tileX + 1, tileY, GetRandomTile(0), oldOrigin, resources);
+        Fill(tileX, tileY - 1, GetRandomTile(0), oldOrigin, resources);
+        Fill(tileX, tileY + 1, GetRandomTile(0), oldOrigin, resources);
     }
 }

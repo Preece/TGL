@@ -56,7 +56,7 @@ public slots:
     void ModifyTile(int x, int y, TileCoord origin);
     void PreviewModifyTile(int x, int y, TileCoord origin);
     void ClearPreview();
-    TileCoord GetTileOrigin(int layerID, int x, int y);
+    TileCoord GetTileOrigin(int x, int y);
     int GetTileCount(int layerID);
     Tile *GetTileByIndex(int layerID, int i);
     void EndPaintOperation();
@@ -76,7 +76,7 @@ private:
     QHash<int, Image*> imageMap;
     QHash<int, TileLayer*> layerMap;
     int currentLayerID;
-    QHash<int, Tile> previewTiles;
+    QHash<TileCoord, Tile> previewTiles;
 
     LevelProperties levelProperties;
 
