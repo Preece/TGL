@@ -47,7 +47,7 @@ void TileLayerView::DestroyAllItems()
 //this function should also check again for the size of the layer, and update itself accordingly
 void TileLayerView::RepopulateTiles()
 {
-    ClearPreview();
+    /*ClearPreview();
 
     //the strategy is to loop through all the items in the scene,
     //comparing them against the model and updating them accordingly.
@@ -96,7 +96,7 @@ void TileLayerView::RepopulateTiles()
         //if we got here, there is a discrepancy between the model and the scene.
         //This function should resolve it        
         ModifyTileWidgetItem(tempTile->pos.first, tempTile->pos.second, tempTile->origin);
-    }
+    }*/
 }
 
 void TileLayerView::SelectTilesInArea(QRect area)
@@ -145,56 +145,6 @@ void TileLayerView::SelectPreviewItems()
     {
         previewItems[i]->setSelected(true);
     }
-}
-
-void TileLayerView::ModifyTile(int x, int y, TileCoord newOrigin)
-{
-    //bounds check    
-    if(x >= widthInTiles)
-        x = widthInTiles - 1;
-
-    if(y >= heightInTiles)
-        y = heightInTiles - 1;
-
-    if(x < 0)
-        x = 0;
-
-    if(y < 0)
-        y = 0;
-
-    //add the new tile into the model through the resource manager.
-    //the resource manager will ping back a change that will update
-    //the actual view with ModifyTileWidgetItem
-    resourceManager->ModifyTile(x, y, newOrigin);
-}
-
-void TileLayerView::PreviewModifyTile(int x, int y, TileCoord newOrigin)
-{
-    //bounds check
-    if(x >= widthInTiles)
-        x = widthInTiles - 1;
-
-    if(y >= heightInTiles)
-        y = heightInTiles - 1;
-
-    if(x < 0)
-        x = 0;
-
-    if(y < 0)
-        y = 0;
-
-    TileWidgetItem *tempTile = new TileWidgetItem;
-    tempTile->setFlag(QGraphicsItem::ItemIsSelectable);
-
-    //update its Pixmap
-    tempTile->SetTilePixmap(resourceManager->GetTilePixmap(newOrigin));
-
-    //set the position
-    tempTile->setPos(x * resourceManager->GetTileWidth(),
-                     y * resourceManager->GetTileHeight());
-
-    previewItems.append(tempTile);
-    tempTile->setParentItem(this);
 }
 
 //this is a convenience function for adding the graphical element to represent a tile.
@@ -254,9 +204,4 @@ void TileLayerView::ClearPreview()
     }
 
     previewItems.clear();
-}
-
-TileCoord TileLayerView::GetTileOrigin(int x, int y)
-{
-    return resourceManager->GetTileOrigin(x, y);
 }
