@@ -11,8 +11,8 @@ LevelView::LevelView(QWidget *parent) :
     format.setSamples(2);
     format.setSampleBuffers(true);
     format.setDepth(false);
-    setViewport(new QGLWidget(format));
-    setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    //setViewport(new QGLWidget(format));
+    //setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 
     currentCursor = QCursor(Qt::ArrowCursor);
 }

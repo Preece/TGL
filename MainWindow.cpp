@@ -37,14 +37,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
+    connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), resources, SLOT(SetLayerSelection(int)));
     connect(ui->resourceView, SIGNAL(NewResourceSelected(int)), ui->propertyBrowser, SLOT(DisplayResource(int)));
     connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
     connect(ui->miniMap, SIGNAL(CenterMinimapOnLevel()), this, SLOT(CenterMinimapOnLevel()));
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
 
-    connect(ui->brushManager, SIGNAL(SelectionCut(QList<TileData>)), resources->GetClipboard(), SLOT(Copy(QList<TileData>)));
-    connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<TileData>)), ui->brushManager, SLOT(PasteTiles(QList<TileData>)));
+    connect(ui->brushManager, SIGNAL(SelectionCut(QList<Tile>)), resources->GetClipboard(), SLOT(Copy(QList<Tile>)));
+    connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<Tile>)), ui->brushManager, SLOT(PasteTiles(QList<Tile>)));
 
     connect(resources, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), layers, SLOT(UpdatePreviewTile(int,int,TileCoord)));
     
