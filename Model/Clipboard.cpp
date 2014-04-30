@@ -5,7 +5,12 @@ Clipboard::Clipboard(QObject *parent) :
 {
 }
 
-void Clipboard::Copy(QList<TileData> copyTiles)
+Clipboard::~Clipboard()
+{
+
+}
+
+void Clipboard::Copy(QList<Tile> copyTiles)
 {
     tiles = copyTiles;
 }

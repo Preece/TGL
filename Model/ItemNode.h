@@ -9,6 +9,14 @@
 #include <QImage>
 #include <QHash>
 
+typedef QPair<int, int> TileCoord;
+
+struct Tile
+{
+    TileCoord pos;
+    TileCoord origin;
+};
+
 class ItemNode
 {
 protected:
