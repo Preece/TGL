@@ -7,12 +7,6 @@
 #include "../Model/ResourceManager.h"
 #include "../Toolbox/TileWidgetItem.h"
 
-struct TileData
-{
-    TileCoord pos;
-    TileCoord origin;
-};
-
 class TileLayerView : public QGraphicsRectItem
 {
 public:
@@ -41,7 +35,7 @@ public:
     void RepopulateTiles();
 
     void SelectTilesInArea(QRect area);
-    QList<TileData> GetSelectedItems();
+    QList<Tile> GetSelectedItems();
     void SelectPreviewItems();
     bool SelectedTileAtPos(int x, int y);
 

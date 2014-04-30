@@ -23,7 +23,6 @@
 
 #include "SpriteEditor/SpriteEditor.h"
 
-
 typedef QList<TileCoord> TileList;
 
 namespace Ui {

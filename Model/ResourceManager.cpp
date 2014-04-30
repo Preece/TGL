@@ -6,9 +6,9 @@ ResourceManager::ResourceManager()
     undo->setUndoLimit(500);
 
     modifyTiles = new ModifyTilesCommand;
-    clipboard = new Clipboard();
 
     currentLayerID = 0;
+    clipboard = new Clipboard;
 }
 
 ResourceManager::~ResourceManager()

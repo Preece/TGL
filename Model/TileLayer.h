@@ -7,14 +7,6 @@
 
 #include "ItemNode.h"
 
-typedef QPair<int, int> TileCoord;
-
-struct Tile
-{
-    TileCoord pos;
-    TileCoord origin;
-};
-
 class TileLayer : public ItemNode
 {
 public:

@@ -1,26 +1,27 @@
 #ifndef CLIPBOARD_H
 #define CLIPBOARD_H
 
+#include <QObject>
+
+#include "TileLayer.h"
+
 class Clipboard : public QObject
 {
-	Q_OBJECT
-
+    Q_OBJECT
 public:
-	Clipboard();
-	~Clipboard();
+    explicit Clipboard(QObject *parent = 0);
+    ~Clipboard();
 
-	void Paste();
-	
-public slots:
-	void Copy(QList<TileData> copyTiles);
-	
+    void Paste();
 
 signals:
-	void PasteTiles(QList<TileData> pasteTiles);
+    void PasteTiles(QList<Tile> pasteTiles);
 
+public slots:
+    void Copy(QList<Tile> copyTiles);
 
 private:
-	QList<TileData> tiles;
+    QList<Tile> tiles;
 };
 
-#endif
+#endif // CLIPBOARD_H

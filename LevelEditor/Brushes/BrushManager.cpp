@@ -248,10 +248,10 @@ void BrushManager::CopyTiles()
     emit SelectionCut(selector.GetSelectedTiles());
 }
 
-void BrushManager::PasteTiles(QList<TileData> pasteTiles)
+void BrushManager::PasteTiles(QList<Tile> pasteTiles)
 {
     //first integrate any selected tiles
-    selector.IntegrateSelectedTiles();
+    //selector.IntegrateSelectedTiles();
     selector.SetSelectedTiles(pasteTiles);
 }
 

@@ -24,8 +24,8 @@ public:
 
     void IntegrateSelectedTiles(ResourceManager *resources);
 
-    QList<TileData> GetSelectedTiles() { return selectedItems; }
-    void SetSelectedTiles(QList<TileData> newTiles) { selectedItems = newTiles; }
+    QList<Tile> GetSelectedTiles() { return selectedItems; }
+    void SetSelectedTiles(QList<Tile> newTiles) { selectedItems = newTiles; }
     void ClearSelectedTiles();
 
 private:
@@ -37,7 +37,7 @@ private:
    	bool dragMode;
     bool clickAfterDrag;
 
-    QList<TileData> selectedItems;
+    QList<Tile> selectedItems;
 };
 
 #endif // SELECTIONBRUSH_H
