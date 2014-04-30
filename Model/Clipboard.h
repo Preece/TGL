@@ -1,6 +1,8 @@
 #ifndef CLIPBOARD_H
 #define CLIPBOARD_H
 
+struct TileData;
+
 class Clipboard : public QObject
 {
 	Q_OBJECT

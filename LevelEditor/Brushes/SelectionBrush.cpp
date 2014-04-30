@@ -114,6 +114,11 @@ void SelectionBrush::IntegrateSelectedTiles(TileLayerView *layer)
     layer->ClearPreview();
 }
 
+void SelectionBrush::ClearSelectedTiles()
+{
+    selectedItems.clear();
+}
+
 bool SelectionBrush::SelectedTileAtPos(int x, int y)
 {
     TileCoord pos(x, y);

@@ -27,7 +27,7 @@ public:
 public slots:
     void Undo();
     void Redo();
-    Clipboard *GetClipboard();
+    Clipboard *GetClipboard() { return clipboard; }
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
     void SetMapSize(int w, int h);

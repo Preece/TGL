@@ -63,7 +63,8 @@ SOURCES += main.cpp\
     SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
     LevelEditor/LevelView.cpp \
     LevelEditor/Brushes/SelectionBrush.cpp \
-    LevelEditor/Brushes/EyedropperBrush.cpp
+    LevelEditor/Brushes/EyedropperBrush.cpp \
+    Model/Clipboard.cpp
 
 HEADERS  += \
     MainWindow.h \
@@ -115,7 +116,8 @@ HEADERS  += \
     SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
     LevelEditor/LevelView.h \
     LevelEditor/Brushes/SelectionBrush.h \
-    LevelEditor/Brushes/EyedropperBrush.h
+    LevelEditor/Brushes/EyedropperBrush.h \
+    Model/Clipboard.h
 
 FORMS    += \
     MainWindow.ui \

@@ -1,3 +1,4 @@
+#include "Clipboard.h"
 
 Clipboard::Clipboard()
 {
@@ -17,5 +18,5 @@ void Clipboard::Copy(QList<TileData> copyTiles)
 void Clipboard::Paste()
 {
 	if(tiles.count() > 0)
-		emit PasteTiles(tiles);
+        emit PasteTiles(tiles);
 }
