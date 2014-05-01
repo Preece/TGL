@@ -228,7 +228,14 @@ void LayerManager::SetLayerSelection(int newSelection)
 
 void LayerManager::RefreshPreview()
 {
+    ClearPreview();
     brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), resourceManager, true);
+}
+
+void LayerManager::ClearPreview()
+{
+    if(brushManager->GetCurrentBrush()->GetType() != "selector")
+        resourceManager->ClearPreview();
 }
 
 void LayerManager::SelectPreviewItems()
@@ -274,6 +281,8 @@ void LayerManager::ToggleSelectionMode(bool selection)
     {
         for(int i = 0; i < childrenList.count(); i++)
             childrenList[i]->setFlag(QGraphicsItem::ItemIsSelectable, false);
+
+        ClearPreview();
     }
 }
 

@@ -32,6 +32,8 @@ void LevelView::mouseMoveEvent(QMouseEvent *event)
         clickSpot = event->pos();
         event->accept();
 
+        dynamic_cast<LayerManager*>(scene())->ClearPreview();
+
         return;
     }
     else
@@ -48,6 +50,8 @@ void LevelView::mousePressEvent(QMouseEvent *event)
         clickSpot = event->pos();
         setCursor(Qt::ClosedHandCursor);
         event->accept();
+
+        dynamic_cast<LayerManager*>(scene())->ClearPreview();
 
         return;
     }
@@ -137,5 +141,5 @@ void LevelView::resizeEvent(QResizeEvent *event)
 
 void LevelView::leaveEvent(QEvent *event)
 {
-
+    dynamic_cast<LayerManager*>(scene())->ClearPreview();
 }
