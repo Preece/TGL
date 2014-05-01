@@ -34,7 +34,7 @@ void TileLayerView::DestroyAllItems()
 
 void TileLayerView::SelectTilesInArea(QRect area)
 {
-    //translate the position to tile coordinates
+    //translate the position to pixel coordinates
     int tileW = resourceManager->GetTileWidth();
     int tileH = resourceManager->GetTileHeight();
 
@@ -43,33 +43,6 @@ void TileLayerView::SelectTilesInArea(QRect area)
     scene()->setSelectionArea(path);
 }
 
-QList<Tile> TileLayerView::GetSelectedItems()
-{
-    //get a list of selected tile widget items
-    QList<QGraphicsItem*> items = scene()->selectedItems();
-    QList<TileWidgetItem*> tileItems;
-
-    foreach(QGraphicsItem* item, items)
-    {
-        tileItems.push_back(dynamic_cast<TileWidgetItem*>(item));
-    }
-
-    //build a list of tile data
-    QList<Tile> tiles;
-
-    for(int i = 0; i < tileItems.count(); i++)
-    {
-        Tile tempData;
-        tempData.pos = tileItems[i]->GetPosition();
-        tempData.origin = tileItems[i]->GetTileOrigin();
-        tiles.push_back(tempData);
-    }
-
-    return tiles;
-}
-
-//this is a convenience function for adding the graphical element to represent a tile.
-//it does not change the model
 void TileLayerView::ModifyTileItem(int x, int y, TileCoord newOrigin)
 {
     TileCoord tilePos(x, y);

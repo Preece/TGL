@@ -231,6 +231,11 @@ void LayerManager::RefreshPreview()
     brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), resourceManager, true);
 }
 
+void LayerManager::SelectPreviewItems()
+{
+
+}
+
 void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
 {
     for(int i = 0; i < layers.count(); i++)

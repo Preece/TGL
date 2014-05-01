@@ -60,6 +60,11 @@ public slots:
     TileCoord GetTileOrigin(int x, int y);
     int GetTileCount(int layerID);
     Tile *GetTileByIndex(int layerID, int i);
+
+    void SelectTilesInArea(QRect area);
+    QList<Tile> GetSelectedItems();
+    bool SelectedTileAtPos(int x, int y);
+
     void EndPaintOperation();
 
     void DestroyAllResources();
@@ -72,6 +77,8 @@ signals:
 
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);
+
+    void SelectPreviewItems();
 
 private:
     QHash<int, Image*> imageMap;

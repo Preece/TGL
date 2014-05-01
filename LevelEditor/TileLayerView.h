@@ -25,9 +25,6 @@ public:
     void DestroyAllItems();
 
     void SelectTilesInArea(QRect area);
-    QList<Tile> GetSelectedItems();
-    void SelectPreviewItems();
-    bool SelectedTileAtPos(int x, int y);
 
 private:
     QHash<TileCoord, TileWidgetItem*> items;

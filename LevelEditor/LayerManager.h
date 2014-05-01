@@ -45,6 +45,7 @@ public slots:
     void SetLayerSelection(int newSelection);
 
     void RefreshPreview();
+    void SelectPreviewItems();
 
     void UpdateTile(int layerID, int x, int y, TileCoord newOrigin);
     void UpdatePreviewTile(int x,int y, TileCoord origin);

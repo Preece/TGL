@@ -239,6 +239,23 @@ Tile *ResourceManager::GetTileByIndex(int layerID, int i)
     return NULL;
 }
 
+void ResourceManager::SelectTilesInArea(QRect area)
+{
+    //clear out the selected list
+    //loop through all possible tiles in the given area
+    //add them to the selected list
+}
+
+QList<Tile> ResourceManager::GetSelectedItems()
+{
+    //return the selected tiles list
+}
+
+bool ResourceManager::SelectedTileAtPos(int x, int y)
+{
+    //check for a key of the specified coordinates in the selected list
+}
+
 Image *ResourceManager::GetImage(int ID)
 {
     if(imageMap.value(ID))

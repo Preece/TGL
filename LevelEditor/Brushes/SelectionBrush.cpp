@@ -65,14 +65,14 @@ void SelectionBrush::Move(int x, int y, ResourceManager *resources, bool leftBut
         else
         {
             //so select new stuff
-            //resources->SelectTilesInArea(QRect(clickSpot, QPoint(x, y)));
+            resources->SelectTilesInArea(QRect(clickSpot, QPoint(x, y)));
         }
     }
 }
 
 void SelectionBrush::Release(int x, int y, ResourceManager *resources)
 {
-    /*//unset our flag
+    //unset our flag
     dragMode = false;
 
     //if the list is empty, do nothing
@@ -90,7 +90,7 @@ void SelectionBrush::Release(int x, int y, ResourceManager *resources)
     }
 
     //then select the preview items, to maintain visual consistency
-    resources->SelectPreviewItems(); */
+    resources->SelectPreviewItems();
 }
 
 void SelectionBrush::Deselect(ResourceManager *resources)
@@ -100,7 +100,7 @@ void SelectionBrush::Deselect(ResourceManager *resources)
 
 void SelectionBrush::IntegrateSelectedTiles(ResourceManager *resources)
 {
-    /*if(selectedItems.empty() || layer == NULL)
+    if(selectedItems.empty())
         return;
 
     //for every selected item, draw it onto the layer
@@ -111,7 +111,7 @@ void SelectionBrush::IntegrateSelectedTiles(ResourceManager *resources)
 
     //clear out the selection
     selectedItems.clear();
-    resources->ClearPreview();*/
+    resources->ClearPreview();
 }
 
 void SelectionBrush::ClearSelectedTiles()
