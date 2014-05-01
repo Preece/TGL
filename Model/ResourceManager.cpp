@@ -290,6 +290,11 @@ bool ResourceManager::SelectedTileAtPos(int x, int y)
     return false;
 }
 
+void ResourceManager::ClearSelection()
+{
+    selectedTiles.clear();
+}
+
 Image *ResourceManager::GetImage(int ID)
 {
     if(imageMap.value(ID))

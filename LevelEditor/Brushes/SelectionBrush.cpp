@@ -108,6 +108,7 @@ void SelectionBrush::IntegrateSelectedTiles(ResourceManager *resources)
 
     //clear out the selection
     selectedItems.clear();
+    resources->ClearSelection();
     resources->ClearPreview();
 }
 
