@@ -240,7 +240,13 @@ void LayerManager::ClearPreview()
 
 void LayerManager::SelectPreviewItems()
 {
+    QList<TileWidgetItem*> tileList = previewItems.values();
 
+    for(int i = 0; i < tileList.count(); i++)
+    {
+        if(tileList[i])
+            tileList[i]->setSelected(true);
+    }
 }
 
 void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
@@ -321,7 +327,7 @@ void LayerManager::UpdatePreviewTile(int x, int y, TileCoord origin)
         {
             removeItem(previewItems[TileCoord(x, y)]);
             delete previewItems[TileCoord(x, y)];
-            previewItems.remove(TileCoord(-1, 1));
+            previewItems.remove(TileCoord(x, y));
             return;
         }
     }
