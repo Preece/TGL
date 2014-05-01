@@ -302,17 +302,6 @@ void LayerManager::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
 
 void LayerManager::UpdatePreviewTile(int x, int y, TileCoord origin)
 {
-    if(origin == TileCoord(-1, -1))
-    {
-        if(previewItems.contains(TileCoord(x, y)))
-        {
-            removeItem(previewItems[TileCoord(x, y)]);
-            delete previewItems[TileCoord(x, y)];
-            previewItems.remove(TileCoord(-1, 1));
-            return;
-        }
-    }
-
     //bounds check
     if(x >= resourceManager->GetMapWidth())
         x = resourceManager->GetMapWidth() - 1;
@@ -325,6 +314,17 @@ void LayerManager::UpdatePreviewTile(int x, int y, TileCoord origin)
 
     if(y < 0)
         y = 0;
+
+    if(origin == TileCoord(-1, -1))
+    {
+        if(previewItems.contains(TileCoord(x, y)))
+        {
+            removeItem(previewItems[TileCoord(x, y)]);
+            delete previewItems[TileCoord(x, y)];
+            previewItems.remove(TileCoord(-1, 1));
+            return;
+        }
+    }
 
     TileWidgetItem *tempTile = new TileWidgetItem;
     tempTile->setFlag(QGraphicsItem::ItemIsSelectable);
