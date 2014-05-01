@@ -243,9 +243,9 @@ void ResourceManager::SelectTilesInArea(QRect area)
 {
     selectedTiles.clear();
 
-    for(int i = area.left(); i < area.right(); i++)
+    for(int i = area.left(); i <= area.right(); i++)
     {
-        for(int j = area.top(); j < area.bottom(); j++)
+        for(int j = area.top(); j <= area.bottom(); j++)
         {
             if(GetTileOrigin(i, j) != TileCoord(-1, -1))
             {
