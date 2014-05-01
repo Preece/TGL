@@ -47,8 +47,6 @@ void LayerManager::AddLayer(int newLayerID)
     TileLayerView *tempLayerView = new TileLayerView;
     tempLayerView->SetLayerID(newLayerID);
     tempLayerView->RegisterResourceManager(resourceManager);
-    tempLayerView->SetLayerSize(resourceManager->GetMapWidth(),
-                                 resourceManager->GetMapHeight());
 
     //put the layer group into the list
     layers.insert(0, tempLayerView);
@@ -230,9 +228,6 @@ void LayerManager::SetLayerSelection(int newSelection)
 
 void LayerManager::RefreshPreview()
 {
-    if(currentLayer)
-        currentLayer->ClearPreview();
-
     brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), resourceManager, true);
 }
 
@@ -247,14 +242,6 @@ void LayerManager::UpdateLayerOpacity(int opaqueLayerID)
             layers[i]->setOpacity(opacity);
         }
     }
-}
-
-void LayerManager::ClearPreview()
-{
-    //we don't want external things clearing away the selection. Only things that
-    //directly access the layer (like the brush) should clear that away
-    if(currentLayer && brushManager->GetCurrentBrush()->GetType() != "selector")
-        currentLayer->ClearPreview();
 }
 
 void LayerManager::ToggleLayerVisibility(int layerIndex, bool show)
@@ -282,22 +269,7 @@ void LayerManager::ToggleSelectionMode(bool selection)
     {
         for(int i = 0; i < childrenList.count(); i++)
             childrenList[i]->setFlag(QGraphicsItem::ItemIsSelectable, false);
-
-        ClearPreview();
     }
-}
-
-void LayerManager::RepopulateAllLayers()
-{
-    for(int i = 0; i < layers.count(); i++)
-        layers[i]->RepopulateTiles();
-}
-
-void LayerManager::UpdateLayerSizes(int newW, int newH)
-{
-    //loop through each layer and modify their sizes
-    for(int i = 0; i < layers.count(); i++)
-        layers[i]->SetLayerSize(newW, newH);
 }
 
 void LayerManager::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
@@ -308,7 +280,7 @@ void LayerManager::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
     {
         if(layers[i]->GetLayerID() == layerID)
         {
-            layers[i]->ModifyTileWidgetItem(x, y, newOrigin);
+            layers[i]->ModifyTileItem(x, y, newOrigin);
             return;
         }
     }

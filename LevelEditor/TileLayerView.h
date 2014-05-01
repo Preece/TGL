@@ -18,15 +18,11 @@ public:
     void SetLayerID(int newID) { layerID = newID; }
     int GetLayerID() { return layerID; }
 
-    void ClearPreview();
-    void ModifyTileWidgetItem(int x, int y, TileCoord newOrigin);
-
-    void SetLayerSize(int w, int h);
+    void ModifyTileItem(int x, int y, TileCoord newOrigin);
 
     void ToggleVisibility(bool visible);
 
     void DestroyAllItems();
-    void RepopulateTiles();
 
     void SelectTilesInArea(QRect area);
     QList<Tile> GetSelectedItems();
@@ -34,11 +30,7 @@ public:
     bool SelectedTileAtPos(int x, int y);
 
 private:
-    int widthInTiles, heightInTiles;
-
     QHash<TileCoord, TileWidgetItem*> items;
-
-    QList<TileWidgetItem*> previewItems;
 
     int layerID;
     ResourceManager *resourceManager;

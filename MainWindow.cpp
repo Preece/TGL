@@ -124,8 +124,6 @@ void MainWindow::RepopulateEverything()
     tileSelector->RepopulateTileSelector();
 
     ui->resourceView->RepopulateEverything();
-
-    layers->RepopulateAllLayers();
 }
 
 void MainWindow::on_actionAdd_Image_triggered()

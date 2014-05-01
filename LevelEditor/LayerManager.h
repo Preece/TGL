@@ -38,8 +38,6 @@ signals:
     void SelectNewBrush(int brushID);
 
 public slots:
-    void RepopulateAllLayers();
-
     void ToggleLayerVisibility(int layerIndex, bool show);
     void ToggleGrid(bool show = true);
     void ToggleSelectionMode(bool selection);
@@ -47,8 +45,6 @@ public slots:
     void SetLayerSelection(int newSelection);
 
     void RefreshPreview();
-
-    void UpdateLayerSizes(int newW, int newH);
 
     void UpdateTile(int layerID, int x, int y, TileCoord newOrigin);
     void UpdatePreviewTile(int x,int y, TileCoord origin);
