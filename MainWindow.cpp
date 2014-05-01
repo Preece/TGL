@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(resources, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), layers, SLOT(UpdatePreviewTile(int,int,TileCoord)));
 
     connect(resources, SIGNAL(SelectPreviewItems()), layers, SLOT(SelectPreviewItems()));
+    connect(resources, SIGNAL(UpdateSelectionGeometry(QRect)), layers, SLOT(UpdateSelectionGeometry(QRect)));
     
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
