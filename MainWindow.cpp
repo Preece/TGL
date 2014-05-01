@@ -51,9 +51,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(resources, SIGNAL(SelectPreviewItems()), layers, SLOT(SelectPreviewItems()));
     
-    //needs to be axed
-    connect(resources, SIGNAL(MapSizeChanged(int,int)), layers, SLOT(UpdateLayerSizes(int,int)));
-    
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
 

@@ -241,19 +241,42 @@ Tile *ResourceManager::GetTileByIndex(int layerID, int i)
 
 void ResourceManager::SelectTilesInArea(QRect area)
 {
-    //clear out the selected list
-    //loop through all possible tiles in the given area
-    //add them to the selected list
+    selectedTiles.clear();
+
+    for(int i = area.left(); i < area.right(); i++)
+    {
+        for(int j = area.top(); j < area.bottom(); j++)
+        {
+            if(GetTileOrigin(i, j) != TileCoord(-1, -1))
+            {
+                Tile tempTile;
+                tempTile.pos.first = i;
+                tempTile.pos.second = j;
+                tempTile.origin = GetTileOrigin(i, j);
+                selectedTiles.append(tempTile);
+            }
+        }
+    }
+
+    emit UpdateSelectionGeometry(area);
 }
 
 QList<Tile> ResourceManager::GetSelectedItems()
 {
     //return the selected tiles list
+    return selectedTiles;
 }
 
 bool ResourceManager::SelectedTileAtPos(int x, int y)
 {
     //check for a key of the specified coordinates in the selected list
+    for(int i = 0; i < selectedTiles.count(); i++)
+    {
+        if(selectedTiles[i].pos.first == x && selectedTiles[i].pos.second == y)
+            return true;
+    }
+
+    return false;
 }
 
 Image *ResourceManager::GetImage(int ID)

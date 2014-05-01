@@ -78,6 +78,7 @@ signals:
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);
 
+    void UpdateSelectionGeometry(QRect rect);
     void SelectPreviewItems();
 
 private:
@@ -85,6 +86,7 @@ private:
     QHash<int, TileLayer*> layerMap;
     int currentLayerID;
     QHash<TileCoord, Tile> previewTiles;
+    QList<Tile> selectedTiles;
 
     LevelProperties levelProperties;
 

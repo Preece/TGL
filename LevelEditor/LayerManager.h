@@ -50,6 +50,8 @@ public slots:
     void UpdateTile(int layerID, int x, int y, TileCoord newOrigin);
     void UpdatePreviewTile(int x,int y, TileCoord origin);
 
+    void UpdateSelectionGeometry(QRect rect);
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);

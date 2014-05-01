@@ -12,9 +12,6 @@ SelectionBrush::~SelectionBrush()
 
 void SelectionBrush::Press(int x, int y, ResourceManager *resources)
 {
-    //later, cut and paste will draw from the tiles suspended in this class.
-
-
     //if there is a selected tile at this position
     if(SelectedTileAtPos(x, y))
     {
@@ -56,7 +53,7 @@ void SelectionBrush::Move(int x, int y, ResourceManager *resources, bool leftBut
                 resources->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
             }
 
-            //resources->SelectPreviewItems();
+            resources->SelectPreviewItems();
 
             previousMouseSpot.setX(x);
             previousMouseSpot.setY(y);

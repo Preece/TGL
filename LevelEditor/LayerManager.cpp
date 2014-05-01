@@ -330,3 +330,9 @@ void LayerManager::UpdatePreviewTile(int x, int y, TileCoord origin)
     previewItems[TileCoord(x, y)] = tempTile;
     addItem(tempTile);
 }
+
+void LayerManager::UpdateSelectionGeometry(QRect rect)
+{
+    if(currentLayer)
+        currentLayer->SelectTilesInArea(rect);
+}
