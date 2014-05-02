@@ -19,8 +19,10 @@ void SelectionBrush::Press(int x, int y, ResourceManager *resources)
     //if there is not a dragged tile at this position
     else
     {
-        //integrate these tiles into the layer
+        //integrate these tiles into the layer. This function will
+        //do nothing if there are no dragging tiles
         IntegrateDraggingTiles(resources);
+        dragMode = false;
     }
     
     clickSpot.setX(x);
@@ -69,12 +71,27 @@ void SelectionBrush::Release(int x, int y, ResourceManager *resources)
 {
     if(!dragMode)
     {
-        //get a list of selected tiles that are not preview items
-        draggingTiles = resources->GetSelectedTiles();
+        //first integrate any lingering tiles
+        IntegrateDraggingTiles(resources);
 
-        if(draggingTiles.empty())
-            return;
+        PopOutSelectedTiles(resources);
+    }
 
+    dragMode = false;
+}
+
+void SelectionBrush::Deselect(ResourceManager *resources)
+{
+    IntegrateDraggingTiles(resources);
+}
+
+void SelectionBrush::PopOutSelectedTiles(ResourceManager *resources)
+{
+    //get a list of selected tiles that are not preview items
+    draggingTiles = resources->GetSelectedTiles();
+
+    if(!draggingTiles.empty())
+    {
         //otherwise, remove them all from the resources, and draw them again as previews
         for(int i = 0; i < draggingTiles.count(); i++)
         {
@@ -87,34 +104,26 @@ void SelectionBrush::Release(int x, int y, ResourceManager *resources)
         resources->SelectPreviewItems();
         resources->EndPaintOperation();
     }
-
-    dragMode = false;
-}
-
-void SelectionBrush::Deselect(ResourceManager *resources)
-{
-    IntegrateDraggingTiles(resources);
 }
 
 void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
 {
-    if(draggingTiles.empty())
-        return;
-
-    //for every selected item, draw it onto the layer
-    for(int i = 0; i < draggingTiles.count(); i++)
+    if(!draggingTiles.empty())
     {
-        resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+        //for every selected item, draw it onto the layer
+        for(int i = 0; i < draggingTiles.count(); i++)
+        {
+            resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+        }
+
+        //package this change into an undo operation
+        resources->EndPaintOperation();
+
+        //clear out the selection
+        resources->ClearSelection();
+        resources->ClearPreview();
+        ClearDraggingTiles();
     }
-
-    //clear out the selection
-    draggingTiles.clear();
-    resources->ClearSelection();
-    resources->ClearPreview();
-    ClearDraggingTiles();
-
-    //package this change into an undo operation
-    resources->EndPaintOperation();
 }
 
 void SelectionBrush::ClearDraggingTiles()

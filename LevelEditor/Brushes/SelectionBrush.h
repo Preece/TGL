@@ -22,6 +22,7 @@ public:
     QString GetType() { return "selector"; }
     QCursor GetCursor() { return QCursor(Qt::CrossCursor); }
 
+    void PopOutSelectedTiles(ResourceManager *resources);
     void IntegrateDraggingTiles(ResourceManager *resources);
 
     QList<Tile> GetDraggingTiles() { return draggingTiles; }
