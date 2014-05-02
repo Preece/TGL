@@ -62,7 +62,7 @@ public slots:
     Tile *GetTileByIndex(int layerID, int i);
 
     void SelectTilesInArea(QRect area);
-    QList<Tile> GetSelectedItems();
+    QList<Tile> GetSelectedTiles();
     bool SelectedTileAtPos(int x, int y);
     void ClearSelection();
 

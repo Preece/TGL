@@ -261,7 +261,7 @@ void ResourceManager::SelectTilesInArea(QRect area)
     emit UpdateSelectionGeometry(area);
 }
 
-QList<Tile> ResourceManager::GetSelectedItems()
+QList<Tile> ResourceManager::GetSelectedTiles()
 {
     TileLayer *tempLayer = layerMap.value(currentLayerID);
 

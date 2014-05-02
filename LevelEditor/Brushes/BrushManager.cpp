@@ -238,21 +238,21 @@ void BrushManager::SetSelectedTiles(TileList newList)
 void BrushManager::CutTiles()
 {
     //emit the selected tiles then clear out the selector
-    emit SelectionCut(selector.GetSelectedTiles());
-    selector.ClearSelectedTiles();
+    emit SelectionCut(selector.GetDraggingTiles());
+    selector.ClearDraggingTiles();
 }
 
 void BrushManager::CopyTiles()
 {
     //simply emit what is selected
-    emit SelectionCut(selector.GetSelectedTiles());
+    emit SelectionCut(selector.GetDraggingTiles());
 }
 
 void BrushManager::PasteTiles(QList<Tile> pasteTiles)
 {
     //first integrate any selected tiles
     //selector.IntegrateSelectedTiles();
-    selector.SetSelectedTiles(pasteTiles);
+    selector.SetDraggingTiles(pasteTiles);
 }
 
 void BrushManager::on_overwriteCheckbox_toggled(bool checked)

@@ -22,14 +22,14 @@ public:
     QString GetType() { return "selector"; }
     QCursor GetCursor() { return QCursor(Qt::CrossCursor); }
 
-    void IntegrateSelectedTiles(ResourceManager *resources);
+    void IntegrateDraggingTiles(ResourceManager *resources);
 
-    QList<Tile> GetSelectedTiles() { return selectedItems; }
-    void SetSelectedTiles(QList<Tile> newTiles) { selectedItems = newTiles; }
-    void ClearSelectedTiles();
+    QList<Tile> GetDraggingTiles() { return draggingTiles; }
+    void SetDraggingTiles(QList<Tile> newTiles) { draggingTiles = newTiles; }
+    void ClearDraggingTiles();
 
 private:
-	bool SelectedTileAtPos(int x, int y);
+    bool DraggingTileAtPos(int x, int y);
 	
     QPoint clickSpot;
     QPoint previousMouseSpot;
@@ -37,7 +37,7 @@ private:
    	bool dragMode;
     bool clickAfterDrag;
 
-    QList<Tile> selectedItems;
+    QList<Tile> draggingTiles;
 };
 
 #endif // SELECTIONBRUSH_H

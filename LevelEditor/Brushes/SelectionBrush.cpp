@@ -12,17 +12,15 @@ SelectionBrush::~SelectionBrush()
 
 void SelectionBrush::Press(int x, int y, ResourceManager *resources)
 {
-    //if there is a selected tile at this position
-    if(SelectedTileAtPos(x, y))
+    if(DraggingTileAtPos(x, y))
     {
-        //flag that we are currently dragging stuff
         dragMode = true;
     }
-    //if there is not a selected tile at this position
+    //if there is not a dragged tile at this position
     else
     {
         //integrate these tiles into the layer
-        IntegrateSelectedTiles(resources);
+        IntegrateDraggingTiles(resources);
     }
     
     clickSpot.setX(x);
@@ -46,11 +44,11 @@ void SelectionBrush::Move(int x, int y, ResourceManager *resources, bool leftBut
             signed int yDiff = y - previousMouseSpot.y();
 
             //apply the change to the position of each selected item, then draw
-            for(int i = 0; i < selectedItems.count(); i++)
+            for(int i = 0; i < draggingTiles.count(); i++)
             {
-                selectedItems[i].pos.first += xDiff;
-                selectedItems[i].pos.second += yDiff;
-                resources->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
+                draggingTiles[i].pos.first += xDiff;
+                draggingTiles[i].pos.second += yDiff;
+                resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
             }
 
             resources->SelectPreviewItems();
@@ -73,57 +71,62 @@ void SelectionBrush::Release(int x, int y, ResourceManager *resources)
     dragMode = false;
 
     //if the list is empty, do nothing
-    if(resources->GetSelectedItems().empty())
+    if(resources->GetSelectedTiles().empty())
         return;
 
     //get a list of selected tiles that are not preview items
-    selectedItems = resources->GetSelectedItems();
+    draggingTiles = resources->GetSelectedTiles();
 
     //otherwise, remove them all from the resources, and draw them again as previews
-    for(int i = 0; i < selectedItems.count(); i++)
+    for(int i = 0; i < draggingTiles.count(); i++)
     {
-        resources->ModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, TileCoord(-1, -1));
-        resources->PreviewModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
+        resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, TileCoord(-1, -1));
+        resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
     }
 
     //then select the preview items, to maintain visual consistency
+    resources->ClearSelection();
     resources->SelectPreviewItems();
+    resources->EndPaintOperation();
 }
 
 void SelectionBrush::Deselect(ResourceManager *resources)
 {
-    IntegrateSelectedTiles(resources);
+    IntegrateDraggingTiles(resources);
 }
 
-void SelectionBrush::IntegrateSelectedTiles(ResourceManager *resources)
+void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
 {
-    if(selectedItems.empty())
+    if(draggingTiles.empty())
         return;
 
     //for every selected item, draw it onto the layer
-    for(int i = 0; i < selectedItems.count(); i++)
+    for(int i = 0; i < draggingTiles.count(); i++)
     {
-        resources->ModifyTile(selectedItems[i].pos.first, selectedItems[i].pos.second, selectedItems[i].origin);
+        resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
     }
 
     //clear out the selection
-    selectedItems.clear();
+    draggingTiles.clear();
     resources->ClearSelection();
     resources->ClearPreview();
+
+    //package this change into an undo operation
+    resources->EndPaintOperation();
 }
 
-void SelectionBrush::ClearSelectedTiles()
+void SelectionBrush::ClearDraggingTiles()
 {
-    selectedItems.clear();
+    draggingTiles.clear();
 }
 
-bool SelectionBrush::SelectedTileAtPos(int x, int y)
+bool SelectionBrush::DraggingTileAtPos(int x, int y)
 {
     TileCoord pos(x, y);
 
-    for(int i = 0; i < selectedItems.count(); i++)
+    for(int i = 0; i < draggingTiles.count(); i++)
     {
-        if(selectedItems[i].pos == pos)
+        if(draggingTiles[i].pos == pos)
             return true;
     }
 
