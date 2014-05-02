@@ -67,27 +67,28 @@ void SelectionBrush::Move(int x, int y, ResourceManager *resources, bool leftBut
 
 void SelectionBrush::Release(int x, int y, ResourceManager *resources)
 {
-    //unset our flag
-    dragMode = false;
-
-    //if the list is empty, do nothing
-    if(resources->GetSelectedTiles().empty())
-        return;
-
-    //get a list of selected tiles that are not preview items
-    draggingTiles = resources->GetSelectedTiles();
-
-    //otherwise, remove them all from the resources, and draw them again as previews
-    for(int i = 0; i < draggingTiles.count(); i++)
+    if(!dragMode)
     {
-        resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, TileCoord(-1, -1));
-        resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+        //get a list of selected tiles that are not preview items
+        draggingTiles = resources->GetSelectedTiles();
+
+        if(draggingTiles.empty())
+            return;
+
+        //otherwise, remove them all from the resources, and draw them again as previews
+        for(int i = 0; i < draggingTiles.count(); i++)
+        {
+            resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, TileCoord(-1, -1));
+            resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+        }
+
+        //then select the preview items, to maintain visual consistency
+        resources->ClearSelection();
+        resources->SelectPreviewItems();
+        resources->EndPaintOperation();
     }
 
-    //then select the preview items, to maintain visual consistency
-    resources->ClearSelection();
-    resources->SelectPreviewItems();
-    resources->EndPaintOperation();
+    dragMode = false;
 }
 
 void SelectionBrush::Deselect(ResourceManager *resources)
@@ -110,6 +111,7 @@ void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
     draggingTiles.clear();
     resources->ClearSelection();
     resources->ClearPreview();
+    ClearDraggingTiles();
 
     //package this change into an undo operation
     resources->EndPaintOperation();
