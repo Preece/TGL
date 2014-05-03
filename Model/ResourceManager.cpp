@@ -219,26 +219,6 @@ TileCoord ResourceManager::GetTileOrigin(int x, int y)
     return TileCoord(-1, -1);
 }
 
-int ResourceManager::GetTileCount(int layerID)
-{
-    if(layerMap.value(layerID))
-    {
-        return layerMap[layerID]->GetTileCount();
-    }
-
-    return 0;
-}
-
-Tile *ResourceManager::GetTileByIndex(int layerID, int i)
-{
-    if(layerMap.value(layerID))
-    {
-        return layerMap[layerID]->GetTileByIndex(layerID, i);
-    }
-
-    return NULL;
-}
-
 void ResourceManager::SelectTilesInArea(QRect area)
 {
     if(area.left() > area.right())

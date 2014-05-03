@@ -58,8 +58,6 @@ public slots:
     void PreviewModifyTile(int x, int y, TileCoord origin);
     void ClearPreview();
     TileCoord GetTileOrigin(int x, int y);
-    int GetTileCount(int layerID);
-    Tile *GetTileByIndex(int layerID, int i);
 
     void SelectTilesInArea(QRect area);
     QList<Tile> GetSelectedTiles();

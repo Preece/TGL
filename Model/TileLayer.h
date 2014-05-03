@@ -17,8 +17,6 @@ public:
     TileLayer();
     ~TileLayer();
 
-    void DestroyTiles();
-
     QString GetName() { return name; }
     void SetName(QString newName) { name = newName; }
 
@@ -30,14 +28,9 @@ public:
     void SetOpacity(int newOpacity) { opacity = newOpacity; if(opacity > 100) opacity = 100; }
     int GetOpacity() { return opacity; }
 
-    int GetTileCount() { return tiles.count(); }
     TileCoord GetTileOrigin(int x, int y);
 
-    Tile *AddTile(int x, int y, TileCoord newOrigin);
-    void RemoveTile(int x, int y);
     void ModifyTile(int x, int y, TileCoord newOrigin);
-
-    Tile *GetTileByIndex(int layerID, int index);
 
 private:
     double verticalParallax, horizontalParallax;
@@ -45,7 +38,7 @@ private:
 
     int opacity;
 
-    QHash<TileCoord, Tile*> tiles;
+    QHash<TileCoord, Tile> tiles;
 };
 
 #endif // LAYER_H

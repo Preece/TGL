@@ -40,18 +40,7 @@ void ModifyTilesCommand::undo()
 
     for(iter = mods.begin(); iter != mods.end(); ++iter)
     {
-        //if the old origin was empty
-        if(iter.value().oldOrigin == TileCoord(-1, -1))
-        {
-            //then remove the tile entirely
-            iter.value().layer->RemoveTile(iter.value().x, iter.value().y);
-        }
-        //if the old origin was not empty
-        else
-        {
-            //then restore the original origin of the tile
-            iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().oldOrigin);
-        }
+        iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().oldOrigin);
     }
 }
 
@@ -61,17 +50,6 @@ void ModifyTilesCommand::redo()
 
     for(iter = mods.begin(); iter != mods.end(); ++iter)
     {
-        //if the old origin was empty
-        if(iter.value().oldOrigin == TileCoord(-1, -1))
-        {
-            //if so, add a new tile
-            iter.value().layer->AddTile(iter.value().x, iter.value().y, iter.value().newOrigin);
-        }
-        //if the old origin was not empty
-        else
-        {
-            //modify the existing tile
-            iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().newOrigin);
-        }
+        iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().newOrigin);
     }
 }
