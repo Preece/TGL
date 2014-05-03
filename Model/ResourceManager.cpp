@@ -241,7 +241,22 @@ Tile *ResourceManager::GetTileByIndex(int layerID, int i)
 
 void ResourceManager::SelectTilesInArea(QRect area)
 {
-    selectionArea = area;
+    if(area.left() > area.right())
+    {
+        int temp = area.left();
+        area.setLeft(area.right());
+        area.setRight(temp);
+    }
+
+    if(area.top() > area.bottom())
+    {
+        int temp = area.top();
+        area.setBottom(area.top());
+        area.setTop(temp);
+    }
+
+    selectionArea = area.normalized();
+
     emit UpdateSelectionGeometry(area);
 }
 
@@ -253,18 +268,25 @@ QList<Tile> ResourceManager::GetSelectedTiles()
     {
         for(int j = selectionArea.top(); j <= selectionArea.bottom(); j++)
         {
-            if(GetTileOrigin(i, j) != TileCoord(-1, -1))
+            TileCoord origin = GetTileOrigin(i, j);
+
+            if(origin != TileCoord(-1, -1))
             {
                 Tile tempTile;
                 tempTile.pos.first = i;
                 tempTile.pos.second = j;
-                tempTile.origin = GetTileOrigin(i, j);
+                tempTile.origin = origin;
                 selectedTiles.append(tempTile);
             }
         }
     }
 
     return selectedTiles;
+}
+
+void ResourceManager::ClearSelection()
+{
+
 }
 
 Image *ResourceManager::GetImage(int ID)

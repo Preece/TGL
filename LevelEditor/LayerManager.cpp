@@ -148,8 +148,6 @@ void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)
         //refresh the preview
         brushManager->GetCurrentBrush()->Paint(tileX, tileY, resourceManager, true);
     }
-
-    QGraphicsScene::mousePressEvent(event);
 }
 
 void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -181,8 +179,6 @@ void LayerManager::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         brushManager->GetCurrentBrush()->Move(tileX, tileY, resourceManager, false);
     }
-
-    QGraphicsScene::mouseMoveEvent(event);
 }
 
 void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -205,8 +201,6 @@ void LayerManager::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         //make it abort if the queue is empty
         resourceManager->EndPaintOperation();
     }
-
-    QGraphicsScene::mouseReleaseEvent(event);
 }
 
 void LayerManager::SetLayerSelection(int newSelection)

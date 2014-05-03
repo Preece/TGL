@@ -19,10 +19,12 @@ void SelectionBrush::Press(int x, int y, ResourceManager *resources)
     //if there is not a dragged tile at this position
     else
     {
+        resources->SelectTilesInArea(QRect(QPoint(x, y), QPoint(x, y)));
+
+        dragMode = false;
         //integrate these tiles into the layer. This function will
         //do nothing if there are no dragging tiles
-        //IntegrateDraggingTiles(resources);
-        dragMode = false;
+        IntegrateDraggingTiles(resources);
     }
     
     clickSpot.setX(x);
@@ -77,6 +79,9 @@ void SelectionBrush::Release(int x, int y, ResourceManager *resources)
         PopOutSelectedTiles(resources);
     }
 
+    //select the preview items, to maintain visual consistency
+    resources->SelectPreviewItems();
+
     dragMode = false;
 }
 
@@ -100,10 +105,6 @@ void SelectionBrush::PopOutSelectedTiles(ResourceManager *resources)
         }
 
         resources->EndPaintOperation();
-
-        //then select the preview items, to maintain visual consistency
-        resources->SelectPreviewItems();
-
     }
 }
 
@@ -114,7 +115,8 @@ void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
         //for every selected item, draw it onto the layer
         for(int i = 0; i < draggingTiles.count(); i++)
         {
-            resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+            if(draggingTiles[i].origin != TileCoord(-1, -1))
+                resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
         }
 
         //package this change into an undo operation

@@ -50,7 +50,7 @@ TileCoord TileLayer::GetTileOrigin(int x, int y)
     Tile *tempTile;
 
     //if the value is 0, the tile doesnt exist
-    if(!tiles.value(TileCoord(x, y)))
+    if(!tiles.contains(TileCoord(x, y)))
     {
         //so return nothing
         return TileCoord(-1, -1);

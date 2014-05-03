@@ -63,6 +63,7 @@ public slots:
 
     void SelectTilesInArea(QRect area);
     QList<Tile> GetSelectedTiles();
+    void ClearSelection();
 
     void EndPaintOperation();
 

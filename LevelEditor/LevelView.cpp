@@ -76,6 +76,14 @@ void LevelView::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
+void LevelView::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_F1)
+    {
+        QMessageBox::information(NULL, "Items in Scene", QString::number(scene()->items().count()));
+    }
+}
+
 void LevelView::wheelEvent(QWheelEvent *event)
 {
     if(event->modifiers() == Qt::ControlModifier)
