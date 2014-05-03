@@ -99,10 +99,12 @@ void SelectionBrush::PopOutSelectedTiles(ResourceManager *resources)
             resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
         }
 
+        resources->EndPaintOperation();
+
         //then select the preview items, to maintain visual consistency
         resources->ClearSelection();
         resources->SelectPreviewItems();
-        resources->EndPaintOperation();
+
     }
 }
 
@@ -119,9 +121,6 @@ void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
         //package this change into an undo operation
         resources->EndPaintOperation();
 
-        //clear out the selection
-        resources->ClearSelection();
-        resources->ClearPreview();
         ClearDraggingTiles();
     }
 }

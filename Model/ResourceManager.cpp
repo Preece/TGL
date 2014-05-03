@@ -263,12 +263,11 @@ void ResourceManager::SelectTilesInArea(QRect area)
 
 QList<Tile> ResourceManager::GetSelectedTiles()
 {
-    TileLayer *tempLayer = layerMap.value(currentLayerID);
 
     //weed out any tiles that are not in the model
     for(int i = 0; i < selectedTiles.count(); i++)
     {
-        if(tempLayer->GetTileOrigin(selectedTiles[i].pos.first, selectedTiles[i].pos.second) == TileCoord(-1, -1))
+        if(GetTileOrigin(selectedTiles[i].pos.first, selectedTiles[i].pos.second) == TileCoord(-1, -1))
         {
             selectedTiles.removeAt(i);
             i--;
