@@ -197,7 +197,7 @@ void ResourceManager::ClearPreview()
         PreviewModifyTile(previewList[i].pos.first, previewList[i].pos.second, TileCoord(-1, -1));
     }
 
-    previewTiles.clear();
+    //previewTiles.clear();
 }
 
 TileCoord ResourceManager::GetTileOrigin(int x, int y)
@@ -241,11 +241,17 @@ Tile *ResourceManager::GetTileByIndex(int layerID, int i)
 
 void ResourceManager::SelectTilesInArea(QRect area)
 {
-    selectedTiles.clear();
+    selectionArea = area;
+    emit UpdateSelectionGeometry(area);
+}
 
-    for(int i = area.left(); i <= area.right(); i++)
+QList<Tile> ResourceManager::GetSelectedTiles()
+{
+    QList<Tile> selectedTiles;
+
+    for(int i = selectionArea.left(); i <= selectionArea.right(); i++)
     {
-        for(int j = area.top(); j <= area.bottom(); j++)
+        for(int j = selectionArea.top(); j <= selectionArea.bottom(); j++)
         {
             if(GetTileOrigin(i, j) != TileCoord(-1, -1))
             {
@@ -258,40 +264,7 @@ void ResourceManager::SelectTilesInArea(QRect area)
         }
     }
 
-    emit UpdateSelectionGeometry(area);
-}
-
-QList<Tile> ResourceManager::GetSelectedTiles()
-{
-
-    //weed out any tiles that are not in the model
-    for(int i = 0; i < selectedTiles.count(); i++)
-    {
-        if(GetTileOrigin(selectedTiles[i].pos.first, selectedTiles[i].pos.second) == TileCoord(-1, -1))
-        {
-            selectedTiles.removeAt(i);
-            i--;
-        }
-    }
-    //return the selected tiles list
     return selectedTiles;
-}
-
-bool ResourceManager::SelectedTileAtPos(int x, int y)
-{
-    //check for a key of the specified coordinates in the selected list
-    for(int i = 0; i < selectedTiles.count(); i++)
-    {
-        if(selectedTiles[i].pos.first == x && selectedTiles[i].pos.second == y)
-            return true;
-    }
-
-    return false;
-}
-
-void ResourceManager::ClearSelection()
-{
-    selectedTiles.clear();
 }
 
 Image *ResourceManager::GetImage(int ID)

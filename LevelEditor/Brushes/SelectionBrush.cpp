@@ -21,7 +21,7 @@ void SelectionBrush::Press(int x, int y, ResourceManager *resources)
     {
         //integrate these tiles into the layer. This function will
         //do nothing if there are no dragging tiles
-        IntegrateDraggingTiles(resources);
+        //IntegrateDraggingTiles(resources);
         dragMode = false;
     }
     
@@ -102,7 +102,6 @@ void SelectionBrush::PopOutSelectedTiles(ResourceManager *resources)
         resources->EndPaintOperation();
 
         //then select the preview items, to maintain visual consistency
-        resources->ClearSelection();
         resources->SelectPreviewItems();
 
     }
@@ -121,6 +120,7 @@ void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
         //package this change into an undo operation
         resources->EndPaintOperation();
 
+        resources->ClearPreview();
         ClearDraggingTiles();
     }
 }

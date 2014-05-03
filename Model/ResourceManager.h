@@ -63,8 +63,6 @@ public slots:
 
     void SelectTilesInArea(QRect area);
     QList<Tile> GetSelectedTiles();
-    bool SelectedTileAtPos(int x, int y);
-    void ClearSelection();
 
     void EndPaintOperation();
 
@@ -87,7 +85,7 @@ private:
     QHash<int, TileLayer*> layerMap;
     int currentLayerID;
     QHash<TileCoord, Tile> previewTiles;
-    QList<Tile> selectedTiles;
+    QRect selectionArea;
 
     LevelProperties levelProperties;
 
