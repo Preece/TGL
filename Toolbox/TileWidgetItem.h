@@ -1,6 +1,8 @@
 #ifndef TILEITEM_H
 #define TILEITEM_H
 
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
 #include <QGraphicsPixmapItem>
 #include "../Model/TileLayer.h"
 
@@ -9,6 +11,8 @@ class TileWidgetItem : public QGraphicsPixmapItem
 public:
     TileWidgetItem();
     ~TileWidgetItem();
+
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
     void SetTilePixmap(QPixmap newPix);
 

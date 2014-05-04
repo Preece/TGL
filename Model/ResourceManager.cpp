@@ -231,8 +231,8 @@ void ResourceManager::SelectTilesInArea(QRect area)
     if(area.top() > area.bottom())
     {
         int temp = area.top();
-        area.setBottom(area.top());
-        area.setTop(temp);
+        area.setTop(area.bottom());
+        area.setBottom(temp);
     }
 
     selectionArea = area.normalized();
