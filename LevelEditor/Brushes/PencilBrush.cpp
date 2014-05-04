@@ -3,7 +3,6 @@
 PencilBrush::PencilBrush()
 {
     selectedTileOrigin = TileCoord(-1, -1);
-    lineMode = false;
 }
 
 PencilBrush::~PencilBrush()

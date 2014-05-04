@@ -36,7 +36,7 @@ public:
     void RepopulateBrushLists();
 
     void RegisterTileSelector(QGraphicsScene *selector) { propertiesWindow.RegisterTileSelector(selector); }
-    void RegisterResourceManager(ResourceManager *newRM) { propertiesWindow.RegisterResourceManager(newRM); }
+    void RegisterResourceManager(ResourceManager *newRM) { resources = newRM; propertiesWindow.RegisterResourceManager(newRM); }
 
     void DestroyBrushes();
 
@@ -88,6 +88,7 @@ public slots:
     void on_matrixBrushCombo_currentIndexChanged(int index);
 
 private:
+    ResourceManager *resources;
     Ui::BrushManager *ui;
     BrushPropertiesDialog propertiesWindow;
 

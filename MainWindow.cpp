@@ -210,3 +210,19 @@ void MainWindow::SetToolSelection(QCursor newCursor, int newSelection)
     ui->levelView->SetCursor(newCursor);
 }
 
+
+void MainWindow::on_actionCut_triggered()
+{
+    ui->brushManager->CutTiles();
+    resources->ClearPreview();
+}
+
+void MainWindow::on_actionCopy_triggered()
+{
+    ui->brushManager->CopyTiles();
+}
+
+void MainWindow::on_actionPaste_triggered()
+{
+    resources->GetClipboard()->Paste();
+}

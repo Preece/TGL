@@ -208,8 +208,8 @@ QTreeView, #propertyBrowser {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>298</width>
-           <height>503</height>
+           <width>89</width>
+           <height>182</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -345,8 +345,8 @@ QTreeView, #propertyBrowser {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>298</width>
-           <height>503</height>
+           <width>100</width>
+           <height>30</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -747,6 +747,9 @@ QTreeView, #propertyBrowser {
      <string>Edit</string>
     </property>
     <addaction name="actionProperties"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -926,6 +929,30 @@ QTreeView, #propertyBrowser {
    </property>
    <property name="toolTip">
     <string>Select a tileset from the images</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="text">
+    <string>Cut</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
    </property>
   </action>
  </widget>

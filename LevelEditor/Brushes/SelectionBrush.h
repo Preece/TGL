@@ -26,7 +26,7 @@ public:
     void IntegrateDraggingTiles(ResourceManager *resources);
 
     QList<Tile> GetDraggingTiles() { return draggingTiles; }
-    void SetDraggingTiles(QList<Tile> newTiles) { draggingTiles = newTiles; }
+    void SetDraggingTiles(ResourceManager *resources, QList<Tile> newTiles);
     void ClearDraggingTiles();
 
 private:

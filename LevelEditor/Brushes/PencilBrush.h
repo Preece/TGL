@@ -12,14 +12,6 @@ public:
     void Paint(int x, int y, ResourceManager *resources, bool preview = false);
 
     QString GetType() { return "pencil"; }
-
-    void SetLineMode(bool state) { lineMode = state; }
-    bool GetLineMode() { return lineMode; }
-private:
-
-
-
-    bool lineMode;
 };
 
 #endif // PENCILBRUSH_H

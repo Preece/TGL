@@ -127,6 +127,24 @@ void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
     }
 }
 
+void SelectionBrush::SetDraggingTiles(ResourceManager *resources, QList<Tile> newTiles)
+{
+    IntegrateDraggingTiles(resources);
+
+    draggingTiles = newTiles;
+
+    resources->ClearPreview();
+
+    if(!draggingTiles.empty())
+    {
+        //otherwise, remove them all from the resources, and draw them again as previews
+        for(int i = 0; i < draggingTiles.count(); i++)
+            resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+    }
+
+    resources->SelectPreviewItems();
+}
+
 void SelectionBrush::ClearDraggingTiles()
 {
     draggingTiles.clear();

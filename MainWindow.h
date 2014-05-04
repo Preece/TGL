@@ -52,6 +52,12 @@ private slots:
     void CenterMinimapOnLevel();
     void SetToolSelection(QCursor newCursor, int newSelection);
 
+    void on_actionCut_triggered();
+
+    void on_actionCopy_triggered();
+
+    void on_actionPaste_triggered();
+
 private:
     Ui::MainWindow *ui;
 
