@@ -11,7 +11,7 @@ StampBrush::~StampBrush()
 
 }
 
-void StampBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
+void StampBrush::Move(int x, int y, ResourceManager *resources, bool)
 {
     resources->ClearPreview();
 

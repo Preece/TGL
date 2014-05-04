@@ -51,7 +51,7 @@ public slots:
     TileLayer *GetLayerByIndex(int index);
     int GetLayerCount() { return layerMap.count(); }
     int GetLayerOpacity(int layerID);
-    void UpdateLayerSize(int w, int h);
+    void UpdateLayerSize(int, int);
     void SetLayerSelection(int newLayer) { currentLayerID = newLayer; }
 
     void ModifyTile(int x, int y, TileCoord origin);

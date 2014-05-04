@@ -6,6 +6,8 @@ TileSelectorScene::TileSelectorScene(QObject *parent)
 
     selectionIndex = 0;
     selectionChangeFromHistory = false;
+    resources = NULL;
+    spritesheet = NULL;
 }
 
 TileSelectorScene::~TileSelectorScene()

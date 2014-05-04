@@ -21,10 +21,10 @@ protected:
     void mouseMoveEvent (QMouseEvent * event);
     void mousePressEvent (QMouseEvent * event);
     void mouseReleaseEvent (QMouseEvent * event);
-    void mouseDoubleClickEvent(QMouseEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *);
     void wheelEvent(QWheelEvent *event);
-    void drawBackground(QPainter *painter, const QRectF &rect);
-    void resizeEvent(QResizeEvent *event);
+    void drawBackground(QPainter *painter, const QRectF);
+    void resizeEvent(QResizeEvent *);
 
 private:
     bool maxZoomed;

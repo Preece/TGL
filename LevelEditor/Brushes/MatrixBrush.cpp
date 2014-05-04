@@ -5,7 +5,7 @@ MatrixBrush::MatrixBrush()
     AddList(13);
 }
 
-void MatrixBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void MatrixBrush::Paint(int, int, ResourceManager *, bool)
 {
     //clear the preview
 
@@ -78,7 +78,7 @@ void MatrixBrush::Move(int x, int y, ResourceManager *resources, bool leftButton
     }
 }
 
-void MatrixBrush::Release(int x, int y, ResourceManager *resources)
+void MatrixBrush::Release(int, int, ResourceManager *resources)
 {
     //if it was the left button being released
         //actually draw the line

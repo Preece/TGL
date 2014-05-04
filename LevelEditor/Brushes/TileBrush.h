@@ -17,11 +17,11 @@ public:
 
     virtual void Press(int x, int y, ResourceManager *resources);
     virtual void Move(int x, int y, ResourceManager *resources, bool leftButtonDown);
-    virtual void Release(int x, int y, ResourceManager *resources);
-    virtual void Select(ResourceManager *resources) {}
-    virtual void Deselect(ResourceManager *resources) {}
+    virtual void Release(int, int, ResourceManager *);
+    virtual void Select(ResourceManager *) {}
+    virtual void Deselect(ResourceManager *) {}
 
-    virtual void Paint(int x, int y, ResourceManager *resources, bool preview = false);
+    virtual void Paint(int, int, ResourceManager *, bool = false);
     void Line(int x1, int y1, int x2, int y2, ResourceManager *resources, bool preview = false);
 
     virtual QString GetType() = 0;

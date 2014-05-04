@@ -140,7 +140,7 @@ void ResourceView::RemoveChildrenNodes(QTreeWidgetItem *parent)
 }
 
 
-void ResourceView::selectionUpdated(QTreeWidgetItem *item, int column)
+void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
 {
     int selectedID = GetSelectedID();
 

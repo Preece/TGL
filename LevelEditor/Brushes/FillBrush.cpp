@@ -10,7 +10,7 @@ FillBrush::~FillBrush()
 
 }
 
-void FillBrush::Move(int x, int y, ResourceManager *resources)
+void FillBrush::Move(int, int, ResourceManager *)
 {
     //we don't want this to do anything for a fill brush
 }

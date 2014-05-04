@@ -154,7 +154,7 @@ int ResourceManager::GetLayerOpacity(int layerID)
     return 100;
 }
 
-void ResourceManager::UpdateLayerSize(int w, int h)
+void ResourceManager::UpdateLayerSize(int, int)
 {
 
 }
@@ -203,7 +203,7 @@ void ResourceManager::ClearPreview()
 TileCoord ResourceManager::GetTileOrigin(int x, int y)
 {
     //see if there is an upcoming modification to this tile
-    TileCoord modOrigin = modifyTiles->GetTileOrigin(currentLayerID, x, y);
+    TileCoord modOrigin = modifyTiles->GetTileOrigin(x, y);
     if(modOrigin != TileCoord(-1, -1))
         return modOrigin;
 

@@ -69,7 +69,7 @@ void SelectionBrush::Move(int x, int y, ResourceManager *resources, bool leftBut
     }
 }
 
-void SelectionBrush::Release(int x, int y, ResourceManager *resources)
+void SelectionBrush::Release(int, int, ResourceManager *resources)
 {
     if(!dragMode)
     {

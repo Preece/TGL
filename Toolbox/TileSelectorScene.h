@@ -49,7 +49,6 @@ private:
     ResourceManager *resources;
     QImage *spritesheet;
 
-    QRubberBand *selection;
     QPoint clickSpot;
     
     QList<GraphicsItemList> selectionHistory;

@@ -24,7 +24,7 @@ int ModifyTilesCommand::GetModificationCount()
     return mods.count();
 }
 
-TileCoord ModifyTilesCommand::GetTileOrigin(int layerID, int x, int y)
+TileCoord ModifyTilesCommand::GetTileOrigin(int x, int y)
 {
     //if a modification exists at this position, return it
     if(mods.contains(TileCoord(x, y)))

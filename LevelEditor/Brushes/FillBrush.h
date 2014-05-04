@@ -11,7 +11,7 @@ public:
     FillBrush();
     ~FillBrush();
 
-    void Move(int x, int y, ResourceManager *resources);
+    void Move(int, int, ResourceManager *);
 
     void Paint(int x, int y, ResourceManager *resources, bool preview = false);
     void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources);

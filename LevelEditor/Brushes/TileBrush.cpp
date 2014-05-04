@@ -54,11 +54,11 @@ void TileBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDo
     }
 }
 
-void TileBrush::Release(int x, int y, ResourceManager *resources)
+void TileBrush::Release(int, int, ResourceManager *)
 {
 }
 
-void TileBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void TileBrush::Paint(int, int, ResourceManager *, bool)
 {
     //do nothing
 }

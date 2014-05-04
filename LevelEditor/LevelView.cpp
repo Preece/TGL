@@ -136,18 +136,18 @@ void LevelView::wheelEvent(QWheelEvent *event)
     }
 }
 
-void LevelView::drawBackground(QPainter *painter, const QRectF &rect)
+void LevelView::drawBackground(QPainter *, const QRectF)
 {
 
 }
 
-void LevelView::resizeEvent(QResizeEvent *event)
+void LevelView::resizeEvent(QResizeEvent *)
 {
     if(maxZoom)
         fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
 }
 
-void LevelView::leaveEvent(QEvent *event)
+void LevelView::leaveEvent(QEvent *)
 {
     dynamic_cast<LayerManager*>(scene())->ClearPreview();
 }

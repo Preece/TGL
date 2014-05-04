@@ -16,7 +16,7 @@ public:
 
     virtual void Press(int x, int y, ResourceManager *resources);
     virtual void Move(int x, int y, ResourceManager *resources, bool leftButtonDown);
-    virtual void Release(int x, int y, ResourceManager *resources);
+    virtual void Release(int, int, ResourceManager *resources);
     virtual void Deselect(ResourceManager *resources);
 
     QString GetType() { return "selector"; }

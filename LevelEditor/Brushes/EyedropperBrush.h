@@ -8,11 +8,11 @@ class EyedropperBrush : public TileBrush
 public:
     EyedropperBrush();
 
-    virtual void Press(int x, int y, ResourceManager *resources);
-    virtual void Move(int x, int y, ResourceManager *resources, bool leftButtonDown);
-    virtual void Release(int x, int y, ResourceManager *resources);
+    virtual void Press(int, int, ResourceManager *);
+    virtual void Move(int x, int, ResourceManager *, bool);
+    virtual void Release(int, int, ResourceManager *);
 
-    virtual void Paint(int x, int y, ResourceManager *resources, bool preview = false);
+    virtual void Paint(int, int, ResourceManager *, bool = false);
 
     QString GetType() { return "eyedropper"; }
     QCursor GetCursor() { return QCursor(QPixmap(":/Icons/eyedropper.png"), 14, 14); }

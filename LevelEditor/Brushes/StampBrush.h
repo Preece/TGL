@@ -11,7 +11,7 @@ public:
     StampBrush();
     ~StampBrush();
 
-    void Move(int x, int y, ResourceManager *resources, bool leftButtonDown);
+    void Move(int x, int y, ResourceManager *resources, bool);
 
     void Paint(int x, int y, ResourceManager *resources, bool preview);
     QString GetType() { return "stamp"; }

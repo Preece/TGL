@@ -45,7 +45,7 @@ void MiniMap::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void MiniMap::mouseDoubleClickEvent(QMouseEvent *event)
+void MiniMap::mouseDoubleClickEvent(QMouseEvent *)
 {
     emit CenterMinimapOnLevel();
 }
@@ -88,7 +88,7 @@ void MiniMap::wheelEvent(QWheelEvent *event)
     }
 }
 
-void MiniMap::drawBackground(QPainter *painter, const QRectF &rect)
+void MiniMap::drawBackground(QPainter *painter, const QRectF)
 {
 
     painter->setBrush(QBrush(Qt::white));
@@ -96,7 +96,7 @@ void MiniMap::drawBackground(QPainter *painter, const QRectF &rect)
     painter->drawRect(sceneRect());
 }
 
-void MiniMap::resizeEvent(QResizeEvent *event)
+void MiniMap::resizeEvent(QResizeEvent *)
 {
     if(maxZoomed)
         fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
