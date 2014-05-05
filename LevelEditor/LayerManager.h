@@ -34,8 +34,6 @@ public:
     void UpdateLayerOpacity(int opaqueLayerID);
     void ClearPreview();
 
-    void CatastrophicRepopulation();
-
 signals:
     void SelectNewTile(TileCoord ID);
     void SelectNewBrush(int brushID);
