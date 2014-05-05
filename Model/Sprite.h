@@ -15,8 +15,6 @@
 class Sprite : public ItemNode
 {
 public:
-    bool Export(Exporter *exporter);
-    bool Import(Exporter *exporter);
     QString GetType() { return "sprite"; }
 
     Sprite();

@@ -11,20 +11,6 @@ Image::~Image()
         delete image;
 }
 
-bool Image::Export(Exporter *exporter)
-{
-    exporter->WriteImage(*image);
-
-    return true;
-}
-
-bool Image::Import(Exporter *exporter)
-{
-    exporter->ReadImage(*image);
-
-    return true;
-}
-
 void Image::SetImageFromFile(QString file)
 {
     //check if the image already exists

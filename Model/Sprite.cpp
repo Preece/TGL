@@ -5,22 +5,6 @@ Sprite::Sprite()
     imageID = 0;
 }
 
-bool Sprite::Export(Exporter *exporter)
-{
-    exporter->WriteString(name);
-    exporter->WriteInt(imageID);
-
-    return true;
-}
-
-bool Sprite::Import(Exporter *exporter)
-{
-    exporter->ReadString(name);
-    exporter->ReadInt(imageID);
-
-    return true;
-}
-
 void Sprite::DestroyAllAnimations()
 {
     //loop through and destroy all animations

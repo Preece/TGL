@@ -11,26 +11,6 @@ TileLayer::~TileLayer()
 {
 }
 
-bool TileLayer::Export(Exporter *exporter)
-{
-    exporter->WriteDouble(verticalParallax);
-    exporter->WriteDouble(horizontalParallax);
-    exporter->WriteString(name);
-    exporter->WriteInt(opacity);
-
-    return true;
-}
-
-bool TileLayer::Import(Exporter *exporter)
-{
-    exporter->ReadDouble(verticalParallax);
-    exporter->ReadDouble(horizontalParallax);
-    exporter->ReadString(name);
-    exporter->ReadInt(opacity);
-
-    return true;
-}
-
 TileCoord TileLayer::GetTileOrigin(int x, int y)
 {
     if(!tiles.contains(TileCoord(x, y)))

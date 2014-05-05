@@ -11,24 +11,6 @@ void Animation::DestroyAllFrames()
     children.clear();
 }
 
-bool Animation::Export(Exporter *exporter)
-{
-    exporter->WriteString(animationName);
-    exporter->WriteBool(loop);
-    exporter->WriteInt(nextAnimationID);
-
-    return true;
-}
-
-bool Animation::Import(Exporter *exporter)
-{
-    exporter->ReadString(animationName);
-    exporter->ReadBool(loop);
-    exporter->ReadInt(nextAnimationID);
-
-    return true;
-}
-
 Animation::Animation()
 {
     loop = false;
