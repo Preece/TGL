@@ -1,12 +1,9 @@
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
-#include <QDialog>
 #include <QHash>
-#include <QStringList>
 #include <QUndoStack>
 
-#include "Sprite.h"
 #include "Image.h"
 #include "TileLayer.h"
 #include "LevelProperties.h"

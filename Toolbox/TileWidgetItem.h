@@ -4,7 +4,6 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsPixmapItem>
-#include "../Model/TileLayer.h"
 
 class TileWidgetItem : public QGraphicsPixmapItem
 {

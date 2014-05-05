@@ -3,7 +3,6 @@
 
 #include <QGraphicsScene>
 
-#include "../Model/TileLayer.h"
 #include "../Model/ResourceManager.h"
 #include "../Toolbox/TileWidgetItem.h"
 

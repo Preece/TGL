@@ -1,9 +1,9 @@
 #ifndef LEVELPROPERTIES_H
 #define LEVELPROPERTIES_H
 
-#include "ItemNode.h"
-
 #include <QString>
+
+#include "ItemNode.h"
 
 class LevelProperties : public ItemNode
 {

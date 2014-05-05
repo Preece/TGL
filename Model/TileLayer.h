@@ -1,8 +1,6 @@
 #ifndef LAYER_H
 #define LAYER_H
 
-#include <QGraphicsItemGroup>
-#include <QPoint>
 #include <QHash>
 
 #include "ItemNode.h"

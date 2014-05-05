@@ -4,10 +4,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QList>
-#include <QVariant>
-#include <QAbstractListModel>
-#include <QItemSelectionModel>
-#include <QRubberBand>
 #include <QKeyEvent>
 #include <QGraphicsRectItem>
 

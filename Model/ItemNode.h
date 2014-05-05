@@ -1,13 +1,13 @@
 #ifndef SAVABLE_H
 #define SAVABLE_H
 
-#include "Exporter.h"
-
 #include <QFile>
 #include <QRect>
 #include <QPoint>
 #include <QImage>
 #include <QHash>
+
+#include "Exporter.h"
 
 typedef QPair<int, int> TileCoord;
 

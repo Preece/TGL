@@ -3,8 +3,6 @@
 
 #include <QImage>
 #include <QString>
-#include <QFile>
-#include <QMessageBox>
 #include <QFileInfo>
 
 #include "ItemNode.h"

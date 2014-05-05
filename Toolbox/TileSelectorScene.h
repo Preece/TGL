@@ -7,7 +7,6 @@
 #include <QList>
 
 #include "Model/ResourceManager.h"
-#include "../SpriteEditor/SpritesheetSelector.h"
 #include "TileWidgetItem.h"
 
 typedef QList<TileCoord> TileList;

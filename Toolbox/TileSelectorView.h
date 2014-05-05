@@ -2,7 +2,6 @@
 #define TILESELECTORVIEW_H
 
 #include <QGraphicsView>
-#include <QRubberBand>
 #include <QPoint>
 #include <QMouseEvent>
 
