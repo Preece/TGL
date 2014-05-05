@@ -234,11 +234,6 @@ void LayerManager::ClearPreview()
     ClearEraserPreview();
 }
 
-void LayerManager::CatastrophicRepopulation()
-{
-
-}
-
 void LayerManager::SelectPreviewItems()
 {
     QList<TileWidgetItem*> tileList = previewItems.values();
