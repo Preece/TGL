@@ -63,6 +63,8 @@ public slots:
     QList<Tile> GetSelectedTiles();
     void ClearSelection();
 
+
+
     void EndPaintOperation();
 
     void DestroyAllResources();
@@ -78,6 +80,8 @@ signals:
 
     void UpdateSelectionGeometry(QRect rect);
     void SelectPreviewItems();
+    void DrawEraserPreview(int x, int y);
+    void ClearEraserPreview();
 
 private:
     QHash<int, Image*> imageMap;

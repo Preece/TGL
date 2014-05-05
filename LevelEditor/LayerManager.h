@@ -9,6 +9,7 @@
 #include <QItemSelectionModel>
 #include <QRubberBand>
 #include <QKeyEvent>
+#include <QGraphicsRectItem>
 
 #include "../Model/ResourceManager.h"
 #include "TileLayerView.h"
@@ -54,6 +55,9 @@ public slots:
 
     void UpdateSelectionGeometry(QRect rect);
 
+    void DrawEraserPreview(int x, int y);
+    void ClearEraserPreview();
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
@@ -66,6 +70,7 @@ private:
     TileLayerView *currentLayer;
 
     QHash<TileCoord, TileWidgetItem*> previewItems;
+    QList<QGraphicsRectItem*> eraserPreviewItems;
 
     ResourceManager *resourceManager;
     BrushManager *brushManager;

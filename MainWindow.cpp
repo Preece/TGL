@@ -52,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(resources, SIGNAL(SelectPreviewItems()), layers, SLOT(SelectPreviewItems()));
     connect(resources, SIGNAL(UpdateSelectionGeometry(QRect)), layers, SLOT(UpdateSelectionGeometry(QRect)));
     
+    connect(resources, SIGNAL(ClearEraserPreview()), layers, SLOT(ClearEraserPreview()));
+    connect(resources, SIGNAL(DrawEraserPreview(int,int)), layers, SLOT(DrawEraserPreview(int,int)));
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
 

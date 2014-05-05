@@ -230,6 +230,8 @@ void LayerManager::ClearPreview()
 {
     if(brushManager->GetCurrentBrush()->GetType() != "selector")
         resourceManager->ClearPreview();
+
+    ClearEraserPreview();
 }
 
 void LayerManager::CatastrophicRepopulation()
@@ -340,4 +342,30 @@ void LayerManager::UpdateSelectionGeometry(QRect rect)
 {
     if(currentLayer)
         currentLayer->SelectTilesInArea(rect);
+}
+
+void LayerManager::DrawEraserPreview(int x, int y)
+{
+    QGraphicsRectItem *rect = new QGraphicsRectItem(x * resourceManager->GetTileWidth(),
+                           y * resourceManager->GetTileHeight(),
+                           resourceManager->GetTileWidth(),
+                           resourceManager->GetTileHeight());
+
+    rect->setBrush(QBrush(QColor(0, 0, 255, 0x80)));
+    rect->setPen(QPen(Qt::transparent));
+
+    addItem(rect);
+    eraserPreviewItems.append(rect);
+}
+
+void LayerManager::ClearEraserPreview()
+{
+    for(int i = 0; i < eraserPreviewItems.count(); i++)
+    {
+        removeItem(eraserPreviewItems[i]);
+        delete eraserPreviewItems[i];
+        eraserPreviewItems[i] = NULL;
+    }
+
+    eraserPreviewItems.clear();
 }
