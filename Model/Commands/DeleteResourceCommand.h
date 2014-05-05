@@ -4,14 +4,12 @@
 #include <QUndoCommand>
 
 #include "../ItemNode.h"
-#include "../Sprite.h"
 #include "../Image.h"
 #include "../TileLayer.h"
 
 class DeleteResourceCommand : public QUndoCommand
 {
 public:
-    DeleteResourceCommand(ItemNode *newResource, QHash<int, Sprite*> *resources);
     DeleteResourceCommand(ItemNode *newResource, QHash<int, Image*> *resources);
     DeleteResourceCommand(ItemNode *newResource, QHash<int, TileLayer*> *resources);
     ~DeleteResourceCommand();

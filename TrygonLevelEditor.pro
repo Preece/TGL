@@ -16,9 +16,6 @@ include(qtpropertybrowser/src/qtpropertybrowser.pri)
 SOURCES += main.cpp\
     MainWindow.cpp \
     Model/ItemNode.cpp \
-    Model/Frame.cpp \
-    Model/Sprite.cpp \
-    Model/Animation.cpp \
     Model/ResourceManager.cpp \
     Model/Image.cpp \
     Model/LevelProperties.cpp \
@@ -61,9 +58,6 @@ SOURCES += main.cpp\
 HEADERS  += \
     MainWindow.h \
     Model/ItemNode.h \
-    Model/Sprite.h \
-    Model/Animation.h \
-    Model/Frame.h \
     Model/ResourceManager.h \
     Model/Image.h \
     Model/LevelProperties.h \

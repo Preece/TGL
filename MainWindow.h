@@ -7,7 +7,6 @@
 #include <QTreeWidget>
 #include <QFileDialog>
 
-#include "Model/Sprite.h"
 #include "Model/ResourceManager.h"
 
 #include "Dialogs/LayerPropertiesDialog.h"
@@ -20,8 +19,6 @@
 #include "LevelEditor/Brushes/EraserBrush.h"
 
 #include "Toolbox/TileSelectorScene.h"
-
-#include "SpriteEditor/SpriteEditor.h"
 
 typedef QList<TileCoord> TileList;
 

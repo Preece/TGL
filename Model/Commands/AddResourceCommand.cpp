@@ -1,13 +1,5 @@
 #include "AddResourceCommand.h"
 
-AddResourceCommand::AddResourceCommand(ItemNode *newResource, QHash<int, Sprite*> *resources)
-{
-    resource = newResource;
-    resourceList = reinterpret_cast<QHash<int, ItemNode*>* >(resources);
-
-    invertAdditions = false;
-}
-
 AddResourceCommand::AddResourceCommand(ItemNode *newResource, QHash<int, Image *> *resources)
 {
     resource = newResource;
@@ -26,7 +18,7 @@ AddResourceCommand::AddResourceCommand(ItemNode *newResource, QHash<int, TileLay
 
 AddResourceCommand::~AddResourceCommand()
 {
-    //if the sprite is not in the list when this command is destroyed, destroy the sprite
+    //if the resource is not in the list when this command is destroyed, destroy the resource
     if(!ListContainsResource())
     {
         if(resource)

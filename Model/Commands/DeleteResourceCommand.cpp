@@ -1,11 +1,5 @@
 #include "DeleteResourceCommand.h"
 
-DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QHash<int, Sprite*> *resources)
-{
-    resource = newResource;
-    resourceList = reinterpret_cast<QHash<int, ItemNode*>* >(resources);
-}
-
 DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QHash<int, Image *> *resources)
 {
     resource = newResource;
@@ -20,7 +14,7 @@ DeleteResourceCommand::DeleteResourceCommand(ItemNode *newResource, QHash<int, T
 
 DeleteResourceCommand::~DeleteResourceCommand()
 {
-    //if the sprite is not in the list when this command is destroyed, destroy the sprite
+    //if the resource is not in the list when this command is destroyed, destroy the resource
     if(!ListContainsResource())
     {
         if(resource)

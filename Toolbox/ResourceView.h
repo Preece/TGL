@@ -37,7 +37,6 @@ private:
     QTreeWidgetItem *projectRoot;
     QTreeWidgetItem *layerRoot;
     QTreeWidgetItem *imageRoot;
-    QTreeWidgetItem *spriteRoot;
     QTreeWidgetItem *tilesetRoot;
 
     int currentSelection;

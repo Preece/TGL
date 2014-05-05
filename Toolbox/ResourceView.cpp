@@ -18,7 +18,6 @@ ResourceView::ResourceView(QWidget *parent) :
     //add children nodes for each of the types of objects
     layerRoot = AddNode(projectRoot, "Layer", ":/Icons/open.png");
     imageRoot = AddNode(projectRoot, "Images", ":/Icons/open.png");
-    spriteRoot = AddNode(projectRoot, "Sprites", ":/Icons/open.png");
     tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/open.png");
 }
 
