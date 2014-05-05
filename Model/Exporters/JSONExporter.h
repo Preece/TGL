@@ -1,6 +1,6 @@
 #include <QString>
 
-#include "../Exporter.h"
+#include "Exporter.h"
 #include "../ResourceManager.h"
 
 class JSONExporter : public Exporter

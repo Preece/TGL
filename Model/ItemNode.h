@@ -7,7 +7,7 @@
 #include <QImage>
 #include <QHash>
 
-#include "Exporter.h"
+#include "Exporters/Exporter.h"
 
 typedef QPair<int, int> TileCoord;
 

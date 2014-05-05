@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     Model/Image.cpp \
     Model/LevelProperties.cpp \
     Model/TileLayer.cpp \
-    Model/Exporter.cpp \
+    Model/Clipboard.cpp \
+    Model/Exporters/Exporter.cpp \
     Model/Exporters/PackedBinaryExporter.cpp \
     Model/Commands/ModifyTilesCommand.cpp \
     Model/Commands/AddResourceCommand.cpp \
@@ -53,18 +54,9 @@ SOURCES += main.cpp\
     Dialogs/LayerPropertiesDialog.cpp \
     Dialogs/BrushPropertiesDialog.cpp \
     Dialogs/LevelPropertiesDialog.cpp \
-    SpriteEditor/AnimationListItem.cpp \
-    SpriteEditor/SpriteEditor.cpp \
-    SpriteEditor/AnimationEditor.cpp \
-    SpriteEditor/FrameListItem.cpp \
-    SpriteEditor/SpritesheetSelector.cpp \
-    SpriteEditor/SelectionGraphicsScene.cpp \
-    SpriteEditor/AnimationPreviewer/AnimationPreviewer.cpp \
-    SpriteEditor/AnimationPreviewer/AnimatedLabel.cpp \
     LevelEditor/LevelView.cpp \
     LevelEditor/Brushes/SelectionBrush.cpp \
-    LevelEditor/Brushes/EyedropperBrush.cpp \
-    Model/Clipboard.cpp
+    LevelEditor/Brushes/EyedropperBrush.cpp 
 
 HEADERS  += \
     MainWindow.h \
@@ -74,9 +66,10 @@ HEADERS  += \
     Model/Frame.h \
     Model/ResourceManager.h \
     Model/Image.h \
-    Model/Exporter.h \
     Model/LevelProperties.h \
     Model/TileLayer.h \
+    Model/Clipboard.h \
+    Model/Exporters/Exporter.h \
     Model/Exporters/PackedBinaryExporter.h \
     Model/Commands/ModifyTilesCommand.h \
     Model/Commands/AddResourceCommand.h \
@@ -106,18 +99,9 @@ HEADERS  += \
     Dialogs/BrushPropertiesDialog.h \
     Dialogs/ImageViewerDialog.h \
     Dialogs/LevelPropertiesDialog.h \
-    SpriteEditor/AnimationListItem.h \
-    SpriteEditor/SpriteEditor.h \
-    SpriteEditor/AnimationEditor.h \ 
-    SpriteEditor/FrameListItem.h \
-    SpriteEditor/SpritesheetSelector.h \
-    SpriteEditor/SelectionGraphicsScene.h \
-    SpriteEditor/AnimationPreviewer/AnimationPreviewer.h \
-    SpriteEditor/AnimationPreviewer/AnimatedLabel.h \
     LevelEditor/LevelView.h \
     LevelEditor/Brushes/SelectionBrush.h \
-    LevelEditor/Brushes/EyedropperBrush.h \
-    Model/Clipboard.h
+    LevelEditor/Brushes/EyedropperBrush.h 
 
 FORMS    += \
     MainWindow.ui \
@@ -126,10 +110,6 @@ FORMS    += \
     Dialogs/LayerPropertiesDialog.ui \
     Dialogs/ImageViewerDialog.ui \
     Dialogs/LevelPropertiesDialog.ui \
-    SpriteEditor/SpriteEditor.ui \
-    SpriteEditor/AnimationEditor.ui \
-    SpriteEditor/SpritesheetSelector.ui \
-    SpriteEditor/AnimationPreviewer/AnimationPreviewer.ui
 
 RESOURCES += \
     Icons.qrc

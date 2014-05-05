@@ -1,7 +1,7 @@
 #ifndef PACKEDBINARYEXPORTER_H
 #define PACKEDBINARYEXPORTER_H
 
-#include "../Exporter.h"
+#include "Exporter.h"
 
 class PackedBinaryExporter : public Exporter
 {
