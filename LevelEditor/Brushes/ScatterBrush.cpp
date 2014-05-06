@@ -2,6 +2,15 @@
 
 bool ScatterBrush::fill = false;
 
+ScatterBrush::ScatterBrush()
+{
+    AddList();
+}
+
+ScatterBrush::~ScatterBrush()
+{
+}
+
 QCursor ScatterBrush::GetCursor()
 {
     if(ScatterBrush::fill)
@@ -14,6 +23,9 @@ void ScatterBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next
     resources->ClearPreview();
+
+    if(fill && preview)
+        return;
 
     if(fill && !preview)
     {
@@ -44,15 +56,6 @@ void ScatterBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
             }
         }
     }
-}
-
-ScatterBrush::ScatterBrush()
-{
-    AddList();
-}
-
-ScatterBrush::~ScatterBrush()
-{
 }
 
 void ScatterBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources)

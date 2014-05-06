@@ -28,9 +28,6 @@ void FillBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
 
 void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources)
 {
-    //this is a recursive function. It calls itself in tiles to the north, east, south and west.
-    //it will return if the tile is different from the one being replaced, or off the edge of the grid
-
     if(!resources || newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
         return;
 

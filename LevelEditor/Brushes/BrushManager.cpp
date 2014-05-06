@@ -24,7 +24,7 @@ BrushManager::BrushManager(QWidget *parent) :
     singleTileBrush = BrushManager::Pencil;
 
     defaultScatter.SetName("Default");
-    scatter.insert(0, &defaultScatter);
+    scatter.push_front(&defaultScatter);
 
     RepopulateBrushLists();
 }
@@ -155,7 +155,7 @@ void BrushManager::RepopulateBrushLists()
     ui->scatterBrushCombo->clear();
 
     //loop over the brush list and add them all
-    for(int i = 1; i < scatter.count(); i++)
+    for(int i = 0; i < scatter.count(); i++)
     {
         ui->scatterBrushCombo->addItem(scatter[i]->GetName());
         ui->scatterBrushCombo->setCurrentIndex(i);
@@ -267,6 +267,11 @@ void BrushManager::PasteTiles(QList<Tile> pasteTiles)
 void BrushManager::on_overwriteCheckbox_toggled(bool checked)
 {
     pencil.SetOverwrite(checked);
+
+    for(int i = 0; i < scatter.count(); i++)
+    {
+        scatter[i]->SetOverwrite(checked);
+    }
 }
 
 void BrushManager::on_brushSizeInput_valueChanged(int arg1)
