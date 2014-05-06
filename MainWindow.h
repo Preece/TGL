@@ -13,10 +13,7 @@
 #include "Dialogs/LevelPropertiesDialog.h"
 
 #include "LevelEditor/LayerManager.h"
-#include "LevelEditor/Brushes/TileBrush.h"
-#include "LevelEditor/Brushes/PencilBrush.h"
-#include "LevelEditor/Brushes/FillBrush.h"
-#include "LevelEditor/Brushes/EraserBrush.h"
+#include "LevelEditor/Brushes/BrushManager.h"
 
 #include "Toolbox/TileSelectorScene.h"
 

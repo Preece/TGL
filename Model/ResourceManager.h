@@ -3,6 +3,7 @@
 
 #include <QHash>
 #include <QUndoStack>
+#include <QPixmap>
 
 #include "Image.h"
 #include "TileLayer.h"

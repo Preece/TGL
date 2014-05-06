@@ -3,7 +3,6 @@
 
 #include <QUndoCommand>
 
-#include "../ItemNode.h"
 #include "../Image.h"
 #include "../TileLayer.h"
 

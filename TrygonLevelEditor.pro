@@ -21,8 +21,6 @@ SOURCES += main.cpp\
     Model/LevelProperties.cpp \
     Model/TileLayer.cpp \
     Model/Clipboard.cpp \
-    Model/Exporters/Exporter.cpp \
-    Model/Exporters/PackedBinaryExporter.cpp \
     Model/Commands/ModifyTilesCommand.cpp \
     Model/Commands/AddResourceCommand.cpp \
     Model/Commands/DeleteResourceCommand.cpp \
@@ -53,7 +51,7 @@ SOURCES += main.cpp\
     Dialogs/LevelPropertiesDialog.cpp \
     LevelEditor/LevelView.cpp \
     LevelEditor/Brushes/SelectionBrush.cpp \
-    LevelEditor/Brushes/EyedropperBrush.cpp 
+    LevelEditor/Brushes/EyedropperBrush.cpp  
 
 HEADERS  += \
     MainWindow.h \
@@ -63,8 +61,6 @@ HEADERS  += \
     Model/LevelProperties.h \
     Model/TileLayer.h \
     Model/Clipboard.h \
-    Model/Exporters/Exporter.h \
-    Model/Exporters/PackedBinaryExporter.h \
     Model/Commands/ModifyTilesCommand.h \
     Model/Commands/AddResourceCommand.h \
     Model/Commands/DeleteResourceCommand.h \
@@ -95,7 +91,7 @@ HEADERS  += \
     Dialogs/LevelPropertiesDialog.h \
     LevelEditor/LevelView.h \
     LevelEditor/Brushes/SelectionBrush.h \
-    LevelEditor/Brushes/EyedropperBrush.h 
+    LevelEditor/Brushes/EyedropperBrush.h  
 
 FORMS    += \
     MainWindow.ui \

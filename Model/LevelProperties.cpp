@@ -18,7 +18,6 @@ bool LevelProperties::ArePropertiesSet()
 
     return false;
 }
-<<<<<<< HEAD
 
 void LevelProperties::SetMapSize(int newW, int newH)
 { 

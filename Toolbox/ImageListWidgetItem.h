@@ -2,6 +2,7 @@
 #define IMAGESELECTORITEM_H
 
 #include <QListWidgetItem>
+#include <QMessageBox>
 
 #include "../Model/Image.h"
 

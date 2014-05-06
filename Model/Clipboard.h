@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "TileLayer.h"
+#include "ItemNode.h"
 
 class Clipboard : public QObject
 {
