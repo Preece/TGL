@@ -21,6 +21,8 @@ public:
 
     void RegisterResourceManager(ResourceManager * newRM) { resources = newRM; }
     void RepopulateTileSelector();
+
+    TileList GetSelectedTiles();
     
 signals:
     void SelectionChanged(TileList newSelection);
@@ -43,8 +45,6 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    TileList GetSelectedTiles();
-
     ResourceManager *resources;
     QImage *spritesheet;
 

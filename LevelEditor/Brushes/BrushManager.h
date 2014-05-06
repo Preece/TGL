@@ -35,7 +35,7 @@ public:
 
     void RepopulateBrushLists();
 
-    void RegisterTileSelector(QGraphicsScene *selector) { propertiesWindow.RegisterTileSelector(selector); }
+    void RegisterTileSelector(TileSelectorScene *selector) { propertiesWindow.RegisterTileSelector(selector); }
     void RegisterResourceManager(ResourceManager *newRM) { resources = newRM; propertiesWindow.RegisterResourceManager(newRM); }
 
     void DestroyBrushes();

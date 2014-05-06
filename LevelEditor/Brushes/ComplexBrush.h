@@ -19,7 +19,6 @@ public:
     void AddList(int count = 1);
     void RemoveList(int index);
 
-    void AddTile(int listIndex, TileCoord origin);
     void AddTiles(int listIndex, TileList tiles, bool clear = false);
     TileCoord GetTile(int listIndex, int tileIndex);
     TileList GetTiles(int listIndex);

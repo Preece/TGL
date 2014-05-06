@@ -37,7 +37,7 @@ BrushPropertiesDialog::~BrushPropertiesDialog()
     delete ui;
 }
 
-void BrushPropertiesDialog::RegisterTileSelector(QGraphicsScene *selector)
+void BrushPropertiesDialog::RegisterTileSelector(TileSelectorScene *selector)
 {
     ui->tileSelector->setScene(selector);
     tileSelector = selector;
@@ -99,7 +99,7 @@ void BrushPropertiesDialog::on_addTile_clicked()
 {
     if(currentBrush)
     {
-        currentBrush->AddTile(currentListIndex, GetSelectedTileOrigin());
+        currentBrush->AddTiles(currentListIndex, tileSelector->GetSelectedTiles());
         RepopulateTileList();
     }
 }
@@ -113,19 +113,6 @@ bool BrushPropertiesDialog::IsTileSelected()
         return true;
 
     return false;
-}
-
-TileCoord BrushPropertiesDialog::GetSelectedTileOrigin()
-{
-    if(IsTileSelected())
-    {
-        TileWidgetItem *tempItem = dynamic_cast<TileWidgetItem*>(tileSelector->selectedItems()[0]);
-
-        if(tempItem)
-            return tempItem->GetTileOrigin();
-    }
-
-    return TileCoord(-1, -1);
 }
 
 TileWidgetItem *BrushPropertiesDialog::GetSelectedTile()

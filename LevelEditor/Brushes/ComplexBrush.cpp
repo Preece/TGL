@@ -26,14 +26,6 @@ void ComplexBrush::RemoveList(int index)
     lists.removeAt(index);
 }
 
-void ComplexBrush::AddTile(int listIndex, TileCoord origin)
-{
-    if(listIndex < 0 || listIndex >= lists.count())
-        return;
-
-    lists[listIndex].append(origin);
-}
-
 void ComplexBrush::AddTiles(int listIndex, TileList tiles, bool clear)
 {
     if(listIndex < 0 || listIndex >= lists.count())

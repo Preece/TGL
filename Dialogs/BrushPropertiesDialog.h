@@ -9,6 +9,7 @@
 #include "../LevelEditor/Brushes/ScatterBrush.h"
 #include "../LevelEditor/Brushes/SmartBrush.h"
 
+#include "../../Toolbox/TileSelectorScene.h"
 #include "../../Toolbox/TileWidgetItem.h"
 
 namespace Ui {
@@ -23,7 +24,7 @@ public:
     explicit BrushPropertiesDialog(QWidget *parent = 0);
     ~BrushPropertiesDialog();
 
-    void RegisterTileSelector(QGraphicsScene *selector);
+    void RegisterTileSelector(TileSelectorScene *selector);
     void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
 
     void NewBrush(ComplexBrush *newBrush);
@@ -37,7 +38,6 @@ public:
     void ShowMatrixControls();
 
     bool IsTileSelected();
-    TileCoord GetSelectedTileOrigin();
     TileWidgetItem *GetSelectedTile();
     TileWidgetItem *GetTileFromOrigin(TileCoord coord);
 
@@ -67,7 +67,7 @@ private:
     ResourceManager *resourceManager;
 
     QGraphicsScene tileList;
-    QGraphicsScene *tileSelector;
+    TileSelectorScene *tileSelector;
 
     ComplexBrush *currentBrush;
     int currentListIndex;
