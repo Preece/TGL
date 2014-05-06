@@ -7,8 +7,6 @@
 
 typedef QList<TileCoord> TileList;
 
-
-
 class ComplexBrush : public TileBrush
 {
 public:
@@ -22,6 +20,7 @@ public:
     void RemoveList(int index);
 
     void AddTile(int listIndex, TileCoord origin);
+    void AddTiles(int listIndex, TileList tiles, bool clear = false);
     TileCoord GetTile(int listIndex, int tileIndex);
     TileCoord GetRandomTile(int listIndex);
     int GetTileCount(int listIndex);

@@ -22,6 +22,11 @@ BrushManager::BrushManager(QWidget *parent) :
     qsrand((uint)time.msec());
 
     singleTileBrush = BrushManager::Pencil;
+
+    defaultScatter.SetName("Default");
+    scatter.insert(0, &defaultScatter);
+
+    RepopulateBrushLists();
 }
 
 BrushManager::~BrushManager()
@@ -150,7 +155,7 @@ void BrushManager::RepopulateBrushLists()
     ui->scatterBrushCombo->clear();
 
     //loop over the brush list and add them all
-    for(int i = 0; i < scatter.count(); i++)
+    for(int i = 1; i < scatter.count(); i++)
     {
         ui->scatterBrushCombo->addItem(scatter[i]->GetName());
         ui->scatterBrushCombo->setCurrentIndex(i);
@@ -225,10 +230,14 @@ void BrushManager::SetSelectedTiles(TileList newList)
     
         stamp.CreateGrid(newList);
 
+        //overwrite the default scatters list
+        defaultScatter.AddTiles(0, newList, true);
+
         //if multiple tiles were selected, go ahead and select the stamp.
         //this might prove to be annoying
+        //at some point, make sure a complex brush is not selected here
         if(newList.count() > 1)
-            SetCurrentBrush(4);
+            SetCurrentBrush(BrushManager::Stamp);
         else if(newList.count() == 1)
             RevertToPreviousSingleTileBrush();
         

@@ -34,6 +34,20 @@ void ComplexBrush::AddTile(int listIndex, TileCoord origin)
     lists[listIndex].append(origin);
 }
 
+void ComplexBrush::AddTiles(int listIndex, TileList tiles, bool clear)
+{
+    if(listIndex < 0 || listIndex >= lists.count())
+        return;
+
+    if(clear)
+        lists[listIndex].clear();
+
+    for(int i = 0; i < tiles.count(); i++)
+    {
+        lists[listIndex].append(tiles[i]);
+    }
+}
+
 TileCoord ComplexBrush::GetTile(int listIndex, int tileIndex)
 {
     if(listIndex < 0 || listIndex >= lists.count())
