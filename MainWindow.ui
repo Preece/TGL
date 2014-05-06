@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>989</width>
+    <width>1000</width>
     <height>667</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
+    <width>1000</width>
     <height>460</height>
    </size>
   </property>
@@ -29,11 +29,11 @@ QMainWindow {
         padding: 0px;
 }
 
-QToolBox::tab, QComboBox,  QComboBox::drop-down {
-        background-color: rgb(132, 255, 140);
+QToolBox::tab, QComboBox,  QComboBox::drop-down, QToolButton {
+        background-color:   rgb(161, 255, 156)  ;
         border-style: outset;
         border-width: 1px;
-        border-color: rgb(79, 197, 93);
+        border-color: rgb(141, 235, 136);
         border-radius: 3px;
  }
 
@@ -43,19 +43,10 @@ QToolBox &gt; QScrollArea &gt; QWidget &gt; QWidget {
         border: 0px;
 }
 
-QToolButton {
-        background-color: rgb(220, 216, 255);
-        border-style: outset;
-        border-width:1px;
-        border-radius:3px;
-        border-color: rgb(157, 155, 193);
-        padding: 1px;
-}
-
-QToolButton:checked, QToolButton::pressed {
+QToolButton:checked, QToolButton::pressed, QToolBox::tab::selected {
         border-style: inset;
-        background-color: rgb(170, 170, 243);
-        border-color: rgb(117, 119, 186);
+        background-color: rgb(126, 204, 135);
+        border-color: rgb(53, 129, 72);
 }
 
 QComboBox::down-arrow {
@@ -120,7 +111,7 @@ QTreeView, #propertyBrowser {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>507</height>
+           <height>509</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -209,7 +200,7 @@ QTreeView, #propertyBrowser {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>507</height>
+           <height>509</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -310,34 +301,6 @@ QTreeView, #propertyBrowser {
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="BrushManager" name="brushManager">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>320</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="collisionBox">
@@ -346,7 +309,7 @@ QTreeView, #propertyBrowser {
            <x>0</x>
            <y>0</y>
            <width>298</width>
-           <height>507</height>
+           <height>509</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -639,6 +602,34 @@ QTreeView, #propertyBrowser {
              </widget>
             </item>
             <item>
+             <widget class="BrushManager" name="brushManager">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>320</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QToolButton" name="gridToggle">
               <property name="toolTip">
                <string>Show/Hide Grid</string>
@@ -727,7 +718,7 @@ QTreeView, #propertyBrowser {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>989</width>
+     <width>1000</width>
      <height>18</height>
     </rect>
    </property>

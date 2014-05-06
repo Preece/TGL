@@ -36,6 +36,7 @@ public:
 private:
 
     QHash<TileCoord, TileModification> mods;
+    bool initialRedo;
 };
 
 #endif // MODIFYTILESCOMMAND_H

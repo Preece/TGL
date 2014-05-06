@@ -2,6 +2,7 @@
 
 ModifyTilesCommand::ModifyTilesCommand()
 {
+    initialRedo = true;
 }
 
 void ModifyTilesCommand::AddModification(TileLayer *layer, int newX, int newY, TileCoord newOrgn, TileCoord oldOrgn)
@@ -51,5 +52,9 @@ void ModifyTilesCommand::redo()
     for(iter = mods.begin(); iter != mods.end(); ++iter)
     {
         iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().newOrigin);
+
+        //if this is not the initial redo, cause a painting event
     }
+
+    initialRedo = false;
 }
