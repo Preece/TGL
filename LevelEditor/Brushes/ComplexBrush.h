@@ -22,6 +22,7 @@ public:
     void AddTile(int listIndex, TileCoord origin);
     void AddTiles(int listIndex, TileList tiles, bool clear = false);
     TileCoord GetTile(int listIndex, int tileIndex);
+    TileList GetTiles(int listIndex);
     TileCoord GetRandomTile(int listIndex);
     int GetTileCount(int listIndex);
     void RemoveTile(int listIndex, int tileIndex);

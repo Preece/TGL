@@ -100,7 +100,9 @@ private:
     LineBrush line;
     StampBrush stamp;
     SelectionBrush selector;
+
     ScatterBrush defaultScatter;
+    ReplacerBrush defaultReplacer;
 
     QList<ScatterBrush*> scatter;
     int scatterBrushIndex;

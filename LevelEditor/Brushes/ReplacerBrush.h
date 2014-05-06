@@ -10,6 +10,8 @@ public:
 
     void Paint(int x, int y, ResourceManager *resources, bool preview);
 
+    void PushNewList(TileList tiles);
+
     QString GetType() { return "replacer"; }
 };
 

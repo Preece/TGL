@@ -33,3 +33,14 @@ void ReplacerBrush::Paint(int x, int y, ResourceManager *resources, bool preview
         }
     }
 }
+
+void ReplacerBrush::PushNewList(TileList tiles)
+{
+    if(tiles.empty())
+        return;
+
+    //make the current clean list become the current dirty list
+    AddTiles(1, GetTiles(0), true);
+    //and the new tiles become the clean tiles
+    AddTiles(0, tiles, true);
+}

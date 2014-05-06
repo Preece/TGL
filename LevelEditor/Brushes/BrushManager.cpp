@@ -26,6 +26,9 @@ BrushManager::BrushManager(QWidget *parent) :
     defaultScatter.SetName("Default");
     scatter.push_front(&defaultScatter);
 
+    defaultReplacer.SetName("Default");
+    replacer.push_front(&defaultReplacer);
+
     RepopulateBrushLists();
 }
 
@@ -232,6 +235,7 @@ void BrushManager::SetSelectedTiles(TileList newList)
 
         //overwrite the default scatters list
         defaultScatter.AddTiles(0, newList, true);
+        defaultReplacer.PushNewList(newList);
 
         //if multiple tiles were selected, go ahead and select the stamp.
         //this might prove to be annoying

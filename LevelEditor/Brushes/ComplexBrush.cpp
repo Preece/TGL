@@ -59,6 +59,17 @@ TileCoord ComplexBrush::GetTile(int listIndex, int tileIndex)
     return lists[listIndex][tileIndex];
 }
 
+TileList ComplexBrush::GetTiles(int listIndex)
+{
+    if(listIndex < 0 || listIndex >= lists.count())
+    {
+        TileList empty;
+        return empty;
+    }
+
+    return lists[listIndex];
+}
+
 TileCoord ComplexBrush::GetRandomTile(int listIndex)
 {
     if(listIndex < 0 || listIndex >= lists.count())
