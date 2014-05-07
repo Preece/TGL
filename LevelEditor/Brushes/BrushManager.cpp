@@ -165,6 +165,8 @@ void BrushManager::RepopulateBrushLists()
         scatterBrushIndex = i;
     }
 
+    ui->scatterBrushCombo->addItem("Add New Brush...");
+
     ui->smartBrushCombo->clear();
 
     for(int i = 0; i < smart.count(); i++)
@@ -173,6 +175,8 @@ void BrushManager::RepopulateBrushLists()
         ui->smartBrushCombo->setCurrentIndex(i);
         smartBrushIndex = i;
     }
+
+    ui->smartBrushCombo->addItem("Add New Brush...");
 
     ui->replacerBrushCombo->clear();
 
@@ -183,6 +187,8 @@ void BrushManager::RepopulateBrushLists()
         replacerBrushIndex = i;
     }
 
+    ui->replacerBrushCombo->addItem("Add New Brush...");
+
     ui->matrixBrushCombo->clear();
 
     for(int i = 0; i < matrix.count(); i++)
@@ -191,6 +197,8 @@ void BrushManager::RepopulateBrushLists()
         ui->matrixBrushCombo->setCurrentIndex(i);
         matrixBrushIndex = i;
     }
+
+    ui->matrixBrushCombo->addItem("Add New Brush...");
 }
 
 void BrushManager::DestroyBrushes()
@@ -320,6 +328,11 @@ void BrushManager::on_scatterBrushCombo_currentIndexChanged(int index)
         currentBrush = scatter[scatterBrushIndex];
         emit BrushChanged(currentBrush->GetCursor(), BrushManager::Scatter);
     }
+    else
+    {
+        //they clicked the add brush option, so add one
+        on_addScatterBrush_clicked();
+    }
 }
 
 void BrushManager::on_editScatterBrush_clicked()
@@ -357,6 +370,10 @@ void BrushManager::on_smartBrushCombo_currentIndexChanged(int index)
     {
         currentBrush = smart[smartBrushIndex];
         emit BrushChanged(currentBrush->GetCursor(), BrushManager::Smart);
+    }
+    else
+    {
+        on_addSmartBrush_clicked();
     }
 }
 
@@ -456,6 +473,10 @@ void BrushManager::on_replacerBrushCombo_currentIndexChanged(int index)
         currentBrush = replacer[replacerBrushIndex];
         emit BrushChanged(currentBrush->GetCursor(), BrushManager::Replacer);
     }
+    else
+    {
+        on_addReplacerBrush_clicked();
+    }
 }
 
 void BrushManager::on_addMatrixBrush_clicked()
@@ -517,5 +538,9 @@ void BrushManager::on_matrixBrushCombo_currentIndexChanged(int index)
     {
         currentBrush = matrix[matrixBrushIndex];
         emit BrushChanged(currentBrush->GetCursor(), BrushManager::Matrix);
+    }
+    else
+    {
+        on_addMatrixBrush_clicked();
     }
 }
