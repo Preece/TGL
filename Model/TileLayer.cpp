@@ -3,12 +3,34 @@
 TileLayer::TileLayer()
 {
     opacity = 100;
+    width = height = 0;
     verticalParallax = 1.0;
     horizontalParallax = 1.0;
+
+    dynamicSize = true;
 }
 
 TileLayer::~TileLayer()
 {
+}
+
+bool TileLayer::ResizeToIncludePoint(int x, int y)
+{
+    if(dynamicSizing)
+    {
+        if(x > width)
+            width = x;
+
+        if(y > height)
+            height = y;
+
+        return true;
+    }
+
+    if(x > width || y > height)
+        return false;
+
+    return true;
 }
 
 TileCoord TileLayer::GetTileOrigin(int x, int y)

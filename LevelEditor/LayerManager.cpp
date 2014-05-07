@@ -33,7 +33,7 @@ void LayerManager::EyedropTile(QPoint pos)
 
     //if the position is beyond the bounds of the scene, ignore it
     //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-    if(tileX >= resourceManager->GetMapWidth() || tileY >= resourceManager->GetMapHeight())
+    if(tileX >= resourceManager->GetCurrentLayerWidth() || tileY >= resourceManager->GetCurrentLayerHeight())
         return;
 
     emit SelectNewTile(resourceManager->GetTileOrigin(tileX, tileY));
@@ -56,8 +56,13 @@ void LayerManager::AddLayer(int newLayerID)
     tempLayerView->show();
     tempLayerView->setPos(0,0);
     
-    setSceneRect(0, 0, resourceManager->GetMapWidth() * resourceManager->GetTileWidth(),
-                       resourceManager->GetMapHeight() * resourceManager->GetTileHeight());
+    setSceneRect(0, 0, resourceManager->GetCurrentLayerWidth() * resourceManager->GetTileWidth(),
+                       resourceManager->GetCurrentLayerHeight() * resourceManager->GetTileHeight());
+}
+
+void LayerManager::UpdateSceneSize(int w, int h)
+{
+
 }
 
 void LayerManager::RemoveLayer(int dirtyLayerID)
@@ -99,8 +104,8 @@ void LayerManager::ToggleGrid(bool show)
 
         int tileW = resourceManager->GetTileWidth();
         int tileH = resourceManager->GetTileHeight();
-        int mapH = resourceManager->GetMapHeight();
-        int mapW = resourceManager->GetMapWidth();
+        int mapH = resourceManager->GetCurrentLayerHeight();
+        int mapW = resourceManager->GetCurrentLayerWidth();
 
         //loop for the height of the map, draw horizontal lines
         for(int i = 1; i < mapH; i++)
@@ -305,7 +310,7 @@ void LayerManager::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
 void LayerManager::UpdatePreviewTile(int x, int y, TileCoord origin)
 {
     //bounds check
-    if(x >= resourceManager->GetMapWidth() || y >= resourceManager->GetMapHeight() || x < 0 || y < 0)
+    if(x >= resourceManager->GetCurrentLayerWidth() || y >= resourceManager->GetCurrentLayerHeight() || x < 0 || y < 0)
         return;
 
     if(origin == TileCoord(-1, -1))

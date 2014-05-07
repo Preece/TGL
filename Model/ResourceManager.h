@@ -31,8 +31,8 @@ public slots:
     void SetMapSize(int w, int h);
     int GetTileWidth();
     int GetTileHeight();
-    int GetMapWidth();
-    int GetMapHeight();
+    int GetCurrentLayerWidth();
+    int GetCurrentLayerHeight();
 
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);

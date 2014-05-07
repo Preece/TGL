@@ -29,14 +29,24 @@ int ResourceManager::GetTileHeight()
     return levelProperties.GetTileHeight();
 }
 
-int ResourceManager::GetMapWidth()
+int ResourceManager::GetCurrentLayerWidth()
 {
-    return levelProperties.GetMapWidth();
+    TileLayer *tempLayer = layerMap.value(currentLayerID);
+
+    if(tempLayer)
+        return tempLayer->GetWidth();
+
+    return 0;
 }
 
-int ResourceManager::GetMapHeight()
+int ResourceManager::GetCurrentLayerHeight()
 {
-    return levelProperties.GetMapHeight();
+    TileLayer *tempLayer = layerMap.value(currentLayerID);
+
+    if(tempLayer)
+        return tempLayer->GetHeight();
+
+    return 0;
 }
 
 int ResourceManager::AddImage(Image *newImage)
@@ -165,6 +175,10 @@ void ResourceManager::ModifyTile(int x, int y, TileCoord origin)
 
     if(tempLayer)
     {
+        //make sure the point will fit in the layer
+        if(!tempLayer->ResizeToIncludePoint(x, y))
+            return;
+
         modifyTiles->AddModification(GetTileLayer(currentLayerID), x, y, origin, tempLayer->GetTileOrigin(x, y));
 
         //notify the view that this tile should be updated

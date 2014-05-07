@@ -22,8 +22,8 @@ void LevelPropertiesDialog::LoadValues()
 
     ui->tileSizeX->setValue(resourceManager->GetTileWidth());
     ui->tileSizeY->setValue(resourceManager->GetTileHeight());
-    ui->mapSizeX->setValue(resourceManager->GetMapWidth());
-    ui->mapSizeY->setValue(resourceManager->GetMapHeight());
+    ui->mapSizeX->setValue(resourceManager->GetCurrentLayerWidth());
+    ui->mapSizeY->setValue(resourceManager->GetCurrentLayerHeight());
 }
 
 void LevelPropertiesDialog::on_buttonBox_accepted()

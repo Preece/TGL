@@ -32,8 +32,8 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
         return;
 
     //if the position is beyond the bounds of the scene, ignore it
-    if(tileX >= resources->GetMapWidth() ||
-       tileY >= resources->GetMapHeight() ||
+    if(tileX >= resources->GetCurrentLayerWidth() ||
+       tileY >= resources->GetCurrentLayerHeight() ||
        tileX < 0 || tileY < 0)
            return;
 
@@ -43,8 +43,8 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
     // 3. Add node to the end of Q.
     seedQueue.push(TileCoord(tileX, tileY));
 
-    int layerWidth = resources->GetMapWidth();
-    int layerHeight = resources->GetMapHeight();
+    int layerWidth = resources->GetCurrentLayerWidth();
+    int layerHeight = resources->GetCurrentLayerHeight();
 
     QHash<TileCoord,bool> examinedTiles;
 

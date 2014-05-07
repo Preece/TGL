@@ -24,6 +24,15 @@ public:
     void SetOpacity(int newOpacity) { opacity = newOpacity; if(opacity > 100) opacity = 100; }
     int GetOpacity() { return opacity; }
 
+    void SetSize(int w, int h) { width = w; height = h; }
+    int GetWidth() { return width; }
+    int GetHeight() { return height; }
+
+    void ToggleDynamicSizing(bool dyn) { dynamicSize = dyn; }
+    bool DynamicSizingEnabled() { return dynamicSize; }
+
+    bool ResizeToIncludePoint(int x, int y);
+
     TileCoord GetTileOrigin(int x, int y);
 
     void ModifyTile(int x, int y, TileCoord newOrigin);
@@ -33,6 +42,8 @@ private:
     QString name;
 
     int opacity;
+    int width, height;
+    bool dynamicSize;
 
     QHash<TileCoord, Tile> tiles;
 };
