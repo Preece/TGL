@@ -2,25 +2,44 @@
 
 LevelProperties::LevelProperties()
 {
-    tileWidth = 16;
-    tileHeight = 16;
-    mapWidth  = 99;
-    mapHeight = 99;
-    tilesetID = 0;
-
-    levelName = "";
+    AddProperty("name", QVariant("New Level"));
+    AddProperty("tileWidth", 16);
+    AddProperty("tileHeight", 16);
+    AddProperty("tilesetID", 0);
 }
 
-bool LevelProperties::ArePropertiesSet()
+void LevelProperties::SetTileSize(int newW, int newH)
 {
-    if(tileWidth && tileHeight && mapWidth && mapHeight)
-        return true;
-
-    return false;
+    SetProperty("tileWidth", newW);
+    SetProperty("tileHeight", newH);
 }
 
-void LevelProperties::SetMapSize(int newW, int newH)
-{ 
-    mapWidth = newW;
-    mapHeight = newH;
+int LevelProperties::GetTileWidth()
+{
+    return GetProperty("tileWidth").toInt();
+}
+
+int LevelProperties::GetTileHeight()
+{
+    return GetProperty("tileHeight").toInt();
+}
+
+void LevelProperties::SetLevelName(QString newName)
+{
+    SetProperty("name", newName);
+}
+
+QString LevelProperties::GetLevelName()
+{
+    GetProperty("name").toString();
+}
+
+void LevelProperties::SetTilesetID(int newID)
+{
+    SetProperty("tilesetID", newID);
+}
+
+int LevelProperties::GetTilesetID()
+{
+    GetProperty("tilesetID").toInt();
 }

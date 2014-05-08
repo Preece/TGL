@@ -28,7 +28,6 @@ public slots:
     Clipboard *GetClipboard() { return clipboard; }
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
-    void SetMapSize(int w, int h);
     int GetTileWidth();
     int GetTileHeight();
     int GetCurrentLayerWidth();

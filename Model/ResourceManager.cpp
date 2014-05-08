@@ -335,13 +335,6 @@ void ResourceManager::Redo()
     undo->redo();
 }
 
-void ResourceManager::SetMapSize(int w, int h)
-{
-    levelProperties.SetMapSize(w, h);
-
-    emit MapSizeChanged(w, h);
-}
-
 void ResourceManager::EndPaintOperation() 
 { 
     //if there are no changes that occured, no undo operation needs to be processed

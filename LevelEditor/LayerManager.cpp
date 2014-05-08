@@ -104,39 +104,36 @@ void LayerManager::ToggleGrid(bool show)
         grid = new QGraphicsItemGroup;
     }
 
-    if(resourceManager->GetLevelProperties()->ArePropertiesSet())
+    QPen pen(Qt::DashLine);
+    pen.setColor(QColor(Qt::gray));
+
+    QGraphicsLineItem *tempLine;
+
+    int tileW = resourceManager->GetTileWidth();
+    int tileH = resourceManager->GetTileHeight();
+    int mapH = resourceManager->GetCurrentLayerHeight();
+    int mapW = resourceManager->GetCurrentLayerWidth();
+
+    //loop for the height of the map, draw horizontal lines
+    for(int i = 1; i < mapH; i++)
     {
-        QPen pen(Qt::DashLine);
-        pen.setColor(QColor(Qt::gray));
-
-        QGraphicsLineItem *tempLine;
-
-        int tileW = resourceManager->GetTileWidth();
-        int tileH = resourceManager->GetTileHeight();
-        int mapH = resourceManager->GetCurrentLayerHeight();
-        int mapW = resourceManager->GetCurrentLayerWidth();
-
-        //loop for the height of the map, draw horizontal lines
-        for(int i = 1; i < mapH; i++)
-        {
-            tempLine = new QGraphicsLineItem(0, (i * tileH), (mapW * tileW), (i * tileH));
-            tempLine->setPen(pen);
-            grid->addToGroup(tempLine);
-        }
-
-        //loop for the width of the map, draw vertical lines
-        for(int j = 1; j < mapW; j++)
-        {
-            tempLine = new QGraphicsLineItem((j * tileW), 0, (j * tileW), (mapH * tileH));
-            tempLine->setPen(pen);
-            grid->addToGroup(tempLine);
-        }
-
-        addItem(grid);
-
-        grid->setZValue(99);
-        grid->show();
+        tempLine = new QGraphicsLineItem(0, (i * tileH), (mapW * tileW), (i * tileH));
+        tempLine->setPen(pen);
+        grid->addToGroup(tempLine);
     }
+
+    //loop for the width of the map, draw vertical lines
+    for(int j = 1; j < mapW; j++)
+    {
+        tempLine = new QGraphicsLineItem((j * tileW), 0, (j * tileW), (mapH * tileH));
+        tempLine->setPen(pen);
+        grid->addToGroup(tempLine);
+    }
+
+    addItem(grid);
+
+    grid->setZValue(99);
+    grid->show();
 }
 
 void LayerManager::mousePressEvent(QGraphicsSceneMouseEvent *event)

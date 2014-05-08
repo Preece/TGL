@@ -117,8 +117,97 @@ QTreeView, #propertyBrowser {
         <number>0</number>
        </property>
        <property name="tabSpacing">
-        <number>6</number>
+        <number>1</number>
        </property>
+       <widget class="QWidget" name="resourcesTab">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>298</width>
+          <height>486</height>
+         </rect>
+        </property>
+        <attribute name="icon">
+         <iconset resource="Icons.qrc">
+          <normaloff>:/Icons/new.png</normaloff>:/Icons/new.png</iconset>
+        </attribute>
+        <attribute name="label">
+         <string>Resources</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="ResourceView" name="resourceView">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>2</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+           <property name="indentation">
+            <number>10</number>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>true</bool>
+           </property>
+           <property name="animated">
+            <bool>false</bool>
+           </property>
+           <attribute name="headerVisible">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Project Resources</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item>
+          <widget class="PropertyBrowser" name="propertyBrowser" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>1</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
        <widget class="QWidget" name="tilePaintingTab">
         <property name="geometry">
          <rect>
@@ -237,7 +326,7 @@ QTreeView, #propertyBrowser {
           <x>0</x>
           <y>0</y>
           <width>298</width>
-          <height>496</height>
+          <height>490</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -249,93 +338,13 @@ QTreeView, #propertyBrowser {
         </attribute>
        </widget>
        <widget class="QWidget" name="objectsTab">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>298</width>
-          <height>496</height>
-         </rect>
-        </property>
         <attribute name="icon">
          <iconset resource="Icons.qrc">
-          <normaloff>:/Icons/new.png</normaloff>:/Icons/new.png</iconset>
+          <normaloff>:/Icons/selectionbox.png</normaloff>:/Icons/selectionbox.png</iconset>
         </attribute>
         <attribute name="label">
          <string>Objects</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="ResourceView" name="resourceView">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>2</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Sunken</enum>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>16</width>
-             <height>16</height>
-            </size>
-           </property>
-           <property name="indentation">
-            <number>10</number>
-           </property>
-           <property name="rootIsDecorated">
-            <bool>true</bool>
-           </property>
-           <property name="animated">
-            <bool>false</bool>
-           </property>
-           <attribute name="headerVisible">
-            <bool>false</bool>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>Project Resources</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="PropertyBrowser" name="propertyBrowser" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>1</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
       </widget>
       <widget class="QStackedWidget" name="viewStack">

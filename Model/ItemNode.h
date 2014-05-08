@@ -6,10 +6,8 @@
 #include <QPoint>
 #include <QImage>
 #include <QHash>
+#include <QVariant>
 
-#include "ObjectProperty.h"
-
-typedef QHash<QString,ObjectProperty> PropertyList;
 typedef QPair<int, int> TileCoord;
 
 struct Tile
@@ -37,21 +35,18 @@ public:
 
     int GetID() { return ID; }
 
-    //copies into a new child and returns the object
-    virtual ObjectNode CreateChild(ObjectNode *parent) {};
-
-    void AddProperty(QString name, QVariant value, bool inherent = false);
+    void AddProperty(QString name, QVariant value);
     void RemoveProperty(QString name);
 
-    QVariant GetPropertyValue(QString name);
-    ObjectProperty GetProperty(QString name);
-    PropertyList GetAllProperties() { return properties; }
+    QVariant GetProperty(QString name);
+    void SetProperty(QString name, QVariant value);
+    QHash<QString, QVariant> GetAllProperties() { return properties; }
 
     QList<ObjectNode> GetChildren() { return children; }
 
 private:
     ObjectNode *parent;
-    PropertyList properties;
+    QHash<QString, QVariant> properties;
     QList<ObjectNode> children;
 
 };

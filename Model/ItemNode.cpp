@@ -25,37 +25,35 @@ void ObjectNode::RegisterID(int registeredID)
         newID++;
 }
 
-void ObjectNode::AddProperty(QString name, QVariant value, bool inherent)
+void ObjectNode::AddProperty(QString name, QVariant value)
 {
-    ObjectProperty newProp;
-    newProp.SetName(name);
-    newProp.SetValue(value);
-    newProp.SetInherent(inherent);
-
-    properties[name] = newProp;
+    properties[name] = value;
 
     for(int i = 0; i < children.count(); i++)
-        children[i].AddProperty(name, value, inherent);
+        children[i].AddProperty(name, value);
 }
 
 void ObjectNode::RemoveProperty(QString name)
 {
     if(properties.contains(name))
     {
-        if(!properties[name].IsInherent())
-        {
-            properties.remove(name);
+        properties.remove(name);
 
-            for(int i = 0; i < children.count(); i++)
-                children[i].RemoveProperty(name);
-        }
+        for(int i = 0; i < children.count(); i++)
+            children[i].RemoveProperty(name);
     }
 }
 
-ObjectProperty ObjectNode::GetProperty(QString name)
+QVariant ObjectNode::GetProperty(QString name)
 {
     if(properties.contains(name))
         return properties[name];
     else
-        return ObjectProperty();
+        return QVariant();
+}
+
+void ObjectNode::SetProperty(QString name, QVariant value)
+{
+    if(properties.contains(name))
+        properties[name] = value;
 }
