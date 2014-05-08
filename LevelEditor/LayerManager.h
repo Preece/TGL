@@ -48,6 +48,7 @@ public slots:
     void UpdatePreviewTile(int x,int y, TileCoord origin);
 
     void UpdateSelectionGeometry(QRect rect);
+    void UpdateSceneSize(int w, int h);
 
     void DrawEraserPreview(int x, int y);
     void ClearEraserPreview();

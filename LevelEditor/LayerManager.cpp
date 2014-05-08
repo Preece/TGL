@@ -62,7 +62,16 @@ void LayerManager::AddLayer(int newLayerID)
 
 void LayerManager::UpdateSceneSize(int w, int h)
 {
+    int newW, newH;
 
+    if(w * resourceManager->GetTileWidth() > sceneRect().width())
+        newW = w * resourceManager->GetTileWidth();
+
+    if(h * resourceManager->GetTileHeight() > sceneRect().height())
+        newH = h * resourceManager->GetTileHeight();
+
+    //the scene rect should always be as big as the biggest layer
+    setSceneRect(0, 0, newW, newH);
 }
 
 void LayerManager::RemoveLayer(int dirtyLayerID)

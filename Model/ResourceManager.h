@@ -75,6 +75,7 @@ signals:
 
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);
+    void LayerSizeUpdated(int newW, int newH);
 
     void UpdateSelectionGeometry(QRect rect);
     void SelectPreviewItems();

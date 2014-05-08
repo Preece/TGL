@@ -67,8 +67,8 @@ void ScatterBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord old
         return;
 
     //if the position is beyond the bounds of the scene, ignore it
-    if(tileX >= resources->GetMapWidth() ||
-       tileY >= resources->GetMapHeight() ||
+    if(tileX >= resources->GetCurrentLayerWidth() ||
+       tileY >= resources->GetCurrentLayerHeight() ||
        tileX < 0 || tileY < 0)
            return;
 

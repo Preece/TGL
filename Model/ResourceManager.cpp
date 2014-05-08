@@ -179,7 +179,9 @@ void ResourceManager::ModifyTile(int x, int y, TileCoord origin)
         if(!tempLayer->ResizeToIncludePoint(x, y))
             return;
 
-        modifyTiles->AddModification(GetTileLayer(currentLayerID), x, y, origin, tempLayer->GetTileOrigin(x, y));
+        emit LayerSizeUpdated(tempLayer->GetWidth(), tempLayer->GetHeight());
+
+        modifyTiles->AddModification(tempLayer, x, y, origin, tempLayer->GetTileOrigin(x, y));
 
         //notify the view that this tile should be updated
         emit TileUpdated(currentLayerID, x, y, origin);

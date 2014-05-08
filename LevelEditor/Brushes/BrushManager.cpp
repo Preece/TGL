@@ -29,6 +29,12 @@ BrushManager::BrushManager(QWidget *parent) :
     defaultReplacer.SetName("Default");
     replacer.push_front(&defaultReplacer);
 
+    defaultSmart.SetName("Default");
+    smart.push_front(&defaultSmart);
+
+    defaultMatrix.SetName("Default");
+    matrix.push_front(&defaultMatrix);
+
     RepopulateBrushLists();
 }
 

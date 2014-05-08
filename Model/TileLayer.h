@@ -28,8 +28,8 @@ public:
     int GetWidth() { return width; }
     int GetHeight() { return height; }
 
-    void ToggleDynamicSizing(bool dyn) { dynamicSize = dyn; }
-    bool DynamicSizingEnabled() { return dynamicSize; }
+    void ToggleDynamicSizing(bool dyn) { dynamicSizing = dyn; }
+    bool DynamicSizingEnabled() { return dynamicSizing; }
 
     bool ResizeToIncludePoint(int x, int y);
 
@@ -43,7 +43,7 @@ private:
 
     int opacity;
     int width, height;
-    bool dynamicSize;
+    bool dynamicSizing;
 
     QHash<TileCoord, Tile> tiles;
 };

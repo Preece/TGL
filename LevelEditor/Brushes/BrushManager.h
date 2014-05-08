@@ -103,6 +103,8 @@ private:
 
     ScatterBrush defaultScatter;
     ReplacerBrush defaultReplacer;
+    SmartBrush defaultSmart;
+    MatrixBrush defaultMatrix;
 
     QList<ScatterBrush*> scatter;
     int scatterBrushIndex;

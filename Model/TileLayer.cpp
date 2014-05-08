@@ -7,7 +7,7 @@ TileLayer::TileLayer()
     verticalParallax = 1.0;
     horizontalParallax = 1.0;
 
-    dynamicSize = true;
+    dynamicSizing = true;
 }
 
 TileLayer::~TileLayer()
