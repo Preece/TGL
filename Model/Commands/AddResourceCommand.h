@@ -9,8 +9,8 @@
 class AddResourceCommand : public QUndoCommand
 {
 public:
-    AddResourceCommand(ItemNode *newResource, QHash<int, Image*> *resources);
-    AddResourceCommand(ItemNode *newResource, QHash<int, TileLayer*> *resources);
+    AddResourceCommand(ObjectNode *newResource, QHash<int, Image*> *resources);
+    AddResourceCommand(ObjectNode *newResource, QHash<int, TileLayer*> *resources);
 
     ~AddResourceCommand();
 
@@ -20,8 +20,8 @@ public:
     bool ListContainsResource();
 
 private:
-    ItemNode *resource;
-    QHash<int, ItemNode*> *resourceList;
+    ObjectNode *resource;
+    QHash<int, ObjectNode*> *resourceList;
 
     bool invertAdditions;
 };

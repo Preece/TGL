@@ -5,11 +5,9 @@
 
 #include "ItemNode.h"
 
-class TileLayer : public ItemNode
+class TileLayer : public ObjectNode
 {
 public:
-    QString GetType() { return "layer"; }
-
     TileLayer();
     ~TileLayer();
 

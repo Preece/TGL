@@ -52,7 +52,6 @@ SOURCES += main.cpp\
     LevelEditor/LevelView.cpp \
     LevelEditor/Brushes/SelectionBrush.cpp \
     LevelEditor/Brushes/EyedropperBrush.cpp \  
-    Model/ObjectNode.cpp \
     Model/ObjectProperty.cpp
 
 HEADERS  += \
@@ -94,7 +93,6 @@ HEADERS  += \
     LevelEditor/LevelView.h \
     LevelEditor/Brushes/SelectionBrush.h \
     LevelEditor/Brushes/EyedropperBrush.h \  
-    Model/ObjectNode.h \
     Model/ObjectProperty.h
 
 FORMS    += \

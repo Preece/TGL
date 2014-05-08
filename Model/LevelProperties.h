@@ -5,12 +5,10 @@
 
 #include "ItemNode.h"
 
-class LevelProperties : public ItemNode
+class LevelProperties : public ObjectNode
 {
 
 public:
-    QString GetType() { return "levelproperties"; }
-
     LevelProperties();
 
     void SetTileSize(int newW, int newH) { tileWidth = newW; tileHeight = newH; }

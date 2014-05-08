@@ -7,11 +7,9 @@
 
 #include "ItemNode.h"
 
-class Image : public ItemNode
+class Image : public ObjectNode
 {
 public:
-    QString GetType() { return "image"; }
-
     Image();
     ~Image();
 

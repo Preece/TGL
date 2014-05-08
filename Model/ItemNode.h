@@ -7,6 +7,9 @@
 #include <QImage>
 #include <QHash>
 
+#include "ObjectProperty.h"
+
+typedef QHash<QString,ObjectProperty> PropertyList;
 typedef QPair<int, int> TileCoord;
 
 struct Tile
@@ -15,13 +18,14 @@ struct Tile
     TileCoord origin;
 };
 
-class ItemNode
+class ObjectNode
 {
 protected:
     static int newID;
-
     int ID;
-    QHash<int, ItemNode*> children;
+
+    PropertyList properties;
+    QList<ObjectNode> children;
 
     int GenerateID();
 
@@ -31,19 +35,17 @@ protected:
     void RegisterID(int registeredID);
 
 public:
-    ItemNode();
-    virtual ~ItemNode();
+    ObjectNode();
+    virtual ~ObjectNode();
 
     int GetID() { return ID; }
 
-    virtual QString GetType() = 0;
+    //copies into a new child and returns the object
+    ObjectNode CreateChild();
 
-    void AddChild(ItemNode *newChild);
-    ItemNode *GetChild(int ID);
-    ItemNode *GetChildByIndex(int i);
-    int GetChildCount();
-    void RemoveChild(int ID);
-
+    void AddProperty(QString name, QVariant value, bool inherent = false);
+    void RemoveProperty(QString name);
+    ObjectProperty GetProperty(QString name);
 
 };
 
