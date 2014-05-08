@@ -289,10 +289,10 @@ void ResourceManager::ClearSelection()
 
 }
 
-Image *ResourceManager::GetImage(int ID)
+Image *ResourceManager::GetImage(int imageID)
 {
-    if(imageMap.value(ID))
-        return imageMap[ID];
+    if(imageMap.value(imageID))
+        return imageMap[imageID];
 
     return NULL;
 }

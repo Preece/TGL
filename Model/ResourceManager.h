@@ -35,7 +35,7 @@ public slots:
 
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);
-    Image *GetImage(int ID);
+    Image *GetImage(int imageID);
     Image *GetImageByIndex(int index);
     int GetImageCount() { return imageMap.count(); }
 
