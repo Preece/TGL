@@ -14,7 +14,7 @@ public:
     void SetName(QString newName) { name = newName; }
     QString GetName() { return name; }
 
-    void SetValue(QVariant newValue);
+    void SetValue(QVariant newValue) { value = newValue; }
     QVariant GetValue() { return value; }
     QVariant::Type GetType() { return value.type(); }
 

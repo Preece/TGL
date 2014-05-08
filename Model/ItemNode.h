@@ -24,9 +24,6 @@ protected:
     static int newID;
     int ID;
 
-    PropertyList properties;
-    QList<ObjectNode> children;
-
     int GenerateID();
 
     //this is used when loading a file. It will make sure the new
@@ -41,11 +38,21 @@ public:
     int GetID() { return ID; }
 
     //copies into a new child and returns the object
-    ObjectNode CreateChild();
+    virtual ObjectNode CreateChild(ObjectNode *parent) {};
 
     void AddProperty(QString name, QVariant value, bool inherent = false);
     void RemoveProperty(QString name);
+
+    QVariant GetPropertyValue(QString name);
     ObjectProperty GetProperty(QString name);
+    PropertyList GetAllProperties() { return properties; }
+
+    QList<ObjectNode> GetChildren() { return children; }
+
+private:
+    ObjectNode *parent;
+    PropertyList properties;
+    QList<ObjectNode> children;
 
 };
 

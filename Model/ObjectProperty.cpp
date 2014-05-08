@@ -2,6 +2,7 @@
 
 ObjectProperty::ObjectProperty()
 {
+    inherent = false;
 }
 
 ObjectProperty::ObjectProperty(QString newName, QVariant newValue, bool newInh)
