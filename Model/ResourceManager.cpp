@@ -9,6 +9,10 @@ ResourceManager::ResourceManager()
 
     currentLayerID = 0;
     clipboard = new Clipboard;
+
+    defaultLayer.SetName("Default");
+    layerMap[defaultLayer.GetID()] = &defaultLayer;
+    emit LayerListModified(defaultLayer.GetID());
 }
 
 ResourceManager::~ResourceManager()
@@ -310,8 +314,12 @@ void ResourceManager::DestroyAllResources()
     for(int i = 0; i < layerMap.count(); i++)
     {
         TileLayer *layer = GetLayerByIndex(i);
-        delete layer;
-        layer = NULL;
+
+        if(layer != &defaultLayer)
+        {
+            delete layer;
+            layer = NULL;
+        }
     }
 
     layerMap.clear();

@@ -89,6 +89,8 @@ private:
     QHash<TileCoord, Tile> previewTiles;
     QRect selectionArea;
 
+    TileLayer defaultLayer;
+
     LevelProperties levelProperties;
 
     QUndoStack *undo;

@@ -51,7 +51,9 @@ SOURCES += main.cpp\
     Dialogs/LevelPropertiesDialog.cpp \
     LevelEditor/LevelView.cpp \
     LevelEditor/Brushes/SelectionBrush.cpp \
-    LevelEditor/Brushes/EyedropperBrush.cpp  
+    LevelEditor/Brushes/EyedropperBrush.cpp \  
+    Model/ObjectNode.cpp \
+    Model/ObjectProperty.cpp
 
 HEADERS  += \
     MainWindow.h \
@@ -91,7 +93,9 @@ HEADERS  += \
     Dialogs/LevelPropertiesDialog.h \
     LevelEditor/LevelView.h \
     LevelEditor/Brushes/SelectionBrush.h \
-    LevelEditor/Brushes/EyedropperBrush.h  
+    LevelEditor/Brushes/EyedropperBrush.h \  
+    Model/ObjectNode.h \
+    Model/ObjectProperty.h
 
 FORMS    += \
     MainWindow.ui \
