@@ -50,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->miniMap, SIGNAL(CenterMinimapOnLevel()), this, SLOT(CenterMinimapOnLevel()));
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
 
+    connect(resources, SIGNAL(ResourceAdded(int)), ui->resourceView, SLOT(AddResource(int)));
+
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
 

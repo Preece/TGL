@@ -22,6 +22,9 @@ signals:
 public slots:
     void selectionUpdated(QTreeWidgetItem*, int);
 
+    void AddResource(int ID);
+    void RemoveResource(int ID);
+
 private:
     ResourceManager *resources;
 

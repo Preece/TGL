@@ -115,3 +115,15 @@ void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
         currentSelection = NULL;
     }
 }
+
+void ResourceView::AddResource(int ID)
+{
+    ObjectNode *newObject = resources->GetObject(ID);
+    AddNode(projectRoot, "tha new snaps", ":/Icons/save.png", ID);
+
+}
+
+void ResourceView::RemoveResource(int ID)
+{
+
+}
