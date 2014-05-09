@@ -9,6 +9,7 @@
 #include <QVariant>
 
 typedef QPair<int, int> TileCoord;
+typedef QHash<QString, QVariant> PropertyList;
 
 struct Tile
 {
@@ -46,7 +47,7 @@ public:
 
 private:
     ObjectNode *parent;
-    QHash<QString, QVariant> properties;
+    PropertyList properties;
     QList<ObjectNode> children;
 
 };

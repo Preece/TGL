@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
     connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), resources, SLOT(SetLayerSelection(int)));
-    connect(ui->resourceView, SIGNAL(NewResourceSelected(int)), ui->propertyBrowser, SLOT(DisplayResource(int)));
+    connect(ui->resourceView, SIGNAL(NewResourceSelected(ObjectNode*)), ui->propertyBrowser, SLOT(DisplayResource(ObjectNode*)));
     connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
     connect(ui->miniMap, SIGNAL(CenterMinimapOnLevel()), this, SLOT(CenterMinimapOnLevel()));

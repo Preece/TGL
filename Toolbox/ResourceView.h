@@ -21,15 +21,10 @@ public:
     bool IsLayerSelected();
     
 signals:
-    void NewResourceSelected(int newID);
-    void NewLayerSelected(int newID);
-    void NewImageSelected(int newID);
+    void NewResourceSelected(ObjectNode *newObject);
     
 public slots:
-    void selectionUpdated(QTreeWidgetItem *, int);
-
-    void RepopulateLayers(int newID);
-    void RepopulateImages();
+    void selectionUpdated(QTreeWidgetItem*, int);
 
 private:
     ResourceManager *resources;
@@ -39,7 +34,7 @@ private:
     QTreeWidgetItem *imageRoot;
     QTreeWidgetItem *tilesetRoot;
 
-    int currentSelection;
+    ObjectNode *currentSelection;
 
     int GetItemID(QTreeWidgetItem *item);
     QTreeWidgetItem *AddNode(QTreeWidgetItem *parent, QString name, QString icon, int ID = 0);

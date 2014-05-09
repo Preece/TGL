@@ -20,6 +20,9 @@ public:
 
     void SetTilesetID(int newID);
     int GetTilesetID();
+
+private:
+    int tilesetID;
 };
 
 #endif // LEVELPROPERTIES_H

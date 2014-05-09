@@ -28,7 +28,6 @@ void ResourceView::RepopulateEverything()
         projectRoot->setData(0, Qt::UserRole, QVariant(resources->GetLevelProperties()->GetID()));
 
     RepopulateLayers(0);
-    RepopulateImages();
 }
 
 void ResourceView::RepopulateLayers(int newID)
@@ -51,30 +50,6 @@ void ResourceView::RepopulateLayers(int newID)
             newLayerNode->setSelected(true);
             layerRoot->setExpanded(true);
             selectionUpdated(newLayerNode, 0);
-        }
-    }
-}
-
-void ResourceView::RepopulateImages()
-{
-    //get rid of the children
-    RemoveChildrenNodes(imageRoot);
-
-    //get each layer and add it as a child node of the layer root
-    for(int i = 0; i < resources->GetImageCount(); i++)
-    {
-        //fetch the layer from the model
-        Image *img = resources->GetImageByIndex(i);
-
-        QTreeWidgetItem *newImageNode = AddNode(imageRoot, img->GetImageName(), ":/Icons/save.png", img->GetID());
-
-        //if this layer was the current selection, select it again
-        if(img->GetID() == currentSelection)
-        {
-            clearSelection();
-            newImageNode->setSelected(true);
-            imageRoot->setExpanded(true);
-            selectionUpdated(newImageNode, 0);
         }
     }
 }
@@ -141,27 +116,17 @@ void ResourceView::RemoveChildrenNodes(QTreeWidgetItem *parent)
 
 void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
 {
-    int selectedID = GetSelectedID();
+    ObjectNode *selectedObject = resources->GetObject(GetSelectedID);
 
-    //get the ID from the selection
-    if(selectedID)
+    if(selectedObject)
     {
-        //emit a message for broad listeners, then more specific ones
         emit NewResourceSelected(selectedID);
 
-        //store the selection
-        currentSelection = selectedID;
-
-        //if the new selection is a layer, broadcast the change
-        if(resources->GetTileLayer(selectedID))
-            emit NewLayerSelected(selectedID);
-
-        if(resources->GetImage(selectedID))
-            emit NewImageSelected(selectedID);
+        currentSelection = selectedObject;
     }
     else
     {
         //if nothing is selected, zero out the current selection
-        currentSelection = 0;
+        currentSelection = NULL;
     }
 }

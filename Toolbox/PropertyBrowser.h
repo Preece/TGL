@@ -20,19 +20,16 @@ signals:
     
 public slots:
 
-    void DisplayResource(int ID);
+    void DisplayResource(ObjectNode *newObject);
     void UpdateValue(QtProperty *property, const QVariant &val);
 
 private:
-    void DisplayLevelProperties(LevelProperties *properties);
-    void DisplayLayer(TileLayer *layer);
-    void DisplayImage(Image *img);
+    ObjectNode *currentObject;
+    void DisplayObject(ObjectNode *object);
 
     ResourceManager *resources;
     QtVariantPropertyManager *propertyManager;
     QtVariantEditorFactory *widgetFactory;
-
-    int currentSelectionID;
 };
 
 #endif // PROPERTYBROWSER_H
