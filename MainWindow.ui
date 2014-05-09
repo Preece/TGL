@@ -139,7 +139,7 @@ QTreeView, #propertyBrowser {
          <item>
           <widget class="ResourceView" name="resourceView">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>2</verstretch>
             </sizepolicy>
@@ -187,7 +187,7 @@ QTreeView, #propertyBrowser {
          <item>
           <widget class="PropertyBrowser" name="propertyBrowser" native="true">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>1</verstretch>
             </sizepolicy>
@@ -214,7 +214,7 @@ QTreeView, #propertyBrowser {
           <x>0</x>
           <y>0</y>
           <width>298</width>
-          <height>496</height>
+          <height>486</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -326,7 +326,7 @@ QTreeView, #propertyBrowser {
           <x>0</x>
           <y>0</y>
           <width>298</width>
-          <height>490</height>
+          <height>486</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -338,6 +338,14 @@ QTreeView, #propertyBrowser {
         </attribute>
        </widget>
        <widget class="QWidget" name="objectsTab">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>298</width>
+          <height>486</height>
+         </rect>
+        </property>
         <attribute name="icon">
          <iconset resource="Icons.qrc">
           <normaloff>:/Icons/selectionbox.png</normaloff>:/Icons/selectionbox.png</iconset>

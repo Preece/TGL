@@ -18,44 +18,38 @@ MainWindow::MainWindow(QWidget *parent) :
     //keep themselves in sync with the resource manager
     levelPropertiesWindow->RegisterResourceManager(resources);
     layers->RegisterResourceManager(resources);
+    layers->RegisterBrushManager(ui->brushManager);
     ui->brushManager->RegisterResourceManager(resources);
+    ui->brushManager->RegisterTileSelector(tileSelector);
     tileSelector->RegisterResourceManager(resources);
     ui->resourceView->RegisterResourceManager(resources);
     ui->propertyBrowser->RegisterResourceManager(resources);
     
-    ui->brushManager->RegisterTileSelector(tileSelector);
-    layers->RegisterBrushManager(ui->brushManager);
-
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
     connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
     connect(tileSelector, SIGNAL(RevertToPreviousSingleTileBrush()), ui->brushManager, SLOT(RevertToPreviousSingleTileBrush()));
+
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
-    connect(resources, SIGNAL(ImageListModified()), ui->resourceView, SLOT(RepopulateImages()));
+
     connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
     connect(resources, SIGNAL(TileUpdated(int,int,int,TileCoord)), layers, SLOT(UpdateTile(int,int,int,TileCoord)));
+    connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<Tile>)), ui->brushManager, SLOT(PasteTiles(QList<Tile>)));
+    connect(resources, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), layers, SLOT(UpdatePreviewTile(int,int,TileCoord)));
+    connect(resources, SIGNAL(SelectPreviewItems()), layers, SLOT(SelectPreviewItems()));
+    connect(resources, SIGNAL(UpdateSelectionGeometry(QRect)), layers, SLOT(UpdateSelectionGeometry(QRect)));
+    connect(resources, SIGNAL(ClearEraserPreview()), layers, SLOT(ClearEraserPreview()));
+    connect(resources, SIGNAL(DrawEraserPreview(int,int)), layers, SLOT(DrawEraserPreview(int,int)));
+    connect(resources, SIGNAL(LayerSizeUpdated(int,int)), layers, SLOT(UpdateSceneSize(int,int)));
+
+    connect(ui->brushManager, SIGNAL(SelectionCut(QList<Tile>)), resources->GetClipboard(), SLOT(Copy(QList<Tile>)));
     connect(ui->brushManager, SIGNAL(BrushChanged(QCursor,int)), this, SLOT(SetToolSelection(QCursor,int)));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
     connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
-    connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), layers, SLOT(SetLayerSelection(int)));
-    connect(ui->resourceView, SIGNAL(NewLayerSelected(int)), resources, SLOT(SetLayerSelection(int)));
     connect(ui->resourceView, SIGNAL(NewResourceSelected(ObjectNode*)), ui->propertyBrowser, SLOT(DisplayResource(ObjectNode*)));
     connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
     connect(ui->miniMap, SIGNAL(CenterMinimapOnLevel()), this, SLOT(CenterMinimapOnLevel()));
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
-
-    connect(ui->brushManager, SIGNAL(SelectionCut(QList<Tile>)), resources->GetClipboard(), SLOT(Copy(QList<Tile>)));
-    connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<Tile>)), ui->brushManager, SLOT(PasteTiles(QList<Tile>)));
-
-    connect(resources, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), layers, SLOT(UpdatePreviewTile(int,int,TileCoord)));
-
-    connect(resources, SIGNAL(SelectPreviewItems()), layers, SLOT(SelectPreviewItems()));
-    connect(resources, SIGNAL(UpdateSelectionGeometry(QRect)), layers, SLOT(UpdateSelectionGeometry(QRect)));
-    
-    connect(resources, SIGNAL(ClearEraserPreview()), layers, SLOT(ClearEraserPreview()));
-    connect(resources, SIGNAL(DrawEraserPreview(int,int)), layers, SLOT(DrawEraserPreview(int,int)));
-
-    connect(resources, SIGNAL(LayerSizeUpdated(int,int)), layers, SLOT(UpdateSceneSize(int,int)));
 
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
@@ -63,9 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->miniMap->setScene(layers);
 
     ui->tileSelectorView->setScene(tileSelector);
-
-    //QScrollBar *scroll = ui->levelView->horizontalScrollBar();
-    //connect(scroll, SIGNAL(valueChanged(int)), )
 
     ui->resourceView->RepopulateEverything();
 

@@ -168,11 +168,6 @@ int ResourceManager::GetLayerOpacity(int layerID)
     return 100;
 }
 
-void ResourceManager::UpdateLayerSize(int, int)
-{
-
-}
-
 void ResourceManager::ModifyTile(int x, int y, TileCoord origin)
 {
     TileLayer *tempLayer = layerMap.value(currentLayerID);
@@ -337,7 +332,24 @@ void ResourceManager::Redo()
 
 ObjectNode *ResourceManager::GetObject(int ID)
 {
+    if(ID == levelProperties.GetID())
+        return &levelProperties;
 
+    QHash<int,Image*>::iterator imageIter;
+    for(imageIter = imageMap.begin(); imageIter != imageMap.end(); ++imageIter)
+    {
+        if(imageIter.key() == ID)
+            return imageIter.value();
+    }
+
+    QHash<int,TileLayer*>::iterator layerIter;
+    for(layerIter = layerMap.begin(); layerIter != layerMap.end(); ++layerIter)
+    {
+        if(layerIter.key() == ID)
+            return layerIter.value();
+    }
+
+    return NULL;
 }
 
 void ResourceManager::EndPaintOperation() 
