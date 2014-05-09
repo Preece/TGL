@@ -13,12 +13,8 @@ public:
     explicit ResourceView(QWidget *parent = 0);
 
     void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
-
     void RepopulateEverything();
-
     int GetSelectedID();
-
-    bool IsLayerSelected();
     
 signals:
     void NewResourceSelected(ObjectNode *newObject);

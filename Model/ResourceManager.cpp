@@ -335,6 +335,11 @@ void ResourceManager::Redo()
     undo->redo();
 }
 
+ObjectNode *ResourceManager::GetObject(int ID)
+{
+
+}
+
 void ResourceManager::EndPaintOperation() 
 { 
     //if there are no changes that occured, no undo operation needs to be processed

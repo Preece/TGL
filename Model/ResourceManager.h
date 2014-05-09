@@ -27,6 +27,8 @@ public slots:
     void Redo();
     Clipboard *GetClipboard() { return clipboard; }
 
+    ObjectNode *GetObject(int ID);
+
     LevelProperties *GetLevelProperties() { return &levelProperties; }
     int GetTileWidth();
     int GetTileHeight();
@@ -69,8 +71,6 @@ public slots:
 signals:
     void LayerListModified(int newID);
     void ImageListModified();
-
-    void MapSizeChanged(int w, int h);
 
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);

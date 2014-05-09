@@ -27,12 +27,7 @@ void ResourceView::RepopulateEverything()
     if(resources)
         projectRoot->setData(0, Qt::UserRole, QVariant(resources->GetLevelProperties()->GetID()));
 
-    RepopulateLayers(0);
-}
-
-void ResourceView::RepopulateLayers(int newID)
-{
-    //get rid of the children
+    /*//get rid of the children
     RemoveChildrenNodes(layerRoot);
 
     //get each layer and add it as a child node of the layer root
@@ -51,7 +46,7 @@ void ResourceView::RepopulateLayers(int newID)
             layerRoot->setExpanded(true);
             selectionUpdated(newLayerNode, 0);
         }
-    }
+    }*/
 }
 
 int ResourceView::GetSelectedID()
@@ -64,15 +59,6 @@ int ResourceView::GetSelectedID()
     }
 
     return 0;
-}
-
-bool ResourceView::IsLayerSelected()
-{
-    //if anything is selected
-    if(resources->GetTileLayer(GetSelectedID()))
-        return true;
-
-    return false;
 }
 
 int ResourceView::GetItemID(QTreeWidgetItem *item)
@@ -116,12 +102,11 @@ void ResourceView::RemoveChildrenNodes(QTreeWidgetItem *parent)
 
 void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
 {
-    ObjectNode *selectedObject = resources->GetObject(GetSelectedID);
+    ObjectNode *selectedObject = resources->GetObject(GetSelectedID());
 
     if(selectedObject)
     {
-        emit NewResourceSelected(selectedID);
-
+        emit NewResourceSelected(selectedObject);
         currentSelection = selectedObject;
     }
     else

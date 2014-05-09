@@ -40,8 +40,6 @@ private slots:
     void on_actionRedo_triggered();
     void on_actionAdd_Image_triggered();
     void on_actionAdd_Layer_triggered();
-    void on_actionDelete_Layer_triggered();
-    void on_actionEdit_Layer_triggered();
 
     void CenterMinimapOnLevel();
     void SetToolSelection(QCursor newCursor, int newSelection);

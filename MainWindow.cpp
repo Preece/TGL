@@ -169,34 +169,6 @@ void MainWindow::on_actionAdd_Layer_triggered()
     }
 }
 
-void MainWindow::on_actionDelete_Layer_triggered()
-{
-    if(ui->resourceView->IsLayerSelected())
-    {
-        TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
-
-        if(tempLayer)
-        {
-            //remove the layer from the layer manager (which will take it out of the RM)
-            layers->RemoveLayer(tempLayer->GetID());
-        }
-    }
-}
-
-void MainWindow::on_actionEdit_Layer_triggered()
-{
-    if(ui->resourceView->IsLayerSelected())
-    {
-        TileLayer *tempLayer = resources->GetTileLayer(ui->resourceView->GetSelectedID());
-
-        if(tempLayer)
-        {
-            layerPropertiesWindow->EditLayer(tempLayer);
-            layers->UpdateLayerOpacity(tempLayer->GetID());
-        }
-    }
-}
-
 void MainWindow::CenterMinimapOnLevel()
 {
     QPointF topLeft     = ui->levelView->mapToScene( 0, 0 );
