@@ -11,23 +11,23 @@ public:
     TileLayer();
     ~TileLayer();
 
-    QString GetName() { return name; }
-    void SetName(QString newName) { name = newName; }
+    QString GetName() { return GetProperty("Layer Name").toString(); }
+    void SetName(QString newName) { SetProperty("Layer Name", newName); }
 
-    void SetVerticalParallax(double newVP) { verticalParallax = newVP; }
-    double GetVerticalParallax() { return verticalParallax; }
-    void SetHorizontalParallax(double newHP) { horizontalParallax = newHP; }
-    double GetHorizontalParallax() { return horizontalParallax; }
+    void SetVerticalParallax(double newVP) {  }
+    double GetVerticalParallax() { return 1.0; }
+    void SetHorizontalParallax(double newHP) {  }
+    double GetHorizontalParallax() { return 1.0; }
 
-    void SetOpacity(int newOpacity) { opacity = newOpacity; if(opacity > 100) opacity = 100; }
-    int GetOpacity() { return opacity; }
+    void SetOpacity(int newOpacity) {  }
+    int GetOpacity() { return 100; }
 
-    void SetSize(int w, int h) { width = w; height = h; }
-    int GetWidth() { return width; }
-    int GetHeight() { return height; }
+    void SetSize(int w, int h) { SetProperty("Layer Size", QPoint(w, h)); }
+    int GetWidth() { return GetProperty("Layer Size").toPoint().x(); }
+    int GetHeight() { return GetProperty("Layer Size").toPoint().y(); }
 
-    void ToggleDynamicSizing(bool dyn) { dynamicSizing = dyn; }
-    bool DynamicSizingEnabled() { return dynamicSizing; }
+    void ToggleDynamicSizing(bool dyn) { SetProperty("Dynamic Sizing", dyn); }
+    bool DynamicSizingEnabled() { return GetProperty("Dynamic Sizing").toBool(); }
 
     bool ResizeToIncludePoint(int x, int y);
 
@@ -36,12 +36,6 @@ public:
     void ModifyTile(int x, int y, TileCoord newOrigin);
 
 private:
-    double verticalParallax, horizontalParallax;
-    QString name;
-
-    int opacity;
-    int width, height;
-    bool dynamicSizing;
 
     QHash<TileCoord, Tile> tiles;
 };

@@ -31,7 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
 
-    connect(resources, SIGNAL(LayerListModified(int)), ui->resourceView, SLOT(RepopulateLayers(int)));
     connect(resources, SIGNAL(TileUpdated(int,int,int,TileCoord)), layers, SLOT(UpdateTile(int,int,int,TileCoord)));
     connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<Tile>)), ui->brushManager, SLOT(PasteTiles(QList<Tile>)));
     connect(resources, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), layers, SLOT(UpdatePreviewTile(int,int,TileCoord)));

@@ -61,15 +61,13 @@ public slots:
     QList<Tile> GetSelectedTiles();
     void ClearSelection();
 
-
-
     void EndPaintOperation();
 
     void DestroyAllResources();
 
 signals:
-    void LayerListModified(int newID);
-    void ImageListModified();
+    void ResourceAdded(int newResourceID);
+    void ResourceDeleted(int deadResourceID);
 
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);

@@ -12,7 +12,7 @@ ResourceManager::ResourceManager()
 
     defaultLayer.SetName("Default");
     layerMap[defaultLayer.GetID()] = &defaultLayer;
-    emit LayerListModified(defaultLayer.GetID());
+    emit ResourceAdded(defaultLayer.GetID());
 }
 
 ResourceManager::~ResourceManager()
@@ -60,7 +60,7 @@ int ResourceManager::AddImage(Image *newImage)
         AddResourceCommand *add = new AddResourceCommand(newImage, &imageMap);
         undo->push(add);
 
-        emit ImageListModified();
+        emit ResourceAdded(newImage->GetID());
     }
 
     return 0;
@@ -73,7 +73,7 @@ bool ResourceManager::DeleteImage(int ID)
         DeleteResourceCommand *del = new DeleteResourceCommand(imageMap[ID], &imageMap);
         undo->push(del);
 
-        emit ImageListModified();
+        emit ResourceDeleted(ID);
 
         return true;
     }
@@ -122,7 +122,7 @@ void ResourceManager::AddTileLayer(TileLayer *newLayer)
     {
         layerMap[newLayer->GetID()] = newLayer;
 
-        emit LayerListModified(newLayer->GetID());
+        emit ResourceAdded(newLayer->GetID());
     }
 }
 
@@ -134,9 +134,7 @@ void ResourceManager::DeleteTileLayer(int ID)
         layerMap[ID] = NULL;
         layerMap.remove(ID);
 
-        emit LayerListModified(ID);
-
-        return;
+        emit ResourceDeleted(ID);
     }
 }
 

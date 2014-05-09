@@ -17,15 +17,13 @@ public:
     void SetImageFromFile(QString file);
     QImage *GetImage();
 
-    void SetImageName(QString newName) { imageName = newName; }
-    QString GetImageName() { return imageName; }
+    void SetImageName(QString newName) { SetProperty("Image Name", newName); }
+    QString GetImageName() { return GetProperty("Image Name").toString(); }
 
-    QString GetFilename() { return filename; }
+    QString GetFilename() { return GetProperty("File Name").toString(); }
 
 private:
     QImage *image;
-    QString imageName;
-    QString filename;
 };
 
 #endif // IMAGE_H

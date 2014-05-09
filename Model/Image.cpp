@@ -3,6 +3,9 @@
 Image::Image()
 {
     image = NULL;
+
+    AddProperty("Image Name", "New Image");
+    AddProperty("File Name", QVariant());
 }
 
 Image::~Image()
@@ -26,8 +29,8 @@ void Image::SetImageFromFile(QString file)
     //and load it from the specified filename
     image->load(file);
 
-    imageName = QFileInfo(file).fileName();
-    filename = file;
+    SetProperty("Image Name", QFileInfo(file).fileName());
+    SetProperty("File Name", file);
 }
 
 QImage *Image::GetImage()

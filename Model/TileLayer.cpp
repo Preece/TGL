@@ -2,12 +2,11 @@
 
 TileLayer::TileLayer()
 {
-    opacity = 100;
-    width = height = 0;
-    verticalParallax = 1.0;
-    horizontalParallax = 1.0;
-
-    dynamicSizing = true;
+    AddProperty("Layer Name", "New Layer");
+    AddProperty("Parallax", QPointF(1.0, 1.0));
+    AddProperty("Opacity", 100);
+    AddProperty("Layer Size", QPoint(0, 0));
+    AddProperty("Dynamic Sizing", true);
 }
 
 TileLayer::~TileLayer()
@@ -16,18 +15,18 @@ TileLayer::~TileLayer()
 
 bool TileLayer::ResizeToIncludePoint(int x, int y)
 {
-    if(dynamicSizing)
+    if(GetProperty("Dynamic Sizing").toBool())
     {
-        if(x > width)
-            width = x;
+        if(x > GetProperty("Layer Size").toPoint().x())
+            GetProperty("Layer Size").toPoint().setX(x);
 
-        if(y > height)
-            height = y;
+        if(y > GetProperty("Layer Size").toPoint().y())
+            GetProperty("Layer Size").toPoint().setY(y);
 
         return true;
     }
 
-    if(x > width || y > height)
+    if(x > GetProperty("Layer Size").toPoint().x() || y > GetProperty("Layer Size").toPoint().y())
         return false;
 
     return true;
