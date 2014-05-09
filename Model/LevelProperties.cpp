@@ -3,15 +3,15 @@
 LevelProperties::LevelProperties()
 {
     AddProperty("name", QVariant("New Level"));
-    AddProperty("tileWidth", 16);
-    AddProperty("tileHeight", 16);
-    AddProperty("tilesetID", 0);
+    AddProperty("tileWidth", QVariant(16));
+    AddProperty("tileHeight", QVariant(16));
+    AddProperty("tilesetID", QVariant(0));
 }
 
 void LevelProperties::SetTileSize(int newW, int newH)
 {
-    SetProperty("tileWidth", newW);
-    SetProperty("tileHeight", newH);
+    SetProperty("tileWidth", QVariant(newW));
+    SetProperty("tileHeight", QVariant(newH));
 }
 
 int LevelProperties::GetTileWidth()
@@ -26,20 +26,20 @@ int LevelProperties::GetTileHeight()
 
 void LevelProperties::SetLevelName(QString newName)
 {
-    SetProperty("name", newName);
+    SetProperty("name", QVariant(newName));
 }
 
 QString LevelProperties::GetLevelName()
 {
-    GetProperty("name").toString();
+    return GetProperty("name").toString();
 }
 
 void LevelProperties::SetTilesetID(int newID)
 {
-    SetProperty("tilesetID", newID);
+    SetProperty("tilesetID", QVariant(newID));
 }
 
 int LevelProperties::GetTilesetID()
 {
-    GetProperty("tilesetID").toInt();
+    return GetProperty("tilesetID").toInt();
 }
