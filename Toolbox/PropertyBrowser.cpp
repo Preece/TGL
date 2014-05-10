@@ -38,6 +38,7 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
     {
         currentObject->SetProperty(property->propertyName(), val);
 
+        //update the name in the resource viewer
         if(property->propertyName() == "Name")
             emit ResourceNameChanged(currentObject->GetID(), val.toString());
     }
