@@ -15,6 +15,8 @@ public:
     void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
     void RepopulateEverything();
     int GetSelectedID();
+
+    void paintEvent(QPaintEvent* e) { QTreeWidget::paintEvent(e); }
     
 signals:
     void NewResourceSelected(ObjectNode *newObject);

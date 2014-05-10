@@ -10,8 +10,11 @@ public:
     explicit LayerListView(QWidget *parent = 0);
 
 signals:
+    void LayerSelectionChanged(int newLayer);
 
 public slots:
+    void AddLayer(int layerID);
+    void RemoveLayer(int layerID);
 
 };
 

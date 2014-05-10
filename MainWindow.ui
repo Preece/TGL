@@ -49,6 +49,10 @@ QToolButton:checked, QToolButton::pressed, QToolBox::tab::selected {
         border-color: rgb(53, 129, 72);
 }
 
+*::item { 
+	selection-background-color: rgb(88, 182, 232);
+}
+
 QComboBox::down-arrow {
         image: url(:/Icons/addvalue.png);
 }
@@ -62,6 +66,9 @@ QTreeView, QTableWidget, #propertyBrowser {
         padding: 0px;
 }
 </string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -135,75 +142,78 @@ QTreeView, QTableWidget, #propertyBrowser {
         <attribute name="label">
          <string>Resources</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="ResourceView" name="resourceView">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>2</verstretch>
-            </sizepolicy>
+          <widget class="QSplitter" name="splitter_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
            </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Sunken</enum>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>16</width>
-             <height>16</height>
-            </size>
-           </property>
-           <property name="indentation">
-            <number>10</number>
-           </property>
-           <property name="rootIsDecorated">
-            <bool>true</bool>
-           </property>
-           <property name="animated">
-            <bool>false</bool>
-           </property>
-           <attribute name="headerVisible">
-            <bool>false</bool>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>Project Resources</string>
+           <widget class="ResourceView" name="resourceView">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>2</verstretch>
+             </sizepolicy>
             </property>
-           </column>
-          </widget>
-         </item>
-         <item>
-          <widget class="PropertyBrowser" name="propertyBrowser" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>1</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Sunken</enum>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
+            </property>
+            <property name="indentation">
+             <number>10</number>
+            </property>
+            <property name="rootIsDecorated">
+             <bool>true</bool>
+            </property>
+            <property name="animated">
+             <bool>false</bool>
+            </property>
+            <attribute name="headerVisible">
+             <bool>false</bool>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>Project Resources</string>
+             </property>
+            </column>
+           </widget>
+           <widget class="PropertyBrowser" name="propertyBrowser" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -319,7 +329,7 @@ QTreeView, QTableWidget, #propertyBrowser {
              <enum>QGraphicsView::ScrollHandDrag</enum>
             </property>
            </widget>
-           <widget class="LayerListView" name="tableWidget">
+           <widget class="LayerListView" name="layerList">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -329,14 +339,32 @@ QTreeView, QTableWidget, #propertyBrowser {
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="sizeIncrement">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="baseSize">
              <size>
               <width>0</width>
               <height>0</height>
              </size>
             </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="frameShape">
              <enum>QFrame::Box</enum>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="showDropIndicator" stdset="0">
+             <bool>false</bool>
             </property>
             <property name="alternatingRowColors">
              <bool>true</bool>
@@ -357,16 +385,19 @@ QTreeView, QTableWidget, #propertyBrowser {
              <bool>false</bool>
             </property>
             <property name="rowCount">
-             <number>5</number>
+             <number>0</number>
             </property>
             <attribute name="horizontalHeaderCascadingSectionResizes">
              <bool>true</bool>
             </attribute>
             <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>100</number>
+             <number>70</number>
             </attribute>
             <attribute name="horizontalHeaderHighlightSections">
-             <bool>true</bool>
+             <bool>false</bool>
+            </attribute>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>70</number>
             </attribute>
             <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
              <bool>false</bool>
@@ -380,11 +411,6 @@ QTreeView, QTableWidget, #propertyBrowser {
             <attribute name="verticalHeaderDefaultSectionSize">
              <number>20</number>
             </attribute>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
             <column>
              <property name="text">
               <string>Visible</string>
