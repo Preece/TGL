@@ -123,6 +123,7 @@ void ResourceManager::AddTileLayer(TileLayer *newLayer)
         layerMap[newLayer->GetID()] = newLayer;
 
         emit ResourceAdded(newLayer->GetID());
+        emit LayerAdded(newLayer->GetID());
     }
 }
 
@@ -135,6 +136,7 @@ void ResourceManager::DeleteTileLayer(int ID)
         layerMap.remove(ID);
 
         emit ResourceDeleted(ID);
+        emit LayerRemoved(ID);
     }
 }
 

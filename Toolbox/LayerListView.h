@@ -12,12 +12,17 @@ public:
     explicit LayerListView(QWidget *parent = 0);
 
     void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
+
 signals:
     void LayerSelectionChanged(int newLayer);
 
+    void LayerDeleted(int ID);
+
 public slots:
-    void AddLayer();
-    void RemoveLayer();
+    void AddLayer(int ID);
+    void RemoveLayer(int ID);
+
+    void SelectionUpdated();
 
 private:
     ResourceManager *resources;

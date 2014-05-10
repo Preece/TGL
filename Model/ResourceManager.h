@@ -69,6 +69,9 @@ signals:
     void ResourceAdded(int newResourceID);
     void ResourceDeleted(int deadResourceID);
 
+    void LayerAdded(int ID);
+    void LayerRemoved(int ID);
+
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);
     void LayerSizeUpdated(int newW, int newH);
