@@ -25,6 +25,8 @@ public slots:
     void AddResource(int ID);
     void RemoveResource(int ID);
 
+    void UpdateResourceName(int ID, QString name);
+
 private:
     ResourceManager *resources;
 
@@ -36,9 +38,11 @@ private:
     ObjectNode *currentSelection;
 
     int GetItemID(QTreeWidgetItem *item);
+    QTreeWidgetItem *GetItem(int ID);
     QTreeWidgetItem *AddNode(QTreeWidgetItem *parent, QString name, QString icon, int ID = 0);
     void RemoveChildrenNodes(QTreeWidgetItem *parent);
     
+    QHash<int,QTreeWidgetItem*> itemHash;
 };
 
 #endif // RESOURCEVIEW_H

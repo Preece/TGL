@@ -17,8 +17,8 @@ public:
     void SetImageFromFile(QString file);
     QImage *GetImage();
 
-    void SetImageName(QString newName) { SetProperty("Image Name", newName); }
-    QString GetImageName() { return GetProperty("Image Name").toString(); }
+    void SetImageName(QString newName) { SetProperty("Name", newName); }
+    QString GetImageName() { return GetProperty("Name").toString(); }
 
     QString GetFilename() { return GetProperty("File Name").toString(); }
 

@@ -26,27 +26,6 @@ void ResourceView::RepopulateEverything()
     //store the level properties ID in the project root
     if(resources)
         projectRoot->setData(0, Qt::UserRole, QVariant(resources->GetLevelProperties()->GetID()));
-
-    /*//get rid of the children
-    RemoveChildrenNodes(layerRoot);
-
-    //get each layer and add it as a child node of the layer root
-    for(int i = 0; i < resources->GetLayerCount(); i++)
-    {
-        //fetch the layer from the model
-        TileLayer *layer = resources->GetLayerByIndex(i);
-
-        QTreeWidgetItem *newLayerNode = AddNode(layerRoot, layer->GetName(), ":/Icons/save.png", layer->GetID());
-
-        //if this layer was the current selection or the new addition, select it again
-        if(layer->GetID() == currentSelection || newID == layer->GetID())
-        {
-            clearSelection();
-            newLayerNode->setSelected(true);
-            layerRoot->setExpanded(true);
-            selectionUpdated(newLayerNode, 0);
-        }
-    }*/
 }
 
 int ResourceView::GetSelectedID()
@@ -70,6 +49,14 @@ int ResourceView::GetItemID(QTreeWidgetItem *item)
     }
 
     return 0;
+}
+
+QTreeWidgetItem *ResourceView::GetItem(int ID)
+{
+    if(itemHash.contains(ID))
+        return itemHash[ID];
+
+    return NULL;
 }
 
 QTreeWidgetItem *ResourceView::AddNode(QTreeWidgetItem *parent, QString name, QString icon, int ID)
@@ -119,11 +106,25 @@ void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
 void ResourceView::AddResource(int ID)
 {
     ObjectNode *newObject = resources->GetObject(ID);
-    AddNode(projectRoot, "tha new snaps", ":/Icons/save.png", ID);
 
+    QString name = newObject->GetProperty("Name").toString();
+
+    if(name.isEmpty())
+        name = "New Resource";
+
+    itemHash[ID] = AddNode(projectRoot, name, ":/Icons/save.png", ID);
 }
 
 void ResourceView::RemoveResource(int ID)
 {
 
+    //dont forget to remove the item from the hash
+}
+
+void ResourceView::UpdateResourceName(int ID, QString name)
+{
+    QTreeWidgetItem *item = GetItem(ID);
+
+    if(item)
+        item->setText(0, name);
 }

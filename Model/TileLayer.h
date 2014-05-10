@@ -11,8 +11,8 @@ public:
     TileLayer();
     ~TileLayer();
 
-    QString GetName() { return GetProperty("Layer Name").toString(); }
-    void SetName(QString newName) { SetProperty("Layer Name", newName); }
+    QString GetName() { return GetProperty("Name").toString(); }
+    void SetName(QString newName) { SetProperty("Name", newName); }
 
     void SetVerticalParallax(double newVP) {  }
     double GetVerticalParallax() { return 1.0; }

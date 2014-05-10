@@ -37,6 +37,9 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
     if(currentObject)
     {
         currentObject->SetProperty(property->propertyName(), val);
+
+        if(property->propertyName() == "Name")
+            emit ResourceNameChanged(currentObject->GetID(), val.toString());
     }
 }
 
@@ -44,11 +47,22 @@ void PropertyBrowser::DisplayObject(ObjectNode *object)
 {
     PropertyList properties = object->GetAllProperties();
 
+    //pull out the name property first, it should be on top
+    if(properties.contains("Name"))
+    {
+        QtVariantProperty *newProperty = propertyManager->addProperty(properties["Name"].type(), "Name");
+        newProperty->setValue(properties["Name"]);
+        addProperty(newProperty);
+    }
+
     PropertyList::iterator i;
     for(i = properties.begin(); i != properties.end(); ++i)
     {
-        QtVariantProperty *newProperty = propertyManager->addProperty(i.value().type(), i.key());
-        newProperty->setValue(i.value());
-        addProperty(newProperty);
+        if(i.key() != "Name")
+        {
+            QtVariantProperty *newProperty = propertyManager->addProperty(i.value().type(), i.key());
+            newProperty->setValue(i.value());
+            addProperty(newProperty);
+        }
     }
 }

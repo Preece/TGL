@@ -17,6 +17,7 @@ public:
     void RegisterResourceManager(ResourceManager *newRM) { resources = newRM; }
     
 signals:
+    void ResourceNameChanged(int ID, QString name);
     
 public slots:
 

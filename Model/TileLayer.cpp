@@ -2,7 +2,7 @@
 
 TileLayer::TileLayer()
 {
-    AddProperty("Layer Name", "New Layer");
+    AddProperty("Name", "New Layer");
     AddProperty("Parallax", QPointF(1.0, 1.0));
     AddProperty("Opacity", 100);
     AddProperty("Layer Size", QPoint(0, 0));
