@@ -143,6 +143,21 @@ QTreeView, QTableWidget, #propertyBrowser {
          <string>Resources</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="spacing">
+          <number>1</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QSplitter" name="splitter_3">
            <property name="orientation">
@@ -235,19 +250,31 @@ QTreeView, QTableWidget, #propertyBrowser {
          <string>Tile Painting</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>1</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QSplitter" name="splitter_2">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
-           <property name="childrenCollapsible">
-            <bool>true</bool>
-           </property>
            <widget class="TileSelectorView" name="tileSelectorView">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
               <horstretch>0</horstretch>
-              <verstretch>2</verstretch>
+              <verstretch>7</verstretch>
              </sizepolicy>
             </property>
             <property name="frameShape">
@@ -261,7 +288,7 @@ QTreeView, QTableWidget, #propertyBrowser {
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
-              <verstretch>1</verstretch>
+              <verstretch>3</verstretch>
              </sizepolicy>
             </property>
             <property name="palette">
@@ -336,7 +363,7 @@ QTreeView, QTableWidget, #propertyBrowser {
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
+              <verstretch>1</verstretch>
              </sizepolicy>
             </property>
             <property name="sizeIncrement">
@@ -420,7 +447,67 @@ QTreeView, QTableWidget, #propertyBrowser {
              <property name="text">
               <string>Layer Name</string>
              </property>
+             <property name="textAlignment">
+              <set>AlignLeft|AlignVCenter</set>
+             </property>
             </column>
+           </widget>
+           <widget class="QWidget" name="layoutWidget">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="spacing">
+              <number>1</number>
+             </property>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item alignment="Qt::AlignRight">
+              <widget class="QToolButton" name="addLayerButton">
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="Icons.qrc">
+                 <normaloff>:/Icons/addvalue.png</normaloff>:/Icons/addvalue.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+               <property name="autoRaise">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="removeLayerButton">
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="Icons.qrc">
+                 <normaloff>:/Icons/removevalue.png</normaloff>:/Icons/removevalue.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
          </item>
@@ -1095,12 +1182,20 @@ QTreeView, QTableWidget, #propertyBrowser {
    <class>ResourceView</class>
    <extends>QTreeWidget</extends>
    <header>Toolbox/ResourceView.h</header>
+   <slots>
+    <signal>NewResourceSelected(ObjectNode*)</signal>
+    <slot>UpdateResourceName(int,QString)</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>PropertyBrowser</class>
    <extends>QWidget</extends>
    <header>Toolbox/PropertyBrowser.h</header>
    <container>1</container>
+   <slots>
+    <signal>ResourceNameChanged(int,QString)</signal>
+    <slot>DisplayResource(ObjectNode*)</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>TileSelectorView</class>
@@ -1111,6 +1206,9 @@ QTreeView, QTableWidget, #propertyBrowser {
    <class>MiniMap</class>
    <extends>QGraphicsView</extends>
    <header>Toolbox/MiniMap.h</header>
+   <slots>
+    <signal>CenterMinimapOnLevel()</signal>
+   </slots>
   </customwidget>
   <customwidget>
    <class>LevelView</class>
@@ -1122,17 +1220,109 @@ QTreeView, QTableWidget, #propertyBrowser {
    <extends>QFrame</extends>
    <header>LevelEditor/Brushes/BrushManager.h</header>
    <container>1</container>
+   <slots>
+    <signal>BrushChanged(QCursor,int)</signal>
+    <slot>SetCurrentBrush(int)</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>LayerListView</class>
    <extends>QTableWidget</extends>
    <header>ToolBox/LayerListView.h</header>
+   <slots>
+    <slot>AddLayer(int)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources>
   <include location="Icons.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>resourceView</sender>
+   <signal>NewResourceSelected(ObjectNode*)</signal>
+   <receiver>propertyBrowser</receiver>
+   <slot>DisplayResource(ObjectNode*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>158</x>
+     <y>536</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>propertyBrowser</sender>
+   <signal>ResourceNameChanged(int,QString)</signal>
+   <receiver>resourceView</receiver>
+   <slot>UpdateResourceName(int,QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>536</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>158</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>brushManager</sender>
+   <signal>BrushChanged(QCursor,int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetToolSelection(QCursor,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>572</x>
+     <y>625</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolGroup</sender>
+   <signal>buttonPressed(int)</signal>
+   <receiver>brushManager</receiver>
+   <slot>SetCurrentBrush(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>572</x>
+     <y>625</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>miniMap</sender>
+   <signal>CenterMinimapOnLevel()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>CenterMinimapOnLevel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>433</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SetToolSelection(QCursor,int)</slot>
+  <slot>CenterMinimapOnLevel()</slot>
+ </slots>
  <buttongroups>
   <buttongroup name="toolGroup"/>
  </buttongroups>

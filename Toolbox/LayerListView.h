@@ -13,8 +13,8 @@ signals:
     void LayerSelectionChanged(int newLayer);
 
 public slots:
-    void AddLayer(int layerID);
-    void RemoveLayer(int layerID);
+    void AddLayer();
+    void RemoveLayer();
 
 };
 

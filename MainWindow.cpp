@@ -39,19 +39,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(resources, SIGNAL(ClearEraserPreview()), layers, SLOT(ClearEraserPreview()));
     connect(resources, SIGNAL(DrawEraserPreview(int,int)), layers, SLOT(DrawEraserPreview(int,int)));
     connect(resources, SIGNAL(LayerSizeUpdated(int,int)), layers, SLOT(UpdateSceneSize(int,int)));
+    connect(resources, SIGNAL(ResourceAdded(int)), ui->resourceView, SLOT(AddResource(int)));
 
     connect(ui->brushManager, SIGNAL(SelectionCut(QList<Tile>)), resources->GetClipboard(), SLOT(Copy(QList<Tile>)));
-    connect(ui->brushManager, SIGNAL(BrushChanged(QCursor,int)), this, SLOT(SetToolSelection(QCursor,int)));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
-    connect(ui->toolGroup, SIGNAL(buttonPressed(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
-    connect(ui->resourceView, SIGNAL(NewResourceSelected(ObjectNode*)), ui->propertyBrowser, SLOT(DisplayResource(ObjectNode*)));
     connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
-    connect(ui->miniMap, SIGNAL(CenterMinimapOnLevel()), this, SLOT(CenterMinimapOnLevel()));
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
-
-    connect(resources, SIGNAL(ResourceAdded(int)), ui->resourceView, SLOT(AddResource(int)));
-    connect(ui->propertyBrowser, SIGNAL(ResourceNameChanged(int,QString)), ui->resourceView, SLOT(UpdateResourceName(int,QString)));
 
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
