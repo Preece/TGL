@@ -3,9 +3,10 @@
 LayerListView::LayerListView(QWidget *parent) :
     QTableWidget(parent)
 {
+    resources = NULL;
 }
 
-void LayerListView::AddLayer()
+void LayerListView::AddLayer(int ID)
 {
     insertRow(0);
 
@@ -16,7 +17,7 @@ void LayerListView::AddLayer()
     setItem(0, 1, newItem);
 }
 
-void LayerListView::RemoveLayer()
+void LayerListView::RemoveLayer(int ID)
 {
     if(selectedItems().count() > 0)
         removeRow(selectedItems()[0]->row());
