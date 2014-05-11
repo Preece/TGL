@@ -81,16 +81,6 @@ bool ResourceManager::DeleteImage(int ID)
     return false;
 }
 
-Image *ResourceManager::GetImageByIndex(int index)
-{
-    QList<Image*> images = imageMap.values();
-
-    if(index >= images.count() || index < 0)
-        return NULL;
-
-    return images[index];
-}
-
 QImage *ResourceManager::GetTileset()
 {
     if(levelProperties.GetTilesetID() == 0)
@@ -148,16 +138,6 @@ TileLayer *ResourceManager::GetTileLayer(int ID)
     return NULL;
 }
 
-TileLayer *ResourceManager::GetLayerByIndex(int index)
-{
-    QList<TileLayer*> layers = layerMap.values();
-
-    if(index < 0 || index > layers.count())
-        return NULL;
-
-    return layers[index];
-}
-
 int ResourceManager::GetLayerOpacity(int layerID)
 {
     TileLayer *tempLayer = GetTileLayer(layerID);
@@ -175,7 +155,7 @@ void ResourceManager::SetLayerVisibility(int layerID, bool visible)
     if(tempLayer)
     {
         tempLayer->SetVisibility(visible);
-        emit LayerVisibilityChanged(layerID, visible);
+        emit LayerVisibilityUpdated(layerID, visible);
     }
 }
 
@@ -263,7 +243,7 @@ void ResourceManager::SelectTilesInArea(QRect area)
 
     selectionArea = area.normalized();
 
-    emit UpdateSelectionGeometry(area);
+    emit SelectionGeometryUpdated(area);
 }
 
 QList<Tile> ResourceManager::GetSelectedTiles()
@@ -308,26 +288,23 @@ void ResourceManager::DestroyAllResources()
     delete undo;
 
     //destroy the images
-    for(int i = 0; i < imageMap.count(); i++)
+    QList<Image*> imageList = imageMap.values();
+    for(int i = 0; i < imageList.count(); i++)
     {
-        Image *image = GetImageByIndex(i);
-        delete image;
-        image = NULL;
+        delete imageList[i];
+        imageList[i] = NULL;
     }
-
     imageMap.clear();
 
-    for(int i = 0; i < layerMap.count(); i++)
+    QList<TileLayer*> layerList = layerMap.values();
+    for(int i = 0; i < layerList.count(); i++)
     {
-        TileLayer *layer = GetLayerByIndex(i);
-
-        if(layer != &defaultLayer)
+        if(layerList[i] != &defaultLayer)
         {
-            delete layer;
-            layer = NULL;
+            delete layerList[i];
+            layerList[i] = NULL;
         }
     }
-
     layerMap.clear();
 }
 

@@ -22,7 +22,7 @@ public:
     LayerManager();
     ~LayerManager();
 
-    void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
+    void RegisterResourceManager(ResourceManager *newRM);
     void RegisterBrushManager(BrushManager *newBM) { brushManager = newBM; }
     
     void AddLayer(int newLayerID);

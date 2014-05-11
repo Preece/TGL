@@ -19,6 +19,20 @@ LayerManager::~LayerManager()
 {
 }
 
+void LayerManager::RegisterResourceManager(ResourceManager *newRM)
+{
+    resourceManager = newRM;
+
+    connect(resourceManager, SIGNAL(TileUpdated(int,int,int,TileCoord)), this, SLOT(UpdateTile(int,int,int,TileCoord)));
+    connect(resourceManager, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), this, SLOT(UpdatePreviewTile(int,int,TileCoord)));
+    connect(resourceManager, SIGNAL(SelectPreviewItems()), this, SLOT(SelectPreviewItems()));
+    connect(resourceManager, SIGNAL(SelectionGeometryUpdated(QRect)), this, SLOT(UpdateSelectionGeometry(QRect)));
+    connect(resourceManager, SIGNAL(ClearEraserPreview()), this, SLOT(ClearEraserPreview()));
+    connect(resourceManager, SIGNAL(DrawEraserPreview(int,int)), this, SLOT(DrawEraserPreview(int,int)));
+    connect(resourceManager, SIGNAL(LayerSizeUpdated(int,int)), this, SLOT(UpdateSceneSize(int,int)));
+    connect(resourceManager, SIGNAL(LayerVisibilityUpdated(int,bool)), this, SLOT(UpdateLayerVisibility(int,bool)));
+}
+
 void LayerManager::EyedropTile(QPoint pos)
 {
     if(!resourceManager || !currentLayer)

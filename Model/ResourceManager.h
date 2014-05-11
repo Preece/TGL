@@ -32,14 +32,10 @@ public slots:
     LevelProperties *GetLevelProperties() { return &levelProperties; }
     int GetTileWidth();
     int GetTileHeight();
-    int GetCurrentLayerWidth();
-    int GetCurrentLayerHeight();
 
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);
     Image *GetImage(int imageID);
-    Image *GetImageByIndex(int index);
-    int GetImageCount() { return imageMap.count(); }
 
     QImage *GetTileset();
     QPixmap GetTilePixmap(TileCoord coord);
@@ -47,20 +43,22 @@ public slots:
     void AddTileLayer(TileLayer *newLayer);
     void DeleteTileLayer(int ID);
     TileLayer *GetTileLayer(int ID);
-    TileLayer *GetLayerByIndex(int index);
-    int GetLayerCount() { return layerMap.count(); }
     int GetLayerOpacity(int layerID);
     void SetLayerVisibility(int layerID, bool visible);
-    void SetLayerSelection(int newLayer) { currentLayerID = newLayer; }
 
     void ModifyTile(int x, int y, TileCoord origin);
     void PreviewModifyTile(int x, int y, TileCoord origin);
     void ClearPreview();
     TileCoord GetTileOrigin(int x, int y);
 
+    int GetCurrentLayerWidth();
+    int GetCurrentLayerHeight();
+
     void SelectTilesInArea(QRect area);
     QList<Tile> GetSelectedTiles();
     void ClearSelection();
+
+    void SetLayerSelection(int newLayer) { currentLayerID = newLayer; }
 
     void EndPaintOperation();
 
@@ -72,13 +70,13 @@ signals:
 
     void LayerAdded(int ID);
     void LayerRemoved(int ID);
-    void LayerVisibilityChanged(int ID, bool visible);
+    void LayerVisibilityUpdated(int ID, bool visible);
 
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);
     void LayerSizeUpdated(int newW, int newH);
 
-    void UpdateSelectionGeometry(QRect rect);
+    void SelectionGeometryUpdated(QRect rect);
     void SelectPreviewItems();
     void DrawEraserPreview(int x, int y);
     void ClearEraserPreview();

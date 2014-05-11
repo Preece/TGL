@@ -32,39 +32,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
 
-    connect(resources, SIGNAL(TileUpdated(int,int,int,TileCoord)), layers, SLOT(UpdateTile(int,int,int,TileCoord)));
     connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<Tile>)), ui->brushManager, SLOT(PasteTiles(QList<Tile>)));
-    connect(resources, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), layers, SLOT(UpdatePreviewTile(int,int,TileCoord)));
-    connect(resources, SIGNAL(SelectPreviewItems()), layers, SLOT(SelectPreviewItems()));
-    connect(resources, SIGNAL(UpdateSelectionGeometry(QRect)), layers, SLOT(UpdateSelectionGeometry(QRect)));
-    connect(resources, SIGNAL(ClearEraserPreview()), layers, SLOT(ClearEraserPreview()));
-    connect(resources, SIGNAL(DrawEraserPreview(int,int)), layers, SLOT(DrawEraserPreview(int,int)));
-    connect(resources, SIGNAL(LayerSizeUpdated(int,int)), layers, SLOT(UpdateSceneSize(int,int)));
     connect(resources, SIGNAL(ResourceAdded(int)), ui->resourceView, SLOT(AddResource(int)));
-
     connect(resources, SIGNAL(LayerAdded(int)), ui->layerList, SLOT(AddLayer(int)));
     connect(resources, SIGNAL(LayerRemoved(int)), ui->layerList, SLOT(RemoveLayer(int)));
 
     connect(ui->addLayerButton, SIGNAL(clicked()), ui->actionAdd_Layer, SLOT(trigger()));
-
     connect(ui->layerList, SIGNAL(LayerSelectionChanged(int)), resources, SLOT(SetLayerSelection(int)));
     connect(ui->layerList, SIGNAL(LayerSelectionChanged(int)), layers, SLOT(SetLayerSelection(int)));
-
     connect(ui->brushManager, SIGNAL(SelectionCut(QList<Tile>)), resources->GetClipboard(), SLOT(Copy(QList<Tile>)));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
     connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
 
-    connect(resources, SIGNAL(LayerVisibilityChanged(int,bool)), layers, SLOT(UpdateLayerVisibility(int,bool)));
-
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
-
     ui->miniMap->setScene(layers);
-
     ui->tileSelectorView->setScene(tileSelector);
-
     ui->resourceView->RepopulateEverything();
 
     //assign IDs to each child in the toolgroup
