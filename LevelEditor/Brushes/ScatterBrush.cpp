@@ -19,7 +19,7 @@ QCursor ScatterBrush::GetCursor()
         return QCursor(QPixmap(":/Icons/pencil.png"), 1, 2);
 }
 
-void ScatterBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void ScatterBrush::Paint(int x, int y, ResourceController *resources, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next
     resources->ClearPreview();
@@ -58,7 +58,7 @@ void ScatterBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
     }
 }
 
-void ScatterBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources)
+void ScatterBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceController *resources)
 {
     //this is a recursive function. It calls itself in tiles to the north, east, south and west.
     //it will return if the tile is different from the one being replaced, or off the edge of the grid

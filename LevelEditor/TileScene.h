@@ -7,7 +7,7 @@
 #include <QKeyEvent>
 #include <QGraphicsRectItem>
 
-#include "../Model/ResourceManager.h"
+#include "../Model/ResourceController.h"
 #include "TileView.h"
 #include "TileLayerItem.h"
 #include "../Toolbox/TileWidgetItem.h"
@@ -23,7 +23,7 @@ public:
     TileScene();
     ~TileScene();
 
-    void RegisterResourceManager(ResourceManager *newRM);
+    void RegisterResourceManager(ResourceController *newRM);
     void RegisterBrushManager(BrushManager *newBM) { brushManager = newBM; }
     
     void AddLayer(int newLayerID);
@@ -69,7 +69,7 @@ private:
     QHash<TileCoord, TileWidgetItem*> previewItems;
     QList<QGraphicsRectItem*> eraserPreviewItems;
 
-    ResourceManager *resourceManager;
+    ResourceController *resourceController;
     BrushManager *brushManager;
 
     QGraphicsItemGroup *grid;

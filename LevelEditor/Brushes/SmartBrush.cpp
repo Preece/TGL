@@ -11,7 +11,7 @@ SmartBrush::~SmartBrush()
 }
 
 
-void SmartBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void SmartBrush::Paint(int x, int y, ResourceController *resources, bool preview)
 {
     //erase the previous preview
     resources->ClearPreview();
@@ -116,7 +116,7 @@ void SmartBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
     }
 }
 
-void SmartBrush::ContextPaintTile(int x, int y, ResourceManager *resources, bool preview)
+void SmartBrush::ContextPaintTile(int x, int y, ResourceController *resources, bool preview)
 {
     //if this is not a middle tile
     if(!ListContainsTile(4, resources->GetTileOrigin(x, y)) && !IsListEmpty(4))

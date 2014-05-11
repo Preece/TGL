@@ -6,13 +6,13 @@
 class ScatterBrush : public ComplexBrush
 {
 public:
-    void Paint(int x, int y, ResourceManager *resources, bool preview);
+    void Paint(int x, int y, ResourceController *resources, bool preview);
 
     ScatterBrush();
     virtual ~ScatterBrush();
 
     void SetFill(bool toFill) { fill = toFill; }
-    void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources);
+    void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceController *resources);
 
     QString GetType() { return "scatter"; }
     QCursor GetCursor();

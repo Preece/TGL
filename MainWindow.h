@@ -7,7 +7,7 @@
 #include <QTreeWidget>
 #include <QFileDialog>
 
-#include "Model/ResourceManager.h"
+#include "Model/ResourceController.h"
 
 #include "Dialogs/LayerPropertiesDialog.h"
 #include "Dialogs/LevelPropertiesDialog.h"
@@ -56,7 +56,7 @@ private:
     LevelPropertiesDialog *levelPropertiesWindow;
     LayerPropertiesDialog *layerPropertiesWindow;
 
-    ResourceManager *resources;
+    ResourceController *resources;
 
     TileScene *layers;
     TileSelectorScene *tileSelector;

@@ -4,21 +4,21 @@ EyedropperBrush::EyedropperBrush()
 {
 }
 
-void EyedropperBrush::Press(int, int, ResourceManager *)
+void EyedropperBrush::Press(int, int, ResourceController *)
 {
 }
 
-void EyedropperBrush::Move(int, int, ResourceManager *, bool)
-{
-
-}
-
-void EyedropperBrush::Release(int, int, ResourceManager *)
+void EyedropperBrush::Move(int, int, ResourceController *, bool)
 {
 
 }
 
-void EyedropperBrush::Paint(int, int, ResourceManager *, bool)
+void EyedropperBrush::Release(int, int, ResourceController *)
+{
+
+}
+
+void EyedropperBrush::Paint(int, int, ResourceController *, bool)
 {
 
 }

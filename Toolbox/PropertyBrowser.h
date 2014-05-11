@@ -5,7 +5,7 @@
 #include <QtVariantPropertyManager>
 #include <QtVariantEditorFactory>
 
-#include "Model/ResourceManager.h"
+#include "Model/ResourceController.h"
 
 class PropertyBrowser : public QtTreePropertyBrowser
 {
@@ -14,7 +14,7 @@ public:
     explicit PropertyBrowser(QWidget *parent = 0);
     ~PropertyBrowser();
 
-    void RegisterResourceManager(ResourceManager *newRM) { resources = newRM; }
+    void RegisterResourceManager(ResourceController *newRM) { resources = newRM; }
     
 signals:
     void ResourceNameChanged(int ID, QString name);
@@ -28,7 +28,7 @@ private:
     ResourceNode *currentObject;
     void DisplayObject(ResourceNode *object);
 
-    ResourceManager *resources;
+    ResourceController *resources;
     QtVariantPropertyManager *propertyManager;
     QtVariantEditorFactory *widgetFactory;
 };

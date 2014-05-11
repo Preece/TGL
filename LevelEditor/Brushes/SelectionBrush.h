@@ -14,19 +14,19 @@ public:
     SelectionBrush();
     ~SelectionBrush();
 
-    virtual void Press(int x, int y, ResourceManager *resources);
-    virtual void Move(int x, int y, ResourceManager *resources, bool leftButtonDown);
-    virtual void Release(int, int, ResourceManager *resources);
-    virtual void Deselect(ResourceManager *resources);
+    virtual void Press(int x, int y, ResourceController *resources);
+    virtual void Move(int x, int y, ResourceController *resources, bool leftButtonDown);
+    virtual void Release(int, int, ResourceController *resources);
+    virtual void Deselect(ResourceController *resources);
 
     QString GetType() { return "selector"; }
     QCursor GetCursor() { return QCursor(Qt::CrossCursor); }
 
-    void PopOutSelectedTiles(ResourceManager *resources);
-    void IntegrateDraggingTiles(ResourceManager *resources);
+    void PopOutSelectedTiles(ResourceController *resources);
+    void IntegrateDraggingTiles(ResourceController *resources);
 
     QList<Tile> GetDraggingTiles() { return draggingTiles; }
-    void SetDraggingTiles(ResourceManager *resources, QList<Tile> newTiles);
+    void SetDraggingTiles(ResourceController *resources, QList<Tile> newTiles);
     void ClearDraggingTiles();
 
 private:

@@ -4,7 +4,7 @@
 #include <QTreeWidget>
 #include <QString>
 
-#include "Model/ResourceManager.h"
+#include "Model/ResourceController.h"
 
 class ResourceView : public QTreeWidget
 {
@@ -12,7 +12,7 @@ class ResourceView : public QTreeWidget
 public:
     explicit ResourceView(QWidget *parent = 0);
 
-    void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
+    void RegisterResourceManager(ResourceController *rm) { resources = rm; }
     void RepopulateEverything();
     int GetSelectedID();
 
@@ -30,7 +30,7 @@ public slots:
     void UpdateResourceName(int ID, QString name);
 
 private:
-    ResourceManager *resources;
+    ResourceController *resources;
 
     QTreeWidgetItem *projectRoot;
     QTreeWidgetItem *layerRoot;

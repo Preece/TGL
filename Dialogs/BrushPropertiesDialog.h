@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QGraphicsScene>
 
-#include "../../Model/ResourceManager.h"
+#include "../../Model/ResourceController.h"
 
 #include "../LevelEditor/Brushes/ScatterBrush.h"
 #include "../LevelEditor/Brushes/SmartBrush.h"
@@ -25,7 +25,7 @@ public:
     ~BrushPropertiesDialog();
 
     void RegisterTileSelector(TileSelectorScene *selector);
-    void RegisterResourceManager(ResourceManager *newRM) { resourceManager = newRM; }
+    void RegisterResourceManager(ResourceController *newRM) { resourceController = newRM; }
 
     void NewBrush(ComplexBrush *newBrush);
     void EditBrush(ComplexBrush *editBrush);
@@ -64,7 +64,7 @@ private slots:
 private:
     Ui::BrushPropertiesDialog *ui;
 
-    ResourceManager *resourceManager;
+    ResourceController *resourceController;
 
     QGraphicsScene tileList;
     TileSelectorScene *tileSelector;

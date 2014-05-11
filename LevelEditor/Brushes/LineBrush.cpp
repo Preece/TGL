@@ -4,7 +4,7 @@ LineBrush::LineBrush()
 {
 }
 
-void LineBrush::Press(int x, int y, ResourceManager *resources)
+void LineBrush::Press(int x, int y, ResourceController *resources)
 {
     //if it was the left mouse button
     clickPoint.setX(x);
@@ -13,7 +13,7 @@ void LineBrush::Press(int x, int y, ResourceManager *resources)
     Paint(x, y, resources, true);
 }
 
-void LineBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
+void LineBrush::Move(int x, int y, ResourceController *resources, bool leftButtonDown)
 {
     //if the left mouse is down
     if(leftButtonDown)
@@ -30,7 +30,7 @@ void LineBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDo
     }
 }
 
-void LineBrush::Release(int x, int y, ResourceManager *resources)
+void LineBrush::Release(int x, int y, ResourceController *resources)
 {
     //if it was the left button being released
         //actually draw the line
@@ -39,7 +39,7 @@ void LineBrush::Release(int x, int y, ResourceManager *resources)
         resources->ClearPreview();
 }
 
-void LineBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void LineBrush::Paint(int x, int y, ResourceController *resources, bool preview)
 {
     //if no tile is selected, bail
     if(selectedTileOrigin == TileCoord(-1, -1))

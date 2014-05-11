@@ -7,7 +7,7 @@ LevelPropertiesDialog::LevelPropertiesDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    resourceManager = NULL;
+    resourceController = NULL;
 }
 
 LevelPropertiesDialog::~LevelPropertiesDialog()
@@ -18,19 +18,19 @@ LevelPropertiesDialog::~LevelPropertiesDialog()
 void LevelPropertiesDialog::LoadValues()
 {
     //put all the level properties values into the inputs
-    ui->mapNameInput->setText(resourceManager->GetLevelProperties()->GetLevelName());
+    ui->mapNameInput->setText(resourceController->GetLevelProperties()->GetLevelName());
 
-    ui->tileSizeX->setValue(resourceManager->GetTileWidth());
-    ui->tileSizeY->setValue(resourceManager->GetTileHeight());
-    ui->mapSizeX->setValue(resourceManager->GetCurrentLayerWidth());
-    ui->mapSizeY->setValue(resourceManager->GetCurrentLayerHeight());
+    ui->tileSizeX->setValue(resourceController->GetTileWidth());
+    ui->tileSizeY->setValue(resourceController->GetTileHeight());
+    ui->mapSizeX->setValue(resourceController->GetCurrentLayerWidth());
+    ui->mapSizeY->setValue(resourceController->GetCurrentLayerHeight());
 }
 
 void LevelPropertiesDialog::on_buttonBox_accepted()
 {
-    if(resourceManager)
+    if(resourceController)
     {
-        resourceManager->GetLevelProperties()->SetLevelName(ui->mapNameInput->text());
-        resourceManager->GetLevelProperties()->SetTileSize(ui->tileSizeX->value(), ui->tileSizeY->value());
+        resourceController->GetLevelProperties()->SetLevelName(ui->mapNameInput->text());
+        resourceController->GetLevelProperties()->SetTileSize(ui->tileSizeX->value(), ui->tileSizeY->value());
     }
 }

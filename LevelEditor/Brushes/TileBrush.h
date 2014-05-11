@@ -5,7 +5,7 @@
 #include <QCursor>
 #include <qmath.h>
 
-#include "../../Model/ResourceManager.h"
+#include "../../Model/ResourceController.h"
 
 class TileBrush
 {
@@ -15,14 +15,14 @@ public:
     TileBrush();
     virtual ~TileBrush();
 
-    virtual void Press(int x, int y, ResourceManager *resources);
-    virtual void Move(int x, int y, ResourceManager *resources, bool leftButtonDown);
-    virtual void Release(int, int, ResourceManager *);
-    virtual void Select(ResourceManager *) {}
-    virtual void Deselect(ResourceManager *) {}
+    virtual void Press(int x, int y, ResourceController *resources);
+    virtual void Move(int x, int y, ResourceController *resources, bool leftButtonDown);
+    virtual void Release(int, int, ResourceController *);
+    virtual void Select(ResourceController *) {}
+    virtual void Deselect(ResourceController *) {}
 
-    virtual void Paint(int, int, ResourceManager *, bool = false);
-    void Line(int x1, int y1, int x2, int y2, ResourceManager *resources, bool preview = false);
+    virtual void Paint(int, int, ResourceController *, bool = false);
+    void Line(int x1, int y1, int x2, int y2, ResourceController *resources, bool preview = false);
 
     virtual QString GetType() = 0;
     virtual QCursor GetCursor() { return QCursor(QPixmap(":/Icons/pencil.png"), 1, 2); }

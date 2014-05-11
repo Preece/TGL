@@ -2,7 +2,7 @@
 
 TileScene::TileScene()
 {
-    resourceManager = NULL;
+    resourceController = NULL;
     currentLayer = NULL;
     brushManager = NULL;
 
@@ -19,38 +19,38 @@ TileScene::~TileScene()
 {
 }
 
-void TileScene::RegisterResourceManager(ResourceManager *newRM)
+void TileScene::RegisterResourceManager(ResourceController *newRM)
 {
-    resourceManager = newRM;
+    resourceController = newRM;
 
-    connect(resourceManager, SIGNAL(TileUpdated(int,int,int,TileCoord)), this, SLOT(UpdateTile(int,int,int,TileCoord)));
-    connect(resourceManager, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), this, SLOT(UpdatePreviewTile(int,int,TileCoord)));
-    connect(resourceManager, SIGNAL(SelectPreviewItems()), this, SLOT(SelectPreviewItems()));
-    connect(resourceManager, SIGNAL(SelectionGeometryUpdated(QRect)), this, SLOT(UpdateSelectionGeometry(QRect)));
-    connect(resourceManager, SIGNAL(ClearEraserPreview()), this, SLOT(ClearEraserPreview()));
-    connect(resourceManager, SIGNAL(DrawEraserPreview(int,int)), this, SLOT(DrawEraserPreview(int,int)));
-    connect(resourceManager, SIGNAL(LayerSizeUpdated(int,int)), this, SLOT(UpdateSceneSize(int,int)));
-    connect(resourceManager, SIGNAL(LayerVisibilityUpdated(int,bool)), this, SLOT(UpdateLayerVisibility(int,bool)));
+    connect(resourceController, SIGNAL(TileUpdated(int,int,int,TileCoord)), this, SLOT(UpdateTile(int,int,int,TileCoord)));
+    connect(resourceController, SIGNAL(PreviewTileUpdated(int,int,TileCoord)), this, SLOT(UpdatePreviewTile(int,int,TileCoord)));
+    connect(resourceController, SIGNAL(SelectPreviewItems()), this, SLOT(SelectPreviewItems()));
+    connect(resourceController, SIGNAL(SelectionGeometryUpdated(QRect)), this, SLOT(UpdateSelectionGeometry(QRect)));
+    connect(resourceController, SIGNAL(ClearEraserPreview()), this, SLOT(ClearEraserPreview()));
+    connect(resourceController, SIGNAL(DrawEraserPreview(int,int)), this, SLOT(DrawEraserPreview(int,int)));
+    connect(resourceController, SIGNAL(LayerSizeUpdated(int,int)), this, SLOT(UpdateSceneSize(int,int)));
+    connect(resourceController, SIGNAL(LayerVisibilityUpdated(int,bool)), this, SLOT(UpdateLayerVisibility(int,bool)));
 }
 
 void TileScene::EyedropTile(QPoint pos)
 {
-    if(!resourceManager || !currentLayer)
+    if(!resourceController || !currentLayer)
         return;
 
     //translate the position to tile coordinates
-    int tileW = resourceManager->GetTileWidth();
-    int tileH = resourceManager->GetTileHeight();
+    int tileW = resourceController->GetTileWidth();
+    int tileH = resourceController->GetTileHeight();
 
     int tileX = pos.x() / tileW;
     int tileY = pos.y() / tileH;
 
     //if the position is beyond the bounds of the scene, ignore it
     //EVENTUALLY THE PARALLAX WILL NEED TO BE CONSIDERED
-    if(tileX >= resourceManager->GetCurrentLayerWidth() || tileY >= resourceManager->GetCurrentLayerHeight())
+    if(tileX >= resourceController->GetCurrentLayerWidth() || tileY >= resourceController->GetCurrentLayerHeight())
         return;
 
-    emit SelectNewTile(resourceManager->GetTileOrigin(tileX, tileY));
+    emit SelectNewTile(resourceController->GetTileOrigin(tileX, tileY));
 
     RefreshPreview();
 }
@@ -60,7 +60,7 @@ void TileScene::AddLayer(int newLayerID)
     //create a layer group, and assign the new layer
     TileLayerItem *tempLayerView = new TileLayerItem;
     tempLayerView->SetLayerID(newLayerID);
-    tempLayerView->RegisterResourceManager(resourceManager);
+    tempLayerView->RegisterResourceManager(resourceController);
 
     //put the layer group into the list
     layers.insert(0, tempLayerView);
@@ -70,19 +70,19 @@ void TileScene::AddLayer(int newLayerID)
     tempLayerView->show();
     tempLayerView->setPos(0,0);
     
-    setSceneRect(0, 0, resourceManager->GetCurrentLayerWidth() * resourceManager->GetTileWidth(),
-                       resourceManager->GetCurrentLayerHeight() * resourceManager->GetTileHeight());
+    setSceneRect(0, 0, resourceController->GetCurrentLayerWidth() * resourceController->GetTileWidth(),
+                       resourceController->GetCurrentLayerHeight() * resourceController->GetTileHeight());
 }
 
 void TileScene::UpdateSceneSize(int w, int h)
 {
     int newW, newH;
 
-    if(w * resourceManager->GetTileWidth() > sceneRect().width())
-        newW = w * resourceManager->GetTileWidth();
+    if(w * resourceController->GetTileWidth() > sceneRect().width())
+        newW = w * resourceController->GetTileWidth();
 
-    if(h * resourceManager->GetTileHeight() > sceneRect().height())
-        newH = h * resourceManager->GetTileHeight();
+    if(h * resourceController->GetTileHeight() > sceneRect().height())
+        newH = h * resourceController->GetTileHeight();
 
     //the scene rect should always be as big as the biggest layer
     setSceneRect(0, 0, newW, newH);
@@ -94,7 +94,7 @@ void TileScene::RemoveLayer(int dirtyLayerID)
     {
         if(layers[i]->GetLayerID() == dirtyLayerID)
         {
-            resourceManager->DeleteTileLayer(layers[i]->GetLayerID());
+            resourceController->DeleteTileLayer(layers[i]->GetLayerID());
 
             layers[i]->DestroyAllItems();
             delete layers[i];
@@ -123,10 +123,10 @@ void TileScene::ToggleGrid(bool show)
 
     QGraphicsLineItem *tempLine;
 
-    int tileW = resourceManager->GetTileWidth();
-    int tileH = resourceManager->GetTileHeight();
-    int mapH = resourceManager->GetCurrentLayerHeight();
-    int mapW = resourceManager->GetCurrentLayerWidth();
+    int tileW = resourceController->GetTileWidth();
+    int tileH = resourceController->GetTileHeight();
+    int mapH = resourceController->GetCurrentLayerHeight();
+    int mapW = resourceController->GetCurrentLayerWidth();
 
     //loop for the height of the map, draw horizontal lines
     for(int i = 1; i < mapH; i++)
@@ -156,22 +156,22 @@ void TileScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
         return;
 
     //translate the position to tile coordinates
-    int tileW = resourceManager->GetTileWidth();
-    int tileH = resourceManager->GetTileHeight();
+    int tileW = resourceController->GetTileWidth();
+    int tileH = resourceController->GetTileHeight();
 
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
     if(event->button() == Qt::LeftButton)
     {
-        brushManager->GetCurrentBrush()->Press(tileX, tileY, resourceManager);
+        brushManager->GetCurrentBrush()->Press(tileX, tileY, resourceController);
     }
     else if(event->button() == Qt::RightButton)
     {
         EyedropTile(event->scenePos().toPoint());
 
         //refresh the preview
-        brushManager->GetCurrentBrush()->Paint(tileX, tileY, resourceManager, true);
+        brushManager->GetCurrentBrush()->Paint(tileX, tileY, resourceController, true);
     }
 }
 
@@ -181,8 +181,8 @@ void TileScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         return;
 
     //translate the position to tile coordinates
-    int tileW = resourceManager->GetTileWidth();
-    int tileH = resourceManager->GetTileHeight();
+    int tileW = resourceController->GetTileWidth();
+    int tileH = resourceController->GetTileHeight();
 
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
@@ -197,12 +197,12 @@ void TileScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     //if the left button is down
     if(event->buttons() == Qt::LeftButton)
     {
-        brushManager->GetCurrentBrush()->Move(tileX, tileY, resourceManager, true);
+        brushManager->GetCurrentBrush()->Move(tileX, tileY, resourceController, true);
     }
     //if the left mouse button was not down
     else if(currentLayer)
     {
-        brushManager->GetCurrentBrush()->Move(tileX, tileY, resourceManager, false);
+        brushManager->GetCurrentBrush()->Move(tileX, tileY, resourceController, false);
     }
 }
 
@@ -212,19 +212,19 @@ void TileScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         return;
 
     //translate the position to tile coordinates
-    int tileW = resourceManager->GetTileWidth();
-    int tileH = resourceManager->GetTileHeight();
+    int tileW = resourceController->GetTileWidth();
+    int tileH = resourceController->GetTileHeight();
 
     int tileX = event->scenePos().toPoint().x() / tileW;
     int tileY = event->scenePos().toPoint().y() / tileH;
 
     if(event->button() == Qt::LeftButton)
     {    
-        brushManager->GetCurrentBrush()->Release(tileX, tileY, resourceManager);
+        brushManager->GetCurrentBrush()->Release(tileX, tileY, resourceController);
 
         //this will package the changes into an undo command and implement them into the model
         //make it abort if the queue is empty
-        resourceManager->EndPaintOperation();
+        resourceController->EndPaintOperation();
     }
 }
 
@@ -257,13 +257,13 @@ void TileScene::UpdateLayerVisibility(int ID, bool visible)
 void TileScene::RefreshPreview()
 {
     ClearPreview();
-    brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), resourceManager, true);
+    brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), resourceController, true);
 }
 
 void TileScene::ClearPreview()
 {
     if(brushManager->GetCurrentBrush()->GetType() != "selector")
-        resourceManager->ClearPreview();
+        resourceController->ClearPreview();
 
     ClearEraserPreview();
 }
@@ -285,7 +285,7 @@ void TileScene::UpdateLayerOpacity(int opaqueLayerID)
     {
         if(layers[i]->GetLayerID() == opaqueLayerID)
         {
-            qreal opacity = resourceManager->GetLayerOpacity(opaqueLayerID);
+            qreal opacity = resourceController->GetLayerOpacity(opaqueLayerID);
             opacity = opacity / 100;
             layers[i]->setOpacity(opacity);
         }
@@ -310,7 +310,7 @@ void TileScene::ToggleSelectionMode(bool selection)
         for(int i = 0; i < childrenList.count(); i++)
             childrenList[i]->setFlag(QGraphicsItem::ItemIsSelectable);
 
-        resourceManager->EndPaintOperation();
+        resourceController->EndPaintOperation();
     }
     //make all items non-selectable
     else
@@ -339,7 +339,7 @@ void TileScene::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
 void TileScene::UpdatePreviewTile(int x, int y, TileCoord origin)
 {
     //bounds check
-    if(x >= resourceManager->GetCurrentLayerWidth() || y >= resourceManager->GetCurrentLayerHeight() || x < 0 || y < 0)
+    if(x >= resourceController->GetCurrentLayerWidth() || y >= resourceController->GetCurrentLayerHeight() || x < 0 || y < 0)
         return;
 
     if(origin == TileCoord(-1, -1))
@@ -357,11 +357,11 @@ void TileScene::UpdatePreviewTile(int x, int y, TileCoord origin)
     tempTile->setFlag(QGraphicsItem::ItemIsSelectable);
 
     //update its Pixmap
-    tempTile->SetTilePixmap(resourceManager->GetTilePixmap(origin));
+    tempTile->SetTilePixmap(resourceController->GetTilePixmap(origin));
 
     //set the position
-    tempTile->setPos(x * resourceManager->GetTileWidth(),
-                     y * resourceManager->GetTileHeight());
+    tempTile->setPos(x * resourceController->GetTileWidth(),
+                     y * resourceController->GetTileHeight());
 
     previewItems[TileCoord(x, y)] = tempTile;
     addItem(tempTile);
@@ -375,10 +375,10 @@ void TileScene::UpdateSelectionGeometry(QRect rect)
 
 void TileScene::DrawEraserPreview(int x, int y)
 {
-    QGraphicsRectItem *rect = new QGraphicsRectItem(x * resourceManager->GetTileWidth(),
-                           y * resourceManager->GetTileHeight(),
-                           resourceManager->GetTileWidth(),
-                           resourceManager->GetTileHeight());
+    QGraphicsRectItem *rect = new QGraphicsRectItem(x * resourceController->GetTileWidth(),
+                           y * resourceController->GetTileHeight(),
+                           resourceController->GetTileWidth(),
+                           resourceController->GetTileHeight());
 
     rect->setBrush(QBrush(QColor(0, 0, 255, 0x80)));
     rect->setPen(QPen(Qt::transparent));

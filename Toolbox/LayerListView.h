@@ -4,7 +4,7 @@
 #include <QTableWidget>
 #include <QHeaderView>
 
-#include "../Model/ResourceManager.h"
+#include "../Model/ResourceController.h"
 
 class LayerListView : public QTableWidget
 {
@@ -12,7 +12,7 @@ class LayerListView : public QTableWidget
 public:
     explicit LayerListView(QWidget *parent = 0);
 
-    void RegisterResourceManager(ResourceManager *rm) { resources = rm; }
+    void RegisterResourceManager(ResourceController *rm) { resources = rm; }
 
 signals:
     void LayerSelectionChanged(int newLayer);
@@ -26,7 +26,7 @@ public slots:
     void cellClicked(int row, int column);
 
 private:
-    ResourceManager *resources;
+    ResourceController *resources;
 };
 
 #endif // LAYERLISTVIEW_H

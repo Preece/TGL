@@ -11,9 +11,9 @@ public:
     StampBrush();
     ~StampBrush();
 
-    void Move(int x, int y, ResourceManager *resources, bool);
+    void Move(int x, int y, ResourceController *resources, bool);
 
-    void Paint(int x, int y, ResourceManager *resources, bool preview);
+    void Paint(int x, int y, ResourceController *resources, bool preview);
     QString GetType() { return "stamp"; }
 
     void CreateGrid(QList<TileCoord> items);

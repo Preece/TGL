@@ -10,7 +10,7 @@ PencilBrush::~PencilBrush()
 
 }
 
-void PencilBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void PencilBrush::Paint(int x, int y, ResourceController *resources, bool preview)
 {
     //if no tile is selected, bail
     if(selectedTileOrigin == TileCoord(-1, -1))

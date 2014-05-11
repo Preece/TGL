@@ -11,14 +11,14 @@ StampBrush::~StampBrush()
 
 }
 
-void StampBrush::Move(int x, int y, ResourceManager *resources, bool)
+void StampBrush::Move(int x, int y, ResourceController *resources, bool)
 {
     resources->ClearPreview();
 
     Paint(x, y, resources, true);
 }
 
-void StampBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void StampBrush::Paint(int x, int y, ResourceController *resources, bool preview)
 {
     //the trick is to take the position to paint
     //add the tile origin coordinates

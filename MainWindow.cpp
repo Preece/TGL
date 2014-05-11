@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //create a resource manager
-    resources               = new ResourceManager;
+    resources               = new ResourceController;
     levelPropertiesWindow   = new LevelPropertiesDialog;
     layerPropertiesWindow   = new LayerPropertiesDialog;
     tileSelector            = new TileSelectorScene;

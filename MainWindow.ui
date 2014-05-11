@@ -267,8 +267,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>83</width>
-          <height>245</height>
+          <width>298</width>
+          <height>492</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -573,8 +573,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>100</width>
-          <height>30</height>
+          <width>298</width>
+          <height>492</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -590,8 +590,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>100</width>
-          <height>30</height>
+          <width>298</width>
+          <height>492</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -623,9 +623,9 @@ QTreeView, QTableWidget, #propertyBrowser {
         <number>0</number>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
-       <widget class="QWidget" name="resourceView">
+       <widget class="QWidget" name="resourcesView">
         <widget class="QLabel" name="label">
          <property name="geometry">
           <rect>
@@ -1303,7 +1303,7 @@ QTreeView, QTableWidget, #propertyBrowser {
    <extends>QTreeWidget</extends>
    <header>Toolbox/ResourceView.h</header>
    <slots>
-    <signal>NewResourceSelected(ObjectNode*)</signal>
+    <signal>NewResourceSelected(ResourceNode*)</signal>
     <slot>UpdateResourceName(int,QString)</slot>
    </slots>
   </customwidget>
@@ -1314,6 +1314,7 @@ QTreeView, QTableWidget, #propertyBrowser {
    <container>1</container>
    <slots>
     <signal>ResourceNameChanged(int,QString)</signal>
+    <slot>DisplayResource(ResourceNode*)</slot>
     <slot>DisplayResource(ObjectNode*)</slot>
    </slots>
   </customwidget>
@@ -1359,22 +1360,6 @@ QTreeView, QTableWidget, #propertyBrowser {
  </resources>
  <connections>
   <connection>
-   <sender>resourceView</sender>
-   <signal>NewResourceSelected(ObjectNode*)</signal>
-   <receiver>propertyBrowser</receiver>
-   <slot>DisplayResource(ObjectNode*)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>158</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>158</x>
-     <y>536</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>propertyBrowser</sender>
    <signal>ResourceNameChanged(int,QString)</signal>
    <receiver>resourceView</receiver>
@@ -1385,7 +1370,7 @@ QTreeView, QTableWidget, #propertyBrowser {
      <y>536</y>
     </hint>
     <hint type="destinationlabel">
-     <x>158</x>
+     <x>155</x>
      <y>290</y>
     </hint>
    </hints>
@@ -1451,6 +1436,22 @@ QTreeView, QTableWidget, #propertyBrowser {
     <hint type="destinationlabel">
      <x>652</x>
      <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>resourceView</sender>
+   <signal>NewResourceSelected(ResourceNode*)</signal>
+   <receiver>propertyBrowser</receiver>
+   <slot>DisplayResource(ResourceNode*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>538</y>
     </hint>
    </hints>
   </connection>

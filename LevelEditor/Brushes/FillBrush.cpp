@@ -10,12 +10,12 @@ FillBrush::~FillBrush()
 
 }
 
-void FillBrush::Move(int, int, ResourceManager *)
+void FillBrush::Move(int, int, ResourceController *)
 {
     //we don't want this to do anything for a fill brush
 }
 
-void FillBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void FillBrush::Paint(int x, int y, ResourceController *resources, bool preview)
 {
     //the fill brush has no preview mode
     if(preview)
@@ -26,7 +26,7 @@ void FillBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
     Fill(x, y, selectedTileOrigin, old, resources);
 }
 
-void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceManager *resources)
+void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceController *resources)
 {
     if(!resources || newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
         return;

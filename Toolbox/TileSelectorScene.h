@@ -6,7 +6,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QList>
 
-#include "Model/ResourceManager.h"
+#include "Model/ResourceController.h"
 #include "TileWidgetItem.h"
 
 typedef QList<TileCoord> TileList;
@@ -19,7 +19,7 @@ public:
     explicit TileSelectorScene(QObject *parent = 0);
     ~TileSelectorScene();
 
-    void RegisterResourceManager(ResourceManager * newRM) { resources = newRM; }
+    void RegisterResourceManager(ResourceController * newRM) { resources = newRM; }
     void RepopulateTileSelector();
 
     TileList GetSelectedTiles();
@@ -45,7 +45,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    ResourceManager *resources;
+    ResourceController *resources;
     QImage *spritesheet;
 
     QPoint clickSpot;

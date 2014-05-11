@@ -10,7 +10,7 @@ SelectionBrush::~SelectionBrush()
 {
 }
 
-void SelectionBrush::Press(int x, int y, ResourceManager *resources)
+void SelectionBrush::Press(int x, int y, ResourceController *resources)
 {
     if(DraggingTileAtPos(x, y))
     {
@@ -33,7 +33,7 @@ void SelectionBrush::Press(int x, int y, ResourceManager *resources)
     previousMouseSpot.setY(y);
 }
 
-void SelectionBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
+void SelectionBrush::Move(int x, int y, ResourceController *resources, bool leftButtonDown)
 {
     if(leftButtonDown)
     {
@@ -69,7 +69,7 @@ void SelectionBrush::Move(int x, int y, ResourceManager *resources, bool leftBut
     }
 }
 
-void SelectionBrush::Release(int, int, ResourceManager *resources)
+void SelectionBrush::Release(int, int, ResourceController *resources)
 {
     if(!dragMode)
     {
@@ -85,12 +85,12 @@ void SelectionBrush::Release(int, int, ResourceManager *resources)
     dragMode = false;
 }
 
-void SelectionBrush::Deselect(ResourceManager *resources)
+void SelectionBrush::Deselect(ResourceController *resources)
 {
     IntegrateDraggingTiles(resources);
 }
 
-void SelectionBrush::PopOutSelectedTiles(ResourceManager *resources)
+void SelectionBrush::PopOutSelectedTiles(ResourceController *resources)
 {
     //get a list of selected tiles that are not preview items
     draggingTiles = resources->GetSelectedTiles();
@@ -108,7 +108,7 @@ void SelectionBrush::PopOutSelectedTiles(ResourceManager *resources)
     }
 }
 
-void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
+void SelectionBrush::IntegrateDraggingTiles(ResourceController *resources)
 {
     if(!draggingTiles.empty())
     {
@@ -127,7 +127,7 @@ void SelectionBrush::IntegrateDraggingTiles(ResourceManager *resources)
     }
 }
 
-void SelectionBrush::SetDraggingTiles(ResourceManager *resources, QList<Tile> newTiles)
+void SelectionBrush::SetDraggingTiles(ResourceController *resources, QList<Tile> newTiles)
 {
     IntegrateDraggingTiles(resources);
 

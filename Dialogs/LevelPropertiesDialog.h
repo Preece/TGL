@@ -2,7 +2,7 @@
 #define LEVELPROPERTIESDIALOG_H
 
 #include <QDialog>
-#include "Model/ResourceManager.h"
+#include "Model/ResourceController.h"
 
 namespace Ui {
 class LevelPropertiesDialog;
@@ -12,13 +12,13 @@ class LevelPropertiesDialog : public QDialog
 {
     Q_OBJECT
 
-    ResourceManager *resourceManager;
+    ResourceController *resourceController;
     
 public:
     explicit LevelPropertiesDialog(QWidget *parent = 0);
     ~LevelPropertiesDialog();
 
-    void RegisterResourceManager(ResourceManager *newRM) {resourceManager = newRM; }void on_mapNameInput_textChanged(const QString &arg1);
+    void RegisterResourceManager(ResourceController *newRM) {resourceController = newRM; }void on_mapNameInput_textChanged(const QString &arg1);
 
     void LoadValues();
     

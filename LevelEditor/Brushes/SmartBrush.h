@@ -9,8 +9,8 @@ public:
     SmartBrush();
     ~SmartBrush();
 
-    virtual void Paint(int x, int y, ResourceManager *resources, bool preview);
-    void ContextPaintTile(int x, int y, ResourceManager *resources, bool preview);
+    virtual void Paint(int x, int y, ResourceController *resources, bool preview);
+    void ContextPaintTile(int x, int y, ResourceController *resources, bool preview);
 
     virtual QString GetType() { return "smart"; }
     QCursor GetCursor() { return QCursor(QPixmap(":/Icons/brush.png"), 2, 1); }

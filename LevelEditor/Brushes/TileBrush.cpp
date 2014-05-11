@@ -13,7 +13,7 @@ TileBrush::~TileBrush()
 
 }
 
-void TileBrush::Press(int x, int y, ResourceManager *resources)
+void TileBrush::Press(int x, int y, ResourceController *resources)
 {
     //they have started painting, so nix the preview
     resources->ClearPreview();
@@ -25,7 +25,7 @@ void TileBrush::Press(int x, int y, ResourceManager *resources)
     lastPaintSpot.setY(y);
 }
 
-void TileBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDown)
+void TileBrush::Move(int x, int y, ResourceController *resources, bool leftButtonDown)
 {
     if(leftButtonDown)
     {
@@ -54,16 +54,16 @@ void TileBrush::Move(int x, int y, ResourceManager *resources, bool leftButtonDo
     }
 }
 
-void TileBrush::Release(int, int, ResourceManager *)
+void TileBrush::Release(int, int, ResourceController *)
 {
 }
 
-void TileBrush::Paint(int, int, ResourceManager *, bool)
+void TileBrush::Paint(int, int, ResourceController *, bool)
 {
     //do nothing
 }
 
-void TileBrush::Line(int x1, int y1, int x2, int y2, ResourceManager *resources, bool preview)
+void TileBrush::Line(int x1, int y1, int x2, int y2, ResourceController *resources, bool preview)
 {
     //if the tiles are at the same spot
     if(x1 == x2 && y1 == y2)

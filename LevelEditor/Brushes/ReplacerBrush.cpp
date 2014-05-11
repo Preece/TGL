@@ -5,7 +5,7 @@ ReplacerBrush::ReplacerBrush()
     AddList(2);
 }
 
-void ReplacerBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void ReplacerBrush::Paint(int x, int y, ResourceController *resources, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next
     resources->ClearPreview();

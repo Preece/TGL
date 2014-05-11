@@ -4,7 +4,7 @@ EraserBrush::EraserBrush()
 {
 }
 
-void EraserBrush::Paint(int x, int y, ResourceManager *resources, bool preview)
+void EraserBrush::Paint(int x, int y, ResourceController *resources, bool preview)
 {
     int radius = size;
 
