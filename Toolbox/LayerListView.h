@@ -16,13 +16,13 @@ public:
 signals:
     void LayerSelectionChanged(int newLayer);
 
-    void LayerDeleted(int ID);
-
 public slots:
     void AddLayer(int ID);
     void RemoveLayer(int ID);
 
     void SelectionUpdated();
+
+    void cellClicked(int row, int column);
 
 private:
     ResourceManager *resources;

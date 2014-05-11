@@ -14,7 +14,7 @@ void LayerListView::AddLayer(int ID)
 
     insertRow(0);
 
-    QTableWidgetItem *newIcon = new QTableWidgetItem(QIcon(":/Icons/addvalue.png"), "V");
+    QTableWidgetItem *newIcon = new QTableWidgetItem(QIcon(":/Icons/addvalue.png"), QString());
     setItem(0, 0, newIcon);
 
     QTableWidgetItem *newItem = new QTableWidgetItem("New Layer");
@@ -41,4 +41,22 @@ void LayerListView::SelectionUpdated()
     }
 
     emit LayerSelectionChanged(selectedID);
+}
+
+void LayerListView::cellClicked(int row, int column)
+{
+    if(column == 0)
+    {
+        int corrID = item(row, 1)->data(Qt::UserRole).toInt();
+
+        ObjectNode *object = resources->GetObject(corrID);
+
+        if(object)
+        {
+            if(object->GetProperty("Visible").toBool())
+                object->SetProperty("Visible", false);
+            else
+                object->SetProperty("Visible", true);
+        }
+    }
 }

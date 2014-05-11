@@ -168,6 +168,17 @@ int ResourceManager::GetLayerOpacity(int layerID)
     return 100;
 }
 
+void ResourceManager::SetLayerVisibility(int layerID, bool visible)
+{
+    TileLayer *tempLayer = layerMap.value(currentLayerID);
+
+    if(tempLayer)
+    {
+        tempLayer->SetVisibility(visible);
+        emit LayerVisibilityChanged(layerID, visible);
+    }
+}
+
 void ResourceManager::ModifyTile(int x, int y, TileCoord origin)
 {
     TileLayer *tempLayer = layerMap.value(currentLayerID);

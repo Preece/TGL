@@ -14,13 +14,17 @@ public:
     QString GetName() { return GetProperty("Name").toString(); }
     void SetName(QString newName) { SetProperty("Name", newName); }
 
-    void SetVerticalParallax(double newVP) {  }
+    void SetVerticalParallax(double newVP) { GetProperty("Parallax").toPoint().setY(newVP); }
     double GetVerticalParallax() { return 1.0; }
-    void SetHorizontalParallax(double newHP) {  }
+    void SetHorizontalParallax(double newHP) { GetProperty("Parallax").toPoint().setX(newHP); }
     double GetHorizontalParallax() { return 1.0; }
 
-    void SetOpacity(int newOpacity) {  }
+    void SetOpacity(int newOpacity) { SetProperty("Opacity", newOpacity); }
     int GetOpacity() { return 100; }
+
+    void SetVisibility(bool visible) { SetProperty("Visible", visible); }
+    bool GetVisibility() { return GetProperty("Visible").toBool(); }
+    void ToggleVisibility();
 
     void SetSize(int w, int h) { SetProperty("Layer Size", QPoint(w, h)); }
     int GetWidth() { return GetProperty("Layer Size").toPoint().x(); }

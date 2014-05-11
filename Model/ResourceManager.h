@@ -50,6 +50,7 @@ public slots:
     TileLayer *GetLayerByIndex(int index);
     int GetLayerCount() { return layerMap.count(); }
     int GetLayerOpacity(int layerID);
+    void SetLayerVisibility(int layerID, bool visible);
     void SetLayerSelection(int newLayer) { currentLayerID = newLayer; }
 
     void ModifyTile(int x, int y, TileCoord origin);
@@ -71,6 +72,7 @@ signals:
 
     void LayerAdded(int ID);
     void LayerRemoved(int ID);
+    void LayerVisibilityChanged(int ID, bool visible);
 
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);

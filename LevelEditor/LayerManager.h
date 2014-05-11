@@ -40,6 +40,7 @@ public slots:
     void ToggleSelectionMode(bool selection);
 
     void SetLayerSelection(int newSelection);
+    void UpdateLayerVisibility(int ID, bool visible);
 
     void RefreshPreview();
     void SelectPreviewItems();

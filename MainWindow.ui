@@ -379,7 +379,7 @@ QTreeView, QTableWidget, #propertyBrowser {
              </size>
             </property>
             <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
+             <enum>Qt::WheelFocus</enum>
             </property>
             <property name="frameShape">
              <enum>QFrame::Box</enum>
@@ -414,6 +414,9 @@ QTreeView, QTableWidget, #propertyBrowser {
             <property name="rowCount">
              <number>0</number>
             </property>
+            <attribute name="horizontalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
             <attribute name="horizontalHeaderCascadingSectionResizes">
              <bool>true</bool>
             </attribute>

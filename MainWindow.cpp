@@ -56,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
     connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
 
+    connect(resources, SIGNAL(LayerVisibilityChanged(int,bool)), layers, SLOT(UpdateLayerVisibility(int,bool)));
+
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
 

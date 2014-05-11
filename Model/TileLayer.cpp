@@ -3,6 +3,7 @@
 TileLayer::TileLayer()
 {
     AddProperty("Name", "New Layer");
+    AddProperty("Visible", true);
     AddProperty("Parallax", QPointF(1.0, 1.0));
     AddProperty("Opacity", 100);
     AddProperty("Layer Size", QPoint(0, 0));
@@ -11,6 +12,14 @@ TileLayer::TileLayer()
 
 TileLayer::~TileLayer()
 {
+}
+
+void TileLayer::ToggleVisibility()
+{
+    if(GetProperty("Visible").toBool())
+        SetProperty("Visible", false);
+    else
+        SetProperty("Visible", true);
 }
 
 bool TileLayer::ResizeToIncludePoint(int x, int y)

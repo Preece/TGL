@@ -231,6 +231,15 @@ void LayerManager::SetLayerSelection(int newSelection)
     currentLayer = NULL;
 }
 
+void LayerManager::UpdateLayerVisibility(int ID, bool visible)
+{
+    for(int i = 0; i < layers.count(); i++)
+    {
+        if(layers[i]->GetLayerID() == ID)
+            layers[i]->setVisible(visible);
+    }
+}
+
 void LayerManager::RefreshPreview()
 {
     ClearPreview();
