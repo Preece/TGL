@@ -24,20 +24,20 @@
     font: 75 9pt &quot;MS Gothic&quot;;
 }
 
-
-QToolBox::tab, QComboBox,  QComboBox::drop-down, QToolButton {
-    background-color:   rgb(161, 255, 156)  ;
+QToolBox::tab {
+    background-color: rgb(194, 249, 198)  ;
     border-style: outset;
     border-width: 1px;
     border-color: rgb(141, 235, 136);
     border-radius: 3px;
 }
 
-QToolButton:checked, QToolButton::pressed, QToolBox::tab::selected {
+QToolBox::tab::selected {
     border-style: inset;
-    background-color: rgb(126, 204, 135);
+    background-color: rgb(183, 227, 181);
     border-color: rgb(53, 129, 72);
 }
+
 
 QTreeView, QTableView  {
 	outline: 0;
@@ -55,10 +55,6 @@ QTreeView::item:hover {
 
 *::item { 
     selection-background-color: rgb(88, 182, 232);
-}
-
-QComboBox::down-arrow {
-    image: url(:/Icons/addvalue.png);
 }
 
 QTreeView, QTableWidget, #propertyBrowser {
@@ -146,7 +142,7 @@ QTreeView, QTableWidget, #propertyBrowser {
           <x>0</x>
           <y>0</y>
           <width>298</width>
-          <height>492</height>
+          <height>491</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -268,7 +264,7 @@ QTreeView, QTableWidget, #propertyBrowser {
           <x>0</x>
           <y>0</y>
           <width>298</width>
-          <height>492</height>
+          <height>491</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -574,7 +570,7 @@ QTreeView, QTableWidget, #propertyBrowser {
           <x>0</x>
           <y>0</y>
           <width>298</width>
-          <height>492</height>
+          <height>491</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -591,7 +587,7 @@ QTreeView, QTableWidget, #propertyBrowser {
           <x>0</x>
           <y>0</y>
           <width>298</width>
-          <height>492</height>
+          <height>491</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -623,7 +619,7 @@ QTreeView, QTableWidget, #propertyBrowser {
         <number>0</number>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="resourcesView">
         <widget class="QLabel" name="label">
