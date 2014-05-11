@@ -5,7 +5,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsPixmapItem>
 
-#include "../Model/ItemNode.h"
+#include "../Model/ResourceNode.h"
 
 class TileWidgetItem : public QGraphicsPixmapItem
 {

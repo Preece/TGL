@@ -19,7 +19,7 @@ PropertyBrowser::~PropertyBrowser()
     delete widgetFactory;
 }
 
-void PropertyBrowser::DisplayResource(ObjectNode *newObject)
+void PropertyBrowser::DisplayResource(ResourceNode *newObject)
 {
     //clear out all the values
     clear();
@@ -44,7 +44,7 @@ void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
     }
 }
 
-void PropertyBrowser::DisplayObject(ObjectNode *object)
+void PropertyBrowser::DisplayObject(ResourceNode *object)
 {
     PropertyList properties = object->GetAllProperties();
 

@@ -5,9 +5,9 @@
 #include <QString>
 #include <QFileInfo>
 
-#include "ItemNode.h"
+#include "ResourceNode.h"
 
-class Image : public ObjectNode
+class Image : public ResourceNode
 {
 public:
     Image();

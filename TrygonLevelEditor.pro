@@ -15,7 +15,6 @@ include(qtpropertybrowser/src/qtpropertybrowser.pri)
 
 SOURCES += main.cpp\
     MainWindow.cpp \
-    Model/ItemNode.cpp \
     Model/ResourceManager.cpp \
     Model/Image.cpp \
     Model/LevelProperties.cpp \
@@ -52,11 +51,11 @@ SOURCES += main.cpp\
     Toolbox/LayerListView.cpp \
     LevelEditor/TileScene.cpp \
     LevelEditor/TileLayerItem.cpp \
-    LevelEditor/TileView.cpp
+    LevelEditor/TileView.cpp \
+    Model/ResourceNode.cpp
 
 HEADERS  += \
     MainWindow.h \
-    Model/ItemNode.h \
     Model/ResourceManager.h \
     Model/Image.h \
     Model/LevelProperties.h \
@@ -93,7 +92,8 @@ HEADERS  += \
     Toolbox/LayerListView.h \
     LevelEditor/TileView.h \
     LevelEditor/TileLayerItem.h \
-    LevelEditor/TileScene.h
+    LevelEditor/TileScene.h \
+    Model/ResourceNode.h
 
 FORMS    += \
     MainWindow.ui \

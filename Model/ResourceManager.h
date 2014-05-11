@@ -27,7 +27,7 @@ public slots:
     void Redo();
     Clipboard *GetClipboard() { return clipboard; }
 
-    ObjectNode *GetObject(int ID);
+    ResourceNode *GetObject(int ID);
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
     int GetTileWidth();

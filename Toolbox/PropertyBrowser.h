@@ -21,12 +21,12 @@ signals:
     
 public slots:
 
-    void DisplayResource(ObjectNode *newObject);
+    void DisplayResource(ResourceNode *newObject);
     void UpdateValue(QtProperty *property, const QVariant &val);
 
 private:
-    ObjectNode *currentObject;
-    void DisplayObject(ObjectNode *object);
+    ResourceNode *currentObject;
+    void DisplayObject(ResourceNode *object);
 
     ResourceManager *resources;
     QtVariantPropertyManager *propertyManager;

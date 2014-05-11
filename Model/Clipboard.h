@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "ItemNode.h"
+#include "ResourceNode.h"
 
 class Clipboard : public QObject
 {

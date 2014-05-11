@@ -318,7 +318,7 @@ void ResourceManager::Redo()
     undo->redo();
 }
 
-ObjectNode *ResourceManager::GetObject(int ID)
+ResourceNode *ResourceManager::GetObject(int ID)
 {
     if(ID == levelProperties.GetID())
         return &levelProperties;

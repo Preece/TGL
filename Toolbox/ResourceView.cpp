@@ -89,7 +89,7 @@ void ResourceView::RemoveChildrenNodes(QTreeWidgetItem *parent)
 
 void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
 {
-    ObjectNode *selectedObject = resources->GetObject(GetSelectedID());
+    ResourceNode *selectedObject = resources->GetObject(GetSelectedID());
 
     if(selectedObject)
     {
@@ -105,7 +105,7 @@ void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
 
 void ResourceView::AddResource(int ID)
 {
-    ObjectNode *newObject = resources->GetObject(ID);
+    ResourceNode *newObject = resources->GetObject(ID);
 
     QString name = newObject->GetProperty("Name").toString();
 

@@ -3,9 +3,9 @@
 
 #include <QHash>
 
-#include "ItemNode.h"
+#include "ResourceNode.h"
 
-class TileLayer : public ObjectNode
+class TileLayer : public ResourceNode
 {
 public:
     TileLayer();

@@ -19,7 +19,7 @@ public:
     void paintEvent(QPaintEvent* e) { QTreeWidget::paintEvent(e); }
     
 signals:
-    void NewResourceSelected(ObjectNode *newObject);
+    void NewResourceSelected(ResourceNode *newObject);
     
 public slots:
     void selectionUpdated(QTreeWidgetItem*, int);
@@ -37,7 +37,7 @@ private:
     QTreeWidgetItem *imageRoot;
     QTreeWidgetItem *tilesetRoot;
 
-    ObjectNode *currentSelection;
+    ResourceNode *currentSelection;
 
     int GetItemID(QTreeWidgetItem *item);
     QTreeWidgetItem *GetItem(int ID);

@@ -9,8 +9,8 @@
 class DeleteResourceCommand : public QUndoCommand
 {
 public:
-    DeleteResourceCommand(ObjectNode *newResource, QHash<int, Image*> *resources);
-    DeleteResourceCommand(ObjectNode *newResource, QHash<int, TileLayer*> *resources);
+    DeleteResourceCommand(ResourceNode *newResource, QHash<int, Image*> *resources);
+    DeleteResourceCommand(ResourceNode *newResource, QHash<int, TileLayer*> *resources);
     ~DeleteResourceCommand();
 
     virtual void undo();
@@ -19,8 +19,8 @@ public:
     bool ListContainsResource();
 
 private:
-    ObjectNode *resource;
-    QHash<int, ObjectNode*> *resourceList;
+    ResourceNode *resource;
+    QHash<int, ResourceNode*> *resourceList;
 };
 
 #endif // DELETERESOURCECOMMAND_H

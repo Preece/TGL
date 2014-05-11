@@ -1,17 +1,17 @@
 #include "AddResourceCommand.h"
 
-AddResourceCommand::AddResourceCommand(ObjectNode *newResource, QHash<int, Image *> *resources)
+AddResourceCommand::AddResourceCommand(ResourceNode *newResource, QHash<int, Image *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QHash<int, ObjectNode*>* >(resources);
+    resourceList = reinterpret_cast<QHash<int, ResourceNode*>* >(resources);
 
     invertAdditions = false;
 }
 
-AddResourceCommand::AddResourceCommand(ObjectNode *newResource, QHash<int, TileLayer *> *resources)
+AddResourceCommand::AddResourceCommand(ResourceNode *newResource, QHash<int, TileLayer *> *resources)
 {
     resource = newResource;
-    resourceList = reinterpret_cast<QHash<int, ObjectNode*>* >(resources);
+    resourceList = reinterpret_cast<QHash<int, ResourceNode*>* >(resources);
 
     invertAdditions = true;
 }

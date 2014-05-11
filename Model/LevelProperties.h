@@ -3,9 +3,9 @@
 
 #include <QString>
 
-#include "ItemNode.h"
+#include "ResourceNode.h"
 
-class LevelProperties : public ObjectNode
+class LevelProperties : public ResourceNode
 {
 
 public:

@@ -10,7 +10,7 @@ LayerListView::LayerListView(QWidget *parent) :
 
 void LayerListView::AddLayer(int ID)
 {
-    ObjectNode *layer = resources->GetObject(ID);
+    ResourceNode *layer = resources->GetObject(ID);
 
     insertRow(0);
 
@@ -51,7 +51,7 @@ void LayerListView::cellClicked(int row, int column)
     {
         int corrID = item(row, 1)->data(Qt::UserRole).toInt();
 
-        ObjectNode *object = resources->GetObject(corrID);
+        ResourceNode *object = resources->GetObject(corrID);
 
         if(object)
         {
