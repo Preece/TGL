@@ -2,6 +2,7 @@
 #define LAYERLISTVIEW_H
 
 #include <QTableWidget>
+#include <QHeaderView>
 
 #include "../Model/ResourceManager.h"
 

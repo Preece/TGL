@@ -15,10 +15,12 @@ void LayerListView::AddLayer(int ID)
     insertRow(0);
 
     QTableWidgetItem *newIcon = new QTableWidgetItem(QIcon(":/Icons/addvalue.png"), QString());
+    newIcon->setFlags(newIcon->flags() & ~(Qt::ItemIsDropEnabled));
     setItem(0, 0, newIcon);
 
     QTableWidgetItem *newItem = new QTableWidgetItem("New Layer");
     newItem->setData(Qt::UserRole, ID);
+    newItem->setFlags(newItem->flags() & ~(Qt::ItemIsDropEnabled));
     setItem(0, 1, newItem);
 }
 
