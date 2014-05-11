@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     levelPropertiesWindow   = new LevelPropertiesDialog;
     layerPropertiesWindow   = new LayerPropertiesDialog;
     tileSelector            = new TileSelectorScene;
-    layers                  = new LayerManager;
+    layers                  = new TileScene;
 
     //register the resource manager with the various modules. They will
     //keep themselves in sync with the resource manager

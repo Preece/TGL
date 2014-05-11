@@ -267,8 +267,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>298</width>
-          <height>492</height>
+          <width>83</width>
+          <height>245</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -573,8 +573,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>298</width>
-          <height>492</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -590,8 +590,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>298</width>
-          <height>492</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -958,7 +958,7 @@ QTreeView, QTableWidget, #propertyBrowser {
           </layout>
          </item>
          <item>
-          <widget class="LevelView" name="levelView">
+          <widget class="TileView" name="levelView">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
              <horstretch>99</horstretch>
@@ -1331,11 +1331,6 @@ QTreeView, QTableWidget, #propertyBrowser {
    </slots>
   </customwidget>
   <customwidget>
-   <class>LevelView</class>
-   <extends>QGraphicsView</extends>
-   <header>LevelEditor/LevelView.h</header>
-  </customwidget>
-  <customwidget>
    <class>BrushManager</class>
    <extends>QFrame</extends>
    <header>LevelEditor/Brushes/BrushManager.h</header>
@@ -1348,7 +1343,15 @@ QTreeView, QTableWidget, #propertyBrowser {
   <customwidget>
    <class>LayerListView</class>
    <extends>QTableWidget</extends>
-   <header>Toolbox/LayerListView.h</header>
+   <header>ToolBox/LayerListView.h</header>
+   <slots>
+    <slot>AddLayer(int)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>TileView</class>
+   <extends>QGraphicsView</extends>
+   <header>LevelEditor/TileView.h</header>
   </customwidget>
  </customwidgets>
  <resources>

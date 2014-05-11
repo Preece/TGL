@@ -31,7 +31,6 @@ SOURCES += main.cpp\
     Toolbox/TileSelectorScene.cpp \
     Toolbox/ImageListWidgetItem.cpp \
     Toolbox/TileWidgetItem.cpp \
-    LevelEditor/LayerManager.cpp \
     LevelEditor/Brushes/TileBrush.cpp \
     LevelEditor/Brushes/PencilBrush.cpp \
     LevelEditor/Brushes/FillBrush.cpp \
@@ -44,15 +43,16 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/LineBrush.cpp \
     LevelEditor/Brushes/MatrixBrush.cpp \
     LevelEditor/Brushes/ReplacerBrush.cpp \
-    LevelEditor/TileLayerView.cpp \
     Dialogs/ImageViewerDialog.cpp \
     Dialogs/LayerPropertiesDialog.cpp \
     Dialogs/BrushPropertiesDialog.cpp \
     Dialogs/LevelPropertiesDialog.cpp \
-    LevelEditor/LevelView.cpp \
     LevelEditor/Brushes/SelectionBrush.cpp \
     LevelEditor/Brushes/EyedropperBrush.cpp \   
-    Toolbox/LayerListView.cpp
+    Toolbox/LayerListView.cpp \
+    LevelEditor/TileScene.cpp \
+    LevelEditor/TileLayerItem.cpp \
+    LevelEditor/TileView.cpp
 
 HEADERS  += \
     MainWindow.h \
@@ -83,17 +83,17 @@ HEADERS  += \
     LevelEditor/Brushes/StampBrush.h \
     LevelEditor/Brushes/LineBrush.h \
     LevelEditor/Brushes/MatrixBrush.h \
-    LevelEditor/TileLayerView.h \
-    LevelEditor/LayerManager.h \
     LevelEditor/Brushes/TileBrush.h \
     Dialogs/LayerPropertiesDialog.h \
     Dialogs/BrushPropertiesDialog.h \
     Dialogs/ImageViewerDialog.h \
     Dialogs/LevelPropertiesDialog.h \
-    LevelEditor/LevelView.h \
     LevelEditor/Brushes/SelectionBrush.h \
     LevelEditor/Brushes/EyedropperBrush.h \   
-    Toolbox/LayerListView.h
+    Toolbox/LayerListView.h \
+    LevelEditor/TileView.h \
+    LevelEditor/TileLayerItem.h \
+    LevelEditor/TileScene.h
 
 FORMS    += \
     MainWindow.ui \

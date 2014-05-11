@@ -12,7 +12,7 @@
 #include "Dialogs/LayerPropertiesDialog.h"
 #include "Dialogs/LevelPropertiesDialog.h"
 
-#include "LevelEditor/LayerManager.h"
+#include "LevelEditor/TileScene.h"
 #include "LevelEditor/Brushes/BrushManager.h"
 
 #include "Toolbox/TileSelectorScene.h"
@@ -58,7 +58,7 @@ private:
 
     ResourceManager *resources;
 
-    LayerManager *layers;
+    TileScene *layers;
     TileSelectorScene *tileSelector;
 };
 
