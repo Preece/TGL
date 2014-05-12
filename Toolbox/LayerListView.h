@@ -12,7 +12,7 @@ class LayerListView : public QTableWidget
 public:
     explicit LayerListView(QWidget *parent = 0);
 
-    void RegisterResourceManager(ResourceController *rm) { resources = rm; }
+    void RegisterResourceController(ResourceController *rm) { resources = rm; }
 
 signals:
     void LayerSelectionChanged(int newLayer);

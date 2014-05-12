@@ -8,6 +8,7 @@
 #include <QFileDialog>
 
 #include "Model/ResourceController.h"
+#include "Model/TileController.h"
 
 #include "Dialogs/LayerPropertiesDialog.h"
 #include "Dialogs/LevelPropertiesDialog.h"
@@ -57,6 +58,7 @@ private:
     LayerPropertiesDialog *layerPropertiesWindow;
 
     ResourceController *resources;
+    TileController *tileController;
 
     TileScene *layers;
     TileSelectorScene *tileSelector;

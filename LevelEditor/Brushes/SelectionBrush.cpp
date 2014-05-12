@@ -10,7 +10,7 @@ SelectionBrush::~SelectionBrush()
 {
 }
 
-void SelectionBrush::Press(int x, int y, ResourceController *resources)
+void SelectionBrush::Press(int x, int y, TileController *tiles)
 {
     if(DraggingTileAtPos(x, y))
     {
@@ -19,12 +19,12 @@ void SelectionBrush::Press(int x, int y, ResourceController *resources)
     //if there is not a dragged tile at this position
     else
     {
-        resources->SelectTilesInArea(QRect(QPoint(x, y), QPoint(x, y)));
+        tiles->SelectTilesInArea(QRect(QPoint(x, y), QPoint(x, y)));
 
         dragMode = false;
         //integrate these tiles into the layer. This function will
         //do nothing if there are no dragging tiles
-        IntegrateDraggingTiles(resources);
+        IntegrateDraggingTiles(tiles);
     }
     
     clickSpot.setX(x);
@@ -33,7 +33,7 @@ void SelectionBrush::Press(int x, int y, ResourceController *resources)
     previousMouseSpot.setY(y);
 }
 
-void SelectionBrush::Move(int x, int y, ResourceController *resources, bool leftButtonDown)
+void SelectionBrush::Move(int x, int y, TileController *tiles, bool leftButtonDown)
 {
     if(leftButtonDown)
     {
@@ -41,7 +41,7 @@ void SelectionBrush::Move(int x, int y, ResourceController *resources, bool left
         if(dragMode)
         {
             //clear the current preview
-            resources->ClearPreview();
+            tiles->ClearPreview();
 
             //get the amount of movement
             signed int xDiff = x - previousMouseSpot.x();
@@ -52,10 +52,10 @@ void SelectionBrush::Move(int x, int y, ResourceController *resources, bool left
             {
                 draggingTiles[i].pos.first += xDiff;
                 draggingTiles[i].pos.second += yDiff;
-                resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+                tiles->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
             }
 
-            resources->SelectPreviewItems();
+            tiles->SelectPreviewItems();
 
             previousMouseSpot.setX(x);
             previousMouseSpot.setY(y);
@@ -64,51 +64,51 @@ void SelectionBrush::Move(int x, int y, ResourceController *resources, bool left
         else
         {
             //so select new stuff
-            resources->SelectTilesInArea(QRect(clickSpot, QPoint(x, y)));
+            tiles->SelectTilesInArea(QRect(clickSpot, QPoint(x, y)));
         }
     }
 }
 
-void SelectionBrush::Release(int, int, ResourceController *resources)
+void SelectionBrush::Release(int, int, TileController *tiles)
 {
     if(!dragMode)
     {
         //first integrate any lingering tiles
-        IntegrateDraggingTiles(resources);
+        IntegrateDraggingTiles(tiles);
 
-        PopOutSelectedTiles(resources);
+        PopOutSelectedTiles(tiles);
     }
 
     //select the preview items, to maintain visual consistency
-    resources->SelectPreviewItems();
+    tiles->SelectPreviewItems();
 
     dragMode = false;
 }
 
-void SelectionBrush::Deselect(ResourceController *resources)
+void SelectionBrush::Deselect(TileController *tiles)
 {
-    IntegrateDraggingTiles(resources);
+    IntegrateDraggingTiles(tiles);
 }
 
-void SelectionBrush::PopOutSelectedTiles(ResourceController *resources)
+void SelectionBrush::PopOutSelectedTiles(TileController *tiles)
 {
     //get a list of selected tiles that are not preview items
-    draggingTiles = resources->GetSelectedTiles();
+    draggingTiles = tiles->GetSelectedTiles();
 
     if(!draggingTiles.empty())
     {
-        //otherwise, remove them all from the resources, and draw them again as previews
+        //otherwise, remove them all from the tiles, and draw them again as previews
         for(int i = 0; i < draggingTiles.count(); i++)
         {
-            resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, TileCoord(-1, -1));
-            resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+            tiles->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, TileCoord(-1, -1));
+            tiles->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
         }
 
-        resources->EndPaintOperation();
+        tiles->EndPaintOperation();
     }
 }
 
-void SelectionBrush::IntegrateDraggingTiles(ResourceController *resources)
+void SelectionBrush::IntegrateDraggingTiles(TileController *tiles)
 {
     if(!draggingTiles.empty())
     {
@@ -116,33 +116,33 @@ void SelectionBrush::IntegrateDraggingTiles(ResourceController *resources)
         for(int i = 0; i < draggingTiles.count(); i++)
         {
             if(draggingTiles[i].origin != TileCoord(-1, -1))
-                resources->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+                tiles->ModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
         }
 
         //package this change into an undo operation
-        resources->EndPaintOperation();
+        tiles->EndPaintOperation();
 
-        resources->ClearPreview();
+        tiles->ClearPreview();
         ClearDraggingTiles();
     }
 }
 
-void SelectionBrush::SetDraggingTiles(ResourceController *resources, QList<Tile> newTiles)
+void SelectionBrush::SetDraggingTiles(TileController *tiles, QList<Tile> newTiles)
 {
-    IntegrateDraggingTiles(resources);
+    IntegrateDraggingTiles(tiles);
 
     draggingTiles = newTiles;
 
-    resources->ClearPreview();
+    tiles->ClearPreview();
 
     if(!draggingTiles.empty())
     {
-        //otherwise, remove them all from the resources, and draw them again as previews
+        //otherwise, remove them all from the tiles, and draw them again as previews
         for(int i = 0; i < draggingTiles.count(); i++)
-            resources->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
+            tiles->PreviewModifyTile(draggingTiles[i].pos.first, draggingTiles[i].pos.second, draggingTiles[i].origin);
     }
 
-    resources->SelectPreviewItems();
+    tiles->SelectPreviewItems();
 }
 
 void SelectionBrush::ClearDraggingTiles()

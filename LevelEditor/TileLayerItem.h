@@ -3,7 +3,7 @@
 
 #include <QGraphicsScene>
 
-#include "../Model/ResourceController.h"
+#include "../Model/TileController.h"
 #include "../Toolbox/TileWidgetItem.h"
 
 class TileLayerItem : public QGraphicsRectItem
@@ -12,7 +12,7 @@ public:
     TileLayerItem();
     ~TileLayerItem();
 
-    void RegisterResourceManager(ResourceController *newRM) { resourceController = newRM; }
+    void RegisterTileController(TileController *newTC) { tileController = newTC; }
 
     void SetLayerID(int newID) { layerID = newID; }
     int GetLayerID() { return layerID; }
@@ -29,7 +29,7 @@ private:
     QHash<TileCoord, TileWidgetItem*> items;
 
     int layerID;
-    ResourceController *resourceController;
+    TileController *tileController;
 };
 
 #endif // LAYERGROUP_H

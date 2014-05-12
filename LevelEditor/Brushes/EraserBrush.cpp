@@ -4,11 +4,11 @@ EraserBrush::EraserBrush()
 {
 }
 
-void EraserBrush::Paint(int x, int y, ResourceController *resources, bool preview)
+void EraserBrush::Paint(int x, int y, TileController *tiles, bool preview)
 {
     int radius = size;
 
-    resources->ClearEraserPreview();
+    tiles->ClearEraserPreview();
 
     //y dimension
     for(signed int i = -radius; i <= radius; i++)
@@ -18,10 +18,10 @@ void EraserBrush::Paint(int x, int y, ResourceController *resources, bool previe
         {
             if((i*i) + (j*j) < radius * radius)
             {
-                resources->DrawEraserPreview(j + x, i + y);
+                tiles->DrawEraserPreview(j + x, i + y);
 
                 if(!preview)
-                    resources->ModifyTile(j + x, i + y, TileCoord(-1, -1));
+                    tiles->ModifyTile(j + x, i + y, TileCoord(-1, -1));
             }
         }
     }

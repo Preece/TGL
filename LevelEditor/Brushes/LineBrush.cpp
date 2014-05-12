@@ -4,16 +4,16 @@ LineBrush::LineBrush()
 {
 }
 
-void LineBrush::Press(int x, int y, ResourceController *resources)
+void LineBrush::Press(int x, int y, TileController *tiles)
 {
     //if it was the left mouse button
     clickPoint.setX(x);
     clickPoint.setY(y);
 
-    Paint(x, y, resources, true);
+    Paint(x, y, tiles, true);
 }
 
-void LineBrush::Move(int x, int y, ResourceController *resources, bool leftButtonDown)
+void LineBrush::Move(int x, int y, TileController *tiles, bool leftButtonDown)
 {
     //if the left mouse is down
     if(leftButtonDown)
@@ -21,8 +21,8 @@ void LineBrush::Move(int x, int y, ResourceController *resources, bool leftButto
         //if the position has changed
         if(movePoint.x() != x || movePoint.y() != y)
         {
-            resources->ClearPreview();
-            Line(clickPoint.x(), clickPoint.y(), x, y, resources, true);
+            tiles->ClearPreview();
+            Line(clickPoint.x(), clickPoint.y(), x, y, tiles, true);
 
             movePoint.setX(x);
             movePoint.setY(y);
@@ -30,16 +30,16 @@ void LineBrush::Move(int x, int y, ResourceController *resources, bool leftButto
     }
 }
 
-void LineBrush::Release(int x, int y, ResourceController *resources)
+void LineBrush::Release(int x, int y, TileController *tiles)
 {
     //if it was the left button being released
         //actually draw the line
-        Line(clickPoint.x(), clickPoint.y(), x, y, resources);
+        Line(clickPoint.x(), clickPoint.y(), x, y, tiles);
 
-        resources->ClearPreview();
+        tiles->ClearPreview();
 }
 
-void LineBrush::Paint(int x, int y, ResourceController *resources, bool preview)
+void LineBrush::Paint(int x, int y, TileController *tiles, bool preview)
 {
     //if no tile is selected, bail
     if(selectedTileOrigin == TileCoord(-1, -1))
@@ -58,7 +58,7 @@ void LineBrush::Paint(int x, int y, ResourceController *resources, bool preview)
             //constrain to within the radius of the drawing circle
             if((iSquared + (j*j)) < radiusSquared)
             {
-                TileCoord currOrigin = resources->GetTileOrigin(j + x, i + y);
+                TileCoord currOrigin = tiles->GetTileOrigin(j + x, i + y);
 
                 //and make sure the draw operation would not be painting the same tile.
                 //the preview "or" clause is for when eyedropping a tile. the preview wont
@@ -72,9 +72,9 @@ void LineBrush::Paint(int x, int y, ResourceController *resources, bool preview)
                     {
                         //paint either a preview or an actual tile
                         if(preview)
-                            resources->PreviewModifyTile(j + x, i + y, selectedTileOrigin);
+                            tiles->PreviewModifyTile(j + x, i + y, selectedTileOrigin);
                         else
-                            resources->ModifyTile(j + x, i + y, selectedTileOrigin);
+                            tiles->ModifyTile(j + x, i + y, selectedTileOrigin);
                     }
                 }
             }

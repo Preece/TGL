@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //create a resource manager
     resources               = new ResourceController;
+    tileController          = new TileController;
     levelPropertiesWindow   = new LevelPropertiesDialog;
     layerPropertiesWindow   = new LayerPropertiesDialog;
     tileSelector            = new TileSelectorScene;
@@ -16,15 +17,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //register the resource manager with the various modules. They will
     //keep themselves in sync with the resource manager
-    levelPropertiesWindow->RegisterResourceManager(resources);
-    layers->RegisterResourceManager(resources);
+    tileController->RegisterResourceController(resources);
+    levelPropertiesWindow->RegisterResourceController(resources);
+    layers->RegisterTileController(tileController);
     layers->RegisterBrushManager(ui->brushManager);
-    ui->brushManager->RegisterResourceManager(resources);
+    ui->brushManager->RegisterTileController(tileController);
     ui->brushManager->RegisterTileSelector(tileSelector);
-    tileSelector->RegisterResourceManager(resources);
-    ui->resourceView->RegisterResourceManager(resources);
-    ui->propertyBrowser->RegisterResourceManager(resources);
-    ui->layerList->RegisterResourceManager(resources);
+    tileSelector->RegisterResourceController(resources);
+    ui->resourceView->RegisterResourceController(resources);
+    ui->propertyBrowser->RegisterResourceController(resources);
+    ui->layerList->RegisterResourceController(resources);
     
     connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
     connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
@@ -174,7 +176,7 @@ void MainWindow::SetToolSelection(QCursor newCursor, int newSelection)
 void MainWindow::on_actionCut_triggered()
 {
     ui->brushManager->CutTiles();
-    resources->ClearPreview();
+    tileController->ClearPreview();
 }
 
 void MainWindow::on_actionCopy_triggered()

@@ -7,7 +7,7 @@
 #include <QKeyEvent>
 #include <QGraphicsRectItem>
 
-#include "../Model/ResourceController.h"
+#include "../Model/TileController.h"
 #include "TileView.h"
 #include "TileLayerItem.h"
 #include "../Toolbox/TileWidgetItem.h"
@@ -23,11 +23,10 @@ public:
     TileScene();
     ~TileScene();
 
-    void RegisterResourceManager(ResourceController *newRM);
+    void RegisterTileController(TileController *newRC);
     void RegisterBrushManager(BrushManager *newBM) { brushManager = newBM; }
     
     void AddLayer(int newLayerID);
-    void RemoveLayer(int dirtyLayerID);
     void UpdateLayerOpacity(int opaqueLayerID);
     void ClearPreview();
 
@@ -69,7 +68,7 @@ private:
     QHash<TileCoord, TileWidgetItem*> previewItems;
     QList<QGraphicsRectItem*> eraserPreviewItems;
 
-    ResourceController *resourceController;
+    TileController *tileController;
     BrushManager *brushManager;
 
     QGraphicsItemGroup *grid;

@@ -12,7 +12,6 @@
 
 #include "Commands/AddResourceCommand.h"
 #include "Commands/DeleteResourceCommand.h"
-#include "Commands/ModifyTilesCommand.h"
 
 class ResourceController : public QObject
 {
@@ -21,6 +20,8 @@ class ResourceController : public QObject
 public:
     ResourceController();
     ~ResourceController();
+
+    void AddUndoCommand(QUndoCommand* newUndo) { undo->push(newUndo); }
 
 public slots:
     void Undo();
@@ -43,24 +44,6 @@ public slots:
     void AddTileLayer(TileLayer *newLayer);
     void DeleteTileLayer(int ID);
     TileLayer *GetTileLayer(int ID);
-    int GetLayerOpacity(int layerID);
-    void SetLayerVisibility(int layerID, bool visible);
-
-    void ModifyTile(int x, int y, TileCoord origin);
-    void PreviewModifyTile(int x, int y, TileCoord origin);
-    void ClearPreview();
-    TileCoord GetTileOrigin(int x, int y);
-
-    int GetCurrentLayerWidth();
-    int GetCurrentLayerHeight();
-
-    void SelectTilesInArea(QRect area);
-    QList<Tile> GetSelectedTiles();
-    void ClearSelection();
-
-    void SetLayerSelection(int newLayer) { currentLayerID = newLayer; }
-
-    void EndPaintOperation();
 
     void DestroyAllResources();
 
@@ -70,30 +53,17 @@ signals:
 
     void LayerAdded(int ID);
     void LayerRemoved(int ID);
-    void LayerVisibilityUpdated(int ID, bool visible);
 
-    void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
-    void PreviewTileUpdated(int x, int y, TileCoord newOrigin);
-    void LayerSizeUpdated(int newW, int newH);
-
-    void SelectionGeometryUpdated(QRect rect);
-    void SelectPreviewItems();
-    void DrawEraserPreview(int x, int y);
-    void ClearEraserPreview();
 
 private:
     QHash<int, Image*> imageMap;
     QHash<int, TileLayer*> layerMap;
-    int currentLayerID;
-    QHash<TileCoord, Tile> previewTiles;
-    QRect selectionArea;
 
     TileLayer defaultLayer;
 
     LevelProperties levelProperties;
 
     QUndoStack *undo;
-    ModifyTilesCommand *modifyTiles;
 
     QHash<TileCoord, QPixmap> pixmapCache;
 

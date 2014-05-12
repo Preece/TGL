@@ -2,7 +2,7 @@
 
 TileLayerItem::TileLayerItem()
 {
-    resourceController = NULL;
+    tileController = NULL;
     layerID = 0;
 }
 
@@ -35,8 +35,8 @@ void TileLayerItem::DestroyAllItems()
 void TileLayerItem::SelectTilesInArea(QRect area)
 {
     //translate the position to pixel coordinates
-    int tileW = resourceController->GetTileWidth();
-    int tileH = resourceController->GetTileHeight();
+    int tileW = tileController->GetTileWidth();
+    int tileH = tileController->GetTileHeight();
 
     QPainterPath path;
     path.addRect((area.left() * tileW) + 1, (area.top() * tileH) + 1, (area.width() * tileW) - 2, (area.height() * tileH) - 2);
@@ -73,10 +73,10 @@ void TileLayerItem::ModifyTileItem(int x, int y, TileCoord newOrigin)
     tempTileItem->setFlag(QGraphicsItem::ItemIsSelectable);
 
     //update its Pixmap
-    tempTileItem->SetTilePixmap(resourceController->GetTilePixmap(newOrigin));
+    tempTileItem->SetTilePixmap(tileController->GetTilePixmap(newOrigin));
 
-    int tileW = resourceController->GetTileWidth();
-    int tileH = resourceController->GetTileHeight();
+    int tileW = tileController->GetTileWidth();
+    int tileH = tileController->GetTileHeight();
 
     //set the position
     tempTileItem->setPos(x * tileW, y * tileH);

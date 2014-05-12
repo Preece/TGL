@@ -11,10 +11,10 @@ public:
     FillBrush();
     ~FillBrush();
 
-    void Move(int, int, ResourceController *);
+    void Move(int, int, TileController *);
 
-    void Paint(int x, int y, ResourceController *resources, bool preview = false);
-    void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceController *resources);
+    void Paint(int x, int y, TileController *tiles, bool preview = false);
+    void Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileController *tiles);
 
     QString GetType() { return "fill"; }
     QCursor GetCursor() { return QCursor(QPixmap(":/Icons/bucket.png"), 3, 13); }

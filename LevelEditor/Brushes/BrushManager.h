@@ -36,7 +36,7 @@ public:
     void RepopulateBrushLists();
 
     void RegisterTileSelector(TileSelectorScene *selector) { propertiesWindow.RegisterTileSelector(selector); }
-    void RegisterResourceManager(ResourceController *newRM) { resources = newRM; propertiesWindow.RegisterResourceManager(newRM); }
+    void RegisterTileController(TileController *newRM) { tiles = newRM; }
 
     void DestroyBrushes();
 
@@ -88,7 +88,7 @@ public slots:
     void on_matrixBrushCombo_currentIndexChanged(int index);
 
 private:
-    ResourceController *resources;
+    TileController *tiles;
     Ui::BrushManager *ui;
     BrushPropertiesDialog propertiesWindow;
 

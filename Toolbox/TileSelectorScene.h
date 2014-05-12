@@ -19,7 +19,7 @@ public:
     explicit TileSelectorScene(QObject *parent = 0);
     ~TileSelectorScene();
 
-    void RegisterResourceManager(ResourceController * newRM) { resources = newRM; }
+    void RegisterResourceController(ResourceController * newRM) { resources = newRM; }
     void RepopulateTileSelector();
 
     TileList GetSelectedTiles();

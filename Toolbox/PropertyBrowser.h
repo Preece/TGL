@@ -14,7 +14,7 @@ public:
     explicit PropertyBrowser(QWidget *parent = 0);
     ~PropertyBrowser();
 
-    void RegisterResourceManager(ResourceController *newRM) { resources = newRM; }
+    void RegisterResourceController(ResourceController *newRM) { resources = newRM; }
     
 signals:
     void ResourceNameChanged(int ID, QString name);

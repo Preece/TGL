@@ -18,7 +18,7 @@ public:
     explicit LevelPropertiesDialog(QWidget *parent = 0);
     ~LevelPropertiesDialog();
 
-    void RegisterResourceManager(ResourceController *newRM) {resourceController = newRM; }void on_mapNameInput_textChanged(const QString &arg1);
+    void RegisterResourceController(ResourceController *newRM) {resourceController = newRM; }void on_mapNameInput_textChanged(const QString &arg1);
 
     void LoadValues();
     

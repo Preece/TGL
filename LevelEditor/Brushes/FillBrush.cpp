@@ -10,30 +10,30 @@ FillBrush::~FillBrush()
 
 }
 
-void FillBrush::Move(int, int, ResourceController *)
+void FillBrush::Move(int, int, TileController *)
 {
     //we don't want this to do anything for a fill brush
 }
 
-void FillBrush::Paint(int x, int y, ResourceController *resources, bool preview)
+void FillBrush::Paint(int x, int y, TileController *tiles, bool preview)
 {
     //the fill brush has no preview mode
     if(preview)
         return;
 
-    TileCoord old = resources->GetTileOrigin(x, y);
+    TileCoord old = tiles->GetTileOrigin(x, y);
 
-    Fill(x, y, selectedTileOrigin, old, resources);
+    Fill(x, y, selectedTileOrigin, old, tiles);
 }
 
-void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, ResourceController *resources)
+void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOrigin, TileController *tiles)
 {
-    if(!resources || newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
+    if(!tiles || newOrigin == TileCoord(-1, -1) || newOrigin == oldOrigin)
         return;
 
     //if the position is beyond the bounds of the scene, ignore it
-    if(tileX >= resources->GetCurrentLayerWidth() ||
-       tileY >= resources->GetCurrentLayerHeight() ||
+    if(tileX >= tiles->GetCurrentLayerWidth() ||
+       tileY >= tiles->GetCurrentLayerHeight() ||
        tileX < 0 || tileY < 0)
            return;
 
@@ -43,8 +43,8 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
     // 3. Add node to the end of Q.
     seedQueue.push(TileCoord(tileX, tileY));
 
-    int layerWidth = resources->GetCurrentLayerWidth();
-    int layerHeight = resources->GetCurrentLayerHeight();
+    int layerWidth = tiles->GetCurrentLayerWidth();
+    int layerHeight = tiles->GetCurrentLayerHeight();
 
     QHash<TileCoord,bool> examinedTiles;
 
@@ -68,10 +68,10 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
         examinedTiles[tempCoord] = true;
 
         //if this tile is of the type to be replaced
-        if(resources->GetTileOrigin(tempCoord.first, tempCoord.second) == oldOrigin)
+        if(tiles->GetTileOrigin(tempCoord.first, tempCoord.second) == oldOrigin)
         {
             //replace this tile with the new type
-            resources->ModifyTile(tempCoord.first, tempCoord.second, newOrigin);
+            tiles->ModifyTile(tempCoord.first, tempCoord.second, newOrigin);
 
             //put the four surrounding tiles on the stack
             seedQueue.push_back(TileCoord(tempCoord.first - 1, tempCoord.second));

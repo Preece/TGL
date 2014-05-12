@@ -10,14 +10,14 @@ class MatrixBrush : public SmartBrush
 public:
     MatrixBrush();
 
-    void Paint(int, int, ResourceController *, bool);
-    void Rect(int x, int y, int w, int h, ResourceController *resources, bool preview);
+    void Paint(int, int, TileController *, bool);
+    void Rect(int x, int y, int w, int h, TileController *tiles, bool preview);
 
     QString GetType() { return "matrix"; }
 
-    void Press(int x, int y, ResourceController *resources);
-    void Move(int x, int y, ResourceController *resources, bool leftButtonDown);
-    void Release(int, int, ResourceController *resources);
+    void Press(int x, int y, TileController *tiles);
+    void Move(int x, int y, TileController *tiles, bool leftButtonDown);
+    void Release(int, int, TileController *tiles);
 
 private:
     QRect currentRect;

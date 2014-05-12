@@ -10,11 +10,11 @@ class LineBrush : public TileBrush
 public:
     LineBrush();
 
-    void Press(int x, int y, ResourceController *resources);
-    void Move(int x, int y, ResourceController *resources, bool leftButtonDown);
-    void Release(int x, int y, ResourceController *resources);
+    void Press(int x, int y, TileController *tiles);
+    void Move(int x, int y, TileController *tiles, bool leftButtonDown);
+    void Release(int x, int y, TileController *tiles);
 
-    void Paint(int x, int y, ResourceController *resources, bool preview);
+    void Paint(int x, int y, TileController *tiles, bool preview);
 
     QString GetType() { return "line"; }
     QCursor GetCursor() { return QCursor(QPixmap(":/Icons/line.png"), 1, 1); }

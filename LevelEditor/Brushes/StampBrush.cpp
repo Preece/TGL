@@ -11,14 +11,14 @@ StampBrush::~StampBrush()
 
 }
 
-void StampBrush::Move(int x, int y, ResourceController *resources, bool)
+void StampBrush::Move(int x, int y, TileController *tiles, bool)
 {
-    resources->ClearPreview();
+    tiles->ClearPreview();
 
-    Paint(x, y, resources, true);
+    Paint(x, y, tiles, true);
 }
 
-void StampBrush::Paint(int x, int y, ResourceController *resources, bool preview)
+void StampBrush::Paint(int x, int y, TileController *tiles, bool preview)
 {
     //the trick is to take the position to paint
     //add the tile origin coordinates
@@ -28,22 +28,22 @@ void StampBrush::Paint(int x, int y, ResourceController *resources, bool preview
     //configuration in which they have been selected in the
     //tile selector, from the middlemost point
     
-    for(int i = 0; i < tiles.count(); i++)
+    for(int i = 0; i < tileList.count(); i++)
     {
-        int paintSpotX = x + tiles[i].first - avgX;
-        int paintSpotY = y + tiles[i].second - avgY;
+        int paintSpotX = x + tileList[i].first - avgX;
+        int paintSpotY = y + tileList[i].second - avgY;
         
         if(preview)
-            resources->PreviewModifyTile(paintSpotX, paintSpotY, tiles[i]);
+            tiles->PreviewModifyTile(paintSpotX, paintSpotY, tileList[i]);
         else
-            resources->ModifyTile(paintSpotX, paintSpotY, tiles[i]);
+            tiles->ModifyTile(paintSpotX, paintSpotY, tileList[i]);
     }
 }
 
 void StampBrush::CreateGrid(QList<TileCoord> items)
 {
     //remove all current items
-    tiles.clear();
+    tileList.clear();
 
     avgX = 0;
     avgY = 0;
@@ -52,18 +52,18 @@ void StampBrush::CreateGrid(QList<TileCoord> items)
     for(int i = 0; i < items.count(); i++)
     {
         //add it into the list of items
-        tiles.append(items[i]);
+        tileList.append(items[i]);
             
         //add its origin points to the tally of origins
         avgX += items[i].first;
         avgY += items[i].second;
     }
     
-    if(tiles.count() > 0)
+    if(tileList.count() > 0)
     {
         //create the averages
-        avgX = (int)(avgX / tiles.count());
-        avgY = (int)(avgY / tiles.count());
+        avgX = (int)(avgX / tileList.count());
+        avgY = (int)(avgY / tileList.count());
     }
     else
     {

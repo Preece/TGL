@@ -279,7 +279,7 @@ void BrushManager::PasteTiles(QList<Tile> pasteTiles)
 {
     //first integrate any selected tiles
     //selector.IntegrateSelectedTiles();
-    selector.SetDraggingTiles(resources, pasteTiles);
+    selector.SetDraggingTiles(tiles, pasteTiles);
 }
 
 void BrushManager::on_overwriteCheckbox_toggled(bool checked)

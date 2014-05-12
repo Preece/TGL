@@ -8,7 +8,7 @@ class ReplacerBrush : public ComplexBrush
 public:
     ReplacerBrush();
 
-    void Paint(int x, int y, ResourceController *resources, bool preview);
+    void Paint(int x, int y, TileController *tiles, bool preview);
 
     void PushNewList(TileList tiles);
 

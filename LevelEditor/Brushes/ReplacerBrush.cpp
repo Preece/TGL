@@ -5,10 +5,10 @@ ReplacerBrush::ReplacerBrush()
     AddList(2);
 }
 
-void ReplacerBrush::Paint(int x, int y, ResourceController *resources, bool preview)
+void ReplacerBrush::Paint(int x, int y, TileController *tiles, bool preview)
 {
     //erase the previous preview, if we are in preview mode. Get ready for the next
-    resources->ClearPreview();
+    tiles->ClearPreview();
 
     int radius = size;
 
@@ -21,13 +21,13 @@ void ReplacerBrush::Paint(int x, int y, ResourceController *resources, bool prev
             if((i*i) + (j*j) < (radius * radius))
             {
                 //if the tile exists in the dirty list
-                if(ListContainsTile(1, resources->GetTileOrigin(j + x, i + y)))
+                if(ListContainsTile(1, tiles->GetTileOrigin(j + x, i + y)))
                 {
                     //draw a tile from the clean list
                     if(preview)
-                        resources->PreviewModifyTile(j + x, i + y, GetRandomTile(0));
+                        tiles->PreviewModifyTile(j + x, i + y, GetRandomTile(0));
                     else
-                        resources->ModifyTile(j + x, i + y, GetRandomTile(0));
+                        tiles->ModifyTile(j + x, i + y, GetRandomTile(0));
                 }
             }
         }

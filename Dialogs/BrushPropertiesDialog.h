@@ -25,7 +25,7 @@ public:
     ~BrushPropertiesDialog();
 
     void RegisterTileSelector(TileSelectorScene *selector);
-    void RegisterResourceManager(ResourceController *newRM) { resourceController = newRM; }
+    void RegisterResourceController(ResourceController *newRM) { resourceController = newRM; }
 
     void NewBrush(ComplexBrush *newBrush);
     void EditBrush(ComplexBrush *editBrush);

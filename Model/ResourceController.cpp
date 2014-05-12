@@ -5,9 +5,6 @@ ResourceController::ResourceController()
     undo = new QUndoStack;
     undo->setUndoLimit(500);
 
-    modifyTiles = new ModifyTilesCommand;
-
-    currentLayerID = 0;
     clipboard = new Clipboard;
 
     defaultLayer.SetName("Default");
@@ -17,9 +14,6 @@ ResourceController::ResourceController()
 
 ResourceController::~ResourceController()
 {
-    if(modifyTiles)
-        delete modifyTiles;
-
     delete clipboard;
 }
 
@@ -31,26 +25,6 @@ int ResourceController::GetTileWidth()
 int ResourceController::GetTileHeight()
 {
     return levelProperties.GetTileHeight();
-}
-
-int ResourceController::GetCurrentLayerWidth()
-{
-    TileLayer *tempLayer = layerMap.value(currentLayerID);
-
-    if(tempLayer)
-        return tempLayer->GetWidth();
-
-    return 0;
-}
-
-int ResourceController::GetCurrentLayerHeight()
-{
-    TileLayer *tempLayer = layerMap.value(currentLayerID);
-
-    if(tempLayer)
-        return tempLayer->GetHeight();
-
-    return 0;
 }
 
 int ResourceController::AddImage(Image *newImage)
@@ -138,143 +112,6 @@ TileLayer *ResourceController::GetTileLayer(int ID)
     return NULL;
 }
 
-int ResourceController::GetLayerOpacity(int layerID)
-{
-    TileLayer *tempLayer = GetTileLayer(layerID);
-
-    if(tempLayer)
-        return tempLayer->GetOpacity();
-
-    return 100;
-}
-
-void ResourceController::SetLayerVisibility(int layerID, bool visible)
-{
-    TileLayer *tempLayer = layerMap.value(currentLayerID);
-
-    if(tempLayer)
-    {
-        tempLayer->SetVisibility(visible);
-        emit LayerVisibilityUpdated(layerID, visible);
-    }
-}
-
-void ResourceController::ModifyTile(int x, int y, TileCoord origin)
-{
-    TileLayer *tempLayer = layerMap.value(currentLayerID);
-
-    if(tempLayer)
-    {
-        //make sure the point will fit in the layer
-        if(!tempLayer->ResizeToIncludePoint(x, y))
-            return;
-
-        emit LayerSizeUpdated(tempLayer->GetWidth(), tempLayer->GetHeight());
-
-        modifyTiles->AddModification(tempLayer, x, y, origin, tempLayer->GetTileOrigin(x, y));
-
-        //notify the view that this tile should be updated
-        emit TileUpdated(currentLayerID, x, y, origin);
-    }
-}
-
-void ResourceController::PreviewModifyTile(int x, int y, TileCoord origin)
-{
-    if(origin != TileCoord(-1, -1))
-    {
-        Tile tempTile;
-        tempTile.origin = origin;
-        tempTile.pos = TileCoord(x, y);
-        previewTiles[TileCoord(x, y)] = tempTile;
-    }
-    else
-    {
-        previewTiles.remove(TileCoord(x, y));
-    }
-
-    emit PreviewTileUpdated(x, y, origin);
-}
-
-void ResourceController::ClearPreview()
-{
-    QList<Tile> previewList = previewTiles.values();
-    for(int i = 0; i < previewList.count(); i++)
-    {
-        PreviewModifyTile(previewList[i].pos.first, previewList[i].pos.second, TileCoord(-1, -1));
-    }
-
-    //previewTiles.clear();
-}
-
-TileCoord ResourceController::GetTileOrigin(int x, int y)
-{
-    //see if there is an upcoming modification to this tile
-    TileCoord modOrigin = modifyTiles->GetTileOrigin(x, y);
-    if(modOrigin != TileCoord(-1, -1))
-        return modOrigin;
-
-    //otherwise, check if the tile exists in the normal model
-    if(layerMap.value(currentLayerID))
-    {
-        TileLayer *tempLayer = layerMap.value(currentLayerID);
-
-        if(tempLayer)
-            return tempLayer->GetTileOrigin(x, y);
-    }
-
-    return TileCoord(-1, -1);
-}
-
-void ResourceController::SelectTilesInArea(QRect area)
-{
-    if(area.left() > area.right())
-    {
-        int temp = area.left();
-        area.setLeft(area.right());
-        area.setRight(temp);
-    }
-
-    if(area.top() > area.bottom())
-    {
-        int temp = area.top();
-        area.setTop(area.bottom());
-        area.setBottom(temp);
-    }
-
-    selectionArea = area.normalized();
-
-    emit SelectionGeometryUpdated(area);
-}
-
-QList<Tile> ResourceController::GetSelectedTiles()
-{
-    QList<Tile> selectedTiles;
-
-    for(int i = selectionArea.left(); i <= selectionArea.right(); i++)
-    {
-        for(int j = selectionArea.top(); j <= selectionArea.bottom(); j++)
-        {
-            TileCoord origin = GetTileOrigin(i, j);
-
-            if(origin != TileCoord(-1, -1))
-            {
-                Tile tempTile;
-                tempTile.pos.first = i;
-                tempTile.pos.second = j;
-                tempTile.origin = origin;
-                selectedTiles.append(tempTile);
-            }
-        }
-    }
-
-    return selectedTiles;
-}
-
-void ResourceController::ClearSelection()
-{
-
-}
-
 Image *ResourceController::GetImage(int imageID)
 {
     if(imageMap.value(imageID))
@@ -339,18 +176,3 @@ ResourceNode *ResourceController::GetObject(int ID)
 
     return NULL;
 }
-
-void ResourceController::EndPaintOperation() 
-{ 
-    //if there are no changes that occured, no undo operation needs to be processed
-    if(modifyTiles->GetModificationCount() == 0)
-        return;
-
-    //push the current bundle of modifications into the undo stack
-    undo->push(modifyTiles); 
-
-    //create a fresh bundle for the next operation
-    modifyTiles = new ModifyTilesCommand;
-}
-
-

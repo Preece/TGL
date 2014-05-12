@@ -11,9 +11,9 @@ public:
     StampBrush();
     ~StampBrush();
 
-    void Move(int x, int y, ResourceController *resources, bool);
+    void Move(int x, int y, TileController *tiles, bool);
 
-    void Paint(int x, int y, ResourceController *resources, bool preview);
+    void Paint(int x, int y, TileController *tiles, bool preview);
     QString GetType() { return "stamp"; }
 
     void CreateGrid(QList<TileCoord> items);
@@ -21,7 +21,7 @@ public:
     QCursor GetCursor() { return QCursor(QPixmap(":/Icons/stamp.png"), 8, 13); }
 
 private:
-    QList<TileCoord> tiles;
+    QList<TileCoord> tileList;
     
     int avgX, avgY;
 };

@@ -12,7 +12,7 @@ class ResourceView : public QTreeWidget
 public:
     explicit ResourceView(QWidget *parent = 0);
 
-    void RegisterResourceManager(ResourceController *rm) { resources = rm; }
+    void RegisterResourceController(ResourceController *rm) { resources = rm; }
     void RepopulateEverything();
     int GetSelectedID();
 
