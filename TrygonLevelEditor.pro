@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     Toolbox/LayerListView.cpp \
     LevelEditor/TileScene.cpp \
     LevelEditor/TileLayerItem.cpp \
-    LevelEditor/TileView.cpp
+    LevelEditor/TileView.cpp \
+    Model/TileController.cpp
 
 HEADERS  += \
     MainWindow.h \
@@ -93,7 +94,8 @@ HEADERS  += \
     LevelEditor/TileLayerItem.h \
     LevelEditor/TileScene.h \
     Model/ResourceNode.h \
-    Model/ResourceController.h
+    Model/ResourceController.h \
+    Model/TileController.h
 
 FORMS    += \
     MainWindow.ui \
