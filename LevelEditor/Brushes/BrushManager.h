@@ -35,8 +35,8 @@ public:
 
     void RepopulateBrushLists();
 
-    void RegisterTileSelector(TileSelectorScene *selector) { propertiesWindow.RegisterTileSelector(selector); }
-    void RegisterTileController(TileController *newRM) { tiles = newRM; }
+    void RegisterTileSelector(TileSelectorScene *selector);
+    void RegisterTileController(TileController *newRM);
 
     void DestroyBrushes();
 

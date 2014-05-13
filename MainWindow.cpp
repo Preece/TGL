@@ -17,55 +17,49 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //register the resource manager with the various modules. They will
     //keep themselves in sync with the resource manager
-    tileController->RegisterResourceController(resources);
-    levelPropertiesWindow->RegisterResourceController(resources);
-    layers->RegisterTileController(tileController);
-    layers->RegisterBrushManager(ui->brushManager);
-    ui->brushManager->RegisterTileController(tileController);
-    ui->brushManager->RegisterTileSelector(tileSelector);
-    tileSelector->RegisterResourceController(resources);
-    ui->resourceView->RegisterResourceController(resources);
-    ui->propertyBrowser->RegisterResourceController(resources);
-    ui->layerList->RegisterResourceController(resources);
-    
-    connect(tileSelector, SIGNAL(SelectionChanged(TileList)), ui->brushManager, SLOT(SetSelectedTiles(TileList)));
-    connect(tileSelector, SIGNAL(SelectNewBrush(int)), ui->brushManager, SLOT(SetCurrentBrush(int)));
-    connect(tileSelector, SIGNAL(RevertToPreviousSingleTileBrush()), ui->brushManager, SLOT(RevertToPreviousSingleTileBrush()));
+    tileController->        RegisterResourceController(resources);
+    levelPropertiesWindow-> RegisterResourceController(resources);
+    tileSelector->          RegisterResourceController(resources);
+    ui->resourceView->      RegisterResourceController(resources);
+    ui->propertyBrowser->   RegisterResourceController(resources);
+    ui->layerList->         RegisterResourceController(resources);
 
-    connect(layers, SIGNAL(SelectNewTile(TileCoord)), tileSelector, SLOT(SelectNewTile(TileCoord)));
+    ui->brushManager->      RegisterTileController(tileController);
+    layers->                RegisterTileController(tileController);
 
-    connect(resources->GetClipboard(), SIGNAL(PasteTiles(QList<Tile>)), ui->brushManager, SLOT(PasteTiles(QList<Tile>)));
-    connect(resources, SIGNAL(ResourceAdded(int)), ui->resourceView, SLOT(AddResource(int)));
-    connect(resources, SIGNAL(LayerAdded(int)), ui->layerList, SLOT(AddLayer(int)));
-    connect(resources, SIGNAL(LayerRemoved(int)), ui->layerList, SLOT(RemoveLayer(int)));
+    layers->                RegisterBrushManager(ui->brushManager);
+    ui->brushManager->      RegisterTileSelector(tileSelector);
 
-    connect(ui->layerList, SIGNAL(LayerSelectionChanged(int)), tileController, SLOT(SetLayerSelection(int)));
-    connect(ui->layerList, SIGNAL(LayerSelectionChanged(int)), layers, SLOT(SetLayerSelection(int)));
-    connect(ui->brushManager, SIGNAL(SelectionCut(QList<Tile>)), resources->GetClipboard(), SLOT(Copy(QList<Tile>)));
-    connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));
-    connect(ui->actionSelect_Tileset, SIGNAL(triggered()), tileSelector, SLOT(SelectTileset()));
-    connect(ui->selectionTool, SIGNAL(toggled(bool)), layers, SLOT(ToggleSelectionMode(bool)));
-    connect(ui->levelView, SIGNAL(TraverseTileHistory(bool)), tileSelector, SLOT(TraverseTileHistory(bool)));
+    connect(layers,                     SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
+    connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileController,             SLOT(SetLayerSelection(int)));
+    connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), layers,                     SLOT(SetLayerSelection(int)));
+    connect(ui->gridToggle,             SIGNAL(toggled(bool)),              layers,                     SLOT(ToggleGrid(bool)));
+    connect(ui->actionSelect_Tileset,   SIGNAL(triggered()),                tileSelector,               SLOT(SelectTileset()));
+    connect(ui->selectionTool,          SIGNAL(toggled(bool)),              layers,                     SLOT(ToggleSelectionMode(bool)));
+    connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
+    connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushManager,           SLOT(PasteTiles(QList<Tile>)));
+    connect(ui->brushManager,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
 
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
+
     ui->miniMap->setScene(layers);
     ui->tileSelectorView->setScene(tileSelector);
     ui->resourceView->RepopulateEverything();
 
     //assign IDs to each child in the toolgroup
-    ui->toolGroup->setId(ui->pencilTool, 0);
-    ui->toolGroup->setId(ui->eraserTool, 1);
-    ui->toolGroup->setId(ui->bucketTool, 2);
-    ui->toolGroup->setId(ui->lineTool, 3);
-    ui->toolGroup->setId(ui->stampTool, 4);
-    ui->toolGroup->setId(ui->eyedropperTool, 5);
-    ui->toolGroup->setId(ui->selectionTool, 6);
-    ui->toolGroup->setId(ui->scatterTool, 7);
-    ui->toolGroup->setId(ui->scatterFillTool, 8);
-    ui->toolGroup->setId(ui->replacerTool, 9);
-    ui->toolGroup->setId(ui->matrixBrushTool, 10);
-    ui->toolGroup->setId(ui->smartBrushTool, 11);
+    ui->toolGroup->setId(ui->pencilTool,        0);
+    ui->toolGroup->setId(ui->eraserTool,        1);
+    ui->toolGroup->setId(ui->bucketTool,        2);
+    ui->toolGroup->setId(ui->lineTool,          3);
+    ui->toolGroup->setId(ui->stampTool,         4);
+    ui->toolGroup->setId(ui->eyedropperTool,    5);
+    ui->toolGroup->setId(ui->selectionTool,     6);
+    ui->toolGroup->setId(ui->scatterTool,       7);
+    ui->toolGroup->setId(ui->scatterFillTool,   8);
+    ui->toolGroup->setId(ui->replacerTool,      9);
+    ui->toolGroup->setId(ui->matrixBrushTool,   10);
+    ui->toolGroup->setId(ui->smartBrushTool,    11);
 
     ui->brushManager->SetCurrentBrush(0);
 }

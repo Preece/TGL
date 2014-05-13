@@ -21,6 +21,12 @@ ResourceView::ResourceView(QWidget *parent) :
     tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/open.png");
 }
 
+void ResourceView::RegisterResourceController(ResourceController *rm)
+{
+    resources = rm;
+    connect(resources, SIGNAL(ResourceAdded(int)), this, SLOT(AddResource(int)));
+}
+
 void ResourceView::RepopulateEverything()
 {
     //store the level properties ID in the project root

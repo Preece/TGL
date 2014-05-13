@@ -13,7 +13,7 @@ class LayerListView : public QTableWidget
 public:
     explicit LayerListView(QWidget *parent = 0);
 
-    void RegisterResourceController(ResourceController *rm) { resources = rm; }
+    void RegisterResourceController(ResourceController *rm);
 
     void RefreshNames();
 

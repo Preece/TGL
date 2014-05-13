@@ -9,6 +9,14 @@ LayerListView::LayerListView(QWidget *parent) :
     connect(this, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(UpdateItem(QTableWidgetItem*)));
 }
 
+void LayerListView::RegisterResourceController(ResourceController *rm)
+{
+    resources = rm;
+
+    connect(resources, SIGNAL(LayerAdded(int)), this, SLOT(AddLayer(int)));
+    connect(resources, SIGNAL(LayerRemoved(int)), this, SLOT(RemoveLayer(int)));
+}
+
 void LayerListView::RefreshNames()
 {
     for(int i = 0; i < nameItems.count(); i++)

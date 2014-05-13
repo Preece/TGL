@@ -207,6 +207,20 @@ void BrushManager::RepopulateBrushLists()
     ui->matrixBrushCombo->addItem("Add New Brush...");
 }
 
+void BrushManager::RegisterTileSelector(TileSelectorScene *selector)
+{
+    propertiesWindow.RegisterTileSelector(selector);
+
+    connect(selector, SIGNAL(SelectionChanged(TileList)), this, SLOT(SetSelectedTiles(TileList)));
+    connect(selector, SIGNAL(SelectNewBrush(int)), this, SLOT(SetCurrentBrush(int)));
+    connect(selector, SIGNAL(RevertToPreviousSingleTileBrush()), this, SLOT(RevertToPreviousSingleTileBrush()));
+}
+
+void BrushManager::RegisterTileController(TileController *newRM)
+{
+    tiles = newRM;
+}
+
 void BrushManager::DestroyBrushes()
 {
     for(int i = 0; i < scatter.count(); i++)
