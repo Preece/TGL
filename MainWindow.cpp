@@ -187,3 +187,19 @@ void MainWindow::on_actionPaste_triggered()
 {
     resources->GetClipboard()->Paste();
 }
+
+void MainWindow::on_toolBox_currentChanged(int index)
+{
+    switch(index)
+    {
+    case 0: //resources
+        break;
+
+    case 1: //tile painting
+        ui->layerList->RefreshNames();
+        break;
+
+    default:
+        break;
+    }
+}

@@ -3,6 +3,7 @@
 
 #include <QTableWidget>
 #include <QHeaderView>
+#include <QList>
 
 #include "../Model/ResourceController.h"
 
@@ -14,6 +15,8 @@ public:
 
     void RegisterResourceController(ResourceController *rm) { resources = rm; }
 
+    void RefreshNames();
+
 signals:
     void LayerSelectionChanged(int newLayer);
 
@@ -22,10 +25,12 @@ public slots:
     void RemoveLayer(int ID);
 
     void SelectionUpdated();
+    void UpdateItem(QTableWidgetItem* item);
 
     void cellClicked(int row, int column);
 
 private:
+    QList<QTableWidgetItem*> nameItems;
     ResourceController *resources;
 };
 

@@ -6,6 +6,27 @@ LayerListView::LayerListView(QWidget *parent) :
     resources = NULL;
 
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(SelectionUpdated()));
+    connect(this, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(UpdateItem(QTableWidgetItem*)));
+}
+
+void LayerListView::RefreshNames()
+{
+    for(int i = 0; i < nameItems.count(); i++)
+    {
+        int itemID = nameItems[i]->data(Qt::UserRole).toInt();
+        nameItems[i]->setText(resources->GetObject(itemID)->GetProperty("Name").toString());
+    }
+}
+
+void LayerListView::UpdateItem(QTableWidgetItem *item)
+{
+    if(!item->data(Qt::UserRole).isNull())
+    {
+        int selectedID = item->data(Qt::UserRole).toInt();
+
+        ResourceNode *resource = resources->GetObject(selectedID);
+        resource->SetProperty("Name", item->text());
+    }
 }
 
 void LayerListView::AddLayer(int ID)
@@ -16,18 +37,22 @@ void LayerListView::AddLayer(int ID)
 
     QTableWidgetItem *newIcon = new QTableWidgetItem(QIcon(":/Icons/addvalue.png"), QString());
     newIcon->setFlags(newIcon->flags() & ~(Qt::ItemIsDropEnabled));
+    newIcon->setFlags(newIcon->flags() & (~Qt::ItemIsEditable));
     setItem(0, 0, newIcon);
 
     QTableWidgetItem *newItem = new QTableWidgetItem("New Layer");
     newItem->setData(Qt::UserRole, ID);
     newItem->setFlags(newItem->flags() & ~(Qt::ItemIsDropEnabled));
     setItem(0, 1, newItem);
+
+    nameItems.push_back(newItem);
 }
 
 void LayerListView::RemoveLayer(int ID)
 {
     if(selectedItems().count() > 0)
     {
+        nameItems.removeAll(selectedItems()[0]);
         removeRow(selectedItems()[0]->row());
     }
 }

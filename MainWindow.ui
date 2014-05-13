@@ -131,7 +131,7 @@ QTreeView, QTableWidget, #propertyBrowser {
         <enum>QFrame::Sunken</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="tabSpacing">
         <number>1</number>
@@ -425,7 +425,7 @@ QTreeView, QTableWidget, #propertyBrowser {
             <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
            </property>
            <property name="editTriggers">
-            <set>QAbstractItemView::DoubleClicked</set>
+            <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
            </property>
            <property name="showDropIndicator" stdset="0">
             <bool>true</bool>
@@ -569,8 +569,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>298</width>
-          <height>491</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -586,8 +586,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>298</width>
-          <height>491</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="icon">

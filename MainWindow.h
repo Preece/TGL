@@ -50,6 +50,8 @@ private slots:
     void on_actionPaste_triggered();
 
 
+    void on_toolBox_currentChanged(int index);
+
 private:
     Ui::MainWindow *ui;
 
