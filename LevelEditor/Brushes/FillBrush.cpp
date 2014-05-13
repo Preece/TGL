@@ -32,8 +32,8 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
         return;
 
     //if the position is beyond the bounds of the scene, ignore it
-    if(tileX >= tiles->GetCurrentLayerWidth() ||
-       tileY >= tiles->GetCurrentLayerHeight() ||
+    if(tileX > tiles->GetCurrentLayerWidth() ||
+       tileY > tiles->GetCurrentLayerHeight() ||
        tileX < 0 || tileY < 0)
            return;
 
@@ -55,8 +55,8 @@ void FillBrush::Fill(int tileX, int tileY, TileCoord newOrigin, TileCoord oldOri
         TileCoord tempCoord = seedQueue.pop();
 
         //if the position is beyond the bounds of the scene, ignore it
-        if(tempCoord.first >= layerWidth ||
-           tempCoord.second >= layerHeight ||
+        if(tempCoord.first > layerWidth ||
+           tempCoord.second > layerHeight ||
            tempCoord.first < 0 || tempCoord.second < 0)
                continue;
 

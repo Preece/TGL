@@ -26,11 +26,16 @@ bool TileLayer::ResizeToIncludePoint(int x, int y)
 {
     if(GetProperty("Dynamic Sizing").toBool())
     {
-        if(x > GetProperty("Layer Size").toPoint().x())
-            GetProperty("Layer Size").toPoint().setX(x);
+        QPoint newSize(GetProperty("Layer Size").toPoint());
 
-        if(y > GetProperty("Layer Size").toPoint().y())
-            GetProperty("Layer Size").toPoint().setY(y);
+
+        if(x > newSize.x())
+            newSize.setX(x);
+
+        if(y > newSize.y())
+            newSize.setY(y);
+
+        SetProperty("Layer Size", newSize);
 
         return true;
     }
