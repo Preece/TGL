@@ -17,24 +17,32 @@ struct Tile
     TileCoord origin;
 };
 
+enum ResourceType {
+    UnknownType = 0,
+    ImageType,
+    TilesetType,
+    TileLayerType
+};
+
 class ResourceNode
 {
 protected:
     static int newID;
     int ID;
+    ResourceType type;
 
     int GenerateID();
-
-    //this is used when loading a file. It will make sure the new
-    //ID's generated don't conflict with existing ones. All loaded
-    //objects should register their ID's.
     void RegisterID(int registeredID);
 
 public:
+
     ResourceNode();
     virtual ~ResourceNode();
 
     int GetID() { return ID; }
+
+    void SetType(ResourceType newType) { type = newType; }
+    ResourceType GetType() { return type; }
 
     void AddProperty(QString name, QVariant value);
     void RemoveProperty(QString name);
@@ -49,7 +57,6 @@ private:
     ResourceNode *parent;
     PropertyList properties;
     QList<ResourceNode> children;
-
 };
 
 #endif // SAVABLE_H

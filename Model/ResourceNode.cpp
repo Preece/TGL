@@ -6,6 +6,7 @@ ResourceNode::ResourceNode()
 {
     //when the object is created, automatically generate an ID
     ID = GenerateID();
+    type = UnknownType;
 }
 
 ResourceNode::~ResourceNode()

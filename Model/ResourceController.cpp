@@ -31,6 +31,7 @@ int ResourceController::AddImage(Image *newImage)
 {
     if(newImage)
     {
+        newImage->SetType(ImageType);
         AddResourceCommand *add = new AddResourceCommand(newImage, &imageMap);
         undo->push(add);
 
@@ -84,6 +85,7 @@ void ResourceController::AddTileLayer(TileLayer *newLayer)
 {
     if(newLayer)
     {
+        newLayer->SetType(TileLayerType);
         layerMap[newLayer->GetID()] = newLayer;
 
         emit ResourceAdded(newLayer->GetID());

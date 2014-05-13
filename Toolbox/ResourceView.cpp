@@ -118,7 +118,21 @@ void ResourceView::AddResource(int ID)
     if(name.isEmpty())
         name = "New Resource";
 
-    itemHash[ID] = AddNode(projectRoot, name, ":/Icons/save.png", ID);
+    switch(newObject->GetType())
+    {
+    case ImageType:
+        itemHash[ID] = AddNode(imageRoot, name, ":/Icons/save.png", ID);
+        break;
+
+    case TileLayerType:
+        itemHash[ID] = AddNode(layerRoot, name, ":/Icons/save.png", ID);
+        break;
+
+    default:
+        itemHash[ID] = AddNode(projectRoot, name, ":/Icons/save.png", ID);
+    }
+
+
 }
 
 void ResourceView::RemoveResource(int ID)
