@@ -21,6 +21,9 @@ public:
     int GetLayerOpacity(int layerID);
     QPixmap GetTilePixmap(TileCoord coord);
 
+    int GetCurrentLayerWidth();
+    int GetCurrentLayerHeight();
+
 signals:
     void TileUpdated(int layerID, int x, int y, TileCoord newOrigin);
     void PreviewTileUpdated(int x, int y, TileCoord newOrigin);
@@ -38,9 +41,6 @@ public slots:
     void PreviewModifyTile(int x, int y, TileCoord origin);
     void ClearPreview();
     TileCoord GetTileOrigin(int x, int y);
-
-    int GetCurrentLayerWidth();
-    int GetCurrentLayerHeight();
 
     void SetLayerVisibility(bool visible);
 

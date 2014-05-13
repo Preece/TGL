@@ -1451,6 +1451,22 @@ QTreeView, QTableWidget, #propertyBrowser {
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addLayerButton</sender>
+   <signal>clicked()</signal>
+   <receiver>actionAdd_Layer</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>582</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>SetToolSelection(QCursor,int)</slot>

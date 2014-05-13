@@ -39,8 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(resources, SIGNAL(LayerAdded(int)), ui->layerList, SLOT(AddLayer(int)));
     connect(resources, SIGNAL(LayerRemoved(int)), ui->layerList, SLOT(RemoveLayer(int)));
 
-    connect(ui->addLayerButton, SIGNAL(clicked()), ui->actionAdd_Layer, SLOT(trigger()));
-    connect(ui->layerList, SIGNAL(LayerSelectionChanged(int)), resources, SLOT(SetLayerSelection(int)));
+    connect(ui->layerList, SIGNAL(LayerSelectionChanged(int)), tileController, SLOT(SetLayerSelection(int)));
     connect(ui->layerList, SIGNAL(LayerSelectionChanged(int)), layers, SLOT(SetLayerSelection(int)));
     connect(ui->brushManager, SIGNAL(SelectionCut(QList<Tile>)), resources->GetClipboard(), SLOT(Copy(QList<Tile>)));
     connect(ui->gridToggle, SIGNAL(toggled(bool)), layers, SLOT(ToggleGrid(bool)));

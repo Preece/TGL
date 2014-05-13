@@ -70,8 +70,8 @@ void TileScene::AddLayer(int newLayerID)
     tempLayerView->show();
     tempLayerView->setPos(0,0);
     
-    setSceneRect(0, 0, tileController->GetCurrentLayerWidth() * tileController->GetTileWidth(),
-                       tileController->GetCurrentLayerHeight() * tileController->GetTileHeight());
+    //setSceneRect(0, 0, tileController->GetCurrentLayerWidth() * tileController->GetTileWidth(),
+                       //tileController->GetCurrentLayerHeight() * tileController->GetTileHeight());
 }
 
 void TileScene::UpdateSceneSize(int w, int h)
@@ -323,8 +323,8 @@ void TileScene::UpdateTile(int layerID, int x, int y, TileCoord newOrigin)
 void TileScene::UpdatePreviewTile(int x, int y, TileCoord origin)
 {
     //bounds check
-    if(x >= tileController->GetCurrentLayerWidth() || y >= tileController->GetCurrentLayerHeight() || x < 0 || y < 0)
-        return;
+    //if(x >= tileController->GetCurrentLayerWidth() || y >= tileController->GetCurrentLayerHeight() || x < 0 || y < 0)
+        //return;
 
     if(origin == TileCoord(-1, -1))
     {
