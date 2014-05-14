@@ -37,7 +37,6 @@ signals:
 public slots:
     void AddLayer(int newLayerID);
 
-    void ToggleLayerVisibility(int layerIndex, bool show);
     void ToggleGrid(bool show = true);
     void ToggleSelectionMode(bool selection);
 

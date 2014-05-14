@@ -7,6 +7,7 @@ LayerListView::LayerListView(QWidget *parent) :
 
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(SelectionUpdated()));
     connect(this, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(UpdateItem(QTableWidgetItem*)));
+    connect(this, SIGNAL(cellClicked(int,int)), this, SLOT(HandleClick(int,int)));
 }
 
 void LayerListView::RegisterResourceController(ResourceController *rm)
@@ -78,7 +79,7 @@ void LayerListView::SelectionUpdated()
     emit LayerSelectionChanged(selectedID);
 }
 
-void LayerListView::cellClicked(int row, int column)
+void LayerListView::HandleClick(int row, int column)
 {
     if(column == 0)
     {
@@ -92,6 +93,8 @@ void LayerListView::cellClicked(int row, int column)
                 object->SetProperty("Visible", false);
             else
                 object->SetProperty("Visible", true);
+
+            emit LayerVisibilityChanged(corrID, object->GetProperty("Visible").toBool());
         }
     }
 }

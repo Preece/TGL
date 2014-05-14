@@ -273,14 +273,6 @@ void TileScene::UpdateLayerOpacity(int opaqueLayerID)
     }
 }
 
-void TileScene::ToggleLayerVisibility(int layerIndex, bool show)
-{
-    if(layerIndex < 0 || layerIndex >= layers.count())
-        return;
-
-    layers[layerIndex]->ToggleVisibility(show);
-}
-
 void TileScene::ToggleSelectionMode(bool selection)
 {
     QList<QGraphicsItem*> childrenList = items();

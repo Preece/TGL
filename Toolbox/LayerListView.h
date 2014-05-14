@@ -19,6 +19,7 @@ public:
 
 signals:
     void LayerSelectionChanged(int newLayer);
+    void LayerVisibilityChanged(int layerID, bool visible);
 
 public slots:
     void AddLayer(int ID);
@@ -27,7 +28,7 @@ public slots:
     void SelectionUpdated();
     void UpdateItem(QTableWidgetItem* item);
 
-    void cellClicked(int row, int column);
+    void HandleClick(int row, int column);
 
 private:
     QList<QTableWidgetItem*> nameItems;

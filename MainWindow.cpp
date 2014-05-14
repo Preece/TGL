@@ -41,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->brushManager,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
     connect(resources,                  SIGNAL(LayerAdded(int)),            layers,                     SLOT(AddLayer(int)));
 
+    connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), layers,               SLOT(UpdateLayerVisibility(int,bool)));
+
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
 
