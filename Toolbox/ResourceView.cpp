@@ -46,6 +46,10 @@ int ResourceView::GetSelectedID()
     return 0;
 }
 
+void ResourceView::RefreshNames()
+{
+}
+
 int ResourceView::GetItemID(QTreeWidgetItem *item)
 {
     if(item)

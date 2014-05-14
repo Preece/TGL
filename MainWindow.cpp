@@ -169,6 +169,7 @@ void MainWindow::on_toolBox_currentChanged(int index)
     switch(index)
     {
     case 0: //resources
+        ui->resourcesView->RefreshNames();
         break;
 
     case 1: //tile painting
