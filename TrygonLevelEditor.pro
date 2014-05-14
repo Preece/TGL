@@ -44,7 +44,6 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/MatrixBrush.cpp \
     LevelEditor/Brushes/ReplacerBrush.cpp \
     Dialogs/ImageViewerDialog.cpp \
-    Dialogs/LayerPropertiesDialog.cpp \
     Dialogs/BrushPropertiesDialog.cpp \
     Dialogs/LevelPropertiesDialog.cpp \
     LevelEditor/Brushes/SelectionBrush.cpp \
@@ -83,7 +82,6 @@ HEADERS  += \
     LevelEditor/Brushes/LineBrush.h \
     LevelEditor/Brushes/MatrixBrush.h \
     LevelEditor/Brushes/TileBrush.h \
-    Dialogs/LayerPropertiesDialog.h \
     Dialogs/BrushPropertiesDialog.h \
     Dialogs/ImageViewerDialog.h \
     Dialogs/LevelPropertiesDialog.h \
@@ -101,7 +99,6 @@ FORMS    += \
     MainWindow.ui \
     LevelEditor/Brushes/BrushManager.ui \
     Dialogs/BrushPropertiesDialog.ui \
-    Dialogs/LayerPropertiesDialog.ui \
     Dialogs/ImageViewerDialog.ui \
     Dialogs/LevelPropertiesDialog.ui \
 
