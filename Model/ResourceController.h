@@ -41,7 +41,7 @@ public slots:
     QImage *GetTileset();
     QPixmap GetTilePixmap(TileCoord coord);
 
-    void AddTileLayer(TileLayer *newLayer);
+    void AddTileLayer();
     void DeleteTileLayer(int ID);
     TileLayer *GetTileLayer(int ID);
 

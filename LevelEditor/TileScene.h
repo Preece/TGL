@@ -26,7 +26,7 @@ public:
     void RegisterTileController(TileController *newRC);
     void RegisterBrushManager(BrushManager *newBM) { brushManager = newBM; }
     
-    void AddLayer(int newLayerID);
+
     void UpdateLayerOpacity(int opaqueLayerID);
     void ClearPreview();
 
@@ -35,6 +35,8 @@ signals:
     void SelectNewBrush(int brushID);
 
 public slots:
+    void AddLayer(int newLayerID);
+
     void ToggleLayerVisibility(int layerIndex, bool show);
     void ToggleGrid(bool show = true);
     void ToggleSelectionMode(bool selection);

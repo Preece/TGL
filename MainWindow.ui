@@ -569,8 +569,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>100</width>
-          <height>30</height>
+          <width>298</width>
+          <height>491</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -586,8 +586,8 @@ QTreeView, QTableWidget, #propertyBrowser {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>100</width>
-          <height>30</height>
+          <width>298</width>
+          <height>491</height>
          </rect>
         </property>
         <attribute name="icon">

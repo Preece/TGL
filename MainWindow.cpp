@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layers->                RegisterBrushManager(ui->brushManager);
     ui->brushManager->      RegisterTileSelector(tileSelector);
 
+    connect(ui->actionAdd_Layer,        SIGNAL(triggered()),                resources,                  SLOT(AddTileLayer()));
     connect(layers,                     SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
     connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileController,             SLOT(SetLayerSelection(int)));
     connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), layers,                     SLOT(SetLayerSelection(int)));
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
     connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushManager,           SLOT(PasteTiles(QList<Tile>)));
     connect(ui->brushManager,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
+    connect(resources,                  SIGNAL(LayerAdded(int)),            layers,                     SLOT(AddLayer(int)));
 
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
@@ -124,26 +126,6 @@ void MainWindow::on_actionAdd_Image_triggered()
 
         //add the image to the resource manager
         resources->AddImage(tempImage);
-    }
-}
-
-void MainWindow::on_actionAdd_Layer_triggered()
-{
-    //create a new tile layer for the model
-    TileLayer *newLayer = new TileLayer;
-
-    //execute the window, and check if the changes were accepted
-    if(layerPropertiesWindow->SetupNewLayer(newLayer) == QDialog::Accepted)
-    {
-        //if so add the new layer to the model
-        resources->AddTileLayer(newLayer);
-
-        //and give a reference to the layer manager
-        layers->AddLayer(newLayer->GetID());
-    }
-    else
-    {
-        delete newLayer;
     }
 }
 
