@@ -235,10 +235,6 @@ void TileSelectorScene::PackageAndEmitSelection()
     //reset the flag
     selectionChangeFromHistory = false;
 
-    //if there are multiple items being selected, select the stamp brush
-    if(selectedList.count() > 1)
-        emit SelectNewBrush(4);
-
     //send out the change so other things can know about the current selection
     emit SelectionChanged(selectedList);
 }

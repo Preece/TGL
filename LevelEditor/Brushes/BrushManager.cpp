@@ -265,13 +265,17 @@ void BrushManager::SetSelectedTiles(TileList newList)
         defaultScatter.AddTiles(0, newList, true);
         defaultReplacer.PushNewList(newList);
 
-        //if multiple tiles were selected, go ahead and select the stamp.
-        //this might prove to be annoying
-        //at some point, make sure a complex brush is not selected here
-        if(newList.count() > 1)
-            SetCurrentBrush(BrushManager::Stamp);
-        else if(newList.count() == 1)
-            RevertToPreviousSingleTileBrush();
+        if(currentBrush->GetType() != "scatter" &&
+           currentBrush->GetType() != "smart" &&
+           currentBrush->GetType() != "matrix" &&
+           currentBrush->GetType() != "replacer")
+        {
+            //if multiple tiles were selected, go ahead and select the stamp.
+            if(newList.count() > 1)
+                SetCurrentBrush(BrushManager::Stamp);
+            else if(newList.count() == 1)
+                RevertToPreviousSingleTileBrush();
+        }
         
     }
 }
