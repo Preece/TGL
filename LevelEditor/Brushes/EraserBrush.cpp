@@ -26,3 +26,14 @@ void EraserBrush::Paint(int x, int y, TileController *tiles, bool preview)
         }
     }
 }
+
+void EraserBrush::Move(int x, int y, TileController *tiles, bool leftButtonDown)
+{
+    tiles->ClearPreview();
+    Paint(x, y, tiles, !leftButtonDown);
+
+    //this spot is now the last spot
+    lastPaintSpot.setX(x);
+    lastPaintSpot.setY(y);
+
+}
