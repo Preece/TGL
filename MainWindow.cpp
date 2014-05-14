@@ -65,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolGroup->setId(ui->smartBrushTool,    11);
 
     ui->brushManager->SetCurrentBrush(0);
+
+    statusBar()->showMessage("Test message");
 }
 
 MainWindow::~MainWindow()

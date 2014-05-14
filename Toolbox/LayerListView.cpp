@@ -54,6 +54,8 @@ void LayerListView::AddLayer(int ID)
     newItem->setFlags(newItem->flags() & ~(Qt::ItemIsDropEnabled));
     setItem(0, 1, newItem);
 
+    selectRow(0);
+
     nameItems.push_back(newItem);
 }
 
