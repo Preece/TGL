@@ -18,6 +18,8 @@ public:
 signals:
     void TraverseTileHistory(bool forward);
 
+    void ZoomLevelChanged(int newZoom);
+
 protected:
     void mouseMoveEvent (QMouseEvent * event);
     void mousePressEvent (QMouseEvent * event);

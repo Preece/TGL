@@ -110,6 +110,8 @@ void TileView::wheelEvent(QWheelEvent *event)
         {
             scale(scaleFactor, scaleFactor);
             maxZoom = false;
+
+            emit ZoomLevelChanged(transform().m11() * 100);
         }
         else
         {
@@ -118,15 +120,20 @@ void TileView::wheelEvent(QWheelEvent *event)
     }
     else //zoom out
     {
-        //zoom out
-        scale(1/scaleFactor, 1/scaleFactor);
-        maxZoom = false;
+        if(transform().m11() >= 0.1 && transform().m22() >= 0.1)
+        {
+            //zoom out
+            scale(1/scaleFactor, 1/scaleFactor);
+            maxZoom = false;
+
+            emit ZoomLevelChanged(transform().m11() * 100);
+        }
 
         //get the transformed size of the scene in this view
         int sceneWidthInView = transform().m11() * sceneRect().width();
         int sceneHeightInView = transform().m22() * sceneRect().height();
 
-        //if the size of the scene is smaller than the view
+        //if the size of the scene is smaller than the view, or the zoom is 10%
         if(sceneWidthInView <= frameRect().width() && sceneHeightInView <= frameRect().height())
         {
             //make the scene fit nicely in there

@@ -19,6 +19,7 @@ ResourceView::ResourceView(QWidget *parent) :
     layerRoot = AddNode(projectRoot, "Layer", ":/Icons/open.png");
     imageRoot = AddNode(projectRoot, "Images", ":/Icons/open.png");
     tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/open.png");
+    miscRoot = AddNode(projectRoot, "Miscellaneous", ":/Icons/open.png");
 }
 
 void ResourceView::RegisterResourceController(ResourceController *rm)
@@ -48,6 +49,18 @@ int ResourceView::GetSelectedID()
 
 void ResourceView::RefreshNames()
 {
+    QList<QTreeWidgetItem*> items = itemHash.values();
+
+    for(int i = 0; i < items.count(); i++)
+    {
+        ResourceNode *res = resources->GetObject(items[i]->data(0, Qt::UserRole).toInt());
+
+        if(res)
+            items[i]->setText(0, res->GetProperty("Name").toString());
+    }
+
+    if(currentSelection)
+        emit NewResourceSelected(currentSelection);
 }
 
 int ResourceView::GetItemID(QTreeWidgetItem *item)
@@ -124,6 +137,10 @@ void ResourceView::AddResource(int ID)
 
     switch(newObject->GetType())
     {
+    case UnknownType:
+        itemHash[ID] = AddNode(miscRoot, name, ":/Icons/save.png", ID);
+        break;
+
     case ImageType:
         itemHash[ID] = AddNode(imageRoot, name, ":/Icons/save.png", ID);
         break;

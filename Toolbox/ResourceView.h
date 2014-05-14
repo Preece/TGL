@@ -17,6 +17,8 @@ public:
     int GetSelectedID();
 
     void paintEvent(QPaintEvent* e) { QTreeWidget::paintEvent(e); }
+
+    void RefreshNames();
     
 signals:
     void NewResourceSelected(ResourceNode *newObject);
@@ -36,6 +38,7 @@ private:
     QTreeWidgetItem *layerRoot;
     QTreeWidgetItem *imageRoot;
     QTreeWidgetItem *tilesetRoot;
+    QTreeWidgetItem *miscRoot;
 
     ResourceNode *currentSelection;
 

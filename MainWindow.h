@@ -10,7 +10,6 @@
 #include "Model/ResourceController.h"
 #include "Model/TileController.h"
 
-#include "Dialogs/LayerPropertiesDialog.h"
 #include "Dialogs/LevelPropertiesDialog.h"
 
 #include "LevelEditor/TileScene.h"
@@ -56,7 +55,6 @@ private:
 
     //Dialogs
     LevelPropertiesDialog *levelPropertiesWindow;
-    LayerPropertiesDialog *layerPropertiesWindow;
 
     ResourceController *resources;
     TileController *tileController;

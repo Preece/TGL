@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
     resources               = new ResourceController;
     tileController          = new TileController;
     levelPropertiesWindow   = new LevelPropertiesDialog;
-    layerPropertiesWindow   = new LayerPropertiesDialog;
     tileSelector            = new TileSelectorScene;
     layers                  = new TileScene;
 
@@ -76,7 +75,6 @@ MainWindow::~MainWindow()
     //call a cleanup function?
     delete layers;
     delete tileSelector;
-    delete layerPropertiesWindow;
     delete levelPropertiesWindow;
 }
 
@@ -169,7 +167,7 @@ void MainWindow::on_toolBox_currentChanged(int index)
     switch(index)
     {
     case 0: //resources
-        ui->resourcesView->RefreshNames();
+        ui->resourceView->RefreshNames();
         break;
 
     case 1: //tile painting
