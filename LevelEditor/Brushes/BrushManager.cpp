@@ -325,19 +325,11 @@ void BrushManager::on_addScatterBrush_clicked()
 
     //execute the window, and check if it was accepted
     if(propertiesWindow.exec() == QDialog::Accepted)
-    {
-        //add the new brush to the list
         scatter.append(tempBrush);
-
-        //and repopulate the lists
-        RepopulateBrushLists();
-    }
-    //if it wasnts accepted
     else
-    {
-        //get rid of our new brush
         delete tempBrush;
-    }
+
+    RepopulateBrushLists();
 }
 
 void BrushManager::on_scatterBrushCombo_currentIndexChanged(int index)
@@ -410,19 +402,11 @@ void BrushManager::on_addSmartBrush_clicked()
 
     //execute the window, and check if it was accepted
     if(propertiesWindow.exec() == QDialog::Accepted)
-    {
-        //add the new brush to the list
         smart.append(tempBrush);
-
-        //and repopulate the lists
-        RepopulateBrushLists();
-    }
-    //if it wasnts accepted
     else
-    {
-        //get rid of our new brush
         delete tempBrush;
-    }
+
+    RepopulateBrushLists();
 }
 
 void BrushManager::on_editSmartBrushes_clicked()
@@ -446,19 +430,11 @@ void BrushManager::on_addReplacerBrush_clicked()
 
     //execute the window, and check if it was accepted
     if(propertiesWindow.exec() == QDialog::Accepted)
-    {
-        //add the new brush to the list
         replacer.append(tempBrush);
-
-        //and repopulate the lists
-        RepopulateBrushLists();
-    }
-    //if it wasnt accepted
     else
-    {
-        //get rid of our new brush
         delete tempBrush;
-    }
+
+    RepopulateBrushLists();
 }
 
 void BrushManager::on_editReplacerBrush_clicked()
@@ -512,19 +488,11 @@ void BrushManager::on_addMatrixBrush_clicked()
 
     //execute the window, and check if it was accepted
     if(propertiesWindow.exec() == QDialog::Accepted)
-    {
-        //add the new brush to the list
         matrix.append(tempBrush);
-
-        //and repopulate the lists
-        RepopulateBrushLists();
-    }
-    //if it wasnt accepted
     else
-    {
-        //get rid of our new brush
         delete tempBrush;
-    }
+
+    RepopulateBrushLists();
 }
 
 void BrushManager::on_editMatrixBrush_clicked()
