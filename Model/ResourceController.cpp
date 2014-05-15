@@ -93,7 +93,7 @@ void ResourceController::AddTileLayer()
 
 void ResourceController::DeleteTileLayer(int ID)
 {
-    if(layerMap.value(ID))
+    if(layerMap.contains(ID))
     {
         delete layerMap[ID];
         layerMap[ID] = NULL;

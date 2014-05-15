@@ -46,6 +46,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(resources,                  SIGNAL(LayerAdded(int)),            layers,                     SLOT(AddLayer(int)));
     connect(resources,                  SIGNAL(LayerAdded(int)),            ui->layerList,              SLOT(AddLayer(int)));
 
+    connect(resources,                  SIGNAL(LayerRemoved(int)),          layers,                     SLOT(DeleteLayer(int)));
+    connect(resources,                  SIGNAL(LayerRemoved(int)),          ui->layerList,              SLOT(RemoveLayer(int)));
+
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
 
@@ -255,4 +258,13 @@ void MainWindow::on_zoomSlider_valueChanged(int value)
         ui->zoomLabel->setText(QString::number(value* 10) + QString("%"));
     else if(value > 10)
         ui->zoomLabel->setText(QString::number((value - 9) * 100) + QString("%"));
+}
+
+void MainWindow::on_removeLayerButton_clicked()
+{
+    if(ui->layerList->GetSelectedID() == 0)
+        return;
+
+    if(QMessageBox::critical(this, "Delete Layer", "Are you sure you want to delete the selected layer?", QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok)
+    resources->DeleteTileLayer(ui->layerList->GetSelectedID());
 }

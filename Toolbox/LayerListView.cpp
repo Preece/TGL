@@ -13,9 +13,6 @@ LayerListView::LayerListView(QWidget *parent) :
 void LayerListView::RegisterResourceController(ResourceController *rm)
 {
     resources = rm;
-
-
-    connect(resources, SIGNAL(LayerRemoved(int)), this, SLOT(RemoveLayer(int)));
 }
 
 void LayerListView::RefreshNames()
@@ -25,6 +22,19 @@ void LayerListView::RefreshNames()
         int itemID = nameItems[i]->data(Qt::UserRole).toInt();
         nameItems[i]->setText(resources->GetObject(itemID)->GetProperty("Name").toString());
     }
+}
+
+int LayerListView::GetSelectedID()
+{
+    int selectedID = 0;
+
+    for(int i = 0; i < selectedItems().count(); i++)
+    {
+        if(!selectedItems()[i]->data(Qt::UserRole).isNull())
+            selectedID = selectedItems()[i]->data(Qt::UserRole).toInt();
+    }
+
+    return selectedID;
 }
 
 void LayerListView::UpdateItem(QTableWidgetItem *item)
@@ -62,24 +72,21 @@ void LayerListView::AddLayer(int ID)
 
 void LayerListView::RemoveLayer(int ID)
 {
-    if(selectedItems().count() > 0)
+    for(int i = 0; i < nameItems.count(); i++)
     {
-        nameItems.removeAll(selectedItems()[0]);
-        removeRow(selectedItems()[0]->row());
+        if(nameItems[i]->data(Qt::UserRole).toInt() == ID)
+        {
+            removeRow(nameItems[i]->row());
+            //delete nameItems[i];
+            nameItems.removeAt(i);
+            return;
+        }
     }
 }
 
 void LayerListView::SelectionUpdated()
 {
-    int selectedID;
-
-    for(int i = 0; i < selectedItems().count(); i++)
-    {
-        if(!selectedItems()[i]->data(Qt::UserRole).isNull())
-            selectedID = selectedItems()[i]->data(Qt::UserRole).toInt();
-    }
-
-    emit LayerSelectionChanged(selectedID);
+    emit LayerSelectionChanged(GetSelectedID());
 }
 
 void LayerListView::HandleClick(int row, int column)

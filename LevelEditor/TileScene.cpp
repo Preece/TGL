@@ -72,7 +72,15 @@ void TileScene::AddLayer(int newLayerID)
 
 void TileScene::DeleteLayer(int ID)
 {
-
+    for(int i = 0; i < layers.count(); i++)
+    {
+        if(layers[i]->GetLayerID() == ID)
+        {
+            layers[i]->DestroyAllItems();
+            delete layers[i];
+            layers.removeAt(i);
+        }
+    }
 }
 
 void TileScene::UpdateSceneSize(int w, int h)

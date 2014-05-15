@@ -17,6 +17,8 @@ public:
 
     void RefreshNames();
 
+    int GetSelectedID();
+
 signals:
     void LayerSelectionChanged(int newLayer);
     void LayerVisibilityChanged(int layerID, bool visible);

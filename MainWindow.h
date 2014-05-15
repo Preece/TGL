@@ -53,6 +53,8 @@ private slots:
     void on_toolBox_currentChanged(int index);
     void on_zoomSlider_valueChanged(int value);
 
+    void on_removeLayerButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
