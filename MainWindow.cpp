@@ -115,6 +115,60 @@ void MainWindow::RepopulateEverything()
     ui->resourceView->RepopulateEverything();
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *e)
+{
+    switch(e->key())
+    {
+    case Qt::Key_1:
+        ui->brushManager->SetCurrentBrush(BrushManager::Pencil);
+        break;
+
+    case Qt::Key_2:
+        ui->brushManager->SetCurrentBrush(BrushManager::Eraser);
+        break;
+
+    case Qt::Key_3:
+        ui->brushManager->SetCurrentBrush(BrushManager::Bucket);
+        break;
+
+    case Qt::Key_4:
+        ui->brushManager->SetCurrentBrush(BrushManager::Line);
+        break;
+
+    case Qt::Key_5:
+        ui->brushManager->SetCurrentBrush(BrushManager::Stamp);
+        break;
+
+    case Qt::Key_6:
+        ui->brushManager->SetCurrentBrush(BrushManager::Eyedropper);
+        break;
+
+    case Qt::Key_7:
+        ui->brushManager->SetCurrentBrush(BrushManager::Selector);
+        break;
+
+    case Qt::Key_Exclam:
+        ui->brushManager->SetCurrentBrush(BrushManager::Scatter);
+        break;
+
+    case Qt::Key_At:
+        ui->brushManager->SetCurrentBrush(BrushManager::ScatterFill);
+        break;
+
+    case Qt::Key_NumberSign:
+        ui->brushManager->SetCurrentBrush(BrushManager::Replacer);
+        break;
+
+    case Qt::Key_Dollar:
+        ui->brushManager->SetCurrentBrush(BrushManager::Matrix);
+        break;
+
+    case Qt::Key_Percent:
+        ui->brushManager->SetCurrentBrush(BrushManager::Smart);
+        break;
+    }
+}
+
 void MainWindow::on_actionAdd_Image_triggered()
 {
     //ask the user where to load the file from.

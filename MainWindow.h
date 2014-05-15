@@ -33,6 +33,9 @@ public:
 
     void RepopulateEverything();
 
+protected:
+    void keyPressEvent(QKeyEvent *e);
+
 private slots:
 
     void on_actionProperties_triggered();
