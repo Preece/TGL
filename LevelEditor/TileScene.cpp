@@ -70,6 +70,11 @@ void TileScene::AddLayer(int newLayerID)
     tempLayerView->setPos(0,0);
 }
 
+void TileScene::DeleteLayer(int ID)
+{
+
+}
+
 void TileScene::UpdateSceneSize(int w, int h)
 {
     int newW, newH;

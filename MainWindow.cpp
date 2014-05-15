@@ -79,6 +79,7 @@ MainWindow::~MainWindow()
     resources->DestroyAllResources();
     
     delete resources;
+    delete tileController;
     delete layers;
     delete tileSelector;
     delete levelPropertiesWindow;
