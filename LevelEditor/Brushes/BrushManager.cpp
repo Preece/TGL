@@ -23,16 +23,16 @@ BrushManager::BrushManager(QWidget *parent) :
 
     singleTileBrush = BrushManager::Pencil;
 
-    defaultScatter.SetName("Default");
+    defaultScatter.SetName("Use Selected Tiles");
     scatter.push_front(&defaultScatter);
 
-    defaultReplacer.SetName("Default");
+    defaultReplacer.SetName("Use Selected Tiles");
     replacer.push_front(&defaultReplacer);
 
-    defaultSmart.SetName("Default");
+    defaultSmart.SetName("Use Selected Tiles");
     smart.push_front(&defaultSmart);
 
-    defaultMatrix.SetName("Default");
+    defaultMatrix.SetName("Use Selected Tiles");
     matrix.push_front(&defaultMatrix);
 
     RepopulateBrushLists();

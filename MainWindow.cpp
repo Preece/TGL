@@ -166,6 +166,13 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
     case Qt::Key_Percent:
         ui->brushManager->SetCurrentBrush(BrushManager::Smart);
         break;
+
+    case Qt::Key_N:
+        if(ui->toolBox->currentIndex() == ui->toolBox->count() - 1)
+            ui->toolBox->setCurrentIndex(0);
+        else
+            ui->toolBox->setCurrentIndex(ui->toolBox->currentIndex() + 1);
+        break;
     }
 }
 
