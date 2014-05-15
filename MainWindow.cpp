@@ -39,9 +39,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
     connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushManager,           SLOT(PasteTiles(QList<Tile>)));
     connect(ui->brushManager,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
-    connect(resources,                  SIGNAL(LayerAdded(int)),            layers,                     SLOT(AddLayer(int)));
+
 
     connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), layers,               SLOT(UpdateLayerVisibility(int,bool)));
+
+    connect(resources,                  SIGNAL(LayerAdded(int)),            layers,                     SLOT(AddLayer(int)));
+    connect(resources,                  SIGNAL(LayerAdded(int)),            ui->layerList,              SLOT(AddLayer(int)));
 
     ui->levelView->setScene(layers);
     ui->levelView->setMouseTracking(true);
@@ -66,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->brushManager->SetCurrentBrush(0);
 
-    statusBar()->showMessage("Test message");
+    statusBar()->hide();
 }
 
 MainWindow::~MainWindow()

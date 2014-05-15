@@ -14,7 +14,7 @@ void LayerListView::RegisterResourceController(ResourceController *rm)
 {
     resources = rm;
 
-    connect(resources, SIGNAL(LayerAdded(int)), this, SLOT(AddLayer(int)));
+
     connect(resources, SIGNAL(LayerRemoved(int)), this, SLOT(RemoveLayer(int)));
 }
 
@@ -55,6 +55,7 @@ void LayerListView::AddLayer(int ID)
     setItem(0, 1, newItem);
 
     selectRow(0);
+    emit LayerSelectionChanged(ID);
 
     nameItems.push_back(newItem);
 }

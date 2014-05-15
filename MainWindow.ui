@@ -1018,10 +1018,10 @@ QTreeView, QTableWidget, #propertyBrowser {
            <item>
             <widget class="QSlider" name="zoomSlider">
              <property name="minimum">
-              <number>10</number>
+              <number>0</number>
              </property>
              <property name="maximum">
-              <number>1000</number>
+              <number>200</number>
              </property>
              <property name="value">
               <number>100</number>
