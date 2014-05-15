@@ -11,7 +11,6 @@ TileScene::TileScene()
     grid->setPos(0, 0);
     grid->hide();
 
-    setSceneRect(0, 0, 0, 0);
     setItemIndexMethod(NoIndex);
 }
 
@@ -80,9 +79,6 @@ void TileScene::UpdateSceneSize(int w, int h)
 
     if(h * tileController->GetTileHeight() > sceneRect().height())
         newH = h * tileController->GetTileHeight();
-
-    //the scene rect should always be as big as the biggest layer
-    setSceneRect(0, 0, newW, newH);
 }
 
 void TileScene::ToggleGrid(bool show)

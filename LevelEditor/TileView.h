@@ -20,6 +20,9 @@ signals:
 
     void ZoomLevelChanged(int newZoom);
 
+public slots:
+    void SetZoom(int zoom);
+
 protected:
     void mouseMoveEvent (QMouseEvent * event);
     void mousePressEvent (QMouseEvent * event);
@@ -32,7 +35,7 @@ protected:
     void leaveEvent(QEvent *);
 
 private:
-    bool maxZoom;
+    double zoomLevel;
 
     bool panning;
     QPoint clickSpot;

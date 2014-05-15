@@ -47,8 +47,8 @@ private slots:
     void on_actionCopy_triggered();
     void on_actionPaste_triggered();
 
-
     void on_toolBox_currentChanged(int index);
+    void on_zoomSlider_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;

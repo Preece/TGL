@@ -1009,32 +1009,31 @@ QTreeView, QTableWidget, #propertyBrowser {
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="zoomLabel">
              <property name="text">
-              <string>10%</string>
+              <string>100%</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QSlider" name="zoomSlider">
              <property name="minimum">
-              <number>0</number>
+              <number>1</number>
              </property>
              <property name="maximum">
-              <number>200</number>
+              <number>20</number>
              </property>
              <property name="value">
-              <number>100</number>
+              <number>10</number>
              </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>1000%</string>
+             <property name="tickPosition">
+              <enum>QSlider::NoTicks</enum>
+             </property>
+             <property name="tickInterval">
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -1370,6 +1369,7 @@ QTreeView, QTableWidget, #propertyBrowser {
    <header>LevelEditor/TileView.h</header>
    <slots>
     <signal>ZoomLevelChanged(int)</signal>
+    <slot>SetZoom(int)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -1502,6 +1502,22 @@ QTreeView, QTableWidget, #propertyBrowser {
     <hint type="destinationlabel">
      <x>905</x>
      <y>622</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>zoomSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>levelView</receiver>
+   <slot>SetZoom(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>932</x>
+     <y>622</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>652</x>
+     <y>347</y>
     </hint>
    </hints>
   </connection>

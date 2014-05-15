@@ -4,8 +4,10 @@ TileView::TileView(QWidget *parent) :
     QGraphicsView(parent)
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    maxZoom = false;
     panning = false;
+
+    //varies between 1 and 20 (10% - 1,000%)
+    zoomLevel = 10;
 
     QGLFormat format;
     format.setSamples(2);
@@ -21,6 +23,22 @@ void TileView::SetCursor(QCursor newCursor)
 {
     setCursor(newCursor);
     currentCursor = newCursor;
+}
+
+void TileView::SetZoom(int zoom)
+{
+    if(zoom >= 20 || zoom < 1)
+        return;
+
+    zoomLevel = zoom;
+
+    //reset the zoom
+    setTransform(QTransform());
+
+    if(zoomLevel < 10)
+        scale(zoomLevel / 10, zoomLevel / 10);
+    else if(zoomLevel > 10)
+        scale(zoomLevel - 9, zoomLevel - 9);
 }
 
 void TileView::mouseMoveEvent(QMouseEvent *event)
@@ -100,47 +118,17 @@ void TileView::wheelEvent(QWheelEvent *event)
         return;
     }
 
-    double scaleFactor = 1.15;
-
     //zoom in
     if(event->delta() > 0)
     {
-        //if the zoom is less than 10x, zoom in
-        if(transform().m11() <= 10 && transform().m22() <= 10)
-        {
-            scale(scaleFactor, scaleFactor);
-            maxZoom = false;
-
-            emit ZoomLevelChanged(transform().m11() * 100);
-        }
-        else
-        {
-            maxZoom = true;
-        }
+        SetZoom(zoomLevel + 1);
     }
     else //zoom out
     {
-        if(transform().m11() >= 0.1 && transform().m22() >= 0.1)
-        {
-            //zoom out
-            scale(1/scaleFactor, 1/scaleFactor);
-            maxZoom = false;
-
-            emit ZoomLevelChanged(transform().m11() * 100);
-        }
-
-        //get the transformed size of the scene in this view
-        int sceneWidthInView = transform().m11() * sceneRect().width();
-        int sceneHeightInView = transform().m22() * sceneRect().height();
-
-        //if the size of the scene is smaller than the view, or the zoom is 10%
-        if(sceneWidthInView <= frameRect().width() && sceneHeightInView <= frameRect().height())
-        {
-            //make the scene fit nicely in there
-            fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
-            maxZoom = true;
-        }
+        SetZoom(zoomLevel - 1);
     }
+
+    emit ZoomLevelChanged(zoomLevel);
 }
 
 void TileView::drawBackground(QPainter *, const QRectF)
@@ -150,8 +138,8 @@ void TileView::drawBackground(QPainter *, const QRectF)
 
 void TileView::resizeEvent(QResizeEvent *)
 {
-    if(maxZoom)
-        fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
+    //if(maxZoom)
+       // fitInView(scene()->sceneRect(), Qt::KeepAspectRatio);
 }
 
 void TileView::leaveEvent(QEvent *)

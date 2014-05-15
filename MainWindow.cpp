@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layers->                RegisterBrushManager(ui->brushManager);
     ui->brushManager->      RegisterTileSelector(tileSelector);
 
-    connect(ui->actionAdd_Layer,        SIGNAL(triggered()),                resources,                  SLOT(AddTileLayer()));
+
     connect(layers,                     SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
     connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileController,             SLOT(SetLayerSelection(int)));
     connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), layers,                     SLOT(SetLayerSelection(int)));
@@ -39,10 +39,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
     connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushManager,           SLOT(PasteTiles(QList<Tile>)));
     connect(ui->brushManager,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
-
-
     connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), layers,               SLOT(UpdateLayerVisibility(int,bool)));
 
+    //the layer must be added to the TileScene first
+    connect(ui->actionAdd_Layer,        SIGNAL(triggered()),                resources,                  SLOT(AddTileLayer()));
     connect(resources,                  SIGNAL(LayerAdded(int)),            layers,                     SLOT(AddLayer(int)));
     connect(resources,                  SIGNAL(LayerAdded(int)),            ui->layerList,              SLOT(AddLayer(int)));
 
@@ -79,7 +79,6 @@ MainWindow::~MainWindow()
     resources->DestroyAllResources();
     
     delete resources;
-    //call a cleanup function?
     delete layers;
     delete tileSelector;
     delete levelPropertiesWindow;
@@ -136,8 +135,8 @@ void MainWindow::on_actionAdd_Image_triggered()
 
 void MainWindow::CenterMinimapOnLevel()
 {
-    QPointF topLeft     = ui->levelView->mapToScene( 0, 0 );
-    QPointF bottomRight = ui->levelView->mapToScene( ui->levelView->viewport()->width() - 1, ui->levelView->viewport()->height() - 1 );
+    QPointF topLeft     = ui->levelView->mapToScene(0, 0);
+    QPointF bottomRight = ui->levelView->mapToScene(ui->levelView->viewport()->width() - 1, ui->levelView->viewport()->height() - 1);
     QRectF rect(topLeft, bottomRight);
 
     int centerX = rect.left() + (rect.width() / 2);
@@ -184,4 +183,14 @@ void MainWindow::on_toolBox_currentChanged(int index)
     default:
         break;
     }
+}
+
+void MainWindow::on_zoomSlider_valueChanged(int value)
+{
+    if(value == 10)
+        ui->zoomLabel->setText(QString("100%"));
+    else if(value < 10)
+        ui->zoomLabel->setText(QString::number(value* 10) + QString("%"));
+    else if(value > 10)
+        ui->zoomLabel->setText(QString::number((value - 9) * 100) + QString("%"));
 }
