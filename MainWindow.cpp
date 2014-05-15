@@ -177,6 +177,15 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         else
             ui->toolBox->setCurrentIndex(ui->toolBox->currentIndex() + 1);
         break;
+
+    case Qt::Key_Plus:
+        ui->zoomSlider->triggerAction(QAbstractSlider::SliderSingleStepAdd);
+        //ui->zoomSlider->mo(ui->zoomSlider->sliderPosition() + 1);
+        break;
+
+    case Qt::Key_Minus:
+        ui->zoomSlider->setSliderPosition(ui->zoomSlider->sliderPosition() - 1);
+        break;
     }
 }
 
