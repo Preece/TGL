@@ -18,10 +18,11 @@ void LineBrush::Move(int x, int y, TileController *tiles, bool leftButtonDown)
     //if the left mouse is down
     if(leftButtonDown)
     {
+        tiles->ClearPreview();
+
         //if the position has changed
         if(movePoint.x() != x || movePoint.y() != y)
         {
-            tiles->ClearPreview();
             Line(clickPoint.x(), clickPoint.y(), x, y, tiles, true);
 
             movePoint.setX(x);
