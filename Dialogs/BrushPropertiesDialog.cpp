@@ -7,7 +7,7 @@ BrushPropertiesDialog::BrushPropertiesDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    resourceController = NULL;
+    tileController = NULL;
     currentBrush = NULL;
     tileSelector = NULL;
 
@@ -129,7 +129,7 @@ TileWidgetItem *BrushPropertiesDialog::GetTileFromOrigin(TileCoord coord)
 {
     TileWidgetItem *tempItem = new TileWidgetItem;
 
-    tempItem->setPixmap(resourceController->GetTilePixmap(coord));
+    tempItem->setPixmap(tileController->GetTilePixmap(coord));
 
     return tempItem;
 }
@@ -167,7 +167,7 @@ void BrushPropertiesDialog::RepopulateTileList()
         {
             //create a visible item for each one, and set its position
             TileWidgetItem *tempItem = GetTileFromOrigin(currentBrush->GetTile(currentListIndex, i));
-            tempItem->setPos((i * resourceController->GetTileWidth()) + i, 0);
+            tempItem->setPos((i * tileController->GetTileWidth()) + i, 0);
             tempItem->setFlag(QGraphicsItem::ItemIsSelectable);
             tempItem->SetIndex(i);
 

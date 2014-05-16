@@ -219,6 +219,7 @@ void BrushController::RegisterTileSelector(TileSelectorScene *selector)
 void BrushController::RegisterTileController(TileController *newRM)
 {
     tiles = newRM;
+    propertiesWindow.RegisterTileController(newRM);
 }
 
 void BrushController::DestroyBrushes()

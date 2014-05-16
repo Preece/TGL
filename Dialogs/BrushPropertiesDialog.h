@@ -25,7 +25,7 @@ public:
     ~BrushPropertiesDialog();
 
     void RegisterTileSelector(TileSelectorScene *selector);
-    void RegisterResourceController(ResourceController *newRM) { resourceController = newRM; }
+    void RegisterTileController(TileController *newTC) { tileController = newTC; }
 
     void NewBrush(ComplexBrush *newBrush);
     void EditBrush(ComplexBrush *editBrush);
@@ -64,7 +64,7 @@ private slots:
 private:
     Ui::BrushPropertiesDialog *ui;
 
-    ResourceController *resourceController;
+    TileController *tileController;
 
     QGraphicsScene tileList;
     TileSelectorScene *tileSelector;
