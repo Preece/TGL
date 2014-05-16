@@ -14,8 +14,26 @@
    <string>Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>6</number>
+   </property>
+   <property name="topMargin">
+    <number>6</number>
+   </property>
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
+   <property name="bottomMargin">
+    <number>6</number>
+   </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="spacing">
+      <number>1</number>
+     </property>
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
@@ -34,8 +52,26 @@
       <string>Smart Brush</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>1</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>1</number>
+      </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
@@ -58,14 +94,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/topleftcorner.png</normaloff>:/Icons/BrushGuides/topleftcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -78,14 +114,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/topleft.png</normaloff>:/Icons/BrushGuides/topleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -98,14 +134,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/topmiddle.png</normaloff>:/Icons/BrushGuides/topmiddle.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -118,14 +154,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/topright.png</normaloff>:/Icons/BrushGuides/topright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -138,14 +174,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/toprightcorner.png</normaloff>:/Icons/BrushGuides/toprightcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -166,6 +202,9 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <item>
          <spacer name="horizontalSpacer_3">
           <property name="orientation">
@@ -188,14 +227,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/middleleft.png</normaloff>:/Icons/BrushGuides/middleleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -208,7 +247,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/middle.png</normaloff>:/Icons/BrushGuides/middle.png</iconset>
           </property>
           <property name="checkable">
@@ -218,7 +257,7 @@
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -231,14 +270,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/middleright.png</normaloff>:/Icons/BrushGuides/middleright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -259,6 +298,9 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <item>
          <spacer name="horizontalSpacer_5">
           <property name="orientation">
@@ -281,14 +323,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/bottomleftcorner.png</normaloff>:/Icons/BrushGuides/bottomleftcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -301,14 +343,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/bottomleft.png</normaloff>:/Icons/BrushGuides/bottomleft.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -321,14 +363,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/bottommiddle.png</normaloff>:/Icons/BrushGuides/bottommiddle.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -341,14 +383,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/bottomright.png</normaloff>:/Icons/BrushGuides/bottomright.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -361,14 +403,14 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../Icons.qrc">
+           <iconset resource="../Icons.qrc">
             <normaloff>:/Icons/BrushGuides/bottomrightcorner.png</normaloff>:/Icons/BrushGuides/bottomrightcorner.png</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
-           <string>smartBrushButtons</string>
+           <string notr="true">smartBrushButtons</string>
           </attribute>
          </widget>
         </item>
@@ -396,6 +438,21 @@
       <string>Replacer Brush</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>1</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>1</number>
+      </property>
       <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
@@ -415,7 +472,7 @@
          <bool>true</bool>
         </property>
         <attribute name="buttonGroup">
-         <string>replacerBrushButtons</string>
+         <string notr="true">replacerBrushButtons</string>
         </attribute>
        </widget>
       </item>
@@ -435,7 +492,7 @@
          <bool>true</bool>
         </property>
         <attribute name="buttonGroup">
-         <string>replacerBrushButtons</string>
+         <string notr="true">replacerBrushButtons</string>
         </attribute>
        </widget>
       </item>
@@ -457,6 +514,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="spacing">
+      <number>1</number>
+     </property>
      <item>
       <widget class="QGraphicsView" name="tileList">
        <property name="sizePolicy">
@@ -477,6 +537,9 @@
          <height>50</height>
         </size>
        </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarAlwaysOff</enum>
        </property>
@@ -491,7 +554,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../Icons.qrc">
+        <iconset resource="../Icons.qrc">
          <normaloff>:/Icons/addvalue.png</normaloff>:/Icons/addvalue.png</iconset>
        </property>
       </widget>
@@ -502,7 +565,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../Icons.qrc">
+        <iconset resource="../Icons.qrc">
          <normaloff>:/Icons/removevalue.png</normaloff>:/Icons/removevalue.png</iconset>
        </property>
       </widget>
@@ -521,8 +584,26 @@
       <string>Tiles</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>1</number>
+      </property>
+      <property name="leftMargin">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>1</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>1</number>
+      </property>
       <item>
        <widget class="QGraphicsView" name="tileSelector">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
@@ -544,7 +625,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../Icons.qrc"/>
+  <include location="../Icons.qrc"/>
  </resources>
  <connections>
   <connection>

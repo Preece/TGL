@@ -40,6 +40,7 @@ public:
 
     void DestroyBrushes();
 
+    BrushPropertiesDialog *GetPropertiesDialog() { return &propertiesWindow; }
     enum
     {
         Pencil = 0,

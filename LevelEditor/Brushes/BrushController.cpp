@@ -36,6 +36,8 @@ BrushController::BrushController(QWidget *parent) :
     matrix.push_front(&defaultMatrix);
 
     RepopulateBrushLists();
+
+    propertiesWindow.setWindowTitle("Edit Brush");
 }
 
 BrushController::~BrushController()

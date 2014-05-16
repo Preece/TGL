@@ -71,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushController->SetCurrentBrush(0);
 
     statusBar()->hide();
+    ui->brushController->GetPropertiesDialog()->setStyleSheet(styleSheet());
 }
 
 MainWindow::~MainWindow()
