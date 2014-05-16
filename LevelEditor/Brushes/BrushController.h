@@ -1,5 +1,5 @@
-#ifndef BrushManager_H
-#define BrushManager_H
+#ifndef BrushController_H
+#define BrushController_H
 
 #include <QFrame>
 #include <QTime>
@@ -20,16 +20,16 @@
 #include "SelectionBrush.h"
 
 namespace Ui {
-class BrushManager;
+class BrushController;
 }
 
-class BrushManager : public QFrame
+class BrushController : public QFrame
 {
     Q_OBJECT
     
 public:
-    explicit BrushManager(QWidget *parent = 0);
-    ~BrushManager();
+    explicit BrushController(QWidget *parent = 0);
+    ~BrushController();
 
     TileBrush *GetCurrentBrush() { return currentBrush; }
 
@@ -89,7 +89,7 @@ public slots:
 
 private:
     TileController *tiles;
-    Ui::BrushManager *ui;
+    Ui::BrushController *ui;
     BrushPropertiesDialog propertiesWindow;
 
     TileBrush *currentBrush;
@@ -121,4 +121,4 @@ private:
     int singleTileBrush;
 };
 
-#endif // BrushManager_H
+#endif // BrushController_H

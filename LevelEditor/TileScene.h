@@ -11,7 +11,7 @@
 #include "TileView.h"
 #include "TileLayerItem.h"
 #include "../Toolbox/TileWidgetItem.h"
-#include "Brushes/BrushManager.h"
+#include "Brushes/BrushController.h"
 
 typedef QList<TileCoord> TileList;
 
@@ -24,7 +24,7 @@ public:
     ~TileScene();
 
     void RegisterTileController(TileController *newRC);
-    void RegisterBrushManager(BrushManager *newBM) { brushManager = newBM; }
+    void RegisterBrushController(BrushController *newBM) { brushController = newBM; }
     
     void ClearPreview();
 
@@ -68,7 +68,7 @@ private:
     QList<QGraphicsRectItem*> eraserPreviewItems;
 
     TileController *tileController;
-    BrushManager *brushManager;
+    BrushController *brushController;
 
     QGraphicsItemGroup *gridLines;
 

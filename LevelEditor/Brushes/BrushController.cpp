@@ -1,9 +1,9 @@
-#include "BrushManager.h"
-#include "ui_BrushManager.h"
+#include "BrushController.h"
+#include "ui_BrushController.h"
 
-BrushManager::BrushManager(QWidget *parent) :
+BrushController::BrushController(QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::BrushManager)
+    ui(new Ui::BrushController)
 {
     ui->setupUi(this);
 
@@ -21,7 +21,7 @@ BrushManager::BrushManager(QWidget *parent) :
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
 
-    singleTileBrush = BrushManager::Pencil;
+    singleTileBrush = BrushController::Pencil;
 
     defaultScatter.SetName("Use Selected Tiles");
     scatter.push_front(&defaultScatter);
@@ -38,14 +38,14 @@ BrushManager::BrushManager(QWidget *parent) :
     RepopulateBrushLists();
 }
 
-BrushManager::~BrushManager()
+BrushController::~BrushController()
 {
     delete ui;
 
     DestroyBrushes();
 }
 
-void BrushManager::SetCurrentBrush(int type)
+void BrushController::SetCurrentBrush(int type)
 {
     ui->scatterBrushGroup->hide();
     ui->smartBrushGroup->hide();
@@ -54,38 +54,38 @@ void BrushManager::SetCurrentBrush(int type)
 
     switch(type)
     {
-    case BrushManager::Pencil:
+    case BrushController::Pencil:
         currentBrush = &pencil;
-        singleTileBrush = BrushManager::Pencil;
+        singleTileBrush = BrushController::Pencil;
         break;
 
-    case BrushManager::Bucket:
+    case BrushController::Bucket:
         currentBrush = &bucket;
-        singleTileBrush = BrushManager::Bucket;
+        singleTileBrush = BrushController::Bucket;
         break;
 
-    case BrushManager::Eraser:
+    case BrushController::Eraser:
         currentBrush = &eraser;
         break;
 
-    case BrushManager::Line:
+    case BrushController::Line:
         currentBrush = &line;
-        singleTileBrush = BrushManager::Line;
+        singleTileBrush = BrushController::Line;
         break;
 
-    case BrushManager::Eyedropper:
+    case BrushController::Eyedropper:
         currentBrush = &eyedropper;
         break;
 
-    case BrushManager::Stamp:
+    case BrushController::Stamp:
         currentBrush = &stamp;
         break;
 
-    case BrushManager::Selector:
+    case BrushController::Selector:
         currentBrush = &selector;
         break;
 
-    case BrushManager::Scatter:
+    case BrushController::Scatter:
         if(scatterBrushIndex < scatter.count())
         {
             scatter[scatterBrushIndex]->SetFill(false);
@@ -97,7 +97,7 @@ void BrushManager::SetCurrentBrush(int type)
         ui->scatterBrushGroup->show();
         break;
 
-    case BrushManager::Smart:
+    case BrushController::Smart:
         if(smartBrushIndex < smart.count())
         {
             currentBrush = smart[smartBrushIndex];
@@ -108,7 +108,7 @@ void BrushManager::SetCurrentBrush(int type)
         ui->smartBrushGroup->show();
         break;
 
-    case BrushManager::ScatterFill:
+    case BrushController::ScatterFill:
         if(scatterBrushIndex < scatter.count())
         {
             scatter[scatterBrushIndex]->SetFill(true);
@@ -121,7 +121,7 @@ void BrushManager::SetCurrentBrush(int type)
         ui->scatterBrushGroup->show();
         break;
 
-    case BrushManager::Replacer:
+    case BrushController::Replacer:
         if(replacerBrushIndex < replacer.count())
         {
             currentBrush = replacer[replacerBrushIndex];
@@ -133,7 +133,7 @@ void BrushManager::SetCurrentBrush(int type)
         ui->replacerGroup->show();
         break;
 
-    case BrushManager::Matrix:
+    case BrushController::Matrix:
         if(matrixBrushIndex < matrix.count())
         {
             currentBrush = matrix[matrixBrushIndex];
@@ -153,12 +153,12 @@ void BrushManager::SetCurrentBrush(int type)
     emit BrushChanged(currentBrush->GetCursor(), type);
 }
 
-void BrushManager::RevertToPreviousSingleTileBrush()
+void BrushController::RevertToPreviousSingleTileBrush()
 {
     SetCurrentBrush(singleTileBrush);
 }
 
-void BrushManager::RepopulateBrushLists()
+void BrushController::RepopulateBrushLists()
 {
     //clear out the scatter brush list
     ui->scatterBrushCombo->clear();
@@ -207,7 +207,7 @@ void BrushManager::RepopulateBrushLists()
     ui->matrixBrushCombo->addItem("Add New Brush...");
 }
 
-void BrushManager::RegisterTileSelector(TileSelectorScene *selector)
+void BrushController::RegisterTileSelector(TileSelectorScene *selector)
 {
     propertiesWindow.RegisterTileSelector(selector);
 
@@ -216,12 +216,12 @@ void BrushManager::RegisterTileSelector(TileSelectorScene *selector)
     connect(selector, SIGNAL(RevertToPreviousSingleTileBrush()), this, SLOT(RevertToPreviousSingleTileBrush()));
 }
 
-void BrushManager::RegisterTileController(TileController *newRM)
+void BrushController::RegisterTileController(TileController *newRM)
 {
     tiles = newRM;
 }
 
-void BrushManager::DestroyBrushes()
+void BrushController::DestroyBrushes()
 {
     for(int i = 0; i < scatter.count(); i++)
     {
@@ -252,7 +252,7 @@ void BrushManager::DestroyBrushes()
     matrix.clear();
 }
 
-void BrushManager::SetSelectedTiles(TileList newList)
+void BrushController::SetSelectedTiles(TileList newList)
 {
     if(newList.count() > 0)
     {
@@ -272,7 +272,7 @@ void BrushManager::SetSelectedTiles(TileList newList)
         {
             //if multiple tiles were selected, go ahead and select the stamp.
             if(newList.count() > 1)
-                SetCurrentBrush(BrushManager::Stamp);
+                SetCurrentBrush(BrushController::Stamp);
             else if(newList.count() == 1)
                 RevertToPreviousSingleTileBrush();
         }
@@ -280,27 +280,27 @@ void BrushManager::SetSelectedTiles(TileList newList)
     }
 }
 
-void BrushManager::CutTiles()
+void BrushController::CutTiles()
 {
     //emit the selected tiles then clear out the selector
     emit SelectionCut(selector.GetDraggingTiles());
     selector.ClearDraggingTiles();
 }
 
-void BrushManager::CopyTiles()
+void BrushController::CopyTiles()
 {
     //simply emit what is selected
     emit SelectionCut(selector.GetDraggingTiles());
 }
 
-void BrushManager::PasteTiles(QList<Tile> pasteTiles)
+void BrushController::PasteTiles(QList<Tile> pasteTiles)
 {
     //first integrate any selected tiles
     //selector.IntegrateSelectedTiles();
     selector.SetDraggingTiles(tiles, pasteTiles);
 }
 
-void BrushManager::on_overwriteCheckbox_toggled(bool checked)
+void BrushController::on_overwriteCheckbox_toggled(bool checked)
 {
     pencil.SetOverwrite(checked);
 
@@ -310,13 +310,13 @@ void BrushManager::on_overwriteCheckbox_toggled(bool checked)
     }
 }
 
-void BrushManager::on_brushSizeInput_valueChanged(int arg1)
+void BrushController::on_brushSizeInput_valueChanged(int arg1)
 {
     pencil.SetSize(arg1);
     eraser.SetSize(arg1);
 }
 
-void BrushManager::on_addScatterBrush_clicked()
+void BrushController::on_addScatterBrush_clicked()
 {
     //create a new brush and pass it to the properties window
     ScatterBrush *tempBrush = new ScatterBrush;
@@ -332,7 +332,7 @@ void BrushManager::on_addScatterBrush_clicked()
     RepopulateBrushLists();
 }
 
-void BrushManager::on_scatterBrushCombo_currentIndexChanged(int index)
+void BrushController::on_scatterBrushCombo_currentIndexChanged(int index)
 {
     if(index == -1)
         return;
@@ -342,7 +342,7 @@ void BrushManager::on_scatterBrushCombo_currentIndexChanged(int index)
     if(scatterBrushIndex < scatter.count())
     {
         currentBrush = scatter[scatterBrushIndex];
-        emit BrushChanged(currentBrush->GetCursor(), BrushManager::Scatter);
+        emit BrushChanged(currentBrush->GetCursor(), BrushController::Scatter);
     }
     else
     {
@@ -351,7 +351,7 @@ void BrushManager::on_scatterBrushCombo_currentIndexChanged(int index)
     }
 }
 
-void BrushManager::on_editScatterBrush_clicked()
+void BrushController::on_editScatterBrush_clicked()
 {
     if(ui->scatterBrushCombo->currentIndex() != -1)
     {
@@ -363,7 +363,7 @@ void BrushManager::on_editScatterBrush_clicked()
     }
 }
 
-void BrushManager::on_deleteScatterBrush_clicked()
+void BrushController::on_deleteScatterBrush_clicked()
 {
     //if a brush is selected
     if(ui->scatterBrushCombo->currentIndex() != -1)
@@ -375,7 +375,7 @@ void BrushManager::on_deleteScatterBrush_clicked()
     }
 }
 
-void BrushManager::on_smartBrushCombo_currentIndexChanged(int index)
+void BrushController::on_smartBrushCombo_currentIndexChanged(int index)
 {
     if(index == -1)
         return;
@@ -385,7 +385,7 @@ void BrushManager::on_smartBrushCombo_currentIndexChanged(int index)
     if(smartBrushIndex < smart.count())
     {
         currentBrush = smart[smartBrushIndex];
-        emit BrushChanged(currentBrush->GetCursor(), BrushManager::Smart);
+        emit BrushChanged(currentBrush->GetCursor(), BrushController::Smart);
     }
     else
     {
@@ -393,7 +393,7 @@ void BrushManager::on_smartBrushCombo_currentIndexChanged(int index)
     }
 }
 
-void BrushManager::on_addSmartBrush_clicked()
+void BrushController::on_addSmartBrush_clicked()
 {
     //create a new brush and pass it to the properties window
     SmartBrush *tempBrush = new SmartBrush;
@@ -409,7 +409,7 @@ void BrushManager::on_addSmartBrush_clicked()
     RepopulateBrushLists();
 }
 
-void BrushManager::on_editSmartBrushes_clicked()
+void BrushController::on_editSmartBrushes_clicked()
 {
     if(ui->smartBrushCombo->currentIndex() != -1)
     {
@@ -421,7 +421,7 @@ void BrushManager::on_editSmartBrushes_clicked()
     }
 }
 
-void BrushManager::on_addReplacerBrush_clicked()
+void BrushController::on_addReplacerBrush_clicked()
 {
     //create a new brush and pass it to the properties window
     ReplacerBrush *tempBrush = new ReplacerBrush;
@@ -437,7 +437,7 @@ void BrushManager::on_addReplacerBrush_clicked()
     RepopulateBrushLists();
 }
 
-void BrushManager::on_editReplacerBrush_clicked()
+void BrushController::on_editReplacerBrush_clicked()
 {
     if(ui->replacerBrushCombo->currentIndex() != -1)
     {
@@ -449,7 +449,7 @@ void BrushManager::on_editReplacerBrush_clicked()
     }
 }
 
-void BrushManager::on_deleteReplacerBrush_clicked()
+void BrushController::on_deleteReplacerBrush_clicked()
 {
     //if a brush is selected
     if(ui->replacerBrushCombo->currentIndex() != -1)
@@ -461,7 +461,7 @@ void BrushManager::on_deleteReplacerBrush_clicked()
     }
 }
 
-void BrushManager::on_replacerBrushCombo_currentIndexChanged(int index)
+void BrushController::on_replacerBrushCombo_currentIndexChanged(int index)
 {
     if(index == -1)
         return;
@@ -471,7 +471,7 @@ void BrushManager::on_replacerBrushCombo_currentIndexChanged(int index)
     if(replacerBrushIndex < replacer.count())
     {
         currentBrush = replacer[replacerBrushIndex];
-        emit BrushChanged(currentBrush->GetCursor(), BrushManager::Replacer);
+        emit BrushChanged(currentBrush->GetCursor(), BrushController::Replacer);
     }
     else
     {
@@ -479,7 +479,7 @@ void BrushManager::on_replacerBrushCombo_currentIndexChanged(int index)
     }
 }
 
-void BrushManager::on_addMatrixBrush_clicked()
+void BrushController::on_addMatrixBrush_clicked()
 {
     //create a new brush and pass it to the properties window
     MatrixBrush *tempBrush = new MatrixBrush;
@@ -495,7 +495,7 @@ void BrushManager::on_addMatrixBrush_clicked()
     RepopulateBrushLists();
 }
 
-void BrushManager::on_editMatrixBrush_clicked()
+void BrushController::on_editMatrixBrush_clicked()
 {
     if(ui->matrixBrushCombo->currentIndex() != -1)
     {
@@ -507,7 +507,7 @@ void BrushManager::on_editMatrixBrush_clicked()
     }
 }
 
-void BrushManager::on_deleteMatrixBrush_clicked()
+void BrushController::on_deleteMatrixBrush_clicked()
 {
     //if a brush is selected
     if(ui->matrixBrushCombo->currentIndex() != -1)
@@ -519,7 +519,7 @@ void BrushManager::on_deleteMatrixBrush_clicked()
     }
 }
 
-void BrushManager::on_matrixBrushCombo_currentIndexChanged(int index)
+void BrushController::on_matrixBrushCombo_currentIndexChanged(int index)
 {
     if(index == -1)
         return;
@@ -529,7 +529,7 @@ void BrushManager::on_matrixBrushCombo_currentIndexChanged(int index)
     if(matrixBrushIndex < matrix.count())
     {
         currentBrush = matrix[matrixBrushIndex];
-        emit BrushChanged(currentBrush->GetCursor(), BrushManager::Matrix);
+        emit BrushChanged(currentBrush->GetCursor(), BrushController::Matrix);
     }
     else
     {

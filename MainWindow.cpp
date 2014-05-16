@@ -21,11 +21,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->propertyBrowser->   RegisterResourceController(resources);
     ui->layerList->         RegisterResourceController(resources);
 
-    ui->brushManager->      RegisterTileController(tileController);
+    ui->brushController->      RegisterTileController(tileController);
     tileScene->             RegisterTileController(tileController);
 
-    tileScene->             RegisterBrushManager(ui->brushManager);
-    ui->brushManager->      RegisterTileSelector(tileSelector);
+    tileScene->             RegisterBrushController(ui->brushController);
+    ui->brushController->      RegisterTileSelector(tileSelector);
 
 
     connect(tileScene,                  SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
@@ -35,8 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSelect_Tileset,   SIGNAL(triggered()),                tileSelector,               SLOT(SelectTileset()));
     connect(ui->selectionTool,          SIGNAL(toggled(bool)),              tileScene,                  SLOT(ToggleSelectionMode(bool)));
     connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
-    connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushManager,           SLOT(PasteTiles(QList<Tile>)));
-    connect(ui->brushManager,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
+    connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushController,           SLOT(PasteTiles(QList<Tile>)));
+    connect(ui->brushController,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
     connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), tileScene,            SLOT(UpdateLayerVisibility(int,bool)));
 
     //the layer must be added to the TileScene first
@@ -68,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolGroup->setId(ui->matrixBrushTool,   10);
     ui->toolGroup->setId(ui->smartBrushTool,    11);
 
-    ui->brushManager->SetCurrentBrush(0);
+    ui->brushController->SetCurrentBrush(0);
 
     statusBar()->hide();
 }
@@ -115,51 +115,51 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
     switch(e->key())
     {
     case Qt::Key_1:
-        ui->brushManager->SetCurrentBrush(BrushManager::Pencil);
+        ui->brushController->SetCurrentBrush(BrushController::Pencil);
         break;
 
     case Qt::Key_2:
-        ui->brushManager->SetCurrentBrush(BrushManager::Eraser);
+        ui->brushController->SetCurrentBrush(BrushController::Eraser);
         break;
 
     case Qt::Key_3:
-        ui->brushManager->SetCurrentBrush(BrushManager::Bucket);
+        ui->brushController->SetCurrentBrush(BrushController::Bucket);
         break;
 
     case Qt::Key_4:
-        ui->brushManager->SetCurrentBrush(BrushManager::Line);
+        ui->brushController->SetCurrentBrush(BrushController::Line);
         break;
 
     case Qt::Key_5:
-        ui->brushManager->SetCurrentBrush(BrushManager::Stamp);
+        ui->brushController->SetCurrentBrush(BrushController::Stamp);
         break;
 
     case Qt::Key_6:
-        ui->brushManager->SetCurrentBrush(BrushManager::Eyedropper);
+        ui->brushController->SetCurrentBrush(BrushController::Eyedropper);
         break;
 
     case Qt::Key_7:
-        ui->brushManager->SetCurrentBrush(BrushManager::Selector);
+        ui->brushController->SetCurrentBrush(BrushController::Selector);
         break;
 
     case Qt::Key_Exclam:
-        ui->brushManager->SetCurrentBrush(BrushManager::Scatter);
+        ui->brushController->SetCurrentBrush(BrushController::Scatter);
         break;
 
     case Qt::Key_At:
-        ui->brushManager->SetCurrentBrush(BrushManager::ScatterFill);
+        ui->brushController->SetCurrentBrush(BrushController::ScatterFill);
         break;
 
     case Qt::Key_NumberSign:
-        ui->brushManager->SetCurrentBrush(BrushManager::Replacer);
+        ui->brushController->SetCurrentBrush(BrushController::Replacer);
         break;
 
     case Qt::Key_Dollar:
-        ui->brushManager->SetCurrentBrush(BrushManager::Matrix);
+        ui->brushController->SetCurrentBrush(BrushController::Matrix);
         break;
 
     case Qt::Key_Percent:
-        ui->brushManager->SetCurrentBrush(BrushManager::Smart);
+        ui->brushController->SetCurrentBrush(BrushController::Smart);
         break;
 
     case Qt::Key_N:
@@ -219,13 +219,13 @@ void MainWindow::SetToolSelection(QCursor newCursor, int newSelection)
 
 void MainWindow::on_actionCut_triggered()
 {
-    ui->brushManager->CutTiles();
+    ui->brushController->CutTiles();
     tileController->ClearPreview();
 }
 
 void MainWindow::on_actionCopy_triggered()
 {
-    ui->brushManager->CopyTiles();
+    ui->brushController->CopyTiles();
 }
 
 void MainWindow::on_actionPaste_triggered()

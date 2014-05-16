@@ -11,7 +11,7 @@
 #include "Model/TileController.h"
 
 #include "LevelEditor/TileScene.h"
-#include "LevelEditor/Brushes/BrushManager.h"
+#include "LevelEditor/Brushes/BrushController.h"
 
 #include "Toolbox/TileSelectorScene.h"
 

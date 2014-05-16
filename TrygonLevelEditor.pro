@@ -36,7 +36,7 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/FillBrush.cpp \
     LevelEditor/Brushes/SmartBrush.cpp \
     LevelEditor/Brushes/EraserBrush.cpp \
-    LevelEditor/Brushes/BrushManager.cpp \
+    LevelEditor/Brushes/BrushController.cpp \
     LevelEditor/Brushes/ScatterBrush.cpp \
     LevelEditor/Brushes/ComplexBrush.cpp \
     LevelEditor/Brushes/StampBrush.cpp \
@@ -73,7 +73,7 @@ HEADERS  += \
     LevelEditor/Brushes/FillBrush.h \
     LevelEditor/Brushes/SmartBrush.h \
     LevelEditor/Brushes/EraserBrush.h \
-    LevelEditor/Brushes/BrushManager.h \
+    LevelEditor/Brushes/BrushController.h \
     LevelEditor/Brushes/ScatterBrush.h \
     LevelEditor/Brushes/ComplexBrush.h \
     LevelEditor/Brushes/ReplacerBrush.h \
@@ -95,7 +95,7 @@ HEADERS  += \
 
 FORMS    += \
     MainWindow.ui \
-    LevelEditor/Brushes/BrushManager.ui \
+    LevelEditor/Brushes/BrushController.ui \
     Dialogs/BrushPropertiesDialog.ui \
     Dialogs/ImageViewerDialog.ui \
     Dialogs/LevelPropertiesDialog.ui \

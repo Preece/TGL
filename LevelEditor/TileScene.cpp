@@ -4,7 +4,7 @@ TileScene::TileScene()
 {
     tileController = NULL;
     currentLayer = NULL;
-    brushManager = NULL;
+    brushController = NULL;
 
     gridLines = new QGraphicsItemGroup;
     addItem(gridLines);
@@ -141,14 +141,14 @@ void TileScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {
-        brushManager->GetCurrentBrush()->Press(tileX, tileY, tileController);
+        brushController->GetCurrentBrush()->Press(tileX, tileY, tileController);
     }
     else if(event->button() == Qt::RightButton)
     {
         EyedropTile(event->scenePos().toPoint());
 
         //refresh the preview
-        brushManager->GetCurrentBrush()->Paint(tileX, tileY, tileController, true);
+        brushController->GetCurrentBrush()->Paint(tileX, tileY, tileController, true);
     }
 }
 
@@ -174,12 +174,12 @@ void TileScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     //if the left button is down
     if(event->buttons() == Qt::LeftButton)
     {
-        brushManager->GetCurrentBrush()->Move(tileX, tileY, tileController, true);
+        brushController->GetCurrentBrush()->Move(tileX, tileY, tileController, true);
     }
     //if the left mouse button was not down
     else if(currentLayer)
     {
-        brushManager->GetCurrentBrush()->Move(tileX, tileY, tileController, false);
+        brushController->GetCurrentBrush()->Move(tileX, tileY, tileController, false);
     }
 }
 
@@ -197,7 +197,7 @@ void TileScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     if(event->button() == Qt::LeftButton)
     {    
-        brushManager->GetCurrentBrush()->Release(tileX, tileY, tileController);
+        brushController->GetCurrentBrush()->Release(tileX, tileY, tileController);
 
         //this will package the changes into an undo command and implement them into the model
         //make it abort if the queue is empty
@@ -234,12 +234,12 @@ void TileScene::UpdateLayerVisibility(int ID, bool visible)
 void TileScene::RefreshPreview()
 {
     ClearPreview();
-    brushManager->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), tileController, true);
+    brushController->GetCurrentBrush()->Paint(lastPreviewSpot.x(), lastPreviewSpot.y(), tileController, true);
 }
 
 void TileScene::ClearPreview()
 {
-    if(brushManager->GetCurrentBrush()->GetType() != "selector")
+    if(brushController->GetCurrentBrush()->GetType() != "selector")
         tileController->ClearPreview();
 
     ClearEraserPreview();

@@ -981,7 +981,7 @@ QTreeView, QTableWidget, #propertyBrowser {
          <item row="2" column="0">
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="BrushManager" name="brushManager">
+            <widget class="BrushController" name="brushController">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -1340,9 +1340,9 @@ QTreeView, QTableWidget, #propertyBrowser {
    </slots>
   </customwidget>
   <customwidget>
-   <class>BrushManager</class>
+   <class>BrushController</class>
    <extends>QFrame</extends>
-   <header>LevelEditor/Brushes/BrushManager.h</header>
+   <header>LevelEditor/Brushes/BrushController.h</header>
    <container>1</container>
    <slots>
     <signal>BrushChanged(QCursor,int)</signal>
@@ -1388,7 +1388,7 @@ QTreeView, QTableWidget, #propertyBrowser {
    </hints>
   </connection>
   <connection>
-   <sender>brushManager</sender>
+   <sender>brushController</sender>
    <signal>BrushChanged(QCursor,int)</signal>
    <receiver>MainWindow</receiver>
    <slot>SetToolSelection(QCursor,int)</slot>
@@ -1406,7 +1406,7 @@ QTreeView, QTableWidget, #propertyBrowser {
   <connection>
    <sender>toolGroup</sender>
    <signal>buttonPressed(int)</signal>
-   <receiver>brushManager</receiver>
+   <receiver>brushController</receiver>
    <slot>SetCurrentBrush(int)</slot>
    <hints>
     <hint type="sourcelabel">
