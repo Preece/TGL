@@ -42,13 +42,13 @@ public slots:
     void ClearPreview();
     TileCoord GetTileOrigin(int x, int y);
 
-    void SetLayerVisibility(bool visible);
+    void UpdateLayerVisibility(bool visible);
 
     void SelectTilesInArea(QRect area);
     QList<Tile> GetSelectedTiles();
     void ClearSelection();
 
-    void SetLayerSelection(int newLayer);
+    void UpdateLayerSelection(int newLayer);
 
     void EndPaintOperation();
 

@@ -39,7 +39,7 @@ int TileController::GetCurrentLayerHeight()
     return 0;
 }
 
-void TileController::SetLayerVisibility(bool visible)
+void TileController::UpdateLayerVisibility(bool visible)
 {
     if(currentLayer)
     {
@@ -176,7 +176,7 @@ QPixmap TileController::GetTilePixmap(TileCoord coord)
 }
 
 
-void TileController::SetLayerSelection(int newLayer)
+void TileController::UpdateLayerSelection(int newLayer)
 {
     currentLayer = resources->GetTileLayer(newLayer);
 }

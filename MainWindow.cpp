@@ -28,16 +28,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushManager->      RegisterTileSelector(tileSelector);
 
 
-    connect(tileScene,                     SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
-    connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileController,             SLOT(SetLayerSelection(int)));
-    connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileScene,                     SLOT(SetLayerSelection(int)));
-    connect(ui->gridToggle,             SIGNAL(toggled(bool)),              tileScene,                     SLOT(ToggleGrid(bool)));
+    connect(tileScene,                  SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
+    connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileController,             SLOT(UpdateLayerSelection(int)));
+    connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileScene,                  SLOT(UpdateLayerSelection(int)));
+    connect(ui->gridToggle,             SIGNAL(toggled(bool)),              tileScene,                  SLOT(ToggleGrid(bool)));
     connect(ui->actionSelect_Tileset,   SIGNAL(triggered()),                tileSelector,               SLOT(SelectTileset()));
-    connect(ui->selectionTool,          SIGNAL(toggled(bool)),              tileScene,                     SLOT(ToggleSelectionMode(bool)));
+    connect(ui->selectionTool,          SIGNAL(toggled(bool)),              tileScene,                  SLOT(ToggleSelectionMode(bool)));
     connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
     connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushManager,           SLOT(PasteTiles(QList<Tile>)));
     connect(ui->brushManager,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
-    connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), tileScene,               SLOT(UpdateLayerVisibility(int,bool)));
+    connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), tileScene,            SLOT(UpdateLayerVisibility(int,bool)));
 
     //the layer must be added to the TileScene first
     connect(ui->actionAdd_Layer,        SIGNAL(triggered()),                resources,                  SLOT(AddTileLayer()));
