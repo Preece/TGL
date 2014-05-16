@@ -26,8 +26,6 @@ public:
     void RegisterTileController(TileController *newRC);
     void RegisterBrushManager(BrushManager *newBM) { brushManager = newBM; }
     
-
-    void UpdateLayerOpacity(int opaqueLayerID);
     void ClearPreview();
 
 signals:
@@ -36,12 +34,12 @@ signals:
 
 public slots:
     void AddLayer(int newLayerID);
-    void DeleteLayer(int ID);
+    void RemoveLayer(int ID);
 
     void ToggleGrid(bool show = true);
     void ToggleSelectionMode(bool selection);
 
-    void SetLayerSelection(int newSelection);
+    void UpdateLayerSelection(int newSelection);
     void UpdateLayerVisibility(int ID, bool visible);
 
     void RefreshPreview();
@@ -51,7 +49,6 @@ public slots:
     void UpdatePreviewTile(int x,int y, TileCoord origin);
 
     void UpdateSelectionGeometry(QRect rect);
-    void UpdateSceneSize(int w, int h);
 
     void DrawEraserPreview(int x, int y);
     void ClearEraserPreview();
@@ -73,7 +70,7 @@ private:
     TileController *tileController;
     BrushManager *brushManager;
 
-    QGraphicsItemGroup *grid;
+    QGraphicsItemGroup *gridLines;
 
     QPoint lastPreviewSpot;
 };

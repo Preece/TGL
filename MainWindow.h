@@ -10,8 +10,6 @@
 #include "Model/ResourceController.h"
 #include "Model/TileController.h"
 
-#include "Dialogs/LevelPropertiesDialog.h"
-
 #include "LevelEditor/TileScene.h"
 #include "LevelEditor/Brushes/BrushManager.h"
 
@@ -38,7 +36,6 @@ protected:
 
 private slots:
 
-    void on_actionProperties_triggered();
     void on_actionUndo_triggered();
     void on_actionRedo_triggered();
     void on_actionAdd_Image_triggered();
@@ -58,13 +55,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    //Dialogs
-    LevelPropertiesDialog *levelPropertiesWindow;
-
     ResourceController *resources;
     TileController *tileController;
 
-    TileScene *layers;
+    TileScene *tileScene;
     TileSelectorScene *tileSelector;
 };
 

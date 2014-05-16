@@ -21,7 +21,7 @@ public:
     void RefreshNames();
     
 signals:
-    void NewResourceSelected(ResourceNode *newObject);
+    void NewResourceSelected(ResourceNode *newResource);
     
 public slots:
     void selectionUpdated(QTreeWidgetItem*, int);

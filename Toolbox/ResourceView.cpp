@@ -15,7 +15,7 @@ ResourceView::ResourceView(QWidget *parent) :
     addTopLevelItem(projectRoot);
     projectRoot->setExpanded(true);
 
-    //add children nodes for each of the types of objects
+    //add children nodes for each of the types of resources
     layerRoot = AddNode(projectRoot, "Layer", ":/Icons/open.png");
     imageRoot = AddNode(projectRoot, "Images", ":/Icons/open.png");
     tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/open.png");
@@ -53,7 +53,7 @@ void ResourceView::RefreshNames()
 
     for(int i = 0; i < items.count(); i++)
     {
-        ResourceNode *res = resources->GetObject(items[i]->data(0, Qt::UserRole).toInt());
+        ResourceNode *res = resources->GetResource(items[i]->data(0, Qt::UserRole).toInt());
 
         if(res)
             items[i]->setText(0, res->GetProperty("Name").toString());
@@ -112,12 +112,12 @@ void ResourceView::RemoveChildrenNodes(QTreeWidgetItem *parent)
 
 void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
 {
-    ResourceNode *selectedObject = resources->GetObject(GetSelectedID());
+    ResourceNode *selectedResource = resources->GetResource(GetSelectedID());
 
-    if(selectedObject)
+    if(selectedResource)
     {
-        emit NewResourceSelected(selectedObject);
-        currentSelection = selectedObject;
+        emit NewResourceSelected(selectedResource);
+        currentSelection = selectedResource;
     }
     else
     {
@@ -128,14 +128,14 @@ void ResourceView::selectionUpdated(QTreeWidgetItem *, int)
 
 void ResourceView::AddResource(int ID)
 {
-    ResourceNode *newObject = resources->GetObject(ID);
+    ResourceNode *newResource = resources->GetResource(ID);
 
-    QString name = newObject->GetProperty("Name").toString();
+    QString name = newResource->GetProperty("Name").toString();
 
     if(name.isEmpty())
         name = "New Resource";
 
-    switch(newObject->GetType())
+    switch(newResource->GetType())
     {
     case UnknownType:
         itemHash[ID] = AddNode(miscRoot, name, ":/Icons/save.png", ID);

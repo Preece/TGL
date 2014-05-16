@@ -45,7 +45,6 @@ SOURCES += main.cpp\
     LevelEditor/Brushes/ReplacerBrush.cpp \
     Dialogs/ImageViewerDialog.cpp \
     Dialogs/BrushPropertiesDialog.cpp \
-    Dialogs/LevelPropertiesDialog.cpp \
     LevelEditor/Brushes/SelectionBrush.cpp \
     LevelEditor/Brushes/EyedropperBrush.cpp \   
     Toolbox/LayerListView.cpp \
@@ -84,7 +83,6 @@ HEADERS  += \
     LevelEditor/Brushes/TileBrush.h \
     Dialogs/BrushPropertiesDialog.h \
     Dialogs/ImageViewerDialog.h \
-    Dialogs/LevelPropertiesDialog.h \
     LevelEditor/Brushes/SelectionBrush.h \
     LevelEditor/Brushes/EyedropperBrush.h \   
     Toolbox/LayerListView.h \

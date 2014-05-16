@@ -4,7 +4,7 @@ int ResourceNode::newID = 1;
 
 ResourceNode::ResourceNode()
 {
-    //when the object is created, automatically generate an ID
+    //when the resource is created, automatically generate an ID
     ID = GenerateID();
     type = UnknownType;
 }

@@ -8,7 +8,7 @@ ResourceController::ResourceController()
     clipboard = new Clipboard;
 
     defaultLayer.SetName("Default");
-    layerMap[defaultLayer.GetID()] = &defaultLayer;
+    layers[defaultLayer.GetID()] = &defaultLayer;
     emit ResourceAdded(defaultLayer.GetID());
 }
 
@@ -32,7 +32,7 @@ int ResourceController::AddImage(Image *newImage)
     if(newImage)
     {
         newImage->SetType(ImageType);
-        AddResourceCommand *add = new AddResourceCommand(newImage, &imageMap);
+        AddResourceCommand *add = new AddResourceCommand(newImage, &images);
         undo->push(add);
 
         emit ResourceAdded(newImage->GetID());
@@ -43,9 +43,9 @@ int ResourceController::AddImage(Image *newImage)
 
 bool ResourceController::DeleteImage(int ID)
 {
-    if(imageMap.value(ID))
+    if(images.value(ID))
     {
-        DeleteResourceCommand *del = new DeleteResourceCommand(imageMap[ID], &imageMap);
+        DeleteResourceCommand *del = new DeleteResourceCommand(images[ID], &images);
         undo->push(del);
 
         emit ResourceDeleted(ID);
@@ -85,7 +85,7 @@ void ResourceController::AddTileLayer()
 {
     TileLayer *newLayer = new TileLayer;
     newLayer->SetType(TileLayerType);
-    layerMap[newLayer->GetID()] = newLayer;
+    layers[newLayer->GetID()] = newLayer;
 
     emit ResourceAdded(newLayer->GetID());
     emit LayerAdded(newLayer->GetID());
@@ -93,11 +93,11 @@ void ResourceController::AddTileLayer()
 
 void ResourceController::DeleteTileLayer(int ID)
 {
-    if(layerMap.contains(ID))
+    if(layers.contains(ID))
     {
-        delete layerMap[ID];
-        layerMap[ID] = NULL;
-        layerMap.remove(ID);
+        delete layers[ID];
+        layers[ID] = NULL;
+        layers.remove(ID);
 
         emit ResourceDeleted(ID);
         emit LayerRemoved(ID);
@@ -106,16 +106,16 @@ void ResourceController::DeleteTileLayer(int ID)
 
 TileLayer *ResourceController::GetTileLayer(int ID)
 {
-    if(layerMap.value(ID))
-        return layerMap[ID];
+    if(layers.value(ID))
+        return layers[ID];
 
     return NULL;
 }
 
 Image *ResourceController::GetImage(int imageID)
 {
-    if(imageMap.value(imageID))
-        return imageMap[imageID];
+    if(images.value(imageID))
+        return images[imageID];
 
     return NULL;
 }
@@ -125,15 +125,15 @@ void ResourceController::DestroyAllResources()
     delete undo;
 
     //destroy the images
-    QList<Image*> imageList = imageMap.values();
+    QList<Image*> imageList = images.values();
     for(int i = 0; i < imageList.count(); i++)
     {
         delete imageList[i];
         imageList[i] = NULL;
     }
-    imageMap.clear();
+    images.clear();
 
-    QList<TileLayer*> layerList = layerMap.values();
+    QList<TileLayer*> layerList = layers.values();
     for(int i = 0; i < layerList.count(); i++)
     {
         if(layerList[i] != &defaultLayer)
@@ -142,7 +142,7 @@ void ResourceController::DestroyAllResources()
             layerList[i] = NULL;
         }
     }
-    layerMap.clear();
+    layers.clear();
 }
 
 void ResourceController::Undo()
@@ -155,20 +155,20 @@ void ResourceController::Redo()
     undo->redo();
 }
 
-ResourceNode *ResourceController::GetObject(int ID)
+ResourceNode *ResourceController::GetResource(int ID)
 {
     if(ID == levelProperties.GetID())
         return &levelProperties;
 
     QHash<int,Image*>::iterator imageIter;
-    for(imageIter = imageMap.begin(); imageIter != imageMap.end(); ++imageIter)
+    for(imageIter = images.begin(); imageIter != images.end(); ++imageIter)
     {
         if(imageIter.key() == ID)
             return imageIter.value();
     }
 
     QHash<int,TileLayer*>::iterator layerIter;
-    for(layerIter = layerMap.begin(); layerIter != layerMap.end(); ++layerIter)
+    for(layerIter = layers.begin(); layerIter != layers.end(); ++layerIter)
     {
         if(layerIter.key() == ID)
             return layerIter.value();

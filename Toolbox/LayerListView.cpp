@@ -20,7 +20,7 @@ void LayerListView::RefreshNames()
     for(int i = 0; i < nameItems.count(); i++)
     {
         int itemID = nameItems[i]->data(Qt::UserRole).toInt();
-        nameItems[i]->setText(resources->GetObject(itemID)->GetProperty("Name").toString());
+        nameItems[i]->setText(resources->GetResource(itemID)->GetProperty("Name").toString());
     }
 }
 
@@ -43,14 +43,14 @@ void LayerListView::UpdateItem(QTableWidgetItem *item)
     {
         int selectedID = item->data(Qt::UserRole).toInt();
 
-        ResourceNode *resource = resources->GetObject(selectedID);
+        ResourceNode *resource = resources->GetResource(selectedID);
         resource->SetProperty("Name", item->text());
     }
 }
 
 void LayerListView::AddLayer(int ID)
 {
-    ResourceNode *layer = resources->GetObject(ID);
+    ResourceNode *layer = resources->GetResource(ID);
 
     insertRow(0);
 
@@ -95,16 +95,16 @@ void LayerListView::HandleClick(int row, int column)
     {
         int corrID = item(row, 1)->data(Qt::UserRole).toInt();
 
-        ResourceNode *object = resources->GetObject(corrID);
+        ResourceNode *tempResource = resources->GetResource(corrID);
 
-        if(object)
+        if(tempResource)
         {
-            if(object->GetProperty("Visible").toBool())
-                object->SetProperty("Visible", false);
+            if(tempResource->GetProperty("Visible").toBool())
+                tempResource->SetProperty("Visible", false);
             else
-                object->SetProperty("Visible", true);
+                tempResource->SetProperty("Visible", true);
 
-            emit LayerVisibilityChanged(corrID, object->GetProperty("Visible").toBool());
+            emit LayerVisibilityChanged(corrID, tempResource->GetProperty("Visible").toBool());
         }
     }
 }

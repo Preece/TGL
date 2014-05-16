@@ -131,11 +131,6 @@ void TileView::wheelEvent(QWheelEvent *event)
     emit ZoomLevelChanged(zoomLevel);
 }
 
-void TileView::drawBackground(QPainter *, const QRectF)
-{
-
-}
-
 void TileView::resizeEvent(QResizeEvent *)
 {
     //if(maxZoom)

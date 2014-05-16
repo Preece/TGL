@@ -30,7 +30,6 @@ protected:
     void keyPressEvent(QKeyEvent *event);
 
     void wheelEvent(QWheelEvent *event);
-    void drawBackground(QPainter *, const QRectF);
     void resizeEvent(QResizeEvent *);
     void leaveEvent(QEvent *);
 

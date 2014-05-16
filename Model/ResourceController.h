@@ -28,7 +28,7 @@ public slots:
     void Redo();
     Clipboard *GetClipboard() { return clipboard; }
 
-    ResourceNode *GetObject(int ID);
+    ResourceNode *GetResource(int ID);
 
     LevelProperties *GetLevelProperties() { return &levelProperties; }
     int GetTileWidth();
@@ -56,8 +56,8 @@ signals:
 
 
 private:
-    QHash<int, Image*> imageMap;
-    QHash<int, TileLayer*> layerMap;
+    QHash<int, Image*> images;
+    QHash<int, TileLayer*> layers;
 
     TileLayer defaultLayer;
 

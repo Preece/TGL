@@ -10,49 +10,47 @@ MainWindow::MainWindow(QWidget *parent) :
     //create a resource manager
     resources               = new ResourceController;
     tileController          = new TileController;
-    levelPropertiesWindow   = new LevelPropertiesDialog;
     tileSelector            = new TileSelectorScene;
-    layers                  = new TileScene;
+    tileScene                  = new TileScene;
 
     //register the resource manager with the various modules. They will
     //keep themselves in sync with the resource manager
     tileController->        RegisterResourceController(resources);
-    levelPropertiesWindow-> RegisterResourceController(resources);
     tileSelector->          RegisterResourceController(resources);
     ui->resourceView->      RegisterResourceController(resources);
     ui->propertyBrowser->   RegisterResourceController(resources);
     ui->layerList->         RegisterResourceController(resources);
 
     ui->brushManager->      RegisterTileController(tileController);
-    layers->                RegisterTileController(tileController);
+    tileScene->             RegisterTileController(tileController);
 
-    layers->                RegisterBrushManager(ui->brushManager);
+    tileScene->             RegisterBrushManager(ui->brushManager);
     ui->brushManager->      RegisterTileSelector(tileSelector);
 
 
-    connect(layers,                     SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
+    connect(tileScene,                     SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
     connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileController,             SLOT(SetLayerSelection(int)));
-    connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), layers,                     SLOT(SetLayerSelection(int)));
-    connect(ui->gridToggle,             SIGNAL(toggled(bool)),              layers,                     SLOT(ToggleGrid(bool)));
+    connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileScene,                     SLOT(SetLayerSelection(int)));
+    connect(ui->gridToggle,             SIGNAL(toggled(bool)),              tileScene,                     SLOT(ToggleGrid(bool)));
     connect(ui->actionSelect_Tileset,   SIGNAL(triggered()),                tileSelector,               SLOT(SelectTileset()));
-    connect(ui->selectionTool,          SIGNAL(toggled(bool)),              layers,                     SLOT(ToggleSelectionMode(bool)));
+    connect(ui->selectionTool,          SIGNAL(toggled(bool)),              tileScene,                     SLOT(ToggleSelectionMode(bool)));
     connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
     connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushManager,           SLOT(PasteTiles(QList<Tile>)));
     connect(ui->brushManager,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
-    connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), layers,               SLOT(UpdateLayerVisibility(int,bool)));
+    connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), tileScene,               SLOT(UpdateLayerVisibility(int,bool)));
 
     //the layer must be added to the TileScene first
     connect(ui->actionAdd_Layer,        SIGNAL(triggered()),                resources,                  SLOT(AddTileLayer()));
-    connect(resources,                  SIGNAL(LayerAdded(int)),            layers,                     SLOT(AddLayer(int)));
+    connect(resources,                  SIGNAL(LayerAdded(int)),            tileScene,                     SLOT(AddLayer(int)));
     connect(resources,                  SIGNAL(LayerAdded(int)),            ui->layerList,              SLOT(AddLayer(int)));
 
-    connect(resources,                  SIGNAL(LayerRemoved(int)),          layers,                     SLOT(DeleteLayer(int)));
+    connect(resources,                  SIGNAL(LayerRemoved(int)),          tileScene,                     SLOT(RemoveLayer(int)));
     connect(resources,                  SIGNAL(LayerRemoved(int)),          ui->layerList,              SLOT(RemoveLayer(int)));
 
-    ui->levelView->setScene(layers);
+    ui->levelView->setScene(tileScene);
     ui->levelView->setMouseTracking(true);
 
-    ui->miniMap->setScene(layers);
+    ui->miniMap->setScene(tileScene);
     ui->tileSelectorView->setScene(tileSelector);
     ui->resourceView->RepopulateEverything();
 
@@ -83,15 +81,8 @@ MainWindow::~MainWindow()
     
     delete resources;
     delete tileController;
-    delete layers;
+    delete tileScene;
     delete tileSelector;
-    delete levelPropertiesWindow;
-}
-
-void MainWindow::on_actionProperties_triggered()
-{
-    levelPropertiesWindow->LoadValues();
-    levelPropertiesWindow->exec();
 }
 
 void MainWindow::on_actionUndo_triggered()

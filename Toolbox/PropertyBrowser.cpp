@@ -4,7 +4,7 @@ PropertyBrowser::PropertyBrowser(QWidget *parent) :
     QtTreePropertyBrowser(parent)
 {
     resources = NULL;
-    currentObject = NULL;
+    currentResource = NULL;
 
     propertyManager = new QtVariantPropertyManager;
     widgetFactory = new QtVariantEditorFactory;
@@ -19,7 +19,7 @@ PropertyBrowser::~PropertyBrowser()
     delete widgetFactory;
 }
 
-void PropertyBrowser::DisplayResource(ResourceNode *newObject)
+void PropertyBrowser::DisplayResource(ResourceNode *newResource)
 {
     //clear out all the values
     clear();
@@ -27,26 +27,9 @@ void PropertyBrowser::DisplayResource(ResourceNode *newObject)
     if(!resources)
         return;
 
-    currentObject = newObject;
+    currentResource = newResource;
 
-    DisplayObject(newObject);
-}
-
-void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
-{
-    if(currentObject)
-    {
-        currentObject->SetProperty(property->propertyName(), val);
-
-        //update the name in the resource viewer
-        if(property->propertyName() == "Name")
-            emit ResourceNameChanged(currentObject->GetID(), val.toString());
-    }
-}
-
-void PropertyBrowser::DisplayObject(ResourceNode *object)
-{
-    PropertyList properties = object->GetAllProperties();
+    PropertyList properties = newResource->GetAllProperties();
 
     //pull out the name property first, it should be on top
     if(properties.contains("Name"))
@@ -65,5 +48,17 @@ void PropertyBrowser::DisplayObject(ResourceNode *object)
             newProperty->setValue(i.value());
             addProperty(newProperty);
         }
+    }
+}
+
+void PropertyBrowser::UpdateValue(QtProperty *property, const QVariant &val)
+{
+    if(currentResource)
+    {
+        currentResource->SetProperty(property->propertyName(), val);
+
+        //update the name in the resource viewer
+        if(property->propertyName() == "Name")
+            emit ResourceNameChanged(currentResource->GetID(), val.toString());
     }
 }

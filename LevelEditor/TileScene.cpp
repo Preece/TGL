@@ -6,10 +6,10 @@ TileScene::TileScene()
     currentLayer = NULL;
     brushManager = NULL;
 
-    grid = new QGraphicsItemGroup;
-    addItem(grid);
-    grid->setPos(0, 0);
-    grid->hide();
+    gridLines = new QGraphicsItemGroup;
+    addItem(gridLines);
+    gridLines->setPos(0, 0);
+    gridLines->hide();
 
     setItemIndexMethod(NoIndex);
 }
@@ -28,7 +28,6 @@ void TileScene::RegisterTileController(TileController *newRC)
     connect(tileController, SIGNAL(SelectionGeometryUpdated(QRect)), this, SLOT(UpdateSelectionGeometry(QRect)));
     connect(tileController, SIGNAL(ClearEraserPreview()), this, SLOT(ClearEraserPreview()));
     connect(tileController, SIGNAL(DrawEraserPreview(int,int)), this, SLOT(DrawEraserPreview(int,int)));
-    connect(tileController, SIGNAL(LayerSizeUpdated(int,int)), this, SLOT(UpdateSceneSize(int,int)));
     connect(tileController, SIGNAL(LayerVisibilityUpdated(int,bool)), this, SLOT(UpdateLayerVisibility(int,bool)));
 }
 
@@ -64,13 +63,12 @@ void TileScene::AddLayer(int newLayerID)
     //put the layer group into the list
     layers.insert(0, tempLayerView);
     addItem(tempLayerView);
-    UpdateLayerOpacity(newLayerID);
 
     tempLayerView->show();
     tempLayerView->setPos(0,0);
 }
 
-void TileScene::DeleteLayer(int ID)
+void TileScene::RemoveLayer(int ID)
 {
     for(int i = 0; i < layers.count(); i++)
     {
@@ -83,29 +81,18 @@ void TileScene::DeleteLayer(int ID)
     }
 }
 
-void TileScene::UpdateSceneSize(int w, int h)
-{
-    int newW, newH;
-
-    if(w * tileController->GetTileWidth() > sceneRect().width())
-        newW = w * tileController->GetTileWidth();
-
-    if(h * tileController->GetTileHeight() > sceneRect().height())
-        newH = h * tileController->GetTileHeight();
-}
-
 void TileScene::ToggleGrid(bool show)
 {
     if(show == false)
     {
-        grid->hide();
+        gridLines->hide();
         return;
     }
 
-    if(grid)
+    if(gridLines)
     {
-        delete grid;
-        grid = new QGraphicsItemGroup;
+        delete gridLines;
+        gridLines = new QGraphicsItemGroup;
     }
 
     QPen pen(Qt::DashLine);
@@ -123,7 +110,7 @@ void TileScene::ToggleGrid(bool show)
     {
         tempLine = new QGraphicsLineItem(0, (i * tileH), (mapW * tileW), (i * tileH));
         tempLine->setPen(pen);
-        grid->addToGroup(tempLine);
+        gridLines->addToGroup(tempLine);
     }
 
     //loop for the width of the map, draw vertical lines
@@ -131,13 +118,13 @@ void TileScene::ToggleGrid(bool show)
     {
         tempLine = new QGraphicsLineItem((j * tileW), 0, (j * tileW), (mapH * tileH));
         tempLine->setPen(pen);
-        grid->addToGroup(tempLine);
+        gridLines->addToGroup(tempLine);
     }
 
-    addItem(grid);
+    addItem(gridLines);
 
-    grid->setZValue(99);
-    grid->show();
+    gridLines->setZValue(99);
+    gridLines->show();
 }
 
 void TileScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -218,7 +205,7 @@ void TileScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 
-void TileScene::SetLayerSelection(int newSelection)
+void TileScene::UpdateLayerSelection(int newSelection)
 {
     //loop through all the layers
     for(int i = 0; i < layers.count(); i++)
@@ -266,19 +253,6 @@ void TileScene::SelectPreviewItems()
     {
         if(tileList[i])
             tileList[i]->setSelected(true);
-    }
-}
-
-void TileScene::UpdateLayerOpacity(int opaqueLayerID)
-{
-    for(int i = 0; i < layers.count(); i++)
-    {
-        if(layers[i]->GetLayerID() == opaqueLayerID)
-        {
-            qreal opacity = tileController->GetLayerOpacity(opaqueLayerID);
-            opacity = opacity / 100;
-            layers[i]->setOpacity(opacity);
-        }
     }
 }
 

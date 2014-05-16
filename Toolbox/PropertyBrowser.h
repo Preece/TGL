@@ -15,18 +15,17 @@ public:
     ~PropertyBrowser();
 
     void RegisterResourceController(ResourceController *newRM) { resources = newRM; }
-    
+
 signals:
-    void ResourceNameChanged(int ID, QString name);
+    void ResourceNameChanged(int resourceID, QString name);
     
 public slots:
 
-    void DisplayResource(ResourceNode *newObject);
+    void DisplayResource(ResourceNode *newResource);
     void UpdateValue(QtProperty *property, const QVariant &val);
 
 private:
-    ResourceNode *currentObject;
-    void DisplayObject(ResourceNode *object);
+    ResourceNode *currentResource;
 
     ResourceController *resources;
     QtVariantPropertyManager *propertyManager;
