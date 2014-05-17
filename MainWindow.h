@@ -41,6 +41,7 @@ private slots:
 
     void CenterMinimapOnLevel();
     void SetToolSelection(QCursor newCursor, int newSelection);
+    void PromptForTileset();
 
     void on_actionCut_triggered();
     void on_actionCopy_triggered();

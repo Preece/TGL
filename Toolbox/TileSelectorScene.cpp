@@ -80,10 +80,10 @@ void TileSelectorScene::SelectNewTile(TileCoord origin)
     PackageAndEmitSelection();
 }
 
-void TileSelectorScene::SelectTileset()
+void TileSelectorScene::SelectTileset(QWidget *topParent)
 {
     //ask the user where to load the file from.
-    QString filename = QFileDialog::getOpenFileName(NULL, "Add Image", ".", "Portable Network Graphics (*.png)");
+    QString filename = QFileDialog::getOpenFileName(topParent, "Add Image", ".", "Portable Network Graphics (*.png)");
 
     //if the dialog succeeds
     if(!filename.isEmpty())

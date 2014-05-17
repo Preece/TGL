@@ -8,6 +8,7 @@ TileLayer::TileLayer()
     AddProperty("Opacity", 100);
     AddProperty("Layer Size", QPoint(0, 0));
     AddProperty("Dynamic Sizing", true);
+    AddProperty("Stack Order", 0);
 }
 
 TileLayer::~TileLayer()

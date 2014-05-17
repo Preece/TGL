@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileController,             SLOT(UpdateLayerSelection(int)));
     connect(ui->layerList,              SIGNAL(LayerSelectionChanged(int)), tileScene,                  SLOT(UpdateLayerSelection(int)));
     connect(ui->gridToggle,             SIGNAL(toggled(bool)),              tileScene,                  SLOT(ToggleGrid(bool)));
-    connect(ui->actionSelect_Tileset,   SIGNAL(triggered()),                tileSelector,               SLOT(SelectTileset()));
+    connect(ui->actionSelect_Tileset,   SIGNAL(triggered()),                this,                       SLOT(PromptForTileset()));
     connect(ui->selectionTool,          SIGNAL(toggled(bool)),              tileScene,                  SLOT(ToggleSelectionMode(bool)));
     connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
     connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushController,           SLOT(PasteTiles(QList<Tile>)));
@@ -148,6 +148,11 @@ void MainWindow::SetToolSelection(QCursor newCursor, int newSelection)
 {
     ui->toolGroup->button(newSelection)->setChecked(true);
     ui->levelView->SetCursor(newCursor);
+}
+
+void MainWindow::PromptForTileset()
+{
+    tileSelector->SelectTileset(this);
 }
 
 

@@ -35,7 +35,7 @@ public slots:
     void PackageAndEmitSelection();
     void SelectNewTile(TileCoord origin);
 
-    void SelectTileset();
+    void SelectTileset(QWidget *topParent);
 
     void TraverseTileHistory(bool forward);
 
