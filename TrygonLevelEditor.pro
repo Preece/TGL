@@ -98,7 +98,6 @@ FORMS    += \
     LevelEditor/Brushes/BrushController.ui \
     Dialogs/BrushPropertiesDialog.ui \
     Dialogs/ImageViewerDialog.ui \
-    Dialogs/LevelPropertiesDialog.ui \
 
 RESOURCES += \
     Icons.qrc

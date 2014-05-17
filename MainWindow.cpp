@@ -71,7 +71,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->brushController->SetCurrentBrush(0);
 
     statusBar()->hide();
+    ui->actionAdd_Layer->trigger();
     ui->brushController->GetPropertiesDialog()->setStyleSheet(styleSheet());
+
+    SetupKeyboardShortcuts();
 }
 
 MainWindow::~MainWindow()
@@ -109,76 +112,6 @@ void MainWindow::RepopulateEverything()
     tileSelector->RepopulateTileSelector();
 
     ui->resourceView->RepopulateEverything();
-}
-
-void MainWindow::keyPressEvent(QKeyEvent *e)
-{
-    switch(e->key())
-    {
-    case Qt::Key_1:
-        ui->brushController->SetCurrentBrush(BrushController::Pencil);
-        break;
-
-    case Qt::Key_2:
-        ui->brushController->SetCurrentBrush(BrushController::Eraser);
-        break;
-
-    case Qt::Key_3:
-        ui->brushController->SetCurrentBrush(BrushController::Bucket);
-        break;
-
-    case Qt::Key_4:
-        ui->brushController->SetCurrentBrush(BrushController::Line);
-        break;
-
-    case Qt::Key_5:
-        ui->brushController->SetCurrentBrush(BrushController::Stamp);
-        break;
-
-    case Qt::Key_6:
-        ui->brushController->SetCurrentBrush(BrushController::Eyedropper);
-        break;
-
-    case Qt::Key_7:
-        ui->brushController->SetCurrentBrush(BrushController::Selector);
-        break;
-
-    case Qt::Key_Exclam:
-        ui->brushController->SetCurrentBrush(BrushController::Scatter);
-        break;
-
-    case Qt::Key_At:
-        ui->brushController->SetCurrentBrush(BrushController::ScatterFill);
-        break;
-
-    case Qt::Key_NumberSign:
-        ui->brushController->SetCurrentBrush(BrushController::Replacer);
-        break;
-
-    case Qt::Key_Dollar:
-        ui->brushController->SetCurrentBrush(BrushController::Matrix);
-        break;
-
-    case Qt::Key_Percent:
-        ui->brushController->SetCurrentBrush(BrushController::Smart);
-        break;
-
-    case Qt::Key_N:
-        if(ui->toolBox->currentIndex() == ui->toolBox->count() - 1)
-            ui->toolBox->setCurrentIndex(0);
-        else
-            ui->toolBox->setCurrentIndex(ui->toolBox->currentIndex() + 1);
-        break;
-
-    case Qt::Key_Plus:
-        ui->zoomSlider->triggerAction(QAbstractSlider::SliderSingleStepAdd);
-        //ui->zoomSlider->mo(ui->zoomSlider->sliderPosition() + 1);
-        break;
-
-    case Qt::Key_Minus:
-        ui->zoomSlider->setSliderPosition(ui->zoomSlider->sliderPosition() - 1);
-        break;
-    }
 }
 
 void MainWindow::on_actionAdd_Image_triggered()
@@ -267,5 +200,56 @@ void MainWindow::on_removeLayerButton_clicked()
         return;
 
     if(QMessageBox::critical(this, "Delete Layer", "Are you sure you want to delete the selected layer?", QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok)
-    resources->DeleteTileLayer(ui->layerList->GetSelectedID());
+        resources->DeleteTileLayer(ui->layerList->GetSelectedID());
+}
+
+void MainWindow::SetupKeyboardShortcuts()
+{
+    QShortcut *shortcut = new QShortcut(QKeySequence(Qt::Key_1), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->pencilTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_2), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->eraserTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_3), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->bucketTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_4), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->lineTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_5), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->stampTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_6), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->eyedropperTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_7), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->selectionTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_Exclam), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->scatterTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_At), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->scatterFillTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_NumberSign), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->replacerTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_Dollar), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->matrixBrushTool, SLOT(click()));
+
+    shortcut = new QShortcut(QKeySequence(Qt::Key_Percent), this);
+    shortcut->setContext(Qt::ApplicationShortcut);
+    connect(shortcut, SIGNAL(activated()), ui->smartBrushTool, SLOT(click()));
 }

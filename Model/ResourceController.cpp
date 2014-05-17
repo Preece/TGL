@@ -6,10 +6,6 @@ ResourceController::ResourceController()
     undo->setUndoLimit(500);
 
     clipboard = new Clipboard;
-
-    defaultLayer.SetName("Default");
-    layers[defaultLayer.GetID()] = &defaultLayer;
-    emit ResourceAdded(defaultLayer.GetID());
 }
 
 ResourceController::~ResourceController()
@@ -136,11 +132,8 @@ void ResourceController::DestroyAllResources()
     QList<TileLayer*> layerList = layers.values();
     for(int i = 0; i < layerList.count(); i++)
     {
-        if(layerList[i] != &defaultLayer)
-        {
-            delete layerList[i];
-            layerList[i] = NULL;
-        }
+        delete layerList[i];
+        layerList[i] = NULL;
     }
     layers.clear();
 }

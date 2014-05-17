@@ -59,8 +59,6 @@ private:
     QHash<int, Image*> images;
     QHash<int, TileLayer*> layers;
 
-    TileLayer defaultLayer;
-
     LevelProperties levelProperties;
 
     QUndoStack *undo;

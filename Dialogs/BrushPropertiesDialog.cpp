@@ -177,6 +177,14 @@ void BrushPropertiesDialog::RepopulateTileList()
     }
 }
 
+void BrushPropertiesDialog::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if(ui->tileSelector->rect().contains(event->pos()))
+    {
+        ui->addTile->click();
+    }
+}
+
 void BrushPropertiesDialog::on_brushNameInput_textChanged(const QString &arg1)
 {
     if(currentBrush)

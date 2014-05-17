@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QGraphicsScene>
+#include <QMouseEvent>
 
 #include "../../Model/ResourceController.h"
 
@@ -45,6 +46,8 @@ public:
     int GetSelectedListTileIndex();
 
     void RepopulateTileList();
+
+    void mouseDoubleClickEvent(QMouseEvent *event);
     
 private slots:
     void on_addTile_clicked();

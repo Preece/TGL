@@ -32,7 +32,6 @@ public:
     void RepopulateEverything();
 
 protected:
-    void keyPressEvent(QKeyEvent *e);
 
 private slots:
 
@@ -53,6 +52,8 @@ private slots:
     void on_removeLayerButton_clicked();
 
 private:
+    void SetupKeyboardShortcuts();
+
     Ui::MainWindow *ui;
 
     ResourceController *resources;
