@@ -3,9 +3,11 @@
 TileController::TileController(QObject *parent) :
     QObject(parent)
 {
-    modifyTiles = new ModifyTilesCommand;
+    modifyTiles = new ModifyTilesCommand();
     currentLayer = NULL;
     resources = NULL;
+
+    connect(modifyTiles, SIGNAL(RepaintTile(int,int,int,TileCoord)), this, SIGNAL(TileUpdated(int,int,int,TileCoord)));
 }
 
 TileController::~TileController()

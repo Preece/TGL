@@ -1,8 +1,13 @@
 #include "ModifyTilesCommand.h"
 
-ModifyTilesCommand::ModifyTilesCommand()
+ModifyTilesCommand::ModifyTilesCommand(QObject *parent)
 {
     initialRedo = true;
+}
+
+ModifyTilesCommand::~ModifyTilesCommand()
+{
+
 }
 
 void ModifyTilesCommand::AddModification(TileLayer *layer, int newX, int newY, TileCoord newOrgn, TileCoord oldOrgn)
@@ -42,6 +47,7 @@ void ModifyTilesCommand::undo()
     for(iter = mods.begin(); iter != mods.end(); ++iter)
     {
         iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().oldOrigin);
+        emit RepaintTile(iter.value().layer->GetID(), iter.value().x, iter.value().y, iter.value().oldOrigin);
     }
 }
 
@@ -54,6 +60,8 @@ void ModifyTilesCommand::redo()
         iter.value().layer->ModifyTile(iter.value().x, iter.value().y, iter.value().newOrigin);
 
         //if this is not the initial redo, cause a painting event
+        if(!initialRedo)
+            emit RepaintTile(iter.value().layer->GetID(), iter.value().x, iter.value().y, iter.value().newOrigin);
     }
 
     initialRedo = false;

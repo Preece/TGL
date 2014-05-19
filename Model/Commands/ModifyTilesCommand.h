@@ -1,6 +1,7 @@
 #ifndef MODIFYTILESCOMMAND_H
 #define MODIFYTILESCOMMAND_H
 
+#include <QObject>
 #include <QUndoCommand>
 #include <QMultiMap>
 
@@ -20,10 +21,13 @@ struct TileModification
     TileCoord oldOrigin;
 };
 
-class ModifyTilesCommand : public QUndoCommand
+class ModifyTilesCommand : public QObject, public QUndoCommand
 {
+    Q_OBJECT
+
 public:
-    ModifyTilesCommand();
+    explicit ModifyTilesCommand(QObject *parent = 0);
+    ~ModifyTilesCommand();
 
     void AddModification(TileLayer *layer, int newX, int newY, TileCoord newOrgn, TileCoord oldOrgn);
     int GetModificationCount();
@@ -32,6 +36,9 @@ public:
 
     void undo();
     void redo();
+
+signals:
+    void RepaintTile(int layerID, int x, int y, TileCoord newOrigin);
 
 private:
 

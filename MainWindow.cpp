@@ -94,7 +94,7 @@ void MainWindow::on_actionUndo_triggered()
     if(resources)
     {
         resources->Undo();
-        RepopulateEverything();
+        //RepopulateEverything();
     }
 }
 
@@ -103,7 +103,7 @@ void MainWindow::on_actionRedo_triggered()
     if(resources)
     {
         resources->Redo();
-        RepopulateEverything();
+        //RepopulateEverything();
     }
 }
 
@@ -148,6 +148,7 @@ void MainWindow::SetToolSelection(QCursor newCursor, int newSelection)
 {
     ui->toolGroup->button(newSelection)->setChecked(true);
     ui->levelView->SetCursor(newCursor);
+    tileScene->RefreshPreview();
 }
 
 void MainWindow::PromptForTileset()
