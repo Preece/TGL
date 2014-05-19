@@ -67,6 +67,10 @@ void TileController::ModifyTile(int x, int y, TileCoord origin)
 
 void TileController::PreviewModifyTile(int x, int y, TileCoord origin)
 {
+    if(currentLayer)
+        if(!currentLayer->PointIsWithinLayer(x, y))
+            return;
+
     if(previewTiles.contains(TileCoord(x, y)))
     {
         if(previewTiles[TileCoord(x, y)].origin == origin)

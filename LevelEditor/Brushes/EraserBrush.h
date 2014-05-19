@@ -10,6 +10,7 @@ public:
 
     void Paint(int x, int y, TileController *tiles, bool preview = false);
     void Move(int x, int y, TileController *tiles, bool leftButtonDown);
+    void Press(int x, int y, TileController *tiles);
 
     QString GetType() { return "eraser"; }
     QCursor GetCursor() { return QCursor(QPixmap(":/Icons/eraser.png"), 2, 5); }

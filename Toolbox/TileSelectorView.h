@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QPoint>
 #include <QMouseEvent>
+#include <QPushButton>
 
 class TileSelectorView : public QGraphicsView
 {

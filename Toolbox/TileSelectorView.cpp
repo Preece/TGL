@@ -2,7 +2,6 @@
 
 TileSelectorView::TileSelectorView(QObject *)
 {
-
 }
 
 TileSelectorView::~TileSelectorView()

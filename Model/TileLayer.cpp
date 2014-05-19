@@ -47,6 +47,16 @@ bool TileLayer::ResizeToIncludePoint(int x, int y)
     return true;
 }
 
+bool TileLayer::PointIsWithinLayer(int x, int y)
+{
+    QPoint layerSize(GetProperty("Layer Size").toPoint());
+
+    if(layerSize.x() < x || layerSize.y() < y)
+        return false;
+
+    return true;
+}
+
 TileCoord TileLayer::GetTileOrigin(int x, int y)
 {
     if(!tiles.contains(TileCoord(x, y)))

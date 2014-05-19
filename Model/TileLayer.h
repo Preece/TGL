@@ -34,6 +34,7 @@ public:
     bool DynamicSizingEnabled() { return GetProperty("Dynamic Sizing").toBool(); }
 
     bool ResizeToIncludePoint(int x, int y);
+    bool PointIsWithinLayer(int x, int y);
 
     TileCoord GetTileOrigin(int x, int y);
 
