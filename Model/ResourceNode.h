@@ -54,7 +54,6 @@ public:
     QList<ResourceNode> GetChildren() { return children; }
 
 private:
-    ResourceNode *parent;
     PropertyList properties;
     QList<ResourceNode> children;
 };

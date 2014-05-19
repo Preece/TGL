@@ -5,6 +5,7 @@ TileController::TileController(QObject *parent) :
 {
     modifyTiles = new ModifyTilesCommand;
     currentLayer = NULL;
+    resources = NULL;
 }
 
 TileController::~TileController()

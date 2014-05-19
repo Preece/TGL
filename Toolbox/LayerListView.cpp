@@ -50,8 +50,6 @@ void LayerListView::UpdateItem(QTableWidgetItem *item)
 
 void LayerListView::AddLayer(int ID)
 {
-    ResourceNode *layer = resources->GetResource(ID);
-
     insertRow(0);
 
     QTableWidgetItem *newIcon = new QTableWidgetItem(QIcon(":/Icons/addvalue.png"), QString());
