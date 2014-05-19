@@ -6,6 +6,8 @@
 #include <QPoint>
 #include <QScrollBar>
 
+#include "../LevelEditor/TileScene.h"
+
 class MiniMap : public QGraphicsView
 {
     Q_OBJECT

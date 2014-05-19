@@ -20,6 +20,8 @@ void MiniMap::mouseMoveEvent(QMouseEvent *event)
     }
 
     QGraphicsView::mouseMoveEvent(event);
+
+    dynamic_cast<TileScene*>(scene())->ClearPreview();
 }
 
 void MiniMap::mousePressEvent(QMouseEvent *event)

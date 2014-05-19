@@ -35,16 +35,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSelect_Tileset,   SIGNAL(triggered()),                this,                       SLOT(PromptForTileset()));
     connect(ui->selectionTool,          SIGNAL(toggled(bool)),              tileScene,                  SLOT(ToggleSelectionMode(bool)));
     connect(ui->levelView,              SIGNAL(TraverseTileHistory(bool)),  tileSelector,               SLOT(TraverseTileHistory(bool)));
-    connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushController,           SLOT(PasteTiles(QList<Tile>)));
-    connect(ui->brushController,           SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
+    connect(resources->GetClipboard(),  SIGNAL(PasteTiles(QList<Tile>)),    ui->brushController,        SLOT(PasteTiles(QList<Tile>)));
+    connect(ui->brushController,        SIGNAL(SelectionCut(QList<Tile>)),  resources->GetClipboard(),  SLOT(Copy(QList<Tile>)));
     connect(ui->layerList,              SIGNAL(LayerVisibilityChanged(int,bool)), tileScene,            SLOT(UpdateLayerVisibility(int,bool)));
 
     //the layer must be added to the TileScene first
     connect(ui->actionAdd_Layer,        SIGNAL(triggered()),                resources,                  SLOT(AddTileLayer()));
-    connect(resources,                  SIGNAL(LayerAdded(int)),            tileScene,                     SLOT(AddLayer(int)));
+    connect(resources,                  SIGNAL(LayerAdded(int)),            tileScene,                  SLOT(AddLayer(int)));
     connect(resources,                  SIGNAL(LayerAdded(int)),            ui->layerList,              SLOT(AddLayer(int)));
 
-    connect(resources,                  SIGNAL(LayerRemoved(int)),          tileScene,                     SLOT(RemoveLayer(int)));
+    connect(resources,                  SIGNAL(LayerRemoved(int)),          tileScene,                  SLOT(RemoveLayer(int)));
     connect(resources,                  SIGNAL(LayerRemoved(int)),          ui->layerList,              SLOT(RemoveLayer(int)));
 
     ui->levelView->setScene(tileScene);

@@ -229,6 +229,8 @@ void TileScene::UpdateLayerVisibility(int ID, bool visible)
         if(layers[i]->GetLayerID() == ID)
             layers[i]->setVisible(visible);
     }
+
+    tileController->ClearPreview();
 }
 
 void TileScene::RefreshPreview()
