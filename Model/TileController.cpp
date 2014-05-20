@@ -199,4 +199,6 @@ void TileController::EndPaintOperation()
 
     //create a fresh bundle for the next operation
     modifyTiles = new ModifyTilesCommand;
+
+    connect(modifyTiles, SIGNAL(RepaintTile(int,int,int,TileCoord)), this, SIGNAL(TileUpdated(int,int,int,TileCoord)));
 }
