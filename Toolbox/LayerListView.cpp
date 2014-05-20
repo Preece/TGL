@@ -8,6 +8,8 @@ LayerListView::LayerListView(QWidget *parent) :
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(SelectionUpdated()));
     connect(this, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(UpdateItem(QTableWidgetItem*)));
     connect(this, SIGNAL(cellClicked(int,int)), this, SLOT(HandleClick(int,int)));
+
+    //verticalHeader()->setMovable(true);
 }
 
 void LayerListView::RegisterResourceController(ResourceController *rm)
