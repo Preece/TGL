@@ -51,7 +51,9 @@ SOURCES += main.cpp\
     LevelEditor/TileScene.cpp \
     LevelEditor/TileLayerItem.cpp \
     LevelEditor/TileView.cpp \
-    Model/TileController.cpp
+    Model/TileController.cpp \
+    Model/CollisionController.cpp \
+    Collision/CollisionScene.cpp
 
 HEADERS  += \
     MainWindow.h \
@@ -91,7 +93,9 @@ HEADERS  += \
     LevelEditor/TileScene.h \
     Model/ResourceNode.h \
     Model/ResourceController.h \
-    Model/TileController.h
+    Model/TileController.h \
+    Model/CollisionController.h \
+    Collision/CollisionScene.h
 
 FORMS    += \
     MainWindow.ui \

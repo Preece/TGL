@@ -131,7 +131,7 @@ QTreeView, QTableWidget, #propertyBrowser {
         <enum>QFrame::Sunken</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <property name="tabSpacing">
         <number>1</number>
@@ -619,7 +619,7 @@ QTreeView, QTableWidget, #propertyBrowser {
         <number>0</number>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="resourcesView">
         <widget class="QLabel" name="label">
@@ -1047,20 +1047,63 @@ QTreeView, QTableWidget, #propertyBrowser {
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="collisionView">
-        <widget class="QLabel" name="label_2">
-         <property name="geometry">
-          <rect>
-           <x>190</x>
-           <y>300</y>
-           <width>101</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Collision View</string>
-         </property>
-        </widget>
+       <widget class="QWidget" name="collisionWidgetView">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QToolButton" name="addRectTool">
+             <property name="text">
+              <string>add rect</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButton_2">
+             <property name="text">
+              <string>add triangle</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButton_3">
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGraphicsView" name="collisionView">
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="verticalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOn</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOn</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustToContents</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
        <widget class="QWidget" name="objectsView">
         <widget class="QLabel" name="label_3">

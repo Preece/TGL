@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     resources               = new ResourceController;
     tileController          = new TileController;
     tileSelector            = new TileSelectorScene;
-    tileScene                  = new TileScene;
+    tileScene               = new TileScene;
+    collisionScene          = new CollisionScene;
 
     //register the resource manager with the various modules. They will
     //keep themselves in sync with the resource manager
@@ -21,11 +22,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->propertyBrowser->   RegisterResourceController(resources);
     ui->layerList->         RegisterResourceController(resources);
 
-    ui->brushController->      RegisterTileController(tileController);
+    ui->brushController->   RegisterTileController(tileController);
     tileScene->             RegisterTileController(tileController);
 
     tileScene->             RegisterBrushController(ui->brushController);
-    ui->brushController->      RegisterTileSelector(tileSelector);
+    ui->brushController->   RegisterTileSelector(tileSelector);
 
 
     connect(tileScene,                  SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));
@@ -53,6 +54,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->miniMap->setScene(tileScene);
     ui->tileSelectorView->setScene(tileSelector);
     ui->resourceView->RepopulateEverything();
+
+    ui->collisionView->setScene(collisionScene);
+    ui->collisionView->setMouseTracking(true);
 
     //assign IDs to each child in the toolgroup
     ui->toolGroup->setId(ui->pencilTool,        0);
@@ -86,6 +90,7 @@ MainWindow::~MainWindow()
     delete resources;
     delete tileController;
     delete tileScene;
+    delete collisionScene;
     delete tileSelector;
 }
 

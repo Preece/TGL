@@ -11,6 +11,7 @@
 #include "Model/TileController.h"
 
 #include "LevelEditor/TileScene.h"
+#include "Collision/CollisionScene.h"
 #include "LevelEditor/Brushes/BrushController.h"
 
 #include "Toolbox/TileSelectorScene.h"
@@ -61,6 +62,7 @@ private:
     TileController *tileController;
 
     TileScene *tileScene;
+    CollisionScene *collisionScene;
     TileSelectorScene *tileSelector;
 };
 
