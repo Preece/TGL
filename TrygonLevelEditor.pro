@@ -51,7 +51,9 @@ SOURCES += main.cpp\
     LevelEditor/TileScene.cpp \
     LevelEditor/TileLayerItem.cpp \
     LevelEditor/TileView.cpp \
-    Model/TileController.cpp
+    Model/TileController.cpp \
+    Exporters/Exporter.cpp \
+    Exporters/JSONExporter.cpp
 
 HEADERS  += \
     MainWindow.h \
@@ -91,7 +93,9 @@ HEADERS  += \
     LevelEditor/TileScene.h \
     Model/ResourceNode.h \
     Model/ResourceController.h \
-    Model/TileController.h
+    Model/TileController.h \
+    Exporters/Exporter.h \
+    Exporters/JSONExporter.h
 
 FORMS    += \
     MainWindow.ui \
