@@ -108,12 +108,22 @@ TileLayer *ResourceController::GetTileLayer(int ID)
     return NULL;
 }
 
+QList<TileLayer *> ResourceController::GetAllLayers()
+{
+    return layers.values();
+}
+
 Image *ResourceController::GetImage(int imageID)
 {
     if(images.value(imageID))
         return images[imageID];
 
     return NULL;
+}
+
+QList<Image *> ResourceController::GetAllImages()
+{
+    return images.values();
 }
 
 void ResourceController::DestroyAllResources()

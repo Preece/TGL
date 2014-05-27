@@ -37,6 +37,7 @@ public slots:
     int AddImage(Image *newImage);
     bool DeleteImage(int ID);
     Image *GetImage(int imageID);
+    QList<Image*> GetAllImages();
 
     QImage *GetTileset();
     QPixmap GetTilePixmap(TileCoord coord);
@@ -44,6 +45,7 @@ public slots:
     void AddTileLayer();
     void DeleteTileLayer(int ID);
     TileLayer *GetTileLayer(int ID);
+    QList<TileLayer*> GetAllLayers();
 
     void DestroyAllResources();
 
