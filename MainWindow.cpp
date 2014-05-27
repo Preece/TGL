@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     resources               = new ResourceController;
     tileController          = new TileController;
     tileSelector            = new TileSelectorScene;
-    tileScene                  = new TileScene;
+    tileScene               = new TileScene;
+    exporter                = new JSONExporter;
 
     //register the resource manager with the various modules. They will
     //keep themselves in sync with the resource manager
@@ -87,6 +88,7 @@ MainWindow::~MainWindow()
     delete tileController;
     delete tileScene;
     delete tileSelector;
+    delete exporter;
 }
 
 void MainWindow::on_actionUndo_triggered()
@@ -109,7 +111,7 @@ void MainWindow::on_actionRedo_triggered()
 
 void MainWindow::on_actionSave_As_triggered()
 {
-    exporter->Export(resources, "C:\Tester.json");
+    exporter->Export(resources, QFileDialog::getSaveFileName(this));
 }
 
 void MainWindow::RepopulateEverything()

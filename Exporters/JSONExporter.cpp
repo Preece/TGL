@@ -17,10 +17,6 @@ void JSONExporter::Export(ResourceController *resources, QString filename)
     QJsonArray layerArray;
     QJsonObject levelPropsObject;
 
-    documentObject["levelProperties"] = levelPropsObject;
-    documentObject["images"] = imageArray;
-    documentObject["layers"] = layerArray;
-
     levelPropsObject["properties"] = QJsonObject::fromVariantMap(levelProps->GetAllProperties());
 
     Image *currentImage;
@@ -44,6 +40,10 @@ void JSONExporter::Export(ResourceController *resources, QString filename)
 
         layerArray.append(layerObject);
     }
+
+    documentObject["levelProperties"] = levelPropsObject;
+    documentObject["images"] = imageArray;
+    documentObject["layers"] = layerArray;
 
     QJsonDocument document(documentObject);
 
