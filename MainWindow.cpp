@@ -114,6 +114,11 @@ void MainWindow::on_actionSave_As_triggered()
     exporter->Export(resources, QFileDialog::getSaveFileName(this));
 }
 
+void MainWindow::on_actionOpen_triggered()
+{
+    exporter->Import(resources, QFileDialog::getOpenFileName(this));
+}
+
 void MainWindow::RepopulateEverything()
 {
     tileSelector->RepopulateTileSelector();
@@ -266,5 +271,3 @@ void MainWindow::SetupKeyboardShortcuts()
     shortcut->setContext(Qt::ApplicationShortcut);
     connect(shortcut, SIGNAL(activated()), ui->smartBrushTool, SLOT(click()));
 }
-
-

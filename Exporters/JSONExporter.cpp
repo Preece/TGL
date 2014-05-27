@@ -55,7 +55,19 @@ void JSONExporter::Export(ResourceController *resources, QString filename)
 
 void JSONExporter::Import(ResourceController *resources, QString filename)
 {
+    QFile file(filename);
+    file.open(QIODevice::ReadOnly);
 
+    QJsonDocument document = QJsonDocument::fromJson(file.readAll());
+
+    file.close();
+
+    QJsonObject documentObject = document.object();
+
+    QJsonObject levelPropsObject = documentObject["levelProperties"].toObject();
+    levelPropsObject = levelPropsObject["properties"].toObject();
+
+    resources->GetLevelProperties()->SetLevelName(levelPropsObject["Name"].toString());
 }
 
 void JSONExporter::WriteProperties(ResourceNode *resource, QJsonObject *object)
