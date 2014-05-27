@@ -5,11 +5,11 @@
 #include <QRect>
 #include <QPoint>
 #include <QImage>
-#include <QHash>
+#include <QMap>
 #include <QVariant>
 
 typedef QPair<int, int> TileCoord;
-typedef QHash<QString, QVariant> PropertyList;
+typedef QMap<QString, QVariant> PropertyList;
 
 struct Tile
 {
@@ -49,7 +49,7 @@ public:
 
     QVariant GetProperty(QString name);
     void SetProperty(QString name, QVariant value);
-    QHash<QString, QVariant> GetAllProperties() { return properties; }
+    QMap<QString, QVariant> GetAllProperties() { return properties; }
 
     QList<ResourceNode> GetChildren() { return children; }
 

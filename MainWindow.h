@@ -15,6 +15,9 @@
 
 #include "Toolbox/TileSelectorScene.h"
 
+#include "Exporters/Exporter.h"
+#include "Exporters/JSONExporter.h"
+
 typedef QList<TileCoord> TileList;
 
 namespace Ui {
@@ -52,6 +55,8 @@ private slots:
 
     void on_removeLayerButton_clicked();
 
+    void on_actionSave_As_triggered();
+
 private:
     void SetupKeyboardShortcuts();
 
@@ -62,6 +67,9 @@ private:
 
     TileScene *tileScene;
     TileSelectorScene *tileSelector;
+
+
+    Exporter *exporter;
 };
 
 #endif // MAINWINDOW_H

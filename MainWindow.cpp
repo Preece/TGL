@@ -107,6 +107,11 @@ void MainWindow::on_actionRedo_triggered()
     }
 }
 
+void MainWindow::on_actionSave_As_triggered()
+{
+    exporter->Export(resources, "C:\Tester.json");
+}
+
 void MainWindow::RepopulateEverything()
 {
     tileSelector->RepopulateTileSelector();
@@ -259,3 +264,5 @@ void MainWindow::SetupKeyboardShortcuts()
     shortcut->setContext(Qt::ApplicationShortcut);
     connect(shortcut, SIGNAL(activated()), ui->smartBrushTool, SLOT(click()));
 }
+
+

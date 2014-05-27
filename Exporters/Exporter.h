@@ -11,12 +11,15 @@ class Exporter : public QObject
 public:
     explicit Exporter(QObject *parent = 0);
 
-    virtual Export(ResourceController *resources) = 0;
-    virtual Import(ResourceController *resources) = 0;
+    virtual void Export(ResourceController *resources, QString filename) = 0;
+    virtual void Import(ResourceController *resources, QString filename) = 0;
 
 signals:
 
 public slots:
+
+protected:
+
 
 };
 
