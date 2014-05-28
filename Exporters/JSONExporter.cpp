@@ -64,10 +64,40 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
 
     QJsonObject documentObject = document.object();
 
+    //load the level properties
     QJsonObject levelPropsObject = documentObject["levelProperties"].toObject();
     levelPropsObject = levelPropsObject["properties"].toObject();
 
     resources->GetLevelProperties()->SetLevelName(levelPropsObject["Name"].toString());
+
+    //load the images
+    QJsonArray imageArray = documentObject["images"].toArray();
+
+    for(int i = 0; i < imageArray.count(); i++)
+    {
+        QJsonObject imageObject = imageArray[i].toObject();
+        QJsonObject imageProperties = imageObject["properties"].toObject();
+
+        Image *newImage = new Image;
+        newImage->SetImageFromFile(imageProperties["File Name"].toString());
+        newImage->SetImageName(imageProperties["Name"].toString());
+
+        resources->AddImage(newImage);
+    }
+
+    //load the layers
+    QJsonArray layerArray = documentObject["layers"].toArray();
+
+    for(int i = 0; i < layerArray.count(); i++)
+    {
+        QJsonObject layerObject = layerArray[i].toObject();
+        QJsonObject layerProperties = layerObject["properties"].toObject();
+
+        TileLayer *newLayer = resources->AddTileLayer();
+
+         newLayer->SetName(layerProperties["Name"].toString());
+         newLayer->SetVisibility(layerProperties["Visibility"].toBool());
+    }
 }
 
 void JSONExporter::WriteProperties(ResourceNode *resource, QJsonObject *object)

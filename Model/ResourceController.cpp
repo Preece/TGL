@@ -77,7 +77,7 @@ QPixmap ResourceController::GetTilePixmap(TileCoord coord)
     return pixmapCache[coord];
 }
 
-void ResourceController::AddTileLayer()
+TileLayer *ResourceController::AddTileLayer()
 {
     TileLayer *newLayer = new TileLayer;
     newLayer->SetType(TileLayerType);
@@ -85,6 +85,8 @@ void ResourceController::AddTileLayer()
 
     emit ResourceAdded(newLayer->GetID());
     emit LayerAdded(newLayer->GetID());
+
+    return newLayer;
 }
 
 void ResourceController::DeleteTileLayer(int ID)
