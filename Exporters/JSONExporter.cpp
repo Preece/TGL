@@ -17,15 +17,13 @@ void JSONExporter::Export(ResourceController *resources, QString filename)
     QJsonArray layerArray;
     QJsonObject levelPropsObject;
 
-    levelPropsObject["properties"] = QJsonObject::fromVariantMap(levelProps->GetAllProperties());
+    levelPropsObject["properties"] = ResourcePropertiesToJSON(levelProps);
 
     Image *currentImage;
     foreach(currentImage, images)
     {
-        QJsonObject propertiesObject = QJsonObject::fromVariantMap(currentImage->GetAllProperties());
-
         QJsonObject imageObject;
-        imageObject["properties"] = propertiesObject;
+        imageObject["properties"] = ResourcePropertiesToJSON(currentImage);
 
         imageArray.append(imageObject);
     }
@@ -33,14 +31,13 @@ void JSONExporter::Export(ResourceController *resources, QString filename)
     TileLayer *currentLayer;
     foreach(currentLayer, layers)
     {
-        QJsonObject propertiesObject = QJsonObject::fromVariantMap(currentLayer->GetAllProperties());
-
         QJsonObject layerObject;
-        layerObject["properties"] = propertiesObject;
+        layerObject["properties"] = ResourcePropertiesToJSON(currentLayer);
 
         layerArray.append(layerObject);
     }
 
+    //fill out the document object
     documentObject["levelProperties"] = levelPropsObject;
     documentObject["images"] = imageArray;
     documentObject["layers"] = layerArray;
@@ -100,10 +97,16 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
     }
 }
 
-void JSONExporter::WriteProperties(ResourceNode *resource, QJsonObject *object)
+QJsonObject JSONExporter::ResourcePropertiesToJSON(ResourceNode *resource)
 {
-    //get a list of all the generic properties in the resource
+    QJsonObject propertiesObject;
 
-    //loop through them, create their object, and add it to the object parameter
+    if(resource)
+    {
+        propertiesObject = QJsonObject::fromVariantMap(resource->GetAllProperties());
+        propertiesObject["id"] = resource->GetID();
+    }
 
+    return propertiesObject;
 }
+
