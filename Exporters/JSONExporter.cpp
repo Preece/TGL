@@ -96,7 +96,7 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
         TileLayer *newLayer = resources->AddTileLayer();
 
          newLayer->SetName(layerProperties["Name"].toString());
-         newLayer->SetVisibility(layerProperties["Visibility"].toBool());
+         newLayer->SetVisibility(layerProperties["Visibile"].toBool());
     }
 }
 
