@@ -116,7 +116,11 @@ void MainWindow::on_actionSave_As_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    exporter->Import(resources, QFileDialog::getOpenFileName(this));
+    if(QMessageBox::warning(this, "Open File", "Any unsaved progress will be lost! Continue?") == QMessageBox::Ok)
+    {
+        resources->DestroyAllResources();
+        exporter->Import(resources, QFileDialog::getOpenFileName(this));
+    }
 }
 
 void MainWindow::RepopulateEverything()

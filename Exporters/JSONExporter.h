@@ -17,7 +17,7 @@ public:
     void Import(ResourceController *resources, QString filename);
 
 private:
-    void WriteProperties(ResourceNode* resource, QJsonObject* object);
+    QJsonObject ResourcePropertiesToJSON(ResourceNode* resource);
 };
 
 #endif // JSONEXPORTER_H
