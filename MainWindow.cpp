@@ -22,11 +22,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->propertyBrowser->   RegisterResourceController(resources);
     ui->layerList->         RegisterResourceController(resources);
 
-    ui->brushController->      RegisterTileController(tileController);
+    ui->brushController->   RegisterTileController(tileController);
     tileScene->             RegisterTileController(tileController);
 
     tileScene->             RegisterBrushController(ui->brushController);
-    ui->brushController->      RegisterTileSelector(tileSelector);
+    ui->brushController->   RegisterTileSelector(tileSelector);
 
 
     connect(tileScene,                  SIGNAL(SelectNewTile(TileCoord)),   tileSelector,               SLOT(SelectNewTile(TileCoord)));

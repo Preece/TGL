@@ -96,8 +96,7 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
         QJsonObject imageProperties = imageObject["properties"].toObject();
 
         Image *newImage = new Image;
-        newImage->SetImageFromFile(imageProperties["File Name"].toString());
-        newImage->SetImageName(imageProperties["Name"].toString());
+        newImage->Load(imageProperties["id"].toInt(), ImageType, imageProperties.toVariantMap());
 
         resources->AddImage(newImage);
     }
@@ -112,8 +111,7 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
 
         TileLayer *newLayer = resources->AddTileLayer();
 
-         newLayer->SetName(layerProperties["Name"].toString());
-         newLayer->SetVisibility(layerProperties["Visible"].toBool());
+        newLayer->Load(layerProperties["id"].toInt(), TileLayerType, layerProperties.toVariantMap());
     }
 }
 
@@ -125,6 +123,7 @@ QJsonObject JSONExporter::ResourcePropertiesToJSON(ResourceNode *resource)
     {
         propertiesObject = QJsonObject::fromVariantMap(resource->GetAllProperties());
         propertiesObject["id"] = resource->GetID();
+        propertiesObject["type"] = resource->GetType();
     }
 
     return propertiesObject;

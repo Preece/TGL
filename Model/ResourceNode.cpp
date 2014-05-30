@@ -26,6 +26,22 @@ void ResourceNode::RegisterID(int registeredID)
         newID++;
 }
 
+void ResourceNode::Load(int startID, ResourceType newType, QMap<QString, QVariant> properties)
+{
+    ID = startID;
+    type = newType;
+
+    //make sure the new ID generator wont overlap
+    RegisterID(ID);
+
+    QMap<QString, QVariant>::iterator i;
+    for(i = properties.begin(); i != properties.end(); ++i)
+    {
+        if(i.value().isValid())
+            SetProperty(i.key(), i.value());
+    }
+}
+
 void ResourceNode::AddProperty(QString name, QVariant value)
 {
     properties[name] = value;

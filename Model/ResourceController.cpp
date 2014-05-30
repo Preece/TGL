@@ -155,6 +155,28 @@ void ResourceController::DestroyAllResources()
     layers.clear();
 }
 
+void ResourceController::LoadResource(ResourceNode *resource)
+{
+    if(resource)
+    {
+        switch(resource->GetType())
+        {
+        case ImageType:
+            images[resource->GetID()] = dynamic_cast<Image*>(resource);
+
+            emit ResourceAdded(resource->GetID());
+            break;
+
+        case TileLayerType:
+            layers[resource->GetID()] = dynamic_cast<TileLayer*>(resource);
+
+            emit ResourceAdded(resource->GetID());
+            emit LayerAdded(resource->GetID());
+            break;
+        }
+    }
+}
+
 void ResourceController::Undo()
 {
     undo->undo();

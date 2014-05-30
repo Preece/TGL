@@ -38,6 +38,7 @@ public:
 
     ResourceNode();
     virtual ~ResourceNode();
+    void Load(int startID, ResourceType newType, QMap<QString, QVariant> properties);
 
     int GetID() { return ID; }
 
