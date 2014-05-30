@@ -130,12 +130,14 @@ QList<Image *> ResourceController::GetAllImages()
 
 void ResourceController::DestroyAllResources()
 {
-    delete undo;
+    undo->clear();
 
     //destroy the images
     QList<Image*> imageList = images.values();
     for(int i = 0; i < imageList.count(); i++)
     {
+        emit ResourceDeleted(imageList[i]->GetID());
+
         delete imageList[i];
         imageList[i] = NULL;
     }
@@ -144,6 +146,9 @@ void ResourceController::DestroyAllResources()
     QList<TileLayer*> layerList = layers.values();
     for(int i = 0; i < layerList.count(); i++)
     {
+        emit ResourceDeleted(layerList[i]->GetID());
+        emit LayerRemoved(layerList[i]->GetID());
+
         delete layerList[i];
         layerList[i] = NULL;
     }

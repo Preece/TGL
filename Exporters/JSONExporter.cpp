@@ -34,6 +34,26 @@ void JSONExporter::Export(ResourceController *resources, QString filename)
         QJsonObject layerObject;
         layerObject["properties"] = ResourcePropertiesToJSON(currentLayer);
 
+        QHash<TileCoord, Tile> tiles = currentLayer->GetAllTiles();
+        QHash<TileCoord, Tile>::iterator i = tiles.begin();
+
+        QJsonArray tileArray;
+
+        while(i != tiles.end())
+        {
+            QJsonObject tileObject;
+            tileObject["oX"] = i.value().origin.first;
+            tileObject["oY"] = i.value().origin.second;
+            tileObject["x"] = i.value().pos.first;
+            tileObject["y"] = i.value().pos.second;
+
+            tileArray.append(tileObject);
+
+            ++i;
+        }
+
+        layerObject["tiles"] = tileArray;
+
         layerArray.append(layerObject);
     }
 
@@ -93,7 +113,7 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
         TileLayer *newLayer = resources->AddTileLayer();
 
          newLayer->SetName(layerProperties["Name"].toString());
-         newLayer->SetVisibility(layerProperties["Visibility"].toBool());
+         newLayer->SetVisibility(layerProperties["Visible"].toBool());
     }
 }
 

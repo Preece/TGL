@@ -40,6 +40,8 @@ public:
 
     void ModifyTile(int x, int y, TileCoord newOrigin);
 
+    QHash<TileCoord, Tile> GetAllTiles() { return tiles; }
+
 private:
 
     QHash<TileCoord, Tile> tiles;
