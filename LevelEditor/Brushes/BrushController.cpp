@@ -37,12 +37,14 @@ BrushController::BrushController(QWidget *parent) :
 
     RepopulateBrushLists();
 
-    propertiesWindow.setWindowTitle("Edit Brush");
+    propertiesWindow = new BrushPropertiesDialog;
+    propertiesWindow->setWindowTitle("Edit Brush");
 }
 
 BrushController::~BrushController()
 {
     delete ui;
+    delete propertiesWindow;
 
     DestroyBrushes();
 }
@@ -211,7 +213,7 @@ void BrushController::RepopulateBrushLists()
 
 void BrushController::RegisterTileSelector(TileSelectorScene *selector)
 {
-    propertiesWindow.RegisterTileSelector(selector);
+    propertiesWindow->RegisterTileSelector(selector);
 
     connect(selector, SIGNAL(SelectionChanged(TileList)), this, SLOT(SetSelectedTiles(TileList)));
     connect(selector, SIGNAL(SelectNewBrush(int)), this, SLOT(SetCurrentBrush(int)));
@@ -221,7 +223,7 @@ void BrushController::RegisterTileSelector(TileSelectorScene *selector)
 void BrushController::RegisterTileController(TileController *newRM)
 {
     tiles = newRM;
-    propertiesWindow.RegisterTileController(newRM);
+    propertiesWindow->RegisterTileController(newRM);
 }
 
 void BrushController::DestroyBrushes()
@@ -323,11 +325,11 @@ void BrushController::on_addScatterBrush_clicked()
 {
     //create a new brush and pass it to the properties window
     ScatterBrush *tempBrush = new ScatterBrush;
-    propertiesWindow.NewBrush(tempBrush);
-    propertiesWindow.ShowScatterControls();
+    propertiesWindow->NewBrush(tempBrush);
+    propertiesWindow->ShowScatterControls();
 
     //execute the window, and check if it was accepted
-    if(propertiesWindow.exec() == QDialog::Accepted)
+    if(propertiesWindow->exec() == QDialog::Accepted)
         scatter.append(tempBrush);
     else
         delete tempBrush;
@@ -358,9 +360,9 @@ void BrushController::on_editScatterBrush_clicked()
 {
     if(ui->scatterBrushCombo->currentIndex() != -1)
     {
-        propertiesWindow.EditBrush(scatter[scatterBrushIndex]);
-        propertiesWindow.SetListIndex(0);
-        propertiesWindow.exec();
+        propertiesWindow->EditBrush(scatter[scatterBrushIndex]);
+        propertiesWindow->SetListIndex(0);
+        propertiesWindow->exec();
 
         RepopulateBrushLists();
     }
@@ -400,11 +402,11 @@ void BrushController::on_addSmartBrush_clicked()
 {
     //create a new brush and pass it to the properties window
     SmartBrush *tempBrush = new SmartBrush;
-    propertiesWindow.NewBrush(tempBrush);
-    propertiesWindow.ShowSmartControls();
+    propertiesWindow->NewBrush(tempBrush);
+    propertiesWindow->ShowSmartControls();
 
     //execute the window, and check if it was accepted
-    if(propertiesWindow.exec() == QDialog::Accepted)
+    if(propertiesWindow->exec() == QDialog::Accepted)
         smart.append(tempBrush);
     else
         delete tempBrush;
@@ -416,9 +418,9 @@ void BrushController::on_editSmartBrushes_clicked()
 {
     if(ui->smartBrushCombo->currentIndex() != -1)
     {
-        propertiesWindow.EditBrush(smart[smartBrushIndex]);
-        propertiesWindow.SetListIndex(4);
-        propertiesWindow.exec();
+        propertiesWindow->EditBrush(smart[smartBrushIndex]);
+        propertiesWindow->SetListIndex(4);
+        propertiesWindow->exec();
 
         RepopulateBrushLists();
     }
@@ -428,11 +430,11 @@ void BrushController::on_addReplacerBrush_clicked()
 {
     //create a new brush and pass it to the properties window
     ReplacerBrush *tempBrush = new ReplacerBrush;
-    propertiesWindow.NewBrush(tempBrush);
-    propertiesWindow.ShowReplacerControls();
+    propertiesWindow->NewBrush(tempBrush);
+    propertiesWindow->ShowReplacerControls();
 
     //execute the window, and check if it was accepted
-    if(propertiesWindow.exec() == QDialog::Accepted)
+    if(propertiesWindow->exec() == QDialog::Accepted)
         replacer.append(tempBrush);
     else
         delete tempBrush;
@@ -444,9 +446,9 @@ void BrushController::on_editReplacerBrush_clicked()
 {
     if(ui->replacerBrushCombo->currentIndex() != -1)
     {
-        propertiesWindow.EditBrush(replacer[replacerBrushIndex]);
-        propertiesWindow.SetListIndex(0);
-        propertiesWindow.exec();
+        propertiesWindow->EditBrush(replacer[replacerBrushIndex]);
+        propertiesWindow->SetListIndex(0);
+        propertiesWindow->exec();
 
         RepopulateBrushLists();
     }
@@ -486,11 +488,11 @@ void BrushController::on_addMatrixBrush_clicked()
 {
     //create a new brush and pass it to the properties window
     MatrixBrush *tempBrush = new MatrixBrush;
-    propertiesWindow.NewBrush(tempBrush);
-    propertiesWindow.ShowMatrixControls();
+    propertiesWindow->NewBrush(tempBrush);
+    propertiesWindow->ShowMatrixControls();
 
     //execute the window, and check if it was accepted
-    if(propertiesWindow.exec() == QDialog::Accepted)
+    if(propertiesWindow->exec() == QDialog::Accepted)
         matrix.append(tempBrush);
     else
         delete tempBrush;
@@ -502,9 +504,9 @@ void BrushController::on_editMatrixBrush_clicked()
 {
     if(ui->matrixBrushCombo->currentIndex() != -1)
     {
-        propertiesWindow.EditBrush(matrix[matrixBrushIndex]);
-        propertiesWindow.SetListIndex(0);
-        propertiesWindow.exec();
+        propertiesWindow->EditBrush(matrix[matrixBrushIndex]);
+        propertiesWindow->SetListIndex(0);
+        propertiesWindow->exec();
 
         RepopulateBrushLists();
     }

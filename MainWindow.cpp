@@ -80,8 +80,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete ui;
-
     resources->DestroyAllResources();
     
     delete resources;
@@ -89,6 +87,8 @@ MainWindow::~MainWindow()
     delete tileScene;
     delete tileSelector;
     delete exporter;
+
+    delete ui;
 }
 
 void MainWindow::on_actionUndo_triggered()

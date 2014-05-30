@@ -40,7 +40,7 @@ public:
 
     void DestroyBrushes();
 
-    BrushPropertiesDialog *GetPropertiesDialog() { return &propertiesWindow; }
+    BrushPropertiesDialog *GetPropertiesDialog() { return propertiesWindow; }
     enum
     {
         Pencil = 0,
@@ -91,7 +91,7 @@ public slots:
 private:
     TileController *tiles;
     Ui::BrushController *ui;
-    BrushPropertiesDialog propertiesWindow;
+    BrushPropertiesDialog *propertiesWindow;
 
     TileBrush *currentBrush;
     PencilBrush pencil;
