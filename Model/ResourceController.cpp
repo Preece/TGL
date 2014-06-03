@@ -57,7 +57,12 @@ QImage *ResourceController::GetTileset()
     if(levelProperties.GetTilesetID() == 0)
         return NULL;
 
-    return GetImage(levelProperties.GetTilesetID())->GetImage();
+    Image *tempImage = GetImage(levelProperties.GetTilesetID());
+
+    if(tempImage)
+        return tempImage->GetImage();
+    else
+        return NULL;
 }
 
 QPixmap ResourceController::GetTilePixmap(TileCoord coord)
@@ -66,6 +71,10 @@ QPixmap ResourceController::GetTilePixmap(TileCoord coord)
         return pixmapCache[coord];
 
     QImage *tempTileset = GetTileset();
+
+    if(tempTileset == NULL)
+        return QPixmap();
+
     QImage tempImage = *tempTileset;
 
     if(tempImage.isNull())
@@ -153,28 +162,6 @@ void ResourceController::DestroyAllResources()
         layerList[i] = NULL;
     }
     layers.clear();
-}
-
-void ResourceController::LoadResource(ResourceNode *resource)
-{
-    if(resource)
-    {
-        switch(resource->GetType())
-        {
-        case ImageType:
-            images[resource->GetID()] = dynamic_cast<Image*>(resource);
-
-            emit ResourceAdded(resource->GetID());
-            break;
-
-        case TileLayerType:
-            layers[resource->GetID()] = dynamic_cast<TileLayer*>(resource);
-
-            emit ResourceAdded(resource->GetID());
-            emit LayerAdded(resource->GetID());
-            break;
-        }
-    }
 }
 
 void ResourceController::Undo()

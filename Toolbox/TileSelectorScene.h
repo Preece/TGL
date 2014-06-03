@@ -19,7 +19,7 @@ public:
     explicit TileSelectorScene(QObject *parent = 0);
     ~TileSelectorScene();
 
-    void RegisterResourceController(ResourceController * newRM) { resources = newRM; }
+    void RegisterResourceController(ResourceController * newRM);
     void RepopulateTileSelector();
 
     TileList GetSelectedTiles();
@@ -36,6 +36,7 @@ public slots:
     void SelectNewTile(TileCoord origin);
 
     void SelectTileset(QWidget *topParent);
+    void SetTileImage(Image *image);
 
     void TraverseTileHistory(bool forward);
 

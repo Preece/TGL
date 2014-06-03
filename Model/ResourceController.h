@@ -56,6 +56,8 @@ signals:
     void LayerAdded(int ID);
     void LayerRemoved(int ID);
 
+    void SetTilesetImage(Image *image);
+
 
 private:
     QHash<int, Image*> images;

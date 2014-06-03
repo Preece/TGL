@@ -18,6 +18,7 @@ void JSONExporter::Export(ResourceController *resources, QString filename)
     QJsonObject levelPropsObject;
 
     levelPropsObject["properties"] = ResourcePropertiesToJSON(levelProps);
+    levelPropsObject["Tileset ID"] = levelProps->GetTilesetID();
 
     Image *currentImage;
     foreach(currentImage, images)
@@ -83,9 +84,11 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
 
     //load the level properties
     QJsonObject levelPropsObject = documentObject["levelProperties"].toObject();
+    int tilesetID = levelPropsObject["Tileset ID"].toInt();
     levelPropsObject = levelPropsObject["properties"].toObject();
 
     resources->GetLevelProperties()->SetLevelName(levelPropsObject["Name"].toString());
+    resources->GetLevelProperties()->SetTilesetID(tilesetID);
 
     //load the images
     QJsonArray imageArray = documentObject["images"].toArray();
@@ -97,8 +100,12 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
 
         Image *newImage = new Image;
         newImage->Load(imageProperties["id"].toInt(), ImageType, imageProperties.toVariantMap());
+        newImage->SetImageFromFile(imageProperties["File Name"].toString());
 
         resources->AddImage(newImage);
+
+        if(newImage->GetID() == tilesetID)
+            resources->SetTilesetImage(newImage);
     }
 
     //load the layers

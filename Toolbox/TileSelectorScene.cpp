@@ -15,6 +15,13 @@ TileSelectorScene::~TileSelectorScene()
 
 }
 
+void TileSelectorScene::RegisterResourceController(ResourceController *newRM)
+{
+     resources = newRM;
+
+     connect(resources, SIGNAL(SetTilesetImage(Image*)), this, SLOT(SetTileImage(Image*)));
+}
+
 void TileSelectorScene::RepopulateTileSelector()
 {
     clear();
@@ -90,21 +97,24 @@ void TileSelectorScene::SelectTileset(QWidget *topParent)
     {
         Image *tempImage = new Image;
 
-        //load the file
         tempImage->SetImageFromFile(filename);
 
         //add the image to the resource manager
         resources->AddImage(tempImage);
 
-        //set the spritesheet as that image
-        spritesheet = tempImage->GetImage();
-
         //store its ID as the image to be used as the tileset
         resources->GetLevelProperties()->SetTilesetID(tempImage->GetID());
 
-        //and repopulate the tile selector
-        RepopulateTileSelector();
+        SetTileImage(tempImage);
     }
+}
+
+void TileSelectorScene::SetTileImage(Image *image)
+{
+    //set the spritesheet as that image
+    spritesheet = image->GetImage();
+
+    RepopulateTileSelector();
 }
 
 void TileSelectorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)

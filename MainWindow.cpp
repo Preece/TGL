@@ -96,7 +96,6 @@ void MainWindow::on_actionUndo_triggered()
     if(resources)
     {
         resources->Undo();
-        //RepopulateEverything();
     }
 }
 
@@ -105,7 +104,6 @@ void MainWindow::on_actionRedo_triggered()
     if(resources)
     {
         resources->Redo();
-        //RepopulateEverything();
     }
 }
 
