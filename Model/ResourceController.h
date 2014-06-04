@@ -23,6 +23,8 @@ public:
 
     void AddUndoCommand(QUndoCommand* newUndo) { undo->push(newUndo); }
 
+    void PurgeUndoStack();
+
 public slots:
     void Undo();
     void Redo();
@@ -34,7 +36,7 @@ public slots:
     int GetTileWidth();
     int GetTileHeight();
 
-    int AddImage(Image *newImage);
+    int AddImage(Image *newImage = NULL);
     bool DeleteImage(int ID);
     Image *GetImage(int imageID);
     QList<Image*> GetAllImages();
@@ -42,7 +44,7 @@ public slots:
     QImage *GetTileset();
     QPixmap GetTilePixmap(TileCoord coord);
 
-    TileLayer *AddTileLayer();
+    TileLayer *AddTileLayer(TileLayer *layer = NULL);
     void DeleteTileLayer(int ID);
     TileLayer *GetTileLayer(int ID);
     QList<TileLayer*> GetAllLayers();

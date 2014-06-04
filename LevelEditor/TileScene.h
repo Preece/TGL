@@ -27,6 +27,7 @@ public:
     void RegisterBrushController(BrushController *newBM) { brushController = newBM; }
     
     void ClearPreview();
+    void ClearAllTiles();
 
 signals:
     void SelectNewTile(TileCoord ID);

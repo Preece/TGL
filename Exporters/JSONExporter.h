@@ -14,7 +14,7 @@ public:
     JSONExporter();
 
     void Export(ResourceController *resources, QString filename);
-    void Import(ResourceController *resources, QString filename);
+    void Import(ResourceController *resources, TileController *tiles, QString filename);
 
 private:
     QJsonObject ResourcePropertiesToJSON(ResourceNode* resource);

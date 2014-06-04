@@ -71,7 +71,7 @@ void JSONExporter::Export(ResourceController *resources, QString filename)
     file.close();
 }
 
-void JSONExporter::Import(ResourceController *resources, QString filename)
+void JSONExporter::Import(ResourceController *resources, TileController* tiles, QString filename)
 {
     QFile file(filename);
     file.open(QIODevice::ReadOnly);
@@ -116,9 +116,23 @@ void JSONExporter::Import(ResourceController *resources, QString filename)
         QJsonObject layerObject = layerArray[i].toObject();
         QJsonObject layerProperties = layerObject["properties"].toObject();
 
-        TileLayer *newLayer = resources->AddTileLayer();
-
+        TileLayer *newLayer = new TileLayer;
         newLayer->Load(layerProperties["id"].toInt(), TileLayerType, layerProperties.toVariantMap());
+
+        resources->AddTileLayer(newLayer);
+        tiles->UpdateLayerSelection(newLayer->GetID());
+
+        //load tiles
+        QJsonArray tileArray = layerObject["tiles"].toArray();
+
+        for(int i = 0; i < tileArray.count(); i++)
+        {
+            QJsonObject tile = tileArray[i].toObject();
+
+            TileCoord origin(tile["oX"].toInt(), tile["oY"].toInt());
+
+            tiles->ModifyTile(tile["x"].toInt(), tile["y"].toInt(), origin);
+        }
     }
 }
 

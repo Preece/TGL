@@ -13,6 +13,11 @@ ResourceController::~ResourceController()
     delete clipboard;
 }
 
+void ResourceController::PurgeUndoStack()
+{
+    undo->clear();
+}
+
 int ResourceController::GetTileWidth()
 {
     return levelProperties.GetTileWidth();
@@ -25,14 +30,14 @@ int ResourceController::GetTileHeight()
 
 int ResourceController::AddImage(Image *newImage)
 {
-    if(newImage)
-    {
-        newImage->SetType(ImageType);
-        AddResourceCommand *add = new AddResourceCommand(newImage, &images);
-        undo->push(add);
+    if(newImage == NULL)
+        newImage = new Image;
 
-        emit ResourceAdded(newImage->GetID());
-    }
+    newImage->SetType(ImageType);
+    AddResourceCommand *add = new AddResourceCommand(newImage, &images);
+    undo->push(add);
+
+    emit ResourceAdded(newImage->GetID());
 
     return 0;
 }
@@ -86,16 +91,18 @@ QPixmap ResourceController::GetTilePixmap(TileCoord coord)
     return pixmapCache[coord];
 }
 
-TileLayer *ResourceController::AddTileLayer()
+TileLayer *ResourceController::AddTileLayer(TileLayer *layer)
 {
-    TileLayer *newLayer = new TileLayer;
-    newLayer->SetType(TileLayerType);
-    layers[newLayer->GetID()] = newLayer;
+    if(layer == NULL)
+        layer = new TileLayer;
 
-    emit ResourceAdded(newLayer->GetID());
-    emit LayerAdded(newLayer->GetID());
+    layer->SetType(TileLayerType);
+    layers[layer->GetID()] = layer;
 
-    return newLayer;
+    emit ResourceAdded(layer->GetID());
+    emit LayerAdded(layer->GetID());
+
+    return layer;
 }
 
 void ResourceController::DeleteTileLayer(int ID)

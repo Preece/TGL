@@ -247,6 +247,18 @@ void TileScene::ClearPreview()
     ClearEraserPreview();
 }
 
+void TileScene::ClearAllTiles()
+{
+    ClearPreview();
+
+    TileLayerItem *layer;
+    foreach(layer, layers)
+    {
+        if(layer)
+            layer->DestroyAllItems();
+    }
+}
+
 void TileScene::SelectPreviewItems()
 {
     QList<TileWidgetItem*> tileList = previewItems.values();
