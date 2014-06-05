@@ -26,6 +26,7 @@ void ResourceView::RegisterResourceController(ResourceController *rm)
 {
     resources = rm;
     connect(resources, SIGNAL(ResourceAdded(int)), this, SLOT(AddResource(int)));
+    connect(resources, SIGNAL(ResourceDeleted(int)), this, SLOT(RemoveResource(int)));
 }
 
 void ResourceView::RepopulateEverything()
@@ -61,6 +62,14 @@ void ResourceView::RefreshNames()
 
     if(currentSelection)
         emit NewResourceSelected(currentSelection);
+}
+
+void ResourceView::ClearEverything()
+{
+    RemoveChildrenNodes(layerRoot);
+    RemoveChildrenNodes(imageRoot);
+    RemoveChildrenNodes(tilesetRoot);
+    RemoveChildrenNodes(miscRoot);
 }
 
 int ResourceView::GetItemID(QTreeWidgetItem *item)
@@ -158,8 +167,11 @@ void ResourceView::AddResource(int ID)
 
 void ResourceView::RemoveResource(int ID)
 {
-
-    //dont forget to remove the item from the hash
+    if(itemHash.contains(ID))
+    {
+        delete itemHash[ID];
+        itemHash.remove(ID);
+    }
 }
 
 void ResourceView::UpdateResourceName(int ID, QString name)

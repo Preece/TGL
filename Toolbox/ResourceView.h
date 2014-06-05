@@ -19,6 +19,7 @@ public:
     void paintEvent(QPaintEvent* e) { QTreeWidget::paintEvent(e); }
 
     void RefreshNames();
+    void ClearEverything();
     
 signals:
     void NewResourceSelected(ResourceNode *newResource);

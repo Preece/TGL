@@ -117,6 +117,7 @@ void MainWindow::on_actionOpen_triggered()
     if(QMessageBox::warning(this, "Open File", "Any unsaved progress will be lost! Continue?") == QMessageBox::Ok)
     {
         resources->DestroyAllResources();
+
         exporter->Import(resources, tileController, QFileDialog::getOpenFileName(this));
 
         tileController->EndPaintOperation();
