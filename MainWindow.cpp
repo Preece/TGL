@@ -118,6 +118,8 @@ void MainWindow::on_actionOpen_triggered()
     {
         resources->DestroyAllResources();
         exporter->Import(resources, tileController, QFileDialog::getOpenFileName(this));
+
+        tileController->EndPaintOperation();
         resources->PurgeUndoStack();
     }
 }
