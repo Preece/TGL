@@ -1,5 +1,5 @@
 <RCC>
-    <qresource>
+    <qresource prefix="/">
         <file>Icons/bucket.png</file>
         <file>Icons/eraser.png</file>
         <file>Icons/eyedropper.png</file>
@@ -49,5 +49,10 @@
         <file>Icons/line.png</file>
         <file>Icons/matrix.png</file>
         <file>Icons/stamp.png</file>
+        <file>Icons/eyeclosed.png</file>
+        <file>Icons/eyeopen.png</file>
+        <file>Icons/layer.png</file>
+        <file>Icons/folder.png</file>
+        <file>Icons/image.png</file>
     </qresource>
 </RCC>

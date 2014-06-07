@@ -11,15 +11,15 @@ ResourceView::ResourceView(QWidget *parent) :
     //create and add a root node for the project
     projectRoot = new QTreeWidgetItem;
     projectRoot->setText(0, "Project Root");
-    projectRoot->setIcon(0, QIcon(":/Icons/open.png"));
+    projectRoot->setIcon(0, QIcon(":/Icons/folder.png"));
     addTopLevelItem(projectRoot);
     projectRoot->setExpanded(true);
 
     //add children nodes for each of the types of resources
-    layerRoot = AddNode(projectRoot, "Layer", ":/Icons/open.png");
-    imageRoot = AddNode(projectRoot, "Images", ":/Icons/open.png");
-    tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/open.png");
-    miscRoot = AddNode(projectRoot, "Miscellaneous", ":/Icons/open.png");
+    layerRoot = AddNode(projectRoot, "Layer", ":/Icons/folder.png");
+    imageRoot = AddNode(projectRoot, "Images", ":/Icons/folder.png");
+    tilesetRoot = AddNode(projectRoot, "Tilesets", ":/Icons/folder.png");
+    miscRoot = AddNode(projectRoot, "Miscellaneous", ":/Icons/folder.png");
 }
 
 void ResourceView::RegisterResourceController(ResourceController *rm)
@@ -151,11 +151,11 @@ void ResourceView::AddResource(int ID)
         break;
 
     case ImageType:
-        itemHash[ID] = AddNode(imageRoot, name, ":/Icons/save.png", ID);
+        itemHash[ID] = AddNode(imageRoot, name, ":/Icons/image.png", ID);
         break;
 
     case TileLayerType:
-        itemHash[ID] = AddNode(layerRoot, name, ":/Icons/save.png", ID);
+        itemHash[ID] = AddNode(layerRoot, name, ":/Icons/layer.png", ID);
         break;
 
     default:

@@ -25,6 +25,9 @@ void TileLayer::ToggleVisibility()
 
 bool TileLayer::ResizeToIncludePoint(int x, int y)
 {
+    if(x < 0 || y < 0)
+        return false;
+
     if(GetProperty("Dynamic Sizing").toBool())
     {
         QPoint newSize(GetProperty("Layer Size").toPoint());

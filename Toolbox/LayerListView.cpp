@@ -9,7 +9,7 @@ LayerListView::LayerListView(QWidget *parent) :
     connect(this, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(UpdateItem(QTableWidgetItem*)));
     connect(this, SIGNAL(cellClicked(int,int)), this, SLOT(HandleClick(int,int)));
 
-    //verticalHeader()->setMovable(true);
+    horizontalHeader()->resizeSection(0, 24);
 }
 
 void LayerListView::RegisterResourceController(ResourceController *rm)
@@ -54,7 +54,7 @@ void LayerListView::AddLayer(int ID)
 {
     insertRow(0);
 
-    QTableWidgetItem *newIcon = new QTableWidgetItem(QIcon(":/Icons/addvalue.png"), QString());
+    QTableWidgetItem *newIcon = new QTableWidgetItem(QIcon(":/Icons/eyeopen.png"), QString());
     newIcon->setFlags(newIcon->flags() & ~(Qt::ItemIsDropEnabled));
     newIcon->setFlags(newIcon->flags() & (~Qt::ItemIsEditable));
     setItem(0, 0, newIcon);
@@ -94,15 +94,20 @@ void LayerListView::HandleClick(int row, int column)
     if(column == 0)
     {
         int corrID = item(row, 1)->data(Qt::UserRole).toInt();
-
         ResourceNode *tempResource = resources->GetResource(corrID);
 
         if(tempResource)
         {
             if(tempResource->GetProperty("Visible").toBool())
+            {
                 tempResource->SetProperty("Visible", false);
+                item(row, 0)->setIcon(QIcon(":/Icons/eyeclosed.png"));
+            }
             else
+            {
                 tempResource->SetProperty("Visible", true);
+                item(row, 0)->setIcon(QIcon(":/Icons/eyeopen.png"));
+            }
 
             emit LayerVisibilityChanged(corrID, tempResource->GetProperty("Visible").toBool());
         }
